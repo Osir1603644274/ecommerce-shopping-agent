@@ -1,6 +1,6 @@
 {
   "schemaVersion": "public-snapshot-manifest-v1",
-  "fileCount": 1035,
+  "fileCount": 1036,
   "files": [
     {
       "path": ".env.example",
@@ -8,9 +8,14 @@
       "sha256": "e0d8fb2fccd317c716ab766fe133e4690030588cb699d23aaf7c605b567381fe"
     },
     {
+      "path": ".gitattributes",
+      "bytes": 112,
+      "sha256": "b1beeb286166e1c187196791fffdffbeff1d6e912f548f1fabb50ccaf07fc7c7"
+    },
+    {
       "path": ".gitignore",
-      "bytes": 2512,
-      "sha256": "ee01d873d2e3ce85480f589d2a05c7251e2933913578c4dab1c59713ee88ce85"
+      "bytes": 2509,
+      "sha256": "e1b0a6f818cccc51f473b494d695a4569a3009df3b491ee6b42355f3c769b71c"
     },
     {
       "path": "agent/.dockerignore",
@@ -559,13 +564,13 @@
     },
     {
       "path": "agent/app/place_data/data/beijing_parks_v1.json",
-      "bytes": 206765,
-      "sha256": "74eeca86b405cb941fede2086e5db6e3606091c40f20b307d1ad7ce8208e0aeb"
+      "bytes": 199440,
+      "sha256": "215afb8c61bba2c8c7bc7403bc21ea8aacf19738be756eb9cd2b1216b50c017c"
     },
     {
       "path": "agent/app/place_data/data/beijing_places_v2.json",
-      "bytes": 342600,
-      "sha256": "d7f48428f8afaf7a262ea3f5e753a24f45b2386c8a5c26668a2e37739cb6da6e"
+      "bytes": 329941,
+      "sha256": "79ae5aa9741ef8ce22c3f2cf148611c17ee435e3fbb2b6567e1a5c85894e649c"
     },
     {
       "path": "agent/app/place_data/evaluation.py",
@@ -914,8 +919,8 @@
     },
     {
       "path": "agent/evaluation/bm25_inverted_evaluation.py",
-      "bytes": 3688,
-      "sha256": "366558c515a5414132f1badebedf9194b832e8a949dfaec5d775c190218e1d6f"
+      "bytes": 3575,
+      "sha256": "55454fe9f5a6bbe0cc0d7e67d74eb7490744271e1bab3ba6449acf85edc0b8b4"
     },
     {
       "path": "agent/evaluation/build_context_multiagent_blind_review_v1.py",
@@ -1009,8 +1014,8 @@
     },
     {
       "path": "agent/evaluation/capability_router_evaluation.py",
-      "bytes": 8796,
-      "sha256": "274f4ebd4308766e6f1684193e6efb026083287eec34eeb61d562e5357d4aa87"
+      "bytes": 8558,
+      "sha256": "8e3862b528fbc44b7a858433c8b62f902ffeca43f133476a1b1b9461c6372239"
     },
     {
       "path": "agent/evaluation/checkpoint_recovery_inbox_v2.py",
@@ -1164,8 +1169,8 @@
     },
     {
       "path": "agent/evaluation/context_multiagent_public_pilot_v3.py",
-      "bytes": 54819,
-      "sha256": "86602a4e44e3cefeab6260a8e48476ed3fdf26552c8717f1820644b3612d2a75"
+      "bytes": 54818,
+      "sha256": "b0f463c2d3775c8054594e67f7242ddc5e4e2c6c457805bfc8c4d15a5f55a60b"
     },
     {
       "path": "agent/evaluation/context_multiagent_runtime_v2_remediation.py",
@@ -1264,18 +1269,18 @@
     },
     {
       "path": "agent/evaluation/knowledge_mixed_evaluation.py",
-      "bytes": 5324,
-      "sha256": "0fbd65588aa26d59b30c1d7e0b634a466957892797138215d62a44bc52a7c9bd"
+      "bytes": 5181,
+      "sha256": "18b0a44fe92f676275bab1fdbf437e47d223737578c9ed501040fcbab54efdf2"
     },
     {
       "path": "agent/evaluation/knowledge_router_evaluation.py",
-      "bytes": 4480,
-      "sha256": "2dcbb60a6f6d80877fad25fbb2d6ef3ee8ceae69d521f4300c3dedab7c5a1921"
+      "bytes": 4338,
+      "sha256": "58ff8b547ad0367ca5738fcd56358e87ef754388b741b40ef540c7afd6f391d0"
     },
     {
       "path": "agent/evaluation/knowledge_source_aware_evaluation.py",
-      "bytes": 3922,
-      "sha256": "1b3ff2eade97a8cb03901770dce603544be3169ba5affd006c248a66fd19f1ac"
+      "bytes": 3823,
+      "sha256": "8fea8769f9f876fbe58638f915023153cb3fcfbe21278fb6d4d88c1164e46e4a"
     },
     {
       "path": "agent/evaluation/kuaisearch_g2_phase_a_adjudicated_qrels_v1.py",
@@ -1339,8 +1344,8 @@
     },
     {
       "path": "agent/evaluation/mixed_review_corpus_evaluation.py",
-      "bytes": 23308,
-      "sha256": "9583f3d5d5694d4ce82b7e350a9ed35507751c7ef3844155df2e2bcd99b105c9"
+      "bytes": 22705,
+      "sha256": "6905b881aded799de4dabd39375853c83b25f4b36fa99f669c2243d984fdc942"
     },
     {
       "path": "agent/evaluation/multi_agent_runtime_v2_confirmation.py",
@@ -1364,48 +1369,48 @@
     },
     {
       "path": "agent/evaluation/rag_content_reranker_evaluation.py",
-      "bytes": 5621,
-      "sha256": "04066d889b47544161329e63a862ca212ffb4a243a922cb1e2a31fa390215fd8"
+      "bytes": 5464,
+      "sha256": "a91737e108100f5ea33ee4794e6c0999ac0df5a2d28808c93ffbb408e2522088"
     },
     {
       "path": "agent/evaluation/rag_context_selection_evaluation.py",
-      "bytes": 10827,
-      "sha256": "9153489508995a1d570ccbb054cfe2d097ccfc128a5d60dabb0e040cd4022310"
+      "bytes": 10556,
+      "sha256": "bd8fe61036790d5d997dabee601059e65b996eb843383ddecd3ec85709830298"
     },
     {
       "path": "agent/evaluation/rag_dual_recall_evaluation.py",
-      "bytes": 7313,
-      "sha256": "338ce3e637c4508b7cc4204b90361523a64c862547c3dc6f7534e0ce544826ae"
+      "bytes": 7104,
+      "sha256": "9b20d43288d3330fea7ab5334fb952ae0ce49aa9d43a6ac68448240a48b262bf"
     },
     {
       "path": "agent/evaluation/rag_evaluation.py",
-      "bytes": 8467,
-      "sha256": "78f022622d96c6a38b3093d910c07fbd15e830e4a59a7868adebc0bac988711d"
+      "bytes": 8267,
+      "sha256": "7ee9b181147f377cd399e71ef5b86cc6613c02c7fbe2b460978439de5c4006c5"
     },
     {
       "path": "agent/evaluation/rag_fuzzy_discovery_evaluation.py",
-      "bytes": 9694,
-      "sha256": "385b08d22f8b5871d2ac4ed4bf6afcc7039f778babc75dccd0fe9ecd53b5c534"
+      "bytes": 9420,
+      "sha256": "3ebde08660f576974a5651dabc7df6f626ac762e54a97bb12be39b84a1db37a3"
     },
     {
       "path": "agent/evaluation/rag_metadata_filter_evaluation.py",
-      "bytes": 4760,
-      "sha256": "bcfaa129a7aa447b375f5ee1d44134bb5c67c819319592fbd7a687883f75873e"
+      "bytes": 4618,
+      "sha256": "465dfc09f038e7abfb9e1f411e84f867bc00158fb7d59a9db9a445b293b4e2bb"
     },
     {
       "path": "agent/evaluation/rag_q15_evaluation.py",
-      "bytes": 16480,
-      "sha256": "7dd9887e3c6803903d931d9e55467c748b74e135c2493dc59d7bfbbd468aab2c"
+      "bytes": 16074,
+      "sha256": "1d462050658ad1feea46bc4fad21159d70129360d22e2dd5233d2de359f5995f"
     },
     {
       "path": "agent/evaluation/rag_query_decomposed_reranker_evaluation.py",
-      "bytes": 7945,
-      "sha256": "c33008416bbaa3df40063ed2de1de62a6357b408712d51cf838d34b4ba9bf542"
+      "bytes": 7732,
+      "sha256": "0f2088644d0549874db04e7c15ca62a66075e95882664617ea8846b736bd01fb"
     },
     {
       "path": "agent/evaluation/rag_shop_aggregation_evaluation.py",
-      "bytes": 9159,
-      "sha256": "ba20545e898c46093934214f1f8058f679d10d33732b9de6f5a953e00a51d465"
+      "bytes": 8915,
+      "sha256": "57c140a78db9096b68ba3e3ed20e0c58d2c68683e9790b98742839d7f28ce18c"
     },
     {
       "path": "agent/evaluation/react_v1_architecture_24_blind_pack_v1.py",
@@ -1639,8 +1644,8 @@
     },
     {
       "path": "agent/evaluation/review_hybrid_evaluation.py",
-      "bytes": 6672,
-      "sha256": "9bcb62fa417bfa23af2aae8c1f58496219729866f074c42448a62166baa6a55f"
+      "bytes": 6494,
+      "sha256": "4c4084ea83b598955c73a762a5f8aa9012e4657d0bbbe57b64c8dce6fb57a6d1"
     },
     {
       "path": "agent/evaluation/scenario_lab_v0_real_runner.py",
@@ -1659,8 +1664,8 @@
     },
     {
       "path": "agent/evaluation/shop_review_entity_evaluation.py",
-      "bytes": 4648,
-      "sha256": "0396cd3b3ab70697ec0cebbef94e35423760bc722ac8921b3d4c8948b5fa0d6b"
+      "bytes": 4525,
+      "sha256": "4e3f56dfe752a1da4f697ab9494475de8958399bfaa5a55a2b1b989029ff85b3"
     },
     {
       "path": "agent/evaluation/shopping_memory_abc_v1.py",
@@ -2219,8 +2224,8 @@
     },
     {
       "path": "agent/knowledge_data/eval/bm25_inverted_report.json",
-      "bytes": 2015,
-      "sha256": "e11d36116d8cdfbd9dc9b60b9f3bddd94d812616db077f074550d3884f2b45dd"
+      "bytes": 1938,
+      "sha256": "3041593e4c2efbb80175f685654ea14779f4e0eda63175af3a4a3a44cd0e318a"
     },
     {
       "path": "agent/knowledge_data/eval/capability_router_cases.json",
@@ -2234,8 +2239,8 @@
     },
     {
       "path": "agent/knowledge_data/eval/capability_router_validation_report.json",
-      "bytes": 10422,
-      "sha256": "4b00423bbff04834c933549f3b92b0f9f3f10118e725c0cd913276a562f679b4"
+      "bytes": 10210,
+      "sha256": "b1634f3b21d32fcd1cb656649240882f1c8c603c99989e4a2477cb16015af140"
     },
     {
       "path": "agent/knowledge_data/eval/content_reranker_validation_report.json",
@@ -2274,18 +2279,18 @@
     },
     {
       "path": "agent/knowledge_data/eval/knowledge_index_shadow_report.json",
-      "bytes": 59645,
-      "sha256": "baea8313b4965303c28fb931353bde40b006bf324ed7ea5434c3b53c79e7fddc"
+      "bytes": 57847,
+      "sha256": "4c857792d7c971c5efedb47f09b46f9f2c439d291a05a88dd9aeca56b5061033"
     },
     {
       "path": "agent/knowledge_data/eval/knowledge_index_shadow_zh_v1_regression_report.json",
-      "bytes": 62504,
-      "sha256": "752de0cfa190795b736fe81c152ef32e5bd63d187a5b5abfba95b53bad61ae01"
+      "bytes": 60645,
+      "sha256": "cd0d14b8f3ea4e44e34573e3b78aa222d4f49ce4f3ed328a22685172bb8cd28b"
     },
     {
       "path": "agent/knowledge_data/eval/mixed_review_corpus_candidate_pool.json",
-      "bytes": 218756,
-      "sha256": "9d182d4fb202310a538a26fec958f2e3c58694ae996a4b10aef8ca6282561c01"
+      "bytes": 214292,
+      "sha256": "b29774ffb393ba92fe12646e1610fa4449e9ebebd32314a7cf55d392fea8a5e4"
     },
     {
       "path": "agent/knowledge_data/eval/mixed_review_corpus_judgments.json",
@@ -2294,8 +2299,8 @@
     },
     {
       "path": "agent/knowledge_data/eval/mixed_review_corpus_validation_report.json",
-      "bytes": 205888,
-      "sha256": "70d8345babe338ed2c8476fcae860fea2d4480c4dad3a934839e50379c17ed67"
+      "bytes": 199924,
+      "sha256": "1e419ccb2e7802b751b75cedc0f70fce8c9ee80a639abc6238c6747a526883f1"
     },
     {
       "path": "agent/knowledge_data/eval/q15_sealed_test_report.json",
@@ -2309,8 +2314,8 @@
     },
     {
       "path": "agent/knowledge_data/eval/rag_prod_readiness_report.json",
-      "bytes": 2274,
-      "sha256": "dc3332c961dd907d840444234d96aae498e5592df16dc1d793c7a52f838133f9"
+      "bytes": 2209,
+      "sha256": "442b8977156e091512583e5ff8f9f4ce36f68881df079455cde1f0017c6a68fb"
     },
     {
       "path": "agent/knowledge_data/eval/retrieval_quality_cases.json",
@@ -2319,8 +2324,8 @@
     },
     {
       "path": "agent/knowledge_data/eval/retrieval_quality_report.json",
-      "bytes": 25515,
-      "sha256": "d5fb1e1d747e868ad05e6b70e8545ba34776736a80bc3ec611f86d685978b4cc"
+      "bytes": 24695,
+      "sha256": "d07e7cf0446c2b4d6fd660f2f8a7a1123db9fb8b2efa9d19e66aaa553fff85e0"
     },
     {
       "path": "agent/knowledge_data/eval/review_hybrid_agent_canary_cases.json",
@@ -2329,23 +2334,23 @@
     },
     {
       "path": "agent/knowledge_data/eval/review_hybrid_agent_canary_report.json",
-      "bytes": 17432,
-      "sha256": "4c23e1ba18a44471e3bcdb130c5c9e39923dcf149d154c603047edc3faccf431"
+      "bytes": 16999,
+      "sha256": "a9fcb8a3de3ea8d56a610d4c0e4f5291ef82dfcb9908ffe00f2851dd6b294131"
     },
     {
       "path": "agent/knowledge_data/eval/review_hybrid_validation_report.json",
-      "bytes": 112010,
-      "sha256": "f17a733cd8a14781b30e0c15e6ce17b800f466050562a60293101bd38b106878"
+      "bytes": 109716,
+      "sha256": "dc453568afaab19c18800c3ce2f00f35c512c32618e5ff151943479c24fab83d"
     },
     {
       "path": "agent/knowledge_data/eval/review_index_freshness_smoke_report.json",
-      "bytes": 481,
-      "sha256": "82f72a732206007a01222cb607a87929543e20fbf15c71335ae279657861e14a"
+      "bytes": 466,
+      "sha256": "b4996e3e98a5cc5e136455d19c377a9c64b948f6737d2e16d979b1743fe41f59"
     },
     {
       "path": "agent/knowledge_data/eval/review_metadata_filter_report.json",
-      "bytes": 5328,
-      "sha256": "bab28d83f88c88d25131f78e0e20ce765f8afb0a520752cb3481e764cc2c7a80"
+      "bytes": 5141,
+      "sha256": "7c2c674d21379f76cb95ab23cee29e167d3420483d797e98a792e5850f88e28b"
     },
     {
       "path": "agent/knowledge_data/eval/router_cases.json",
@@ -2354,13 +2359,13 @@
     },
     {
       "path": "agent/knowledge_data/eval/router_report.json",
-      "bytes": 15168,
-      "sha256": "9da97c7eb74104ca6ba8ffa27962b4a0700984b3d2e116791e0bdf817dff77ee"
+      "bytes": 14551,
+      "sha256": "e9a8a214efb4991a7566509aac9a277980af50693b3104f0013984240a0af78d"
     },
     {
       "path": "agent/knowledge_data/eval/search_knowledge_mixed_report.json",
-      "bytes": 25345,
-      "sha256": "5099ede31f4c7eecde09b1619670e1ce58f67797bb7deafaf442a523b2f7fc72"
+      "bytes": 24341,
+      "sha256": "7aa2006161a7fd702a3c79f21cef17aaefe4da3b96046d0bb9f5f87ebda07d01"
     },
     {
       "path": "agent/knowledge_data/eval/shop_aggregation_validation_cases.json",
@@ -2369,13 +2374,13 @@
     },
     {
       "path": "agent/knowledge_data/eval/shop_aggregation_validation_report.json",
-      "bytes": 57513,
-      "sha256": "cf6fe3cb9eee0a1d5768f484a3556f96b58262598984e8313bf23f69572c6278"
+      "bytes": 55653,
+      "sha256": "ecde37e67ebabc8e7d501794af3594ed77b94dafa569389345f8824bdeea2872"
     },
     {
       "path": "agent/knowledge_data/eval/shop_review_entity_report.json",
-      "bytes": 4290,
-      "sha256": "370e7a7dfcbda147be7ce05ed00c3375dc98ffa3052e568679112c2ee2fa805a"
+      "bytes": 4138,
+      "sha256": "b8de12e64c27d60e9b77d3e0d000d02e58f8ca44c9ac0e6caae87a59926c1261"
     },
     {
       "path": "agent/knowledge_data/eval/source_aware_agent_canary_cases.json",
@@ -2384,23 +2389,23 @@
     },
     {
       "path": "agent/knowledge_data/eval/source_aware_agent_canary_report.json",
-      "bytes": 13614,
-      "sha256": "72cf598b715ca3cb9816effcf5893a47426ca8953da7d5f898033e4b728901b1"
+      "bytes": 13274,
+      "sha256": "3de7344f06bf20df94064ff6a55eb57ffa77cffdb7951b969b2effe99e319e89"
     },
     {
       "path": "agent/knowledge_data/eval/source_aware_runtime_smoke_report.json",
-      "bytes": 14363,
-      "sha256": "e1d7bb4a714102926411b315716b2d4f4462305046c196f0313382f49383c27c"
+      "bytes": 14062,
+      "sha256": "20952f8541a4c0b592b1a3a1378ab4d303897cfd5cdcea04256b673bb524cdb1"
     },
     {
       "path": "agent/knowledge_data/eval/source_aware_validation_zh_v1_report.json",
-      "bytes": 50724,
-      "sha256": "2fc1b0dacf0b39af2416777670af7cba1b0d92a80a97f9749da51f4c198e6119"
+      "bytes": 49208,
+      "sha256": "05be85701c03c79c1cc5d3e84566f3e09f5ca00bd8286b92a3dd129d67e234a1"
     },
     {
       "path": "agent/knowledge_data/raw/merchant_docs/yelp_merchant_docs.json",
-      "bytes": 1205818,
-      "sha256": "5af399a18e7c75cd0ef7e4ab791890100660ad15046bd0795406d2d0f36cf8f6"
+      "bytes": 1182855,
+      "sha256": "a83f499ae518ccc7f61e1fb00dc9b6b581a461d7a69cf9ff2730f3c19a84430d"
     },
     {
       "path": "agent/knowledge_data/raw/policy_docs/consumer_rights.md",
@@ -2419,8 +2424,8 @@
     },
     {
       "path": "agent/place_data/demo/place_agent_demo_report.json",
-      "bytes": 45672,
-      "sha256": "1534ad370e58249f94373d3c5dbf4e698c60f3a43613cb14e486669cb16d1dd0"
+      "bytes": 44597,
+      "sha256": "5647b4d897d9ae521eb84f0771324401b2283b7ed4d2bf4f21ad27dedaabefe1"
     },
     {
       "path": "agent/place_data/demo/place_agent_demo_v2.json",
@@ -2434,8 +2439,8 @@
     },
     {
       "path": "agent/place_data/eval/beijing_places_v2_report.json",
-      "bytes": 14217,
-      "sha256": "1c689f7aa51a550428359abc382b5cce3ea2aad60830e026589b292623ecf88e"
+      "bytes": 13627,
+      "sha256": "f81af15ac8a1c241a41ed59908ca2051fab479faee7c47ea389fca6059653392"
     },
     {
       "path": "agent/place_data/eval/place_agent_v1_cases.json",
@@ -2444,13 +2449,13 @@
     },
     {
       "path": "agent/place_data/eval/place_agent_validation_report.json",
-      "bytes": 50152,
-      "sha256": "1f8375e0ce2f3ea5c94d891e5e213ab25bc037a3bbf7c0552f11d7de0523d86f"
+      "bytes": 48799,
+      "sha256": "1c511cbf7bc8d7cff62c7f38c7926504669d20cb746d7c2404ddd956dcd04387"
     },
     {
       "path": "agent/place_data/eval/place_agent_validation_targeted_report.json",
-      "bytes": 16055,
-      "sha256": "6786f5d9a1e3afc1694e23e9ff50b4a71b0e8efc893bab8292138765766171b6"
+      "bytes": 15560,
+      "sha256": "40fc80d14fddb9724c047e2e313892904d1a118dfb7465718557efae2e6b2f9c"
     },
     {
       "path": "agent/place_data/README.md",
@@ -2464,8 +2469,8 @@
     },
     {
       "path": "agent/rag/corpus/merchant_reviews.json",
-      "bytes": 153116,
-      "sha256": "488bf2a041a77145a5e112a1301d36c5322d53d297f77184d5d31bc386a09b8c"
+      "bytes": 147537,
+      "sha256": "ff2a98959592c3de0b6d61d09949c4dd7de07215750688c78ef2ebcd074fbfd4"
     },
     {
       "path": "agent/rag/eval/generation_baseline.json",
@@ -2479,18 +2484,18 @@
     },
     {
       "path": "agent/rag/eval/search_knowledge_equivalence_report.json",
-      "bytes": 2342,
-      "sha256": "53179ce69f335b5f8854fc6eca9439c0e0e0bdfe0976d0de372f16c7a506e9e2"
+      "bytes": 2254,
+      "sha256": "5f6cb74ab561fe836782c2dd82a14ae873ddadd3020f3c78bc59740b642b71c5"
     },
     {
       "path": "agent/rag/eval/search_knowledge_tool_equivalence_report.json",
-      "bytes": 47346,
-      "sha256": "98921794dd6c4f352dceb7c5c6f931eadc091dbd74a55e3dadd4becc37230247"
+      "bytes": 45814,
+      "sha256": "626824d301843d3e1c5b1cb7cc31449a01a2851483c06bd05cdb040ecb1b02fb"
     },
     {
       "path": "agent/rag/eval/seed_dual_recall_frozen_weight_report.json",
-      "bytes": 39186,
-      "sha256": "c1cb07c3c7db07e91b8fccf5546b233a775c52485fe52c55958f8cca1dbf2311"
+      "bytes": 37499,
+      "sha256": "a559cf17e5d8b8291a5b388e8478092da3a35a20446cffc949d1ed3ff7795d50"
     },
     {
       "path": "agent/rag/eval/yelp_bm25_extended_report.json",
@@ -2504,23 +2509,23 @@
     },
     {
       "path": "agent/rag/eval/yelp_bm25_report.json",
-      "bytes": 6106,
-      "sha256": "7a538ca2f6df2f9d5547b46211b3cb49be593ab590a32eb4196e2bfcacd7a5a7"
+      "bytes": 5859,
+      "sha256": "e3d33eb03d4169db5847a6d3472aee84c1fd0dafac96b6e09ab8bb89af95337f"
     },
     {
       "path": "agent/rag/eval/yelp_dual_recall_report.json",
-      "bytes": 59870,
-      "sha256": "296176e47c8c76f6b0254eb470b8f4792f395f7bc5a7c7b2c9520d3574cf8951"
+      "bytes": 57848,
+      "sha256": "cf089bce0c5d261f8d4d51bfd11f4581dd2972241154d6ed79d2b55a7549b189"
     },
     {
       "path": "agent/rag/eval/yelp_dual_recall_weight_grid.json",
-      "bytes": 7693,
-      "sha256": "2143c2036b56c20b01d3e5529a5fbff2a90a11e998750f7a7b05ef374e1ce5ae"
+      "bytes": 7345,
+      "sha256": "0f1ef6eae2b5e8648835b15e997341c4bb31a332324b94845d25d64e0ad60e06"
     },
     {
       "path": "agent/rag/eval/yelp_lexical_rerank_report.json",
-      "bytes": 22725,
-      "sha256": "78701edff4c70e2d40af133f21bb2fea0e9cb649149b5a4deb100f215f557bd3"
+      "bytes": 21976,
+      "sha256": "7edfd115f647cea6794e7f4381ca98ea5cc326b9c2e4598b16c7e10c11f1e60e"
     },
     {
       "path": "agent/rag/eval/yelp_real_review_qa_answers.json",
@@ -2529,23 +2534,23 @@
     },
     {
       "path": "agent/rag/eval/yelp_retrieval_cases.json",
-      "bytes": 27118,
-      "sha256": "dee4b2305b3d7c04b0446adcc67a432fce62939342a2a01b6e0b61815c46c3ca"
+      "bytes": 26610,
+      "sha256": "9f369318851e890f5769f0634d03e733692b38351e7c358787f1f532d1317f39"
     },
     {
       "path": "agent/rag/eval/yelp_retrieval_failure_analysis_yelp_only.json",
-      "bytes": 326069,
-      "sha256": "5d1140731bb906e61b6b4b151127bfb0ba9db61a771a3776d42dd752b9a31aa5"
+      "bytes": 321879,
+      "sha256": "b889dc342ac2e8b856e0855ff313c06f3058215f90c28ae66bafd8ce819ba305"
     },
     {
       "path": "agent/rag/eval/yelp_retrieval_failure_analysis.json",
-      "bytes": 294115,
-      "sha256": "fec3d2c8af5d236f56aaf65045dfce562266511214e2f419884c541b7d32c939"
+      "bytes": 289507,
+      "sha256": "ec8cf6ee142af84f8f908ba2690afc933aeb68fecfe26800396d66ad93cb9dd5"
     },
     {
       "path": "agent/rag/eval/yelp_retrieval_report_yelp_only.json",
-      "bytes": 18666,
-      "sha256": "e8e24153a13f2b35883728b530070b0593b7b6423367371ef56a221628765819"
+      "bytes": 17961,
+      "sha256": "01a668a9ffcbac950486604e4867fb7d44772f2d1d0460431b7030705fa807c6"
     },
     {
       "path": "agent/rag/eval/yelp_retrieval_report.json",
@@ -2554,13 +2559,13 @@
     },
     {
       "path": "agent/rag/eval/yelp_zh_v1_dual_recall_regression_report.json",
-      "bytes": 71762,
-      "sha256": "0b925e01182a4ad386954bcde7dd095df596e2a22fdbbd38d963c50adf7d47f1"
+      "bytes": 69337,
+      "sha256": "7a38e79da3cff18a5c89226b2f602b774d7f44a514c50bfeb299deec35bd07c0"
     },
     {
       "path": "agent/recommendation/__init__.py",
-      "bytes": 69,
-      "sha256": "0a8f6b00f6f827d5ff17b24a3a65e85f9efc77721a68275f6057eb84853457e3"
+      "bytes": 68,
+      "sha256": "8a15303b6852db7128215f8b825db77dea5b2f652333acdc34e20c31ae5882d0"
     },
     {
       "path": "agent/recommendation/baselines.py",
@@ -3374,8 +3379,8 @@
     },
     {
       "path": "agent/tests/test_run_agent.py",
-      "bytes": 318213,
-      "sha256": "6c0591a5c55096a4836764892739533383b54844e86d5ed1de4f4b3432674194"
+      "bytes": 314783,
+      "sha256": "655bf509d2a654af991971a1929509a413b55ad82282fd6cd5357db008cef2f8"
     },
     {
       "path": "agent/tests/test_session_memory.py",
@@ -4994,8 +4999,8 @@
     },
     {
       "path": "backend/src/test/resources/data.sql",
-      "bytes": 97943,
-      "sha256": "eafe91707d44c6282e8c17f4327cd9362c778d728d87e69d5cd8d3caf6e68635"
+      "bytes": 97460,
+      "sha256": "459a65efdbba77269b9c5c8220f926857e1cd23a03517046d55019e40893865c"
     },
     {
       "path": "backend/src/test/resources/schema.sql",
@@ -5014,8 +5019,8 @@
     },
     {
       "path": "db/review.sql",
-      "bytes": 94265,
-      "sha256": "0be2a66b03652f2baef4b5a49981ccae24dc31624739febd97e9e3c67df64f27"
+      "bytes": 93805,
+      "sha256": "932f739ae4c0b5027ef413931a836fc301c063121e7a405937b2b16a15c03dd8"
     },
     {
       "path": "db/shop_type.sql",
@@ -5044,8 +5049,8 @@
     },
     {
       "path": "docs/acceptance/github-publication-and-demo-2026-09-03.md",
-      "bytes": 1170,
-      "sha256": "786bf3a72150e82032e6eeb3e59e515e4fa20a6c347ba420cba543533a63f73a"
+      "bytes": 1284,
+      "sha256": "2c8a0549603eee26df6cdc27825c9b2ca7fb3dc0eb8832568bee5a12000bec13"
     },
     {
       "path": "docs/assets/demo/agent-flow-desktop.png",
@@ -5105,7 +5110,7 @@
     {
       "path": "README.md",
       "bytes": 4638,
-      "sha256": "1ac22244f72a798c4fc6075c03a62b98880d828f03ec2e175f7c9dd7311f982f"
+      "sha256": "e54973db4e08d2b5237ffe2beaf46858759328e3f7cfa69cc163a0f318875ca0"
     },
     {
       "path": "retrieval_judgment_pool_core/__init__.py",
@@ -5154,8 +5159,8 @@
     },
     {
       "path": "scripts/build-public-snapshot.ps1",
-      "bytes": 6806,
-      "sha256": "9928fe7c6abf0c9fb60cc3fd0debb21478e49ec721f8599a3f9e093ff7b61fd0"
+      "bytes": 7459,
+      "sha256": "0f1e03ea973c8911b08f97b8214901e302e496b0af54b383aef78cbbd36d1860"
     },
     {
       "path": "scripts/check_markdown_links.py",

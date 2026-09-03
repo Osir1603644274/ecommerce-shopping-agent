@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 $ProjectRoot = [IO.Path]::GetFullPath((Split-Path -Parent $PSScriptRoot))
 $RuntimeRoot = [IO.Path]::GetFullPath((Join-Path $ProjectRoot ".runtime"))
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
-    $OutputDirectory = Join-Path $RuntimeRoot "public-snapshot-v10"
+    $OutputDirectory = Join-Path $RuntimeRoot "public-snapshot-v11"
 }
 $OutputRoot = [IO.Path]::GetFullPath($OutputDirectory)
 $runtimePrefix = $RuntimeRoot.TrimEnd([IO.Path]::DirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar
@@ -60,6 +60,7 @@ function Copy-PublicTree([string]$RelativeRoot, [switch]$PythonOnly) {
 
 $rootFiles = @(
     ".env.example",
+    ".gitattributes",
     ".gitignore",
     "README.md",
     "docker-compose.yml",
@@ -150,6 +151,17 @@ $agentTests = @(
 )
 foreach ($name in $agentTests) {
     Copy-PublicFile (Join-Path "agent/tests" $name)
+}
+
+# Public Git blobs use canonical LF text. Normalize before hashing so a remote
+# archive remains byte-for-byte verifiable against the manifest.
+$binaryExtensions = @(".gif", ".jpg", ".jpeg", ".png", ".webp", ".pdf", ".zip")
+$utf8NoBom = [Text.UTF8Encoding]::new($false)
+foreach ($file in Get-ChildItem -LiteralPath $OutputRoot -File -Recurse) {
+    if ($file.Extension.ToLowerInvariant() -in $binaryExtensions) { continue }
+    $content = [IO.File]::ReadAllText($file.FullName, $utf8NoBom)
+    $normalized = $content.Replace("`r`n", "`n").Replace("`r", "`n")
+    [IO.File]::WriteAllText($file.FullName, $normalized, $utf8NoBom)
 }
 
 $manifestFiles = @(

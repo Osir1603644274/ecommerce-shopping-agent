@@ -84,7 +84,7 @@ pwsh -NoProfile -File .\scripts\verify_project_governance.ps1
 
 ```powershell
 pwsh -NoProfile -File .\scripts\build-public-snapshot.ps1
-python .\scripts\check_public_snapshot.py .\.runtime\public-snapshot-v11
+python .\scripts\check_public_snapshot.py .\.runtime\public-snapshot-v13
 ```
 
 ## 诚实边界

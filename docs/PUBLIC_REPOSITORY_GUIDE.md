@@ -60,5 +60,6 @@ pwsh -NoProfile -File .\scripts\commerce-demo.ps1 smoke
 3. 在快照内部执行仓库卫生、Markdown 链接与定向测试。
 4. 只从该快照创建独立 Git 历史并推送；不得直接发布受保护的本地工作树。
 5. 推送后重新下载远程归档，复算 manifest 并抽查首页、动图和文档链接。
+6. GitHub Actions 只读复查 manifest、仓库卫生和活动 Markdown 链接，不运行模型或读取外部数据。
 
 本仓库用于个人作品展示。第三方依赖和外部数据遵循各自许可证；原始外部数据不随仓库分发。

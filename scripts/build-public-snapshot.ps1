@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 $ProjectRoot = [IO.Path]::GetFullPath((Split-Path -Parent $PSScriptRoot))
 $RuntimeRoot = [IO.Path]::GetFullPath((Join-Path $ProjectRoot ".runtime"))
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
-    $OutputDirectory = Join-Path $RuntimeRoot "public-snapshot-v11"
+    $OutputDirectory = Join-Path $RuntimeRoot "public-snapshot-v13"
 }
 $OutputRoot = [IO.Path]::GetFullPath($OutputDirectory)
 $runtimePrefix = $RuntimeRoot.TrimEnd([IO.Path]::DirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar
@@ -62,6 +62,7 @@ $rootFiles = @(
     ".env.example",
     ".gitattributes",
     ".gitignore",
+    ".github/workflows/public-integrity.yml",
     "README.md",
     "docker-compose.yml",
     "agent/.dockerignore",

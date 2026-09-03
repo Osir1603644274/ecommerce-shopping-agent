@@ -1,6 +1,6 @@
 {
   "schemaVersion": "public-snapshot-manifest-v1",
-  "fileCount": 1036,
+  "fileCount": 1037,
   "files": [
     {
       "path": ".env.example",
@@ -11,6 +11,11 @@
       "path": ".gitattributes",
       "bytes": 112,
       "sha256": "b1beeb286166e1c187196791fffdffbeff1d6e912f548f1fabb50ccaf07fc7c7"
+    },
+    {
+      "path": ".github/workflows/public-integrity.yml",
+      "bytes": 663,
+      "sha256": "5b60077d6fe3ac57989ed8d7cfbdbbb9e3194fc9dcabdbc48400538316e66cb2"
     },
     {
       "path": ".gitignore",
@@ -5049,8 +5054,8 @@
     },
     {
       "path": "docs/acceptance/github-publication-and-demo-2026-09-03.md",
-      "bytes": 1284,
-      "sha256": "2c8a0549603eee26df6cdc27825c9b2ca7fb3dc0eb8832568bee5a12000bec13"
+      "bytes": 2703,
+      "sha256": "99eb37df03a4e93a309adb840ec41a34336426f7a557771aefd2364869a567db"
     },
     {
       "path": "docs/assets/demo/agent-flow-desktop.png",
@@ -5099,8 +5104,8 @@
     },
     {
       "path": "docs/PUBLIC_REPOSITORY_GUIDE.md",
-      "bytes": 3539,
-      "sha256": "1239ecf103ef7710079e0b7c6c85aac65ccaf9040bfa8d989e6af2bdddae51f3"
+      "bytes": 3661,
+      "sha256": "2136fb2fa8003e82ffd3e79ba267338d3e38fafb854c51f3a4f3dc2b2458f389"
     },
     {
       "path": "observability/prometheus.yml",
@@ -5110,7 +5115,7 @@
     {
       "path": "README.md",
       "bytes": 4638,
-      "sha256": "e54973db4e08d2b5237ffe2beaf46858759328e3f7cfa69cc163a0f318875ca0"
+      "sha256": "102f72f51de0fb8845d9c2da54597b8a33f4da5b9f955da2cc6dd0983682b020"
     },
     {
       "path": "retrieval_judgment_pool_core/__init__.py",
@@ -5159,8 +5164,8 @@
     },
     {
       "path": "scripts/build-public-snapshot.ps1",
-      "bytes": 7459,
-      "sha256": "0f1e03ea973c8911b08f97b8214901e302e496b0af54b383aef78cbbd36d1860"
+      "bytes": 7505,
+      "sha256": "4fe7053ebe42b60143b4d2e6c3ad069dfcb309297521d336bad4a13ce10ee1c5"
     },
     {
       "path": "scripts/check_markdown_links.py",

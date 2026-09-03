@@ -1,4 +1,4 @@
-"""Fail when tracked files contain common secret or repository-hygiene hazards."""
+"""Check committed files for common secret and repository-hygiene hazards."""
 
 from __future__ import annotations
 
@@ -42,7 +42,7 @@ def tracked_files() -> list[PurePosixPath]:
 
 
 def repository_files() -> list[PurePosixPath]:
-    """Use Git's index in the worktree, or the filesystem in a clean snapshot."""
+    """Use Git's index in a worktree, or the filesystem in an exported archive."""
 
     if (PROJECT_ROOT / ".git").exists():
         return tracked_files()
@@ -72,7 +72,7 @@ def main() -> int:
 
         absolute = PROJECT_ROOT.joinpath(*relative.parts)
         if absolute.is_symlink():
-            failures.append(f"{display}: symlink is not allowed in a public snapshot")
+            failures.append(f"{display}: symlink is not allowed in this repository")
             continue
         try:
             size = absolute.stat().st_size

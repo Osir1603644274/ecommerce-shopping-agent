@@ -12,17 +12,7 @@ SKIPPED_PREFIXES = ("http://", "https://", "mailto:", "tel:", "data:")
 
 def markdown_files() -> list[Path]:
     files = [ROOT / "README.md"]
-    files.extend(
-        path
-        for path in (ROOT / "docs").rglob("*.md")
-        if "archive" not in path.relative_to(ROOT / "docs").parts
-        # Handoff evidence directories are immutable point-in-time copies. Their
-        # relative links resolve in the source tree, not inside the copied packet.
-        and not (
-            "handoffs" in path.relative_to(ROOT / "docs").parts
-            and "evidence" in path.relative_to(ROOT / "docs").parts
-        )
-    )
+    files.extend((ROOT / "docs").rglob("*.md"))
     files.extend((ROOT / "review").rglob("*.md"))
     return sorted(files)
 

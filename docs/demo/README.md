@@ -1,6 +1,6 @@
-# 全链路演示材料
+# 本地全链路 Demo
 
-本演示使用真实浏览器重新执行一次本地链路，不是静态模拟页面：
+演示覆盖以下流程：
 
 `注册 → Agent 检索 → CandidateScope → 订单预览 → 确认下单 → 支付预览 → 确认支付 → 本地回调 → Agent 回查 PAID`
 
@@ -26,12 +26,10 @@ pwsh -NoProfile -File .\scripts\commerce-demo.ps1 health
 pwsh -NoProfile -File .\scripts\commerce-demo.ps1 stop
 ```
 
-## 本次浏览器证据
+## 界面预览
 
 ![Agent 检索形成服务端候选](../assets/demo/commerce-demo-search.png)
 
-![Agent 回查权威支付状态](../assets/demo/commerce-demo-paid.png)
+![Agent 查询订单支付状态](../assets/demo/commerce-demo-paid.png)
 
-最终页面显示支付状态 `SUCCESS`，Agent 从 Java/MySQL 回查订单状态为 `PAID`。该结果只证明本地单实例、模拟支付回调链路，不代表真实支付或生产就绪。
-
-口头介绍使用[三分钟项目讲稿](THREE_MINUTE_PITCH.md)。
+最终页面显示支付状态 `SUCCESS`，Agent 从 Java/MySQL 查询到订单状态 `PAID`。支付步骤使用本地模拟回调，不连接真实支付渠道。

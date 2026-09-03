@@ -1,0 +1,341 @@
+{
+  "experiment": "RAG-PROD-01 stage 2d non-sealed Agent canary matrix",
+  "methodology": {
+    "sealedDataRead": false,
+    "baseUrl": "http://localhost:8001",
+    "isolatedCanaryPortRequired": true,
+    "defaultAgentChanged": false,
+    "hybridEnabled": false,
+    "warningLatencyMs": 3000.0,
+    "stopLatencyMs": 5000.0
+  },
+  "summary": {
+    "passed": true,
+    "complete": true,
+    "stoppedEarly": false,
+    "cases": 5,
+    "executed": 5,
+    "passedCases": 5,
+    "failedCases": 0,
+    "warnings": 0,
+    "eligibleForNextStageDiscussion": true
+  },
+  "details": [
+    {
+      "caseId": "named-merchant-review",
+      "question": "Red Hook Coffee & Tea适合用电脑工作吗？",
+      "passed": true,
+      "checks": {
+        "httpStatusOk": true,
+        "requestStatusOk": true,
+        "toolsAllowedSequence": true,
+        "forbiddenToolIsolation": true,
+        "toolsSucceeded": true,
+        "singleRetrievalTrace": true,
+        "sourceAwareEffective": true,
+        "selectedSourcesExact": true,
+        "returnedEvidence": true,
+        "citationSourceTypeExact": true,
+        "citationsAligned": true,
+        "withinStopLatency": true,
+        "resolvedShopExact": true,
+        "shopFilterExact": true,
+        "citationShopExact": true
+      },
+      "failedChecks": [],
+      "warnings": [],
+      "toolNames": [
+        "search_shop_reviews"
+      ],
+      "answer": "根据真实顾客的评价，**Red Hook Coffee & Tea 挺适合用电脑工作的**！以下是大家的使用体验：\n\n- 🖥️ **有顾客明确提到**：\"这里很适合坐在舒适的扶手椅上放松，**或者用笔记本电脑工作**\" [yelp-mBE3JkCV5YH9UqNdRJMUGg]\n- ☕ 店内有**舒适的扶手椅和沙发**，氛围轻松、时髦又温馨 [yelp-mBE3JkCV5YH9UqNdRJMUGg][yelp-sKVCrT5KwXIZ7qaepLecIQ]\n- ⚠️ 不过也要注意，有顾客指出**座位不算多**——\"只有几把椅子和一张沙发\"，所以高峰期可能不太好找位置 [yelp-zDmLvL7TI8hHw7W6DIiGlQ]\n\n总的来说，环境适合带电脑去办公或学习，但建议避开高峰时段，早点到更容易找到好位子哦！😊",
+      "requestTrace": {
+        "requestId": "req-d189146f2307",
+        "route": "/agent/chat-llm",
+        "status": "ok",
+        "totalDurationMs": 4858.55,
+        "slow": true,
+        "slowThresholdMs": 3000.0,
+        "bottleneck": "agent",
+        "agentDurationMs": 4850.72,
+        "llmDurationMs": null,
+        "retrievalDurationMs": null,
+        "toolDurationMs": 449.26,
+        "toolCount": 1,
+        "toolNames": [
+          "search_shop_reviews"
+        ],
+        "reviewIds": [
+          "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "yelp-zDmLvL7TI8hHw7W6DIiGlQ",
+          "yelp-sKVCrT5KwXIZ7qaepLecIQ"
+        ]
+      },
+      "retrieval": {
+        "tool": "search_shop_reviews",
+        "selectedSources": [
+          "reviews"
+        ],
+        "runtimeRoute": {
+          "requestedMode": "source_aware",
+          "effectiveMode": "source_aware",
+          "fallback": false
+        },
+        "filters": {
+          "visibility": "public",
+          "shopIds": [
+            100011
+          ]
+        },
+        "durationMs": 425.78,
+        "citationCount": 3,
+        "citationIds": [
+          "review:yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "review:yelp-zDmLvL7TI8hHw7W6DIiGlQ",
+          "review:yelp-sKVCrT5KwXIZ7qaepLecIQ"
+        ],
+        "citationSourceTypes": [
+          "review",
+          "review",
+          "review"
+        ],
+        "citationShopIds": [
+          100011,
+          100011,
+          100011
+        ]
+      }
+    },
+    {
+      "caseId": "merchant-profile",
+      "question": "St Honore Pastries 的 WiFi 和周末营业时间是什么？",
+      "passed": true,
+      "checks": {
+        "httpStatusOk": true,
+        "requestStatusOk": true,
+        "toolsAllowedSequence": true,
+        "forbiddenToolIsolation": true,
+        "toolsSucceeded": true,
+        "singleRetrievalTrace": true,
+        "sourceAwareEffective": true,
+        "selectedSourcesExact": true,
+        "returnedEvidence": true,
+        "citationSourceTypeExact": true,
+        "citationsAligned": true,
+        "withinStopLatency": true,
+        "expectedSourcePresent": true,
+        "requiredAnswerTerms": true,
+        "forbiddenAnswerTermsAbsent": true
+      },
+      "failedChecks": [],
+      "warnings": [],
+      "toolNames": [
+        "search_knowledge"
+      ],
+      "answer": "以下是 **St Honore Pastries** 的相关信息：\n\n**WiFi：** 免费提供 🆓\n\n**周末营业时间：**\n- 周六：7:00 – 21:00\n- 周日：7:00 – 21:00\n\n另外，平日营业时间为：\n- 周一至周四：7:00 – 20:00\n- 周五：7:00 – 21:00\n\n📍 地址：935 Race St, Philadelphia, PA",
+      "requestTrace": {
+        "requestId": "req-8ecf211d8541",
+        "route": "/agent/chat-llm",
+        "status": "ok",
+        "totalDurationMs": 2360.36,
+        "slow": false,
+        "slowThresholdMs": 3000.0,
+        "bottleneck": "none",
+        "agentDurationMs": 2357.13,
+        "llmDurationMs": null,
+        "retrievalDurationMs": null,
+        "toolDurationMs": 114.92,
+        "toolCount": 1,
+        "toolNames": [
+          "search_knowledge"
+        ],
+        "reviewIds": []
+      },
+      "retrieval": {
+        "tool": "search_knowledge",
+        "selectedSources": [
+          "merchant_docs"
+        ],
+        "runtimeRoute": {
+          "requestedMode": "source_aware",
+          "effectiveMode": "source_aware",
+          "fallback": false
+        },
+        "filters": {
+          "visibility": "public"
+        },
+        "durationMs": 114.41,
+        "citationCount": 3,
+        "citationIds": [
+          "merchant_doc:MTSW4McQd7CbVtyjqoe9mw:profile",
+          "merchant_doc:7J81xJFlMM244_f05k2egw:profile",
+          "merchant_doc:9XpU6r6ATXSWYfbU7kibaQ:profile"
+        ],
+        "citationSourceTypes": [
+          "merchant_doc",
+          "merchant_doc",
+          "merchant_doc"
+        ],
+        "citationShopIds": [
+          100001,
+          100092,
+          100099
+        ]
+      }
+    },
+    {
+      "caseId": "policy-knowledge",
+      "question": "个性化推荐会如何使用我的个人信息？",
+      "passed": true,
+      "checks": {
+        "httpStatusOk": true,
+        "requestStatusOk": true,
+        "toolsAllowedSequence": true,
+        "forbiddenToolIsolation": true,
+        "toolsSucceeded": true,
+        "singleRetrievalTrace": true,
+        "sourceAwareEffective": true,
+        "selectedSourcesExact": true,
+        "returnedEvidence": true,
+        "citationSourceTypeExact": true,
+        "citationsAligned": true,
+        "withinStopLatency": true,
+        "expectedSourcePresent": true,
+        "requiredAnswerTerms": true,
+        "forbiddenAnswerTermsAbsent": true
+      },
+      "failedChecks": [],
+      "warnings": [],
+      "toolNames": [
+        "search_knowledge"
+      ],
+      "answer": "根据相关政策说明，个性化推荐在使用您的个人信息时，遵循以下原则：\n\n## 数据用途说明\n\n本地生活平台如果使用个性化推荐功能（比如\"猜你喜欢\"），通常会利用您的 **浏览记录、收藏、评分、点击等行为数据** 来生成推荐内容，并且会向您说明这些数据的用途和基本处理方式。\n\n## 最小必要原则\n\n平台处理您的个人信息时，应遵循 **最小必要原则**——只收集实现推荐功能所必要的最少数据。例如，推荐功能通常需要您与商户的交互记录，但**不一定需要**身份证号、通讯录等与推荐目的无关的信息。\n\n## 您的权利\n\n您通常有权：\n- **了解**平台如何处理您的个人信息\n- **查阅、复制**您的行为数据\n- **更正、补充**不准确的信息\n- **删除**与个性化推荐相关的数据\n\n平台应当为您提供清晰的权利行使入口。\n\n如果您对个人信息的使用有具体疑问，或者想了解如何管理自己的推荐设置，欢迎进一步询问！",
+      "requestTrace": {
+        "requestId": "req-b30356d03f8f",
+        "route": "/agent/chat-llm",
+        "status": "ok",
+        "totalDurationMs": 4040.94,
+        "slow": true,
+        "slowThresholdMs": 3000.0,
+        "bottleneck": "agent",
+        "agentDurationMs": 4038.22,
+        "llmDurationMs": null,
+        "retrievalDurationMs": null,
+        "toolDurationMs": 82.75,
+        "toolCount": 1,
+        "toolNames": [
+          "search_knowledge"
+        ],
+        "reviewIds": []
+      },
+      "retrieval": {
+        "tool": "search_knowledge",
+        "selectedSources": [
+          "policy_docs"
+        ],
+        "runtimeRoute": {
+          "requestedMode": "source_aware",
+          "effectiveMode": "source_aware",
+          "fallback": false
+        },
+        "filters": {
+          "visibility": "public"
+        },
+        "durationMs": 82.17,
+        "citationCount": 3,
+        "citationIds": [
+          "policy_doc:privacy-and-recommendation:data-minimization",
+          "policy_doc:privacy-and-recommendation:data-subject-rights",
+          "policy_doc:privacy-and-recommendation:recommendation-data-use"
+        ],
+        "citationSourceTypes": [
+          "policy_doc",
+          "policy_doc",
+          "policy_doc"
+        ],
+        "citationShopIds": []
+      }
+    },
+    {
+      "caseId": "place-route-isolation",
+      "question": "海淀区有哪些一级综合公园？",
+      "passed": true,
+      "checks": {
+        "httpStatusOk": true,
+        "requestStatusOk": true,
+        "toolsAllowedSequence": true,
+        "forbiddenToolIsolation": true,
+        "toolsSucceeded": true,
+        "noRagTool": true,
+        "noRetrievalTrace": true,
+        "requiredAnswerTerms": true
+      },
+      "failedChecks": [],
+      "warnings": [],
+      "toolNames": [
+        "search_places"
+      ],
+      "answer": "当前演示目录中找到了 **7个** 海淀区的一级综合公园，具体如下：\n\n| 公园名称 | 地址 |\n|---|---|\n| 🌳 **西小口公园** | 海淀区西三旗街道兴林嘉园南侧 |\n| 🌳 **玲珑公园** | 海淀区慈寿寺桥西南侧 |\n| 🌳 **荷清园公园** | 海淀区荷清路清华大学北侧 |\n| 🌳 **马甸公园** | 海淀区马甸桥西北角 |\n| 🌳 **北坞公园** | 海淀区颐和园西门外 |\n| 🌳 **巴沟山水园** | 巴沟路与蓝靛厂北路交叉口西北角 |\n| 🌳 **长春健身园** | 海淀区万柳西路西侧 |\n\n如果需要了解某个公园的详细信息（如电话、无障碍设施等），随时告诉我！",
+      "requestTrace": {
+        "requestId": "req-df0ca0bd3241",
+        "route": "/agent/chat-llm",
+        "status": "ok",
+        "totalDurationMs": 3028.38,
+        "slow": true,
+        "slowThresholdMs": 3000.0,
+        "bottleneck": "agent",
+        "agentDurationMs": 3024.82,
+        "llmDurationMs": null,
+        "retrievalDurationMs": null,
+        "toolDurationMs": 1.8,
+        "toolCount": 1,
+        "toolNames": [
+          "search_places"
+        ],
+        "reviewIds": []
+      },
+      "retrieval": null
+    },
+    {
+      "caseId": "structured-shop-route-isolation",
+      "question": "当前有哪些咖啡店？",
+      "passed": true,
+      "checks": {
+        "httpStatusOk": true,
+        "requestStatusOk": true,
+        "toolsAllowedSequence": true,
+        "forbiddenToolIsolation": true,
+        "toolsSucceeded": true,
+        "noRagTool": true,
+        "noRetrievalTrace": true
+      },
+      "failedChecks": [],
+      "warnings": [],
+      "toolNames": [
+        "list_shop_types",
+        "search_shops"
+      ],
+      "answer": "目前数据库中共有 **64 家咖啡店**，以下是为您整理的部分列表：\n\n### ☕ 精选咖啡店推荐\n\n| 店名 | 地址 | 人均 |\n|------|------|:----:|\n| **清晨手冲咖啡** | 文化广场 3 号 | ¥35 |\n| **纸间咖啡书屋** | 学院路 18 号 | ¥42 |\n| **街角共创咖啡** | 创业大街 66 号 | ¥39 |\n| **Luck Goat Coffeehouse** | 888 N 26th St, Philadelphia, PA | ¥50 |\n| **Cafe Square One** | 50 S 3rd St, Philadelphia, PA | ¥50 |\n| **Good Karma Cafe** | 928 Pine St, Philadelphia, PA | ¥50 |\n| **ReAnimator Coffee** | 1523 E Susquehanna Ave, Philadelphia, PA | ¥50 |\n| **Red Hook Coffee & Tea** | 765 S 4th St, Philadelphia, PA | ¥50 |\n| **Starbucks**（多家分店） | 1528 Walnut St 等 | 不等 |\n| **Dunkin'**（多家分店） | 多处地址 | ¥50 |\n| **Alchemy Coffee** | 119 S 21st St, Philadelphia, PA | ¥100 |\n\n> 数据较多，仅展示部分。如果您对某家店感兴趣，可以告诉我店名，我为您查询详细信息和真实顾客评价！😊",
+      "requestTrace": {
+        "requestId": "req-c3d1a5945aa5",
+        "route": "/agent/chat-llm",
+        "status": "ok",
+        "totalDurationMs": 4695.38,
+        "slow": true,
+        "slowThresholdMs": 3000.0,
+        "bottleneck": "agent",
+        "agentDurationMs": 4692.68,
+        "llmDurationMs": null,
+        "retrievalDurationMs": null,
+        "toolDurationMs": 42.29,
+        "toolCount": 2,
+        "toolNames": [
+          "list_shop_types",
+          "search_shops"
+        ],
+        "reviewIds": []
+      },
+      "retrieval": null
+    }
+  ],
+  "failures": []
+}

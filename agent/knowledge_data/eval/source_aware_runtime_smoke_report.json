@@ -1,0 +1,302 @@
+{
+  "experiment": "RAG-PROD-01 stage 2b source-aware runtime smoke",
+  "methodology": {
+    "sealedDataRead": false,
+    "publicRuntimeEntry": "knowledge/runtime_search.py::search_knowledge",
+    "configuredDefaultBeforeSmoke": false,
+    "temporarySourceAwareOverride": true,
+    "canaryScope": "retrieval-only limited canary; not default rollout",
+    "defaultRestoredAfterSmoke": true,
+    "sourceAwareLatencyCeilingMs": 5000.0,
+    "fallbackLatencyCeilingMs": 8000.0,
+    "latencyCeilingsAreProductionSla": false
+  },
+  "summary": {
+    "passed": true,
+    "eligibleForCanary": true,
+    "sourceAwareCases": 4,
+    "sourceAwarePassed": 4,
+    "fallbackPassed": true
+  },
+  "details": [
+    {
+      "caseId": "reviews-discovery",
+      "query": "哪家咖啡店适合安静办公？",
+      "sources": [
+        "reviews"
+      ],
+      "passed": true,
+      "checks": {
+        "sourceAwareEffective": true,
+        "returnedEvidence": true,
+        "sourceTypeExact": true,
+        "retrieverExpected": true,
+        "citationsAligned": true,
+        "withinSmokeLatencyCeiling": true
+      },
+      "elapsedMs": 2191.38,
+      "runtimeRoute": {
+        "requestedMode": "source_aware",
+        "effectiveMode": "source_aware",
+        "fallback": false
+      },
+      "retrievers": [
+        "qdrant_unified_vector"
+      ],
+      "returnedCount": 3,
+      "chunks": [
+        {
+          "chunkId": "review:review-018",
+          "sourceType": "review",
+          "sourceId": "review-018",
+          "title": "街角共创咖啡评论",
+          "shopId": 8,
+          "score": 0.70159,
+          "contentPreview": "工作日下午常有创业团队讨论，虽然适合协作和开会，但环境比普通咖啡店嘈杂，不适合需要安静专注的人。"
+        },
+        {
+          "chunkId": "review:yelp-MhSusleKbPBIiq2fKHH5mA",
+          "sourceType": "review",
+          "sourceId": "yelp-MhSusleKbPBIiq2fKHH5mA",
+          "title": "Valerio Coffee Roasters评论",
+          "shopId": 100277,
+          "score": 0.69039583,
+          "contentPreview": "可爱的咖啡店，适合工作。停车在附近比较困难，但除此之外，空间很大，目前有室内座位。咖啡不错，咸味吐司也很好吃。"
+        },
+        {
+          "chunkId": "review:yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "sourceType": "review",
+          "sourceId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "title": "Good Karma Cafe评论",
+          "shopId": 100169,
+          "score": 0.67971885,
+          "contentPreview": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        }
+      ]
+    },
+    {
+      "caseId": "named-review-shop-filter",
+      "query": "这家店适合安静办公吗？",
+      "sources": [
+        "reviews"
+      ],
+      "shopId": 100011,
+      "passed": true,
+      "checks": {
+        "sourceAwareEffective": true,
+        "returnedEvidence": true,
+        "sourceTypeExact": true,
+        "retrieverExpected": true,
+        "citationsAligned": true,
+        "withinSmokeLatencyCeiling": true,
+        "shopFilterExact": true
+      },
+      "elapsedMs": 1847.3,
+      "runtimeRoute": {
+        "requestedMode": "source_aware",
+        "effectiveMode": "source_aware",
+        "fallback": false
+      },
+      "retrievers": [
+        "qdrant_unified_vector"
+      ],
+      "returnedCount": 3,
+      "chunks": [
+        {
+          "chunkId": "review:yelp-zDmLvL7TI8hHw7W6DIiGlQ",
+          "sourceType": "review",
+          "sourceId": "yelp-zDmLvL7TI8hHw7W6DIiGlQ",
+          "title": "Red Hook Coffee & Tea评论",
+          "shopId": 100011,
+          "score": 0.57122296,
+          "contentPreview": "我真的很喜欢 Red Hook。每次我去那附近买布料，都会顺便去一下。里面很可爱，有一个飘窗，非常适合看书——如果没人先坐在那里的话。咖啡很好喝，他们总是问你要中烘还是深烘。我从来没吃过他们的烘焙食品，但看起来很不错。他们绝对需要更多座位——只有几把椅子和一张沙发。价格合理，员工也总是很友好。"
+        },
+        {
+          "chunkId": "review:yelp-JSzQlkP67ME2VeZEQPBmgA",
+          "sourceType": "review",
+          "sourceId": "yelp-JSzQlkP67ME2VeZEQPBmgA",
+          "title": "Red Hook Coffee & Tea评论",
+          "shopId": 100011,
+          "score": 0.5631112,
+          "contentPreview": "很棒的社区咖啡馆。价格合理，食物不错，室内外环境都很好。我喜欢huevos banditos。员工很友善。"
+        },
+        {
+          "chunkId": "review:yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "sourceType": "review",
+          "sourceId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "title": "Red Hook Coffee & Tea评论",
+          "shopId": 100011,
+          "score": 0.5603664,
+          "contentPreview": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        }
+      ]
+    },
+    {
+      "caseId": "merchant-doc-lexical",
+      "query": "St Honore Pastries 有 WiFi 吗？",
+      "sources": [
+        "merchant_docs"
+      ],
+      "passed": true,
+      "checks": {
+        "sourceAwareEffective": true,
+        "returnedEvidence": true,
+        "sourceTypeExact": true,
+        "retrieverExpected": true,
+        "citationsAligned": true,
+        "withinSmokeLatencyCeiling": true,
+        "expectedTopSource": true,
+        "requiredTopTerms": true
+      },
+      "elapsedMs": 1679.31,
+      "runtimeRoute": {
+        "requestedMode": "source_aware",
+        "effectiveMode": "source_aware",
+        "fallback": false
+      },
+      "retrievers": [
+        "qdrant_payload_lexical"
+      ],
+      "returnedCount": 3,
+      "chunks": [
+        {
+          "chunkId": "merchant_doc:MTSW4McQd7CbVtyjqoe9mw:profile",
+          "sourceType": "merchant_doc",
+          "sourceId": "MTSW4McQd7CbVtyjqoe9mw",
+          "title": "St Honore Pastries 商户资料",
+          "shopId": 100001,
+          "score": 8.0,
+          "contentPreview": "商户名称：St Honore Pastries。\n本地商户编号：100001；Yelp business_id：MTSW4McQd7CbVtyjqoe9mw。\n本地分类：咖啡（typeId=2）。\n地址：935 Race St, Philadelphia, PA。\n城市：Philadelphia, PA 19107。\nYelp 评分：4.0；评论数：80。\n营业状态：营业中。\nYelp 原始分类：Restaurants、Food、Bubble Tea、Coffee & Tea"
+        },
+        {
+          "chunkId": "merchant_doc:xruWHK8Z5N0JWyQubLHjgA:profile",
+          "sourceType": "merchant_doc",
+          "sourceId": "xruWHK8Z5N0JWyQubLHjgA",
+          "title": "Potito's Italian American Pastries 商户资料",
+          "shopId": 100139,
+          "score": 3.0,
+          "contentPreview": "商户名称：Potito's Italian American Pastries。\n本地商户编号：100139；Yelp business_id：xruWHK8Z5N0JWyQubLHjgA。\n本地分类：美食（typeId=1）。\n地址：1614 W Ritner St, Philadelphia, PA。\n城市：Philadelphia, PA 19145。\nYelp 评分：3.5；评论数：88。\n营业状态：营业中。\nYelp 原始分类：Food、Restaurants、Ba"
+        },
+        {
+          "chunkId": "merchant_doc:-OIUunijjcq_ZzyyQhPPFQ:profile",
+          "sourceType": "merchant_doc",
+          "sourceId": "-OIUunijjcq_ZzyyQhPPFQ",
+          "title": "Zorba's Taverna 商户资料",
+          "shopId": 100194,
+          "score": 2.0,
+          "contentPreview": "商户名称：Zorba's Taverna。\n本地商户编号：100194；Yelp business_id：-OIUunijjcq_ZzyyQhPPFQ。\n本地分类：美食（typeId=1）。\n地址：2230 Fairmount Ave, Philadelphia, PA。\n城市：Philadelphia, PA 19130。\nYelp 评分：4.5；评论数：510。\n营业状态：营业中。\nYelp 原始分类：Restaurants、Greek、Mediterranean。\n营业"
+        }
+      ]
+    },
+    {
+      "caseId": "policy-semantic-top3",
+      "query": "个性化推荐会如何使用我的个人信息？",
+      "sources": [
+        "policy_docs"
+      ],
+      "passed": true,
+      "checks": {
+        "sourceAwareEffective": true,
+        "returnedEvidence": true,
+        "sourceTypeExact": true,
+        "retrieverExpected": true,
+        "citationsAligned": true,
+        "withinSmokeLatencyCeiling": true,
+        "expectedSourceInTopK": true,
+        "requiredMatchingTerms": true
+      },
+      "elapsedMs": 1538.94,
+      "runtimeRoute": {
+        "requestedMode": "source_aware",
+        "effectiveMode": "source_aware",
+        "fallback": false
+      },
+      "retrievers": [
+        "qdrant_unified_vector"
+      ],
+      "returnedCount": 3,
+      "chunks": [
+        {
+          "chunkId": "policy_doc:privacy-and-recommendation:data-minimization",
+          "sourceType": "policy_doc",
+          "sourceId": "privacy-and-recommendation",
+          "title": "用户行为数据与个性化推荐说明 - 个人信息处理应遵循最小必要原则",
+          "shopId": null,
+          "score": 0.7713563,
+          "contentPreview": "用户行为数据与个性化推荐说明\n个人信息处理应遵循最小必要原则\n平台处理用户信息时，应当围绕明确、合理的目的进行，尽量使用实现功能所必要的最少数据。比如“猜你喜欢”通常需要用户与商户的交互记录，但不一定需要身份证号、通讯录等与推荐目的无关的信息。\n\n适合回答的问题：\n\n- 推荐系统为什么不应该收集过多信息？\n- 用户行为数据和敏感个人信息有什么区别？\n- 平台做推荐时可以只用哪些必要信息？"
+        },
+        {
+          "chunkId": "policy_doc:privacy-and-recommendation:recommendation-data-use",
+          "sourceType": "policy_doc",
+          "sourceId": "privacy-and-recommendation",
+          "title": "用户行为数据与个性化推荐说明 - 个性化推荐需要说明数据用途",
+          "shopId": null,
+          "score": 0.7516687,
+          "contentPreview": "用户行为数据与个性化推荐说明\n个性化推荐需要说明数据用途\n本地生活平台如果使用浏览、收藏、评分、点击等用户行为生成“猜你喜欢”，应当向用户说明数据用途和基本处理方式。推荐功能不应以超出必要范围的方式收集与推荐无关的信息。\n\n适合回答的问题：\n\n- 为什么猜你喜欢需要用户历史行为？\n- 平台可以用我的浏览记录做推荐吗？\n- 推荐功能应该向用户说明什么？"
+        },
+        {
+          "chunkId": "policy_doc:privacy-and-recommendation:automated-decision-explanation",
+          "sourceType": "policy_doc",
+          "sourceId": "privacy-and-recommendation",
+          "title": "用户行为数据与个性化推荐说明 - 自动化决策和推荐应当可解释",
+          "shopId": null,
+          "score": 0.7335632,
+          "contentPreview": "用户行为数据与个性化推荐说明\n自动化决策和推荐应当可解释\n如果平台利用个人信息进行自动化决策或个性化推荐，应当关注透明度和用户权益。项目中的推荐解释可以展示推荐原因、触发推荐的历史商户、推荐分和可选距离，让用户知道为什么看到某个推荐。\n\n适合回答的问题：\n\n- 推荐系统为什么要展示推荐原因？\n- 用户为什么会看到某家店？\n- 自动化推荐需要注意哪些用户权益？"
+        }
+      ]
+    }
+  ],
+  "fallback": {
+    "caseId": "forced-missing-unified-collection-fallback",
+    "passed": true,
+    "checks": {
+      "legacyEffective": true,
+      "errorTypeRecorded": true,
+      "returnedEvidence": true,
+      "reviewEvidenceOnly": true,
+      "legacyRetrieverUsed": true,
+      "withinSmokeLatencyCeiling": true
+    },
+    "elapsedMs": 3608.51,
+    "runtimeRoute": {
+      "requestedMode": "source_aware",
+      "effectiveMode": "legacy",
+      "fallback": true,
+      "errorType": "UnexpectedResponse"
+    },
+    "retrievers": [
+      "qdrant_vector"
+    ],
+    "returnedCount": 3,
+    "chunks": [
+      {
+        "chunkId": "review:review-018",
+        "sourceType": "review",
+        "sourceId": "review-018",
+        "title": "街角共创咖啡评论",
+        "shopId": 8,
+        "score": 0.70159,
+        "contentPreview": "工作日下午常有创业团队讨论，虽然适合协作和开会，但环境比普通咖啡店嘈杂，不适合需要安静专注的人。"
+      },
+      {
+        "chunkId": "review:yelp-MhSusleKbPBIiq2fKHH5mA",
+        "sourceType": "review",
+        "sourceId": "yelp-MhSusleKbPBIiq2fKHH5mA",
+        "title": "Valerio Coffee Roasters评论",
+        "shopId": 100277,
+        "score": 0.69039583,
+        "contentPreview": "可爱的咖啡店，适合工作。停车在附近比较困难，但除此之外，空间很大，目前有室内座位。咖啡不错，咸味吐司也很好吃。"
+      },
+      {
+        "chunkId": "review:yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "sourceType": "review",
+        "sourceId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "title": "Good Karma Cafe评论",
+        "shopId": 100169,
+        "score": 0.67971885,
+        "contentPreview": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+      }
+    ]
+  },
+  "failures": []
+}

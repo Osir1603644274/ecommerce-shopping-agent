@@ -1,0 +1,245 @@
+[
+  {
+    "id": "rag-001",
+    "question": "两个人吃火锅，不能吃太辣，有什么依据可以推荐？",
+    "relevantReviewIds": ["review-001"],
+    "expectedPoints": ["巷子口火锅的微辣对不太能吃辣的人友好", "双人消费约 90 元/人"],
+    "type": "factual",
+    "difficulty": "basic",
+    "challengeTypes": ["multi_constraint", "negative_constraint"]
+  },
+  {
+    "id": "rag-002",
+    "question": "想周五晚上安静聊天，巷子口火锅要注意什么？",
+    "relevantReviewIds": ["review-002"],
+    "expectedPoints": ["周五七点后可能排队", "应避开高峰以便安静聊天"],
+    "type": "factual",
+    "difficulty": "basic",
+    "challengeTypes": ["time_constraint", "environment_preference"]
+  },
+  {
+    "id": "rag-003",
+    "question": "看完电影后还想吃东西，有适合的店吗？",
+    "relevantReviewIds": ["review-003"],
+    "expectedPoints": ["深夜食堂烧烤晚上十点后仍营业", "适合看完电影后用餐"],
+    "type": "factual",
+    "difficulty": "basic",
+    "challengeTypes": ["time_constraint", "implicit_intent"]
+  },
+  {
+    "id": "rag-004",
+    "question": "预算 150 元以内，两个人吃烧烤合适吗？",
+    "relevantReviewIds": ["review-004"],
+    "expectedPoints": ["两个人约 130 元", "室内烟味略重"],
+    "type": "factual",
+    "difficulty": "basic",
+    "challengeTypes": ["budget_constraint", "multi_constraint"]
+  },
+  {
+    "id": "rag-005",
+    "question": "哪家咖啡店适合下午带电脑办公？",
+    "relevantReviewIds": ["review-005"],
+    "expectedPoints": ["清晨手冲咖啡有插座", "有靠窗单人位", "适合写作业或办公"],
+    "type": "factual",
+    "difficulty": "basic",
+    "challengeTypes": ["facility_constraint", "implicit_intent"]
+  },
+  {
+    "id": "rag-006",
+    "question": "周末和朋友安静喝咖啡聊天，环境怎么样？",
+    "relevantReviewIds": ["review-006"],
+    "expectedPoints": ["周末下午客人较多", "背景音乐不吵", "适合慢慢聊天"],
+    "type": "factual",
+    "difficulty": "basic",
+    "challengeTypes": ["time_constraint", "environment_preference"]
+  },
+  {
+    "id": "rag-007",
+    "question": "周末看热门电影需要提前做什么？",
+    "relevantReviewIds": ["review-007"],
+    "expectedPoints": ["提前线上选座", "热门影片周末场次更需要提前安排"],
+    "type": "factual",
+    "difficulty": "basic",
+    "challengeTypes": ["time_constraint", "implicit_intent"]
+  },
+  {
+    "id": "rag-008",
+    "question": "情侣去影院想选情侣专座，有什么座位方面的建议？",
+    "relevantReviewIds": ["review-008", "review-030", "review-032"],
+    "expectedPoints": ["城市光影影院的情侣双人座不多，需尽早确认", "星河艺术影城没有情侣双人座", "欢乐巨幕影城的情侣电动躺椅较多，但周末仍建议提前选座"],
+    "type": "factual",
+    "difficulty": "basic",
+    "challengeTypes": ["audience_constraint", "implicit_intent"]
+  },
+  {
+    "id": "rag-009",
+    "question": "想住得安静、休息好，酒店有什么可参考的信息？",
+    "relevantReviewIds": ["review-009"],
+    "expectedPoints": ["安睡精品酒店隔音不错", "床垫偏软", "湖边房间夜景更好但更贵"],
+    "type": "factual",
+    "difficulty": "basic",
+    "challengeTypes": ["multi_constraint", "environment_preference"]
+  },
+  {
+    "id": "rag-010",
+    "question": "出差早到酒店，能先寄存行李吗？",
+    "relevantReviewIds": ["review-010"],
+    "expectedPoints": ["前台可以寄存行李", "对出差提前到达较方便"],
+    "type": "factual",
+    "difficulty": "basic",
+    "challengeTypes": ["service_constraint", "implicit_intent"]
+  },
+  {
+    "id": "rag-011",
+    "question": "健身新手第一次去，需要避开哪个时段，能得到什么帮助？",
+    "relevantReviewIds": ["review-011"],
+    "expectedPoints": ["晚上六点到八点自由力量区人最多", "可预约教练讲解器械"],
+    "type": "factual",
+    "difficulty": "basic",
+    "challengeTypes": ["time_constraint", "audience_constraint"]
+  },
+  {
+    "id": "rag-012",
+    "question": "下班后直接健身方便吗？",
+    "relevantReviewIds": ["review-012"],
+    "expectedPoints": ["有淋浴和储物柜", "有适合新手的燃脂和拉伸团课"],
+    "type": "factual",
+    "difficulty": "basic",
+    "challengeTypes": ["facility_constraint", "audience_constraint"]
+  },
+  {
+    "id": "rag-013",
+    "question": "周末三个人想找安静包间吃饭，预算只有 200 元，需要注意什么？",
+    "relevantReviewIds": ["review-026"],
+    "expectedPoints": ["河畔家常菜有两个安静小包间", "周末需要提前一天预订", "包间最低消费 300 元，超过 200 元预算"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["budget_constraint", "time_constraint", "negative_constraint", "multi_constraint"]
+  },
+  {
+    "id": "rag-014",
+    "question": "带老人和孩子晚上九点以后吃饭，想要清淡无烟的环境，河畔家常菜合适吗？",
+    "relevantReviewIds": ["review-027"],
+    "expectedPoints": ["河畔家常菜大厅禁烟，适合老人和孩子", "晚上九点停止点餐，因此九点以后不合适"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["audience_constraint", "time_constraint", "negative_constraint", "multi_constraint"]
+  },
+  {
+    "id": "rag-015",
+    "question": "下雨天去深夜食堂烧烤，想坐露天位避开室内烟味并和朋友聊天，可以吗？",
+    "relevantReviewIds": ["review-021"],
+    "expectedPoints": ["露天座位天气好时烟味较轻并适合聊天", "下雨天露天区不开放，因此该条件下不可行"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["environment_preference", "negative_constraint", "multi_constraint"]
+  },
+  {
+    "id": "rag-016",
+    "question": "工作日下午想一个人安静写代码，街角共创咖啡合适吗？",
+    "relevantReviewIds": ["review-018"],
+    "expectedPoints": ["工作日下午常有创业团队讨论", "环境较嘈杂，不适合需要安静专注的人"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["time_constraint", "environment_preference", "negative_constraint"]
+  },
+  {
+    "id": "rag-017",
+    "question": "四个人需要高速网络、充足插座并讨论项目，哪家咖啡店更合适？",
+    "relevantReviewIds": ["review-017"],
+    "expectedPoints": ["街角共创咖啡有高速无线网络和很多插座", "可以预订四人讨论桌"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["facility_constraint", "audience_constraint", "multi_constraint"]
+  },
+  {
+    "id": "rag-018",
+    "question": "工作日上午只想安静看书、不需要电脑，纸间咖啡书屋有什么优缺点？",
+    "relevantReviewIds": ["review-014"],
+    "expectedPoints": ["书架旁光线柔和且要求轻声通话，适合看书", "全店只有两个插座，但不使用电脑时影响较小"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["time_constraint", "environment_preference", "negative_constraint"]
+  },
+  {
+    "id": "rag-019",
+    "question": "预算每人 50 元以内但想看巨幕电影，欢乐巨幕影城合适吗？",
+    "relevantReviewIds": ["review-031"],
+    "expectedPoints": ["欢乐巨幕影城具有巨幕和较强音效", "普通场约 72 元，超过 50 元预算，需要留意优惠日"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["budget_constraint", "facility_constraint", "negative_constraint"]
+  },
+  {
+    "id": "rag-020",
+    "question": "想开车去看文艺片，星河艺术影城停车方便吗？",
+    "relevantReviewIds": ["review-029"],
+    "expectedPoints": ["星河艺术影城适合乘地铁前往", "没有专用停车场，开车不方便"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["facility_constraint", "negative_constraint", "implicit_intent"]
+  },
+  {
+    "id": "rag-021",
+    "question": "情侣周末看热门电影，想坐电动躺椅，需要提前准备吗？",
+    "relevantReviewIds": ["review-032"],
+    "expectedPoints": ["欢乐巨幕影城的情侣电动躺椅较多", "周末热门影片仍建议提前线上选座"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["audience_constraint", "time_constraint", "facility_constraint"]
+  },
+  {
+    "id": "rag-022",
+    "question": "出差要赶早班高铁，还需要在房间办公，城际商务酒店合适吗？",
+    "relevantReviewIds": ["review-034"],
+    "expectedPoints": ["房间有宽书桌和高速网络，适合办公", "早餐六点半开始，方便赶早班高铁"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["time_constraint", "facility_constraint", "implicit_intent"]
+  },
+  {
+    "id": "rag-023",
+    "question": "睡眠很浅但又想看城市景观，住城际商务酒店该怎么选房？",
+    "relevantReviewIds": ["review-035"],
+    "expectedPoints": ["临街房能看到城市景观但有车流声", "内侧房更安静但看不到城市景观，需要取舍"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["environment_preference", "negative_constraint", "multi_constraint"]
+  },
+  {
+    "id": "rag-024",
+    "question": "预算每晚 100 元以内但不能接受公共卫浴，湖畔青年旅舍合适吗？",
+    "relevantReviewIds": ["review-037"],
+    "expectedPoints": ["床位每晚约 88 元，符合预算", "卫浴为公共区域，因此不符合不能共用卫浴的要求"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["budget_constraint", "facility_constraint", "negative_constraint"]
+  },
+  {
+    "id": "rag-025",
+    "question": "晚上十一点以后下班，还想练自由力量，有二十四小时营业且人少的健身房吗？",
+    "relevantReviewIds": ["review-043"],
+    "expectedPoints": ["全天候综合健身二十四小时营业", "深夜十一点后自由力量区人少"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["time_constraint", "facility_constraint", "multi_constraint"]
+  },
+  {
+    "id": "rag-026",
+    "question": "健身新手想在安静小班里学动作，同时练自由力量，静力瑜伽馆都能满足吗？",
+    "relevantReviewIds": ["review-040"],
+    "expectedPoints": ["静力瑜伽馆是安静小班且老师会纠正动作", "馆内没有自由力量器械，不能同时满足力量训练需求"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["audience_constraint", "facility_constraint", "negative_constraint"]
+  },
+  {
+    "id": "rag-027",
+    "question": "工作日晚上七点去综合健身房，想立即使用热门器械不用等待，现实吗？",
+    "relevantReviewIds": ["review-044"],
+    "expectedPoints": ["工作日晚上六点到九点比较拥挤", "热门器械常需轮流使用，七点无法保证不用等待"],
+    "type": "factual",
+    "difficulty": "hard",
+    "challengeTypes": ["time_constraint", "negative_constraint", "environment_preference"]
+  }
+]

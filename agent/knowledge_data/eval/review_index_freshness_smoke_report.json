@@ -1,0 +1,16 @@
+{
+  "experiment": "review index freshness multi-instance smoke",
+  "sealedDataRead": false,
+  "temporaryReviewId": "review-freshness-6aa60f9214ff",
+  "checks": {
+    "syncEndpointUpsert": true,
+    "bm25UpsertVisible": true,
+    "legacyVectorUpsertVisible": true,
+    "unifiedChunkUpsertVisible": true,
+    "syncEndpointDelete": true,
+    "bm25DeleteVisible": true,
+    "legacyVectorDeleteVisible": true,
+    "unifiedChunkDeleteVisible": true
+  },
+  "passed": true
+}

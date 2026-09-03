@@ -1,0 +1,124 @@
+{
+  "cases": [
+    {
+      "category": "structured_filter",
+      "expectedArguments": [{"district": "海淀区", "kind": "park", "parkLevel": "一级", "parkType": "综合公园"}],
+      "expectedSearchTotal": 7,
+      "expectedToolSequences": [["search_places"]],
+      "expectedTopIds": ["beijing-park-265", "beijing-park-266", "beijing-park-267"],
+      "forbiddenAnswer": ["海淀区共有7个", "海淀区共有 7 个"],
+      "forbiddenTools": ["search_knowledge", "search_shop_reviews", "search_shops"],
+      "id": "place-val-01-haidian-filter",
+      "question": "海淀区有哪些一级综合公园？",
+      "requiredAnswerAll": ["当前演示目录", "7"],
+      "split": "validation"
+    },
+    {
+      "category": "search_then_detail",
+      "expectedArguments": [{"query": "北京世界公园"}, {"placeId": "beijing-park-433"}],
+      "expectedDetailId": "beijing-park-433",
+      "expectedToolSequences": [["search_places", "get_place_detail"]],
+      "forbiddenTools": ["search_knowledge", "search_shop_reviews", "get_shop_detail"],
+      "id": "place-val-02-world-park-detail",
+      "question": "北京世界公园的地址和电话是什么？",
+      "requiredAnswerAll": ["丰台区花乡大葆台158号", "83613681"],
+      "split": "validation"
+    },
+    {
+      "category": "ambiguity",
+      "expectedArguments": [{"query": "永定门公园"}],
+      "expectedSearchTotal": 2,
+      "expectedToolSequences": [["search_places"]],
+      "expectedTopIds": ["beijing-park-19", "beijing-park-88"],
+      "forbiddenTools": ["get_place_detail", "search_knowledge", "search_shop_reviews"],
+      "id": "place-val-03-yongdingmen-ambiguity",
+      "question": "永定门公园在哪里？",
+      "requiredAnswerAll": ["东城", "西城"],
+      "requiredAnswerAny": ["确认", "哪一个", "具体"],
+      "split": "validation"
+    },
+    {
+      "category": "facility_filter",
+      "expectedArguments": [{"district": "朝阳区", "facilityName": "无障碍厕所/厕位", "facilityStatus": "标准", "kind": "park"}],
+      "expectedSearchTotal": 8,
+      "expectedToolSequences": [["search_places"]],
+      "forbiddenTools": ["search_knowledge", "search_shop_reviews"],
+      "id": "place-val-04-accessible-toilet",
+      "question": "朝阳区哪些公园的无障碍厕所记录为标准？",
+      "requiredAnswerAll": ["当前演示目录", "8"],
+      "split": "validation"
+    },
+    {
+      "category": "subjective_boundary",
+      "expectedToolSequences": [["search_places"], ["search_places", "get_place_detail"]],
+      "forbiddenTools": ["search_knowledge", "search_shop_reviews", "search_reviews"],
+      "id": "place-val-05-subjective-boundary",
+      "question": "朝阳公园适合老人散步吗？",
+      "requiredAnswerAny": ["无法判断", "无法根据现有资料判断", "不能直接判断", "证据不足", "仅能提供", "不能据此", "没有收录"],
+      "forbiddenAnswer": ["通常规模较大", "道路平整", "绿化较好"],
+      "split": "validation"
+    },
+    {
+      "category": "shop_near_landmark",
+      "expectedToolSequences": [["search_shops"], ["list_shop_types"], ["search_shops", "list_shop_types"], ["list_shop_types", "search_shops"]],
+      "forbiddenTools": ["search_places", "get_place_detail", "search_knowledge"],
+      "id": "place-val-06-shop-near-park",
+      "question": "朝阳公园附近有哪些咖啡店？",
+      "split": "validation"
+    },
+    {
+      "category": "empty_scope",
+      "expectedArguments": [{"district": "平谷区", "kind": "park"}],
+      "expectedSearchTotal": 0,
+      "expectedToolSequences": [["search_places"]],
+      "forbiddenTools": ["search_knowledge", "search_shop_reviews"],
+      "id": "place-val-07-empty-pinggu",
+      "question": "平谷区有哪些公园？",
+      "requiredAnswerAny": ["没有找到", "没有查到", "没有收录", "未找到", "暂时没有", "找到0个"],
+      "split": "validation"
+    },
+    {
+      "category": "status_semantics",
+      "expectedArguments": [{"district": "朝阳区", "facilityName": "无障碍厕所/厕位", "kind": "park", "signageStatus": "标准"}],
+      "expectedToolSequences": [["search_places"]],
+      "forbiddenTools": ["search_knowledge", "search_shop_reviews"],
+      "id": "place-val-08-signage-status",
+      "question": "朝阳区哪些公园的无障碍厕所标识状态为标准？",
+      "split": "validation"
+    },
+    {
+      "category": "partial_name",
+      "expectedToolSequences": [["search_places"], ["search_places", "get_place_detail"]],
+      "forbiddenTools": ["search_knowledge", "search_shop_reviews"],
+      "id": "place-test-01-zizhuyuan",
+      "question": "紫竹院的官方等级和地址是什么？",
+      "split": "test"
+    },
+    {
+      "category": "structured_filter",
+      "expectedSearchTotal": 2,
+      "expectedToolSequences": [["search_places"]],
+      "forbiddenTools": ["search_knowledge", "search_shop_reviews"],
+      "id": "place-test-02-daxing-community",
+      "question": "大兴区有哪些一级社区公园？",
+      "split": "test"
+    },
+    {
+      "category": "subjective_boundary",
+      "expectedToolSequences": [["search_places"], ["search_places", "get_place_detail"]],
+      "forbiddenTools": ["search_knowledge", "search_shop_reviews"],
+      "id": "place-test-03-crowding",
+      "question": "北京世界公园周末拥挤吗？",
+      "split": "test"
+    },
+    {
+      "category": "merchant_rag_isolation",
+      "expectedToolSequences": [["search_shop_reviews"], ["search_knowledge"]],
+      "forbiddenTools": ["search_places", "get_place_detail"],
+      "id": "place-test-04-coffee-facility",
+      "question": "咖啡店有没有无障碍设施？",
+      "split": "test"
+    }
+  ],
+  "evaluationVersion": "place-agent-v1"
+}

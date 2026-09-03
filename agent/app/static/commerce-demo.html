@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>电商导购 Agent · 全链路 Demo</title>
+  <style>
+    :root { --ink:#111; --muted:#666; --line:#d8d8d8; --soft:#f5f5f3; --ok:#166534; --bad:#991b1b; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:#ececea; font:14px/1.55 Inter,"PingFang SC","Microsoft YaHei",sans-serif; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    .shell { min-height:100vh; max-width:1480px; margin:auto; background:#fff; }
+    header { min-height:78px; display:flex; align-items:center; gap:18px; padding:18px 28px; border-bottom:1px solid var(--ink); }
+    .mark { width:38px; height:38px; display:grid; place-items:center; color:#fff; background:#111; font-weight:800; }
+    h1 { margin:0; font-size:20px; letter-spacing:.03em; }
+    .subtitle { color:var(--muted); font-size:12px; }
+    .spacer { flex:1; }
+    .toplink { color:#111; text-decoration:none; border-bottom:1px solid #111; }
+    .badge { padding:4px 8px; border:1px solid #aaa; background:#fff; font-size:12px; }
+    .badge.ok { color:var(--ok); border-color:#86a98f; }
+    .badge.bad { color:var(--bad); border-color:#c89b9b; }
+    main { display:grid; grid-template-columns:245px minmax(480px,1fr) 365px; min-height:calc(100vh - 79px); }
+    aside,.work { padding:22px; min-width:0; }
+    aside:first-child { border-right:1px solid var(--line); }
+    aside:last-child { border-left:1px solid var(--line); }
+    h2 { margin:0 0 14px; font-size:13px; text-transform:uppercase; letter-spacing:.12em; }
+    .journey { display:grid; gap:10px; }
+    .journey-step { display:grid; grid-template-columns:26px 1fr; gap:9px; padding:10px 0; border-top:1px solid #e7e7e7; color:#777; }
+    .journey-step:first-child { border-top:0; }
+    .journey-step strong { display:block; color:inherit; }
+    .journey-step span { font-size:12px; }
+    .step-no { width:24px; height:24px; display:grid; place-items:center; border:1px solid #aaa; font-weight:800; }
+    .journey-step.active { color:#111; }
+    .journey-step.done { color:var(--ok); }
+    .journey-step.active .step-no { color:#fff; background:#111; border-color:#111; }
+    .panel { border:1px solid var(--line); padding:18px; margin-bottom:16px; }
+    .panel-head { display:flex; align-items:flex-start; gap:12px; margin-bottom:14px; }
+    .panel-title { font-weight:800; font-size:16px; }
+    .panel-copy { color:var(--muted); font-size:12px; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    input { width:100%; border:1px solid #aaa; padding:10px 11px; background:#fff; }
+    .actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    .primary,.secondary,.danger { border:1px solid #111; padding:9px 13px; background:#111; color:#fff; font-weight:700; }
+    .secondary { background:#fff; color:#111; }
+    .danger { background:#fff; color:var(--bad); border-color:var(--bad); }
+    button:disabled { opacity:.38; cursor:not-allowed; }
+    .status { min-height:22px; margin-top:9px; color:var(--muted); }
+    .status.error { color:var(--bad); }
+    .status.ok { color:var(--ok); }
+    .query-row { display:grid; grid-template-columns:1fr auto; gap:8px; }
+    .answer { padding:13px; background:var(--soft); white-space:pre-wrap; margin-top:12px; }
+    .products { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; margin-top:12px; }
+    .product { border:1px solid var(--line); padding:12px; display:grid; gap:7px; }
+    .product.selected { border:2px solid #111; padding:11px; }
+    .product-title { font-weight:800; min-height:44px; }
+    .product-meta { color:var(--muted); font-size:12px; }
+    .receipt { display:grid; gap:8px; padding:12px; border-left:3px solid #111; background:var(--soft); margin-top:12px; }
+    .receipt dt { color:var(--muted); font-size:11px; }
+    .receipt dd { margin:0; font-family:ui-monospace,Consolas,monospace; overflow-wrap:anywhere; }
+    .arch { display:grid; gap:7px; }
+    .node { border:1px solid #aaa; padding:9px 10px; background:#fff; }
+    .node strong { display:block; }
+    .node span { color:var(--muted); font-size:11px; }
+    .arrow { text-align:center; color:#777; height:14px; }
+    .fork { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
+    .trace { display:grid; gap:7px; max-height:360px; overflow:auto; }
+    .trace-row { display:grid; grid-template-columns:22px 1fr; gap:8px; padding:8px 0; border-top:1px solid #e5e5e5; }
+    .trace-row:first-child { border-top:0; }
+    .trace-index { width:20px; height:20px; display:grid; place-items:center; background:#111; color:#fff; font-size:11px; }
+    .trace-name { font-weight:750; }
+    .trace-detail { color:var(--muted); font-size:11px; overflow-wrap:anywhere; }
+    .truth { margin-top:12px; padding:10px; border:1px dashed #999; color:#555; font-size:12px; }
+    code { font-family:ui-monospace,Consolas,monospace; font-size:12px; }
+    [hidden] { display:none !important; }
+    @media (max-width:1100px) { main { grid-template-columns:210px 1fr; } aside:last-child { grid-column:1/-1; border-left:0; border-top:1px solid var(--line); } }
+    @media (max-width:720px) {
+      main { display:block; }
+      aside:first-child,aside:last-child { border:0; border-bottom:1px solid var(--line); }
+      .form-grid { grid-template-columns:1fr; }
+      header { padding:15px; flex-wrap:wrap; align-items:flex-start; }
+      header .spacer { display:none; }
+      header > div:nth-child(2) { flex:1; min-width:220px; }
+      .badge { display:none; }
+      .toplink { order:3; flex-basis:calc(100% - 56px); margin-left:56px; }
+      .toplink:last-child { display:none; }
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <div class="mark">AG</div>
+    <div><h1>电商导购 Agent · 全链路 Demo</h1><div class="subtitle">搜索、候选约束、双确认交易、支付回调与订单状态回查</div></div>
+    <div class="spacer"></div>
+    <span class="badge" id="capability">读取配置…</span>
+    <a class="toplink" href="/agent-flow">架构与单步图</a>
+    <a class="toplink" href="/">返回对话页</a>
+  </header>
+  <main>
+    <aside>
+      <h2>Journey</h2>
+      <div class="journey" id="journey">
+        <div class="journey-step active" data-step="auth"><div class="step-no">1</div><div><strong>登录</strong><span>JWT 留在服务端 Redis</span></div></div>
+        <div class="journey-step" data-step="search"><div class="step-no">2</div><div><strong>导购检索</strong><span>ReAct + Java/ES</span></div></div>
+        <div class="journey-step" data-step="order-preview"><div class="step-no">3</div><div><strong>订单预览</strong><span>候选范围校验</span></div></div>
+        <div class="journey-step" data-step="order-confirm"><div class="step-no">4</div><div><strong>确认下单</strong><span>精确短语 + 幂等键</span></div></div>
+        <div class="journey-step" data-step="payment-preview"><div class="step-no">5</div><div><strong>支付预览</strong><span>本人待支付订单</span></div></div>
+        <div class="journey-step" data-step="payment-confirm"><div class="step-no">6</div><div><strong>确认发起支付</strong><span>自然唯一业务键</span></div></div>
+        <div class="journey-step" data-step="callback"><div class="step-no">7</div><div><strong>本地模拟回调</strong><span>双开关隔离</span></div></div>
+        <div class="journey-step" data-step="status"><div class="step-no">8</div><div><strong>Agent 回查</strong><span>Java/MySQL 权威状态</span></div></div>
+      </div>
+      <div class="truth">此页是本机演示，不宣称生产支付。Java 事务内部只展示已完成回执，不提供逐语句暂停。</div>
+    </aside>
+
+    <section class="work">
+      <div class="panel" id="auth-panel">
+        <div class="panel-head"><div><div class="panel-title">身份会话</div><div class="panel-copy">注册或登录。浏览器只持有 HttpOnly Cookie 与 CSRF token。</div></div></div>
+        <div class="form-grid"><input id="username" autocomplete="username" value="commerce-demo" placeholder="用户名" /><input id="password" type="password" autocomplete="current-password" value="StrongPassword123!" placeholder="密码" /></div>
+        <div class="actions"><button class="primary" id="register">注册新用户</button><button class="secondary" id="login">登录已有用户</button><button class="danger" id="logout" disabled>退出</button></div>
+        <div class="status" id="auth-status">尚未登录</div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><div><div class="panel-title">Agent 导购</div><div class="panel-copy">先形成服务端 CandidateScope，再允许订单预览。</div></div></div>
+        <div class="query-row"><input id="query" value="推荐变形金刚 G09 耳机" /><button class="primary" id="search" disabled>搜索</button></div>
+        <div class="status" id="search-status"></div>
+        <div class="answer" id="answer" hidden></div>
+        <div class="products" id="products"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><div><div class="panel-title">交易履约</div><div class="panel-copy">预览与写入分离；每个写操作都要求下一条消息精确确认。</div></div></div>
+        <div class="actions">
+          <button class="secondary" id="preview-order" disabled>1. 预览订单</button>
+          <button class="primary" id="confirm-order" disabled>2. 确认下单</button>
+          <button class="secondary" id="preview-payment" disabled>3. 预览支付</button>
+          <button class="primary" id="confirm-payment" disabled>4. 确认发起支付</button>
+          <button class="danger" id="simulate" disabled>5. 模拟支付成功</button>
+          <button class="secondary" id="query-status" disabled>6. Agent 查询订单状态</button>
+        </div>
+        <div class="status" id="transaction-status">请选择商品</div>
+        <dl class="receipt" id="receipt" hidden></dl>
+      </div>
+    </section>
+
+    <aside>
+      <h2>Current architecture</h2>
+      <div class="arch">
+        <div class="node"><strong>Browser</strong><span>HttpOnly session · CSRF · ReferenceContext</span></div><div class="arrow">↓</div>
+        <div class="node"><strong>FastAPI Shopping Agent</strong><span>TaskManager · TaskState · ContextPack</span></div><div class="arrow">↓</div>
+        <div class="node"><strong>LangGraph ReAct Harness</strong><span>受约束动作 · Validator · Checkpoint</span></div><div class="arrow">↓</div>
+        <div class="fork"><div class="node"><strong>只读工具</strong><span>商品 / RAG / Evidence Agent</span></div><div class="node"><strong>TransactionAgent</strong><span>JWT · Scope · 双确认</span></div></div><div class="arrow">↓</div>
+        <div class="node"><strong>Java Spring Backend</strong><span>商品 · 库存 · 订单 · 支付 · 记忆</span></div><div class="arrow">↓</div>
+        <div class="fork"><div class="node"><strong>MySQL / Redis</strong><span>权威数据 / 缓存与提案</span></div><div class="node"><strong>Kafka / ES</strong><span>事件投影 / 检索</span></div></div>
+      </div>
+      <h2 style="margin-top:22px">Server receipts</h2>
+      <div class="trace" id="trace"><div class="trace-detail">完成一次操作后，这里展示服务端返回的 requestId、工具回执与跨系统阶段。</div></div>
+    </aside>
+  </main>
+</div>
+<script>
+(() => {
+  "use strict";
+  const state = {
+    csrf: "", sessionId: localStorage.getItem("commerce-demo-chat-session") || crypto.randomUUID(),
+    selectedProductId: null, order: null, payment: null, simulationEnabled: false,
+  };
+  localStorage.setItem("commerce-demo-chat-session", state.sessionId);
+  const $ = (id) => document.getElementById(id);
+  const setStatus = (id, text, kind="") => { const el=$(id); el.textContent=text; el.className="status"+(kind?" "+kind:""); };
+  const headers = () => ({"Content-Type":"application/json", "X-CSRF-Token":state.csrf});
+  const detail = (error) => typeof error === "string" ? error : (error && error.detail) || "请求失败";
+  const api = async (path, options={}) => {
+    const response = await fetch(path, {credentials:"same-origin", ...options});
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(detail(data));
+    return data;
+  };
+  const stepOrder=["auth","search","order-preview","order-confirm","payment-preview","payment-confirm","callback","status"];
+  function markStep(name) {
+    const index=stepOrder.indexOf(name);
+    document.querySelectorAll(".journey-step").forEach((el,i)=>{el.classList.toggle("done",i<index);el.classList.toggle("active",i===index);});
+  }
+  function addTrace(name, text) {
+    const root=$("trace"); if(root.dataset.empty!=="false"){root.replaceChildren();root.dataset.empty="false";}
+    const row=document.createElement("div");row.className="trace-row";
+    const n=document.createElement("div");n.className="trace-index";n.textContent=String(root.children.length+1);
+    const body=document.createElement("div"),title=document.createElement("div"),copy=document.createElement("div");
+    title.className="trace-name";title.textContent=name;copy.className="trace-detail";copy.textContent=text||"completed";
+    body.append(title,copy);row.append(n,body);root.append(row);root.scrollTop=root.scrollHeight;
+  }
+  function addExecutionPath(path) { (Array.isArray(path)?path:[]).forEach(item=>addTrace(item.stage,item.status)); }
+  function receipt(values) {
+    const root=$("receipt");root.replaceChildren();
+    Object.entries(values).filter(([,v])=>v!==undefined&&v!==null&&v!=="").forEach(([k,v])=>{const dt=document.createElement("dt"),dd=document.createElement("dd");dt.textContent=k;dd.textContent=String(v);root.append(dt,dd);});
+    root.hidden=false;
+  }
+  function transactionResult(data, tool) {
+    const trace=(data.tool_trace||data.toolTrace||[]).find(item=>item&&item.tool===tool&&item.ok);
+    return trace && trace.detail && trace.detail.result ? trace.detail.result : null;
+  }
+  function traceChat(data) {
+    if(data.trace)addTrace("Agent request",(data.trace.requestId||"unknown")+" · "+(data.trace.totalDurationMs??"?")+" ms");
+    (data.tool_trace||data.toolTrace||[]).forEach(item=>addTrace("Tool · "+item.tool,(item.ok?"ok":"failed")+(item.durationMs==null?"":" · "+item.durationMs+" ms")));
+  }
+  async function authenticate(mode) {
+    try {
+      const data=await api("/api/commerce-demo/"+mode,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:$("username").value.trim(),password:$("password").value})});
+      state.csrf=data.csrfToken; setStatus("auth-status","已登录："+data.username,"ok"); $("search").disabled=false;$("logout").disabled=false;markStep("search");addTrace("Identity BFF","Java JWT stored server-side");
+    } catch(error){setStatus("auth-status",error.message,"error");}
+  }
+  async function restore() {
+    try { const data=await api("/api/commerce-demo/me");state.csrf=data.csrfToken;setStatus("auth-status","已恢复会话："+data.username,"ok");$("search").disabled=false;$("logout").disabled=false;markStep("search"); } catch(_) {}
+  }
+  async function chat(message) {
+    const data=await api("/agent/chat-llm",{method:"POST",headers:headers(),body:JSON.stringify({message,sessionId:state.sessionId,domainHint:"ecommerce"})});traceChat(data);return data;
+  }
+  function renderProducts(guide) {
+    const root=$("products");root.replaceChildren();const rows=guide&&Array.isArray(guide.products)?guide.products:[];
+    rows.forEach((row,index)=>{const p=row.product||{};const card=document.createElement("article");card.className="product";
+      const title=document.createElement("div");title.className="product-title";title.textContent=(index+1)+". "+(p.title||("商品 "+p.id));
+      const meta=document.createElement("div");meta.className="product-meta";meta.textContent=(p.brand||"品牌未知")+" · 商品ID "+p.id;
+      const choose=document.createElement("button");choose.className="secondary";choose.textContent="选择此商品";choose.onclick=()=>{state.selectedProductId=Number(p.id);document.querySelectorAll(".product").forEach(el=>el.classList.remove("selected"));card.classList.add("selected");$("preview-order").disabled=false;setStatus("transaction-status","已选择商品 "+p.id);markStep("order-preview");};
+      card.append(title,meta,choose);root.append(card);
+    });
+    return rows.length;
+  }
+  $("register").onclick=()=>authenticate("register");$("login").onclick=()=>authenticate("login");
+  $("logout").onclick=async()=>{try{await api("/api/commerce-demo/logout",{method:"POST",headers:headers()});location.reload();}catch(e){setStatus("auth-status",e.message,"error");}};
+  $("search").onclick=async()=>{setStatus("search-status","Agent 正在检索…");try{const data=await chat($("query").value.trim());$("answer").textContent=data.answer;$("answer").hidden=false;const count=renderProducts(data.guideResult);if(!count)throw new Error("本轮没有形成可选商品卡片");setStatus("search-status","已返回 "+count+" 个服务端验证候选","ok");markStep("order-preview");}catch(e){setStatus("search-status",e.message,"error");}};
+  $("preview-order").onclick=async()=>{try{const data=await api("/transaction-agent/orders/preview",{method:"POST",headers:headers(),body:JSON.stringify({sessionId:state.sessionId,productId:state.selectedProductId,quantity:1})});addExecutionPath(data.executionPath);receipt({状态:data.data.status,确认短语:data.data.confirmationPhrase,确认ID:data.data.confirmationId});$("confirm-order").disabled=false;setStatus("transaction-status","订单预览已绑定；下一步必须明确确认","ok");markStep("order-confirm");}catch(e){setStatus("transaction-status",e.message,"error");}};
+  $("confirm-order").onclick=async()=>{try{const data=await chat("确认下单");const result=transactionResult(data,"create_order");if(!result)throw new Error(data.answer||"未取得订单回执");state.order=result;receipt({订单ID:result.id,订单号:result.orderNo,状态:result.status,应付分:result.payableAmountMinor});$("preview-payment").disabled=false;setStatus("transaction-status","订单已由 Java/MySQL 创建","ok");markStep("payment-preview");}catch(e){setStatus("transaction-status",e.message,"error");}};
+  $("preview-payment").onclick=async()=>{try{const data=await api("/transaction-agent/payments/preview",{method:"POST",headers:headers(),body:JSON.stringify({sessionId:state.sessionId,orderId:state.order.id})});addExecutionPath(data.executionPath);receipt({状态:data.data.status,确认短语:data.data.confirmationPhrase,订单ID:state.order.id});$("confirm-payment").disabled=false;setStatus("transaction-status","支付预览已绑定；尚未创建支付单","ok");markStep("payment-confirm");}catch(e){setStatus("transaction-status",e.message,"error");}};
+  $("confirm-payment").onclick=async()=>{try{const data=await chat("确认发起支付");const result=transactionResult(data,"create_payment");if(!result)throw new Error(data.answer||"未取得支付回执");state.payment=result;receipt({支付ID:result.id,订单ID:result.orderId,状态:result.status});$("simulate").disabled=!state.simulationEnabled;$("query-status").disabled=false;setStatus("transaction-status","支付单已创建；未收到支付成功回调","ok");markStep(state.simulationEnabled?"callback":"status");}catch(e){setStatus("transaction-status",e.message,"error");}};
+  $("simulate").onclick=async()=>{try{const data=await api("/api/commerce-demo/payments/"+encodeURIComponent(state.payment.id)+"/simulate-success",{method:"POST",headers:headers()});addExecutionPath(data.executionPath);receipt({支付ID:data.data.id,支付状态:data.data.status,订单ID:data.data.orderId});setStatus("transaction-status","本地模拟支付回调已提交","ok");markStep("status");}catch(e){setStatus("transaction-status",e.message,"error");}};
+  $("query-status").onclick=async()=>{try{const ref=state.order.orderNo||state.order.id;const data=await chat("查询订单 "+ref+" 的状态");$("answer").textContent=data.answer;$("answer").hidden=false;setStatus("transaction-status","Agent 已从 Java/MySQL 回查订单状态","ok");markStep("status");document.querySelector('[data-step="status"]').classList.add("done");}catch(e){setStatus("transaction-status",e.message,"error");}};
+  api("/api/commerce-demo/capability").then(data=>{state.simulationEnabled=Boolean(data.paymentSimulationEnabled);$("capability").textContent=data.enabled?(state.simulationEnabled?"Demo + 模拟支付已开启":"Demo 已开启 · 模拟支付关闭"):"Demo 未开启";$("capability").className="badge "+(data.enabled?"ok":"bad");if(data.enabled)restore();}).catch(()=>{$("capability").textContent="配置读取失败";$("capability").className="badge bad";});
+})();
+</script>
+</body>
+</html>

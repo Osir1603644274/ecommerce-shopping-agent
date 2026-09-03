@@ -1,0 +1,110 @@
+[
+  {
+    "id": "capability-val-generic-001",
+    "split": "validation",
+    "category": "generic_experience",
+    "question": "有没有安静、适合带电脑工作的咖啡店？",
+    "expectedTools": ["search_knowledge"],
+    "expectedSources": ["reviews"]
+  },
+  {
+    "id": "capability-val-generic-002",
+    "split": "validation",
+    "category": "generic_experience",
+    "question": "想找一个能静下心写东西的咖啡馆，大家实际感受怎么样？",
+    "expectedTools": ["search_knowledge"],
+    "expectedSources": ["reviews"]
+  },
+  {
+    "id": "capability-val-named-001",
+    "split": "validation",
+    "category": "named_experience",
+    "question": "Alchemy Coffee 的员工服务体验怎么样？",
+    "expectedTools": ["search_shop_reviews"],
+    "expectedShopName": "Alchemy Coffee",
+    "expectedShopId": 100068,
+    "expectedResolutionStatus": "resolved"
+  },
+  {
+    "id": "capability-val-named-002",
+    "split": "validation",
+    "category": "named_experience",
+    "question": "Good Karma Cafe 的空间、WiFi和插座实际怎么样？",
+    "expectedTools": ["search_shop_reviews"],
+    "expectedShopName": "Good Karma Cafe",
+    "expectedShopId": 100169,
+    "expectedResolutionStatus": "resolved"
+  },
+  {
+    "id": "capability-val-ambiguous-001",
+    "split": "validation",
+    "category": "ambiguous_named_experience",
+    "question": "Starbucks适合带电脑工作吗？",
+    "expectedTools": ["search_shop_reviews"],
+    "expectedShopName": "Starbucks",
+    "expectedResolutionStatus": "multiple_exact_matches",
+    "expectedClarificationAny": ["哪一家", "哪家", "确认", "具体门店"]
+  },
+  {
+    "id": "capability-val-non-experience-001",
+    "split": "validation",
+    "category": "structured_fact",
+    "question": "Red Hook Coffee & Tea的地址在哪里？",
+    "expectedTools": ["search_shops"],
+    "forbiddenTools": ["search_knowledge", "search_shop_reviews", "search_reviews"]
+  },
+  {
+    "id": "capability-test-generic-001",
+    "split": "test",
+    "category": "generic_experience",
+    "question": "周末想找一家适合朋友聊天、不会太拥挤的咖啡店。",
+    "expectedTools": ["search_knowledge"],
+    "expectedSources": ["reviews"]
+  },
+  {
+    "id": "capability-test-generic-002",
+    "split": "test",
+    "category": "generic_experience",
+    "question": "想找一家坐久了也舒服的咖啡馆。",
+    "expectedTools": ["search_knowledge"],
+    "expectedSources": ["reviews"]
+  },
+  {
+    "id": "capability-test-named-001",
+    "split": "test",
+    "category": "named_experience",
+    "question": "Red Hook Coffee & Tea适合用电脑工作吗？",
+    "expectedTools": ["search_shop_reviews"],
+    "expectedShopName": "Red Hook Coffee & Tea",
+    "expectedShopId": 100011,
+    "expectedResolutionStatus": "resolved"
+  },
+  {
+    "id": "capability-test-named-002",
+    "split": "test",
+    "category": "named_experience",
+    "question": "Valerio Coffee Roasters停车和员工服务的实际体验怎么样？",
+    "expectedTools": ["search_shop_reviews"],
+    "expectedShopName": "Valerio Coffee Roasters",
+    "expectedShopId": 100277,
+    "expectedResolutionStatus": "resolved"
+  },
+  {
+    "id": "capability-test-ambiguous-001",
+    "split": "test",
+    "category": "ambiguous_named_experience",
+    "question": "Wawa的停车和店内体验怎么样？",
+    "expectedTools": ["search_shop_reviews"],
+    "expectedShopName": "Wawa",
+    "expectedResolutionStatus": "multiple_exact_matches",
+    "expectedClarificationAny": ["哪一家", "哪家", "确认", "具体门店"]
+  },
+  {
+    "id": "capability-test-non-experience-001",
+    "split": "test",
+    "category": "structured_fact",
+    "question": "Alchemy Coffee的地址在哪里？",
+    "expectedTools": ["search_shops"],
+    "forbiddenTools": ["search_knowledge", "search_shop_reviews", "search_reviews"]
+  }
+]

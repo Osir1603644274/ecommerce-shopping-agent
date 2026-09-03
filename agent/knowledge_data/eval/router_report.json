@@ -1,0 +1,618 @@
+{
+  "caseCount": 38,
+  "exactMatches": 38,
+  "accuracy": 1.0,
+  "byCategory": {
+    "merchant_docs": {
+      "total": 10,
+      "exactMatches": 10,
+      "accuracy": 1.0
+    },
+    "merchant_reviews": {
+      "total": 8,
+      "exactMatches": 8,
+      "accuracy": 1.0
+    },
+    "policy_docs": {
+      "total": 10,
+      "exactMatches": 10,
+      "accuracy": 1.0
+    },
+    "policy_merchant": {
+      "total": 1,
+      "exactMatches": 1,
+      "accuracy": 1.0
+    },
+    "policy_reviews": {
+      "total": 1,
+      "exactMatches": 1,
+      "accuracy": 1.0
+    },
+    "reviews": {
+      "total": 8,
+      "exactMatches": 8,
+      "accuracy": 1.0
+    }
+  },
+  "bySource": {
+    "merchant_docs": {
+      "truePositive": 19,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "policy_docs": {
+      "truePositive": 12,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "reviews": {
+      "truePositive": 17,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  },
+  "failures": [],
+  "details": [
+    {
+      "caseId": "router-review-001",
+      "category": "reviews",
+      "question": "哪家咖啡店实际比较安静，适合办公？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-review-002",
+      "category": "reviews",
+      "question": "这家店下午会不会很吵，适合学习吗？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-review-003",
+      "category": "reviews",
+      "question": "哪家餐厅服务体验比较好，不容易排队？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-review-004",
+      "category": "reviews",
+      "question": "情侣约会哪家氛围更舒服？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-review-005",
+      "category": "reviews",
+      "question": "这家咖啡口味好不好，大家评价怎么样？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-review-006",
+      "category": "reviews",
+      "question": "有没有适合聊天的地方，环境不要太拥挤？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-review-007",
+      "category": "reviews",
+      "question": "哪家健身房实际体验不踩雷？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-review-008",
+      "category": "reviews",
+      "question": "哪家店更推荐带朋友去？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-merchant-001",
+      "category": "merchant_docs",
+      "question": "Good Karma Cafe 周末几点关门？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-merchant-002",
+      "category": "merchant_docs",
+      "question": "Red Hook Coffee & Tea 地址在哪里？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-merchant-003",
+      "category": "merchant_docs",
+      "question": "这家店电话是多少？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-merchant-004",
+      "category": "merchant_docs",
+      "question": "St Honore Pastries 有没有 WiFi？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-merchant-005",
+      "category": "merchant_docs",
+      "question": "这家商户支持信用卡吗？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-merchant-006",
+      "category": "merchant_docs",
+      "question": "这家店可以外带或配送吗？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-merchant-007",
+      "category": "merchant_docs",
+      "question": "这家店有没有停车位？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-merchant-008",
+      "category": "merchant_docs",
+      "question": "这家店评分和评论数是多少？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-merchant-009",
+      "category": "merchant_docs",
+      "question": "这家店属于什么类别？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-merchant-010",
+      "category": "merchant_docs",
+      "question": "这家店价格档位是多少？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-policy-001",
+      "category": "policy_docs",
+      "question": "商户入驻平台需要准备什么材料？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-policy-002",
+      "category": "policy_docs",
+      "question": "用户隐私和个人信息会怎么使用？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-policy-003",
+      "category": "policy_docs",
+      "question": "平台个性化推荐为什么要用我的信息？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-policy-004",
+      "category": "policy_docs",
+      "question": "充值后退款规则是什么？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-policy-005",
+      "category": "policy_docs",
+      "question": "商家被投诉后如何申诉？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-policy-006",
+      "category": "policy_docs",
+      "question": "平台规则变更会怎么通知？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-policy-007",
+      "category": "policy_docs",
+      "question": "自动化决策可以关闭吗？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-policy-008",
+      "category": "policy_docs",
+      "question": "消费者权益受损怎么处理？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-policy-009",
+      "category": "policy_docs",
+      "question": "商户违规会有什么处罚？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-policy-010",
+      "category": "policy_docs",
+      "question": "预付款和押金不退怎么办？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-mixed-001",
+      "category": "merchant_reviews",
+      "question": "这家咖啡店有 WiFi，而且实际适合办公吗？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-mixed-002",
+      "category": "merchant_reviews",
+      "question": "哪家店地址方便，环境也安静？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-mixed-003",
+      "category": "merchant_reviews",
+      "question": "有停车的店里，哪家服务体验好？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-mixed-004",
+      "category": "merchant_reviews",
+      "question": "支持外带的咖啡店，口味评价怎么样？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-mixed-005",
+      "category": "merchant_reviews",
+      "question": "评分高的酒店实际安静吗？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-mixed-006",
+      "category": "merchant_reviews",
+      "question": "价格档位不高而且适合约会的地方？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-mixed-007",
+      "category": "merchant_reviews",
+      "question": "这家店营业到几点，晚上去会不会拥挤？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-mixed-008",
+      "category": "merchant_reviews",
+      "question": "能预约而且氛围适合聊天的餐厅？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-mixed-009",
+      "category": "policy_reviews",
+      "question": "如果评论体验很差，我可以投诉吗？",
+      "expectedSources": [
+        "policy_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "policy_docs",
+        "reviews"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    },
+    {
+      "caseId": "router-mixed-010",
+      "category": "policy_merchant",
+      "question": "商户入驻时需要提供电话和地址吗？",
+      "expectedSources": [
+        "policy_docs",
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "policy_docs",
+        "merchant_docs"
+      ],
+      "exactMatch": true,
+      "missingSources": [],
+      "extraSources": []
+    }
+  ]
+}

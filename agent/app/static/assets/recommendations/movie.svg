@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-label="电影商户插画">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ede9fe"/>
+      <stop offset="1" stop-color="#c7d2fe"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="180" rx="28" fill="url(#bg)"/>
+  <circle cx="76" cy="48" r="34" fill="#6366f1" opacity=".16"/>
+  <circle cx="264" cy="128" r="46" fill="#7c3aed" opacity=".10"/>
+  <rect x="72" y="60" width="176" height="88" rx="14" fill="#312e81"/>
+  <rect x="94" y="78" width="132" height="52" rx="8" fill="#eef2ff"/>
+  <path d="M139 89v30l30-15-30-15Z" fill="#7c3aed"/>
+  <path d="M72 80h176M72 128h176" stroke="#a5b4fc" stroke-width="8" stroke-dasharray="12 12"/>
+  <text x="28" y="152" fill="#3730a3" font-family="Arial, sans-serif" font-size="24" font-weight="700">MOVIE</text>
+</svg>

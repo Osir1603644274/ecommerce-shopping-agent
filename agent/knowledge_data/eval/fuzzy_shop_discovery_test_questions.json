@@ -1,0 +1,42 @@
+{
+  "methodology": {
+    "split": "test",
+    "status": "questions-sealed-before-pooling",
+    "sealedAt": "2026-07-14",
+    "questionSource": "manually written Chinese local-life scenarios",
+    "validationOverlap": false,
+    "rule": "questions are frozen before candidate pooling; test results must not be used to tune retrieval, reranking, or context selection"
+  },
+  "cases": [
+    {
+      "id": "fuzzy-shop-test-001",
+      "question": "周末想带狗出去坐坐，最好有户外座位，店员对宠物也比较友好。",
+      "intent": "dog_friendly_outdoor"
+    },
+    {
+      "id": "fuzzy-shop-test-002",
+      "question": "想找一家适合几个人庆祝生日的地方，气氛热闹一点，店员能配合庆祝更好。",
+      "intent": "group_birthday_celebration"
+    },
+    {
+      "id": "fuzzy-shop-test-003",
+      "question": "早上想慢慢吃顿早餐，不想排很久的队，环境轻松一点。",
+      "intent": "relaxed_breakfast_without_long_wait"
+    },
+    {
+      "id": "fuzzy-shop-test-004",
+      "question": "晚上想听听现场音乐、喝点东西，热闹一些也没关系。",
+      "intent": "live_music_and_drinks"
+    },
+    {
+      "id": "fuzzy-shop-test-005",
+      "question": "朋友吃素，想找素食选择不只是沙拉、店员也清楚配料的地方。",
+      "intent": "substantial_vegetarian_options"
+    },
+    {
+      "id": "fuzzy-shop-test-006",
+      "question": "准备开车过去，想找停车比较省心、下车后不用走太远的店。",
+      "intent": "easy_parking"
+    }
+  ]
+}

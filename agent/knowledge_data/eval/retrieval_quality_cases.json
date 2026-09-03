@@ -1,0 +1,150 @@
+[
+  {
+    "id": "quality-val-review-001",
+    "split": "validation",
+    "category": "reviews",
+    "question": "Alchemy Coffee 的员工服务怎么样，真的帮顾客找回过落下的电脑吗？",
+    "expectedSources": ["reviews"],
+    "shopEntity": {"name": "Alchemy Coffee"},
+    "reviewFilter": {"source": "yelp", "shopId": 100068},
+    "relevantChunkIds": ["review:yelp-0raRTiWTrj9ytORRy-kZoA"]
+  },
+  {
+    "id": "quality-val-review-002",
+    "split": "validation",
+    "category": "reviews",
+    "question": "Good Karma Cafe 空间、WiFi 和插座怎么样，付款时有什么要注意？",
+    "expectedSources": ["reviews"],
+    "shopEntity": {"name": "Good Karma Cafe"},
+    "reviewFilter": {"source": "yelp", "shopId": 100169},
+    "relevantChunkIds": ["review:yelp-1VyHchVgc9oEfVrsFweNNA"]
+  },
+  {
+    "id": "quality-val-merchant-001",
+    "split": "validation",
+    "category": "merchant_docs",
+    "question": "Forin Cafe 的地址在哪里，周六营业到几点？",
+    "expectedSources": ["merchant_docs"],
+    "relevantChunkIds": ["merchant_doc:nBr6NgqcZz1GhtAngU0RSQ:profile"]
+  },
+  {
+    "id": "quality-val-merchant-002",
+    "split": "validation",
+    "category": "merchant_docs",
+    "question": "19th St & Market St 那家 Wawa 的评分、评论数和停车方式是什么？",
+    "expectedSources": ["merchant_docs"],
+    "relevantChunkIds": ["merchant_doc:kLS3Sth5HvO0IjrXCCvXxA:profile"]
+  },
+  {
+    "id": "quality-val-policy-001",
+    "split": "validation",
+    "category": "policy_docs",
+    "question": "押金迟迟不退，预付款没有消费完时规则应该怎么处理？",
+    "expectedSources": ["policy_docs"],
+    "relevantChunkIds": ["policy_doc:consumer-rights:refund-deposit-prepaid"]
+  },
+  {
+    "id": "quality-val-policy-002",
+    "split": "validation",
+    "category": "policy_docs",
+    "question": "用户下单前，平台和商户应该展示哪些重要服务与限制信息？",
+    "expectedSources": ["policy_docs"],
+    "relevantChunkIds": ["policy_doc:consumer-rights:service-information"]
+  },
+  {
+    "id": "quality-val-mixed-001",
+    "split": "validation",
+    "category": "merchant_reviews",
+    "question": "ReAnimator Coffee 周日营业到几点，评论里中午坐户外用 WiFi 办公的体验怎么样？",
+    "expectedSources": ["merchant_docs", "reviews"],
+    "shopEntity": {"name": "ReAnimator Coffee"},
+    "reviewFilter": {"source": "yelp", "shopId": 100010},
+    "relevantChunkIds": [
+      "merchant_doc:2dlQX5sP9X6Dlm1MmNOlSw:profile",
+      "review:yelp-wiod6zg7n7S_-Iow_O-L9w"
+    ]
+  },
+  {
+    "id": "quality-val-mixed-002",
+    "split": "validation",
+    "category": "merchant_reviews",
+    "question": "Lucky Goat Coffeehouse 的地址和营业时间是什么，实际坐前面会不会太吵？",
+    "expectedSources": ["merchant_docs", "reviews"],
+    "shopEntity": {"name": "Lucky Goat Coffeehouse"},
+    "reviewFilter": {"source": "yelp", "shopId": 100151},
+    "relevantChunkIds": [
+      "merchant_doc:vdpxxb6fxjYtJMnW_V0GZg:profile",
+      "review:yelp-0jBamrOBDkY6lLTpkY0xZw"
+    ]
+  },
+  {
+    "id": "quality-test-review-001",
+    "split": "test",
+    "category": "reviews",
+    "question": "Red Hook Coffee & Tea 适合用电脑工作吗，价格和咖啡有什么特点？",
+    "expectedSources": ["reviews"],
+    "relevantChunkIds": ["review:yelp-mBE3JkCV5YH9UqNdRJMUGg"]
+  },
+  {
+    "id": "quality-test-review-002",
+    "split": "test",
+    "category": "reviews",
+    "question": "Valerio Coffee Roasters 停车、员工服务和带电脑的实际体验怎么样？",
+    "expectedSources": ["reviews"],
+    "relevantChunkIds": ["review:yelp-CaXYOXHwOkmEu_JL3nEozQ"]
+  },
+  {
+    "id": "quality-test-merchant-001",
+    "split": "test",
+    "category": "merchant_docs",
+    "question": "J'aime French Bakery 周日几点关门，支持配送吗？",
+    "expectedSources": ["merchant_docs"],
+    "relevantChunkIds": ["merchant_doc:eqNutOMnPqKa9QDAY6KfEw:profile"]
+  },
+  {
+    "id": "quality-test-merchant-002",
+    "split": "test",
+    "category": "merchant_docs",
+    "question": "1528 Walnut St 的 Starbucks 周六营业到几点，价格档位是多少？",
+    "expectedSources": ["merchant_docs"],
+    "relevantChunkIds": ["merchant_doc:OTBWyXkNsBYHqIlXJXnEDA:profile"]
+  },
+  {
+    "id": "quality-test-policy-001",
+    "split": "test",
+    "category": "policy_docs",
+    "question": "商户被平台处罚后，平台要说明什么，商户能要求人工申诉吗？",
+    "expectedSources": ["policy_docs"],
+    "relevantChunkIds": ["policy_doc:platform-rules:enforcement-reasons"]
+  },
+  {
+    "id": "quality-test-policy-002",
+    "split": "test",
+    "category": "policy_docs",
+    "question": "用户能否查询、更正或删除个性化推荐使用的行为数据？",
+    "expectedSources": ["policy_docs"],
+    "relevantChunkIds": ["policy_doc:privacy-and-recommendation:data-subject-rights"]
+  },
+  {
+    "id": "quality-test-mixed-001",
+    "split": "test",
+    "category": "merchant_reviews",
+    "question": "Paris Baguette 周日营业到几点、是否配送，评论里用 WiFi 办公的实际体验怎么样？",
+    "expectedSources": ["merchant_docs", "reviews"],
+    "relevantChunkIds": [
+      "merchant_doc:wP0SSjU7R-m9j-VRhOCzmg:profile",
+      "review:yelp-OTgJteiQbczb4ZV5Nsf_5A"
+    ]
+  },
+  {
+    "id": "quality-test-mixed-002",
+    "split": "test",
+    "category": "merchant_reviews",
+    "question": "Vineyards Cafe 周六几点关门，评论里大窗户、楼下座位和 chai latte 的体验怎么样？",
+    "expectedSources": ["merchant_docs", "reviews"],
+    "relevantChunkIds": [
+      "merchant_doc:GOSVLhjUT6TnrPhkkmDOpw:profile",
+      "review:yelp-REgp10DO01kp2pOONZtq9w"
+    ]
+  }
+]

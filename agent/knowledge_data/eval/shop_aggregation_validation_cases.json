@@ -1,0 +1,41 @@
+{
+  "methodology": {
+    "split": "validation",
+    "candidateShopCount": 3,
+    "maxEvidenceBudget": 6,
+    "evidencePerShop": 2,
+    "source": "yelp",
+    "labelSource": "existing manually labeled retrieval-quality review IDs",
+    "queryPolicy": "remove the target shop name so ranking cannot succeed through name matching alone"
+  },
+  "cases": [
+    {
+      "id": "shop-agg-val-001",
+      "question": "哪家咖啡店的员工会主动帮助顾客，甚至追出去归还落下的电脑？",
+      "candidateShopIds": [100068, 100169, 100010],
+      "expectedTopShopId": 100068,
+      "relevantReviewIds": ["yelp-0raRTiWTrj9ytORRy-kZoA"]
+    },
+    {
+      "id": "shop-agg-val-002",
+      "question": "哪家咖啡店空间宽敞，有 WiFi 和很多插座，付款时还要注意只收现金？",
+      "candidateShopIds": [100169, 100010, 100151],
+      "expectedTopShopId": 100169,
+      "relevantReviewIds": ["yelp-1VyHchVgc9oEfVrsFweNNA"]
+    },
+    {
+      "id": "shop-agg-val-003",
+      "question": "哪家适合中午坐在户外，用 WiFi 和电脑工作？",
+      "candidateShopIds": [100010, 100151, 100068],
+      "expectedTopShopId": 100010,
+      "relevantReviewIds": ["yelp-wiod6zg7n7S_-Iow_O-L9w"]
+    },
+    {
+      "id": "shop-agg-val-004",
+      "question": "哪家店坐在前面会受到咖啡机噪音影响，后面可能更安静？",
+      "candidateShopIds": [100151, 100068, 100169],
+      "expectedTopShopId": 100151,
+      "relevantReviewIds": ["yelp-0jBamrOBDkY6lLTpkY0xZw"]
+    }
+  ]
+}

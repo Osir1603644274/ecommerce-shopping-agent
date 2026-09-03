@@ -1,0 +1,509 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: local-life-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-local_root_password}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-local_life}
+      MYSQL_USER: ${MYSQL_USER:-local_life}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-local_life_password}
+    ports:
+      - "${MYSQL_HOST_PORT:-13306}:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./db/shop_type.sql:/docker-entrypoint-initdb.d/01-shop-type.sql:ro
+      - ./db/shop.sql:/docker-entrypoint-initdb.d/02-shop.sql:ro
+      - ./db/review.sql:/docker-entrypoint-initdb.d/03-review.sql:ro
+      - ./db/user_behavior.sql:/docker-entrypoint-initdb.d/04-user-behavior.sql:ro
+      - ./db/product.sql:/docker-entrypoint-initdb.d/05-product.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: local-life-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  kafka:
+    image: apache/kafka:3.9.1
+    container_name: local-life-kafka
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_NUM_PARTITIONS: 3
+    ports:
+      - "${KAFKA_HOST_PORT:-19092}:9092"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 15
+      start_period: 20s
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.6
+    container_name: local-life-elasticsearch
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ports:
+      - "${ELASTICSEARCH_HOST_PORT:-19200}:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -fsS http://localhost:9200/_cluster/health?wait_for_status=yellow >/dev/null",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    container_name: local-life-prometheus
+    profiles:
+      - observability
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+    ports:
+      - "${PROMETHEUS_HOST_PORT:-19090}:9090"
+    volumes:
+      - ./observability/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  qdrant:
+    image: qdrant/qdrant:v1.12.6
+    container_name: local-life-qdrant
+    profiles:
+      - rag
+      - rag-canary
+      - rag-hybrid-canary
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant-data:/qdrant/storage
+
+  backend:
+    build:
+      context: ./backend
+      args:
+        RUNTIME_IMAGE: ${BACKEND_RUNTIME_IMAGE:-eclipse-temurin:17-jre}
+    container_name: local-life-backend
+    environment:
+      SERVER_PORT: 8080
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${MYSQL_DATABASE:-local_life}
+      DB_USER: ${MYSQL_USER:-local_life}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-local_life_password}
+      JWT_SECRET: ${JWT_SECRET:-local-compose-only-jwt-secret-change-before-production}
+      PAYMENT_CALLBACK_SECRET: ${PAYMENT_CALLBACK_SECRET:-local-compose-only-payment-secret}
+      PAYMENT_SIMULATOR_ENABLED: ${PAYMENT_SIMULATOR_ENABLED:-false}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      AGENT_BASE_URL: http://agent:8000
+      REVIEW_SYNC_MAX_ATTEMPTS: 3
+      REVIEW_SYNC_MODE: ${REVIEW_SYNC_MODE:-outbox}
+      MESSAGING_ENABLED: ${MESSAGING_ENABLED:-true}
+      MESSAGING_TRANSPORT: ${MESSAGING_TRANSPORT:-kafka}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      FLASH_SALE_ENABLED: ${FLASH_SALE_ENABLED:-true}
+      SEARCH_ENABLED: ${SEARCH_ENABLED:-true}
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "bash -ec \"exec 3<>/dev/tcp/127.0.0.1/8080; printf 'GET /actuator/health/readiness HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3; grep -q 'HTTP/1.1 200' <&3\"",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 20s
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+
+  schema-migrator:
+    profiles: ["cloud-split"]
+    build:
+      context: ./backend
+      args:
+        RUNTIME_IMAGE: ${BACKEND_RUNTIME_IMAGE:-eclipse-temurin:17-jre}
+    environment:
+      SPRING_MAIN_WEB_APPLICATION_TYPE: none
+      SPRING_MAIN_LAZY_INITIALIZATION: "true"
+      MIGRATION_ONLY: "true"
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${MYSQL_DATABASE:-local_life}
+      DB_USER: ${MYSQL_USER:-local_life}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-local_life_password}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: ${JWT_SECRET:-local-compose-only-jwt-secret-change-before-production}
+      MESSAGING_ENABLED: "false"
+      FLASH_SALE_ENABLED: "false"
+      SEARCH_ENABLED: "false"
+      LOCAL_LIFE_ORDER_EXPIRY_ENABLED: "false"
+    restart: "no"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  mysql-role-bootstrap:
+    profiles: ["cloud-split"]
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-local_root_password}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-local_life}
+      CATALOG_DB_PASSWORD: ${CATALOG_DB_PASSWORD:-catalog-local-only-password}
+      TRADE_DB_PASSWORD: ${TRADE_DB_PASSWORD:-trade-local-only-password}
+    volumes:
+      - ./db/bootstrap-cloud-split-roles.sh:/bootstrap-cloud-split-roles.sh:ro
+    entrypoint: ["bash", "/bootstrap-cloud-split-roles.sh"]
+    restart: "no"
+    depends_on:
+      schema-migrator:
+        condition: service_completed_successfully
+
+  catalog-search-service:
+    profiles: ["cloud-split"]
+    build:
+      context: ./backend
+      args:
+        RUNTIME_IMAGE: ${BACKEND_RUNTIME_IMAGE:-eclipse-temurin:17-jre}
+    container_name: local-life-catalog-search
+    environment:
+      SERVER_PORT: 8081
+      SERVICE_ROLE: catalog
+      REQUIRE_INTERNAL_SERVICE_TOKEN: "true"
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-local-compose-internal-token-32bytes}
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${MYSQL_DATABASE:-local_life}
+      DB_USER: catalog_service
+      DB_PASSWORD: ${CATALOG_DB_PASSWORD:-catalog-local-only-password}
+      SPRING_FLYWAY_ENABLED: "false"
+      JWT_SECRET: ${JWT_SECRET:-local-compose-only-jwt-secret-change-before-production}
+      PAYMENT_CALLBACK_SECRET: ${PAYMENT_CALLBACK_SECRET:-local-compose-only-payment-secret}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      AGENT_BASE_URL: http://agent:8000
+      LOCAL_LIFE_ORDER_EXPIRY_ENABLED: "false"
+      FLASH_SALE_ENABLED: "false"
+      MESSAGING_ENABLED: "true"
+      MESSAGING_TRANSPORT: kafka
+      DOMAIN_EVENT_CONSUMER_GROUP: catalog-search-service
+      DOMAIN_EVENT_CONSUMER_ID: catalog-search-projection
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      RATE_LIMIT_ENABLED: "false"
+      SEARCH_ENABLED: "true"
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    ports:
+      - "${CATALOG_HOST_PORT:-18081}:8081"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "bash -ec \"exec 3<>/dev/tcp/127.0.0.1/8081; printf 'GET /actuator/health/readiness HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3; grep -q 'HTTP/1.1 200' <&3\"",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 20s
+    depends_on:
+      mysql-role-bootstrap:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+
+  trade-service:
+    profiles: ["cloud-split"]
+    build:
+      context: ./backend
+      args:
+        RUNTIME_IMAGE: ${BACKEND_RUNTIME_IMAGE:-eclipse-temurin:17-jre}
+    container_name: local-life-trade
+    environment:
+      SERVER_PORT: 8082
+      SPRING_PROFILES_ACTIVE: cloud-trade
+      SERVICE_ROLE: trade
+      REQUIRE_INTERNAL_SERVICE_TOKEN: "true"
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-local-compose-internal-token-32bytes}
+      CATALOG_SERVICE_URL: http://catalog-search-service:8081
+      CATALOG_CONNECT_TIMEOUT_MS: 500
+      CATALOG_READ_TIMEOUT_MS: 1000
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${MYSQL_DATABASE:-local_life}
+      DB_USER: trade_service
+      DB_PASSWORD: ${TRADE_DB_PASSWORD:-trade-local-only-password}
+      SPRING_FLYWAY_ENABLED: "false"
+      JWT_SECRET: ${JWT_SECRET:-local-compose-only-jwt-secret-change-before-production}
+      PAYMENT_CALLBACK_SECRET: ${PAYMENT_CALLBACK_SECRET:-local-compose-only-payment-secret}
+      PAYMENT_SIMULATOR_ENABLED: ${PAYMENT_SIMULATOR_ENABLED:-false}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      AGENT_BASE_URL: http://agent:8000
+      MESSAGING_ENABLED: "true"
+      MESSAGING_TRANSPORT: kafka
+      DOMAIN_EVENT_CONSUMER_GROUP: trade-service
+      DOMAIN_EVENT_CONSUMER_ID: trade-projection
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      RATE_LIMIT_ENABLED: "false"
+      FLASH_SALE_ENABLED: ${FLASH_SALE_ENABLED:-true}
+      SEARCH_ENABLED: "false"
+    ports:
+      - "${TRADE_HOST_PORT:-18082}:8082"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "bash -ec \"exec 3<>/dev/tcp/127.0.0.1/8082; printf 'GET /actuator/health/readiness HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3; grep -q 'HTTP/1.1 200' <&3\"",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 20s
+    depends_on:
+      mysql-role-bootstrap:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      catalog-search-service:
+        condition: service_healthy
+
+  gateway:
+    profiles: ["cloud-split"]
+    build:
+      context: ./backend-gateway
+      args:
+        RUNTIME_IMAGE: ${BACKEND_RUNTIME_IMAGE:-eclipse-temurin:17-jre}
+    container_name: local-life-gateway
+    environment:
+      SERVER_PORT: 8080
+      JWT_ISSUER: local-life-backend
+      JWT_SECRET: ${JWT_SECRET:-local-compose-only-jwt-secret-change-before-production}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      CATALOG_SERVICE_URL: http://catalog-search-service:8081
+      TRADE_SERVICE_URL: http://trade-service:8082
+      RATE_LIMIT_ENABLED: ${RATE_LIMIT_ENABLED:-true}
+      AUTH_RATE_LIMIT: ${AUTH_RATE_LIMIT:-20}
+      WRITE_RATE_LIMIT: ${WRITE_RATE_LIMIT:-120}
+      RATE_LIMIT_WINDOW: ${RATE_LIMIT_WINDOW:-PT1M}
+    ports:
+      - "${GATEWAY_HOST_PORT:-18080}:8080"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "bash -ec \"exec 3<>/dev/tcp/127.0.0.1/8080; printf 'GET /actuator/health/readiness HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3; grep -q 'HTTP/1.1 200' <&3\"",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 20s
+    depends_on:
+      redis:
+        condition: service_healthy
+      catalog-search-service:
+        condition: service_healthy
+      trade-service:
+        condition: service_healthy
+
+  agent:
+    build:
+      context: ./agent
+    container_name: local-life-agent
+    environment:
+      BACKEND_BASE_URL: http://backend:8080
+      QDRANT_URL: http://qdrant:6333
+      RAG_DATA_DIR: /app/rag
+      RAG_MODEL_CACHE_DIR: /app/.cache/fastembed
+      REDIS_URL: redis://redis:6379/0
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      HTTP_PROXY: ${DOCKER_HTTP_PROXY:-}
+      HTTPS_PROXY: ${DOCKER_HTTPS_PROXY:-}
+      NO_PROXY: ${DOCKER_NO_PROXY:-localhost,127.0.0.1,backend,redis,qdrant,mysql,kafka,elasticsearch}
+      KNOWLEDGE_SOURCE_AWARE_ENABLED: ${KNOWLEDGE_SOURCE_AWARE_ENABLED:-true}
+      KNOWLEDGE_REVIEW_HYBRID_ENABLED: ${KNOWLEDGE_REVIEW_HYBRID_ENABLED:-true}
+      ECOMMERCE_GUIDE_ENABLED: ${ECOMMERCE_GUIDE_ENABLED:-true}
+      AGENT_CONTEXT_MODE: ${AGENT_CONTEXT_MODE:-context_pack}
+      AGENT_ORCHESTRATOR_MODE: ${AGENT_ORCHESTRATOR_MODE:-unified}
+      AGENT_LEGACY_FALLBACK_ENABLED: ${AGENT_LEGACY_FALLBACK_ENABLED:-false}
+      AGENT_EXECUTOR_LEASE_SECONDS: ${AGENT_EXECUTOR_LEASE_SECONDS:-60}
+      AGENT_REQUEST_DEADLINE_SECONDS: ${AGENT_REQUEST_DEADLINE_SECONDS:-20}
+      AGENT_TRANSACTION_ENABLED: ${AGENT_TRANSACTION_ENABLED:-false}
+      COMMERCE_DEMO_ENABLED: ${COMMERCE_DEMO_ENABLED:-false}
+      COMMERCE_DEMO_PAYMENT_SIMULATION_ENABLED: ${COMMERCE_DEMO_PAYMENT_SIMULATION_ENABLED:-false}
+      COMMERCE_DEMO_COOKIE_SECURE: ${COMMERCE_DEMO_COOKIE_SECURE:-false}
+      TRANSACTION_CONFIRMATION_TTL_SECONDS: ${TRANSACTION_CONFIRMATION_TTL_SECONDS:-300}
+      PRODUCT_COLLECTION_NAME: ${PRODUCT_COLLECTION_NAME:-product_catalog}
+      PRODUCT_RETRIEVAL_MODE: ${PRODUCT_RETRIEVAL_MODE:-rrf}
+    ports:
+      - "${AGENT_PORT:-8000}:8000"
+    volumes:
+      - ./agent/app:/app/app
+      - ./agent/knowledge_data:/app/knowledge_data
+      - ./agent/rag:/app/rag
+      - embedding-model-cache:/app/.cache/fastembed
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2).read()",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 15s
+    depends_on:
+      backend:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  agent-source-aware-canary:
+    image: agent-agent
+    build:
+      context: ./agent
+    container_name: local-life-agent-source-aware-canary
+    profiles:
+      - rag-canary
+    environment:
+      BACKEND_BASE_URL: http://backend:8080
+      QDRANT_URL: http://qdrant:6333
+      RAG_DATA_DIR: /app/rag
+      RAG_MODEL_CACHE_DIR: /app/.cache/fastembed
+      REDIS_URL: redis://redis:6379/0
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      HTTP_PROXY: ${DOCKER_HTTP_PROXY:-}
+      HTTPS_PROXY: ${DOCKER_HTTPS_PROXY:-}
+      NO_PROXY: ${DOCKER_NO_PROXY:-localhost,127.0.0.1,backend,redis,qdrant,mysql,kafka,elasticsearch}
+      KNOWLEDGE_SOURCE_AWARE_ENABLED: "true"
+    ports:
+      - "${AGENT_CANARY_PORT:-8001}:8000"
+    volumes:
+      - ./agent/app:/app/app
+      - ./agent/knowledge_data:/app/knowledge_data
+      - ./agent/rag:/app/rag
+      - embedding-model-cache:/app/.cache/fastembed
+    depends_on:
+      backend:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+
+  agent-review-hybrid-canary:
+    image: agent-agent
+    build:
+      context: ./agent
+    container_name: local-life-agent-review-hybrid-canary
+    profiles:
+      - rag-hybrid-canary
+    environment:
+      BACKEND_BASE_URL: http://backend:8080
+      QDRANT_URL: http://qdrant:6333
+      RAG_DATA_DIR: /app/rag
+      RAG_MODEL_CACHE_DIR: /app/.cache/fastembed
+      REDIS_URL: redis://redis:6379/0
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      HTTP_PROXY: ${DOCKER_HTTP_PROXY:-}
+      HTTPS_PROXY: ${DOCKER_HTTPS_PROXY:-}
+      NO_PROXY: ${DOCKER_NO_PROXY:-localhost,127.0.0.1,backend,redis,qdrant,mysql,kafka,elasticsearch}
+      KNOWLEDGE_SOURCE_AWARE_ENABLED: "true"
+      KNOWLEDGE_REVIEW_HYBRID_ENABLED: "true"
+    ports:
+      - "${AGENT_HYBRID_CANARY_PORT:-8002}:8000"
+    volumes:
+      - ./agent/app:/app/app
+      - ./agent/knowledge_data:/app/knowledge_data
+      - ./agent/rag:/app/rag
+      - embedding-model-cache:/app/.cache/fastembed
+    depends_on:
+      backend:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+
+  k6:
+    image: grafana/k6:0.54.0
+    profiles:
+      - loadtest
+    environment:
+      BACKEND_BASE_URL: http://backend:8080
+      K6_VUS: ${K6_VUS:-10}
+      K6_DURATION: ${K6_DURATION:-30s}
+    volumes:
+      - ./load/k6:/scripts:ro
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  mysql-data:
+  redis-data:
+  kafka-data:
+  elasticsearch-data:
+  prometheus-data:
+  qdrant-data:
+  embedding-model-cache:

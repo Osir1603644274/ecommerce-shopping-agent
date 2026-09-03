@@ -1,0 +1,3335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>电商导购 Agent</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255,122,69,.16), transparent 28%),
+        radial-gradient(circle at 88% 8%, rgba(255,193,7,.14), transparent 28%),
+        linear-gradient(135deg, #eef1f6 0%, #e3e7ef 100%);
+      display: flex; justify-content: center; align-items: center;
+      min-height: 100vh;
+    }
+    /* 手机外壳 */
+    .phone {
+      width: 100%; max-width: 430px; height: 100vh; max-height: 880px;
+      background: #f5f6f8; display: flex; flex-direction: column;
+      box-shadow: 0 12px 40px rgba(0,0,0,.18); overflow: hidden;
+      border-radius: 0; position: relative;
+    }
+    @media (min-width: 460px) { .phone { border-radius: 28px; height: 88vh; } }
+
+    /* 顶部标题栏 */
+    .topbar {
+      background: linear-gradient(135deg, #ff7a45, #ff5722);
+      color: #fff; padding: 16px 18px; flex-shrink: 0;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .topbar .logo {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255,255,255,.22); display: flex;
+      align-items: center; justify-content: center; font-size: 20px;
+    }
+    .topbar .title { font-size: 17px; font-weight: 600; }
+    .topbar .sub { font-size: 12px; opacity: .85; margin-top: 2px; }
+    .topbar .spacer { flex: 1; }
+    .topbar .new-chat {
+      width: 36px; height: 36px; border: none; border-radius: 50%;
+      background: rgba(255,255,255,.2); color: #fff; font-size: 22px;
+      cursor: pointer;
+    }
+    .topbar .task-lab-link {
+      color: #fff; text-decoration: none; font-size: 12px; font-weight: 700;
+      border: 1px solid rgba(255,255,255,.42); border-radius: 999px;
+      padding: 7px 10px; background: rgba(255,255,255,.12);
+    }
+    .topbar .memory-action {
+      border: 1px solid rgba(255,255,255,.42); border-radius: 999px;
+      padding: 7px 10px; background: rgba(255,255,255,.12); color: #fff;
+      font-size: 12px; font-weight: 700; cursor: pointer;
+    }
+    .memory-overlay {
+      position: absolute; inset: 0; z-index: 80;
+      background: rgba(23,28,38,.42); display: flex;
+      justify-content: flex-end; backdrop-filter: blur(2px);
+    }
+    .memory-overlay[hidden] { display: none; }
+    .memory-sheet {
+      width: min(390px, 92%); height: 100%; background: #fff;
+      box-shadow: -16px 0 40px rgba(18,26,39,.18);
+      display: flex; flex-direction: column; padding: 20px;
+    }
+    .memory-sheet-head { display: flex; align-items: center; gap: 10px; }
+    .memory-sheet-title { flex: 1; font-size: 20px; font-weight: 800; color: #202938; }
+    .memory-close {
+      border: 0; width: 34px; height: 34px; border-radius: 50%;
+      background: #f2f4f7; color: #596273; cursor: pointer; font-size: 18px;
+    }
+    .memory-help { margin: 8px 0 18px; color: #7a818f; font-size: 13px; line-height: 1.55; }
+    .memory-login-form { display: grid; gap: 12px; }
+    .memory-login-form input {
+      width: 100%; border: 1px solid #dfe3e9; border-radius: 12px;
+      padding: 11px 12px; font-size: 14px; outline: none;
+    }
+    .memory-login-form input:focus { border-color: #ff7043; box-shadow: 0 0 0 3px rgba(255,112,67,.12); }
+    .memory-primary, .memory-danger, .memory-secondary {
+      border: 0; border-radius: 12px; padding: 10px 12px;
+      font-weight: 750; cursor: pointer;
+    }
+    .memory-primary { background: #ff5722; color: #fff; }
+    .memory-secondary { background: #f2f4f7; color: #4d5562; }
+    .memory-danger { background: #fff0f0; color: #c92a2a; }
+    .memory-feedback { min-height: 20px; color: #c92a2a; font-size: 13px; }
+    .memory-list { flex: 1; overflow: auto; display: grid; align-content: start; gap: 10px; }
+    .memory-empty { color: #8a8f99; font-size: 13px; padding: 18px 2px; }
+    .memory-entry {
+      border: 1px solid #e7eaf0; border-radius: 15px; padding: 12px;
+      background: #fbfcfe;
+    }
+    .memory-entry-main { color: #252d3a; font-size: 14px; font-weight: 750; }
+    .memory-entry-meta { color: #7a818f; font-size: 12px; margin: 6px 0 10px; }
+    .memory-entry-actions { display: flex; gap: 8px; }
+    .memory-footer { display: flex; gap: 8px; padding-top: 14px; }
+    .memory-footer button { flex: 1; }
+    .memory-candidates {
+      flex-shrink: 0; display: grid; gap: 8px; padding: 0 14px 10px;
+      background: #f5f6f8;
+    }
+    .memory-candidates:empty { display: none; }
+    .memory-candidate {
+      display: flex; align-items: center; gap: 10px; padding: 10px 11px;
+      border: 1px solid #ffd3c4; border-radius: 14px; background: #fff8f5;
+      box-shadow: 0 5px 16px rgba(255,87,34,.08);
+    }
+    .memory-candidate-text { flex: 1; color: #4d342d; font-size: 13px; line-height: 1.45; }
+    .memory-candidate button {
+      border: 0; border-radius: 999px; padding: 7px 10px;
+      background: #ff5722; color: #fff; font-weight: 700; cursor: pointer;
+    }
+
+    .conversation {
+      flex: 1; min-height: 0;
+      display: flex; flex-direction: column;
+    }
+
+    /* 猜你喜欢推荐区 */
+    .recommend-panel {
+      flex-shrink: 0;
+      padding: 14px;
+      background: rgba(255,255,255,.92);
+      border-bottom: 1px solid #eceef1;
+    }
+    .recommend-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 12px; margin-bottom: 12px;
+    }
+    .recommend-kicker {
+      color: #ff5722; font-size: 12px; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+    .recommend-title {
+      margin-top: 3px; color: #1f2937; font-size: 18px; font-weight: 800;
+    }
+    .recommend-desc {
+      margin-top: 4px; color: #7a818f; font-size: 12px; line-height: 1.45;
+    }
+    .recommend-refresh {
+      flex-shrink: 0; border: none; border-radius: 999px;
+      padding: 7px 11px; background: #fff1ec; color: #ff5722;
+      font-weight: 700; cursor: pointer;
+    }
+    .recommend-status {
+      color: #7a818f; font-size: 13px; padding: 8px 0;
+    }
+    .recommend-grid {
+      display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px;
+      scroll-snap-type: x proximity;
+    }
+    .recommend-grid::-webkit-scrollbar { height: 8px; }
+    .recommend-grid::-webkit-scrollbar-thumb { background: rgba(121, 129, 143, .28); border-radius: 999px; }
+    .recommend-card {
+      flex: 0 0 235px; scroll-snap-align: start;
+      background: #fff; border: 1px solid #edf0f4; border-radius: 18px;
+      overflow: hidden; box-shadow: 0 8px 24px rgba(20, 31, 50, .07);
+    }
+    .recommend-cover {
+      width: 100%; height: 92px; display: block; object-fit: cover;
+      background: #fff7f3;
+    }
+    .recommend-body { padding: 11px 12px 12px; }
+    .recommend-meta {
+      display: flex; justify-content: space-between; gap: 8px;
+      color: #8a8f99; font-size: 12px; margin-bottom: 6px;
+    }
+    .recommend-name {
+      color: #1f2937; font-size: 15px; font-weight: 800; line-height: 1.35;
+    }
+    .recommend-address {
+      margin-top: 4px; color: #6f747d; font-size: 12px; line-height: 1.4;
+    }
+    .recommend-reason {
+      margin-top: 8px; padding: 8px 9px; border-radius: 12px;
+      background: #f7f8fb; color: #4d5562; font-size: 12px; line-height: 1.45;
+    }
+    .recommend-score {
+      margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px;
+      color: #6f747d; font-size: 12px;
+    }
+    .recommend-pill {
+      border-radius: 999px; padding: 3px 7px; background: #fff5ef;
+      color: #ff5722; font-weight: 700;
+    }
+
+    /* 消息区 */
+    .chat {
+      flex: 1; overflow-y: auto; padding: 16px 14px;
+      display: flex; flex-direction: column; gap: 14px;
+      scroll-behavior: smooth;
+    }
+    .chat::-webkit-scrollbar { width: 10px; }
+    .chat::-webkit-scrollbar-track { background: transparent; }
+    .chat::-webkit-scrollbar-thumb {
+      background: rgba(121, 129, 143, .36); border-radius: 999px;
+      border: 3px solid transparent; background-clip: content-box;
+    }
+    .row { display: flex; gap: 8px; align-items: flex-end; }
+    .row.user { flex-direction: row-reverse; }
+    .avatar {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 17px;
+    }
+    .avatar.bot { background: #ffe7de; }
+    .avatar.me { background: #d6e4ff; }
+    .bubble {
+      max-width: 76%; padding: 10px 13px; border-radius: 16px;
+      font-size: 15px; line-height: 1.5;
+      word-break: break-word;
+    }
+    .row.bot .bubble { background: #fff; color: #222; border-top-left-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+    .row.user .bubble { background: #ff5722; color: #fff; border-top-right-radius: 4px; }
+    .markdown { white-space: normal; }
+    .markdown p { margin: 0 0 10px; }
+    .markdown p:last-child { margin-bottom: 0; }
+    .markdown h3 {
+      margin: 14px 0 8px; font-size: 1.02em; line-height: 1.4;
+      color: #1f2937;
+    }
+    .markdown h3:first-child { margin-top: 0; }
+    .markdown strong { font-weight: 700; color: #202938; }
+    .markdown ul { margin: 6px 0 12px 1.25em; padding: 0; }
+    .markdown li { margin: 4px 0; }
+    .markdown blockquote {
+      margin: 8px 0 12px; padding: 8px 10px;
+      border-left: 3px solid #ff9b75; background: #fff7f3;
+      color: #4d5562; border-radius: 8px;
+    }
+    .markdown hr {
+      border: 0; border-top: 1px solid #eceef1; margin: 14px 0;
+    }
+    .markdown-table-wrap {
+      width: 100%; overflow-x: auto; margin: 10px 0 14px;
+      border: 1px solid #e5e7eb; border-radius: 10px;
+      background: #fff;
+    }
+    .markdown table {
+      width: 100%; min-width: 420px; border-collapse: collapse;
+      font-size: .94em; line-height: 1.45;
+    }
+    .markdown th, .markdown td {
+      padding: 9px 11px; border-right: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb; vertical-align: top;
+      text-align: left;
+    }
+    .markdown th {
+      background: #fff4ef; color: #374151; font-weight: 700;
+      white-space: nowrap;
+    }
+    .markdown th:last-child, .markdown td:last-child { border-right: 0; }
+    .markdown tbody tr:last-child td { border-bottom: 0; }
+    .markdown tbody tr:nth-child(even) { background: #fafafa; }
+    .stream-status { color: #8a8f99; font-size: 13px; }
+    .markdown.streaming::after {
+      content: ""; display: inline-block; width: 7px; height: 1em;
+      margin-left: 3px; vertical-align: -2px; border-radius: 2px;
+      background: #ff7043; animation: stream-cursor .9s steps(1) infinite;
+    }
+    @keyframes stream-cursor { 50% { opacity: 0; } }
+
+    /* 工具调用小标签 */
+    .trace {
+      margin-top: 9px; padding-top: 8px; font-size: 12px; color: #8a8f99;
+      border-top: 1px solid #eceef1;
+    }
+    .trace .chip {
+      display: inline-block; background: #eef0f4; border-radius: 10px; padding: 2px 8px;
+    }
+    .trace .chip.ok { color: #19a974; }
+    .trace .chip.fail { color: #e7515a; }
+    .trace-request-line { color: #6f747d; display: flex; flex-wrap: wrap; gap: 6px; }
+    .trace-pill {
+      display: inline-flex; align-items: center; border-radius: 999px;
+      background: #f2f4f7; color: #667085; padding: 3px 8px;
+      line-height: 1.3;
+    }
+    .trace-pill.slow { background: #fff1e8; color: #d9480f; font-weight: 700; }
+    .trace-pill.normal { background: #edf8f2; color: #168753; }
+    .backend-flow { margin-top: 10px; }
+    .backend-flow > summary {
+      cursor: pointer; color: #4d5562; font-weight: 700; list-style-position: outside;
+    }
+    .backend-flow[open] > summary { margin-bottom: 10px; }
+    .backend-stage-list { display: grid; gap: 8px; }
+    .backend-stage {
+      display: grid; grid-template-columns: 28px minmax(100px, .8fr) minmax(0, 2fr) auto;
+      gap: 8px; align-items: start; padding: 8px 0; border-top: 1px solid #eceef1;
+    }
+    .backend-stage:first-child { border-top: none; }
+    .backend-stage-index {
+      width: 24px; height: 24px; display: grid; place-items: center;
+      border-radius: 50%; background: #edf8f2; color: #168753; font-size: 11px; font-weight: 800;
+    }
+    .backend-stage.failed .backend-stage-index { background: #ffeded; color: #b42318; }
+    .backend-stage.warning .backend-stage-index { background: #fff1e8; color: #b54708; }
+    .backend-stage-name { color: #20242b; font-weight: 750; overflow-wrap: anywhere; }
+    .backend-stage-detail { color: #6f747d; line-height: 1.45; overflow-wrap: anywhere; }
+    .backend-stage-time { color: #6f747d; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .step-debug-panel {
+      margin-top: 10px; padding: 12px; border: 1px solid #e1e5eb;
+      border-radius: 14px; background: #f8fafc; color: #303642;
+    }
+    .step-debug-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+    .step-debug-title { font-weight: 800; color: #20242b; }
+    .step-debug-status { color: #6f747d; font-size: 12px; }
+    .step-debug-next { margin-top: 8px; color: #4d5562; line-height: 1.5; }
+    .step-debug-context-identity {
+      margin-top: 8px; padding: 8px 10px; border-radius: 9px;
+      background: #eef6ff; color: #24527a; line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+    .step-debug-context-identity.error {
+      background: #fff1f0; color: #b42318;
+    }
+    .transport-pill {
+      display: inline-flex; align-items: center; flex-wrap: wrap;
+      margin-top: 8px; padding: 7px 9px; border-radius: 999px;
+      background: #eef8f2; color: #176b45; line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+    .transport-pill.error {
+      background: #fff1f0; color: #b42318;
+    }
+    .step-debug-list { display: grid; gap: 8px; margin-top: 12px; }
+    .step-debug-record {
+      padding-top: 9px; border-top: 1px solid #e5e8ed;
+      display: grid; grid-template-columns: minmax(110px, .7fr) minmax(0, 2fr) auto;
+      gap: 8px; align-items: start;
+    }
+    .step-debug-record.failed { color: #b42318; }
+    .step-debug-code { font-family: Consolas, "SFMono-Regular", monospace; overflow-wrap: anywhere; }
+    .step-debug-state {
+      grid-column: 1 / -1; margin: 0; max-height: 210px; overflow: auto;
+      border-radius: 9px; background: #111827; color: #e5e7eb;
+      padding: 9px; font-size: 11px; line-height: 1.45; white-space: pre-wrap;
+    }
+    .step-debug-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .step-debug-actions button {
+      border: 1px solid #d8dde5; background: #fff; color: #303642;
+      border-radius: 10px; padding: 7px 11px; cursor: pointer; font-weight: 700;
+    }
+    .step-debug-actions button.primary { background: #ff5722; color: #fff; border-color: #ff5722; }
+    .step-debug-actions button.danger { color: #b42318; }
+    .step-debug-actions button:disabled { opacity: .55; cursor: wait; }
+    .bubble:has(.step-debug-panel) { max-width: min(100%, 1040px); width: 100%; }
+    .step-debug-legend {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;
+      color: #667085; font-size: 11px;
+    }
+    .step-debug-legend-item { display: inline-flex; align-items: center; gap: 5px; }
+    .step-debug-legend-dot {
+      width: 9px; height: 9px; border-radius: 50%; background: #e4e7ec;
+      border: 1px solid #c9ced6;
+    }
+    .step-debug-legend-dot.completed { background: #1f9d63; border-color: #168753; }
+    .step-debug-legend-dot.current { background: #ff7a45; border-color: #ff5722; }
+    .step-debug-legend-dot.failed { background: #d92d20; border-color: #b42318; }
+    .step-debug-flow {
+      margin-top: 12px; padding: 12px; border: 1px solid #dce3ed;
+      border-radius: 14px; background: #fff; overflow: hidden;
+    }
+    .step-debug-flow-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 12px; margin-bottom: 10px;
+    }
+    .step-debug-flow-title { color: #20242b; font-weight: 800; }
+    .step-debug-flow-caption { color: #667085; font-size: 11px; line-height: 1.4; }
+    .step-debug-flow-expand {
+      flex: none; border: 1px solid #d8dde5; border-radius: 9px;
+      background: #fff; color: #303642; padding: 5px 9px;
+      cursor: pointer; font-size: 12px; font-weight: 750;
+    }
+    .step-debug-track {
+      display: grid; grid-template-columns: repeat(8, minmax(104px, 1fr));
+      gap: 18px; min-width: 940px; overflow-x: auto;
+      padding: 4px 4px 10px;
+    }
+    .step-debug-node {
+      position: relative; min-width: 0; min-height: 82px; padding: 10px;
+      border: 2px solid #d5dce7; border-radius: 12px;
+      background: #f8fafc;
+    }
+    .step-debug-node:not(:last-child)::after {
+      content: "→"; position: absolute; right: -15px; top: 27px;
+      color: #98a2b3; font-weight: 900;
+    }
+    .step-debug-node strong { display: block; color: #303642; font-size: 12px; }
+    .step-debug-node span {
+      display: block; margin-top: 5px; color: #667085;
+      font-size: 10px; line-height: 1.35; overflow-wrap: anywhere;
+    }
+    .step-debug-node.completed { border-color: #1f9d63; background: #eaf8f1; }
+    .step-debug-node.current {
+      border: 4px solid #ff5722; background: #fff2e8;
+      animation: step-debug-pulse 1.4s ease-in-out infinite;
+    }
+    .step-debug-node.failed { border: 4px solid #d92d20; background: #fff0ef; }
+    .step-debug-node.cancelled {
+      border-style: dashed; border-color: #98a2b3; background: #f2f4f7;
+    }
+    .step-debug-node.skipped { opacity: .45; }
+    @keyframes step-debug-pulse { 50% { opacity: .72; } }
+    .step-debug-flow:fullscreen {
+      display: grid; align-content: center; width: 100vw; height: 100vh;
+      margin: 0; padding: clamp(18px, 3vw, 48px); border: 0;
+      border-radius: 0; background: #f4f7fb; overflow: auto;
+    }
+    .step-debug-flow:fullscreen .step-debug-track {
+      min-width: 0; width: 100%; grid-template-columns: repeat(8, minmax(0, 1fr));
+    }
+    .step-debug-history { margin-top: 10px; }
+    .step-debug-history > summary { color: #667085; cursor: pointer; font-size: 12px; font-weight: 750; }
+    .trace details { margin-top: 6px; }
+    .trace summary { color: #60656f; cursor: pointer; user-select: none; }
+    .trace-review-grid { display: grid; gap: 8px; margin-top: 6px; }
+    .trace-review {
+      padding: 7px 8px; border-radius: 9px;
+      background: #f6f7f9; color: #4c515a;
+    }
+    .trace-review-head {
+      display: flex; justify-content: space-between; gap: 8px;
+      font-weight: 600;
+    }
+    .trace-review-score { color: #ff6b35; white-space: nowrap; }
+    .trace-review-text { margin-top: 3px; line-height: 1.4; color: #6f747d; }
+
+    /* 开发调试面板：把 citations / retrievalTrace 从聊天正文中拆出来 */
+    .debug-panel {
+      display: none;
+      background: rgba(255,255,255,.94);
+      border-left: 1px solid #eceef1;
+      min-height: 0;
+      overflow-y: auto;
+    }
+    .debug-panel::-webkit-scrollbar { width: 10px; }
+    .debug-panel::-webkit-scrollbar-thumb {
+      background: rgba(121, 129, 143, .30); border-radius: 999px;
+      border: 3px solid transparent; background-clip: content-box;
+    }
+    .debug-inner { padding: 22px 18px; }
+    .debug-kicker {
+      color: #ff5722; font-size: 12px; font-weight: 800;
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+    .debug-title {
+      margin-top: 4px; color: #1f2937; font-size: 20px; font-weight: 800;
+    }
+    .debug-desc {
+      margin-top: 5px; color: #7a818f; font-size: 12px; line-height: 1.5;
+    }
+    .debug-content { margin-top: 16px; display: grid; gap: 12px; }
+    .debug-empty {
+      margin-top: 14px; color: #8a8f99; font-size: 13px; line-height: 1.6;
+      padding: 14px; border-radius: 16px; background: #f7f8fb;
+      border: 1px dashed #d7dce4;
+    }
+    .debug-card {
+      border: 1px solid #eaedf2; border-radius: 16px;
+      background: #fff; box-shadow: 0 8px 24px rgba(20, 31, 50, .06);
+      padding: 12px;
+    }
+    .debug-card-title {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      color: #1f2937; font-weight: 800; font-size: 14px;
+    }
+    .debug-status {
+      flex-shrink: 0; border-radius: 999px; padding: 3px 8px;
+      font-size: 12px; background: #eef6f2; color: #168753;
+    }
+    .debug-status.fail { background: #fff1f1; color: #d92d20; }
+    .debug-meta {
+      margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .debug-pill {
+      border-radius: 999px; padding: 4px 8px;
+      background: #f2f5fa; color: #667085; font-size: 12px;
+    }
+    .debug-section-title {
+      margin-top: 12px; color: #4d5562; font-weight: 800; font-size: 13px;
+    }
+    .debug-citation-list { margin-top: 8px; display: grid; gap: 8px; }
+    .debug-citation {
+      padding: 9px 10px; border-radius: 12px;
+      background: #f7f8fb; color: #4d5562;
+    }
+    .debug-citation-head {
+      display: flex; justify-content: space-between; gap: 8px;
+      font-weight: 800; font-size: 13px;
+    }
+    .debug-citation-score { color: #ff5722; white-space: nowrap; }
+    .debug-citation-quote {
+      margin-top: 5px; color: #6f747d; line-height: 1.45; font-size: 12px;
+    }
+    .debug-raw {
+      margin-top: 8px; white-space: pre-wrap; word-break: break-word;
+      max-height: 220px; overflow: auto;
+      border-radius: 12px; background: #111827; color: #e5e7eb;
+      padding: 10px; font-size: 11px; line-height: 1.45;
+    }
+
+    /* 正在输入动画 */
+    .typing { display: inline-flex; gap: 4px; padding: 4px 2px; }
+    .typing span {
+      width: 7px; height: 7px; border-radius: 50%; background: #c0c4cc;
+      animation: blink 1.2s infinite both;
+    }
+    .typing span:nth-child(2) { animation-delay: .2s; }
+    .typing span:nth-child(3) { animation-delay: .4s; }
+    @keyframes blink { 0%, 80%, 100% { opacity: .3; } 40% { opacity: 1; } }
+
+    /* 快捷提问 */
+    .suggest {
+      flex-shrink: 0; padding: 8px 14px 0; display: flex; gap: 8px;
+      overflow-x: auto;
+    }
+    .suggest::-webkit-scrollbar { height: 8px; }
+    .suggest::-webkit-scrollbar-thumb { background: rgba(121, 129, 143, .36); border-radius: 999px; }
+    .suggest button {
+      flex-shrink: 0; border: 1px solid #ffd2c4; background: #fff;
+      color: #ff5722; border-radius: 16px; padding: 6px 12px;
+      font-size: 13px; cursor: pointer; white-space: nowrap;
+    }
+    .suggest button:active { background: #fff1ec; }
+    .suggest button.mode-toggle[aria-pressed="true"] {
+      background: #ff5722; color: #fff; border-color: #ff5722;
+    }
+
+    .guide-result {
+      margin-top: 14px; display: grid; gap: 12px;
+      border-top: 1px solid #eceef1; padding-top: 14px;
+    }
+    .bubble:has(.guide-result) { max-width: min(100%, 780px); }
+    .guide-notice {
+      padding: 10px 12px; border-radius: 12px;
+      background: #fff8e6; color: #875b00; font-size: 12px; line-height: 1.5;
+    }
+    .product-cards {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;
+    }
+    .product-card {
+      min-width: 0; padding: 12px; border: 1px solid #e6e8ec;
+      border-radius: 15px; background: #fff;
+    }
+    .product-card.selectable { cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+    .product-card.selectable:hover { border-color: #ffb39b; }
+    .product-card.is-selected {
+      border-color: #ff5722; box-shadow: 0 0 0 2px rgba(255, 87, 34, .14);
+    }
+    .product-rank { color: #ff5722; font-size: 12px; font-weight: 800; }
+    .product-title {
+      margin-top: 5px; color: #20242b; font-size: 14px; font-weight: 800;
+      line-height: 1.4; overflow-wrap: anywhere;
+    }
+    .product-meta { margin-top: 7px; color: #6f747d; font-size: 12px; line-height: 1.5; }
+    .constraint-badges { margin-top: 8px; display: flex; gap: 5px; flex-wrap: wrap; }
+    .constraint-badge {
+      padding: 3px 7px; border-radius: 999px; font-size: 11px; font-weight: 750;
+    }
+    .constraint-badge.pass { background: #e9f8ef; color: #147a3f; }
+    .constraint-badge.fail { background: #ffeded; color: #b42318; }
+    .constraint-badge.unknown { background: #f1f3f6; color: #596273; }
+    .constraint-badge.closest { background: #fff2e8; color: #b54708; }
+    .guide-expand-toggle {
+      justify-self: center; border: 1px solid #ffd2c4; background: #fff;
+      color: #ff5722; border-radius: 999px; padding: 8px 16px;
+      font-size: 13px; font-weight: 750; cursor: pointer;
+    }
+    .guide-expand-toggle:hover { background: #fff7f3; }
+    .guide-table-wrap { overflow-x: auto; }
+    .guide-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .guide-table th, .guide-table td {
+      padding: 8px; border: 1px solid #e6e8ec; text-align: left; vertical-align: top;
+    }
+    .guide-table th { background: #f7f8fa; color: #4d5562; }
+    @media (max-width: 720px) {
+      .product-cards { grid-template-columns: 1fr; }
+    }
+
+    /* 输入栏 */
+    .inputbar {
+      flex-shrink: 0; padding: 10px 12px; display: flex; gap: 8px;
+      background: #fff; border-top: 1px solid #eceef1;
+    }
+    .inputbar input {
+      flex: 1; border: none; background: #f0f2f5; border-radius: 20px;
+      padding: 11px 16px; font-size: 15px; outline: none;
+    }
+    .inputbar select {
+      max-width: 148px; border: 1px solid #e3e6eb; background: #fff;
+      border-radius: 18px; padding: 0 10px; color: #596273; font-size: 13px;
+    }
+    .inputbar button {
+      border: none; background: #ff5722; color: #fff; border-radius: 20px;
+      padding: 0 20px; font-size: 15px; font-weight: 600; cursor: pointer;
+    }
+    .inputbar button:disabled { background: #f0b8a8; cursor: not-allowed; }
+    .inputbar .pause-control { background: #6f5bd3; min-width: 88px; }
+    .inputbar .pause-control[data-state="resume"] { background: #217a54; }
+    .inputbar .pause-control[data-state="requested"] { background: #8b6f47; }
+    .control-notice {
+      min-height: 20px; padding: 4px 16px 0; color: #667085;
+      background: #fff; font-size: 12px; line-height: 1.4;
+    }
+    .control-notice.warn { color: #b54708; }
+    .control-notice.ok { color: #217a54; }
+    /* 桌面端：从“手机壳演示”切换为“开发调试台” */
+    @media (min-width: 900px) {
+      body { padding: 24px; }
+      .phone {
+        width: min(1180px, calc(100vw - 48px));
+        max-width: none;
+        height: min(900px, calc(100vh - 48px));
+        max-height: none;
+        display: grid;
+        grid-template-columns: 360px minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr);
+        border-radius: 28px;
+        box-shadow: 0 22px 70px rgba(36, 44, 63, .22);
+      }
+      .topbar { grid-column: 1 / -1; }
+      .topbar { padding: 20px 28px; }
+      .topbar .logo { width: 44px; height: 44px; font-size: 22px; }
+      .topbar .title { font-size: 22px; letter-spacing: .2px; }
+      .topbar .sub { font-size: 14px; }
+      .topbar .new-chat {
+        width: 44px; height: 44px; font-size: 28px;
+        transition: transform .16s ease, background .16s ease;
+      }
+      .topbar .new-chat:hover { transform: rotate(90deg); background: rgba(255,255,255,.28); }
+
+      .recommend-panel {
+        grid-column: 1;
+        grid-row: 2;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 24px 20px;
+        border-bottom: none;
+        border-right: 1px solid #eceef1;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,247,243,.88));
+      }
+      .recommend-panel::-webkit-scrollbar { width: 10px; }
+      .recommend-panel::-webkit-scrollbar-thumb {
+        background: rgba(121, 129, 143, .30); border-radius: 999px;
+        border: 3px solid transparent; background-clip: content-box;
+      }
+      .recommend-title { font-size: 22px; }
+      .recommend-desc { font-size: 13px; }
+      .recommend-refresh:hover { background: #ffe3d8; }
+      .recommend-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        overflow-x: visible;
+        gap: 14px;
+      }
+      .recommend-card {
+        flex: none;
+        border-radius: 20px;
+        transition: transform .14s ease, box-shadow .14s ease;
+      }
+      .recommend-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 34px rgba(20, 31, 50, .12);
+      }
+      .recommend-cover { height: 116px; }
+      .recommend-name { font-size: 16px; }
+      .recommend-reason { font-size: 13px; }
+
+      .conversation {
+        grid-column: 2;
+        grid-row: 2;
+        min-width: 0;
+        min-height: 0;
+      }
+      .chat {
+        padding: 28px 42px;
+        gap: 18px;
+        background:
+          linear-gradient(90deg, rgba(255,255,255,.45), rgba(255,255,255,0) 18%, rgba(255,255,255,.45));
+      }
+      .row { gap: 12px; align-items: flex-start; }
+      .avatar { width: 38px; height: 38px; font-size: 19px; }
+      .bubble {
+        max-width: min(860px, 78%);
+        padding: 16px 18px;
+        border-radius: 20px;
+        font-size: 16px;
+        line-height: 1.65;
+      }
+      .row.bot .bubble {
+        border-top-left-radius: 8px;
+        box-shadow: 0 8px 24px rgba(20, 31, 50, .08);
+      }
+      .row.user .bubble {
+        max-width: min(720px, 70%);
+        border-top-right-radius: 8px;
+        box-shadow: 0 8px 20px rgba(255, 87, 34, .18);
+      }
+      .markdown h3 { font-size: 1.08em; margin: 18px 0 9px; }
+      .markdown p { margin-bottom: 12px; }
+      .markdown blockquote { padding: 10px 12px; }
+
+      .trace {
+        margin-top: 14px;
+        padding: 12px;
+        border: 1px solid #eaedf2;
+        border-radius: 16px;
+        background: #fbfcfe;
+        font-size: 13px;
+      }
+      .trace + .trace { margin-top: 10px; }
+      .trace .chip {
+        margin-right: 6px;
+        padding: 4px 10px;
+        background: #eef6f2;
+        font-weight: 600;
+      }
+      .trace summary {
+        margin-top: 8px;
+        padding: 2px 0;
+        font-weight: 600;
+      }
+      .trace-review-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 10px;
+      }
+      .trace-review {
+        padding: 12px;
+        border: 1px solid #edf0f4;
+        border-radius: 14px;
+        background: #f7f8fb;
+      }
+      .trace-review-head { font-size: 14px; align-items: flex-start; }
+      .trace-review-text { margin-top: 7px; font-size: 14px; }
+      .trace-pill { padding: 5px 10px; background: #f2f5fa; }
+      .backend-stage { grid-template-columns: 30px 120px minmax(0, 1fr) auto; }
+
+      .suggest {
+        padding: 14px 42px 0;
+        flex-wrap: wrap;
+        overflow-x: visible;
+        background: rgba(255,255,255,.72);
+      }
+      .suggest button {
+        padding: 8px 14px;
+        font-size: 14px;
+        border-radius: 999px;
+        transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+      }
+      .suggest button:hover {
+        transform: translateY(-1px);
+        background: #fff7f4;
+        box-shadow: 0 6px 16px rgba(255, 87, 34, .12);
+      }
+
+      .inputbar {
+        padding: 16px 42px 22px;
+        gap: 12px;
+        background: rgba(255,255,255,.86);
+      }
+      .inputbar input {
+        height: 52px;
+        border-radius: 18px;
+        padding: 0 20px;
+        font-size: 16px;
+      }
+      .inputbar select { height: 52px; border-radius: 18px; }
+      .inputbar button {
+        min-width: 96px;
+        border-radius: 18px;
+        font-size: 16px;
+        transition: transform .12s ease, box-shadow .12s ease;
+      }
+      .inputbar button:not(:disabled):hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 22px rgba(255, 87, 34, .22);
+      }
+      .phone:has(#step-debug-toggle[aria-pressed="true"]) {
+        width: calc(100vw - 48px);
+        height: calc(100vh - 48px);
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .phone:has(#step-debug-toggle[aria-pressed="true"]) .recommend-panel,
+      .phone:has(#step-debug-toggle[aria-pressed="true"]) .debug-panel {
+        display: none;
+      }
+      .phone:has(#step-debug-toggle[aria-pressed="true"]) .conversation {
+        grid-column: 1;
+      }
+      .phone:has(#step-debug-toggle[aria-pressed="true"]) .bubble:has(.step-debug-panel) {
+        width: calc(100% - 64px);
+        max-width: none;
+      }
+      .phone:has(#step-debug-toggle[aria-pressed="true"]) .step-debug-track {
+        min-width: 0;
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .backend-stage { grid-template-columns: 28px minmax(0, 1fr) auto; }
+      .backend-stage-detail { grid-column: 2 / -1; }
+      .step-debug-flow-head { align-items: stretch; flex-direction: column; }
+      .step-debug-flow-expand { align-self: flex-start; }
+      .step-debug-track,
+      .step-debug-flow:fullscreen .step-debug-track {
+        min-width: 0; grid-template-columns: 1fr; gap: 18px; overflow: visible;
+      }
+      .step-debug-node:not(:last-child)::after {
+        content: "↓"; right: auto; left: 50%; top: auto; bottom: -17px;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .phone {
+        width: min(1520px, calc(100vw - 48px));
+        grid-template-columns: 320px minmax(0, 1fr) 360px;
+      }
+      .recommend-panel { grid-column: 1; }
+      .conversation { grid-column: 2; }
+      .debug-panel {
+        display: block;
+        grid-column: 3;
+        grid-row: 2;
+      }
+      .bubble { max-width: min(760px, 84%); }
+      .row.user .bubble { max-width: min(660px, 76%); }
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="topbar">
+      <div class="logo">🍜</div>
+      <div>
+        <div class="title">生活与商品决策智能体</div>
+        <div class="sub">本地生活 · 3C 商品导购 · DeepSeek 驱动</div>
+      </div>
+      <div class="spacer"></div>
+      <a class="task-lab-link" href="/task-state-lab">TaskState 观察台</a>
+      <a class="task-lab-link" href="/commerce-demo">交易全链路 Demo</a>
+      <button class="memory-action" id="memory-login-open" type="button" hidden>登录</button>
+      <button class="memory-action" id="memory-open" type="button" hidden>我的记忆</button>
+      <button class="new-chat" id="new-chat" title="新对话" aria-label="新对话">＋</button>
+    </div>
+
+    <div class="memory-overlay" id="memory-login-overlay" hidden>
+      <section class="memory-sheet" role="dialog" aria-modal="true" aria-labelledby="memory-login-title">
+        <div class="memory-sheet-head">
+          <div class="memory-sheet-title" id="memory-login-title">登录记忆灰度</div>
+          <button class="memory-close" id="memory-login-close" type="button" aria-label="关闭">×</button>
+        </div>
+        <p class="memory-help">登录后，令牌只保存在服务端 Redis。浏览器仅持有 HttpOnly 会话 Cookie。</p>
+        <form class="memory-login-form" id="memory-login-form">
+          <input id="memory-username" autocomplete="username" placeholder="用户名" required minlength="3" maxlength="64" />
+          <input id="memory-password" type="password" autocomplete="current-password" placeholder="密码" required minlength="8" maxlength="128" />
+          <button class="memory-primary" type="submit">登录</button>
+          <div class="memory-feedback" id="memory-login-feedback" role="status"></div>
+        </form>
+      </section>
+    </div>
+
+    <div class="memory-overlay" id="memory-drawer" hidden>
+      <section class="memory-sheet" role="dialog" aria-modal="true" aria-labelledby="memory-drawer-title">
+        <div class="memory-sheet-head">
+          <div class="memory-sheet-title" id="memory-drawer-title">我的购物记忆</div>
+          <button class="memory-close" id="memory-close" type="button" aria-label="关闭">×</button>
+        </div>
+        <p class="memory-help" id="memory-user-label">这里只显示你确认过且仍有效的偏好。当前任务要求始终优先。</p>
+        <div class="memory-list" id="memory-list"></div>
+        <div class="memory-footer">
+          <button class="memory-secondary" id="memory-edit-through-chat" type="button">在对话中更新</button>
+          <button class="memory-danger" id="memory-logout" type="button">退出登录</button>
+        </div>
+      </section>
+    </div>
+
+    <aside class="recommend-panel" aria-label="历史商家推荐（已归档）" hidden>
+      <div class="recommend-head">
+        <div>
+          <div class="recommend-kicker">For You</div>
+          <div class="recommend-title">猜你喜欢</div>
+          <div class="recommend-desc">默认用 demo-user-1 的历史行为生成推荐；这里是独立推荐入口，不需要在聊天里手动说 userId。</div>
+        </div>
+        <button class="recommend-refresh" id="refresh-recommendations" type="button">刷新</button>
+      </div>
+      <div class="recommend-status" id="recommend-status">正在加载推荐…</div>
+      <div class="recommend-grid" id="recommend-grid"></div>
+    </aside>
+
+    <main class="conversation">
+      <div class="chat" id="chat"></div>
+
+      <div class="suggest" id="suggest">
+        <button
+          class="mode-toggle"
+          id="ecommerce-toggle"
+          type="button"
+          data-domain-hint="ecommerce"
+          aria-label="对话领域：商品导购"
+        >领域：商品导购</button>
+        <button class="mode-toggle" id="step-debug-toggle" type="button" aria-pressed="false">单步调试：关</button>
+        <button class="mode-toggle" id="advanced-rag-toggle" type="button" aria-pressed="false" hidden>历史 RAG：已归档</button>
+        <button>推荐一台 iOS、优先原装屏的二手手机</button>
+        <button>比较商品 5989522 和 5304970</button>
+        <button>想要安卓、主板未维修的二手机</button>
+        <button>原装屏降为偏好，其他要求不变</button>
+      </div>
+
+      <div class="control-notice" id="control-notice" role="status" aria-live="polite"></div>
+      <div class="memory-candidates" id="memory-candidates" aria-live="polite"></div>
+      <div class="inputbar">
+        <select id="recipient-scope" aria-label="本轮购买对象">
+          <option value="unknown">购买对象：未指定</option>
+          <option value="self">购买对象：我自己</option>
+          <option value="other">购买对象：他人</option>
+        </select>
+        <input id="msg" type="text" placeholder="说点什么…" autocomplete="off" />
+        <button class="pause-control" id="pause-run" type="button" disabled data-state="idle">暂停</button>
+        <button id="send">发送</button>
+      </div>
+    </main>
+
+    <aside class="debug-panel" aria-label="检索调试面板">
+      <div class="debug-inner">
+        <div class="debug-kicker">Trace</div>
+        <div class="debug-title">检索调试</div>
+        <div class="debug-desc">
+          这里展示最近一轮 Agent 工具调用、citations、retrievalTrace 和原始 JSON。聊天正文保持给普通用户阅读。
+        </div>
+        <div class="debug-content" id="debug-content">
+          <div class="debug-empty">发送一个问题后，这里会显示检索来源与工具 trace。</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    const chat = document.getElementById("chat");
+    const input = document.getElementById("msg");
+    const recipientScope = document.getElementById("recipient-scope");
+    const sendBtn = document.getElementById("send");
+    const pauseBtn = document.getElementById("pause-run");
+    const controlNotice = document.getElementById("control-notice");
+    const advancedRagToggle = document.getElementById("advanced-rag-toggle");
+    const ecommerceToggle = document.getElementById("ecommerce-toggle");
+    const stepDebugToggle = document.getElementById("step-debug-toggle");
+    const recommendGrid = document.getElementById("recommend-grid");
+    const recommendStatus = document.getElementById("recommend-status");
+    const refreshRecommendationsBtn = document.getElementById("refresh-recommendations");
+    const debugContent = document.getElementById("debug-content");
+    const memoryLoginOpen = document.getElementById("memory-login-open");
+    const memoryOpen = document.getElementById("memory-open");
+    const memoryLoginOverlay = document.getElementById("memory-login-overlay");
+    const memoryDrawer = document.getElementById("memory-drawer");
+    const memoryList = document.getElementById("memory-list");
+    const memoryCandidates = document.getElementById("memory-candidates");
+    const memoryLoginFeedback = document.getElementById("memory-login-feedback");
+    let sessionId = localStorage.getItem("local-life-session-id") || crypto.randomUUID();
+    let stepDebugEnabled = false;
+    let activeDebugTurn = null;
+    let debugStepBusy = false;
+    let debugActionError = "";
+    let activeRequest = false;
+    let activeTaskId = null;
+    let checkpointPause = null;
+    let durableResume = null;
+    let memoryCsrfToken = null;
+    let memoryAuthenticated = false;
+    let memoryPollTimer = null;
+    let activeReferenceContext = null;
+    const DEBUG_FLOW_STORAGE_PREFIX = "agent-debug-flow-current:";
+    const debugFlowChannel = "BroadcastChannel" in window
+      ? new BroadcastChannel("agent-debug-flow")
+      : null;
+    localStorage.setItem("local-life-session-id", sessionId);
+
+    function setMemoryAuth(authenticated, username) {
+      memoryAuthenticated = authenticated === true;
+      memoryLoginOpen.hidden = memoryAuthenticated;
+      memoryOpen.hidden = !memoryAuthenticated;
+      if (!memoryAuthenticated) {
+        memoryCandidates.replaceChildren();
+        memoryCsrfToken = null;
+      }
+      document.getElementById("memory-user-label").textContent = memoryAuthenticated
+        ? "已登录为 " + username + "。这里只显示你确认过且仍有效的偏好；当前任务要求始终优先。"
+        : "购物记忆未登录。";
+    }
+
+    async function refreshMemoryCapability() {
+      try {
+        const capabilityResponse = await fetch("/api/web-memory/capability");
+        if (!capabilityResponse.ok || !(await capabilityResponse.json()).enabled) {
+          memoryLoginOpen.hidden = true;
+          memoryOpen.hidden = true;
+          return;
+        }
+        const response = await fetch("/api/web-memory/me", { credentials: "same-origin" });
+        if (!response.ok) {
+          setMemoryAuth(false, "");
+          return;
+        }
+        const data = await response.json();
+        memoryCsrfToken = data.csrfToken;
+        setMemoryAuth(true, data.username);
+        await loadMemoryCandidates();
+        if (!memoryPollTimer) memoryPollTimer = setInterval(loadMemoryCandidates, 4000);
+      } catch (_) {
+        memoryLoginOpen.hidden = true;
+        memoryOpen.hidden = true;
+      }
+    }
+
+    async function loadMemoryEntries() {
+      memoryList.replaceChildren();
+      const response = await fetch("/api/web-memory/entries", { credentials: "same-origin" });
+      if (!response.ok) {
+        memoryList.textContent = "记忆读取失败或登录已过期。";
+        return;
+      }
+      const data = await response.json();
+      if (!data.entries.length) {
+        const empty = document.createElement("div");
+        empty.className = "memory-empty";
+        empty.textContent = "还没有已确认的购物记忆。你可以在对话中明确说“请记住……”。";
+        memoryList.appendChild(empty);
+        return;
+      }
+      for (const entry of data.entries) {
+        const card = document.createElement("article");
+        card.className = "memory-entry";
+        const main = document.createElement("div");
+        main.className = "memory-entry-main";
+        const kind = { prefer: "偏好", avoid: "不想要", indifferent: "不在意" }[entry.preferenceKind] || entry.preferenceKind;
+        main.textContent = kind + " · " + entry.attributeKey + " = " + entry.normalizedValue;
+        const meta = document.createElement("div");
+        meta.className = "memory-entry-meta";
+        meta.textContent = entry.categoryId
+          + " · 用户确认 · 置信度 " + Number(entry.confidence || 0).toFixed(1)
+          + " · 更新于 " + new Date(entry.updatedAt).toLocaleDateString()
+          + " · 有效至 " + new Date(entry.expiresAt).toLocaleDateString();
+        const actions = document.createElement("div");
+        actions.className = "memory-entry-actions";
+        const edit = document.createElement("button");
+        edit.className = "memory-secondary";
+        edit.type = "button";
+        edit.textContent = "更正";
+        edit.addEventListener("click", async () => {
+          const nextKind = window.prompt(
+            "偏好类型：prefer（偏好）/ avoid（避免）/ indifferent（不在意）",
+            entry.preferenceKind
+          );
+          if (nextKind === null) return;
+          const normalizedKind = nextKind.trim().toLowerCase();
+          if (!["prefer", "avoid", "indifferent"].includes(normalizedKind)) {
+            edit.textContent = "类型无效";
+            return;
+          }
+          const nextValue = window.prompt("新的标准化属性值", entry.normalizedValue);
+          if (nextValue === null) return;
+          edit.disabled = true;
+          const result = await fetch(
+            "/api/web-memory/entries/" + encodeURIComponent(entry.memoryHandle),
+            {
+              method: "PATCH",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-Token": memoryCsrfToken || "",
+              },
+              body: JSON.stringify({
+                preferenceKind: normalizedKind,
+                normalizedValue: nextValue.trim().toLowerCase(),
+              }),
+            }
+          );
+          if (result.ok) await loadMemoryEntries();
+          else edit.textContent = "更正失败";
+        });
+        const disable = document.createElement("button");
+        disable.className = "memory-secondary";
+        disable.type = "button";
+        disable.textContent = "停用";
+        disable.addEventListener("click", async () => {
+          disable.disabled = true;
+          const result = await fetch(
+            "/api/web-memory/entries/"
+              + encodeURIComponent(entry.memoryHandle)
+              + "/disable",
+            {
+              method: "POST",
+              credentials: "same-origin",
+              headers: { "X-CSRF-Token": memoryCsrfToken || "" },
+            }
+          );
+          if (result.ok) await loadMemoryEntries();
+          else disable.textContent = "停用失败";
+        });
+        const revoke = document.createElement("button");
+        revoke.className = "memory-danger";
+        revoke.type = "button";
+        revoke.textContent = "忘掉";
+        revoke.addEventListener("click", async () => {
+          revoke.disabled = true;
+          const result = await fetch("/api/web-memory/entries/" + encodeURIComponent(entry.memoryHandle), {
+            method: "DELETE",
+            credentials: "same-origin",
+            headers: { "X-CSRF-Token": memoryCsrfToken || "" },
+          });
+          if (result.ok) await loadMemoryEntries();
+          else revoke.textContent = "撤销失败";
+        });
+        actions.append(edit, disable, revoke);
+        card.append(main, meta, actions);
+        memoryList.appendChild(card);
+      }
+    }
+
+    async function loadMemoryCandidates() {
+      if (!memoryAuthenticated) return;
+      try {
+        const response = await fetch("/api/web-memory/candidates", { credentials: "same-origin" });
+        if (!response.ok) return;
+        const data = await response.json();
+        memoryCandidates.replaceChildren();
+        for (const candidate of data.candidates.filter(item => item.status === "pending")) {
+          const card = document.createElement("div");
+          card.className = "memory-candidate";
+          const text = document.createElement("div");
+          text.className = "memory-candidate-text";
+          text.textContent = candidate.displayText;
+          const confirm = document.createElement("button");
+          confirm.type = "button";
+          confirm.textContent = "确认记住";
+          confirm.addEventListener("click", async () => {
+            confirm.disabled = true;
+            const response = await fetch(
+              "/api/web-memory/candidates/" + encodeURIComponent(candidate.candidateId) + "/decision",
+              {
+                method: "POST",
+                credentials: "same-origin",
+                headers: { "Content-Type": "application/json", "X-CSRF-Token": memoryCsrfToken || "" },
+                body: JSON.stringify({ action: "confirm" }),
+              }
+            );
+            if (response.ok) {
+              card.remove();
+              if (!memoryDrawer.hidden) await loadMemoryEntries();
+            } else {
+              confirm.textContent = "确认失败";
+            }
+          });
+          card.append(text, confirm);
+          memoryCandidates.appendChild(card);
+        }
+      } catch (_) {
+        // 候选生成是旁路能力，不影响聊天。
+      }
+    }
+
+    const DEMO_USER_ID = "demo-user-1";
+    const SHOP_TYPE_LABELS = {
+      1: "美食",
+      2: "咖啡",
+      3: "电影",
+      4: "酒店",
+      5: "健身",
+    };
+    const SHOP_TYPE_IMAGES = {
+      1: "/static/assets/recommendations/food.svg",
+      2: "/static/assets/recommendations/coffee.svg",
+      3: "/static/assets/recommendations/movie.svg",
+      4: "/static/assets/recommendations/hotel.svg",
+      5: "/static/assets/recommendations/fitness.svg",
+    };
+
+    function showGreeting() {
+      addBubble("bot", "你好呀～我是电商导购 Agent。可以告诉我预算、用途和偏好，让我帮你检索、比较商品并说明证据 👇");
+    }
+
+    // 往聊天区加一个气泡；who = "user" | "bot"，返回这个气泡的 DOM（方便后面改内容）
+    function addBubble(who, text) {
+      const row = document.createElement("div");
+      row.className = "row " + who;
+      const avatar = document.createElement("div");
+      avatar.className = "avatar " + (who === "user" ? "me" : "bot");
+      avatar.textContent = who === "user" ? "🙂" : "🍜";
+      const bubble = document.createElement("div");
+      bubble.className = "bubble";
+      if (typeof text === "string") bubble.textContent = text;
+      else bubble.appendChild(text); // 传 DOM（比如“正在输入”动画）
+      row.appendChild(avatar);
+      row.appendChild(bubble);
+      chat.appendChild(row);
+      chat.scrollTop = chat.scrollHeight;
+      return { row, bubble };
+    }
+
+    // 三个跳动的点：表示模型在思考
+    function typingDots() {
+      const t = document.createElement("div");
+      t.className = "typing";
+      t.innerHTML = "<span></span><span></span><span></span>";
+      return t;
+    }
+
+    function formatPrice(value) {
+      const number = Number(value);
+      return Number.isFinite(number) ? "人均 ¥" + number : "人均未知";
+    }
+
+    function formatScore(value) {
+      const number = Number(value);
+      return Number.isFinite(number) ? "推荐分 " + number.toFixed(2) : "推荐分未知";
+    }
+
+    function formatDistance(value) {
+      if (value === null || value === undefined) return null;
+      const number = Number(value);
+      if (!Number.isFinite(number)) return null;
+      if (number >= 1000) return (number / 1000).toFixed(1) + " km";
+      return Math.round(number) + " m";
+    }
+
+    function formatRecommendationReason(shop) {
+      const names = Array.isArray(shop.triggerShopNames)
+        ? shop.triggerShopNames.filter(Boolean)
+        : [];
+      if (names.length > 0) {
+        const displayNames = names.slice(0, 3).join("、");
+        const suffix = names.length > 3 ? " 等店" : "";
+        return "因为你最近关注过 " + displayNames + suffix + "，所以推荐这家同类型商户。";
+      }
+      return shop.reason || "根据你的历史行为推荐";
+    }
+
+    function appendTextElement(parent, tagName, className, text) {
+      const node = document.createElement(tagName);
+      node.className = className;
+      node.textContent = text;
+      parent.appendChild(node);
+      return node;
+    }
+
+    function renderRecommendationCard(shop, index) {
+      const card = document.createElement("article");
+      card.className = "recommend-card";
+
+      const image = document.createElement("img");
+      image.className = "recommend-cover";
+      image.src = SHOP_TYPE_IMAGES[shop.typeId] || SHOP_TYPE_IMAGES[1];
+      image.alt = (SHOP_TYPE_LABELS[shop.typeId] || "本地生活") + "推荐插画";
+      card.appendChild(image);
+
+      const body = document.createElement("div");
+      body.className = "recommend-body";
+
+      const meta = document.createElement("div");
+      meta.className = "recommend-meta";
+      appendTextElement(meta, "span", "", "#" + (index + 1) + " · " + (SHOP_TYPE_LABELS[shop.typeId] || "商户"));
+      appendTextElement(meta, "span", "", formatPrice(shop.avgPrice));
+      body.appendChild(meta);
+
+      appendTextElement(body, "div", "recommend-name", shop.shopName || "未知商户");
+      appendTextElement(body, "div", "recommend-address", shop.address || "地址未知");
+      appendTextElement(body, "div", "recommend-reason", formatRecommendationReason(shop));
+
+      const scoreLine = document.createElement("div");
+      scoreLine.className = "recommend-score";
+      appendTextElement(scoreLine, "span", "recommend-pill", formatScore(shop.score));
+      const distance = formatDistance(shop.distanceMeters);
+      if (distance) {
+        appendTextElement(scoreLine, "span", "recommend-pill", "距离 " + distance);
+      }
+      if (
+        (!Array.isArray(shop.triggerShopNames) || shop.triggerShopNames.length === 0)
+        && Array.isArray(shop.triggerShopIds)
+        && shop.triggerShopIds.length > 0
+      ) {
+        appendTextElement(scoreLine, "span", "recommend-pill", "来源 " + shop.triggerShopIds.join("、"));
+      }
+      body.appendChild(scoreLine);
+
+      card.appendChild(body);
+      return card;
+    }
+
+    async function loadRecommendations() {
+      recommendStatus.textContent = "正在加载推荐…";
+      recommendGrid.replaceChildren();
+      refreshRecommendationsBtn.disabled = true;
+      try {
+        const params = new URLSearchParams({ userId: DEMO_USER_ID, limit: "6" });
+        const resp = await fetch("/agent/recommendations/shops?" + params.toString());
+        if (!resp.ok) throw new Error("HTTP " + resp.status);
+        const data = await resp.json();
+        const shops = Array.isArray(data.shops) ? data.shops : [];
+        if (shops.length === 0) {
+          recommendStatus.textContent = "暂时没有推荐结果。可以先产生一些浏览/收藏/评分行为。";
+          return;
+        }
+        recommendStatus.textContent = "根据 " + (data.userId || DEMO_USER_ID) + " 的历史行为生成 " + shops.length + " 条推荐";
+        shops.forEach((shop, index) => {
+          recommendGrid.appendChild(renderRecommendationCard(shop, index));
+        });
+      } catch (err) {
+        recommendStatus.textContent = "推荐暂时加载失败：" + err.message;
+      } finally {
+        refreshRecommendationsBtn.disabled = false;
+      }
+    }
+
+    function appendInlineMarkdown(parent, text) {
+      const boldPattern = /\*\*([^*]+)\*\*/g;
+      let lastIndex = 0;
+      let match;
+      while ((match = boldPattern.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+          parent.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+        }
+        const strong = document.createElement("strong");
+        strong.textContent = match[1];
+        parent.appendChild(strong);
+        lastIndex = match.index + match[0].length;
+      }
+      if (lastIndex < text.length) {
+        parent.appendChild(document.createTextNode(text.slice(lastIndex)));
+      }
+    }
+
+    function appendParagraph(root, lines) {
+      if (lines.length === 0) return;
+      const p = document.createElement("p");
+      lines.forEach((line, index) => {
+        if (index > 0) p.appendChild(document.createElement("br"));
+        appendInlineMarkdown(p, line);
+      });
+      root.appendChild(p);
+    }
+
+    function appendList(root, items) {
+      if (items.length === 0) return;
+      const ul = document.createElement("ul");
+      for (const item of items) {
+        const li = document.createElement("li");
+        appendInlineMarkdown(li, item);
+        ul.appendChild(li);
+      }
+      root.appendChild(ul);
+    }
+
+    function splitMarkdownTableRow(line) {
+      let value = String(line || "").trim();
+      if (!value.includes("|")) return [];
+      if (value.startsWith("|")) value = value.slice(1);
+      if (value.endsWith("|") && !value.endsWith("\\|")) value = value.slice(0, -1);
+
+      const cells = [];
+      let cell = "";
+      for (let index = 0; index < value.length; index += 1) {
+        const char = value[index];
+        if (char === "\\" && value[index + 1] === "|") {
+          cell += "|";
+          index += 1;
+        } else if (char === "|") {
+          cells.push(cell.trim());
+          cell = "";
+        } else {
+          cell += char;
+        }
+      }
+      cells.push(cell.trim());
+      return cells;
+    }
+
+    function parseMarkdownTableDelimiter(line, columnCount) {
+      const cells = splitMarkdownTableRow(line);
+      if (cells.length !== columnCount || cells.length === 0) return null;
+      const alignments = [];
+      for (const cell of cells) {
+        if (!/^:?-{3,}:?$/.test(cell)) return null;
+        if (cell.startsWith(":") && cell.endsWith(":")) alignments.push("center");
+        else if (cell.endsWith(":")) alignments.push("right");
+        else alignments.push("left");
+      }
+      return alignments;
+    }
+
+    function appendMarkdownTable(root, headers, rows, alignments) {
+      const wrap = document.createElement("div");
+      wrap.className = "markdown-table-wrap";
+      const table = document.createElement("table");
+      const thead = document.createElement("thead");
+      const headRow = document.createElement("tr");
+
+      headers.forEach((header, index) => {
+        const th = document.createElement("th");
+        th.style.textAlign = alignments[index];
+        appendInlineMarkdown(th, header);
+        headRow.appendChild(th);
+      });
+      thead.appendChild(headRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement("tbody");
+      for (const row of rows) {
+        const tr = document.createElement("tr");
+        headers.forEach((_, index) => {
+          const td = document.createElement("td");
+          td.style.textAlign = alignments[index];
+          appendInlineMarkdown(td, row[index] || "");
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      }
+      table.appendChild(tbody);
+      wrap.appendChild(table);
+      root.appendChild(wrap);
+    }
+
+    function renderMarkdown(text) {
+      const root = document.createElement("div");
+      root.className = "markdown";
+      const lines = String(text || "").split(/\r?\n/);
+      let paragraphLines = [];
+      let listItems = [];
+
+      function flushParagraph() {
+        appendParagraph(root, paragraphLines);
+        paragraphLines = [];
+      }
+
+      function flushList() {
+        appendList(root, listItems);
+        listItems = [];
+      }
+
+      for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+        const rawLine = lines[lineIndex];
+        const line = rawLine.trimEnd();
+        const trimmed = line.trim();
+
+        if (!trimmed) {
+          flushParagraph();
+          flushList();
+          continue;
+        }
+
+        const tableHeaders = splitMarkdownTableRow(trimmed);
+        const tableAlignments = (
+          tableHeaders.length > 0 && lineIndex + 1 < lines.length
+            ? parseMarkdownTableDelimiter(lines[lineIndex + 1], tableHeaders.length)
+            : null
+        );
+        if (tableAlignments) {
+          flushParagraph();
+          flushList();
+          const tableRows = [];
+          lineIndex += 2;
+          while (lineIndex < lines.length) {
+            const cells = splitMarkdownTableRow(lines[lineIndex]);
+            if (cells.length !== tableHeaders.length) break;
+            tableRows.push(cells);
+            lineIndex += 1;
+          }
+          lineIndex -= 1;
+          appendMarkdownTable(root, tableHeaders, tableRows, tableAlignments);
+          continue;
+        }
+
+        if (/^(-{3,}|\*{3,})$/.test(trimmed)) {
+          flushParagraph();
+          flushList();
+          root.appendChild(document.createElement("hr"));
+          continue;
+        }
+
+        const heading = trimmed.match(/^#{1,3}\s+(.+)$/);
+        if (heading) {
+          flushParagraph();
+          flushList();
+          const h3 = document.createElement("h3");
+          appendInlineMarkdown(h3, heading[1]);
+          root.appendChild(h3);
+          continue;
+        }
+
+        if (trimmed.startsWith("> ")) {
+          flushParagraph();
+          flushList();
+          const quote = document.createElement("blockquote");
+          appendInlineMarkdown(quote, trimmed.slice(2));
+          root.appendChild(quote);
+          continue;
+        }
+
+        const listItem = trimmed.match(/^[-*]\s+(.+)$/);
+        if (listItem) {
+          flushParagraph();
+          listItems.push(listItem[1]);
+          continue;
+        }
+
+        flushList();
+        paragraphLines.push(line);
+      }
+
+      flushParagraph();
+      flushList();
+      return root;
+    }
+
+    // 把后端的 tool_trace 渲染在机器人气泡内；评论工具可展开查看来源和相似度。
+    function renderTrace(bubble, traces) {
+      if (!traces || traces.length === 0) return;
+      const box = document.createElement("div");
+      box.className = "trace";
+      for (const t of traces) {
+        const chip = document.createElement("span");
+        chip.className = "chip " + (t.ok ? "ok" : "fail");
+        chip.textContent = "🔧 " + t.tool + (t.ok ? " ✓" : " ✗");
+        if (t.durationMs !== null && t.durationMs !== undefined) {
+          chip.textContent += " · " + formatMs(t.durationMs);
+        }
+        box.appendChild(chip);
+
+        const reviews = t.detail && Array.isArray(t.detail.reviews)
+          ? t.detail.reviews
+          : [];
+        if (t.tool === "search_reviews" && reviews.length > 0) {
+          const details = document.createElement("details");
+          const summary = document.createElement("summary");
+          summary.textContent = "查看检索来源与相似度（" + reviews.length + " 条）";
+          details.appendChild(summary);
+          const reviewGrid = document.createElement("div");
+          reviewGrid.className = "trace-review-grid";
+
+          for (const review of reviews) {
+            const card = document.createElement("div");
+            card.className = "trace-review";
+
+            const head = document.createElement("div");
+            head.className = "trace-review-head";
+            const source = document.createElement("span");
+            source.textContent = (review.reviewId || "未知评论")
+              + " · " + (review.shopName || "未知商户");
+            const score = document.createElement("span");
+            score.className = "trace-review-score";
+            const scoreValue = Number(review.score);
+            score.textContent = "相似度 "
+              + (Number.isFinite(scoreValue) ? scoreValue.toFixed(4) : "未知");
+            head.appendChild(source);
+            head.appendChild(score);
+
+            const text = document.createElement("div");
+            text.className = "trace-review-text";
+            text.textContent = review.text || "（没有评论原文）";
+
+            card.appendChild(head);
+            card.appendChild(text);
+            reviewGrid.appendChild(card);
+          }
+          details.appendChild(reviewGrid);
+          box.appendChild(details);
+        }
+      }
+      bubble.appendChild(box);
+    }
+
+    function formatMs(value) {
+      const number = Number(value);
+      return Number.isFinite(number) ? number.toFixed(2) + "ms" : "未知耗时";
+    }
+
+    function isObject(value) {
+      return value !== null && typeof value === "object" && !Array.isArray(value);
+    }
+
+    function formatScoreValue(value) {
+      const number = Number(value);
+      return Number.isFinite(number) ? number.toFixed(4) : "未知";
+    }
+
+    function getToolDetail(toolTrace) {
+      return isObject(toolTrace && toolTrace.detail) ? toolTrace.detail : null;
+    }
+
+    function citationsFromToolTrace(toolTrace) {
+      const detail = getToolDetail(toolTrace);
+      if (!detail) return [];
+
+      if (Array.isArray(detail.citations)) {
+        return detail.citations;
+      }
+
+      if (Array.isArray(detail.reviews)) {
+        return detail.reviews.map((review) => ({
+          chunkId: "review:" + (review.reviewId || "unknown"),
+          sourceType: "review",
+          sourceId: review.reviewId || "unknown",
+          title: review.shopName ? review.shopName + "评论" : "评论",
+          quote: review.text || "（没有评论原文）",
+          score: review.score,
+          metadata: {
+            reviewId: review.reviewId,
+            shopId: review.shopId,
+            shopName: review.shopName,
+          },
+        }));
+      }
+
+      return [];
+    }
+
+    function appendDebugPill(container, text) {
+      const pill = document.createElement("span");
+      pill.className = "debug-pill";
+      pill.textContent = text;
+      container.appendChild(pill);
+    }
+
+    function appendRawJson(container, value, label) {
+      const details = document.createElement("details");
+      const summary = document.createElement("summary");
+      summary.className = "debug-section-title";
+      summary.textContent = label;
+      const raw = document.createElement("pre");
+      raw.className = "debug-raw";
+      raw.textContent = JSON.stringify(value, null, 2);
+      details.appendChild(summary);
+      details.appendChild(raw);
+      container.appendChild(details);
+    }
+
+    function renderDebugRequestTrace(trace) {
+      if (!trace) return null;
+      const card = document.createElement("section");
+      card.className = "debug-card";
+
+      const title = document.createElement("div");
+      title.className = "debug-card-title";
+      const name = document.createElement("span");
+      name.textContent = "请求总览";
+      const status = document.createElement("span");
+      status.className = "debug-status " + (trace.status === "ok" ? "" : "fail");
+      status.textContent = trace.status || "unknown";
+      title.appendChild(name);
+      title.appendChild(status);
+      card.appendChild(title);
+
+      const meta = document.createElement("div");
+      meta.className = "debug-meta";
+      appendDebugPill(meta, trace.requestId || "未知 requestId");
+      appendDebugPill(meta, "总耗时 " + formatMs(trace.totalDurationMs));
+      if (trace.agentDurationMs !== null && trace.agentDurationMs !== undefined) {
+        appendDebugPill(meta, "Agent " + formatMs(trace.agentDurationMs));
+      }
+      if (trace.toolDurationMs !== null && trace.toolDurationMs !== undefined) {
+        appendDebugPill(meta, "工具 " + formatMs(trace.toolDurationMs));
+      }
+      if (trace.bottleneck && trace.bottleneck !== "none") {
+        appendDebugPill(meta, "瓶颈 " + trace.bottleneck);
+      }
+      card.appendChild(meta);
+      appendRawJson(card, trace, "查看请求 trace JSON");
+      return card;
+    }
+
+    function renderDebugCitations(container, citations) {
+      const title = document.createElement("div");
+      title.className = "debug-section-title";
+      title.textContent = "Citations（" + citations.length + " 条）";
+      container.appendChild(title);
+
+      if (citations.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "debug-empty";
+        empty.textContent = "这个工具没有返回 citations / reviews。";
+        container.appendChild(empty);
+        return;
+      }
+
+      const list = document.createElement("div");
+      list.className = "debug-citation-list";
+      for (const citation of citations) {
+        const card = document.createElement("div");
+        card.className = "debug-citation";
+
+        const head = document.createElement("div");
+        head.className = "debug-citation-head";
+        const source = document.createElement("span");
+        const metadata = isObject(citation.metadata) ? citation.metadata : {};
+        const sourceId = metadata.reviewId || citation.sourceId || "未知来源";
+        const title = citation.title || metadata.shopName || citation.sourceType || "来源";
+        source.textContent = sourceId + " · " + title;
+        const score = document.createElement("span");
+        score.className = "debug-citation-score";
+        score.textContent = "score " + formatScoreValue(citation.score);
+        head.appendChild(source);
+        head.appendChild(score);
+
+        const quote = document.createElement("div");
+        quote.className = "debug-citation-quote";
+        quote.textContent = citation.quote || "（没有证据文本）";
+
+        card.appendChild(head);
+        card.appendChild(quote);
+        list.appendChild(card);
+      }
+      container.appendChild(list);
+    }
+
+    function renderDebugToolTrace(toolTrace) {
+      const card = document.createElement("section");
+      card.className = "debug-card";
+
+      const title = document.createElement("div");
+      title.className = "debug-card-title";
+      const name = document.createElement("span");
+      name.textContent = "🔧 " + (toolTrace.tool || "unknown_tool");
+      const status = document.createElement("span");
+      status.className = "debug-status " + (toolTrace.ok ? "" : "fail");
+      status.textContent = toolTrace.ok ? "ok" : "fail";
+      title.appendChild(name);
+      title.appendChild(status);
+      card.appendChild(title);
+
+      const detail = getToolDetail(toolTrace);
+      const meta = document.createElement("div");
+      meta.className = "debug-meta";
+      appendDebugPill(meta, "工具耗时 " + formatMs(toolTrace.durationMs));
+      if (detail && detail.query) appendDebugPill(meta, "query: " + detail.query);
+      if (detail && Array.isArray(detail.sources)) appendDebugPill(meta, "sources: " + detail.sources.join(", "));
+      if (detail && detail.count !== undefined) appendDebugPill(meta, "count: " + detail.count);
+      card.appendChild(meta);
+
+      const citations = citationsFromToolTrace(toolTrace);
+      renderDebugCitations(card, citations);
+
+      if (detail && detail.retrievalTrace) {
+        const trace = detail.retrievalTrace;
+        const traceMeta = document.createElement("div");
+        traceMeta.className = "debug-meta";
+        appendDebugPill(traceMeta, "selectedSources: " + (trace.selectedSources || []).join(", "));
+        appendDebugPill(traceMeta, "candidateCount: " + (trace.candidateCount ?? "未知"));
+        appendDebugPill(traceMeta, "returnedCount: " + (trace.returnedCount ?? "未知"));
+        if (Array.isArray(trace.steps) && trace.steps.length > 0) {
+          appendDebugPill(traceMeta, "steps: " + trace.steps.map((step) => step.name).join(" → "));
+        }
+        card.appendChild(traceMeta);
+        appendRawJson(card, trace, "查看 retrievalTrace JSON");
+      }
+
+      appendRawJson(card, toolTrace, "查看完整 toolTrace JSON");
+      return card;
+    }
+
+    function updateDebugPanel(data) {
+      if (!debugContent) return;
+      const traces = Array.isArray(data && data.tool_trace) ? data.tool_trace : [];
+      debugContent.replaceChildren();
+
+      const requestCard = renderDebugRequestTrace(data && data.trace);
+      if (requestCard) debugContent.appendChild(requestCard);
+
+      if (data && data.taskRelation) {
+        const relationCard = document.createElement("div");
+        relationCard.className = "debug-card";
+        const title = document.createElement("div");
+        title.className = "debug-card-title";
+        title.textContent = "TaskManager · " + (data.taskRelation.relation || "unknown");
+        relationCard.appendChild(title);
+        const relationMeta = document.createElement("div");
+        relationMeta.className = "debug-meta";
+        appendDebugPill(relationMeta, "confidence: " + (data.taskRelation.confidence ?? "未知"));
+        if (data.taskRelation.targetTaskId) {
+          appendDebugPill(relationMeta, "target: " + data.taskRelation.targetTaskId);
+        }
+        relationCard.appendChild(relationMeta);
+        if (data.taskRelation.reason) {
+          const reason = document.createElement("div");
+          reason.className = "debug-empty";
+          reason.textContent = data.taskRelation.reason;
+          relationCard.appendChild(reason);
+        }
+        appendRawJson(relationCard, data.taskRelation, "查看任务关系判断 JSON");
+        debugContent.appendChild(relationCard);
+      }
+
+      if (data && data.taskState) {
+        const taskCard = document.createElement("div");
+        taskCard.className = "debug-card";
+        const title = document.createElement("div");
+        title.className = "debug-card-title";
+        title.textContent = "TaskState · " + (data.taskState.status || "unknown");
+        taskCard.appendChild(title);
+        const taskMeta = document.createElement("div");
+        taskMeta.className = "debug-meta";
+        appendDebugPill(taskMeta, "taskId: " + (data.taskState.taskId || "未知"));
+        appendDebugPill(taskMeta, "revision: " + (data.taskState.revision ?? "未知"));
+        appendDebugPill(taskMeta, "facts: " + ((data.taskState.facts || []).length));
+        appendDebugPill(taskMeta, "constraints: " + ((data.taskState.constraints || []).length));
+        appendDebugPill(taskMeta, "unknowns: " + ((data.taskState.unknowns || []).length));
+        taskCard.appendChild(taskMeta);
+        appendRawJson(taskCard, data.taskState, "查看完整 TaskState 快照");
+        debugContent.appendChild(taskCard);
+      }
+
+      if (data && data.pipeline) {
+        const pipelineCard = document.createElement("div");
+        pipelineCard.className = "debug-card";
+        const title = document.createElement("div");
+        title.className = "debug-card-title";
+        title.textContent = "高级 RAG · " + (data.pipeline.effectiveMode || "advanced");
+        pipelineCard.appendChild(title);
+        const stages = document.createElement("div");
+        stages.className = "debug-meta";
+        stages.textContent = (data.pipeline.stages || []).join(" → ");
+        pipelineCard.appendChild(stages);
+        appendRawJson(pipelineCard, data.pipeline, "查看 pipeline / citation audit JSON");
+        debugContent.appendChild(pipelineCard);
+      }
+
+      if (traces.length === 0 && !(data && (data.pipeline || data.taskState || data.taskRelation))) {
+        const empty = document.createElement("div");
+        empty.className = "debug-empty";
+        empty.textContent = "本轮没有工具调用，因此没有 citations / retrievalTrace。";
+        debugContent.appendChild(empty);
+        return;
+      }
+
+      for (const toolTrace of traces) {
+        debugContent.appendChild(renderDebugToolTrace(toolTrace));
+      }
+    }
+
+    function resetDebugPanel() {
+      if (!debugContent) return;
+      const empty = document.createElement("div");
+      empty.className = "debug-empty";
+      empty.textContent = "发送一个问题后，这里会显示检索来源与工具 trace。";
+      debugContent.replaceChildren(empty);
+    }
+
+    // 把后端的 trace 渲染成一次请求的工程摘要：编号、耗时、工具数、评论来源。
+    function renderGuideResult(bubble, guide, opts) {
+      if (!guide || !Array.isArray(guide.products)) return;
+      const rankPrefix = (opts && opts.rankPrefix) || "决选";
+      const rawReference = guide.referenceContext;
+      const guideReference = (
+        rawReference && typeof rawReference.handle === "string"
+      ) ? { handle: rawReference.handle, scopeId: rawReference.scopeId || null } : null;
+      let localPresentationMode = "compact";
+      if (guideReference && opts && opts.activateReferenceContext === true) {
+        const preserveSelection = (
+          activeReferenceContext
+          && activeReferenceContext.scopeId
+          && activeReferenceContext.scopeId === guideReference.scopeId
+        );
+        activeReferenceContext = {
+          handle: guideReference.handle,
+          scopeId: guideReference.scopeId,
+          presentationMode: preserveSelection
+            ? activeReferenceContext.presentationMode
+            : "compact",
+          focusedProductId: preserveSelection
+            ? activeReferenceContext.focusedProductId
+            : null,
+        };
+      }
+      const specLabels = {
+        price_minor: "预算价格", memory_gb: "内存", storage_gb: "存储",
+        battery_mah: "电池容量", supports_5g: "5G", weight_kg: "重量",
+        screen_inch: "屏幕", battery_hours: "续航", noise_cancelling: "主动降噪",
+        wireless: "无线", weight_g: "重量", os: "系统", battery_health: "电池健康",
+        screen_originality: "屏幕", motherboard_repair: "主板",
+        battery_originality: "电池", scratch_level: "划痕", shell_condition: "外壳"
+      };
+      const specValues = {
+        ios: "iOS", android: "Android", "90_plus": "90%+", "80_90": "80%-90%",
+        "70_80": "70%-80%", lt70: "低于 70%", original: "原装",
+        non_original: "非原装", not_repaired: "未维修", repaired: "有维修",
+        none: "无", light: "轻微", obvious: "明显", normal: "正常", damaged: "磕碰/缺失"
+      };
+      const specLabel = (key) => specLabels[key] || key;
+      const specValue = (value) => specValues[value] || value;
+      const attributeBadgeClass = (item) => (
+        item.key === "screen_originality" && item.value === "non_original"
+          ? "fail"
+          : "pass"
+      );
+      const root = document.createElement("section");
+      root.className = "guide-result";
+      root.setAttribute("aria-label", "商品导购结果");
+
+      const cards = document.createElement("div");
+      cards.className = "product-cards";
+      const renderCards = (rows, currentRankPrefix) => {
+        cards.replaceChildren();
+        rows.forEach((row, index) => {
+        const product = row.product || {};
+        const card = document.createElement("article");
+        card.className = "product-card";
+        const productId = String(product.id || "");
+        const selectable = guideReference && /^[1-9]\d*$/.test(productId);
+        if (selectable) {
+          card.classList.add("selectable");
+          card.setAttribute("role", "button");
+          card.setAttribute("tabindex", "0");
+          card.setAttribute("aria-pressed", "false");
+          const selectCard = () => {
+            activeReferenceContext = {
+              handle: guideReference.handle,
+              scopeId: guideReference.scopeId,
+              presentationMode: localPresentationMode,
+              focusedProductId: productId,
+            };
+            root.querySelectorAll(".product-card.is-selected").forEach((item) => {
+              item.classList.remove("is-selected");
+              item.setAttribute("aria-pressed", "false");
+            });
+            card.classList.add("is-selected");
+            card.setAttribute("aria-pressed", "true");
+          };
+          card.addEventListener("click", selectCard);
+          card.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              selectCard();
+            }
+          });
+          if (
+            activeReferenceContext
+            && activeReferenceContext.handle === guideReference.handle
+            && activeReferenceContext.focusedProductId === productId
+          ) {
+            card.classList.add("is-selected");
+            card.setAttribute("aria-pressed", "true");
+          }
+        }
+        appendTextElement(
+          card, "div", "product-rank", currentRankPrefix + " " + (index + 1)
+        );
+        appendTextElement(card, "div", "product-title", product.title || ("商品 " + product.id));
+        let price = " · 价格未验证";
+        if (product.priceStatus === "verified"
+          && Number.isFinite(Number(product.snapshotPriceMinor))) {
+          price = " · 快照价 ¥" + (Number(product.snapshotPriceMinor) / 100).toFixed(2);
+        } else if (product.priceStatus === "synthetic"
+          && Number.isFinite(Number(product.syntheticReferencePriceMinor))) {
+          price = " · 模拟参考价 ¥" + (Number(product.syntheticReferencePriceMinor) / 100).toFixed(2)
+            + "（AI 合成，非真实报价）";
+          if (product.pricePolicy === "budget_and_ranking") {
+            price += " · 预算筛选：synthetic policy";
+          }
+        }
+        appendTextElement(
+          card, "div", "product-meta",
+          (product.brand || "品牌未知") + price + " · ID " + (product.id || "未知")
+        );
+        const badges = document.createElement("div");
+        badges.className = "constraint-badges";
+        if (row.selectionType === "closest_alternative") {
+          appendTextElement(badges, "span", "constraint-badge closest", "最接近备选");
+        }
+        if (Array.isArray(row.attributes)) {
+          const known = row.attributes.filter((item) => item && item.status === "known");
+          known.slice(0, 5).forEach((item) => {
+            appendTextElement(
+              badges, "span", "constraint-badge " + attributeBadgeClass(item),
+              specLabel(item.key) + "：" + specValue(item.value)
+            );
+          });
+          const conflicts = row.attributes.filter((item) => item && item.status === "conflict");
+          conflicts.forEach((item) => {
+            appendTextElement(
+              badges, "span", "constraint-badge fail", specLabel(item.key) + "：证据冲突"
+            );
+          });
+          const unknownCount = row.attributes.filter(
+            (item) => item && item.status === "unknown"
+          ).length;
+          if (unknownCount > 0) {
+            appendTextElement(
+              badges, "span", "constraint-badge unknown", "其余 " + unknownCount + " 项未知"
+            );
+          }
+        } else {
+          (row.checks || []).forEach((check) => {
+            const label = specLabel(check.key) + "：" + (
+              check.status === "pass" ? "通过" :
+              check.status === "fail" ? "未满足" : "未知"
+            );
+            appendTextElement(
+              badges, "span", "constraint-badge " + (check.status || "unknown"), label
+            );
+          });
+        }
+        card.appendChild(badges);
+        cards.appendChild(card);
+        });
+      };
+      renderCards(guide.products, rankPrefix);
+      root.appendChild(cards);
+
+      const expandedProducts = Array.isArray(guide.expandedProducts)
+        ? guide.expandedProducts
+        : [];
+      if (expandedProducts.length > guide.products.length) {
+        const toggle = document.createElement("button");
+        toggle.type = "button";
+        toggle.className = "guide-expand-toggle";
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.textContent = "展开全部 " + expandedProducts.length + " 个候选";
+        toggle.addEventListener("click", () => {
+          const expand = toggle.getAttribute("aria-expanded") !== "true";
+          localPresentationMode = expand ? "expanded" : "compact";
+          if (guideReference) {
+            activeReferenceContext = {
+              handle: guideReference.handle,
+              scopeId: guideReference.scopeId,
+              presentationMode: localPresentationMode,
+              focusedProductId: null,
+            };
+          }
+          toggle.setAttribute("aria-expanded", String(expand));
+          renderCards(expand ? expandedProducts : guide.products, expand ? "候选" : rankPrefix);
+          toggle.textContent = expand
+            ? "收起，仅看前 " + guide.products.length + " 个决选"
+            : "展开全部 " + expandedProducts.length + " 个候选";
+        });
+        root.appendChild(toggle);
+      }
+
+      if (Array.isArray(guide.comparisonMatrix) && guide.comparisonMatrix.length > 0) {
+        const keys = [];
+        guide.comparisonMatrix.forEach((row) => {
+          (row.checks || []).forEach((check) => {
+            if (!keys.includes(check.key)) keys.push(check.key);
+          });
+        });
+        if (keys.length > 0) {
+          const wrap = document.createElement("div");
+          wrap.className = "guide-table-wrap";
+          const table = document.createElement("table");
+          table.className = "guide-table";
+          const head = table.createTHead().insertRow();
+          ["规格", ...guide.comparisonMatrix.map((row) => "商品 " + row.productId)]
+            .forEach((text) => appendTextElement(head, "th", "", text));
+          const body = table.createTBody();
+          keys.forEach((key) => {
+            const tr = body.insertRow();
+            appendTextElement(tr, "th", "", specLabel(key));
+            guide.comparisonMatrix.forEach((row) => {
+              const check = (row.checks || []).find((item) => item.key === key);
+              let text = "—";
+              if (check) {
+                if (check.status === "unknown") {
+                  text = "未知";
+                } else {
+                  const value = check.unit === "CNY_MINOR"
+                    ? "¥" + (Number(check.actual) / 100).toFixed(2)
+                    : String(check.actual) + " " + (check.unit || "");
+                  text = value + (check.status === "pass" ? " ✓" : " ✕");
+                }
+              }
+              appendTextElement(tr, "td", "", text);
+            });
+          });
+          wrap.appendChild(table);
+          root.appendChild(wrap);
+        }
+      }
+      appendTextElement(
+        root, "div", "guide-notice",
+        guide.snapshotNotice || "历史公开数据快照，非实时价格/库存。"
+      );
+      bubble.appendChild(root);
+    }
+
+    // A comparison answer can legitimately have no freshly rendered cards.
+    // In that case the backend still rebinds the previously displayed,
+    // server-owned presentation to the newest TaskState revision. Preserve the
+    // browser's current view/focus while replacing only the opaque receipt.
+    function refreshActiveReferenceContext(rawReference) {
+      if (!rawReference || typeof rawReference.handle !== "string") return;
+      activeReferenceContext = {
+        handle: rawReference.handle,
+        scopeId: rawReference.scopeId || (
+          activeReferenceContext && activeReferenceContext.scopeId
+        ) || null,
+        presentationMode: (
+          activeReferenceContext && activeReferenceContext.presentationMode
+        ) || rawReference.presentationMode || "compact",
+        focusedProductId: (
+          activeReferenceContext && activeReferenceContext.focusedProductId
+        ) || null,
+      };
+    }
+
+    function activeReferenceContextRequest() {
+      if (!activeReferenceContext || typeof activeReferenceContext.handle !== "string") {
+        return undefined;
+      }
+      return {
+        handle: activeReferenceContext.handle,
+        presentationMode: activeReferenceContext.presentationMode || "compact",
+        focusedProductId: activeReferenceContext.focusedProductId || undefined,
+      };
+    }
+
+    // 先快后完整：把 fast-preview SSE 事件渲染成“备选”卡片 + 明确标注未经过
+    // 最终核对。complete 事件随后会 replaceChildren 原位替换为决选结果。
+    function renderProvisionalPreview(bubble, event) {
+      bubble.replaceChildren();
+      const status = document.createElement("div");
+      status.className = "stream-status";
+      status.textContent = "初步匹配中 · 正在核对详细要求（最终结果可能调整）";
+      bubble.appendChild(status);
+      const guide = event && event.guideResult;
+      if (guide && Array.isArray(guide.products) && guide.products.length > 0) {
+        renderGuideResult(bubble, guide, { rankPrefix: "备选" });
+      } else {
+        const empty = document.createElement("div");
+        empty.className = "stream-status";
+        empty.textContent = (guide && guide.snapshotNotice) || "暂无可展示的初步匹配。";
+        bubble.appendChild(empty);
+      }
+    }
+
+    function renderRequestTrace(bubble, trace) {
+      if (!trace) return;
+      const box = document.createElement("div");
+      box.className = "trace";
+
+      const parts = [
+        "🧭 " + (trace.requestId || "未知请求"),
+        "状态 " + (trace.status || "unknown"),
+        "总耗时 " + formatMs(trace.totalDurationMs),
+      ];
+      const slowStatus = trace.slow
+        ? "⚠️ 慢请求 ≥ " + formatMs(trace.slowThresholdMs)
+        : "耗时正常";
+      parts.push({ text: slowStatus, type: trace.slow ? "slow" : "normal" });
+      if (trace.bottleneck && trace.bottleneck !== "none") {
+        parts.push({ text: "瓶颈 " + trace.bottleneck, type: "slow" });
+      }
+      if (trace.agentDurationMs !== null && trace.agentDurationMs !== undefined) {
+        parts.push("Agent " + formatMs(trace.agentDurationMs));
+      }
+      if (trace.toolDurationMs !== null && trace.toolDurationMs !== undefined) {
+        parts.push("工具总耗时 " + formatMs(trace.toolDurationMs));
+      }
+      if (trace.retrievalDurationMs !== null && trace.retrievalDurationMs !== undefined) {
+        parts.push("检索 " + formatMs(trace.retrievalDurationMs));
+      }
+      if (trace.llmDurationMs !== null && trace.llmDurationMs !== undefined) {
+        parts.push("LLM " + formatMs(trace.llmDurationMs));
+      }
+      if (trace.toolCount) {
+        parts.push("工具 " + trace.toolCount + " 次");
+      }
+      if (Array.isArray(trace.reviewIds) && trace.reviewIds.length > 0) {
+        parts.push("评论 " + trace.reviewIds.join("、"));
+      }
+      if (trace.taskId) {
+        parts.push("TaskState r" + (trace.taskRevision || "?") );
+      }
+
+      const line = document.createElement("div");
+      line.className = "trace-request-line";
+      for (const part of parts) {
+        const pill = document.createElement("span");
+        pill.className = "trace-pill";
+        if (typeof part === "object") {
+          pill.className += " " + part.type;
+          pill.textContent = part.text;
+        } else {
+          pill.textContent = part;
+        }
+        line.appendChild(pill);
+      }
+      box.appendChild(line);
+      bubble.appendChild(box);
+    }
+
+    function backendPhaseLabel(phase) {
+      const labels = {
+        pre_harness: "执行前检查",
+        context_only_answer: "上下文回答",
+        planner: "Planner 规划",
+        executor: "Executor 执行",
+        validator: "Validator 校验",
+        replanner: "Replanner 重规划",
+        final_answer: "生成最终回答",
+        harness_step: "Harness 状态推进",
+      };
+      return labels[phase] || phase || "未知阶段";
+    }
+
+    function backendStageClass(outcome, failed) {
+      const value = String(outcome || "").toLowerCase();
+      if (failed || /fail|error|exception|mismatch|blocked|exceed|stop/.test(value)) {
+        return "failed";
+      }
+      if (/degrad|unclosed|replan|input|clarif/.test(value)) return "warning";
+      return "passed";
+    }
+
+    function appendBackendStage(list, stage, index) {
+      const row = document.createElement("div");
+      row.className = "backend-stage " + backendStageClass(stage.outcome, stage.failed);
+
+      appendTextElement(row, "span", "backend-stage-index", String(index + 1));
+      appendTextElement(row, "span", "backend-stage-name", stage.name);
+      appendTextElement(
+        row,
+        "span",
+        "backend-stage-detail",
+        stage.detail || stage.outcome || "已完成"
+      );
+      appendTextElement(
+        row,
+        "span",
+        "backend-stage-time",
+        stage.durationMs === null || stage.durationMs === undefined
+          ? "—"
+          : formatMs(stage.durationMs)
+      );
+      list.appendChild(row);
+    }
+
+    function renderBackendFlow(bubble, data) {
+      if (!data || !data.trace) return;
+      const requestTrace = data.trace;
+      const summary = isObject(data.traceSummary) ? data.traceSummary : {};
+      const stages = [{
+        name: "网页请求",
+        outcome: requestTrace.status || "unknown",
+        durationMs: requestTrace.totalDurationMs,
+        failed: requestTrace.status !== "ok",
+        detail: requestTrace.requestId || "未知 requestId",
+      }];
+
+      if (isObject(data.taskRelation)) {
+        stages.push({
+          name: "TaskManager",
+          outcome: data.taskRelation.relation || "unknown",
+          durationMs: null,
+          failed: data.taskRelation.relation === "ambiguous",
+          detail: "任务关系：" + (data.taskRelation.relation || "unknown")
+            + (data.taskRelation.confidence === undefined
+              ? ""
+              : " · 置信度 " + data.taskRelation.confidence),
+        });
+      }
+
+      if (isObject(data.taskState)) {
+        const domainState = isObject(data.taskState.domainState)
+          ? data.taskState.domainState : {};
+        const extraction = isObject(domainState.taskStateExtraction)
+          ? domainState.taskStateExtraction : null;
+        stages.push({
+          name: "TaskState",
+          outcome: data.taskState.status || "unknown",
+          durationMs: null,
+          failed: data.taskState.status === "cancelled",
+          detail: "revision " + (data.taskState.revision ?? "?")
+            + (extraction
+              ? " · " + (extraction.route || "unknown")
+                + " / " + (extraction.reason || "unknown")
+              : ""),
+        });
+
+        if (isObject(data.taskState.activePlan)) {
+          const plan = data.taskState.activePlan;
+          const tools = Array.isArray(plan.steps)
+            ? plan.steps.map((step) => step && step.toolName).filter(Boolean)
+            : [];
+          stages.push({
+            name: "Plan",
+            outcome: plan.status || "unknown",
+            durationMs: null,
+            failed: plan.status === "failed" || plan.status === "stale",
+            detail: (plan.planId || "未知 planId")
+              + (tools.length ? " · " + tools.join(" → ") : ""),
+          });
+        }
+      }
+
+      const phases = Array.isArray(summary.phases) ? summary.phases : [];
+      if (summary.controlPolicy || summary.enteredRuntime) {
+        stages.push({
+          name: "控制运行时",
+          outcome: summary.controlPolicy || summary.enteredRuntime,
+          durationMs: null,
+          failed: false,
+          detail: "enteredRuntime=" + (summary.enteredRuntime || "unknown")
+            + " · policy=" + (summary.controlPolicy || "unknown")
+            + " · revision=" + (summary.policyRevision || "unknown"),
+        });
+      }
+      phases.forEach((phase) => {
+        if (!isObject(phase)) return;
+        const nestedTimingNotice = phase.phase === "harness_step"
+          ? " · 包含内部执行阶段，耗时不可与子阶段相加"
+          : "";
+        stages.push({
+          name: backendPhaseLabel(phase.phase),
+          outcome: phase.outcome || "unknown",
+          durationMs: phase.durationMs,
+          failed: false,
+          detail: "结果：" + (phase.outcome || "unknown") + nestedTimingNotice,
+        });
+      });
+
+      const details = document.createElement("details");
+      details.className = "backend-flow";
+      const heading = document.createElement("summary");
+      const failed = requestTrace.status !== "ok"
+        || summary.agentStatus === "failed"
+        || Boolean(summary.degraded);
+      heading.textContent = "后台发生了什么 · " + stages.length + " 个阶段"
+        + (failed ? " · 有异常" : " · 已完成");
+      details.appendChild(heading);
+
+      const list = document.createElement("div");
+      list.className = "backend-stage-list";
+      stages.forEach((stage, index) => appendBackendStage(list, stage, index));
+      if (summary.failureCode) {
+        appendBackendStage(list, {
+          name: "失败原因",
+          outcome: summary.failureCode,
+          durationMs: null,
+          failed: true,
+          detail: summary.failureCode,
+        }, stages.length);
+      }
+      details.appendChild(list);
+      bubble.appendChild(details);
+    }
+
+    function parseServerSentEvent(block) {
+      const dataLines = block
+        .split(/\r?\n/)
+        .filter((line) => line.startsWith("data:"))
+        .map((line) => line.slice(5).trimStart());
+      if (dataLines.length === 0) return null;
+      return JSON.parse(dataLines.join("\n"));
+    }
+
+    async function readStreamingAnswer(resp, bubble) {
+      if (!resp.ok) {
+        throw new Error("HTTP " + resp.status + "：" + await resp.text());
+      }
+      if (!resp.body) {
+        throw new Error("浏览器没有提供可读取的响应流");
+      }
+
+      const reader = resp.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = "";
+      let accumulatedAnswer = "";
+      let completeData = null;
+
+      while (true) {
+        const { value, done } = await reader.read();
+        buffer += decoder.decode(value || new Uint8Array(), { stream: !done });
+        const blocks = buffer.split(/\r?\n\r?\n/);
+        buffer = blocks.pop() || "";
+
+        for (const block of blocks) {
+          if (!block.trim()) continue;
+          const event = parseServerSentEvent(block);
+          if (!event) continue;
+
+          if (event.type === "task_state" && event.state && event.state.taskId) {
+            activeTaskId = event.state.taskId;
+            updatePauseControl();
+          }
+          if (event.type === "status" && !accumulatedAnswer) {
+            const status = document.createElement("div");
+            status.className = "stream-status";
+            status.textContent = event.message || "正在生成回答…";
+            bubble.replaceChildren(status);
+          } else if (event.type === "task_state" && !accumulatedAnswer) {
+            const status = document.createElement("div");
+            status.className = "stream-status";
+            const revision = event.state && event.state.revision;
+            status.textContent = "TaskState " + (event.phase || "updated")
+              + (revision ? " · revision " + revision : "");
+            bubble.replaceChildren(status);
+          } else if (event.type === "task_relation" && !accumulatedAnswer) {
+            const status = document.createElement("div");
+            status.className = "stream-status";
+            const decision = event.decision || {};
+            status.textContent = "TaskManager · " + (decision.relation || "判断任务关系");
+            bubble.replaceChildren(status);
+          } else if (event.type === "preview" && !accumulatedAnswer) {
+            renderProvisionalPreview(bubble, event);
+          } else if (event.type === "delta") {
+            accumulatedAnswer += event.delta || "";
+            const markdown = renderMarkdown(accumulatedAnswer);
+            markdown.classList.add("streaming");
+            bubble.replaceChildren(markdown);
+            chat.scrollTop = chat.scrollHeight;
+          } else if (event.type === "complete") {
+            completeData = event.data || {};
+          }
+        }
+        if (done) break;
+      }
+
+      if (!completeData) {
+        throw new Error("响应流意外结束，未收到 complete 事件");
+      }
+      bubble.replaceChildren(
+        renderMarkdown(completeData.answer || accumulatedAnswer || "(空回复)")
+      );
+      renderGuideResult(bubble, completeData.guideResult, { activateReferenceContext: true });
+      if (!(completeData.guideResult && completeData.guideResult.referenceContext)) {
+        refreshActiveReferenceContext(completeData.referenceContext);
+      }
+      renderTrace(bubble, completeData.tool_trace);
+      renderRequestTrace(bubble, completeData.trace);
+      renderBackendFlow(bubble, completeData);
+      updateDebugPanel(completeData);
+      const pauseReceipt = completeData.traceSummary
+        && completeData.traceSummary.checkpointPause;
+      if (pauseReceipt && pauseReceipt.state === "paused") {
+        rememberCheckpointPause(pauseReceipt);
+      }
+      const resumeReceipt = completeData.traceSummary
+        && completeData.traceSummary.durableResume;
+      if (resumeReceipt) rememberDurableResume(resumeReceipt);
+      return completeData;
+    }
+
+    const DEBUG_STAGE_LABELS = {
+      task_manager: "TaskManager：判断任务关系",
+      task_state: "TaskState：提取并持久化本轮意图",
+      context_pack: "ContextPack：构建受预算保护的上下文",
+      planner: "Planner：生成或复用 Plan",
+      executor: "Executor：执行一个 PlanStep",
+      validator: "Validator：校验证据合同",
+      replanner: "Replanner：基于失败证据恢复",
+      final_answer: "FinalAnswer：发布已验证回答",
+      done: "本轮已经结束",
+    };
+    const DEBUG_STAGE_FLOW = [
+      ["task_manager", "TaskManager", "任务关系与 session 绑定"],
+      ["task_state", "TaskState", "约束提取与 revision"],
+      ["context_pack", "ContextPack", "受预算上下文投影"],
+      ["planner", "Planner", "生成或复用 Plan"],
+      ["executor", "Executor", "执行一个 PlanStep"],
+      ["validator", "Validator", "证据与范围校验"],
+      ["replanner", "Replanner", "仅修正路径经过"],
+      ["final_answer", "FinalAnswer", "发布已验证回答"],
+    ];
+
+    function publishDebugFlow(turn) {
+      if (!turn) {
+        localStorage.removeItem(DEBUG_FLOW_STORAGE_PREFIX + sessionId);
+        debugFlowChannel?.postMessage({ type: "debug-turn-cleared", sessionId });
+        return;
+      }
+      const projection = {
+        schemaVersion: "agent-debug-flow-live-v1",
+        sessionId: turn.sessionId,
+        debugTurnId: turn.debugTurnId,
+        requestId: turn.requestId,
+        runId: turn.runId,
+        taskId: turn.taskId,
+        revision: turn.revision,
+        status: turn.status,
+        nextStage: turn.nextStage,
+        failureCode: turn.failureCode,
+        busy: debugStepBusy,
+        updatedAt: turn.updatedAt,
+        steps: (turn.steps || []).map((record) => ({
+          index: record.index,
+          stage: record.stage,
+          label: record.label,
+          codeFile: record.codeFile,
+          codeFunction: record.codeFunction,
+          outcome: record.outcome,
+          durationMs: record.durationMs,
+        })),
+      };
+      localStorage.setItem(
+        DEBUG_FLOW_STORAGE_PREFIX + turn.sessionId,
+        JSON.stringify(projection)
+      );
+      debugFlowChannel?.postMessage({ type: "debug-turn-updated", payload: projection });
+    }
+
+    function debugTurnIsTerminal(turn) {
+      return turn && ["completed", "failed", "cancelled"].includes(turn.status);
+    }
+
+    function pauseStorageKey() {
+      return "agent-checkpoint-pause:" + sessionId;
+    }
+
+    function resumeStorageKey() {
+      return "agent-durable-resume:" + sessionId;
+    }
+
+    function rememberDurableResume(receipt) {
+      durableResume = receipt;
+      localStorage.setItem(resumeStorageKey(), JSON.stringify(receipt));
+    }
+
+    function clearDurableResume() {
+      localStorage.removeItem(resumeStorageKey());
+      durableResume = null;
+    }
+
+    function rememberCheckpointPause(receipt) {
+      checkpointPause = receipt;
+      localStorage.setItem(pauseStorageKey(), JSON.stringify(receipt));
+      updatePauseControl();
+    }
+
+    function clearCheckpointPause() {
+      localStorage.removeItem(pauseStorageKey());
+      checkpointPause = null;
+      updatePauseControl();
+    }
+
+    function setControlNotice(message, kind = "") {
+      controlNotice.textContent = message || "";
+      controlNotice.className = "control-notice" + (kind ? " " + kind : "");
+    }
+
+    function updatePauseControl() {
+      if (checkpointPause && checkpointPause.state === "paused") {
+        pauseBtn.dataset.state = "resume";
+        pauseBtn.textContent = "继续";
+        pauseBtn.disabled = false;
+      } else if (checkpointPause && checkpointPause.state === "pause_requested") {
+        pauseBtn.dataset.state = "requested";
+        pauseBtn.textContent = "暂停中…";
+        pauseBtn.disabled = true;
+      } else {
+        pauseBtn.dataset.state = "idle";
+        pauseBtn.textContent = "暂停";
+        pauseBtn.disabled = !activeRequest || !activeTaskId || stepDebugEnabled;
+      }
+    }
+
+    function setDebugInputLock() {
+      const locked = Boolean(
+        activeRequest
+        || (checkpointPause && checkpointPause.state === "paused")
+        || (activeDebugTurn && !debugTurnIsTerminal(activeDebugTurn))
+      );
+      input.disabled = locked;
+      sendBtn.disabled = locked;
+      updatePauseControl();
+    }
+
+    function appendDebugTurnRecord(container, record) {
+      const row = document.createElement("div");
+      row.className = "step-debug-record " + (record.outcome === "failed" ? "failed" : "");
+      appendTextElement(
+        row,
+        "div",
+        "step-debug-title",
+        record.index + ". " + (record.label || record.stage)
+      );
+      appendTextElement(
+        row,
+        "div",
+        "step-debug-code",
+        (record.codeFile || "未知文件") + "::" + (record.codeFunction || "未知函数")
+      );
+      appendTextElement(row, "div", "step-debug-status", formatMs(record.durationMs));
+      const state = document.createElement("pre");
+      state.className = "step-debug-state";
+      state.textContent = JSON.stringify(record.keyState || {}, null, 2);
+      row.appendChild(state);
+      if (record.message) {
+        appendTextElement(row, "div", "step-debug-state", record.message);
+      }
+      container.appendChild(row);
+    }
+
+    function appendDebugContextIdentity(container, record, state) {
+      const identity = record && record.keyState
+        ? record.keyState.contextIdentity
+        : null;
+      if (identity && identity.status === "error") {
+        appendTextElement(
+          container,
+          "div",
+          "step-debug-context-identity error",
+          "上下文身份：受控错误（" + (identity.code || "unknown") + "）"
+        );
+        return;
+      }
+      if (
+        identity
+        && identity.contextPolicyId
+        && identity.contextPolicyVersion
+        && identity.contextSkillId
+        && identity.contextSkillVersion
+      ) {
+        appendTextElement(
+          container,
+          "div",
+          "step-debug-context-identity",
+          "Context Policy："
+            + identity.contextPolicyId + "@" + identity.contextPolicyVersion
+            + " · Context Skill："
+            + identity.contextSkillId + "@" + identity.contextSkillVersion
+        );
+        return;
+      }
+      const reason = state === "skipped"
+        ? "本轮真实路径未经过该节点；ContextPack 未创建或不可用。"
+        : record
+          ? "该节点没有创建或投影 ContextPack；身份不可用。"
+          : "尚未执行；服务端尚未创建或投影 ContextPack。";
+      appendTextElement(
+        container,
+        "div",
+        "step-debug-context-identity",
+        "上下文身份：不可用（not-created）· " + reason
+      );
+    }
+
+    function appendDebugTransportIdentity(container, record) {
+      const identity = record && record.keyState
+        ? record.keyState.toolTransportIdentity
+        : null;
+      if (!identity) {
+        if (record && ["executor", "replanner"].includes(record.stage)) {
+          appendTextElement(
+            container,
+            "div",
+            "transport-pill error",
+            "Tool transport：服务端身份不可用（missing）"
+          );
+        }
+        return;
+      }
+      if (identity.status === "error") {
+        appendTextElement(
+          container,
+          "div",
+          "transport-pill error",
+          "Tool transport：受控错误（" + (identity.code || "unknown") + "）"
+        );
+        return;
+      }
+      if (!identity.mode || !identity.source) {
+        appendTextElement(
+          container,
+          "div",
+          "transport-pill error",
+          "Tool transport：服务端身份字段不完整"
+        );
+        return;
+      }
+      const details = [identity.mode, identity.source];
+      if (identity.protocolVersion) details.push("protocol=" + identity.protocolVersion);
+      if (identity.serverName) details.push("server=" + identity.serverName);
+      if (identity.serverVersion) details.push("version=" + identity.serverVersion);
+      appendTextElement(
+        container,
+        "div",
+        "transport-pill",
+        "Tool transport：" + details.join(" · ")
+      );
+    }
+
+    function appendDebugLegend(panel) {
+      const legend = document.createElement("div");
+      legend.className = "step-debug-legend";
+      [["completed", "已完成"], ["current", "当前暂停点"], ["pending", "未执行"], ["failed", "失败"]]
+        .forEach(([state, label]) => {
+          const item = document.createElement("span");
+          item.className = "step-debug-legend-item";
+          const dot = document.createElement("span");
+          dot.className = "step-debug-legend-dot " + state;
+          item.appendChild(dot);
+          item.appendChild(document.createTextNode(label));
+          legend.appendChild(item);
+        });
+      panel.appendChild(legend);
+    }
+
+    function renderEmbeddedDebugFlow(turn) {
+      const flow = document.createElement("section");
+      flow.className = "step-debug-flow";
+      flow.setAttribute("aria-label", "当前 DebugTurn 单步流程图");
+
+      const head = document.createElement("div");
+      head.className = "step-debug-flow-head";
+      const copy = document.createElement("div");
+      appendTextElement(copy, "div", "step-debug-flow-title", "当前单步流程");
+      appendTextElement(
+        copy,
+        "div",
+        "step-debug-flow-caption",
+        "revision " + turn.revision + " · 每次点击“下一步”后由服务端返回状态重绘"
+      );
+      const expand = document.createElement("button");
+      expand.type = "button";
+      expand.className = "step-debug-flow-expand";
+      expand.textContent = "全屏查看";
+      expand.disabled = typeof flow.requestFullscreen !== "function";
+      expand.addEventListener("click", async () => {
+        if (document.fullscreenElement === flow) await document.exitFullscreen?.();
+        else await flow.requestFullscreen?.();
+      });
+      flow.addEventListener("fullscreenchange", () => {
+        expand.textContent = document.fullscreenElement === flow ? "退出全屏" : "全屏查看";
+      });
+      head.append(copy, expand);
+      flow.appendChild(head);
+
+      const track = document.createElement("div");
+      track.className = "step-debug-track";
+      const terminal = debugTurnIsTerminal(turn);
+      const latestByStage = new Map();
+      (turn.steps || []).forEach((record) => latestByStage.set(record.stage, record));
+      DEBUG_STAGE_FLOW.forEach(([stage, label, description]) => {
+        const node = document.createElement("article");
+        node.className = "step-debug-node";
+        node.dataset.debugStage = stage;
+        const record = latestByStage.get(stage);
+        if (record) {
+          if (record.outcome === "failed") node.classList.add("failed");
+          else if (record.outcome === "cancelled") node.classList.add("cancelled");
+          else node.classList.add("completed");
+          node.title = (record.codeFile || "") + "::" + (record.codeFunction || "");
+        }
+        if (!terminal && turn.nextStage === stage) {
+          node.classList.add("current");
+          node.setAttribute("aria-current", "step");
+        } else if (terminal && !record) {
+          node.classList.add("skipped");
+        }
+        const name = document.createElement("strong");
+        name.textContent = label;
+        const detail = document.createElement("span");
+        detail.textContent = record
+          ? (record.outcome === "passed" ? "已完成" : record.outcome) + " · " + formatMs(record.durationMs)
+          : (!terminal && turn.nextStage === stage ? "当前暂停点 · " : "") + description;
+        node.append(name, detail);
+        track.appendChild(node);
+      });
+      flow.appendChild(track);
+      return flow;
+    }
+
+    function renderDebugTurn(bubble, turn) {
+      activeDebugTurn = turn;
+      publishDebugFlow(turn);
+      bubble.replaceChildren();
+      if (turn.status === "completed" && turn.finalAnswer) {
+        bubble.appendChild(renderMarkdown(turn.finalAnswer));
+        renderGuideResult(bubble, turn.guideResult);
+      }
+
+      const panel = document.createElement("section");
+      panel.className = "step-debug-panel";
+      panel.setAttribute("aria-label", "Agent 单步调试");
+      const head = document.createElement("div");
+      head.className = "step-debug-head";
+      const title = document.createElement("div");
+      title.className = "step-debug-title";
+      title.textContent = "Agent 单步调试";
+      const status = document.createElement("div");
+      status.className = "step-debug-status";
+      status.textContent = turn.status + " · revision " + turn.revision;
+      head.appendChild(title);
+      head.appendChild(status);
+      panel.appendChild(head);
+
+      appendTextElement(
+        panel,
+        "div",
+        "step-debug-next",
+        "下一步：" + (DEBUG_STAGE_LABELS[turn.nextStage] || turn.nextStage)
+      );
+      appendTextElement(
+        panel,
+        "div",
+        "step-debug-status",
+        (turn.debugTurnId || "") + " · " + (turn.runId || "")
+      );
+      appendDebugLegend(panel);
+      panel.appendChild(renderEmbeddedDebugFlow(turn));
+
+      if ((turn.steps || []).length > 0) {
+        const history = document.createElement("details");
+        history.className = "step-debug-history";
+        const summary = document.createElement("summary");
+        summary.textContent = "查看按时间排序的原始阶段记录（" + turn.steps.length + "）";
+        history.appendChild(summary);
+        const list = document.createElement("div");
+        list.className = "step-debug-list";
+        turn.steps.forEach((record) => appendDebugTurnRecord(list, record));
+        history.appendChild(list);
+        panel.appendChild(history);
+      }
+
+      if (turn.failureCode) {
+        appendTextElement(
+          panel,
+          "div",
+          "step-debug-next",
+          "失败原因：" + turn.failureCode
+        );
+      }
+      if (debugActionError) {
+        appendTextElement(panel, "div", "step-debug-next", debugActionError);
+      }
+
+      if (!debugTurnIsTerminal(turn)) {
+        const actions = document.createElement("div");
+        actions.className = "step-debug-actions";
+        const next = document.createElement("button");
+        next.type = "button";
+        next.className = "primary";
+        next.textContent = "下一步";
+        next.disabled = debugStepBusy;
+        next.addEventListener("click", () => advanceDebugTurn(bubble, false));
+        const run = document.createElement("button");
+        run.type = "button";
+        run.textContent = "运行到结束";
+        run.disabled = debugStepBusy;
+        run.addEventListener("click", () => advanceDebugTurn(bubble, true));
+        const cancel = document.createElement("button");
+        cancel.type = "button";
+        cancel.className = "danger";
+        cancel.textContent = "取消本轮";
+        cancel.disabled = debugStepBusy;
+        cancel.addEventListener("click", () => cancelDebugTurn(bubble));
+        actions.appendChild(next);
+        actions.appendChild(run);
+        actions.appendChild(cancel);
+        panel.appendChild(actions);
+      }
+
+      bubble.appendChild(panel);
+      setDebugInputLock();
+      requestAnimationFrame(() => panel.scrollIntoView({ block: "start" }));
+    }
+
+    async function fetchDebugTurnAction(path, turn) {
+      const response = await fetch(path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ expectedRevision: turn.revision }),
+      });
+      if (!response.ok) {
+        throw new Error("HTTP " + response.status + "：" + await response.text());
+      }
+      return await response.json();
+    }
+
+    async function advanceDebugTurn(bubble, runToEnd) {
+      if (!activeDebugTurn || debugStepBusy || debugTurnIsTerminal(activeDebugTurn)) return;
+      debugStepBusy = true;
+      debugActionError = "";
+      renderDebugTurn(bubble, activeDebugTurn);
+      try {
+        let remaining = runToEnd ? 16 : 1;
+        while (remaining > 0 && !debugTurnIsTerminal(activeDebugTurn)) {
+          activeDebugTurn = await fetchDebugTurnAction(
+            "/agent/debug-turns/" + encodeURIComponent(activeDebugTurn.debugTurnId) + "/step",
+            activeDebugTurn
+          );
+          remaining -= 1;
+          renderDebugTurn(bubble, activeDebugTurn);
+        }
+        if (remaining === 0 && runToEnd && !debugTurnIsTerminal(activeDebugTurn)) {
+          throw new Error("单步执行超过 16 个阶段，已停止自动推进");
+        }
+      } catch (error) {
+        debugActionError = "推进失败：" + error;
+      } finally {
+        debugStepBusy = false;
+        renderDebugTurn(bubble, activeDebugTurn);
+      }
+    }
+
+    async function cancelDebugTurn(bubble) {
+      if (!activeDebugTurn || debugStepBusy || debugTurnIsTerminal(activeDebugTurn)) return;
+      debugStepBusy = true;
+      debugActionError = "";
+      try {
+        activeDebugTurn = await fetchDebugTurnAction(
+          "/agent/debug-turns/" + encodeURIComponent(activeDebugTurn.debugTurnId) + "/cancel",
+          activeDebugTurn
+        );
+      } catch (error) {
+        debugActionError = "取消失败：" + error;
+      } finally {
+        debugStepBusy = false;
+        renderDebugTurn(bubble, activeDebugTurn);
+      }
+    }
+
+    async function startDebugTurn(text, bubble) {
+      const response = await fetch("/agent/debug-turns", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: text,
+          sessionId,
+          domainHint: "ecommerce",
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("HTTP " + response.status + "：" + await response.text());
+      }
+      activeDebugTurn = await response.json();
+      debugActionError = "";
+      renderDebugTurn(bubble, activeDebugTurn);
+    }
+
+    function renderCompleteResponse(bubble, data) {
+      bubble.replaceChildren(renderMarkdown(data.answer || "(空回复)"));
+      renderGuideResult(bubble, data.guideResult, { activateReferenceContext: true });
+      if (!(data.guideResult && data.guideResult.referenceContext)) {
+        refreshActiveReferenceContext(data.referenceContext);
+      }
+      renderTrace(bubble, data.tool_trace);
+      renderRequestTrace(bubble, data.trace);
+      renderBackendFlow(bubble, data);
+      updateDebugPanel(data);
+      const summary = data.traceSummary || {};
+      if (summary.checkpointPause && summary.checkpointPause.state === "paused") {
+        rememberCheckpointPause(summary.checkpointPause);
+      }
+      if (summary.durableResume) rememberDurableResume(summary.durableResume);
+      else clearDurableResume();
+      return data;
+    }
+
+    async function postDurable(payload, bubble) {
+      const response = await fetch("/agent/chat-llm-durable", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error("HTTP " + response.status + "：" + await response.text());
+      }
+      return renderCompleteResponse(bubble, await response.json());
+    }
+
+    async function requestCheckpointPause() {
+      if (!activeRequest || checkpointPause) return;
+      checkpointPause = { state: "pause_requested" };
+      setControlNotice("正在等待 durable 游标，并将在下一个安全检查点暂停…");
+      updatePauseControl();
+      let lastError = null;
+      const deadline = Date.now() + 45000;
+      while (activeRequest && Date.now() < deadline) {
+        if (!activeTaskId) {
+          await new Promise((resolve) => setTimeout(resolve, 250));
+          continue;
+        }
+        try {
+          const response = await fetch(
+            "/agent/sessions/" + encodeURIComponent(sessionId) + "/pause",
+            { method: "POST" }
+          );
+          if (response.ok) {
+            const receipt = await response.json();
+            if (!activeRequest) {
+              checkpointPause = null;
+              setControlNotice("本轮已完成，晚到的暂停请求不再绑定到界面。", "warn");
+              updatePauseControl();
+              return;
+            }
+            checkpointPause = receipt;
+            setControlNotice("暂停请求已提交；当前节点完成后会停在 Checkpoint。", "ok");
+            updatePauseControl();
+            return;
+          }
+          lastError = new Error("HTTP " + response.status + "：" + await response.text());
+          if (![404, 409].includes(response.status)) break;
+        } catch (error) {
+          lastError = error;
+        }
+        await new Promise((resolve) => setTimeout(resolve, 250));
+      }
+      checkpointPause = null;
+      setControlNotice(
+        activeRequest
+          ? "暂停请求未能绑定 durable 游标：" + (lastError || "超时")
+          : "本轮已完成，未进入新的暂停边界。",
+        "warn"
+      );
+      updatePauseControl();
+    }
+
+    async function resumeCheckpointRun() {
+      if (!checkpointPause || checkpointPause.state !== "paused" || activeRequest) return;
+      const receipt = checkpointPause;
+      addBubble("user", "继续已暂停的任务");
+      const { bubble } = addBubble("bot", typingDots());
+      activeRequest = true;
+      setDebugInputLock();
+      try {
+        const data = await postDurable({
+          message: "继续当前任务",
+          sessionId,
+          domainHint: "ecommerce",
+          restartTaskId: receipt.taskId,
+          pauseReceipt: receipt,
+        }, bubble);
+        if (
+          data.traceSummary
+          && data.traceSummary.finalAction === "resume_rejected"
+        ) {
+          rememberCheckpointPause(receipt);
+          setControlNotice("恢复回执或 Checkpoint 已漂移，系统已安全拒绝。", "warn");
+        } else if (!(data.traceSummary && data.traceSummary.checkpointPause)) {
+          clearCheckpointPause();
+          setControlNotice("已从原 Checkpoint 继续执行。", "ok");
+        }
+      } catch (error) {
+        bubble.textContent = "恢复失败：" + error;
+        rememberCheckpointPause(receipt);
+      } finally {
+        activeRequest = false;
+        setDebugInputLock();
+        chat.scrollTop = chat.scrollHeight;
+      }
+    }
+
+    async function send(text) {
+      text = (text || "").trim();
+      if (!text) return;
+      const selectedRecipientScope = recipientScope.value;
+      recipientScope.value = "unknown";
+      addBubble("user", text);
+      input.value = "";
+      activeRequest = true;
+      activeTaskId = null;
+      setControlNotice("");
+      setDebugInputLock();
+
+      const { row, bubble } = addBubble("bot", typingDots());
+      try {
+        if (stepDebugEnabled) {
+          await startDebugTurn(text, bubble);
+          return;
+        }
+        if (durableResume) {
+          const resume = { ...durableResume, answer: text };
+          await postDurable({
+            message: text,
+            sessionId,
+            domainHint: "ecommerce",
+            recipientScope: selectedRecipientScope,
+            referenceContext: activeReferenceContextRequest(),
+            resume,
+          }, bubble);
+          return;
+        }
+        const advancedMode = false;
+        const domainHint = "ecommerce";
+        const endpoint = "/agent/chat-llm/stream";
+        const payload = advancedMode
+          ? { message: text, mode: "advanced" }
+          : {
+              message: text,
+              sessionId,
+              domainHint,
+              recipientScope: selectedRecipientScope,
+              referenceContext: activeReferenceContextRequest(),
+            };
+        const resp = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": advancedMode ? "application/json" : "text/event-stream",
+          },
+          body: JSON.stringify(payload),
+        });
+        if (advancedMode) {
+          if (!resp.ok) {
+            throw new Error("HTTP " + resp.status + "：" + await resp.text());
+          }
+          renderCompleteResponse(bubble, await resp.json());
+        } else {
+          const data = await readStreamingAnswer(resp, bubble);
+          if (
+            checkpointPause
+            && checkpointPause.state === "pause_requested"
+            && !(data.traceSummary && data.traceSummary.checkpointPause)
+          ) clearCheckpointPause();
+        }
+      } catch (err) {
+        bubble.textContent = "网络出错了：" + err;
+      } finally {
+        activeRequest = false;
+        activeTaskId = null;
+        setDebugInputLock();
+        if (!input.disabled) input.focus();
+        chat.scrollTop = chat.scrollHeight;
+      }
+    }
+
+    sendBtn.addEventListener("click", () => send(input.value));
+    memoryLoginOpen.addEventListener("click", () => {
+      memoryLoginFeedback.textContent = "";
+      memoryLoginOverlay.hidden = false;
+      document.getElementById("memory-username").focus();
+    });
+    document.getElementById("memory-login-close").addEventListener("click", () => {
+      memoryLoginOverlay.hidden = true;
+    });
+    document.getElementById("memory-login-form").addEventListener("submit", async event => {
+      event.preventDefault();
+      memoryLoginFeedback.textContent = "正在登录…";
+      try {
+        const response = await fetch("/api/web-memory/login", {
+          method: "POST",
+          credentials: "same-origin",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: document.getElementById("memory-username").value,
+            password: document.getElementById("memory-password").value,
+          }),
+        });
+        if (!response.ok) throw new Error("登录失败或账号不在灰度名单中");
+        const data = await response.json();
+        memoryCsrfToken = data.csrfToken;
+        setMemoryAuth(true, data.username);
+        memoryLoginOverlay.hidden = true;
+        document.getElementById("memory-password").value = "";
+        await loadMemoryCandidates();
+        if (!memoryPollTimer) memoryPollTimer = setInterval(loadMemoryCandidates, 4000);
+      } catch (error) {
+        memoryLoginFeedback.textContent = error.message;
+      }
+    });
+    memoryOpen.addEventListener("click", async () => {
+      memoryDrawer.hidden = false;
+      await loadMemoryEntries();
+    });
+    document.getElementById("memory-close").addEventListener("click", () => {
+      memoryDrawer.hidden = true;
+    });
+    document.getElementById("memory-edit-through-chat").addEventListener("click", () => {
+      memoryDrawer.hidden = true;
+      input.placeholder = "例如：以后买手机请记住，我更喜欢小屏";
+      input.focus();
+    });
+    document.getElementById("memory-logout").addEventListener("click", async () => {
+      const response = await fetch("/api/web-memory/logout", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "X-CSRF-Token": memoryCsrfToken || "" },
+      });
+      if (response.ok) {
+        memoryDrawer.hidden = true;
+        setMemoryAuth(false, "");
+        if (memoryPollTimer) clearInterval(memoryPollTimer);
+        memoryPollTimer = null;
+      }
+    });
+    pauseBtn.addEventListener("click", () => {
+      if (checkpointPause && checkpointPause.state === "paused") {
+        resumeCheckpointRun();
+      } else {
+        requestCheckpointPause();
+      }
+    });
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") send(input.value); });
+    advancedRagToggle.addEventListener("click", () => {
+      advancedRagToggle.setAttribute("aria-pressed", "false");
+      advancedRagToggle.textContent = "历史 RAG：已归档";
+      input.placeholder = "例如：想买一台 3000 元以内的二手 iPhone";
+      input.focus();
+    });
+    const DOMAIN_MODES = ["ecommerce"];
+    const DOMAIN_LABELS = {
+      ecommerce: "领域：商品导购",
+    };
+
+    function setDomainHint(domainHint) {
+      const normalized = "ecommerce";
+      ecommerceToggle.dataset.domainHint = normalized;
+      ecommerceToggle.textContent = DOMAIN_LABELS[normalized];
+      ecommerceToggle.setAttribute("aria-label", "对话" + DOMAIN_LABELS[normalized]);
+      input.placeholder = "例如：想买一台 5000 元内、16GB 内存的轻薄笔记本";
+    }
+
+    ecommerceToggle.addEventListener("click", () => {
+      setDomainHint("ecommerce");
+      advancedRagToggle.setAttribute("aria-pressed", "false");
+      advancedRagToggle.textContent = "历史 RAG：已归档";
+      input.focus();
+    });
+    stepDebugToggle.addEventListener("click", () => {
+      if (activeDebugTurn && !debugTurnIsTerminal(activeDebugTurn)) return;
+      stepDebugEnabled = !stepDebugEnabled;
+      stepDebugToggle.setAttribute("aria-pressed", String(stepDebugEnabled));
+      stepDebugToggle.textContent = "单步调试：" + (stepDebugEnabled ? "开" : "关");
+      input.placeholder = stepDebugEnabled
+        ? "输入问题后，在回答卡片中点击“下一步”"
+        : "例如：想买一台 5000 元内、16GB 内存的轻薄笔记本";
+      input.focus();
+    });
+    document.getElementById("suggest").addEventListener("click", (e) => {
+      if (
+        e.target.tagName === "BUTTON"
+        && e.target.id !== "advanced-rag-toggle"
+        && e.target.id !== "ecommerce-toggle"
+        && e.target.id !== "step-debug-toggle"
+      ) send(e.target.textContent);
+    });
+    document.getElementById("new-chat").addEventListener("click", async () => {
+      const oldSessionId = sessionId;
+      if (activeDebugTurn && !debugTurnIsTerminal(activeDebugTurn)) {
+        try {
+          activeDebugTurn = await fetchDebugTurnAction(
+            "/agent/debug-turns/" + encodeURIComponent(activeDebugTurn.debugTurnId) + "/cancel",
+            activeDebugTurn
+          );
+        } catch (_) {
+          // 新对话会换 session；旧调试轮次保留 TTL 后自动过期。
+        }
+      }
+      activeDebugTurn = null;
+      debugActionError = "";
+      publishDebugFlow(null);
+      localStorage.removeItem("agent-checkpoint-pause:" + oldSessionId);
+      localStorage.removeItem("agent-durable-resume:" + oldSessionId);
+      checkpointPause = null;
+      durableResume = null;
+      activeReferenceContext = null;
+      sessionId = crypto.randomUUID();
+      localStorage.setItem("local-life-session-id", sessionId);
+      chat.replaceChildren();
+      showGreeting();
+      resetDebugPanel();
+      setDebugInputLock();
+      try {
+        await fetch("/agent/sessions/" + encodeURIComponent(oldSessionId), { method: "DELETE" });
+      } catch (_) {
+        // 新 sessionId 已经生效；旧会话清理失败不影响继续聊天。
+      }
+    });
+    refreshRecommendationsBtn.addEventListener("click", loadRecommendations);
+
+    async function restoreDurableControls() {
+      try {
+        const storedPause = JSON.parse(localStorage.getItem(pauseStorageKey()) || "null");
+        if (storedPause && storedPause.state === "paused") checkpointPause = storedPause;
+      } catch (_) {
+        localStorage.removeItem(pauseStorageKey());
+      }
+      try {
+        const storedResume = JSON.parse(localStorage.getItem(resumeStorageKey()) || "null");
+        if (storedResume) durableResume = storedResume;
+      } catch (_) {
+        localStorage.removeItem(resumeStorageKey());
+      }
+      try {
+        const response = await fetch(
+          "/agent/sessions/" + encodeURIComponent(sessionId) + "/pause"
+        );
+        if (response.ok) {
+          const receipt = await response.json();
+          if (receipt.state === "paused") rememberCheckpointPause(receipt);
+        }
+      } catch (_) {
+        // Local receipt still permits the server-bound restart validation.
+      }
+      setDebugInputLock();
+    }
+
+    // 开场白
+    showGreeting();
+    restoreDurableControls();
+    refreshMemoryCapability();
+    if (new URLSearchParams(window.location.search).get("guidePreview") === "1") {
+      const preview = addBubble("bot", "");
+      preview.bubble.replaceChildren(renderMarkdown("下面是商品导购结果的视觉预览。"));
+      renderGuideResult(preview.bubble, {
+        snapshotNotice: "历史公开数据快照，非实时价格/库存。",
+        products: [
+          {
+            selectionType: "full_match",
+            product: { id: 1001, title: "远航 P1 5G 手机 12GB+256GB", brand: "远航", priceStatus: "verified", snapshotPriceMinor: 249900 },
+            attributes: [
+              { key: "os", value: "ios", status: "known" },
+              { key: "screen_originality", value: "non_original", status: "known" }
+            ]
+          },
+          {
+            selectionType: "closest_alternative",
+            product: { id: 1004, title: "星河 S2 轻薄影像手机", brand: "星河", priceStatus: "unverified", snapshotPriceMinor: null },
+            checks: [{ key: "预算", status: "unknown" }, { key: "内存", status: "pass" }]
+          },
+          {
+            selectionType: "closest_alternative",
+            product: { id: 1005, title: "山海 Pro 长续航 5G 手机", brand: "山海", priceStatus: "verified", snapshotPriceMinor: 329900 },
+            checks: [{ key: "预算", status: "fail" }, { key: "内存", status: "pass" }]
+          }
+        ],
+        comparisonMatrix: [
+          { productId: 1001, checks: [
+            { key: "price_minor", actual: 249900, unit: "CNY_MINOR", status: "pass" },
+            { key: "memory_gb", actual: 12, unit: "GB", status: "pass" }
+          ]},
+          { productId: 1004, checks: [
+            { key: "price_minor", actual: null, unit: "CNY_MINOR", status: "unknown" },
+            { key: "memory_gb", actual: 12, unit: "GB", status: "pass" }
+          ]},
+          { productId: 1005, checks: [
+            { key: "price_minor", actual: 329900, unit: "CNY_MINOR", status: "fail" },
+            { key: "memory_gb", actual: 16, unit: "GB", status: "pass" }
+          ]}
+        ]
+      });
+    }
+  </script>
+</body>
+</html>

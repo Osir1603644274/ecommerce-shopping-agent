@@ -1,0 +1,127 @@
+[
+  {
+    "id": "yelp-rag-001",
+    "expectedAnswer": "这家小咖啡店坐前面会偏吵，不太适合需要安静环境的人。评论提到店面小而吵，前面咖啡机声音很大；如果一定要去，后面区域可能会安静一些。[yelp-0jBamrOBDkY6lLTpkY0xZw]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-002",
+    "expectedAnswer": "可以考虑 Alchemy Coffee。真实评论里说咖啡师友好、熟练且高效，甚至在顾客把笔记本电脑落在店里后追到街上归还，服务体验非常突出。[yelp-0raRTiWTrj9ytORRy-kZoA]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-003",
+    "expectedAnswer": "Good Karma 符合空间大、插座多、WiFi 和营业到很晚这些需求。需要注意的是，这家店只收现金，店内虽然有 ATM，但手续费较贵，所以最好提前准备现金。[yelp-1VyHchVgc9oEfVrsFweNNA]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-004",
+    "expectedAnswer": "这家有法式糕点和不错的店内环境，但不太适合带电脑办公，因为评论明确提到店里没有 Wi-Fi，对想工作的人来说比较扫兴。[yelp-2ERd_nEJ-zXQjuWCkR9Q3Q]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-005",
+    "expectedAnswer": "Forin Cafe 比较符合这个需求。评论提到它的咖啡很浓、WiFi 很快，店内氛围也很有创造力，适合开会或在工作日中途找灵感。[yelp-a6HDkwToJFoIPzlxBiS71g]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-006",
+    "expectedAnswer": "这家 WaWa 有座位、免费 WiFi 和充电站，适合短暂停留或使用电脑。但评论也提醒午餐时间会非常拥挤，而且收银台和三明治柜台动线互相影响，容易排队混乱。[yelp-AR8lhVM0aylAt8W06q6zxg]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-007",
+    "expectedAnswer": "这家星巴克有不错的桌子，可以用笔记本电脑工作；但评论特别提醒桌子附近没有插座，所以去之前最好把电脑充满电。另外，评论还提到牛奶空了后较久没人更换。[yelp-b8dIMHMGEWXMZi5BXaRfCw]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-008",
+    "expectedAnswer": "有，评论者特别喜欢店里的沙发，并说沙发适合用笔记本电脑工作。如果你偏好坐在沙发上处理电脑任务，这条评论对应的店比较合适。[yelp-ca5-l1hCUfQvkVfykIUyuQ]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-009",
+    "expectedAnswer": "Valerio Coffee Roasters 符合这些条件：评论提到停车有点难，但员工对进店的人很热情、很有帮助，店里也有人在用笔记本电脑。[yelp-CaXYOXHwOkmEu_JL3nEozQ]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-010",
+    "expectedAnswer": "这家咖啡店适合需要免费 WiFi 和舒适工作空间的人。评论者提到店里有免费 WiFi、舒适的工作空间，并且喝到了一杯不错的美式咖啡。[yelp-ChYhI05dXfDPbATD9VdiDQ]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-011",
+    "expectedAnswer": "这家 Good Karma 有很多自然光、免费 WiFi、大小合适的桌子和很多插座，还提供 3 美元无限续杯咖啡，比较适合长时间学习或办公。[yelp-FXIVmjL3GckScX7Uww2NDw]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-012",
+    "expectedAnswer": "Fairmount / Art Museum 附近可以考虑这家店。评论提到后面也有座位，整体适合安静地喝咖啡、消磨下午时光。[yelp-G1hVCb7CrOyL-HP1h6rByg]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-013",
+    "expectedAnswer": "如果周末想去这家咖啡店学习，最好早上 9 点或 10 点前到，否则不容易有位置。评论提到店里有大桌子、很多插座和不错的无线网络，但氛围像图书馆，不太适合聊天。[yelp-GOfMeMJLlr2vaLRxNgkSnQ]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-014",
+    "expectedAnswer": "这家咖啡馆适合晚上去：评论提到店里有很多桌子和插座，营业到晚上 10 点，而且晚上人更少，适合需要相对安静环境的人。[yelp-hUIkr15XxOSzheG5l9mYSw]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-015",
+    "expectedAnswer": "这家新咖啡店比较适合办公或学习。评论提到它空间开阔、自然光充足，有很多座位和插座，WiFi 也很棒。[yelp-kmEHaWvhg3O6IXfw7cDf7Q]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-016",
+    "expectedAnswer": "Red Hook 适合放松或用笔记本电脑工作，评论里提到可以坐在扶手椅上使用电脑。需要注意的是价格有点贵，但咖啡是公平贸易的，而且味道不错。[yelp-mBE3JkCV5YH9UqNdRJMUGg]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-017",
+    "expectedAnswer": "这家店的糕点和咖啡不错，但不适合认真用电脑工作，因为评论明确说 WiFi 很糟，导致顾客没法在笔记本电脑上完成多少工作。[yelp-OTgJteiQbczb4ZV5Nsf_5A]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-018",
+    "expectedAnswer": "这家店适合周六早上和朋友学习，评论提到前面大窗户有自然光，楼下也有座位。不过 chai latte 对评论者来说有点太甜，点饮品时可以注意口味。[yelp-REgp10DO01kp2pOONZtq9w]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-019",
+    "expectedAnswer": "Mt Airy 可以考虑 Alena's。评论者称它是隐藏小店，适合学习；桌子能同时放笔记本电脑、笔记本和咖啡，并且店里有 WiFi 和几个插座。[yelp-YSKJAZCSVaHN2HP7ThqHqQ]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-020",
+    "expectedAnswer": "Alchemy Coffee 有桌子和 WiFi，可以带电脑去；但评论提醒店里没有插座，所以如果要工作，设备需要提前充满电。[yelp-z2Ia7bFRqSKHicUNi7359Q]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-021",
+    "expectedAnswer": "这家店的优点是没有播放吵闹的大学兄弟音乐，食物和咖啡也不错；但评论者希望后面区域的地板能更安静，所以后区可能仍有一点噪音问题。[yelp-T52ED3B5-Lymo9EzCpuTwg]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-022",
+    "expectedAnswer": "Red Hook 不只适合喝咖啡，也适合午餐或不用排队的早午餐。评论者说食物很棒，也经常来这里工作。[yelp-VJEtJzH0GP_gFYjKDVIstw]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-023",
+    "expectedAnswer": "ReAnimator 适合中午去，评论者推荐中午到店，可以找一个舒适的户外座位；店里有 WiFi，也适合完成工作。[yelp-wiod6zg7n7S_-Iow_O-L9w]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-024",
+    "expectedAnswer": "这家咖啡店座位不多，而且会比较拥挤；但如果抢到位置，就适合工作。它也有人行道户外座位，适合带狗坐着读书放松。[yelp-RIdKOn-6dE8hdSFPh5RZug]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  },
+  {
+    "id": "yelp-rag-025",
+    "expectedAnswer": "Valerio 的咸派等待体验不太好，评论者等了很久且感受很差，还提到员工态度粗鲁。人多时 WiFi 也不能用，所以不适合依赖网络办公。[yelp-ZMZCxn7QQsG0val9K3945Q]",
+    "answerSource": "generated_from_real_yelp_evidence"
+  }
+]

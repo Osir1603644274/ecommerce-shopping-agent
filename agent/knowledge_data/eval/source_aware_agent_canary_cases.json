@@ -1,0 +1,59 @@
+{
+  "version": "rag-prod-01-stage-2d-v1",
+  "sealed": false,
+  "description": "非 sealed 的真实 Agent source-aware 小流量验证矩阵，不用于调检索排序。",
+  "cases": [
+    {
+      "id": "named-merchant-review",
+      "question": "Red Hook Coffee & Tea适合用电脑工作吗？",
+      "expectedTools": ["search_shop_reviews"],
+      "forbiddenTools": ["search_shops", "search_places", "get_place_detail"],
+      "expectsRetrieval": true,
+      "expectedSources": ["reviews"],
+      "expectedSourceType": "review",
+      "expectedShopId": 100011
+    },
+    {
+      "id": "merchant-profile",
+      "question": "St Honore Pastries 的 WiFi 和周末营业时间是什么？",
+      "expectedTools": ["search_knowledge"],
+      "forbiddenTools": ["search_shop_reviews", "search_shops", "search_places"],
+      "expectsRetrieval": true,
+      "expectedSources": ["merchant_docs"],
+      "expectedSourceType": "merchant_doc",
+      "expectedSourceId": "MTSW4McQd7CbVtyjqoe9mw",
+      "requiredAnswerTerms": ["免费", "21:00"],
+      "forbiddenAnswerTerms": ["适合带电脑", "适合办公", "适合工作", "环境舒适"]
+    },
+    {
+      "id": "policy-knowledge",
+      "question": "个性化推荐会如何使用我的个人信息？",
+      "expectedTools": ["search_knowledge"],
+      "forbiddenTools": ["recommend_shops", "search_shops", "search_places"],
+      "expectsRetrieval": true,
+      "expectedSources": ["policy_docs"],
+      "expectedSourceType": "policy_doc",
+      "expectedSourceId": "privacy-and-recommendation",
+      "requiredAnswerTerms": ["个人信息"],
+      "forbiddenAnswerTerms": ["提供您的用户编号", "提供您的 userId", "想试试", "推荐商户或地点"]
+    },
+    {
+      "id": "place-route-isolation",
+      "question": "海淀区有哪些一级综合公园？",
+      "expectedTools": ["search_places"],
+      "forbiddenTools": ["search_knowledge", "search_shop_reviews", "search_shops"],
+      "expectsRetrieval": false,
+      "requiredAnswerTerms": ["当前演示目录"]
+    },
+    {
+      "id": "structured-shop-route-isolation",
+      "question": "当前有哪些咖啡店？",
+      "expectedToolSequences": [
+        ["search_shops"],
+        ["list_shop_types", "search_shops"]
+      ],
+      "forbiddenTools": ["search_knowledge", "search_shop_reviews", "search_places"],
+      "expectsRetrieval": false
+    }
+  ]
+}

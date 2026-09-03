@@ -1,0 +1,89 @@
+{
+  "topK": 3,
+  "datasets": {
+    "legacy": {
+      "caseCount": 27,
+      "baseline": {
+        "hits": 25,
+        "hitRate": 0.9259259259259259,
+        "hitsAt1": 19,
+        "hitAt1Rate": 0.7037037037037037,
+        "mrr": 0.8148148148148148,
+        "timing": {
+          "totalMs": 72380.74340006278,
+          "avgMs": 2680.7682740763994,
+          "p50Ms": 2679.760700004408,
+          "p95Ms": 2949.8586999980034,
+          "maxMs": 3052.800899997237
+        }
+      },
+      "candidate": {
+        "hits": 25,
+        "hitRate": 0.9259259259259259,
+        "hitsAt1": 19,
+        "hitAt1Rate": 0.7037037037037037,
+        "mrr": 0.8148148148148148,
+        "timing": {
+          "totalMs": 71997.60759994388,
+          "avgMs": 2666.5780592571805,
+          "p50Ms": 2626.9610000017565,
+          "p95Ms": 2918.8601999921957,
+          "maxMs": 3035.264599995571
+        }
+      },
+      "equivalence": {
+        "topK": 3,
+        "total": 27,
+        "exactMatches": 27,
+        "exactMatchRate": 1.0,
+        "sameHitCount": 27,
+        "sameHitRate": 1.0,
+        "candidateRegressions": 0
+      },
+      "regressions": [],
+      "mismatches": []
+    },
+    "yelp": {
+      "caseCount": 25,
+      "baseline": {
+        "hits": 15,
+        "hitRate": 0.6,
+        "hitsAt1": 11,
+        "hitAt1Rate": 0.44,
+        "mrr": 0.5133333333333333,
+        "timing": {
+          "totalMs": 61296.720599988475,
+          "avgMs": 2451.868823999539,
+          "p50Ms": 2360.6958000018494,
+          "p95Ms": 3274.2761000117753,
+          "maxMs": 3376.820699995733
+        }
+      },
+      "candidate": {
+        "hits": 15,
+        "hitRate": 0.6,
+        "hitsAt1": 11,
+        "hitAt1Rate": 0.44,
+        "mrr": 0.5133333333333333,
+        "timing": {
+          "totalMs": 43239.68319999403,
+          "avgMs": 1729.5873279997613,
+          "p50Ms": 1684.1992999979993,
+          "p95Ms": 2038.4885999956168,
+          "maxMs": 2058.815099997446
+        }
+      },
+      "equivalence": {
+        "topK": 3,
+        "total": 25,
+        "exactMatches": 25,
+        "exactMatchRate": 1.0,
+        "sameHitCount": 25,
+        "sameHitRate": 1.0,
+        "candidateRegressions": 0
+      },
+      "regressions": [],
+      "mismatches": []
+    }
+  }
+}

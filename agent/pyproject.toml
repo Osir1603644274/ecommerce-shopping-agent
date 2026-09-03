@@ -1,0 +1,45 @@
+[project]
+name = "ecommerce-guide-agent"
+version = "0.1.0"
+description = "Evidence-grounded ecommerce guide Agent and evaluation runtime."
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi==0.138.0",
+    "httpx==0.28.1",
+    "jsonschema==4.26.0",
+    "langgraph==1.2.8",
+    "langgraph-checkpoint==4.2.0",
+    "mcp==2.0.0",
+    "openai==2.43.0",
+    "pydantic-settings==2.14.2",
+    "qdrant-client[fastembed]==1.12.1",
+    "redis==5.2.1",
+    "uvicorn[standard]==0.49.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.4.2",
+]
+data = [
+    "datasets==4.5.0",
+    "pdfplumber==0.11.8",
+    "pymysql==1.1.2",
+]
+qrel-rerank = [
+    "torch>=2.2,<3",
+    "transformers==4.46.3",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*", "evaluation*", "recommendation*", "scripts*"]
+
+[tool.setuptools.package-data]
+"app" = ["static/*", "static/**/*"]
+"app.place_data" = ["data/*.json"]
+"evaluation" = ["*.json"]

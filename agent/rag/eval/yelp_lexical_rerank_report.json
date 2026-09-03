@@ -1,0 +1,750 @@
+{
+  "topK": 3,
+  "sourceFilter": "yelp",
+  "candidateLimit": 10,
+  "reranker": "vector_top10_plus_lexical_overlap",
+  "retrievalDurationMs": 45669.38659999869,
+  "weights": {
+    "vector": 1.0,
+    "lexical": 5.0
+  },
+  "grid": [
+    {
+      "lexicalWeight": 0.1,
+      "total": 25,
+      "hits": 20,
+      "hitRate": 0.8,
+      "hitsAt1": 17,
+      "hitAt1Rate": 0.68,
+      "mrr": 0.7266666666666667
+    },
+    {
+      "lexicalWeight": 0.2,
+      "total": 25,
+      "hits": 19,
+      "hitRate": 0.76,
+      "hitsAt1": 18,
+      "hitAt1Rate": 0.72,
+      "mrr": 0.7333333333333333
+    },
+    {
+      "lexicalWeight": 0.5,
+      "total": 25,
+      "hits": 20,
+      "hitRate": 0.8,
+      "hitsAt1": 18,
+      "hitAt1Rate": 0.72,
+      "mrr": 0.7533333333333333
+    },
+    {
+      "lexicalWeight": 1.0,
+      "total": 25,
+      "hits": 20,
+      "hitRate": 0.8,
+      "hitsAt1": 17,
+      "hitAt1Rate": 0.68,
+      "mrr": 0.74
+    },
+    {
+      "lexicalWeight": 2.0,
+      "total": 25,
+      "hits": 20,
+      "hitRate": 0.8,
+      "hitsAt1": 16,
+      "hitAt1Rate": 0.64,
+      "mrr": 0.72
+    },
+    {
+      "lexicalWeight": 3.0,
+      "total": 25,
+      "hits": 21,
+      "hitRate": 0.84,
+      "hitsAt1": 15,
+      "hitAt1Rate": 0.6,
+      "mrr": 0.7133333333333333
+    },
+    {
+      "lexicalWeight": 5.0,
+      "total": 25,
+      "hits": 21,
+      "hitRate": 0.84,
+      "hitsAt1": 15,
+      "hitAt1Rate": 0.6,
+      "mrr": 0.72
+    },
+    {
+      "lexicalWeight": 8.0,
+      "total": 25,
+      "hits": 21,
+      "hitRate": 0.84,
+      "hitsAt1": 15,
+      "hitAt1Rate": 0.6,
+      "mrr": 0.72
+    }
+  ],
+  "baseline": {
+    "total": 25,
+    "hits": 18,
+    "hitRate": 0.72,
+    "hitsAt1": 12,
+    "hitAt1Rate": 0.48,
+    "mrr": 0.58
+  },
+  "candidate": {
+    "total": 25,
+    "hits": 21,
+    "hitRate": 0.84,
+    "hitsAt1": 15,
+    "hitAt1Rate": 0.6,
+    "mrr": 0.72
+  },
+  "improvements": [
+    {
+      "caseId": "yelp-rag-002",
+      "question": "有没有咖啡店员工服务特别好，甚至帮顾客找回落下的电脑？",
+      "expectedReviewIds": [
+        "yelp-0raRTiWTrj9ytORRy-kZoA"
+      ],
+      "baselineHit": false,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": null,
+      "candidateFirstRelevantRank": 2,
+      "baselineReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ],
+      "candidateReviewIds": [
+        "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+        "yelp-0raRTiWTrj9ytORRy-kZoA",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ"
+      ],
+      "improved": true,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-009",
+      "question": "哪家咖啡烘焙店停车不太方便，但员工很热情，店里也有人带电脑？",
+      "expectedReviewIds": [
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+      ],
+      "baselineHit": false,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": null,
+      "candidateFirstRelevantRank": 2,
+      "baselineReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+      ],
+      "candidateReviewIds": [
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+      ],
+      "improved": true,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-022",
+      "question": "Red Hook 除了咖啡，适合午餐或不用排队的早午餐吗？",
+      "expectedReviewIds": [
+        "yelp-VJEtJzH0GP_gFYjKDVIstw"
+      ],
+      "baselineHit": false,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": null,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ"
+      ],
+      "candidateReviewIds": [
+        "yelp-VJEtJzH0GP_gFYjKDVIstw",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-ChYhI05dXfDPbATD9VdiDQ"
+      ],
+      "improved": true,
+      "regressed": false
+    }
+  ],
+  "regressions": [],
+  "comparisons": [
+    {
+      "caseId": "yelp-rag-001",
+      "question": "这家小咖啡店如果坐前面会不会太吵？",
+      "expectedReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 1,
+      "candidateFirstRelevantRank": 2,
+      "baselineReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+      ],
+      "candidateReviewIds": [
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-1VyHchVgc9oEfVrsFweNNA"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-002",
+      "question": "有没有咖啡店员工服务特别好，甚至帮顾客找回落下的电脑？",
+      "expectedReviewIds": [
+        "yelp-0raRTiWTrj9ytORRy-kZoA"
+      ],
+      "baselineHit": false,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": null,
+      "candidateFirstRelevantRank": 2,
+      "baselineReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ],
+      "candidateReviewIds": [
+        "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+        "yelp-0raRTiWTrj9ytORRy-kZoA",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ"
+      ],
+      "improved": true,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-003",
+      "question": "想找空间大、插座多、开到很晚的咖啡馆，付款上有什么要注意？",
+      "expectedReviewIds": [
+        "yelp-1VyHchVgc9oEfVrsFweNNA"
+      ],
+      "baselineHit": false,
+      "candidateHit": false,
+      "baselineFirstRelevantRank": null,
+      "candidateFirstRelevantRank": null,
+      "baselineReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-YmBytIHGjEroySTkyL8m8w"
+      ],
+      "candidateReviewIds": [
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-AhTsqSS43V1-9yPq-NRX-w",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-004",
+      "question": "想吃法式糕点但还要办公，有哪家店因为没有 WiFi 不太合适？",
+      "expectedReviewIds": [
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 2,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-G16hQXpXMfiodPlsrLCnLw",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+        "yelp-AR8lhVM0aylAt8W06q6zxg"
+      ],
+      "candidateReviewIds": [
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-z2Ia7bFRqSKHicUNi7359Q"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-005",
+      "question": "哪家咖啡店咖啡很浓、WiFi 很快，而且适合找创意？",
+      "expectedReviewIds": [
+        "yelp-a6HDkwToJFoIPzlxBiS71g"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 1,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-a6HDkwToJFoIPzlxBiS71g",
+        "yelp-mhS1SUPKRA3Q6nR3oresqA",
+        "yelp-0raRTiWTrj9ytORRy-kZoA"
+      ],
+      "candidateReviewIds": [
+        "yelp-a6HDkwToJFoIPzlxBiS71g",
+        "yelp-WtbJcI8-FAkvxwyt0MtJgQ",
+        "yelp-YmBytIHGjEroySTkyL8m8w"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-006",
+      "question": "哪家 WaWa 有座位、免费 WiFi 和充电站，但午餐时间会很挤？",
+      "expectedReviewIds": [
+        "yelp-AR8lhVM0aylAt8W06q6zxg"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 1,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-AR8lhVM0aylAt8W06q6zxg",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+      ],
+      "candidateReviewIds": [
+        "yelp-AR8lhVM0aylAt8W06q6zxg",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-007",
+      "question": "哪家星巴克有桌子可以用电脑，但桌子附近没有插座？",
+      "expectedReviewIds": [
+        "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 3,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+      ],
+      "candidateReviewIds": [
+        "yelp-b8dIMHMGEWXMZi5BXaRfCw",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-008",
+      "question": "有没有适合在沙发上用笔记本电脑工作的咖啡店？",
+      "expectedReviewIds": [
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 1,
+      "candidateFirstRelevantRank": 2,
+      "baselineReviewIds": [
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+      ],
+      "candidateReviewIds": [
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-009",
+      "question": "哪家咖啡烘焙店停车不太方便，但员工很热情，店里也有人带电脑？",
+      "expectedReviewIds": [
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+      ],
+      "baselineHit": false,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": null,
+      "candidateFirstRelevantRank": 2,
+      "baselineReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+      ],
+      "candidateReviewIds": [
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+      ],
+      "improved": true,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-010",
+      "question": "哪家咖啡店有免费 WiFi 和舒适工作空间，还提供不错的美式？",
+      "expectedReviewIds": [
+        "yelp-ChYhI05dXfDPbATD9VdiDQ"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 3,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-ChYhI05dXfDPbATD9VdiDQ"
+      ],
+      "candidateReviewIds": [
+        "yelp-ChYhI05dXfDPbATD9VdiDQ",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-011",
+      "question": "哪家 Good Karma 有自然光、免费 WiFi、很多插座，还能喝 3 美元无限续杯咖啡？",
+      "expectedReviewIds": [
+        "yelp-FXIVmjL3GckScX7Uww2NDw"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 1,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-FXIVmjL3GckScX7Uww2NDw",
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+      ],
+      "candidateReviewIds": [
+        "yelp-FXIVmjL3GckScX7Uww2NDw",
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-WtbJcI8-FAkvxwyt0MtJgQ"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-012",
+      "question": "Fairmount 附近有没有安静喝咖啡、下午放松的地方？",
+      "expectedReviewIds": [
+        "yelp-G1hVCb7CrOyL-HP1h6rByg"
+      ],
+      "baselineHit": false,
+      "candidateHit": false,
+      "baselineFirstRelevantRank": null,
+      "candidateFirstRelevantRank": null,
+      "baselineReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ],
+      "candidateReviewIds": [
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-T52ED3B5-Lymo9EzCpuTwg",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-013",
+      "question": "周末想去咖啡店学习，哪家要早上九点或十点前到才容易有位置？",
+      "expectedReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 1,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-YmBytIHGjEroySTkyL8m8w"
+      ],
+      "candidateReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-WtbJcI8-FAkvxwyt0MtJgQ"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-014",
+      "question": "哪家咖啡馆晚上人更少、开到十点，还有很多插座？",
+      "expectedReviewIds": [
+        "yelp-hUIkr15XxOSzheG5l9mYSw"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 3,
+      "candidateFirstRelevantRank": 2,
+      "baselineReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-hUIkr15XxOSzheG5l9mYSw"
+      ],
+      "candidateReviewIds": [
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-hUIkr15XxOSzheG5l9mYSw",
+        "yelp-FXIVmjL3GckScX7Uww2NDw"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-015",
+      "question": "哪家新咖啡店空间开阔、自然光足，还有很多座位插座和很棒的 WiFi？",
+      "expectedReviewIds": [
+        "yelp-kmEHaWvhg3O6IXfw7cDf7Q"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 2,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-mhS1SUPKRA3Q6nR3oresqA",
+        "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+        "yelp-YmBytIHGjEroySTkyL8m8w"
+      ],
+      "candidateReviewIds": [
+        "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-0raRTiWTrj9ytORRy-kZoA"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-016",
+      "question": "Red Hook 适合用电脑工作吗？价格和咖啡有什么特点？",
+      "expectedReviewIds": [
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 1,
+      "candidateFirstRelevantRank": 2,
+      "baselineReviewIds": [
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+      ],
+      "candidateReviewIds": [
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-017",
+      "question": "哪家店糕点咖啡不错，但 WiFi 太差导致电脑工作做不了多少？",
+      "expectedReviewIds": [
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 1,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+      ],
+      "candidateReviewIds": [
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-ChYhI05dXfDPbATD9VdiDQ"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-018",
+      "question": "周六早上想和朋友学习，哪家有大窗户和楼下座位，但 chai latte 可能偏甜？",
+      "expectedReviewIds": [
+        "yelp-REgp10DO01kp2pOONZtq9w"
+      ],
+      "baselineHit": false,
+      "candidateHit": false,
+      "baselineFirstRelevantRank": null,
+      "candidateFirstRelevantRank": null,
+      "baselineReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-T52ED3B5-Lymo9EzCpuTwg"
+      ],
+      "candidateReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-019",
+      "question": "Mt Airy 有没有适合学习的隐藏小店，桌子能放电脑、笔记本和咖啡？",
+      "expectedReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 2,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+      ],
+      "candidateReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-0raRTiWTrj9ytORRy-kZoA"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-020",
+      "question": "Alchemy Coffee 有桌子和 WiFi 吗？如果要带电脑去，电源方面要注意什么？",
+      "expectedReviewIds": [
+        "yelp-z2Ia7bFRqSKHicUNi7359Q"
+      ],
+      "baselineHit": false,
+      "candidateHit": false,
+      "baselineFirstRelevantRank": null,
+      "candidateFirstRelevantRank": null,
+      "baselineReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+      ],
+      "candidateReviewIds": [
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-021",
+      "question": "哪家店不放吵闹的大学兄弟音乐，但后面区域地板还是有点吵？",
+      "expectedReviewIds": [
+        "yelp-T52ED3B5-Lymo9EzCpuTwg"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 1,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-T52ED3B5-Lymo9EzCpuTwg",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-YmBytIHGjEroySTkyL8m8w"
+      ],
+      "candidateReviewIds": [
+        "yelp-T52ED3B5-Lymo9EzCpuTwg",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-022",
+      "question": "Red Hook 除了咖啡，适合午餐或不用排队的早午餐吗？",
+      "expectedReviewIds": [
+        "yelp-VJEtJzH0GP_gFYjKDVIstw"
+      ],
+      "baselineHit": false,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": null,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ"
+      ],
+      "candidateReviewIds": [
+        "yelp-VJEtJzH0GP_gFYjKDVIstw",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-ChYhI05dXfDPbATD9VdiDQ"
+      ],
+      "improved": true,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-023",
+      "question": "ReAnimator 适合中午坐户外、用 WiFi 工作吗？",
+      "expectedReviewIds": [
+        "yelp-wiod6zg7n7S_-Iow_O-L9w"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 1,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-k3-x8KcSymMNREMgTGneAA"
+      ],
+      "candidateReviewIds": [
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-024",
+      "question": "哪家咖啡店座位不多但抢到位置后适合工作，也有户外人行道座位可以带狗读书？",
+      "expectedReviewIds": [
+        "yelp-RIdKOn-6dE8hdSFPh5RZug"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 1,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-RIdKOn-6dE8hdSFPh5RZug",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+      ],
+      "candidateReviewIds": [
+        "yelp-RIdKOn-6dE8hdSFPh5RZug",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+      ],
+      "improved": false,
+      "regressed": false
+    },
+    {
+      "caseId": "yelp-rag-025",
+      "question": "Valerio 的咸派等待体验怎么样？人多时 WiFi 稳定吗？",
+      "expectedReviewIds": [
+        "yelp-ZMZCxn7QQsG0val9K3945Q"
+      ],
+      "baselineHit": true,
+      "candidateHit": true,
+      "baselineFirstRelevantRank": 1,
+      "candidateFirstRelevantRank": 1,
+      "baselineReviewIds": [
+        "yelp-ZMZCxn7QQsG0val9K3945Q",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg"
+      ],
+      "candidateReviewIds": [
+        "yelp-ZMZCxn7QQsG0val9K3945Q",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+      ],
+      "improved": false,
+      "regressed": false
+    }
+  ]
+}

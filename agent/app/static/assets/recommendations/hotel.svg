@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-label="酒店商户插画">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ecfeff"/>
+      <stop offset="1" stop-color="#bae6fd"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="180" rx="28" fill="url(#bg)"/>
+  <circle cx="60" cy="46" r="32" fill="#0284c7" opacity=".14"/>
+  <circle cx="270" cy="126" r="42" fill="#0ea5e9" opacity=".12"/>
+  <rect x="86" y="48" width="148" height="104" rx="12" fill="#0f766e"/>
+  <rect x="108" y="72" width="28" height="22" rx="5" fill="#ccfbf1"/>
+  <rect x="146" y="72" width="28" height="22" rx="5" fill="#ccfbf1"/>
+  <rect x="184" y="72" width="28" height="22" rx="5" fill="#ccfbf1"/>
+  <rect x="108" y="106" width="28" height="22" rx="5" fill="#ccfbf1"/>
+  <rect x="146" y="106" width="28" height="46" rx="5" fill="#134e4a"/>
+  <rect x="184" y="106" width="28" height="22" rx="5" fill="#ccfbf1"/>
+  <path d="M78 152h164" stroke="#075985" stroke-width="10" stroke-linecap="round"/>
+  <text x="28" y="152" fill="#075985" font-family="Arial, sans-serif" font-size="24" font-weight="700">HOTEL</text>
+</svg>

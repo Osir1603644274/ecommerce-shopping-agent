@@ -1,0 +1,68 @@
+{
+  "version": "rag-prod-01-stage-3-v1",
+  "sealed": false,
+  "description": "评论Hybrid真实Agent canary矩阵；只验证接线、过滤、引用、路由隔离和延迟。",
+  "cases": [
+    {
+      "id": "generic-review-hybrid",
+      "question": "哪家咖啡店适合安静地用电脑工作？",
+      "expectedTools": ["search_knowledge"],
+      "forbiddenTools": ["search_shops", "search_places", "recommend_shops"],
+      "expectsRetrieval": true,
+      "expectedSources": ["reviews"],
+      "expectedSourceType": "review",
+      "expectedReviewMode": "hybrid"
+    },
+    {
+      "id": "named-review-hybrid-filter",
+      "question": "Red Hook Coffee & Tea适合用电脑工作吗？",
+      "expectedTools": ["search_shop_reviews"],
+      "forbiddenTools": ["search_shops", "search_places", "get_place_detail"],
+      "expectsRetrieval": true,
+      "expectedSources": ["reviews"],
+      "expectedSourceType": "review",
+      "expectedReviewMode": "hybrid",
+      "expectedShopId": 100011
+    },
+    {
+      "id": "merchant-doc-isolation",
+      "question": "St Honore Pastries 的 WiFi 和周末营业时间是什么？",
+      "expectedTools": ["search_knowledge"],
+      "forbiddenTools": ["search_shop_reviews", "search_shops", "search_places"],
+      "expectsRetrieval": true,
+      "expectedSources": ["merchant_docs"],
+      "expectedSourceType": "merchant_doc",
+      "expectedSourceId": "MTSW4McQd7CbVtyjqoe9mw",
+      "requiredAnswerTerms": ["免费", "21:00"],
+      "forbiddenAnswerTerms": ["适合带电脑", "适合办公"]
+    },
+    {
+      "id": "policy-isolation",
+      "question": "个性化推荐会如何使用我的个人信息？",
+      "expectedTools": ["search_knowledge"],
+      "forbiddenTools": ["recommend_shops", "search_shops", "search_places"],
+      "expectsRetrieval": true,
+      "expectedSources": ["policy_docs"],
+      "expectedSourceType": "policy_doc",
+      "expectedSourceId": "privacy-and-recommendation"
+    },
+    {
+      "id": "place-route-isolation",
+      "question": "海淀区有哪些一级综合公园？",
+      "expectedTools": ["search_places"],
+      "forbiddenTools": ["search_knowledge", "search_shop_reviews", "search_shops"],
+      "expectsRetrieval": false,
+      "requiredAnswerTerms": ["当前演示目录"]
+    },
+    {
+      "id": "structured-shop-route-isolation",
+      "question": "当前有哪些咖啡店？",
+      "expectedToolSequences": [
+        ["search_shops"],
+        ["list_shop_types", "search_shops"]
+      ],
+      "forbiddenTools": ["search_knowledge", "search_shop_reviews", "search_places"],
+      "expectsRetrieval": false
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "topK": 3,
+  "sourceFilter": "yelp",
+  "caseCount": 25,
+  "repeats": 3,
+  "hybridConfiguration": {
+    "candidateLimit": 50,
+    "bm25Weight": 0.02
+  },
+  "methodology": {
+    "warm": "each method executes its complete retrieval path for every timed request",
+    "cacheResetSingleRun": "clears process-local model/index caches; not a full machine cold start",
+    "timingUnit": "milliseconds"
+  },
+  "cacheResetSingleRunMs": {
+    "vector": 228.72839900003328,
+    "bm25": 655.8502909999788,
+    "hybrid": 785.3802389999487
+  },
+  "warm": {
+    "vector": {
+      "requestCount": 75,
+      "totalMs": 1964.3540750000739,
+      "avgMs": 26.19138766666765,
+      "p50Ms": 24.575502999994114,
+      "p95Ms": 34.355071000049975,
+      "minMs": 20.68267999999307,
+      "maxMs": 62.832461000027706
+    },
+    "bm25": {
+      "requestCount": 75,
+      "totalMs": 10607.58942300015,
+      "avgMs": 141.434525640002,
+      "p50Ms": 143.25785500000165,
+      "p95Ms": 185.55014899999378,
+      "minMs": 92.50900699998965,
+      "maxMs": 225.44393399999763
+    },
+    "hybrid": {
+      "requestCount": 75,
+      "totalMs": 2465.987167999799,
+      "avgMs": 32.87982890666399,
+      "p50Ms": 30.83741400001827,
+      "p95Ms": 41.79936899998893,
+      "minMs": 24.811966000015673,
+      "maxMs": 80.7238419999976
+    }
+  }
+}

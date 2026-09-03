@@ -1,0 +1,7325 @@
+{
+  "catalogVersion": "beijing-parks-v1",
+  "coordinateSystem": "BD-09",
+  "places": [
+    {
+      "address": "东城区东滨河路18号",
+      "contact": {
+        "governingUnit": "东城区园林绿化局",
+        "phone": "67692146（24小时电话）"
+      },
+      "district": "东城区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-19",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.877205,
+        "longitude": 116.405996
+      },
+      "name": "永定门公园（东城）",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 1,
+        "candidateScore": 62,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_alias_name_district",
+        "matchScore": 0.98
+      },
+      "sourceRefs": {
+        "official_parks": "19",
+        "park_accessibility": "ggfwcs-22-0001249"
+      }
+    },
+    {
+      "address": "丰台区花乡大葆台158号",
+      "contact": {
+        "governingUnit": "丰台区花乡街道办事处",
+        "phone": "83613681（24小时电话）"
+      },
+      "district": "丰台区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "不标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-433",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.817249,
+        "longitude": 116.294206
+      },
+      "name": "北京世界公园",
+      "park": {
+        "level": "二级",
+        "type": "专类公园"
+      },
+      "quality": {
+        "candidateRank": 2,
+        "candidateScore": 51,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "433",
+        "park_accessibility": "ggfwcs-22-0206313"
+      }
+    },
+    {
+      "address": "大兴区双高路163号",
+      "contact": {
+        "governingUnit": "大兴区园林服务中心",
+        "phone": "80256106（24小时电话）"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-793",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.773547,
+        "longitude": 116.326863
+      },
+      "name": "翡翠公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 3,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "793",
+        "park_accessibility": "ggfwcs-22-0001593"
+      }
+    },
+    {
+      "address": "密云区鼓楼街道密关路",
+      "contact": {
+        "governingUnit": "密云区园林绿化服务中心",
+        "phone": "69069996（24小时电话）"
+      },
+      "district": "密云区",
+      "facilities": [
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-1037",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.369819,
+        "longitude": 116.843818
+      },
+      "name": "长虹公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 4,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "1037",
+        "park_accessibility": "ggfwcs-22-0138422"
+      }
+    },
+    {
+      "address": "延庆区延庆镇湖北西路2号",
+      "contact": {
+        "governingUnit": "延庆区园林绿化局",
+        "phone": "69104105（24小时电话）"
+      },
+      "district": "延庆区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "无"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-1071",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.46214,
+        "longitude": 115.983531
+      },
+      "name": "夏都公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 5,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "1071",
+        "park_accessibility": "ggfwcs-22-0015730"
+      }
+    },
+    {
+      "address": "怀柔区怀柔镇张各长村",
+      "contact": {
+        "governingUnit": "怀柔区园林绿化服务中心",
+        "phone": "69644995（24小时电话）"
+      },
+      "district": "怀柔区",
+      "facilities": [
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        }
+      ],
+      "id": "beijing-park-963",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.323612,
+        "longitude": 116.658962
+      },
+      "name": "怀柔城市森林公园",
+      "park": {
+        "level": "二级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 6,
+        "candidateScore": 53,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "963",
+        "park_accessibility": "ggfwcs-22-0118001"
+      }
+    },
+    {
+      "address": "房山区长阳镇长兴西街东侧",
+      "contact": {
+        "governingUnit": "房山区园林绿化局",
+        "phone": "53036006（24小时电话）"
+      },
+      "district": "房山区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-614",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.76609,
+        "longitude": 116.186301
+      },
+      "name": "长阳公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 7,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "614",
+        "park_accessibility": "ggfwcs-22-0063704"
+      }
+    },
+    {
+      "address": "昌平区太平庄东路",
+      "contact": {
+        "governingUnit": "昌平区园林绿化局",
+        "phone": "57807282（24小时电话）"
+      },
+      "district": "昌平区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "未接驳"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "无"
+        }
+      ],
+      "id": "beijing-park-870",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.075161,
+        "longitude": 116.441733
+      },
+      "name": "天通艺园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 8,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "870",
+        "park_accessibility": "ggfwcs-22-0010674"
+      }
+    },
+    {
+      "address": "朝阳区朝阳公园南路1号",
+      "contact": {
+        "governingUnit": "朝阳区国资委",
+        "phone": "65953490 65025865（24小时电话）"
+      },
+      "district": "朝阳区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-178",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.951219,
+        "longitude": 116.487585
+      },
+      "name": "朝阳公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 9,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "178",
+        "park_accessibility": "ggfwcs-22-0093078"
+      }
+    },
+    {
+      "address": "海淀区中关村南大街35号",
+      "contact": {
+        "governingUnit": "北京市公园管理中心",
+        "phone": "88412894（8:30-17:00） 88412801（17:00-8:30）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-10",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.947809,
+        "longitude": 116.326386
+      },
+      "name": "紫竹院公园",
+      "park": {
+        "level": "一级",
+        "type": "历史名园"
+      },
+      "quality": {
+        "candidateRank": 10,
+        "candidateScore": 64,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "10",
+        "park_accessibility": "ggfwcs-22-0015652"
+      }
+    },
+    {
+      "address": "石景山区八角南路49号",
+      "contact": {
+        "governingUnit": "石景山区公园管理中心",
+        "phone": "68878597 88971880（24小时电话）"
+      },
+      "district": "石景山区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-536",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.917639,
+        "longitude": 116.20639
+      },
+      "name": "石景山雕塑公园",
+      "park": {
+        "level": "一级",
+        "type": "专类公园"
+      },
+      "quality": {
+        "candidateRank": 11,
+        "candidateScore": 61,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "536",
+        "park_accessibility": "ggfwcs-22-0045945"
+      }
+    },
+    {
+      "address": "西城区西直门外大街137号",
+      "contact": {
+        "governingUnit": "北京市公园管理中心",
+        "phone": "68390274 68390454（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-8",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.947671,
+        "longitude": 116.34234
+      },
+      "name": "北京动物园",
+      "park": {
+        "level": "一级",
+        "type": "历史名园"
+      },
+      "quality": {
+        "candidateRank": 12,
+        "candidateScore": 64,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "8",
+        "park_accessibility": "ggfwcs-22-0016105"
+      }
+    },
+    {
+      "address": "通州区八通轻轨临河里站南侧",
+      "contact": {
+        "governingUnit": "通州区城镇绿化服务中心",
+        "phone": "60550808 60550500（24小时电话）"
+      },
+      "district": "通州区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-716",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.880777,
+        "longitude": 116.684007
+      },
+      "name": "梨园主题公园",
+      "park": {
+        "level": "一级",
+        "type": "专类公园"
+      },
+      "quality": {
+        "candidateRank": 13,
+        "candidateScore": 61,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "716",
+        "park_accessibility": "ggfwcs-22-0002128"
+      }
+    },
+    {
+      "address": "门头沟区滨河路22号",
+      "contact": {
+        "governingUnit": "门头沟区公园管理中心",
+        "phone": "69858419 69841870（24小时电话）"
+      },
+      "district": "门头沟区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-577",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.945407,
+        "longitude": 116.119299
+      },
+      "name": "滨河世纪广场公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 14,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "577",
+        "park_accessibility": "ggfwcs-22-0082928"
+      }
+    },
+    {
+      "address": "顺义区后沙峪地区安平街临3号",
+      "contact": {
+        "governingUnit": "顺义区园林绿化服务中心",
+        "phone": "80476068（24小时电话）"
+      },
+      "district": "顺义区",
+      "facilities": [
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-774",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.127188,
+        "longitude": 116.572693
+      },
+      "name": "花博会主题公园",
+      "park": {
+        "level": "一级",
+        "type": "专类公园"
+      },
+      "quality": {
+        "candidateRank": 15,
+        "candidateScore": 61,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "774",
+        "park_accessibility": "ggfwcs-22-0004366"
+      }
+    },
+    {
+      "address": "西城区月坛北街甲6号",
+      "contact": {
+        "governingUnit": "西城区公园管理中心",
+        "phone": "68020940（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-113",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.922558,
+        "longitude": 116.358839
+      },
+      "name": "月坛公园",
+      "park": {
+        "level": "一级",
+        "type": "历史名园"
+      },
+      "quality": {
+        "candidateRank": 16,
+        "candidateScore": 64,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "113",
+        "park_accessibility": "ggfwcs-22-0166966"
+      }
+    },
+    {
+      "address": "什刹海历史文化旅游风景区内",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "62050786（24小时电话） 62010460（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-114",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.940158,
+        "longitude": 116.398453
+      },
+      "name": "什刹海公园",
+      "park": {
+        "level": "一级",
+        "type": "历史名园"
+      },
+      "quality": {
+        "candidateRank": 17,
+        "candidateScore": 64,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "114",
+        "park_accessibility": "ggfwcs-22-0183031"
+      }
+    },
+    {
+      "address": "西城区广安门南街64号",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "63404029（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-87",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.877073,
+        "longitude": 116.356383
+      },
+      "name": "金中都公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 18,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "87",
+        "park_accessibility": "ggfwcs-22-0010329"
+      }
+    },
+    {
+      "address": "西城区永定门东滨河路18号",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "83126132（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-88",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.8845,
+        "longitude": 116.404521
+      },
+      "name": "永定门公园（西城)",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 19,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "88",
+        "park_accessibility": "ggfwcs-22-0179162"
+      }
+    },
+    {
+      "address": "西城区槐柏树街12号",
+      "contact": {
+        "governingUnit": "西城区公园管理中心",
+        "phone": "83115092（8:00-17:00） 83125443（17:00-8:00)"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-89",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.901061,
+        "longitude": 116.365749
+      },
+      "name": "宣武艺园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 20,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "89",
+        "park_accessibility": "ggfwcs-22-0180182"
+      }
+    },
+    {
+      "address": "西城区真武庙路四条8号",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "68011422（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-90",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.908487,
+        "longitude": 116.352222
+      },
+      "name": "白云公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 21,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "90",
+        "park_accessibility": "ggfwcs-22-0183122"
+      }
+    },
+    {
+      "address": "西城区德胜街道安德路102号北滨河 公园",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "62010460（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-91",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.956468,
+        "longitude": 116.397504
+      },
+      "name": "北滨河公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 22,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "91",
+        "park_accessibility": "ggfwcs-22-0149756"
+      }
+    },
+    {
+      "address": "西城区北三环中路20号",
+      "contact": {
+        "governingUnit": "北京金都园林绿化有限责任公司",
+        "phone": "62011695（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-92",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.972598,
+        "longitude": 116.381297
+      },
+      "name": "双秀公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 23,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "92",
+        "park_accessibility": "ggfwcs-22-0055552"
+      }
+    },
+    {
+      "address": "西城区德外安德路六铺炕大街15号",
+      "contact": {
+        "governingUnit": "西城区公园管理中心",
+        "phone": "62023200（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-93",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.963029,
+        "longitude": 116.392668
+      },
+      "name": "人定湖公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 24,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "93",
+        "park_accessibility": "ggfwcs-22-0149841"
+      }
+    },
+    {
+      "address": "西城区白纸坊东街甲29号",
+      "contact": {
+        "governingUnit": "西城区公园管理中心",
+        "phone": "63523578（24小时电话)"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        }
+      ],
+      "id": "beijing-park-94",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.885845,
+        "longitude": 116.37434
+      },
+      "name": "万寿公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 25,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "94",
+        "park_accessibility": "ggfwcs-22-0010197"
+      }
+    },
+    {
+      "address": "朝阳区望京东路甲6号",
+      "contact": {
+        "governingUnit": "朝阳区园林绿化局",
+        "phone": "64725018 64725018（24小时电话）"
+      },
+      "district": "朝阳区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-180",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.004002,
+        "longitude": 116.501385
+      },
+      "name": "大望京公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 26,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "180",
+        "park_accessibility": "ggfwcs-22-0093107"
+      }
+    },
+    {
+      "address": "朝阳区后八里庄5号",
+      "contact": {
+        "governingUnit": "朝阳区园林绿化局",
+        "phone": "85817037 85824746（24小时电话）"
+      },
+      "district": "朝阳区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-182",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.933293,
+        "longitude": 116.498609
+      },
+      "name": "朝阳区红领巾公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 27,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "182",
+        "park_accessibility": "ggfwcs-22-0093170"
+      }
+    },
+    {
+      "address": "朝阳区将台西路9号",
+      "contact": {
+        "governingUnit": "朝阳区园林绿化局",
+        "phone": "64353759（24小时电话） 64353759（24小时电话）"
+      },
+      "district": "朝阳区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-183",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.977579,
+        "longitude": 116.481835
+      },
+      "name": "四得公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 28,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "183",
+        "park_accessibility": "ggfwcs-22-0093179"
+      }
+    },
+    {
+      "address": "朝阳区师家坟村156号",
+      "contact": {
+        "governingUnit": "朝阳区园林绿化局",
+        "phone": "64708518（24小时电话）"
+      },
+      "district": "朝阳区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-184",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.010921,
+        "longitude": 116.461533
+      },
+      "name": "北小河公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 29,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "184",
+        "park_accessibility": "ggfwcs-22-0093144"
+      }
+    },
+    {
+      "address": "朝阳区北四环东路77号",
+      "contact": {
+        "governingUnit": "朝阳区园林绿化局",
+        "phone": "64755736 84765896（24小时电话）"
+      },
+      "district": "朝阳区",
+      "facilities": [
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-185",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.004373,
+        "longitude": 116.458439
+      },
+      "name": "望和公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 30,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "185",
+        "park_accessibility": "ggfwcs-22-0093216"
+      }
+    },
+    {
+      "address": "朝阳区王四营乡高碑店路东侧",
+      "contact": {
+        "governingUnit": "王四营乡公共服务中心",
+        "phone": "87390858（24小时电话）"
+      },
+      "district": "朝阳区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-187",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.885409,
+        "longitude": 116.541847
+      },
+      "name": "古塔公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 31,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "187",
+        "park_accessibility": "ggfwcs-22-0201284"
+      }
+    },
+    {
+      "address": "海淀区西三旗街道兴林嘉园南侧",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-265",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.047147,
+        "longitude": 116.402387
+      },
+      "name": "西小口公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 32,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "265",
+        "park_accessibility": "ggfwcs-22-0172762"
+      }
+    },
+    {
+      "address": "海淀区慈寿寺桥西南侧",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-266",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.935382,
+        "longitude": 116.301679
+      },
+      "name": "玲珑公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 33,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "266",
+        "park_accessibility": "ggfwcs-22-0018116"
+      }
+    },
+    {
+      "address": "海淀区荷清路清华大学北侧",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-267",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.022589,
+        "longitude": 116.331922
+      },
+      "name": "荷清园公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 34,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "267",
+        "park_accessibility": "ggfwcs-22-0016079"
+      }
+    },
+    {
+      "address": "海淀区马甸桥西北角",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-268",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.978533,
+        "longitude": 116.386326
+      },
+      "name": "马甸公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 35,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "268",
+        "park_accessibility": "ggfwcs-22-0015829"
+      }
+    },
+    {
+      "address": "海淀区颐和园西门外",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        }
+      ],
+      "id": "beijing-park-269",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.991948,
+        "longitude": 116.261624
+      },
+      "name": "北坞公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 36,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "269",
+        "park_accessibility": "ggfwcs-22-0018136"
+      }
+    },
+    {
+      "address": "巴沟路与蓝靛厂北路交叉口西北角",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-273",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.97614,
+        "longitude": 116.295482
+      },
+      "name": "巴沟山水园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 37,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "273",
+        "park_accessibility": "ggfwcs-22-0015796"
+      }
+    },
+    {
+      "address": "海淀区万柳西路西侧",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-274",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.969125,
+        "longitude": 116.300104
+      },
+      "name": "长春健身园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 38,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "274",
+        "park_accessibility": "ggfwcs-22-0015783"
+      }
+    },
+    {
+      "address": "大兴区黄村镇新源大街",
+      "contact": {
+        "governingUnit": "大兴区园林服务中心",
+        "phone": "69266971（24小时电话）"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-794",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.71126,
+        "longitude": 116.325614
+      },
+      "name": "念坛公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 39,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "794",
+        "park_accessibility": "ggfwcs-22-0002204"
+      }
+    },
+    {
+      "address": "大兴区黄村镇清源西路南侧",
+      "contact": {
+        "governingUnit": "大兴区园林服务中心",
+        "phone": "69296833（24小时电话）"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        }
+      ],
+      "id": "beijing-park-795",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.743308,
+        "longitude": 116.311492
+      },
+      "name": "清源公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 40,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "795",
+        "park_accessibility": "ggfwcs-22-0002206"
+      }
+    },
+    {
+      "address": "大兴区辅高路与金星路路口",
+      "contact": {
+        "governingUnit": "大兴区园林服务中心",
+        "phone": "69242812 69248362（24小时电话） 69242640（24小时电话）"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-799",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.770657,
+        "longitude": 116.347838
+      },
+      "name": "高米店公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 41,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "799",
+        "park_accessibility": "ggfwcs-22-0001746"
+      }
+    },
+    {
+      "address": "大兴区黄村镇兴丰北大街3号",
+      "contact": {
+        "governingUnit": "大兴区园林服务中心",
+        "phone": "60211735（24小时电话）"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-801",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.747544,
+        "longitude": 116.341416
+      },
+      "name": "黄村公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 42,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "801",
+        "park_accessibility": "ggfwcs-22-0001013"
+      }
+    },
+    {
+      "address": "大兴区兴旺路",
+      "contact": {
+        "governingUnit": "大兴区园林服务中心",
+        "phone": "60211735（24小时电话）"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-802",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.746481,
+        "longitude": 116.320312
+      },
+      "name": "兴旺公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 43,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "802",
+        "park_accessibility": "ggfwcs-22-0002235"
+      }
+    },
+    {
+      "address": "大兴区芦花路与狼垡东路交叉路口往 北约100米",
+      "contact": {
+        "governingUnit": "大兴区黄村镇人民政府",
+        "phone": "61226222（24小时电话）"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-804",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.797813,
+        "longitude": 116.287031
+      },
+      "name": "狼垡公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 44,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "804",
+        "park_accessibility": "ggfwcs-22-0018219"
+      }
+    },
+    {
+      "address": "密云区果园街道城后街",
+      "contact": {
+        "governingUnit": "密云区园林绿化服务中心",
+        "phone": "69069996（24小时电话）"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-1025",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.773457,
+        "longitude": 116.331345
+      },
+      "name": "滨河公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 45,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "1025",
+        "park_accessibility": "ggfwcs-22-0001590"
+      }
+    },
+    {
+      "address": "延庆区中踏广场南侧，湖北西路北侧",
+      "contact": {
+        "governingUnit": "延庆区园林绿化局",
+        "phone": "69104105（24小时电话）"
+      },
+      "district": "延庆区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "无"
+        }
+      ],
+      "id": "beijing-park-1072",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.463947,
+        "longitude": 115.983461
+      },
+      "name": "妫川广场",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 46,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "1072",
+        "park_accessibility": "ggfwcs-22-0014553"
+      }
+    },
+    {
+      "address": "延庆区高塔街50号",
+      "contact": {
+        "governingUnit": "延庆区园林绿化局",
+        "phone": "69104105（24小时电话）"
+      },
+      "district": "延庆区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "无"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "不标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-1073",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.472434,
+        "longitude": 116.000435
+      },
+      "name": "香水苑公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 47,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "1073",
+        "park_accessibility": "ggfwcs-22-0014997"
+      }
+    },
+    {
+      "address": "延庆区广兴街北延，延庆镇八达岭温 泉度假村北侧",
+      "contact": {
+        "governingUnit": "延庆区园林绿化局",
+        "phone": "69104105（24小时电话）"
+      },
+      "district": "延庆区",
+      "facilities": [
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不标准",
+          "status": "不标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "无"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-1074",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.487771,
+        "longitude": 115.984086
+      },
+      "name": "江水泉公园",
+      "park": {
+        "level": "一级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 48,
+        "candidateScore": 63,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "1074",
+        "park_accessibility": "ggfwcs-22-0015666"
+      }
+    },
+    {
+      "address": "西城区西二环路西便门桥东侧（宣武 门西大街-广安门北滨河路）",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "68011422（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-116",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.906885,
+        "longitude": 116.363783
+      },
+      "name": "西便门城墙遗址公园",
+      "park": {
+        "level": "一级",
+        "type": "专类公园"
+      },
+      "quality": {
+        "candidateRank": 49,
+        "candidateScore": 61,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "116",
+        "park_accessibility": "ggfwcs-22-0183121"
+      }
+    },
+    {
+      "address": "海淀区后八家东路与后八家路交叉口 向东100米",
+      "contact": {
+        "governingUnit": "海淀区东升镇农业综合服务中心",
+        "phone": "82413225 82619059（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-322",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.025813,
+        "longitude": 116.346724
+      },
+      "name": "东升八家郊野公园",
+      "park": {
+        "level": "一级",
+        "type": "专类公园"
+      },
+      "quality": {
+        "candidateRank": 50,
+        "candidateScore": 61,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "322",
+        "park_accessibility": "ggfwcs-22-0016449"
+      }
+    },
+    {
+      "address": "海淀区树村路农大南路交叉口东",
+      "contact": {
+        "governingUnit": "海淀区上地街道办事处",
+        "phone": "62978535 13810674314（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-323",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.032183,
+        "longitude": 116.310472
+      },
+      "name": "树村郊野公园",
+      "park": {
+        "level": "一级",
+        "type": "专类公园"
+      },
+      "quality": {
+        "candidateRank": 51,
+        "candidateScore": 61,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "323",
+        "park_accessibility": "ggfwcs-22-0172789"
+      }
+    },
+    {
+      "address": "石景山区石景山路2号",
+      "contact": {
+        "governingUnit": "石景山区公园管理中心",
+        "phone": "68650422（24小时电话）"
+      },
+      "district": "石景山区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        }
+      ],
+      "id": "beijing-park-538",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.91168,
+        "longitude": 116.248701
+      },
+      "name": "北京国际雕塑公园",
+      "park": {
+        "level": "一级",
+        "type": "专类公园"
+      },
+      "quality": {
+        "candidateRank": 52,
+        "candidateScore": 61,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "538",
+        "park_accessibility": "ggfwcs-22-0034242"
+      }
+    },
+    {
+      "address": "大兴区西红门镇欣宁街与宏康路交叉 口",
+      "contact": {
+        "governingUnit": "大兴区园林服务中心",
+        "phone": "80256106（24小时电话）"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-819",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.787264,
+        "longitude": 116.333788
+      },
+      "name": "地铁文化公园",
+      "park": {
+        "level": "一级",
+        "type": "专类公园"
+      },
+      "quality": {
+        "candidateRank": 53,
+        "candidateScore": 61,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "819",
+        "park_accessibility": "ggfwcs-22-0001537"
+      }
+    },
+    {
+      "address": "通州区台湖镇九周路与张台路交叉口 西南角",
+      "contact": {
+        "governingUnit": "通州区台湖镇集体林场",
+        "phone": "61533689（24小时电话）"
+      },
+      "district": "通州区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "未接驳"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "无"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "无"
+        }
+      ],
+      "id": "beijing-park-743",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.830221,
+        "longitude": 116.654088
+      },
+      "name": "台湖公园",
+      "park": {
+        "level": "一级",
+        "type": "生态公园"
+      },
+      "quality": {
+        "candidateRank": 54,
+        "candidateScore": 60,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "743",
+        "park_accessibility": "ggfwcs-22-0060932"
+      }
+    },
+    {
+      "address": "东城区东滨河路17号",
+      "contact": {
+        "governingUnit": "东城区园林绿化局",
+        "phone": "67692146（24小时电话）"
+      },
+      "district": "东城区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        }
+      ],
+      "id": "beijing-park-22",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.878469,
+        "longitude": 116.424628
+      },
+      "name": "玉蜓公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 55,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "22",
+        "park_accessibility": "ggfwcs-22-0000875"
+      }
+    },
+    {
+      "address": "西城区西二环沿线东侧 （官园桥—复 兴门）",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "62010460（24小时电话） 68011422（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-95",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.932022,
+        "longitude": 116.363172
+      },
+      "name": "顺城公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 56,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "95",
+        "park_accessibility": "ggfwcs-22-0183124"
+      }
+    },
+    {
+      "address": "西城区广安门外大街以北的护城河东 西两岸",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "63404029（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-97",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.898118,
+        "longitude": 116.337038
+      },
+      "name": "莲花河城市休闲公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 57,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "97",
+        "park_accessibility": "ggfwcs-22-0027970"
+      }
+    },
+    {
+      "address": "西城区广安门北街甲一号",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "63404029（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-98",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.899752,
+        "longitude": 116.355878
+      },
+      "name": "北京滨河公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 58,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "98",
+        "park_accessibility": "ggfwcs-22-0183035"
+      }
+    },
+    {
+      "address": "西城区南礼士路58号",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "68011422（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-100",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.91661,
+        "longitude": 116.361029
+      },
+      "name": "南礼士路公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 59,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "100",
+        "park_accessibility": "ggfwcs-22-0015643"
+      }
+    },
+    {
+      "address": "西城区德胜门东大街南侧",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "62010460（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        }
+      ],
+      "id": "beijing-park-101",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.954715,
+        "longitude": 116.388899
+      },
+      "name": "德胜公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 60,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "101",
+        "park_accessibility": "ggfwcs-22-0012424"
+      }
+    },
+    {
+      "address": "西城区马甸桥东北角",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "82279443（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-102",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.976414,
+        "longitude": 116.387884
+      },
+      "name": "玫瑰公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 61,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "102",
+        "park_accessibility": "ggfwcs-22-0179163"
+      }
+    },
+    {
+      "address": "西城区后广平胡同36号",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "62010460（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        }
+      ],
+      "id": "beijing-park-103",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.942029,
+        "longitude": 116.367385
+      },
+      "name": "官园公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 62,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "103",
+        "park_accessibility": "ggfwcs-22-0183125"
+      }
+    },
+    {
+      "address": "西城区金城坊街2号",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "68011422（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        }
+      ],
+      "id": "beijing-park-104",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.922715,
+        "longitude": 116.368249
+      },
+      "name": "金融街中心公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 63,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "104",
+        "park_accessibility": "ggfwcs-22-0032207"
+      }
+    },
+    {
+      "address": "西城区广内大街报国寺门外西南侧",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "83126132（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-105",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.895617,
+        "longitude": 116.364613
+      },
+      "name": "广宁公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 64,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "105",
+        "park_accessibility": "ggfwcs-22-0015740"
+      }
+    },
+    {
+      "address": "海淀区清华东路南侧",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-275",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.006248,
+        "longitude": 116.353585
+      },
+      "name": "王庄公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 65,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "275",
+        "park_accessibility": "ggfwcs-22-0016638"
+      }
+    },
+    {
+      "address": "海淀区西四环东侧（金沟河桥至五棵 松桥）",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-277",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.915437,
+        "longitude": 116.281495
+      },
+      "name": "五棵松奥林匹克文化公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 66,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "277",
+        "park_accessibility": "ggfwcs-22-0018124"
+      }
+    },
+    {
+      "address": "海淀区厢黄旗东路柳浪家园西侧",
+      "contact": {
+        "governingUnit": "海淀区上地街道办事处",
+        "phone": "62978535 13810674314（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        }
+      ],
+      "id": "beijing-park-279",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.036083,
+        "longitude": 116.301935
+      },
+      "name": "厢黄旗公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 67,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "279",
+        "park_accessibility": "ggfwcs-22-0016835"
+      }
+    },
+    {
+      "address": "海淀区双贝子坟路东侧，东双贝子坟 路西侧",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-281",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.906691,
+        "longitude": 116.339883
+      },
+      "name": "会城门公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 68,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "281",
+        "park_accessibility": "ggfwcs-22-0018140"
+      }
+    },
+    {
+      "address": "海淀区北四环健翔桥与G6京藏高速交 叉口",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-282",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.991771,
+        "longitude": 116.383592
+      },
+      "name": "北极寺公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 69,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "282",
+        "park_accessibility": "ggfwcs-22-0015920"
+      }
+    },
+    {
+      "address": "海淀区西三环中路中央电视塔北侧",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-283",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.926607,
+        "longitude": 116.314286
+      },
+      "name": "中央电视塔公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 70,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "283",
+        "park_accessibility": "ggfwcs-22-0018181"
+      }
+    },
+    {
+      "address": "海淀区营福路与前屯路交汇西南角",
+      "contact": {
+        "governingUnit": "海淀区东升镇农业综合服务中心",
+        "phone": "82413225"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        }
+      ],
+      "id": "beijing-park-284",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.048891,
+        "longitude": 116.353822
+      },
+      "name": "小营公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 71,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "284",
+        "park_accessibility": "ggfwcs-22-0016820"
+      }
+    },
+    {
+      "address": "海淀区毛纺路橡林郡南侧",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-285",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.040423,
+        "longitude": 116.344487
+      },
+      "name": "燕清文化体育公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 72,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "285",
+        "park_accessibility": "ggfwcs-22-0016053"
+      }
+    },
+    {
+      "address": "海淀区玉泉路和金沟河路交汇处东南 角",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-288",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.922315,
+        "longitude": 116.260886
+      },
+      "name": "阳光星期八公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 73,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "288",
+        "park_accessibility": "ggfwcs-22-0018101"
+      }
+    },
+    {
+      "address": "北展后湖至交通大学路河北岸",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-289",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.956695,
+        "longitude": 116.308792
+      },
+      "name": "南长河公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 74,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "289",
+        "park_accessibility": "ggfwcs-22-0018145"
+      }
+    },
+    {
+      "address": "海淀区蓝靛厂南路与彰化路交叉口西 北角",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-290",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.950154,
+        "longitude": 116.30079
+      },
+      "name": "车道沟公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 75,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "290",
+        "park_accessibility": "ggfwcs-22-0018154"
+      }
+    },
+    {
+      "address": "火器营路东侧",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        }
+      ],
+      "id": "beijing-park-291",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.970728,
+        "longitude": 116.296093
+      },
+      "name": "金源娱乐园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 76,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "291",
+        "park_accessibility": "ggfwcs-22-0015818"
+      }
+    },
+    {
+      "address": "海淀区西五环西侧晋元桥西南角",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-292",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.926323,
+        "longitude": 116.217395
+      },
+      "name": "田村城市休闲公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 77,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "292",
+        "park_accessibility": "ggfwcs-22-0018199"
+      }
+    },
+    {
+      "address": "海淀区宝盛东路",
+      "contact": {
+        "governingUnit": "海淀区东升镇农业综合服务中心",
+        "phone": "82413225 82619059（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-294",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.046114,
+        "longitude": 116.382036
+      },
+      "name": "东升文体公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 78,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "294",
+        "park_accessibility": "ggfwcs-22-0016471"
+      }
+    },
+    {
+      "address": "海淀区清河小营桥西侧",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-297",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.045475,
+        "longitude": 116.345094
+      },
+      "name": "碧水风荷公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 79,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "297",
+        "park_accessibility": "ggfwcs-22-0016043"
+      }
+    },
+    {
+      "address": "石景山区古城南路1号",
+      "contact": {
+        "governingUnit": "石景山区公园管理中心",
+        "phone": "88255260（24小时电话） 88971880（24小时电话）"
+      },
+      "district": "石景山区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-512",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.91781,
+        "longitude": 116.199792
+      },
+      "name": "古城公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 80,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "512",
+        "park_accessibility": "ggfwcs-22-0045992"
+      }
+    },
+    {
+      "address": "门头沟区黑山大街12号",
+      "contact": {
+        "governingUnit": "门头沟区公园管理中心",
+        "phone": "69858419 69841870（24小时电话）"
+      },
+      "district": "门头沟区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-581",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.946362,
+        "longitude": 116.10312
+      },
+      "name": "黑山公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 81,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "581",
+        "park_accessibility": "ggfwcs-22-0018129"
+      }
+    },
+    {
+      "address": "通州区宋庄镇草尹路小中河桥西800 米",
+      "contact": {
+        "governingUnit": "东郊森林公园管理处",
+        "phone": "89589506（24小时电话）"
+      },
+      "district": "顺义区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-742",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.025837,
+        "longitude": 116.667815
+      },
+      "name": "东郊森林公园（通州）",
+      "park": {
+        "level": "一级",
+        "type": "生态公园"
+      },
+      "quality": {
+        "candidateRank": 82,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_alias_name",
+        "matchScore": 0.98
+      },
+      "sourceRefs": {
+        "official_parks": "742",
+        "park_accessibility": "ggfwcs-22-0004405"
+      }
+    },
+    {
+      "address": "大兴区兴丰大街中段197号",
+      "contact": {
+        "governingUnit": "大兴区园林服务中心",
+        "phone": "60211735（24小时电话）"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-806",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.734676,
+        "longitude": 116.345346
+      },
+      "name": "街心公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 83,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "806",
+        "park_accessibility": "ggfwcs-22-0002391"
+      }
+    },
+    {
+      "address": "大兴区黄村镇兴丰北大街",
+      "contact": {
+        "governingUnit": "大兴区园林服务中心",
+        "phone": "69242812 69248362（24小时电话） 69242640（24小时电话）"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "无",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-807",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.757797,
+        "longitude": 116.342755
+      },
+      "name": "枣林公园",
+      "park": {
+        "level": "一级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 84,
+        "candidateScore": 59,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "807",
+        "park_accessibility": "ggfwcs-22-0002239"
+      }
+    },
+    {
+      "address": "西城区珠市口大街纪晓岚故居西侧",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "83126132（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-152",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.89614,
+        "longitude": 116.393193
+      },
+      "name": "京韵园",
+      "park": {
+        "level": "一级",
+        "type": "游园"
+      },
+      "quality": {
+        "candidateRank": 85,
+        "candidateScore": 58,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "152",
+        "park_accessibility": "ggfwcs-22-0185606"
+      }
+    },
+    {
+      "address": "西城区樱桃斜街",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "83126132（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-156",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.900523,
+        "longitude": 116.395691
+      },
+      "name": "百花园",
+      "park": {
+        "level": "一级",
+        "type": "游园"
+      },
+      "quality": {
+        "candidateRank": 86,
+        "candidateScore": 58,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "156",
+        "park_accessibility": "ggfwcs-22-0179144"
+      }
+    },
+    {
+      "address": "顺义区金牛北路",
+      "contact": {
+        "governingUnit": "顺义区牛栏山镇人民政府",
+        "phone": "60438290（24小时电话） 13811277392"
+      },
+      "district": "顺义区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-757",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 40.228539,
+        "longitude": 116.681109
+      },
+      "name": "金牛山公园",
+      "park": {
+        "level": "二级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 87,
+        "candidateScore": 53,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "757",
+        "park_accessibility": "ggfwcs-22-0055383"
+      }
+    },
+    {
+      "address": "北京经济技术开发区文化园路",
+      "contact": {
+        "governingUnit": "经开区生态环境建设局",
+        "phone": "67863973 13124799424"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-1097",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.818821,
+        "longitude": 116.504551
+      },
+      "name": "国际企业文化园",
+      "park": {
+        "level": "二级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 88,
+        "candidateScore": 53,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "1097",
+        "park_accessibility": "ggfwcs-22-0152564"
+      }
+    },
+    {
+      "address": "北京经济技术开发区天华南路",
+      "contact": {
+        "governingUnit": "经开区生态环境建设局",
+        "phone": "67890969 13693665698"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-1098",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.802884,
+        "longitude": 116.509716
+      },
+      "name": "博大公园",
+      "park": {
+        "level": "二级",
+        "type": "综合公园"
+      },
+      "quality": {
+        "candidateRank": 89,
+        "candidateScore": 53,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "1098",
+        "park_accessibility": "ggfwcs-22-0151393"
+      }
+    },
+    {
+      "address": "西城区新街口北大街西侧",
+      "contact": {
+        "governingUnit": "西城区园林绿化局",
+        "phone": "62010460（24小时电话）"
+      },
+      "district": "西城区",
+      "facilities": [
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-118",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.947132,
+        "longitude": 116.378237
+      },
+      "name": "新街口城市森林公园",
+      "park": {
+        "level": "二级",
+        "type": "专类公园"
+      },
+      "quality": {
+        "candidateRank": 90,
+        "candidateScore": 51,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "118",
+        "park_accessibility": "ggfwcs-22-0183123"
+      }
+    },
+    {
+      "address": "朝阳区小红门乡牌坊村",
+      "contact": {
+        "governingUnit": "朝阳区小红门乡公服中心",
+        "phone": "87603360（24小时电话）"
+      },
+      "district": "朝阳区",
+      "facilities": [
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-221",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.834432,
+        "longitude": 116.494118
+      },
+      "name": "镇海寺郊野公园",
+      "park": {
+        "level": "二级",
+        "type": "专类公园"
+      },
+      "quality": {
+        "candidateRank": 91,
+        "candidateScore": 51,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "221",
+        "park_accessibility": "ggfwcs-22-0030119"
+      }
+    },
+    {
+      "address": "石景山区上庄大街6号",
+      "contact": {
+        "governingUnit": "石景山区公园管理中心",
+        "phone": "68878597 88971880（24小时电话）"
+      },
+      "district": "石景山区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-540",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.920565,
+        "longitude": 116.231188
+      },
+      "name": "老山城市休闲公园",
+      "park": {
+        "level": "二级",
+        "type": "专类公园"
+      },
+      "quality": {
+        "candidateRank": 92,
+        "candidateScore": 51,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "540",
+        "park_accessibility": "ggfwcs-22-0013240"
+      }
+    },
+    {
+      "address": "大兴区南中轴路",
+      "contact": {
+        "governingUnit": "大兴区黄村镇人民政府",
+        "phone": "61262258（24小时电话）"
+      },
+      "district": "大兴区",
+      "facilities": [
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-823",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.721187,
+        "longitude": 116.413712
+      },
+      "name": "孙村公园",
+      "park": {
+        "level": "二级",
+        "type": "专类公园"
+      },
+      "quality": {
+        "candidateRank": 93,
+        "candidateScore": 51,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "823",
+        "park_accessibility": "ggfwcs-22-0018143"
+      }
+    },
+    {
+      "address": "东城区永定门外大街永定门地铁站西 侧",
+      "contact": {
+        "governingUnit": "东城区园林绿化局",
+        "phone": "87196801（24小时电话）"
+      },
+      "district": "东城区",
+      "facilities": [
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-32",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.87569,
+        "longitude": 116.404948
+      },
+      "name": "燕墩公园",
+      "park": {
+        "level": "二级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 94,
+        "candidateScore": 49,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "32",
+        "park_accessibility": "ggfwcs-22-0174069"
+      }
+    },
+    {
+      "address": "东城区通惠河北路北京机务段西侧",
+      "contact": {
+        "governingUnit": "东城区园林绿化局",
+        "phone": "87196801（24小时电话）"
+      },
+      "district": "东城区",
+      "facilities": [
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        }
+      ],
+      "id": "beijing-park-34",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.908075,
+        "longitude": 116.447344
+      },
+      "name": "大通滨河公园",
+      "park": {
+        "level": "二级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 95,
+        "candidateScore": 49,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "34",
+        "park_accessibility": "ggfwcs-22-0174068"
+      }
+    },
+    {
+      "address": "海淀区玉渊潭南路与西三环中路交汇 西北角",
+      "contact": {
+        "governingUnit": "海淀区公园管理中心",
+        "phone": "85230016 62568968（24小时电话）"
+      },
+      "district": "海淀区",
+      "facilities": [
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-306",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.919258,
+        "longitude": 116.315746
+      },
+      "name": "小天鹅公园",
+      "park": {
+        "level": "二级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 96,
+        "candidateScore": 49,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "306",
+        "park_accessibility": "ggfwcs-22-0018209"
+      }
+    },
+    {
+      "address": "石景山区鲁谷路与石槽中街的丁字路 口西南",
+      "contact": {
+        "governingUnit": "石景山区园林绿化局",
+        "phone": "88258505 18813039721"
+      },
+      "district": "石景山区",
+      "facilities": [
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "良好"
+        }
+      ],
+      "id": "beijing-park-518",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.909649,
+        "longitude": 116.255281
+      },
+      "name": "旺景公园",
+      "park": {
+        "level": "二级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 97,
+        "candidateScore": 49,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "518",
+        "park_accessibility": "ggfwcs-22-0212124"
+      }
+    },
+    {
+      "address": "房山区城关街道燕房路、京周路交汇 处",
+      "contact": {
+        "governingUnit": "房山区园林绿化局",
+        "phone": "69314197（24小时电话）"
+      },
+      "district": "门头沟区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        }
+      ],
+      "id": "beijing-park-619",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.936911,
+        "longitude": 116.130396
+      },
+      "name": "迎宾公园",
+      "park": {
+        "level": "二级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 98,
+        "candidateScore": 49,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "619",
+        "park_accessibility": "ggfwcs-22-0020781"
+      }
+    },
+    {
+      "address": "房山区长阳镇南广阳城小区南侧",
+      "contact": {
+        "governingUnit": "房山区园林绿化局",
+        "phone": "81310198（24小时电话）"
+      },
+      "district": "房山区",
+      "facilities": [
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-624",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.746017,
+        "longitude": 116.195117
+      },
+      "name": "金隅公园",
+      "park": {
+        "level": "二级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 99,
+        "candidateScore": 49,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "624",
+        "park_accessibility": "ggfwcs-22-0061947"
+      }
+    },
+    {
+      "address": "房山区城关街道东大街北侧",
+      "contact": {
+        "governingUnit": "房山区园林绿化局",
+        "phone": "69314197（24小时电话）"
+      },
+      "district": "房山区",
+      "facilities": [
+        {
+          "name": "出入口坡化",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "低位服务设施",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍旅游路线",
+          "signage": "无障碍标识",
+          "signageStatus": "标准",
+          "status": "标准"
+        },
+        {
+          "name": "无障碍设施的接驳程度",
+          "signage": "/",
+          "signageStatus": "/",
+          "status": "一般"
+        },
+        {
+          "name": "无障碍停车位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        },
+        {
+          "name": "无障碍厕所/厕位",
+          "signage": "无障碍标识",
+          "signageStatus": "不涉及",
+          "status": "不涉及"
+        }
+      ],
+      "id": "beijing-park-625",
+      "kind": "park",
+      "location": {
+        "coordinateSystem": "BD-09",
+        "latitude": 39.707751,
+        "longitude": 115.997455
+      },
+      "name": "朝曦公园",
+      "park": {
+        "level": "二级",
+        "type": "社区公园"
+      },
+      "quality": {
+        "candidateRank": 100,
+        "candidateScore": 49,
+        "flags": [
+          "official_registry",
+          "source_coordinate",
+          "exact_name_match"
+        ],
+        "matchMethod": "exact_normalized_name_district",
+        "matchScore": 1.0
+      },
+      "sourceRefs": {
+        "official_parks": "625",
+        "park_accessibility": "ggfwcs-22-0062447"
+      }
+    }
+  ],
+  "recordCount": 100,
+  "scope": "demo_snapshot_not_realtime",
+  "sourceDatasetVersion": "parks-2025__access-2024-05-27__museums-2023-02-14__toilets-2022",
+  "sources": {
+    "official_parks": {
+      "provider": "北京市园林绿化局",
+      "sha256": "4407C05D040D0E112981C2E3922AEAB0E89C4B0EC878F69CC3AED9655B3B14F9",
+      "sourceUpdatedOn": "2025-05-29",
+      "sourceUrl": "https://yllhj.beijing.gov.cn/zwgk/2024nzcwj/2024nqtwj/202505/t20250529_4101774.shtml",
+      "sourceVersion": "2025"
+    },
+    "park_accessibility": {
+      "provider": "北京市残疾人联合会",
+      "sha256": "91CD23BC63D581483A42DBD6164C8EA79569205F5D9783F738A08F6B5848AFD8",
+      "sourceUpdatedOn": "2024-05-27",
+      "sourceUrl": "https://data.beijing.gov.cn/zyml/wnkfsj/b29da708521a4139b02e7ee5c5b9c63f.htm",
+      "sourceVersion": "2024-05-27"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-label="美食商户插画">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff1e8"/>
+      <stop offset="1" stop-color="#ffd6c2"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="180" rx="28" fill="url(#bg)"/>
+  <circle cx="54" cy="42" r="34" fill="#ff8a5b" opacity=".28"/>
+  <circle cx="276" cy="132" r="42" fill="#ff5722" opacity=".12"/>
+  <ellipse cx="160" cy="116" rx="82" ry="24" fill="#ff9f7a" opacity=".28"/>
+  <path d="M92 106c14 39 122 39 136 0H92Z" fill="#ff7043"/>
+  <path d="M104 102c10-36 102-36 112 0H104Z" fill="#fff7ed"/>
+  <path d="M118 95c7-13 27-18 42-8 15-10 36-5 43 8" fill="none" stroke="#ff5722" stroke-width="8" stroke-linecap="round"/>
+  <path d="M95 76v-38M111 76v-38M205 76c23 0 23-38 0-38v72" fill="none" stroke="#7c2d12" stroke-width="9" stroke-linecap="round"/>
+  <text x="28" y="152" fill="#9a3412" font-family="Arial, sans-serif" font-size="24" font-weight="700">FOOD</text>
+</svg>

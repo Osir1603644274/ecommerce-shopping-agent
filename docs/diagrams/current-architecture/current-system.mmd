@@ -1,0 +1,33 @@
+flowchart LR
+    Browser["Browser<br/>HttpOnly session · CSRF<br/>ReferenceContext"]
+
+    subgraph Agent["FastAPI Shopping Agent"]
+        State["TaskManager<br/>TaskState · ContextPack · Memory"]
+        Harness["LangGraph ReAct Harness<br/>Action Contract · Validator<br/>Checkpoint / Resume"]
+        Read["Read-only path<br/>Product Search · Merchant RAG<br/>Conditional Multi-Agent"]
+        Tx["TransactionAgent<br/>JWT · CandidateScope<br/>Exact confirmation · Idempotency"]
+    end
+
+    subgraph Java["Java Spring Backend"]
+        Identity["Identity / Rate limit"]
+        Catalog["Catalog / Search"]
+        Trade["Inventory / Order / Payment"]
+        Events["Outbox / Inbox / Projection"]
+    end
+
+    MySQL[("MySQL<br/>authoritative facts")]
+    Redis[("Redis<br/>session · proposal · cache")]
+    Kafka["Kafka"]
+    ES["Elasticsearch"]
+
+    Browser --> State --> Harness
+    Harness --> Read
+    Harness --> Tx
+    Read --> Catalog
+    Tx --> Identity --> Trade
+    Catalog --> MySQL
+    Trade --> MySQL
+    State --> Redis
+    Tx --> Redis
+    Trade --> Events --> Kafka
+    Kafka --> Events --> ES

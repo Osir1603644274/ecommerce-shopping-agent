@@ -1,0 +1,136 @@
+{
+  "cases": [
+    {
+      "expected": {
+        "topIds": ["beijing-park-433"],
+        "total": 1
+      },
+      "id": "exact-name-world-park",
+      "operation": "search",
+      "params": {"kind": "park", "query": "北京世界公园"},
+      "question": "北京世界公园在哪里？"
+    },
+    {
+      "expected": {
+        "topIds": ["beijing-park-19", "beijing-park-88"],
+        "total": 2
+      },
+      "id": "ambiguous-yongdingmen",
+      "operation": "search",
+      "params": {"kind": "park", "limit": 10, "query": "永定门公园"},
+      "question": "帮我找永定门公园。"
+    },
+    {
+      "expected": {
+        "allMatch": {"district": "海淀区", "park_level": "一级", "park_type": "综合公园"},
+        "topIds": ["beijing-park-265", "beijing-park-266", "beijing-park-267"],
+        "total": 7
+      },
+      "id": "haidian-level1-comprehensive",
+      "operation": "search",
+      "params": {"district": "海淀区", "kind": "park", "limit": 50, "park_level": "一级", "park_type": "综合公园"},
+      "question": "海淀区有哪些一级综合公园？"
+    },
+    {
+      "expected": {
+        "allMatch": {"district": "西城区", "park_type": "历史名园"},
+        "topIds": ["beijing-park-8", "beijing-park-113", "beijing-park-114"],
+        "total": 3
+      },
+      "id": "xicheng-historic",
+      "operation": "search",
+      "params": {"district": "西城区", "kind": "park", "limit": 50, "park_type": "历史名园"},
+      "question": "西城区有哪些历史名园？"
+    },
+    {
+      "expected": {
+        "allMatch": {"district": "朝阳区"},
+        "topIds": ["beijing-park-178", "beijing-park-180", "beijing-park-182"],
+        "total": 8
+      },
+      "id": "chaoyang-accessible-toilet-standard",
+      "operation": "search",
+      "params": {
+        "district": "朝阳区",
+        "facility_name": "无障碍厕所/厕位",
+        "facility_status": "标准",
+        "kind": "park",
+        "limit": 50
+      },
+      "question": "朝阳区哪些公园的无障碍厕所记录为标准？"
+    },
+    {
+      "expected": {"topIds": [], "total": 0},
+      "id": "unsupported-pinggu-scope",
+      "operation": "search",
+      "params": {"district": "平谷区", "kind": "park"},
+      "question": "平谷区有哪些公园？"
+    },
+    {
+      "expected": {
+        "topIds": ["beijing-museum-1", "beijing-museum-2", "beijing-museum-3"],
+        "total": 190
+      },
+      "id": "museum-kind-supported",
+      "operation": "search",
+      "params": {"kind": "museum"},
+      "question": "有哪些博物馆？"
+    },
+    {
+      "expected": {
+        "allMatch": {"district": "大兴区", "park_level": "一级", "park_type": "社区公园"},
+        "topIds": ["beijing-park-806", "beijing-park-807"],
+        "total": 2
+      },
+      "id": "daxing-level1-community",
+      "operation": "search",
+      "params": {"district": "大兴区", "kind": "park", "limit": 50, "park_level": "一级", "park_type": "社区公园"},
+      "question": "大兴区有哪些一级社区公园？"
+    },
+    {
+      "expected": {
+        "topIds": ["beijing-park-742", "beijing-park-963", "beijing-park-118"],
+        "total": 3
+      },
+      "id": "partial-name-forest",
+      "operation": "search",
+      "params": {"kind": "park", "limit": 50, "query": "森林公园"},
+      "question": "候选中有哪些森林公园？"
+    },
+    {
+      "expected": {
+        "allMatch": {"district": "石景山区"},
+        "topIds": ["beijing-park-536", "beijing-park-538", "beijing-park-512"],
+        "total": 5
+      },
+      "id": "shijingshan-all",
+      "operation": "search",
+      "params": {"district": "石景山区", "kind": "park", "limit": 50},
+      "question": "石景山区有哪些候选公园？"
+    },
+    {
+      "expected": {
+        "fields": {
+          "address": "丰台区花乡大葆台158号",
+          "coordinateSystem": "BD-09",
+          "name": "北京世界公园",
+          "parkLevel": "二级",
+          "parkType": "专类公园"
+        },
+        "found": true
+      },
+      "id": "detail-world-park",
+      "operation": "get",
+      "placeId": "beijing-park-433",
+      "question": "查询北京世界公园的结构化详情。"
+    },
+    {
+      "expected": {"found": false},
+      "id": "detail-missing-id",
+      "operation": "get",
+      "placeId": "beijing-park-missing",
+      "question": "不存在的地点编号应如何处理？"
+    }
+  ],
+  "evaluationVersion": "beijing-places-v2-eval-1"
+}

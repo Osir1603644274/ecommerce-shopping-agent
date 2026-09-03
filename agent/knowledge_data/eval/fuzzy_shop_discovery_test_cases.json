@@ -1,0 +1,299 @@
+{
+  "methodology": {
+    "split": "test",
+    "testRead": true,
+    "datasetRole": "sealed one-time shadow test for RAG-QUALITY-15",
+    "qrelVersion": "fuzzy-shop-zh-test-v1",
+    "questionsSealedAt": "2026-07-14T00:38:30+08:00",
+    "qrelsFrozenAt": "2026-07-14T00:43:20+08:00",
+    "questionSource": "manually written Chinese user-style scenarios with no overlap with the validation questions",
+    "labelMethod": "manual evidence review over a pooled union of independent Vector Top-30 and BM25 Top-30 candidates",
+    "retrievalResultsUsedForTuning": false,
+    "labelScale": {
+      "3": "strongly satisfies the complete or central experience preference",
+      "2": "useful match with one condition supported less directly",
+      "1": "partial match that may still help the user"
+    },
+    "knownLimitations": [
+      "Yelp contains reviews rather than query-to-shop relevance labels",
+      "judgments are subjective and non-exhaustive outside the pooled candidates",
+      "the Chinese corpus is faithfully translated from English rather than native Chinese local-life content",
+      "six questions are sufficient for a shadow gate but not for a product-level benchmark"
+    ]
+  },
+  "cases": [
+    {
+      "id": "fuzzy-shop-test-001",
+      "question": "周末想带狗出去坐坐，最好有户外座位，店员对宠物也比较友好。",
+      "intent": "dog_friendly_outdoor",
+      "relevanceJudgments": [
+        {
+          "shopId": 100213,
+          "shopName": "Franklin's",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-tMbDmOKQm4kSF2eoXBSPRw"],
+          "rationale": "同一条评论明确提到甲板氛围好并允许狗进入。"
+        },
+        {
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-UO9TXvLjHoMHCZ1C5OXqLg"],
+          "rationale": "同一条评论明确提到友好服务、户外桌和可以带狗一起待着。"
+        },
+        {
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "relevance": 2,
+          "supportingReviewIds": [
+            "yelp-N67WeyGj2HX65y8PX3zxaQ",
+            "yelp-u9KfYIV-mFYwDqyheDQ0Hg"
+          ],
+          "rationale": "两条评论分别支持户外座位和允许宠物，员工与咖啡师也被评价为友好。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-test-002",
+      "question": "想找一家适合几个人庆祝生日的地方，气氛热闹一点，店员能配合庆祝更好。",
+      "intent": "group_birthday_celebration",
+      "relevanceJudgments": [
+        {
+          "shopId": 100198,
+          "shopName": "Xochitl",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-hClndlZGPR0Ltolm8xhIjw"],
+          "rationale": "十二人生日聚餐得到很好的服务且出餐不慢。"
+        },
+        {
+          "shopId": 100227,
+          "shopName": "Buena Onda",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-rZoMm-GEATvPUe01XvADHw"],
+          "rationale": "朋友生日聚会，环境明亮，并且员工配合给生日纸杯蛋糕点蜡烛。"
+        },
+        {
+          "shopId": 100039,
+          "shopName": "Flambo Caribbean Restaurant",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-ie09ROCrbKCD76aCRq1H_A"],
+          "rationale": "员工友好并为生日客人赠送甜点，庆祝体验明确正向。"
+        },
+        {
+          "shopId": 100145,
+          "shopName": "Las Cazuelas Restaurant BYOB",
+          "relevance": 2,
+          "supportingReviewIds": [
+            "yelp-k1gQVmNyMdNlsfGGxugeAQ",
+            "yelp-L6MFeutO4xYFJU5joRX7EQ"
+          ],
+          "rationale": "有多人生日聚会、友好周到服务和自带酒水场景，但店员主动庆祝的证据较弱。"
+        },
+        {
+          "shopId": 100283,
+          "shopName": "The Post",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-Z5WSIk85xUmCrGcYxjbDkw"],
+          "rationale": "朋友生日、放松有趣的氛围、游戏和快速调酒服务同时得到支持。"
+        },
+        {
+          "shopId": 100235,
+          "shopName": "Suraya",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-iDxEptzR419w-FcOGG8_sQ"],
+          "rationale": "大群朋友庆祝生日并分享大量菜品和葡萄酒，但店员配合庆祝的证据不直接。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-test-003",
+      "question": "早上想慢慢吃顿早餐，不想排很久的队，环境轻松一点。",
+      "intent": "relaxed_breakfast_without_long_wait",
+      "relevanceJudgments": [
+        {
+          "shopId": 100192,
+          "shopName": "Alena’s Cafe",
+          "relevance": 3,
+          "supportingReviewIds": [
+            "yelp-xi3fKKWupXm059uQHjvIlQ",
+            "yelp-b7HlB8UvAmmf__Eu6QO8tQ"
+          ],
+          "rationale": "评论同时支持良好氛围、早餐咖啡和不用久等或排队。"
+        },
+        {
+          "shopId": 100037,
+          "shopName": "The Coventry Deli",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-I7UxXaYSkYrCkaxygPWSAA"],
+          "rationale": "明确是休闲早餐地点，食物新鲜且服务迅速。"
+        },
+        {
+          "shopId": 100235,
+          "shopName": "Suraya",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-RzGSv8skwrW0RZugxumkLw"],
+          "rationale": "早餐、超快服务和友好环境在同一条评论中得到支持。"
+        },
+        {
+          "shopId": 100245,
+          "shopName": "Happy Joy Family Restaurant",
+          "relevance": 2,
+          "supportingReviewIds": [
+            "yelp-G0qjFCA-mZhL5xyDmt0jtQ",
+            "yelp-XnbgeNEhPR6njJpVVCxFfw"
+          ],
+          "rationale": "经典早餐、快速服务和有家的感觉得到支持，但悠闲停留的证据较弱。"
+        },
+        {
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-GJVjEx3bCZawRTydNcZgpQ"],
+          "rationale": "评论明确描述安静、快速吃早餐并可以工作阅读。"
+        },
+        {
+          "shopId": 100086,
+          "shopName": "J'aime French Bakery",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-MeHfRwBPr11Cs5ZLoL15ew"],
+          "rationale": "早上环境宁静明亮且不忙，提供咖啡糕点，但完整早餐证据较弱。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-test-004",
+      "question": "晚上想听听现场音乐、喝点东西，热闹一些也没关系。",
+      "intent": "live_music_and_drinks",
+      "relevanceJudgments": [
+        {
+          "shopId": 100190,
+          "shopName": "Dagwood's Pub",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-4eqTJbn-DDTI1cWe3C8oOg"],
+          "rationale": "周五晚现场音乐、生啤和良好服务均被直接提到。"
+        },
+        {
+          "shopId": 100024,
+          "shopName": "The Twisted Tail",
+          "relevance": 3,
+          "supportingReviewIds": [
+            "yelp-NmmBBEAHBMnbv-cySZP1pQ",
+            "yelp-nkeVmSjW7zQdiwKGPbqnew",
+            "yelp-4UMLeJRzWNMOYj46vReUuA",
+            "yelp-sbPqTg8to_d6COKV5iN78A",
+            "yelp-0WydWJYA5UyYKtT23wB-Ug"
+          ],
+          "rationale": "多条评论反复支持高频现场音乐、酒水、鸡尾酒和热闹表演氛围。"
+        },
+        {
+          "shopId": 100145,
+          "shopName": "Las Cazuelas Restaurant BYOB",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-yHTcWIFsYGVkqPuKrWGxXA"],
+          "rationale": "评论明确支持现场音乐和良好用餐体验，但喝酒条件需要自带，证据不完整。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-test-005",
+      "question": "朋友吃素，想找素食选择不只是沙拉、店员也清楚配料的地方。",
+      "intent": "substantial_vegetarian_options",
+      "relevanceJudgments": [
+        {
+          "shopId": 100043,
+          "shopName": "The Lunar Inn",
+          "relevance": 3,
+          "supportingReviewIds": [
+            "yelp-wL6FxIIVbz6kT-aBAePZ5Q",
+            "yelp-iuI5nBOvWMhKCw3HUecyzw"
+          ],
+          "rationale": "素食汉堡等多样选择以及乐于助人、细心的员工都得到支持。"
+        },
+        {
+          "shopId": 100224,
+          "shopName": "HipCityVeg - University City",
+          "relevance": 3,
+          "supportingReviewIds": [
+            "yelp-rsYYHl3M8fEZ4EJ_HUQmaQ",
+            "yelp-hJvv8CyoRHFnNJMUGyCrVw"
+          ],
+          "rationale": "专门的素食店提供三明治、薯条和蘑菇餐等非沙拉选择，但员工配料知识未被直接评价。"
+        },
+        {
+          "shopId": 100096,
+          "shopName": "Vientiane Café",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-1OfFGitmSPGlQ7PzXbLGMg"],
+          "rationale": "有很多素食选择且员工友好、乐于助人，但配料知识和具体主食证据较弱。"
+        },
+        {
+          "shopId": 100039,
+          "shopName": "Flambo Caribbean Restaurant",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-Jv1v6NMjEucou7pEDHTyig"],
+          "rationale": "素食选择很多且员工热情周到，但具体菜品与配料知识没有展开。"
+        },
+        {
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-CVob0T821YK5f3y6uB4mfQ"],
+          "rationale": "同时有素食、纯素和肉食选项，员工友好，但非沙拉主食和配料知识证据不够直接。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-test-006",
+      "question": "准备开车过去，想找停车比较省心、下车后不用走太远的店。",
+      "intent": "easy_parking",
+      "relevanceJudgments": [
+        {
+          "shopId": 100281,
+          "shopName": "Shing Kee",
+          "relevance": 3,
+          "supportingReviewIds": [
+            "yelp-31wSSJpUAOeB_p3STls-Yg",
+            "yelp-Glx1qk3RhR1xvMGrfzSX1A",
+            "yelp-z3YmkYIW7Fswbnw2RHt2lA"
+          ],
+          "rationale": "多条评论明确表示停车容易，并直接提到免费停车。"
+        },
+        {
+          "shopId": 100027,
+          "shopName": "NY Bagel & Deli Shop",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-sCjkJ6_GtagHOaUMyZNQig"],
+          "rationale": "适合快速停留且街边停车选择不错。"
+        },
+        {
+          "shopId": 100019,
+          "shopName": "Federal Donuts",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-mNQ3jCHzSk1A56LZnF7Ohg"],
+          "rationale": "评论直接把停车方便列为反复光顾的原因。"
+        },
+        {
+          "shopId": 100124,
+          "shopName": "Slices Pizza",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-ZZz2zVeV_Ad3NA6S2Kmafg"],
+          "rationale": "店前两小时免费停车，停车便利且距离店面近。"
+        },
+        {
+          "shopId": 100298,
+          "shopName": "Applebee's Grill + Bar",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-YJ4JMsrsAP-2gqi7xdmlsQ"],
+          "rationale": "评论明确表示停车不是问题。"
+        },
+        {
+          "shopId": 100245,
+          "shopName": "Happy Joy Family Restaurant",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-DEKr4rAr5yXPUPlmCBnX-Q"],
+          "rationale": "街边停车且评论者没有遇到找车位的问题，但不是专用停车场。"
+        }
+      ]
+    }
+  ]
+}

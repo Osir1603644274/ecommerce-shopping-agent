@@ -1,0 +1,508 @@
+[
+  {
+    "id": "yelp-rag-001",
+    "question": "这家小咖啡店如果坐前面会不会太吵？",
+    "relevantReviewIds": [
+      "yelp-0jBamrOBDkY6lLTpkY0xZw"
+    ],
+    "expectedPoints": [
+      "店面小而吵",
+      "坐在前面咖啡机声音很大",
+      "后面可能更安静"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "environment_preference",
+      "negative_constraint"
+    ],
+    "evidenceText": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+  },
+  {
+    "id": "yelp-rag-002",
+    "question": "有没有咖啡店员工服务特别好，甚至帮顾客找回落下的电脑？",
+    "relevantReviewIds": [
+      "yelp-0raRTiWTrj9ytORRy-kZoA"
+    ],
+    "expectedPoints": [
+      "咖啡师友好、熟练且高效",
+      "顾客落下笔记本电脑后，咖啡师追到街上归还"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "service_constraint"
+    ],
+    "evidenceText": "费城有很多很棒的咖啡店，所以我偶然走进 Alchemy Coffee 时标准其实挺高，但有三点让这家新店轻松跻身其中。第一，咖啡很好喝，也让人印象深刻——我非常喜欢一款带有柑橘风味的埃塞俄比亚拼配。第二，咖啡师非常友好、熟练而且高效——我在这家店太开心了，以至于不小心把笔记本电脑落下了。他追到街上把电脑还给我。第三，这里就像海明威会说的那种“干净明亮的地方”。高高的天花板、白色墙面和能透进自然光的大窗户。装修很有品味，只是稍微有点简朴。"
+  },
+  {
+    "id": "yelp-rag-003",
+    "question": "想找空间大、插座多、开到很晚的咖啡馆，付款上有什么要注意？",
+    "relevantReviewIds": [
+      "yelp-1VyHchVgc9oEfVrsFweNNA"
+    ],
+    "expectedPoints": [
+      "Good Karma 很大、明亮，有很多插座和 WiFi",
+      "营业到很晚",
+      "只收现金，店内 ATM 手续费贵"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "hard",
+    "challengeTypes": [
+      "facility_constraint",
+      "time_constraint",
+      "multi_constraint"
+    ],
+    "evidenceText": "今年我圣诞愿望清单的第一项，是有人能在我家附近开一家巨大、友好、有 WiFi、有很多插座、空间宽敞的咖啡馆。现在还没有实现，但有人在 Washington West 开了一家，这完全不公平，因为从 Good Karma 走到 Chapterhouse 那一带的好地方也很方便。我先压住自己的怨念，只庆幸如果我真的急着去咖啡馆，可以比以前少走整整两个街区。Good Karma 很大、很明亮，有很多插座和 WiFi。除了咖啡和茶之外，还有很多烘焙食品和其他饮品可选，这点不错。他们还有两个不错的洗手间，也没人打扰你，而且营业到很晚。这会是咖啡馆之爱吗？缺点是食物不算好。店里有牌子告诉你不要带外食，我必须尊重，但我也必须承认，当我咬下一块湿润、蛋味过重的司康时，想到外面有 Metropolitan Bakery 做的那些优秀司康，心里会有点难过。就普通滴滤咖啡来说，咖啡还可以，但正如另一位 Yelp 用户说的，拿铁差很多。他们似乎分不清拿铁和卡布奇诺。我点过一次，之后就再也没点过。可我能说什么呢。为了这里真正友好的氛围，我可以忍受糟糕的司康和普通的咖啡饮品；一想到这个街区如此被宠坏，而我住的那片完全没有这种优秀咖啡馆，我嫉妒得脸都像他们的杯子一样绿了。哦，只收现金，不过店内有一台手续费很贵的 ATM。"
+  },
+  {
+    "id": "yelp-rag-004",
+    "question": "想吃法式糕点但还要办公，有哪家店因为没有 WiFi 不太合适？",
+    "relevantReviewIds": [
+      "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+    ],
+    "expectedPoints": [
+      "店内有法式糕点",
+      "店里没有 Wi-Fi",
+      "对想工作的人来说不方便"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "facility_constraint",
+      "negative_constraint"
+    ],
+    "evidenceText": "咖啡相当普通。饮品选择就是常见那些，也有一些法式烘焙点心。店内环境很好，也很干净，但没有 Wi-Fi，这对想工作的人来说挺扫兴。有一些法式糕点和烘焙食品，不过都稍微有点贵。"
+  },
+  {
+    "id": "yelp-rag-005",
+    "question": "哪家咖啡店咖啡很浓、WiFi 很快，而且适合找创意？",
+    "relevantReviewIds": [
+      "yelp-a6HDkwToJFoIPzlxBiS71g"
+    ],
+    "expectedPoints": [
+      "Forin Cafe 咖啡很浓",
+      "WiFi 很快",
+      "氛围有创造力"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "facility_constraint",
+      "environment_preference"
+    ],
+    "evidenceText": "必须喜欢 Forin Cafe。咖啡很浓，WiFi 很快，氛围里满是创造力。虽然对我这个南费城人来说它不算本地咖啡馆，但我发现自己每个月都会来这里几次，开个会，或者在工作日中途找点创意。很快还会再见你们 :)"
+  },
+  {
+    "id": "yelp-rag-006",
+    "question": "哪家 WaWa 有座位、免费 WiFi 和充电站，但午餐时间会很挤？",
+    "relevantReviewIds": [
+      "yelp-AR8lhVM0aylAt8W06q6zxg"
+    ],
+    "expectedPoints": [
+      "这家 WaWa 有座位、免费 WiFi 和充电站",
+      "午餐时间会极其拥挤",
+      "收银台和三明治柜台动线会互相影响"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "hard",
+    "challengeTypes": [
+      "facility_constraint",
+      "time_constraint",
+      "negative_constraint"
+    ],
+    "evidenceText": "作为较新的 WaWa 之一，这家备货充足，有座位、免费 WiFi 和充电站。这是好消息。坏消息是午餐时间这里会极其拥挤，而且某个天才把收银台放在三明治柜台正对面。等三明治的人太多时，你很难排进收银队伍，因为路被等三明治的人挡住了。这家店也有 WaWa 最大的问题。最大的问题是他们在店内自己烤 hoagie 面包卷，而不是买 Amoroso 的面包卷。Amoroso 的面包卷曾经很完美。店里烤的面包卷即使烤得刚好也无法相比。而且很多时候它们还烤过头，让情况更糟。hoagie 仍然不错，但附近别处能买到更好的；过去可不能这么说，尤其是金枪鱼 hoagie。"
+  },
+  {
+    "id": "yelp-rag-007",
+    "question": "哪家星巴克有桌子可以用电脑，但桌子附近没有插座？",
+    "relevantReviewIds": [
+      "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+    ],
+    "expectedPoints": [
+      "店里有不错的桌子可以用笔记本电脑工作",
+      "桌子附近没有插座",
+      "顾客还提到牛奶空了后很久没人更换"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "facility_constraint",
+      "service_constraint"
+    ],
+    "evidenceText": "7 月 4 日，在他们有限营业时间里，店里干净而且半空。我给自己买了 3 美元促销的 Double Fudge Bar 星冰乐，也给朋友买了 Caramel Waffle Cone。焦糖华夫筒对我来说太甜，Double Fudge Bar 也是。早知道还是点我平常喝的抹茶星冰乐，但这种 3 美元星冰乐促销的意义就在于让你尝试舒适区之外的东西。总之，牛奶都空了，我把它们放到星巴克柜台并告知员工更换。30 分钟后，他们完全没有这么做。至少他们有不错的桌子，可以让你用笔记本电脑工作，不过桌子附近没有插座。"
+  },
+  {
+    "id": "yelp-rag-008",
+    "question": "有没有适合在沙发上用笔记本电脑工作的咖啡店？",
+    "relevantReviewIds": [
+      "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+    ],
+    "expectedPoints": [
+      "评论者喜欢店里的沙发",
+      "沙发适合用笔记本电脑工作"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "facility_constraint",
+      "implicit_intent"
+    ],
+    "evidenceText": "我上班时想补充咖啡因，这里是一个适合跑来喝咖啡的好地方。我也喜欢他们的沙发，非常适合用笔记本电脑做一点或很多工作。"
+  },
+  {
+    "id": "yelp-rag-009",
+    "question": "哪家咖啡烘焙店停车不太方便，但员工很热情，店里也有人带电脑？",
+    "relevantReviewIds": [
+      "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+    ],
+    "expectedPoints": [
+      "Valerio Coffee Roasters 停车有点难",
+      "员工对每个进来的人都很有帮助",
+      "店里有人在用笔记本电脑"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "hard",
+    "challengeTypes": [
+      "facility_constraint",
+      "service_constraint",
+      "multi_constraint"
+    ],
+    "evidenceText": "我第一次认识 Valerio Coffee Roasters 是通过使用剩余食物 app。这是少数让我各方面都印象深刻的商家之一。这里停车有点难处理，但我今天运气不错。这是一个值得费力找车位的地方。员工对每个进来的人都非常有帮助。我并不觉得他们给了我什么特殊待遇，员工只是两个精力充沛、在服务行业工作的人。至于氛围，外面有几张远离路边的双人小酒馆风格桌子，不会让你觉得有危险。里面的装修很现代，像半波西米亚风的咖啡店。目前座位间隔较开，但在 Covid 期间也足够容纳三到四组四人客人。整体清爽干净。当时有几个人在用笔记本电脑，一边喝茶或咖啡。至于体验，员工友好、积极，而且能介绍产品。我们吃了美味的鸡肉沙拉和牛角包，还喝了好喝又香的茶，我觉得可能是木槿和某种东西；我只知道很好喝！很棒的体验，我非常推荐，也会再来。"
+  },
+  {
+    "id": "yelp-rag-010",
+    "question": "哪家咖啡店有免费 WiFi 和舒适工作空间，还提供不错的美式？",
+    "relevantReviewIds": [
+      "yelp-ChYhI05dXfDPbATD9VdiDQ"
+    ],
+    "expectedPoints": [
+      "店里有免费 wi-fi",
+      "有舒适工作空间",
+      "评论者喝到很好的美式"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "facility_constraint"
+    ],
+    "evidenceText": "一家非常不错的咖啡店，有很棒的冰咖啡、制作精良的咖啡饮品（我喝了一杯很好的美式）和丰富的糕点选择。这里有免费 wi-fi，也有舒适的工作空间。我想再回来看看午餐时间还有什么。如果我的咖啡体验能预示之后的东西，我期待会有一些好吃的新选择！这是附近一个有趣的地方！我们还会再来。"
+  },
+  {
+    "id": "yelp-rag-011",
+    "question": "哪家 Good Karma 有自然光、免费 WiFi、很多插座，还能喝 3 美元无限续杯咖啡？",
+    "relevantReviewIds": [
+      "yelp-FXIVmjL3GckScX7Uww2NDw"
+    ],
+    "expectedPoints": [
+      "有很多自然光和免费 wifi",
+      "桌子大小合适且插座很多",
+      "有 3 美元无限续杯咖啡"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "facility_constraint",
+      "environment_preference"
+    ],
+    "evidenceText": "毫无疑问，这是我在费城最喜欢的咖啡馆。有很多自然光、免费 wifi、合适大小的桌子、很多插座，还有 3 美元无限续杯咖啡（豆奶也免费！）。这里是工作或学习的完美地方，我每次来都超级高效。冰 sundew 绿茶很好喝，也很清爽——完美的夏日饮品。他们的汤很好，贝果三明治也不错。我每次来到 Good Karma cafe 都忍不住心情变好 :)"
+  },
+  {
+    "id": "yelp-rag-012",
+    "question": "Fairmount 附近有没有安静喝咖啡、下午放松的地方？",
+    "relevantReviewIds": [
+      "yelp-G1hVCb7CrOyL-HP1h6rByg"
+    ],
+    "expectedPoints": [
+      "店在 Art Museum/Fairmount 区域",
+      "后面也有座位",
+      "适合安静地消磨下午"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "environment_preference",
+      "implicit_intent"
+    ],
+    "evidenceText": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+  },
+  {
+    "id": "yelp-rag-013",
+    "question": "周末想去咖啡店学习，哪家要早上九点或十点前到才容易有位置？",
+    "relevantReviewIds": [
+      "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+    ],
+    "expectedPoints": [
+      "周末想有位置最晚要 9 点或 10 点到",
+      "店里有大桌子、很多插座和不错无线网络",
+      "聊天可能不合适，因为顾客像在图书馆"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "hard",
+    "challengeTypes": [
+      "time_constraint",
+      "facility_constraint",
+      "negative_constraint"
+    ],
+    "evidenceText": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+  },
+  {
+    "id": "yelp-rag-014",
+    "question": "哪家咖啡馆晚上人更少、开到十点，还有很多插座？",
+    "relevantReviewIds": [
+      "yelp-hUIkr15XxOSzheG5l9mYSw"
+    ],
+    "expectedPoints": [
+      "店里有很多桌子和插座",
+      "营业到晚上 10 点",
+      "晚上人更少"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "time_constraint",
+      "facility_constraint"
+    ],
+    "evidenceText": "这是我最喜欢的店之一。我以前很喜欢来这里完成工作，甚至只是阅读。大窗户、很多桌子、到处都是插座。咖啡不错。我试过的饮品一直都很好喝。氛围简直完美。我喜欢晚上坐在这里——明亮的灯光、大桌子、刚刚好的背景音乐。营业到晚上 10 点。而且晚上人更少。我喜欢咖啡店，而这里绝对是其中之一。"
+  },
+  {
+    "id": "yelp-rag-015",
+    "question": "哪家新咖啡店空间开阔、自然光足，还有很多座位插座和很棒的 WiFi？",
+    "relevantReviewIds": [
+      "yelp-kmEHaWvhg3O6IXfw7cDf7Q"
+    ],
+    "expectedPoints": [
+      "这是一家新咖啡店",
+      "空间开阔、自然光足",
+      "有很多座位和插座以及很棒的 WiFi"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "facility_constraint",
+      "environment_preference"
+    ],
+    "evidenceText": "这是一家新咖啡店，和 Bald Birds Brewing Company 连在一起。它很快会成为我做工作的常去地点。这里有漂亮开阔的空间、很多座位和插座、充足自然光，以及很棒的 WiFi。咖啡很好喝，服务也很优秀。我肯定会经常回来！"
+  },
+  {
+    "id": "yelp-rag-016",
+    "question": "Red Hook 适合用电脑工作吗？价格和咖啡有什么特点？",
+    "relevantReviewIds": [
+      "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+    ],
+    "expectedPoints": [
+      "Red Hook 适合坐在扶手椅上放松或用笔记本电脑工作",
+      "价格有点贵",
+      "咖啡是公平贸易且好喝"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "hard",
+    "challengeTypes": [
+      "facility_constraint",
+      "budget_constraint",
+      "multi_constraint"
+    ],
+    "evidenceText": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+  },
+  {
+    "id": "yelp-rag-017",
+    "question": "哪家店糕点咖啡不错，但 WiFi 太差导致电脑工作做不了多少？",
+    "relevantReviewIds": [
+      "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+    ],
+    "expectedPoints": [
+      "糕点和咖啡不错",
+      "Wifi 很糟",
+      "无法在笔记本电脑上完成多少工作"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "facility_constraint",
+      "negative_constraint"
+    ],
+    "evidenceText": "糕点和咖啡不错。不过 Wifi 很糟，所以我没法在笔记本电脑上完成多少工作。"
+  },
+  {
+    "id": "yelp-rag-018",
+    "question": "周六早上想和朋友学习，哪家有大窗户和楼下座位，但 chai latte 可能偏甜？",
+    "relevantReviewIds": [
+      "yelp-REgp10DO01kp2pOONZtq9w"
+    ],
+    "expectedPoints": [
+      "评论者周六早上和朋友来学习",
+      "前面大窗户有自然光，楼下也有座位",
+      "chai latte 对评论者来说有点太甜"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "hard",
+    "challengeTypes": [
+      "time_constraint",
+      "facility_constraint",
+      "multi_constraint"
+    ],
+    "evidenceText": "周六早上我和朋友来这里学习。我们点了两杯印度香料拿铁，坐在前面大窗户旁边，那里有很多自然光。前面有座位，楼下也有更多座位，所以这是带笔记本电脑来做工作的好地方（而且员工也非常可爱）。这杯拿铁是用紫色 Oregon 液体印度香料茶混合物做的（很多人都用这个）。对我来说有点太甜了，所以下次我可能只点茶。"
+  },
+  {
+    "id": "yelp-rag-019",
+    "question": "Mt Airy 有没有适合学习的隐藏小店，桌子能放电脑、笔记本和咖啡？",
+    "relevantReviewIds": [
+      "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+    ],
+    "expectedPoints": [
+      "Alena's 被评论者称为 Mt Airy 隐藏宝石",
+      "适合学习",
+      "桌子能放笔记本电脑、笔记本和咖啡，并且有 WiFi 和几个插座"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "hard",
+    "challengeTypes": [
+      "facility_constraint",
+      "environment_preference",
+      "implicit_intent"
+    ],
+    "evidenceText": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+  },
+  {
+    "id": "yelp-rag-020",
+    "question": "Alchemy Coffee 有桌子和 WiFi 吗？如果要带电脑去，电源方面要注意什么？",
+    "relevantReviewIds": [
+      "yelp-z2Ia7bFRqSKHicUNi7359Q"
+    ],
+    "expectedPoints": [
+      "Alchemy Coffee 有桌子和 WiFi",
+      "设备要提前充满电",
+      "店里没有插座"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "facility_constraint",
+      "negative_constraint"
+    ],
+    "evidenceText": "我不知道他们怎么做到的，但 Alchemy Coffee 能把普通咖啡变成纯金。说真的，他们的拿铁非常好——顺滑的浓缩咖啡和柔滑的燕麦奶。热的和冰的都很棒！他们的糕点好吃到要命——babka 太美味了。它有点偏甜，但配咖啡就很完美。他们也是我见过最有美感的咖啡店之一（想象 CB2 那种现代时髦风）。注意：他们有桌子和 WiFi，但请把设备充满电，因为他们没有插座。总体来说，我推荐你来看看这个小地方，你不会后悔！我保证这不是巫术，只是科学。"
+  },
+  {
+    "id": "yelp-rag-021",
+    "question": "哪家店不放吵闹的大学兄弟音乐，但后面区域地板还是有点吵？",
+    "relevantReviewIds": [
+      "yelp-T52ED3B5-Lymo9EzCpuTwg"
+    ],
+    "expectedPoints": [
+      "店里没有吵闹的大学兄弟音乐",
+      "食物和咖啡不错",
+      "后面区域地板希望能更安静"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "environment_preference",
+      "negative_constraint"
+    ],
+    "evidenceText": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+  },
+  {
+    "id": "yelp-rag-022",
+    "question": "Red Hook 除了咖啡，适合午餐或不用排队的早午餐吗？",
+    "relevantReviewIds": [
+      "yelp-VJEtJzH0GP_gFYjKDVIstw"
+    ],
+    "expectedPoints": [
+      "评论者推荐来这里吃午饭或不用排队的早午餐",
+      "食物很棒",
+      "评论者经常来这里工作"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "implicit_intent",
+      "service_constraint"
+    ],
+    "evidenceText": "这里有很棒的咖啡、漂亮的杯子、很好的氛围、令人愉快的员工，以及（对咖啡店来说最令人惊讶的）很棒的食物！说真的，来这里吃午饭吧。或者更好，来吃一顿好吃又不用排队的早午餐。他们的鸡蛋似乎最受欢迎，但我最喜欢的是 Red Hook 三明治。每个三明治都会配一小碗沙拉，那就像一幅味觉的画。我经常来这里工作（它离我家近）。我不是每次需要工作都来的唯一原因，是我不想对它厌倦！这里很舒适，但似乎从不拥挤。另外，他们每个月会在非营业时间举办有趣活动，供应食物和饮品，并展示本地艺术家。真正以社区为导向的商家。这里肯定有关系紧密的常客，但也总给新面孔留有空间。"
+  },
+  {
+    "id": "yelp-rag-023",
+    "question": "ReAnimator 适合中午坐户外、用 WiFi 工作吗？",
+    "relevantReviewIds": [
+      "yelp-wiod6zg7n7S_-Iow_O-L9w"
+    ],
+    "expectedPoints": [
+      "评论者推荐中午来",
+      "可以找舒适户外座位",
+      "有 WiFi，适合完成工作"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "basic",
+    "challengeTypes": [
+      "time_constraint",
+      "facility_constraint",
+      "environment_preference"
+    ],
+    "evidenceText": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+  },
+  {
+    "id": "yelp-rag-024",
+    "question": "哪家咖啡店座位不多但抢到位置后适合工作，也有户外人行道座位可以带狗读书？",
+    "relevantReviewIds": [
+      "yelp-RIdKOn-6dE8hdSFPh5RZug"
+    ],
+    "expectedPoints": [
+      "店里座位不多且会拥挤",
+      "抢到位置后适合工作",
+      "有人行道户外座位，适合带狗读书放松"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "hard",
+    "challengeTypes": [
+      "facility_constraint",
+      "negative_constraint",
+      "multi_constraint"
+    ],
+    "evidenceText": "我正在骑车逐个探访 Fishtown 的咖啡店。我在这里喝到了一杯很棒的拿铁。咖啡师还算愉快，也很懂咖啡。不幸的是，因为建筑形状奇怪，这里座位并不多，所以会变得拥挤；但如果你抢到一个位置，这里是做工作的好地方。当我想和狗一起读书放松时，我很喜欢外面人行道上的座位。"
+  },
+  {
+    "id": "yelp-rag-025",
+    "question": "Valerio 的咸派等待体验怎么样？人多时 WiFi 稳定吗？",
+    "relevantReviewIds": [
+      "yelp-ZMZCxn7QQsG0val9K3945Q"
+    ],
+    "expectedPoints": [
+      "顾客为咸派等了很久且体验很差",
+      "员工态度粗鲁",
+      "人多时 WiFi 不能用"
+    ],
+    "type": "factual",
+    "source": "yelp",
+    "difficulty": "hard",
+    "challengeTypes": [
+      "service_constraint",
+      "facility_constraint",
+      "negative_constraint"
+    ],
+    "evidenceText": "我没吃早餐，想着在 Valerio 吃一顿像样的早午餐。坏主意。下午 12:45 点了咸派，被告知虽然刚刚卖完，但最多 1 小时内会有新的可以上。我一直等到下午 2:15，饿得不行，才走到柜台礼貌询问咸派进度。得到的是冷冷的一眼和一句：“实际上还要 45 分钟，因为我们还得让它冷却。”好吧。我等到 3 点，还是没有。最奇怪的是，他们已经提前从我的卡里收了咸派的钱。在我还没来得及要求退款，好去买别的东西之前，她就粗鲁地说：“如果这样能让你好受些，你可以一直来柜台问，但我现在就是不能切咸派。”我太震惊了，只说了好吧，说实话还有点被吓到。等它终于做好时（2.5 小时后），它基本上就是四口量的蔬菜蛋饼，没有饼皮。如果能听到一句“抱歉让你久等了”，而不是被甩脸色，会好很多。如果你做这个就是要 2 到 3 小时，完全没问题。只是不要为了让顾客买东西而撒谎。也不要极其粗鲁，好吗？另外值得一提的是——如果人很多，这里的 wifi 就不能用。"
+  }
+]

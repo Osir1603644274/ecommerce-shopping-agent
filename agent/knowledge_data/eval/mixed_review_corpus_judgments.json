@@ -1,0 +1,265 @@
+{
+  "methodology": {
+    "datasetVersion": "mixed-review-validation-v1",
+    "scope": "35 cross-source candidates observed in the Top-3 of BM25-all or Hybrid-all",
+    "relevanceScale": {
+      "0": "irrelevant or violates an explicit entity/category constraint",
+      "1": "tangential evidence that matches only a minor aspect",
+      "2": "useful evidence with one material constraint missing",
+      "3": "direct evidence for or against the requested choice"
+    },
+    "entityRule": "When the question names a specific merchant, evidence about another merchant is irrelevant even if its wording is similar.",
+    "negativeEvidenceRule": "Evidence against a choice can still be directly relevant when it addresses the requested constraint.",
+    "annotatorType": "codex_assistant_review",
+    "independentHumanReview": false,
+    "annotatedAt": "2026-07-15",
+    "sealedDataRead": false
+  },
+  "judgments": [
+    {
+      "caseId": "rag-001",
+      "reviewId": "yelp-d9uislpPZxNepNvLmm6t0g",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "早餐和上菜服务体验，没有火锅或辣度证据。"
+    },
+    {
+      "caseId": "rag-001",
+      "reviewId": "yelp-tNLjoDyn0k0UHeS3PXoFhg",
+      "relevance": 1,
+      "label": "tangential",
+      "rationale": "只覆盖两人份量和价格，没有火锅或辣度信息。"
+    },
+    {
+      "caseId": "rag-002",
+      "reviewId": "yelp-asrIj-S38MQhTKC8fLrvVQ",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "问题点名巷子口火锅，候选是葡萄酒商店。"
+    },
+    {
+      "caseId": "rag-003",
+      "reviewId": "yelp-n776BOF8hqrv54i6IDNVLw",
+      "relevance": 1,
+      "label": "tangential",
+      "rationale": "说明可同时吃早餐和午餐，但没有电影后时段或营业证据。"
+    },
+    {
+      "caseId": "rag-003",
+      "reviewId": "yelp-174T3AbgqiGNBpg2D_qjrQ",
+      "relevance": 2,
+      "label": "relevant_with_missing_constraint",
+      "rationale": "直接描述看电影前用餐且价格合理，但没有电影后营业时间。"
+    },
+    {
+      "caseId": "rag-003",
+      "reviewId": "yelp-yyAycjhj9pBUWYlZd75IZg",
+      "relevance": 2,
+      "label": "relevant_with_missing_constraint",
+      "rationale": "明确适合还想吃东西的场景，但缺少电影后时段证据。"
+    },
+    {
+      "caseId": "rag-004",
+      "reviewId": "yelp-tNLjoDyn0k0UHeS3PXoFhg",
+      "relevance": 1,
+      "label": "tangential",
+      "rationale": "覆盖两人份量和价格，但不是烧烤且币种不同。"
+    },
+    {
+      "caseId": "rag-005",
+      "reviewId": "yelp-MhSusleKbPBIiq2fKHH5mA",
+      "relevance": 3,
+      "label": "directly_relevant",
+      "rationale": "咖啡店评论明确说明适合工作、空间大且有室内座位。"
+    },
+    {
+      "caseId": "rag-006",
+      "reviewId": "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+      "relevance": 3,
+      "label": "directly_relevant",
+      "rationale": "直接提供宁静明亮、适合上午或下午喝咖啡的环境证据。"
+    },
+    {
+      "caseId": "rag-008",
+      "reviewId": "yelp-kgkYAh008o8oX9anuepynA",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "候选是星巴克座位拥挤信息，不是影院情侣专座。"
+    },
+    {
+      "caseId": "rag-009",
+      "reviewId": "yelp-9fe28udUTSQhcbe9wqo7VQ",
+      "relevance": 3,
+      "label": "directly_relevant",
+      "rationale": "酒店评论直接说明房间舒适且安静。"
+    },
+    {
+      "caseId": "rag-009",
+      "reviewId": "yelp-xY5o8VmJpXlUcI2EpNv7Bw",
+      "relevance": 1,
+      "label": "tangential",
+      "rationale": "只说明干净和安全，没有安静或睡眠质量证据。"
+    },
+    {
+      "caseId": "rag-009",
+      "reviewId": "yelp-owWHNdxlTdQFPwSus5yTdQ",
+      "relevance": 3,
+      "label": "directly_relevant",
+      "rationale": "作为负面证据，直接说明噪声导致无法休息。"
+    },
+    {
+      "caseId": "rag-012",
+      "reviewId": "yelp-SgNhuqWbbkin7ipO8WEYRQ",
+      "relevance": 1,
+      "label": "tangential",
+      "rationale": "提到下班后无法联系经理，但不说明锻炼设施是否方便使用。"
+    },
+    {
+      "caseId": "rag-012",
+      "reviewId": "yelp-J30kTcKEgjhX-7qIoRHmUA",
+      "relevance": 2,
+      "label": "relevant_with_missing_constraint",
+      "rationale": "说明健身房适合上班前或晚上使用，也指出缺少下班后课程，但未覆盖通勤。"
+    },
+    {
+      "caseId": "rag-012",
+      "reviewId": "yelp-galen_dLtSt_l7yjPkWC0w",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "候选是下班后拥挤的酒吧，不是健身房。"
+    },
+    {
+      "caseId": "rag-013",
+      "reviewId": "yelp-NNkXp5idqT6r2u94jH1s9Q",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "面包店搬迁信息不涉及安静包间、三人用餐或预算。"
+    },
+    {
+      "caseId": "rag-013",
+      "reviewId": "yelp-irpDKSZelQjvbqiRgsXPJg",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "冰球比赛票价不属于包间用餐场景。"
+    },
+    {
+      "caseId": "rag-014",
+      "reviewId": "yelp-MraV6-HmzFYh6tX_tE5YYg",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "问题点名河畔家常菜，候选是另一家快餐店。"
+    },
+    {
+      "caseId": "rag-017",
+      "reviewId": "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+      "relevance": 3,
+      "label": "directly_relevant",
+      "rationale": "直接提供充足座位、插座、Wi-Fi和适合工作的证据。"
+    },
+    {
+      "caseId": "rag-018",
+      "reviewId": "yelp-33aURapX2sWlYPJe78lFRQ",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "问题点名纸间咖啡书屋，候选是另一家Wawa的卫生评论。"
+    },
+    {
+      "caseId": "rag-019",
+      "reviewId": "yelp-pu9ZbUpYlWuelf1jabDgdw",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "葡萄酒商店排队信息与巨幕影院及票价无关。"
+    },
+    {
+      "caseId": "rag-020",
+      "reviewId": "yelp-DTtcoSEJHTB-NiObdubnMg",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "问题点名星河艺术影城，候选是杂货店且没有停车证据。"
+    },
+    {
+      "caseId": "rag-020",
+      "reviewId": "yelp-zcgIx407lAQ1n9SrVLjhMg",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "棒球场停车方便不能证明星河艺术影城停车情况。"
+    },
+    {
+      "caseId": "rag-022",
+      "reviewId": "yelp-be46b4Yc79H9GXQeyAu31A",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "问题点名城际商务酒店并要求高铁场景，候选是另一家机场酒店。"
+    },
+    {
+      "caseId": "rag-022",
+      "reviewId": "yelp-Yo84eeFFim7rK78quQhLfQ",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "另一家酒店的商务中心不能证明城际商务酒店或赶高铁条件。"
+    },
+    {
+      "caseId": "rag-023",
+      "reviewId": "yelp-eTeec7nyDY_vhCWCYo_CPQ",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "另一家酒店的城市景观不能证明城际商务酒店的选房策略。"
+    },
+    {
+      "caseId": "rag-023",
+      "reviewId": "yelp-n776BOF8hqrv54i6IDNVLw",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "餐厅早午餐评论与酒店选房无关。"
+    },
+    {
+      "caseId": "rag-023",
+      "reviewId": "yelp-xdfCiJxCUSg4vieLR9OMoA",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "另一家酒店适合商务停留的信息不回答安静和景观选房。"
+    },
+    {
+      "caseId": "rag-024",
+      "reviewId": "yelp-pu9ZbUpYlWuelf1jabDgdw",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "葡萄酒商店评论与湖畔青年旅舍房价及卫浴无关。"
+    },
+    {
+      "caseId": "rag-024",
+      "reviewId": "yelp-UbPgaOgJ3pg8DB53TP5A7Q",
+      "relevance": 0,
+      "label": "irrelevant",
+      "rationale": "水果礼篮质量与青年旅舍住宿条件无关。"
+    },
+    {
+      "caseId": "rag-025",
+      "reviewId": "yelp-SgNhuqWbbkin7ipO8WEYRQ",
+      "relevance": 1,
+      "label": "tangential",
+      "rationale": "只说明健身房下班后没有经理，不能证明24小时、自由力量或人少。"
+    },
+    {
+      "caseId": "rag-027",
+      "reviewId": "yelp-Z5nyYn8NXLYmqJb3sUTtbQ",
+      "relevance": 3,
+      "label": "directly_relevant",
+      "rationale": "直接讨论工作日晚间热门自由力量器械是否需要等待。"
+    },
+    {
+      "caseId": "fuzzy-shop-val-003",
+      "reviewId": "review-006",
+      "relevance": 3,
+      "label": "directly_relevant",
+      "rationale": "直接说明背景音乐不吵且适合和朋友慢慢聊天。"
+    },
+    {
+      "caseId": "fuzzy-shop-val-003",
+      "reviewId": "review-038",
+      "relevance": 1,
+      "label": "tangential",
+      "rationale": "适合聊天但氛围热闹，不能确认说话无需提高音量。"
+    }
+  ]
+}

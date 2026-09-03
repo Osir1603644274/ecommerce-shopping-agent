@@ -1,0 +1,2426 @@
+{
+  "methodology": {
+    "dataset": "existing 25-case Yelp exploration set",
+    "testRead": true,
+    "selectionUse": false,
+    "candidateLimitPerRetriever": 10,
+    "topK": 3,
+    "scoreFusionWeights": {
+      "vector": 1.0,
+      "bm25": 1.0
+    },
+    "frozenWeightedFusion": {
+      "vector": 0.2,
+      "bm25": 0.8,
+      "selectionUse": false
+    },
+    "rrfK": 60,
+    "caveat": "mechanism comparison only; all cases were used by earlier experiments"
+  },
+  "caseCount": 25,
+  "dataVersion": "yelp-zh-v1",
+  "corpusSnapshot": {
+    "reviewCount": 6774,
+    "translatedCount": 6774,
+    "indexedLanguageCounts": {
+      "zh": 6774
+    },
+    "retrievalTextSha256": "a04202d5f780b44eab81f9adf096eff5419ff2a351c45d497a9d8b989daad04c"
+  },
+  "candidateUnion": {
+    "total": 25,
+    "hits": 24,
+    "hitRate": 0.96,
+    "averageOverlapSize": 2.16,
+    "averageUnionSize": 17.84,
+    "missedCaseIds": [
+      "yelp-rag-009"
+    ]
+  },
+  "retrievalTiming": {
+    "vector": {
+      "averageMs": 2351.5526559999853,
+      "measurementsMs": [
+        2838.466499999413,
+        2484.096000000136,
+        2346.6770000004544,
+        2362.5639000001684,
+        2300.9716000005938,
+        2271.0221999996065,
+        2272.9426000005333,
+        2259.410399999979,
+        2283.244499999455,
+        2331.009499999709,
+        2416.302900000119,
+        2243.823299999349,
+        2253.0584000005547,
+        2601.9986999999674,
+        2359.2893999993976,
+        2354.321499999969,
+        2389.284700000644,
+        2247.799099999611,
+        2787.09439999966,
+        2187.576700000136,
+        2307.110699999612,
+        2137.5003000002835,
+        2276.455399999577,
+        2206.6099000003305,
+        2270.186800000374
+      ]
+    },
+    "bm25": {
+      "averageMs": 351.5011040000172,
+      "measurementsMs": [
+        3818.930499999624,
+        218.46300000015617,
+        232.6586999997744,
+        277.9852000003302,
+        176.20780000015657,
+        189.7804999998698,
+        194.94790000044304,
+        155.91330000006565,
+        226.2678999995842,
+        209.50360000006185,
+        222.57450000051904,
+        190.50120000065363,
+        205.0483000002714,
+        192.7813000002061,
+        242.75649999981397,
+        174.46649999965302,
+        182.8735000008237,
+        236.5737000000081,
+        237.43939999985741,
+        225.89160000006814,
+        239.98649999975896,
+        193.8070999995034,
+        127.20850000005157,
+        250.24669999947946,
+        164.71389999969688
+      ]
+    }
+  },
+  "methods": {
+    "vector": {
+      "metrics": {
+        "total": 25,
+        "hits": 12,
+        "hitRate": 0.48,
+        "hitsAt1": 9,
+        "hitAt1Rate": 0.36,
+        "mrr": 0.4066666666666666
+      },
+      "details": [
+        {
+          "caseId": "yelp-rag-001",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "yelp-kgkYAh008o8oX9anuepynA",
+            "yelp-YmBytIHGjEroySTkyL8m8w"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-002",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-0raRTiWTrj9ytORRy-kZoA"
+          ],
+          "retrievedReviewIds": [
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-XOQLQC0ki-TtFKlXQqTyMw",
+            "yelp-_GNNUewOAcOj8nh-BTILRg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-003",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-1VyHchVgc9oEfVrsFweNNA"
+          ],
+          "retrievedReviewIds": [
+            "yelp-E8DBE1QeXjTE5hpnh0geNQ",
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-004",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-OQSSaEmvKhA65PQlJHmyJQ",
+            "yelp-T61ElOvmStETCK77tRAORA",
+            "yelp-ovsaf5zxSLPnGdGeownhlA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-005",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g"
+          ],
+          "retrievedReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-5zFX4CsUxDEXDxvCunplQQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-006",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-AR8lhVM0aylAt8W06q6zxg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-PjBWGTzpR1B0a-fD4UM2rw",
+            "yelp-mvy5pdwrK00yKegCoqtmHg",
+            "yelp-G7MRym4_Tnkgp21Zo5AT-Q"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-007",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-F2Bx7hzy11LLnhkJK7I-Eg",
+            "yelp-nqhtm_Cp1uw2_UnFYrfaNg",
+            "yelp-2ORKzUZSb21q9fP5ceNUpA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-008",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-llatESyJmEJH4C8WTOIzlw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-009",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-MhSusleKbPBIiq2fKHH5mA",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-25yWGJQdtHtvrW53eH-viA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-010",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-ChYhI05dXfDPbATD9VdiDQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-llatESyJmEJH4C8WTOIzlw",
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+            "yelp-Xtb2kH5Ptj6V9xY_tLXcJg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-011",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw",
+            "yelp-d58QLfswhL1yeSkSfB4Vpw",
+            "yelp-w07mvMiTWF94KdHzmYgrgg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-012",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-G1hVCb7CrOyL-HP1h6rByg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-Nx84FOIRRmroK91kOYMn3Q",
+            "yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "yelp-wiod6zg7n7S_-Iow_O-L9w"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-013",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-cAU8QSToowojsvOiH0phyQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-014",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-hUIkr15XxOSzheG5l9mYSw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-YmBytIHGjEroySTkyL8m8w",
+            "yelp-EPkcvL2A7xX14NWCtbea1A"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-015",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 2,
+          "reciprocalRank": 0.5,
+          "expectedReviewIds": [
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+            "yelp-llatESyJmEJH4C8WTOIzlw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-016",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-017",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ],
+          "retrievedReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "yelp-33aURapX2sWlYPJe78lFRQ",
+            "yelp-OGimK3J0EzMC_MSnsKi_HA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-018",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-REgp10DO01kp2pOONZtq9w"
+          ],
+          "retrievedReviewIds": [
+            "yelp-Xtb2kH5Ptj6V9xY_tLXcJg",
+            "yelp-t9Zl9MPb52uRUQpn_NpSmA",
+            "yelp-hgiPwT5eKLz-PPOeKCsfqw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-019",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 3,
+          "reciprocalRank": 0.3333333333333333,
+          "expectedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-T870mmM6D8i-zBRW8aWevQ",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-020",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-z2Ia7bFRqSKHicUNi7359Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-XQhMDZPixuB9fhN841yQuw",
+            "yelp-M980wiRzRJhBOlyQsFeDYw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-021",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg",
+            "yelp-PzSlMzF9ia4M_pvXSvz_Nw",
+            "yelp-TZTYOARbcTZzg5ghOU6n_Q"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-022",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-VJEtJzH0GP_gFYjKDVIstw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-cAU8QSToowojsvOiH0phyQ",
+            "yelp-DzkvfdGbT1iIwDeMPQLGqA",
+            "yelp-GJVjEx3bCZawRTydNcZgpQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-023",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w"
+          ],
+          "retrievedReviewIds": [
+            "yelp-jD1nxJdtRa45T5A3fY5IMA",
+            "yelp-MdKPBsXG2PuIjZKVcRG8rA",
+            "yelp-Pdyvd0mgeFJ74_-MPic3yQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-024",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 3,
+          "reciprocalRank": 0.3333333333333333,
+          "expectedReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug"
+          ],
+          "retrievedReviewIds": [
+            "yelp-UO9TXvLjHoMHCZ1C5OXqLg",
+            "yelp-MhSusleKbPBIiq2fKHH5mA",
+            "yelp-RIdKOn-6dE8hdSFPh5RZug"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-025",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q",
+            "yelp-cmdiTkrkzWn_vX83IALioA",
+            "yelp-iCjfUzr5nrM465fd-d3aWg"
+          ]
+        }
+      ]
+    },
+    "bm25": {
+      "metrics": {
+        "total": 25,
+        "hits": 23,
+        "hitRate": 0.92,
+        "hitsAt1": 22,
+        "hitAt1Rate": 0.88,
+        "mrr": 0.9
+      },
+      "details": [
+        {
+          "caseId": "yelp-rag-001",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 2,
+          "reciprocalRank": 0.5,
+          "expectedReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-E4SFLVCqfCGgX9tSOzh7Jw",
+            "yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "yelp-i5kRb5FOZO_fs8vzWIcFGA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-002",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-0raRTiWTrj9ytORRy-kZoA"
+          ],
+          "retrievedReviewIds": [
+            "yelp-0raRTiWTrj9ytORRy-kZoA",
+            "yelp-v2u6TqeimdKovePQl9F_eA",
+            "yelp-_GNNUewOAcOj8nh-BTILRg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-003",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-1VyHchVgc9oEfVrsFweNNA"
+          ],
+          "retrievedReviewIds": [
+            "yelp-1VyHchVgc9oEfVrsFweNNA",
+            "yelp-AhTsqSS43V1-9yPq-NRX-w",
+            "yelp-YmBytIHGjEroySTkyL8m8w"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-004",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-L5hnjC1NQkZR1rpooJWqYA",
+            "yelp-T4-5g57hXxllbj-KY8useA",
+            "yelp-qKhO1NWSDqnNSJXGcnf-SQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-005",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g"
+          ],
+          "retrievedReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-N0Dq5TPfMuf13PB6p9rtYw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-006",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-AR8lhVM0aylAt8W06q6zxg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-AR8lhVM0aylAt8W06q6zxg",
+            "yelp-PjBWGTzpR1B0a-fD4UM2rw",
+            "yelp-qdd-U0nwiyYsutbY-MxRFA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-007",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-b8dIMHMGEWXMZi5BXaRfCw",
+            "yelp-F2Bx7hzy11LLnhkJK7I-Eg",
+            "yelp-vx6Xm5owcmUHmUNeG4h_vg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-008",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-009",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ddrggW6Z3MnSsM19eoA2Hw",
+            "yelp-oy--WjOsjZGDaitx5VdfLg",
+            "yelp-ro8S4CxizmxovAKxdr7cLQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-010",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ChYhI05dXfDPbATD9VdiDQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ChYhI05dXfDPbATD9VdiDQ",
+            "yelp-Quapyu-LOnI0Um1ZZjAw8A",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-011",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw",
+            "yelp-N67WeyGj2HX65y8PX3zxaQ",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-012",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-G1hVCb7CrOyL-HP1h6rByg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-G1hVCb7CrOyL-HP1h6rByg",
+            "yelp-6n6TG7HkGojPgk8Qoujs3g",
+            "yelp-Rvaq8bUZXJpJYV1MoEyyvA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-013",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-F2Bx7hzy11LLnhkJK7I-Eg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-014",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-hUIkr15XxOSzheG5l9mYSw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-hUIkr15XxOSzheG5l9mYSw",
+            "yelp-FXIVmjL3GckScX7Uww2NDw",
+            "yelp-1VyHchVgc9oEfVrsFweNNA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-015",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+            "yelp-FXIVmjL3GckScX7Uww2NDw",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-016",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-sKVCrT5KwXIZ7qaepLecIQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-017",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ],
+          "retrievedReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "yelp-T870mmM6D8i-zBRW8aWevQ",
+            "yelp-IzICiEJAPQTKfSk-2BLP2g"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-018",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-REgp10DO01kp2pOONZtq9w"
+          ],
+          "retrievedReviewIds": [
+            "yelp-REgp10DO01kp2pOONZtq9w",
+            "yelp-2EsM0mPABnQempeoOPIlcA",
+            "yelp-galen_dLtSt_l7yjPkWC0w"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-019",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-020",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-z2Ia7bFRqSKHicUNi7359Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-z2Ia7bFRqSKHicUNi7359Q",
+            "yelp-mOv_DUc3fZsWKRazpmRDSw",
+            "yelp-Xtb2kH5Ptj6V9xY_tLXcJg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-021",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg",
+            "yelp-owWHNdxlTdQFPwSus5yTdQ",
+            "yelp-o5DIRFN3f4IPxZXB_RzWrA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-022",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-VJEtJzH0GP_gFYjKDVIstw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-VJEtJzH0GP_gFYjKDVIstw",
+            "yelp-Vrdd-GLXrFftn19HLmC15w",
+            "yelp-QCMg0dCP3CJ0gXLAj7glaQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-023",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w"
+          ],
+          "retrievedReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+            "yelp-cjKlwEl2pqLN4nJvl7wUSA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-024",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug"
+          ],
+          "retrievedReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug",
+            "yelp-MhSusleKbPBIiq2fKHH5mA",
+            "yelp-Quapyu-LOnI0Um1ZZjAw8A"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-025",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-9fYmkpYxDtv8WIcAYYrjUA"
+          ]
+        }
+      ]
+    },
+    "minMaxFusion": {
+      "metrics": {
+        "total": 25,
+        "hits": 23,
+        "hitRate": 0.92,
+        "hitsAt1": 19,
+        "hitAt1Rate": 0.76,
+        "mrr": 0.84
+      },
+      "details": [
+        {
+          "caseId": "yelp-rag-001",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "yelp-E4SFLVCqfCGgX9tSOzh7Jw",
+            "yelp-i5kRb5FOZO_fs8vzWIcFGA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-002",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 2,
+          "reciprocalRank": 0.5,
+          "expectedReviewIds": [
+            "yelp-0raRTiWTrj9ytORRy-kZoA"
+          ],
+          "retrievedReviewIds": [
+            "yelp-_GNNUewOAcOj8nh-BTILRg",
+            "yelp-0raRTiWTrj9ytORRy-kZoA",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-003",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-1VyHchVgc9oEfVrsFweNNA"
+          ],
+          "retrievedReviewIds": [
+            "yelp-1VyHchVgc9oEfVrsFweNNA",
+            "yelp-E8DBE1QeXjTE5hpnh0geNQ",
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-004",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-OQSSaEmvKhA65PQlJHmyJQ",
+            "yelp-L5hnjC1NQkZR1rpooJWqYA",
+            "yelp-T4-5g57hXxllbj-KY8useA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-005",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g"
+          ],
+          "retrievedReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-5zFX4CsUxDEXDxvCunplQQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-006",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 2,
+          "reciprocalRank": 0.5,
+          "expectedReviewIds": [
+            "yelp-AR8lhVM0aylAt8W06q6zxg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-PjBWGTzpR1B0a-fD4UM2rw",
+            "yelp-AR8lhVM0aylAt8W06q6zxg",
+            "yelp-mvy5pdwrK00yKegCoqtmHg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-007",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 2,
+          "reciprocalRank": 0.5,
+          "expectedReviewIds": [
+            "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-F2Bx7hzy11LLnhkJK7I-Eg",
+            "yelp-b8dIMHMGEWXMZi5BXaRfCw",
+            "yelp-nqhtm_Cp1uw2_UnFYrfaNg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-008",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-009",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-MhSusleKbPBIiq2fKHH5mA",
+            "yelp-ddrggW6Z3MnSsM19eoA2Hw",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-010",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ChYhI05dXfDPbATD9VdiDQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ChYhI05dXfDPbATD9VdiDQ",
+            "yelp-llatESyJmEJH4C8WTOIzlw",
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-011",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw",
+            "yelp-d58QLfswhL1yeSkSfB4Vpw",
+            "yelp-w07mvMiTWF94KdHzmYgrgg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-012",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-G1hVCb7CrOyL-HP1h6rByg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-G1hVCb7CrOyL-HP1h6rByg",
+            "yelp-Nx84FOIRRmroK91kOYMn3Q",
+            "yelp-0jBamrOBDkY6lLTpkY0xZw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-013",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-cAU8QSToowojsvOiH0phyQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-014",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-hUIkr15XxOSzheG5l9mYSw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-hUIkr15XxOSzheG5l9mYSw",
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-FXIVmjL3GckScX7Uww2NDw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-015",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-llatESyJmEJH4C8WTOIzlw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-016",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-017",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ],
+          "retrievedReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "yelp-T870mmM6D8i-zBRW8aWevQ",
+            "yelp-33aURapX2sWlYPJe78lFRQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-018",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-REgp10DO01kp2pOONZtq9w"
+          ],
+          "retrievedReviewIds": [
+            "yelp-REgp10DO01kp2pOONZtq9w",
+            "yelp-Xtb2kH5Ptj6V9xY_tLXcJg",
+            "yelp-t9Zl9MPb52uRUQpn_NpSmA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-019",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-T870mmM6D8i-zBRW8aWevQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-020",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 2,
+          "reciprocalRank": 0.5,
+          "expectedReviewIds": [
+            "yelp-z2Ia7bFRqSKHicUNi7359Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-z2Ia7bFRqSKHicUNi7359Q",
+            "yelp-mOv_DUc3fZsWKRazpmRDSw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-021",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg",
+            "yelp-PzSlMzF9ia4M_pvXSvz_Nw",
+            "yelp-TZTYOARbcTZzg5ghOU6n_Q"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-022",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-VJEtJzH0GP_gFYjKDVIstw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-VJEtJzH0GP_gFYjKDVIstw",
+            "yelp-cAU8QSToowojsvOiH0phyQ",
+            "yelp-DzkvfdGbT1iIwDeMPQLGqA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-023",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w"
+          ],
+          "retrievedReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w",
+            "yelp-jD1nxJdtRa45T5A3fY5IMA",
+            "yelp-MdKPBsXG2PuIjZKVcRG8rA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-024",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug"
+          ],
+          "retrievedReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug",
+            "yelp-MhSusleKbPBIiq2fKHH5mA",
+            "yelp-UO9TXvLjHoMHCZ1C5OXqLg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-025",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q",
+            "yelp-cmdiTkrkzWn_vX83IALioA",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+          ]
+        }
+      ]
+    },
+    "minMaxFusionV02B08": {
+      "metrics": {
+        "total": 25,
+        "hits": 23,
+        "hitRate": 0.92,
+        "hitsAt1": 23,
+        "hitAt1Rate": 0.92,
+        "mrr": 0.92
+      },
+      "details": [
+        {
+          "caseId": "yelp-rag-001",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "yelp-E4SFLVCqfCGgX9tSOzh7Jw",
+            "yelp-i5kRb5FOZO_fs8vzWIcFGA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-002",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-0raRTiWTrj9ytORRy-kZoA"
+          ],
+          "retrievedReviewIds": [
+            "yelp-0raRTiWTrj9ytORRy-kZoA",
+            "yelp-_GNNUewOAcOj8nh-BTILRg",
+            "yelp-v2u6TqeimdKovePQl9F_eA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-003",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-1VyHchVgc9oEfVrsFweNNA"
+          ],
+          "retrievedReviewIds": [
+            "yelp-1VyHchVgc9oEfVrsFweNNA",
+            "yelp-AhTsqSS43V1-9yPq-NRX-w",
+            "yelp-YmBytIHGjEroySTkyL8m8w"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-004",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-L5hnjC1NQkZR1rpooJWqYA",
+            "yelp-T4-5g57hXxllbj-KY8useA",
+            "yelp-qKhO1NWSDqnNSJXGcnf-SQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-005",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g"
+          ],
+          "retrievedReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-N0Dq5TPfMuf13PB6p9rtYw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-006",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-AR8lhVM0aylAt8W06q6zxg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-AR8lhVM0aylAt8W06q6zxg",
+            "yelp-PjBWGTzpR1B0a-fD4UM2rw",
+            "yelp-qdd-U0nwiyYsutbY-MxRFA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-007",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-b8dIMHMGEWXMZi5BXaRfCw",
+            "yelp-F2Bx7hzy11LLnhkJK7I-Eg",
+            "yelp-nqhtm_Cp1uw2_UnFYrfaNg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-008",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-009",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ddrggW6Z3MnSsM19eoA2Hw",
+            "yelp-oy--WjOsjZGDaitx5VdfLg",
+            "yelp-ro8S4CxizmxovAKxdr7cLQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-010",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ChYhI05dXfDPbATD9VdiDQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ChYhI05dXfDPbATD9VdiDQ",
+            "yelp-llatESyJmEJH4C8WTOIzlw",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-011",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw",
+            "yelp-N67WeyGj2HX65y8PX3zxaQ",
+            "yelp-1VyHchVgc9oEfVrsFweNNA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-012",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-G1hVCb7CrOyL-HP1h6rByg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-G1hVCb7CrOyL-HP1h6rByg",
+            "yelp-6n6TG7HkGojPgk8Qoujs3g",
+            "yelp-Rvaq8bUZXJpJYV1MoEyyvA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-013",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-F2Bx7hzy11LLnhkJK7I-Eg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-014",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-hUIkr15XxOSzheG5l9mYSw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-hUIkr15XxOSzheG5l9mYSw",
+            "yelp-FXIVmjL3GckScX7Uww2NDw",
+            "yelp-1VyHchVgc9oEfVrsFweNNA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-015",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-llatESyJmEJH4C8WTOIzlw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-016",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-017",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ],
+          "retrievedReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "yelp-T870mmM6D8i-zBRW8aWevQ",
+            "yelp-IzICiEJAPQTKfSk-2BLP2g"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-018",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-REgp10DO01kp2pOONZtq9w"
+          ],
+          "retrievedReviewIds": [
+            "yelp-REgp10DO01kp2pOONZtq9w",
+            "yelp-Xtb2kH5Ptj6V9xY_tLXcJg",
+            "yelp-2EsM0mPABnQempeoOPIlcA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-019",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-020",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-z2Ia7bFRqSKHicUNi7359Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-z2Ia7bFRqSKHicUNi7359Q",
+            "yelp-mOv_DUc3fZsWKRazpmRDSw",
+            "yelp-Xtb2kH5Ptj6V9xY_tLXcJg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-021",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg",
+            "yelp-PzSlMzF9ia4M_pvXSvz_Nw",
+            "yelp-TZTYOARbcTZzg5ghOU6n_Q"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-022",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-VJEtJzH0GP_gFYjKDVIstw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-VJEtJzH0GP_gFYjKDVIstw",
+            "yelp-Vrdd-GLXrFftn19HLmC15w",
+            "yelp-QCMg0dCP3CJ0gXLAj7glaQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-023",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w"
+          ],
+          "retrievedReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+            "yelp-jD1nxJdtRa45T5A3fY5IMA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-024",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug"
+          ],
+          "retrievedReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug",
+            "yelp-MhSusleKbPBIiq2fKHH5mA",
+            "yelp-Quapyu-LOnI0Um1ZZjAw8A"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-025",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-cmdiTkrkzWn_vX83IALioA"
+          ]
+        }
+      ]
+    },
+    "maxFusion": {
+      "metrics": {
+        "total": 25,
+        "hits": 22,
+        "hitRate": 0.88,
+        "hitsAt1": 19,
+        "hitAt1Rate": 0.76,
+        "mrr": 0.8133333333333332
+      },
+      "details": [
+        {
+          "caseId": "yelp-rag-001",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "yelp-E4SFLVCqfCGgX9tSOzh7Jw",
+            "yelp-i5kRb5FOZO_fs8vzWIcFGA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-002",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 2,
+          "reciprocalRank": 0.5,
+          "expectedReviewIds": [
+            "yelp-0raRTiWTrj9ytORRy-kZoA"
+          ],
+          "retrievedReviewIds": [
+            "yelp-_GNNUewOAcOj8nh-BTILRg",
+            "yelp-0raRTiWTrj9ytORRy-kZoA",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-003",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-1VyHchVgc9oEfVrsFweNNA"
+          ],
+          "retrievedReviewIds": [
+            "yelp-1VyHchVgc9oEfVrsFweNNA",
+            "yelp-E8DBE1QeXjTE5hpnh0geNQ",
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-004",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-OQSSaEmvKhA65PQlJHmyJQ",
+            "yelp-L5hnjC1NQkZR1rpooJWqYA",
+            "yelp-T61ElOvmStETCK77tRAORA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-005",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g"
+          ],
+          "retrievedReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-5zFX4CsUxDEXDxvCunplQQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-006",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-AR8lhVM0aylAt8W06q6zxg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-AR8lhVM0aylAt8W06q6zxg",
+            "yelp-PjBWGTzpR1B0a-fD4UM2rw",
+            "yelp-fpbspV6HedWFiOZuTO1bDQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-007",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-F2Bx7hzy11LLnhkJK7I-Eg",
+            "yelp-nqhtm_Cp1uw2_UnFYrfaNg",
+            "yelp-2ORKzUZSb21q9fP5ceNUpA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-008",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-009",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-MhSusleKbPBIiq2fKHH5mA",
+            "yelp-ddrggW6Z3MnSsM19eoA2Hw",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-010",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ChYhI05dXfDPbATD9VdiDQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ChYhI05dXfDPbATD9VdiDQ",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-011",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw",
+            "yelp-N67WeyGj2HX65y8PX3zxaQ",
+            "yelp-1VyHchVgc9oEfVrsFweNNA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-012",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-G1hVCb7CrOyL-HP1h6rByg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-G1hVCb7CrOyL-HP1h6rByg",
+            "yelp-Nx84FOIRRmroK91kOYMn3Q",
+            "yelp-0jBamrOBDkY6lLTpkY0xZw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-013",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-F2Bx7hzy11LLnhkJK7I-Eg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-014",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-hUIkr15XxOSzheG5l9mYSw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-hUIkr15XxOSzheG5l9mYSw",
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-uYgYgz3VRU-nQMsRuUZ7Dg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-015",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-016",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-017",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ],
+          "retrievedReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "yelp-33aURapX2sWlYPJe78lFRQ",
+            "yelp-OGimK3J0EzMC_MSnsKi_HA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-018",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-REgp10DO01kp2pOONZtq9w"
+          ],
+          "retrievedReviewIds": [
+            "yelp-REgp10DO01kp2pOONZtq9w",
+            "yelp-Xtb2kH5Ptj6V9xY_tLXcJg",
+            "yelp-t9Zl9MPb52uRUQpn_NpSmA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-019",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-Xtb2kH5Ptj6V9xY_tLXcJg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-020",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 3,
+          "reciprocalRank": 0.3333333333333333,
+          "expectedReviewIds": [
+            "yelp-z2Ia7bFRqSKHicUNi7359Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-mOv_DUc3fZsWKRazpmRDSw",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-z2Ia7bFRqSKHicUNi7359Q"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-021",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg",
+            "yelp-PzSlMzF9ia4M_pvXSvz_Nw",
+            "yelp-TZTYOARbcTZzg5ghOU6n_Q"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-022",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 2,
+          "reciprocalRank": 0.5,
+          "expectedReviewIds": [
+            "yelp-VJEtJzH0GP_gFYjKDVIstw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-QCMg0dCP3CJ0gXLAj7glaQ",
+            "yelp-VJEtJzH0GP_gFYjKDVIstw",
+            "yelp-cAU8QSToowojsvOiH0phyQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-023",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w"
+          ],
+          "retrievedReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w",
+            "yelp-jD1nxJdtRa45T5A3fY5IMA",
+            "yelp-MdKPBsXG2PuIjZKVcRG8rA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-024",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug"
+          ],
+          "retrievedReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug",
+            "yelp-MhSusleKbPBIiq2fKHH5mA",
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-025",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q",
+            "yelp-cmdiTkrkzWn_vX83IALioA",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+          ]
+        }
+      ]
+    },
+    "rrf": {
+      "metrics": {
+        "total": 25,
+        "hits": 22,
+        "hitRate": 0.88,
+        "hitsAt1": 17,
+        "hitAt1Rate": 0.68,
+        "mrr": 0.7733333333333333
+      },
+      "details": [
+        {
+          "caseId": "yelp-rag-001",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "yelp-E4SFLVCqfCGgX9tSOzh7Jw",
+            "yelp-i5kRb5FOZO_fs8vzWIcFGA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-002",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 2,
+          "reciprocalRank": 0.5,
+          "expectedReviewIds": [
+            "yelp-0raRTiWTrj9ytORRy-kZoA"
+          ],
+          "retrievedReviewIds": [
+            "yelp-_GNNUewOAcOj8nh-BTILRg",
+            "yelp-0raRTiWTrj9ytORRy-kZoA",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-003",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-1VyHchVgc9oEfVrsFweNNA"
+          ],
+          "retrievedReviewIds": [
+            "yelp-1VyHchVgc9oEfVrsFweNNA",
+            "yelp-E8DBE1QeXjTE5hpnh0geNQ",
+            "yelp-AhTsqSS43V1-9yPq-NRX-w"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-004",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-OQSSaEmvKhA65PQlJHmyJQ",
+            "yelp-L5hnjC1NQkZR1rpooJWqYA",
+            "yelp-T4-5g57hXxllbj-KY8useA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-005",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g"
+          ],
+          "retrievedReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-5zFX4CsUxDEXDxvCunplQQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-006",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 2,
+          "reciprocalRank": 0.5,
+          "expectedReviewIds": [
+            "yelp-AR8lhVM0aylAt8W06q6zxg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-PjBWGTzpR1B0a-fD4UM2rw",
+            "yelp-AR8lhVM0aylAt8W06q6zxg",
+            "yelp-fpbspV6HedWFiOZuTO1bDQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-007",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-F2Bx7hzy11LLnhkJK7I-Eg",
+            "yelp-nqhtm_Cp1uw2_UnFYrfaNg",
+            "yelp-2ORKzUZSb21q9fP5ceNUpA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-008",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-009",
+          "hit": false,
+          "hitAt1": false,
+          "firstRelevantRank": null,
+          "reciprocalRank": 0.0,
+          "expectedReviewIds": [
+            "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-MhSusleKbPBIiq2fKHH5mA",
+            "yelp-ddrggW6Z3MnSsM19eoA2Hw",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-010",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ChYhI05dXfDPbATD9VdiDQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ChYhI05dXfDPbATD9VdiDQ",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-011",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw",
+            "yelp-N67WeyGj2HX65y8PX3zxaQ",
+            "yelp-1VyHchVgc9oEfVrsFweNNA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-012",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-G1hVCb7CrOyL-HP1h6rByg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-G1hVCb7CrOyL-HP1h6rByg",
+            "yelp-Nx84FOIRRmroK91kOYMn3Q",
+            "yelp-0jBamrOBDkY6lLTpkY0xZw"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-013",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-F2Bx7hzy11LLnhkJK7I-Eg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-014",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 2,
+          "reciprocalRank": 0.5,
+          "expectedReviewIds": [
+            "yelp-hUIkr15XxOSzheG5l9mYSw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-hUIkr15XxOSzheG5l9mYSw",
+            "yelp-uYgYgz3VRU-nQMsRuUZ7Dg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-015",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-016",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-017",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ],
+          "retrievedReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "yelp-33aURapX2sWlYPJe78lFRQ",
+            "yelp-T870mmM6D8i-zBRW8aWevQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-018",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-REgp10DO01kp2pOONZtq9w"
+          ],
+          "retrievedReviewIds": [
+            "yelp-REgp10DO01kp2pOONZtq9w",
+            "yelp-Xtb2kH5Ptj6V9xY_tLXcJg",
+            "yelp-2EsM0mPABnQempeoOPIlcA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-019",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+          ],
+          "retrievedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-Xtb2kH5Ptj6V9xY_tLXcJg"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-020",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 3,
+          "reciprocalRank": 0.3333333333333333,
+          "expectedReviewIds": [
+            "yelp-z2Ia7bFRqSKHicUNi7359Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-mOv_DUc3fZsWKRazpmRDSw",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-z2Ia7bFRqSKHicUNi7359Q"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-021",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg"
+          ],
+          "retrievedReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg",
+            "yelp-PzSlMzF9ia4M_pvXSvz_Nw",
+            "yelp-owWHNdxlTdQFPwSus5yTdQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-022",
+          "hit": true,
+          "hitAt1": false,
+          "firstRelevantRank": 2,
+          "reciprocalRank": 0.5,
+          "expectedReviewIds": [
+            "yelp-VJEtJzH0GP_gFYjKDVIstw"
+          ],
+          "retrievedReviewIds": [
+            "yelp-QCMg0dCP3CJ0gXLAj7glaQ",
+            "yelp-VJEtJzH0GP_gFYjKDVIstw",
+            "yelp-cAU8QSToowojsvOiH0phyQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-023",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w"
+          ],
+          "retrievedReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w",
+            "yelp-jD1nxJdtRa45T5A3fY5IMA",
+            "yelp-MdKPBsXG2PuIjZKVcRG8rA"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-024",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug"
+          ],
+          "retrievedReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug",
+            "yelp-MhSusleKbPBIiq2fKHH5mA",
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ]
+        },
+        {
+          "caseId": "yelp-rag-025",
+          "hit": true,
+          "hitAt1": true,
+          "firstRelevantRank": 1,
+          "reciprocalRank": 1.0,
+          "expectedReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q"
+          ],
+          "retrievedReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q",
+            "yelp-cmdiTkrkzWn_vX83IALioA",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+          ]
+        }
+      ]
+    }
+  }
+}

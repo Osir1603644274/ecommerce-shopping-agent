@@ -1,0 +1,1076 @@
+{
+  "demoVersion": "place-agent-demo-v2",
+  "catalogScope": "beijing-places-v2 demo snapshot",
+  "scenarioCount": 6,
+  "passed": 6,
+  "scenarios": [
+    {
+      "id": "demo-01-structured-filter",
+      "title": "结构化公园筛选",
+      "learningPoint": "行政区、等级、类型应被提取为 search_places 参数，数量必须注明演示目录边界。",
+      "passed": true,
+      "turns": [
+        {
+          "user": "海淀区有哪些一级综合公园？",
+          "answer": "当前演示目录中找到 **7个** 海淀区的一级综合公园，名单如下：\n\n1. **西小口公园** — 海淀区西三旗街道兴林嘉园南侧\n2. **玲珑公园** — 海淀区慈寿寺桥西南侧\n3. **荷清园公园** — 海淀区荷清路清华大学北侧\n4. **马甸公园** — 海淀区马甸桥西北角\n5. **北坞公园** — 海淀区颐和园西门外\n6. **巴沟山水园** — 巴沟路与蓝靛厂北路交叉口西北角\n7. **长春健身园** — 海淀区万柳西路西侧\n\n如果需要某个公园的更多详细信息（如电话、坐标、无障碍设施等），可以告诉我，我帮你进一步查询～",
+          "toolNames": [
+            "search_places"
+          ],
+          "toolTraces": [
+            {
+              "tool": "search_places",
+              "ok": true,
+              "durationMs": 1.82,
+              "detail": {
+                "query": null,
+                "filters": {
+                  "district": "海淀区",
+                  "kind": "park",
+                  "parkType": "综合公园",
+                  "parkLevel": "一级"
+                },
+                "total": 7,
+                "count": 7,
+                "items": [
+                  {
+                    "id": "beijing-park-265",
+                    "kind": "park",
+                    "name": "西小口公园",
+                    "district": "海淀区",
+                    "address": "海淀区西三旗街道兴林嘉园南侧",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.402387,
+                    "latitude": 40.047147,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 32
+                  },
+                  {
+                    "id": "beijing-park-266",
+                    "kind": "park",
+                    "name": "玲珑公园",
+                    "district": "海淀区",
+                    "address": "海淀区慈寿寺桥西南侧",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.301679,
+                    "latitude": 39.935382,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 33
+                  },
+                  {
+                    "id": "beijing-park-267",
+                    "kind": "park",
+                    "name": "荷清园公园",
+                    "district": "海淀区",
+                    "address": "海淀区荷清路清华大学北侧",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.331922,
+                    "latitude": 40.022589,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 34
+                  },
+                  {
+                    "id": "beijing-park-268",
+                    "kind": "park",
+                    "name": "马甸公园",
+                    "district": "海淀区",
+                    "address": "海淀区马甸桥西北角",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.386326,
+                    "latitude": 39.978533,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 35
+                  },
+                  {
+                    "id": "beijing-park-269",
+                    "kind": "park",
+                    "name": "北坞公园",
+                    "district": "海淀区",
+                    "address": "海淀区颐和园西门外",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.261624,
+                    "latitude": 39.991948,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 36
+                  },
+                  {
+                    "id": "beijing-park-273",
+                    "kind": "park",
+                    "name": "巴沟山水园",
+                    "district": "海淀区",
+                    "address": "巴沟路与蓝靛厂北路交叉口西北角",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.295482,
+                    "latitude": 39.97614,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 37
+                  },
+                  {
+                    "id": "beijing-park-274",
+                    "kind": "park",
+                    "name": "长春健身园",
+                    "district": "海淀区",
+                    "address": "海淀区万柳西路西侧",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.300104,
+                    "latitude": 39.969125,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 38
+                  }
+                ],
+                "catalogVersion": "beijing-places-v2",
+                "scope": "demo_snapshot_not_realtime",
+                "scopeNotice": "当前演示目录包含100个北京公园和190个北京地区备案开放博物馆快照，不代表实时全量名录。",
+                "answerConstraint": "回答数量时必须说“当前演示目录中找到N个”，不得表述为某区或北京市共有N个。"
+              },
+              "knowledgeResult": null
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "demo-02-search-detail-chain",
+      "title": "搜索后查询地点详情",
+      "learningPoint": "模型不能猜地址和电话，应先搜索获得 placeId，再调用 get_place_detail。",
+      "passed": true,
+      "turns": [
+        {
+          "user": "北京世界公园的地址和电话是什么？",
+          "answer": "以下是北京世界公园的联系信息：\n\n- **地址**：丰台区花乡大葆台158号\n- **电话**：**83613681（24小时电话）**\n\n此外，该公园属于**专类公园**，等级为**二级**，主管单位为丰台区花乡街道办事处。如有其他问题，欢迎继续提问！",
+          "toolNames": [
+            "search_places",
+            "get_place_detail"
+          ],
+          "toolTraces": [
+            {
+              "tool": "search_places",
+              "ok": true,
+              "durationMs": 5.64,
+              "detail": {
+                "query": "北京世界公园",
+                "filters": {
+                  "kind": "park"
+                },
+                "total": 1,
+                "count": 1,
+                "items": [
+                  {
+                    "id": "beijing-park-433",
+                    "kind": "park",
+                    "name": "北京世界公园",
+                    "district": "丰台区",
+                    "address": "丰台区花乡大葆台158号",
+                    "parkType": "专类公园",
+                    "parkLevel": "二级",
+                    "longitude": 116.294206,
+                    "latitude": 39.817249,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 2
+                  }
+                ],
+                "catalogVersion": "beijing-places-v2",
+                "scope": "demo_snapshot_not_realtime",
+                "scopeNotice": "当前演示目录包含100个北京公园和190个北京地区备案开放博物馆快照，不代表实时全量名录。",
+                "answerConstraint": "回答数量时必须说“当前演示目录中找到N个”，不得表述为某区或北京市共有N个。"
+              },
+              "knowledgeResult": null
+            },
+            {
+              "tool": "get_place_detail",
+              "ok": true,
+              "durationMs": 0.67,
+              "detail": {
+                "catalogVersion": "beijing-places-v2",
+                "scope": "demo_snapshot_not_realtime",
+                "scopeNotice": "该详情来自北京地点演示快照，不是实时开放状态。",
+                "answerConstraint": "只陈述返回的结构化事实，不推断实时开放、拥挤程度或适合人群。",
+                "place": {
+                  "id": "beijing-park-433",
+                  "kind": "park",
+                  "name": "北京世界公园",
+                  "district": "丰台区",
+                  "address": "丰台区花乡大葆台158号",
+                  "parkType": "专类公园",
+                  "parkLevel": "二级",
+                  "longitude": 116.294206,
+                  "latitude": 39.817249,
+                  "coordinateSystem": "BD-09",
+                  "candidateRank": 2,
+                  "phone": "83613681（24小时电话）",
+                  "governingUnit": "丰台区花乡街道办事处",
+                  "postcode": null,
+                  "facilities": [
+                    {
+                      "name": "无障碍旅游路线",
+                      "status": "标准",
+                      "signage": "无障碍标识",
+                      "signageStatus": "标准"
+                    },
+                    {
+                      "name": "无障碍设施的接驳程度",
+                      "status": "良好",
+                      "signage": "/",
+                      "signageStatus": "/"
+                    },
+                    {
+                      "name": "出入口坡化",
+                      "status": "标准",
+                      "signage": "无障碍标识",
+                      "signageStatus": "标准"
+                    },
+                    {
+                      "name": "低位服务设施",
+                      "status": "不标准",
+                      "signage": "无障碍标识",
+                      "signageStatus": "无"
+                    },
+                    {
+                      "name": "无障碍厕所/厕位",
+                      "status": "标准",
+                      "signage": "无障碍标识",
+                      "signageStatus": "标准"
+                    },
+                    {
+                      "name": "无障碍停车位",
+                      "status": "标准",
+                      "signage": "无障碍标识",
+                      "signageStatus": "标准"
+                    }
+                  ],
+                  "quality": {
+                    "candidateScore": 51.0,
+                    "matchMethod": "exact_normalized_name_district",
+                    "matchScore": 1.0,
+                    "flags": [
+                      "official_registry",
+                      "source_coordinate",
+                      "exact_name_match"
+                    ]
+                  },
+                  "sourceRefs": {
+                    "official_parks": "433",
+                    "park_accessibility": "ggfwcs-22-0206313"
+                  }
+                }
+              },
+              "knowledgeResult": null
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "demo-03-ambiguity-follow-up",
+      "title": "同名地点消歧与多轮追问",
+      "learningPoint": "首轮列出同名候选并让用户确认；次轮利用会话历史定位东城区候选并查询详情。",
+      "passed": true,
+      "turns": [
+        {
+          "user": "永定门公园的电话是什么？",
+          "answer": "您查询的“永定门公园”在当前的演示目录中有两个同名候选，我需要您确认具体是哪一家：\n\n1. **永定门公园（东城）** — 东城区东滨河路18号  \n2. **永定门公园（西城)**  — 西城区永定门东滨河路18号  \n\n请问您指的是哪一个？确认后我会为您查询电话。",
+          "toolNames": [
+            "search_places"
+          ],
+          "toolTraces": [
+            {
+              "tool": "search_places",
+              "ok": true,
+              "durationMs": 5.31,
+              "detail": {
+                "query": "永定门公园",
+                "filters": {
+                  "kind": "park"
+                },
+                "total": 2,
+                "count": 2,
+                "items": [
+                  {
+                    "id": "beijing-park-19",
+                    "kind": "park",
+                    "name": "永定门公园（东城）",
+                    "district": "东城区",
+                    "address": "东城区东滨河路18号",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.405996,
+                    "latitude": 39.877205,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 1
+                  },
+                  {
+                    "id": "beijing-park-88",
+                    "kind": "park",
+                    "name": "永定门公园（西城)",
+                    "district": "西城区",
+                    "address": "西城区永定门东滨河路18号",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.404521,
+                    "latitude": 39.8845,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 19
+                  }
+                ],
+                "catalogVersion": "beijing-places-v2",
+                "scope": "demo_snapshot_not_realtime",
+                "scopeNotice": "当前演示目录包含100个北京公园和190个北京地区备案开放博物馆快照，不代表实时全量名录。",
+                "answerConstraint": "回答数量时必须说“当前演示目录中找到N个”，不得表述为某区或北京市共有N个。"
+              },
+              "knowledgeResult": null
+            }
+          ],
+          "passed": true
+        },
+        {
+          "user": "我问东城区那个永定门公园，电话是什么？",
+          "answer": "东城区**永定门公园（东城）**的电话是：**67692146（24小时电话）**。",
+          "toolNames": [
+            "get_place_detail"
+          ],
+          "toolTraces": [
+            {
+              "tool": "get_place_detail",
+              "ok": true,
+              "durationMs": 0.64,
+              "detail": {
+                "catalogVersion": "beijing-places-v2",
+                "scope": "demo_snapshot_not_realtime",
+                "scopeNotice": "该详情来自北京地点演示快照，不是实时开放状态。",
+                "answerConstraint": "只陈述返回的结构化事实，不推断实时开放、拥挤程度或适合人群。",
+                "place": {
+                  "id": "beijing-park-19",
+                  "kind": "park",
+                  "name": "永定门公园（东城）",
+                  "district": "东城区",
+                  "address": "东城区东滨河路18号",
+                  "parkType": "综合公园",
+                  "parkLevel": "一级",
+                  "longitude": 116.405996,
+                  "latitude": 39.877205,
+                  "coordinateSystem": "BD-09",
+                  "candidateRank": 1,
+                  "phone": "67692146（24小时电话）",
+                  "governingUnit": "东城区园林绿化局",
+                  "postcode": null,
+                  "facilities": [
+                    {
+                      "name": "低位服务设施",
+                      "status": "不涉及",
+                      "signage": "无障碍标识",
+                      "signageStatus": "不涉及"
+                    },
+                    {
+                      "name": "无障碍设施的接驳程度",
+                      "status": "良好",
+                      "signage": "/",
+                      "signageStatus": "/"
+                    },
+                    {
+                      "name": "无障碍厕所/厕位",
+                      "status": "不涉及",
+                      "signage": "无障碍标识",
+                      "signageStatus": "不涉及"
+                    },
+                    {
+                      "name": "无障碍旅游路线",
+                      "status": "标准",
+                      "signage": "无障碍标识",
+                      "signageStatus": "标准"
+                    },
+                    {
+                      "name": "无障碍停车位",
+                      "status": "不涉及",
+                      "signage": "无障碍标识",
+                      "signageStatus": "不涉及"
+                    },
+                    {
+                      "name": "出入口坡化",
+                      "status": "标准",
+                      "signage": "无障碍标识",
+                      "signageStatus": "标准"
+                    }
+                  ],
+                  "quality": {
+                    "candidateScore": 62.0,
+                    "matchMethod": "exact_alias_name_district",
+                    "matchScore": 0.98,
+                    "flags": [
+                      "official_registry",
+                      "source_coordinate",
+                      "exact_name_match"
+                    ]
+                  },
+                  "sourceRefs": {
+                    "official_parks": "19",
+                    "park_accessibility": "ggfwcs-22-0001249"
+                  }
+                }
+              },
+              "knowledgeResult": null
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "demo-04-evidence-boundary",
+      "title": "主观与实时问题的证据边界",
+      "learningPoint": "目录可以提供设施事实，但不能把等级或设施推断成人少、安静等实时结论。",
+      "passed": true,
+      "turns": [
+        {
+          "user": "朝阳区哪个公园最安静、周末人最少？",
+          "answer": "当前演示目录中找到朝阳区共8个公园。不过，关于\"哪个最安静、周末人最少\"这类**主观和实时状态**的问题，现有目录数据只包含公园的名称、地址、类型、等级等客观信息，**没有提供拥挤程度、安静程度或人流量等数据**，因此无法判断哪个公园最安静或周末人最少。\n\n以下列出朝阳区8个公园的名称和等级供你参考，具体体验建议参考在线评论或实地感受：\n\n| 公园名称 | 等级 |\n|---|---|\n| **朝阳公园** | 一级综合公园 |\n| **大望京公园** | 一级综合公园 |\n| **红领巾公园** | 一级综合公园 |\n| **四得公园** | 一级综合公园 |\n| **北小河公园** | 一级综合公园 |\n| **望和公园** | 一级综合公园 |\n| **古塔公园** | 一级综合公园 |\n| **镇海寺郊野公园** | 二级专类公园 |\n\n其中**镇海寺郊野公园**是二级专类公园（郊野公园），通常这类公园面积较大、配套设施相对简单，理论上可能人相对少一些，但现有目录无法判断是否真的安静或不拥挤，建议你实际前往体验或查看近期游客评价哦。",
+          "toolNames": [
+            "search_places"
+          ],
+          "toolTraces": [
+            {
+              "tool": "search_places",
+              "ok": true,
+              "durationMs": 1.57,
+              "detail": {
+                "query": null,
+                "filters": {
+                  "district": "朝阳区",
+                  "kind": "park"
+                },
+                "total": 8,
+                "count": 8,
+                "items": [
+                  {
+                    "id": "beijing-park-178",
+                    "kind": "park",
+                    "name": "朝阳公园",
+                    "district": "朝阳区",
+                    "address": "朝阳区朝阳公园南路1号",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.487585,
+                    "latitude": 39.951219,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 9
+                  },
+                  {
+                    "id": "beijing-park-180",
+                    "kind": "park",
+                    "name": "大望京公园",
+                    "district": "朝阳区",
+                    "address": "朝阳区望京东路甲6号",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.501385,
+                    "latitude": 40.004002,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 26
+                  },
+                  {
+                    "id": "beijing-park-182",
+                    "kind": "park",
+                    "name": "朝阳区红领巾公园",
+                    "district": "朝阳区",
+                    "address": "朝阳区后八里庄5号",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.498609,
+                    "latitude": 39.933293,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 27
+                  },
+                  {
+                    "id": "beijing-park-183",
+                    "kind": "park",
+                    "name": "四得公园",
+                    "district": "朝阳区",
+                    "address": "朝阳区将台西路9号",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.481835,
+                    "latitude": 39.977579,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 28
+                  },
+                  {
+                    "id": "beijing-park-184",
+                    "kind": "park",
+                    "name": "北小河公园",
+                    "district": "朝阳区",
+                    "address": "朝阳区师家坟村156号",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.461533,
+                    "latitude": 40.010921,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 29
+                  },
+                  {
+                    "id": "beijing-park-185",
+                    "kind": "park",
+                    "name": "望和公园",
+                    "district": "朝阳区",
+                    "address": "朝阳区北四环东路77号",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.458439,
+                    "latitude": 40.004373,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 30
+                  },
+                  {
+                    "id": "beijing-park-187",
+                    "kind": "park",
+                    "name": "古塔公园",
+                    "district": "朝阳区",
+                    "address": "朝阳区王四营乡高碑店路东侧",
+                    "parkType": "综合公园",
+                    "parkLevel": "一级",
+                    "longitude": 116.541847,
+                    "latitude": 39.885409,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 31
+                  },
+                  {
+                    "id": "beijing-park-221",
+                    "kind": "park",
+                    "name": "镇海寺郊野公园",
+                    "district": "朝阳区",
+                    "address": "朝阳区小红门乡牌坊村",
+                    "parkType": "专类公园",
+                    "parkLevel": "二级",
+                    "longitude": 116.494118,
+                    "latitude": 39.834432,
+                    "coordinateSystem": "BD-09",
+                    "candidateRank": 91
+                  }
+                ],
+                "catalogVersion": "beijing-places-v2",
+                "scope": "demo_snapshot_not_realtime",
+                "scopeNotice": "当前演示目录包含100个北京公园和190个北京地区备案开放博物馆快照，不代表实时全量名录。",
+                "answerConstraint": "回答数量时必须说“当前演示目录中找到N个”，不得表述为某区或北京市共有N个。"
+              },
+              "knowledgeResult": null
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "demo-05-place-shop-routing",
+      "title": "公园地标附近的商家检索",
+      "learningPoint": "公园只是地标，用户真正要找咖啡店时应进入商家能力，不能误走地点目录或 RAG。",
+      "passed": true,
+      "turns": [
+        {
+          "user": "天坛公园附近有哪些咖啡店？",
+          "answer": "根据查询结果，当前演示数据中暂未收录位于天坛公园附近的咖啡店。搜索结果中显示的咖啡类商家（如“清晨手冲咖啡”“纸间咖啡书屋”等）均位于其他区域，无法确认其与天坛公园的距离关系。\n\n建议您通过地图或生活服务类App搜索“天坛公园附近咖啡店”获取更准确的实时信息。",
+          "toolNames": [
+            "search_shops"
+          ],
+          "toolTraces": [
+            {
+              "tool": "search_shops",
+              "ok": true,
+              "durationMs": 3183.0,
+              "detail": {
+                "typeId": 2,
+                "name": null,
+                "count": 64,
+                "shops": [
+                  {
+                    "id": 3,
+                    "name": "清晨手冲咖啡",
+                    "address": "文化广场 3 号",
+                    "avgPrice": 35
+                  },
+                  {
+                    "id": 7,
+                    "name": "纸间咖啡书屋",
+                    "address": "学院路 18 号",
+                    "avgPrice": 42
+                  },
+                  {
+                    "id": 8,
+                    "name": "街角共创咖啡",
+                    "address": "创业大街 66 号",
+                    "avgPrice": 39
+                  },
+                  {
+                    "id": 100001,
+                    "name": "St Honore Pastries",
+                    "address": "935 Race St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100005,
+                    "name": "Wawa",
+                    "address": "3604 Chestnut St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100010,
+                    "name": "ReAnimator Coffee",
+                    "address": "1523 E Susquehanna Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100011,
+                    "name": "Red Hook Coffee & Tea",
+                    "address": "765 S 4th St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100012,
+                    "name": "Watson Adventures Scavenger Hunts",
+                    "address": "Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100016,
+                    "name": "Brown Sugar Bakery & Cafe",
+                    "address": "219 S 52nd St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100027,
+                    "name": "NY Bagel & Deli Shop",
+                    "address": "1120 Buttonwood St, Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100032,
+                    "name": "McDonald's",
+                    "address": "501 Franklin Mill Cir, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100040,
+                    "name": "Wawa",
+                    "address": "3744 Spruce St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100042,
+                    "name": "Feet First Team Building",
+                    "address": "Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100051,
+                    "name": "Forin Cafe",
+                    "address": "2041 Coral St, Ste 2, Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100052,
+                    "name": "Tony's Luke",
+                    "address": "8500 Essington Ave, Philadelphia, PA",
+                    "avgPrice": 100
+                  },
+                  {
+                    "id": 100054,
+                    "name": "Mood Cafe",
+                    "address": "4618 Baltimore Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100060,
+                    "name": "Philadelphia Phillies",
+                    "address": "Citizens Bank Park, Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100068,
+                    "name": "Alchemy Coffee",
+                    "address": "119 S 21st St, Philadelphia, PA",
+                    "avgPrice": 100
+                  },
+                  {
+                    "id": 100075,
+                    "name": "Guavaberry Foods & Drinks",
+                    "address": "776 S 4th St, Philadelphia, PA",
+                    "avgPrice": 100
+                  },
+                  {
+                    "id": 100078,
+                    "name": "Junes Breakfast",
+                    "address": "6227 Lancaster Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100079,
+                    "name": "Lincoln Chicken Pizza And Grill",
+                    "address": "2614 W Girard Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100086,
+                    "name": "J'aime French Bakery",
+                    "address": "212 S 12th St, Philadelphia, PA",
+                    "avgPrice": 100
+                  },
+                  {
+                    "id": 100096,
+                    "name": "Vientiane Café",
+                    "address": "4728 Baltimore Ave, Philadelphia, PA",
+                    "avgPrice": 100
+                  },
+                  {
+                    "id": 100099,
+                    "name": "Passero's Coffee Roasters",
+                    "address": "1601 John F Kennedy Blvd, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100100,
+                    "name": "Starbucks",
+                    "address": "1018 N 2nd St, Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100101,
+                    "name": "Philadelphia Sports Network",
+                    "address": "Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100108,
+                    "name": "Vineyards Cafe",
+                    "address": "847 N 16th St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100111,
+                    "name": "Ron's Caribbean Cuisine",
+                    "address": "5726 N Broad St, Philadelphia, PA",
+                    "avgPrice": 100
+                  },
+                  {
+                    "id": 100119,
+                    "name": "Wawa",
+                    "address": "19th St & Market St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100132,
+                    "name": "Dunkin'",
+                    "address": "7520 City Line Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100134,
+                    "name": "Starbucks",
+                    "address": "1528 Walnut St, Philadelphia, PA",
+                    "avgPrice": 100
+                  },
+                  {
+                    "id": 100142,
+                    "name": "Good Music Academy",
+                    "address": "4705 Baltimore Ave, Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100143,
+                    "name": "Gaetano’s",
+                    "address": "3820 Lancaster Ave, Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100151,
+                    "name": "Lucky Goat Coffeehouse",
+                    "address": "888 N 26th St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100156,
+                    "name": "McDonald's",
+                    "address": "710 Adams Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100157,
+                    "name": "Dunkin'",
+                    "address": "300 Erie Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100162,
+                    "name": "Oregon Steaks",
+                    "address": "2654 S 10th St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100167,
+                    "name": "George's Sandwich Shop",
+                    "address": "900 S 9th St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100169,
+                    "name": "Good Karma Cafe",
+                    "address": "928 Pine St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100182,
+                    "name": "McDonald's",
+                    "address": "5945 Woodland Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100184,
+                    "name": "Cake Life Bake Shop",
+                    "address": "1306 Frankford Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100192,
+                    "name": "Alena’s Cafe",
+                    "address": "6669 Germantown Ave, Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100200,
+                    "name": "Mr Wish",
+                    "address": "5520 Whitaker Ave, Ste 10, Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100204,
+                    "name": "Dunkin' Donuts",
+                    "address": "14254 Bustleton Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100212,
+                    "name": "Cily Chicken Rice",
+                    "address": "933 Race St, Philadelphia, PA",
+                    "avgPrice": 100
+                  },
+                  {
+                    "id": 100217,
+                    "name": "Franny Lou's Porch",
+                    "address": "2400 Coral St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100222,
+                    "name": "Dunkin'",
+                    "address": "3313 Wharton St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100228,
+                    "name": "Vientiane Bistro",
+                    "address": "2537 Kensington Ave, Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100229,
+                    "name": "Izzy's 33",
+                    "address": "1703 S 9th St, Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100231,
+                    "name": "Wawa",
+                    "address": "7236-40 Germantown Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100232,
+                    "name": "Joe's Steaks + Soda Shop",
+                    "address": "6030 Torresdale Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100234,
+                    "name": "Yellow Bicycle Canteen",
+                    "address": "930 Locust St, Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100235,
+                    "name": "Suraya",
+                    "address": "1528 Frankford Ave, Philadelphia, PA",
+                    "avgPrice": 180
+                  },
+                  {
+                    "id": 100241,
+                    "name": "Park Manor Deli",
+                    "address": "240 W Chelten Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100243,
+                    "name": "McDonald's",
+                    "address": "8901 Franford Ave, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100247,
+                    "name": "Tasties",
+                    "address": "1212 N 52nd St, Philadelphia, PA",
+                    "avgPrice": 100
+                  },
+                  {
+                    "id": 100256,
+                    "name": "Paris Baguette",
+                    "address": "3816 Chestnut St, Unit  9, Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100261,
+                    "name": "Cafe Square One",
+                    "address": "50 S 3rd St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100262,
+                    "name": "Bai Wei",
+                    "address": "1038 Race St, Philadelphia, PA",
+                    "avgPrice": 100
+                  },
+                  {
+                    "id": 100270,
+                    "name": "7-Eleven",
+                    "address": "1912 Liacouras Walk, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100276,
+                    "name": "Philadelphia Flyers",
+                    "address": "Wells Fargo Ctr, 3601 S Broad St, Philadelphia, PA",
+                    "avgPrice": 0
+                  },
+                  {
+                    "id": 100277,
+                    "name": "Valerio Coffee Roasters",
+                    "address": "4373 Main St, Philadelphia, PA",
+                    "avgPrice": 50
+                  },
+                  {
+                    "id": 100298,
+                    "name": "Applebee's Grill + Bar",
+                    "address": "2535-37 Castor Ave, Philadelphia, PA",
+                    "avgPrice": 100
+                  },
+                  {
+                    "id": 100299,
+                    "name": "Bury The Hatchet",
+                    "address": "1719 Washington Ave, Fl 2, Philadelphia, PA",
+                    "avgPrice": 0
+                  }
+                ]
+              },
+              "knowledgeResult": null
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "demo-06-museum-search-detail",
+      "title": "博物馆搜索与详情",
+      "learningPoint": "博物馆复用统一地点工具，先搜索取得placeId，再查询地址、电话和邮编。",
+      "passed": true,
+      "turns": [
+        {
+          "user": "故宫博物院的地址和电话是什么？",
+          "answer": "**故宫博物院**的信息如下：\n\n- **地址**：北京市东城区景山前街4号\n- **电话**：65132255\n- **邮编**：100009\n\n> 以上信息来自当前演示目录中的备案开放博物馆快照，可能不代表实时数据，建议出行前通过官方渠道核实开放时间与预约信息。",
+          "toolNames": [
+            "search_places",
+            "get_place_detail"
+          ],
+          "toolTraces": [
+            {
+              "tool": "search_places",
+              "ok": true,
+              "durationMs": 2.18,
+              "detail": {
+                "query": "故宫博物院",
+                "filters": {
+                  "kind": "museum"
+                },
+                "total": 1,
+                "count": 1,
+                "items": [
+                  {
+                    "id": "beijing-museum-1",
+                    "kind": "museum",
+                    "name": "故宫博物院",
+                    "district": "东城区",
+                    "address": "北京市东城区景山前街4号",
+                    "parkType": null,
+                    "parkLevel": null,
+                    "longitude": null,
+                    "latitude": null,
+                    "coordinateSystem": null,
+                    "candidateRank": 101
+                  }
+                ],
+                "catalogVersion": "beijing-places-v2",
+                "scope": "demo_snapshot_not_realtime",
+                "scopeNotice": "当前演示目录包含100个北京公园和190个北京地区备案开放博物馆快照，不代表实时全量名录。",
+                "answerConstraint": "回答数量时必须说“当前演示目录中找到N个”，不得表述为某区或北京市共有N个。"
+              },
+              "knowledgeResult": null
+            },
+            {
+              "tool": "get_place_detail",
+              "ok": true,
+              "durationMs": 0.62,
+              "detail": {
+                "catalogVersion": "beijing-places-v2",
+                "scope": "demo_snapshot_not_realtime",
+                "scopeNotice": "该详情来自北京地点演示快照，不是实时开放状态。",
+                "answerConstraint": "只陈述返回的结构化事实，不推断实时开放、拥挤程度或适合人群。",
+                "place": {
+                  "id": "beijing-museum-1",
+                  "kind": "museum",
+                  "name": "故宫博物院",
+                  "district": "东城区",
+                  "address": "北京市东城区景山前街4号",
+                  "parkType": null,
+                  "parkLevel": null,
+                  "longitude": null,
+                  "latitude": null,
+                  "coordinateSystem": null,
+                  "candidateRank": 101,
+                  "phone": "65132255",
+                  "governingUnit": null,
+                  "postcode": "100009",
+                  "facilities": [],
+                  "quality": {
+                    "candidateScore": 0.0,
+                    "matchMethod": "official_registry_record",
+                    "matchScore": 1.0,
+                    "flags": [
+                      "official_registry"
+                    ]
+                  },
+                  "sourceRefs": {
+                    "open_museums": "1"
+                  }
+                }
+              },
+              "knowledgeResult": null
+            }
+          ],
+          "passed": true
+        }
+      ]
+    }
+  ]
+}

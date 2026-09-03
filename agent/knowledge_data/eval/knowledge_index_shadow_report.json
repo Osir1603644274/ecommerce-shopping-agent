@@ -1,0 +1,1799 @@
+{
+  "experiment": "RAG-QUALITY-13 unified knowledge index shadow comparison",
+  "current": {
+    "methodology": {
+      "sourceSelection": "explicit; router is evaluated separately",
+      "topKPerSource": 3,
+      "globalCrossSourceRanking": false,
+      "completeHit": "all labeled relevant chunks are returned by their source retrievers"
+    },
+    "overall": {
+      "caseCount": 16,
+      "completeHits": 11,
+      "completeHitRate": 0.6875,
+      "relevantChunkCount": 20,
+      "retrievedRelevantChunkCount": 15,
+      "relevantChunkRecall": 0.75,
+      "meanRelevantReciprocalRank": 0.725
+    },
+    "bySplit": {
+      "test": {
+        "caseCount": 8,
+        "completeHits": 6,
+        "completeHitRate": 0.75,
+        "relevantChunkCount": 10,
+        "retrievedRelevantChunkCount": 8,
+        "relevantChunkRecall": 0.8,
+        "meanRelevantReciprocalRank": 0.8
+      },
+      "validation": {
+        "caseCount": 8,
+        "completeHits": 5,
+        "completeHitRate": 0.625,
+        "relevantChunkCount": 10,
+        "retrievedRelevantChunkCount": 7,
+        "relevantChunkRecall": 0.7,
+        "meanRelevantReciprocalRank": 0.65
+      }
+    },
+    "byCategory": {
+      "merchant_docs": {
+        "caseCount": 4,
+        "completeHits": 4,
+        "completeHitRate": 1.0,
+        "relevantChunkCount": 4,
+        "retrievedRelevantChunkCount": 4,
+        "relevantChunkRecall": 1.0,
+        "meanRelevantReciprocalRank": 0.875
+      },
+      "merchant_reviews": {
+        "caseCount": 4,
+        "completeHits": 1,
+        "completeHitRate": 0.25,
+        "relevantChunkCount": 8,
+        "retrievedRelevantChunkCount": 5,
+        "relevantChunkRecall": 0.625,
+        "meanRelevantReciprocalRank": 0.625
+      },
+      "policy_docs": {
+        "caseCount": 4,
+        "completeHits": 4,
+        "completeHitRate": 1.0,
+        "relevantChunkCount": 4,
+        "retrievedRelevantChunkCount": 4,
+        "relevantChunkRecall": 1.0,
+        "meanRelevantReciprocalRank": 1.0
+      },
+      "reviews": {
+        "caseCount": 4,
+        "completeHits": 2,
+        "completeHitRate": 0.5,
+        "relevantChunkCount": 4,
+        "retrievedRelevantChunkCount": 2,
+        "relevantChunkRecall": 0.5,
+        "meanRelevantReciprocalRank": 0.5
+      }
+    },
+    "failures": [
+      {
+        "caseId": "quality-val-review-001",
+        "split": "validation",
+        "category": "reviews",
+        "question": "Alchemy Coffee 的员工服务怎么样，真的帮顾客找回过落下的电脑吗？",
+        "expectedSources": [
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "review:yelp-0raRTiWTrj9ytORRy-kZoA"
+        ],
+        "retrievedChunkIdsBySource": {
+          "reviews": [
+            "review:yelp-CaXYOXHwOkmEu_JL3nEozQ",
+            "review:yelp-G1hVCb7CrOyL-HP1h6rByg",
+            "review:yelp-4AawI-7a186mK_CLziwt3g"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "review:yelp-0raRTiWTrj9ytORRy-kZoA",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2654.91
+      },
+      {
+        "caseId": "quality-val-review-002",
+        "split": "validation",
+        "category": "reviews",
+        "question": "Good Karma Cafe 空间、WiFi 和插座怎么样，付款时有什么要注意？",
+        "expectedSources": [
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "review:yelp-1VyHchVgc9oEfVrsFweNNA"
+        ],
+        "retrievedChunkIdsBySource": {
+          "reviews": [
+            "review:review-220",
+            "review:review-247",
+            "review:review-112"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "review:yelp-1VyHchVgc9oEfVrsFweNNA",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2126.07
+      },
+      {
+        "caseId": "quality-val-mixed-001",
+        "split": "validation",
+        "category": "merchant_reviews",
+        "question": "ReAnimator Coffee 周日营业到几点，评论里中午坐户外用 WiFi 办公的体验怎么样？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:2dlQX5sP9X6Dlm1MmNOlSw:profile",
+          "review:yelp-wiod6zg7n7S_-Iow_O-L9w"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:2dlQX5sP9X6Dlm1MmNOlSw:profile",
+            "merchant_doc:9XpU6r6ATXSWYfbU7kibaQ:profile",
+            "merchant_doc:Bb3F76xkJrA-IwXLNK52RQ:profile"
+          ],
+          "reviews": [
+            "review:review-016",
+            "review:yelp-CaXYOXHwOkmEu_JL3nEozQ",
+            "review:review-247"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:2dlQX5sP9X6Dlm1MmNOlSw:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          },
+          {
+            "chunkId": "review:yelp-wiod6zg7n7S_-Iow_O-L9w",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 1,
+        "completeHit": false,
+        "durationMs": 2216.54
+      },
+      {
+        "caseId": "quality-test-mixed-001",
+        "split": "test",
+        "category": "merchant_reviews",
+        "question": "Paris Baguette 周日营业到几点、是否配送，评论里用 WiFi 办公的实际体验怎么样？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:wP0SSjU7R-m9j-VRhOCzmg:profile",
+          "review:yelp-OTgJteiQbczb4ZV5Nsf_5A"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:wP0SSjU7R-m9j-VRhOCzmg:profile",
+            "merchant_doc:8hgo446H2HoYlZocEi1SJw:profile",
+            "merchant_doc:-OIUunijjcq_ZzyyQhPPFQ:profile"
+          ],
+          "reviews": [
+            "review:yelp-ZMZCxn7QQsG0val9K3945Q",
+            "review:review-409",
+            "review:review-436"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:wP0SSjU7R-m9j-VRhOCzmg:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          },
+          {
+            "chunkId": "review:yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 1,
+        "completeHit": false,
+        "durationMs": 2359.83
+      },
+      {
+        "caseId": "quality-test-mixed-002",
+        "split": "test",
+        "category": "merchant_reviews",
+        "question": "Vineyards Cafe 周六几点关门，评论里大窗户、楼下座位和 chai latte 的体验怎么样？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:GOSVLhjUT6TnrPhkkmDOpw:profile",
+          "review:yelp-REgp10DO01kp2pOONZtq9w"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:GOSVLhjUT6TnrPhkkmDOpw:profile",
+            "merchant_doc:nBr6NgqcZz1GhtAngU0RSQ:profile",
+            "merchant_doc:AWJyivVwe3t9BO-k8D0ynQ:profile"
+          ],
+          "reviews": [
+            "review:review-013",
+            "review:yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "review:review-016"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:GOSVLhjUT6TnrPhkkmDOpw:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          },
+          {
+            "chunkId": "review:yelp-REgp10DO01kp2pOONZtq9w",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 1,
+        "completeHit": false,
+        "durationMs": 2240.72
+      }
+    ],
+    "details": [
+      {
+        "caseId": "quality-val-review-001",
+        "split": "validation",
+        "category": "reviews",
+        "question": "Alchemy Coffee 的员工服务怎么样，真的帮顾客找回过落下的电脑吗？",
+        "expectedSources": [
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "review:yelp-0raRTiWTrj9ytORRy-kZoA"
+        ],
+        "retrievedChunkIdsBySource": {
+          "reviews": [
+            "review:yelp-CaXYOXHwOkmEu_JL3nEozQ",
+            "review:yelp-G1hVCb7CrOyL-HP1h6rByg",
+            "review:yelp-4AawI-7a186mK_CLziwt3g"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "review:yelp-0raRTiWTrj9ytORRy-kZoA",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2654.91
+      },
+      {
+        "caseId": "quality-val-review-002",
+        "split": "validation",
+        "category": "reviews",
+        "question": "Good Karma Cafe 空间、WiFi 和插座怎么样，付款时有什么要注意？",
+        "expectedSources": [
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "review:yelp-1VyHchVgc9oEfVrsFweNNA"
+        ],
+        "retrievedChunkIdsBySource": {
+          "reviews": [
+            "review:review-220",
+            "review:review-247",
+            "review:review-112"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "review:yelp-1VyHchVgc9oEfVrsFweNNA",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2126.07
+      },
+      {
+        "caseId": "quality-val-merchant-001",
+        "split": "validation",
+        "category": "merchant_docs",
+        "question": "Forin Cafe 的地址在哪里，周六营业到几点？",
+        "expectedSources": [
+          "merchant_docs"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:nBr6NgqcZz1GhtAngU0RSQ:profile"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:GOSVLhjUT6TnrPhkkmDOpw:profile",
+            "merchant_doc:nBr6NgqcZz1GhtAngU0RSQ:profile",
+            "merchant_doc:AWJyivVwe3t9BO-k8D0ynQ:profile"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:nBr6NgqcZz1GhtAngU0RSQ:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": 2,
+            "reciprocalRank": 0.5
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 52.65
+      },
+      {
+        "caseId": "quality-val-merchant-002",
+        "split": "validation",
+        "category": "merchant_docs",
+        "question": "19th St & Market St 那家 Wawa 的评分、评论数和停车方式是什么？",
+        "expectedSources": [
+          "merchant_docs"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:kLS3Sth5HvO0IjrXCCvXxA:profile"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:kLS3Sth5HvO0IjrXCCvXxA:profile",
+            "merchant_doc:00Vn4VUTWl71_cFPziRQNQ:profile",
+            "merchant_doc:3nM3QNlex3OkNqM7FZTFPg:profile"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:kLS3Sth5HvO0IjrXCCvXxA:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 33.93
+      },
+      {
+        "caseId": "quality-val-policy-001",
+        "split": "validation",
+        "category": "policy_docs",
+        "question": "押金迟迟不退，预付款没有消费完时规则应该怎么处理？",
+        "expectedSources": [
+          "policy_docs"
+        ],
+        "relevantChunkIds": [
+          "policy_doc:consumer-rights:refund-deposit-prepaid"
+        ],
+        "retrievedChunkIdsBySource": {
+          "policy_docs": [
+            "policy_doc:consumer-rights:refund-deposit-prepaid",
+            "policy_doc:consumer-rights:complaint-dispute",
+            "policy_doc:platform-rules:rights-protection"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "policy_doc:consumer-rights:refund-deposit-prepaid",
+            "source": "policy_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 3.83
+      },
+      {
+        "caseId": "quality-val-policy-002",
+        "split": "validation",
+        "category": "policy_docs",
+        "question": "用户下单前，平台和商户应该展示哪些重要服务与限制信息？",
+        "expectedSources": [
+          "policy_docs"
+        ],
+        "relevantChunkIds": [
+          "policy_doc:consumer-rights:service-information"
+        ],
+        "retrievedChunkIdsBySource": {
+          "policy_docs": [
+            "policy_doc:consumer-rights:service-information",
+            "policy_doc:platform-rules:rights-protection",
+            "policy_doc:platform-rules:rule-disclosure"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "policy_doc:consumer-rights:service-information",
+            "source": "policy_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 5.36
+      },
+      {
+        "caseId": "quality-val-mixed-001",
+        "split": "validation",
+        "category": "merchant_reviews",
+        "question": "ReAnimator Coffee 周日营业到几点，评论里中午坐户外用 WiFi 办公的体验怎么样？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:2dlQX5sP9X6Dlm1MmNOlSw:profile",
+          "review:yelp-wiod6zg7n7S_-Iow_O-L9w"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:2dlQX5sP9X6Dlm1MmNOlSw:profile",
+            "merchant_doc:9XpU6r6ATXSWYfbU7kibaQ:profile",
+            "merchant_doc:Bb3F76xkJrA-IwXLNK52RQ:profile"
+          ],
+          "reviews": [
+            "review:review-016",
+            "review:yelp-CaXYOXHwOkmEu_JL3nEozQ",
+            "review:review-247"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:2dlQX5sP9X6Dlm1MmNOlSw:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          },
+          {
+            "chunkId": "review:yelp-wiod6zg7n7S_-Iow_O-L9w",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 1,
+        "completeHit": false,
+        "durationMs": 2216.54
+      },
+      {
+        "caseId": "quality-val-mixed-002",
+        "split": "validation",
+        "category": "merchant_reviews",
+        "question": "Lucky Goat Coffeehouse 的地址和营业时间是什么，实际坐前面会不会太吵？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:vdpxxb6fxjYtJMnW_V0GZg:profile",
+          "review:yelp-0jBamrOBDkY6lLTpkY0xZw"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:vdpxxb6fxjYtJMnW_V0GZg:profile",
+            "merchant_doc:sfbg2kxnvKpmlIuCUas5TA:profile",
+            "merchant_doc:-VGUpTEsCUE9gJk50gbU6w:profile"
+          ],
+          "reviews": [
+            "review:yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "review:review-119",
+            "review:review-254"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:vdpxxb6fxjYtJMnW_V0GZg:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          },
+          {
+            "chunkId": "review:yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "source": "reviews",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 2,
+        "completeHit": true,
+        "durationMs": 2298.94
+      },
+      {
+        "caseId": "quality-test-review-001",
+        "split": "test",
+        "category": "reviews",
+        "question": "Red Hook Coffee & Tea 适合用电脑工作吗，价格和咖啡有什么特点？",
+        "expectedSources": [
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "review:yelp-mBE3JkCV5YH9UqNdRJMUGg"
+        ],
+        "retrievedChunkIdsBySource": {
+          "reviews": [
+            "review:yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "review:yelp-pZ_z2LRsgODLotM6rAO4VQ",
+            "review:yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "review:yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "source": "reviews",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 2006.23
+      },
+      {
+        "caseId": "quality-test-review-002",
+        "split": "test",
+        "category": "reviews",
+        "question": "Valerio Coffee Roasters 停车、员工服务和带电脑的实际体验怎么样？",
+        "expectedSources": [
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "review:yelp-CaXYOXHwOkmEu_JL3nEozQ"
+        ],
+        "retrievedChunkIdsBySource": {
+          "reviews": [
+            "review:yelp-CaXYOXHwOkmEu_JL3nEozQ",
+            "review:yelp-kSQYotaDVeiDhLA1sxT5Ig",
+            "review:yelp-DY7pvbDYXyBODU__eSQTHg"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "review:yelp-CaXYOXHwOkmEu_JL3nEozQ",
+            "source": "reviews",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 1942.78
+      },
+      {
+        "caseId": "quality-test-merchant-001",
+        "split": "test",
+        "category": "merchant_docs",
+        "question": "J'aime French Bakery 周日几点关门，支持配送吗？",
+        "expectedSources": [
+          "merchant_docs"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:eqNutOMnPqKa9QDAY6KfEw:profile"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:eqNutOMnPqKa9QDAY6KfEw:profile",
+            "merchant_doc:HTqXI5S2XcSlh_ylx9sE6g:profile",
+            "merchant_doc:XpTNCVbO5wL1DtDyKzKqfA:profile"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:eqNutOMnPqKa9QDAY6KfEw:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 46.89
+      },
+      {
+        "caseId": "quality-test-merchant-002",
+        "split": "test",
+        "category": "merchant_docs",
+        "question": "1528 Walnut St 的 Starbucks 周六营业到几点，价格档位是多少？",
+        "expectedSources": [
+          "merchant_docs"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:OTBWyXkNsBYHqIlXJXnEDA:profile"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:OTBWyXkNsBYHqIlXJXnEDA:profile",
+            "merchant_doc:dRdpyxn506UOywojRIKLhg:profile",
+            "merchant_doc:kOHcpCZQd4uNp6G2uE8o2A:profile"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:OTBWyXkNsBYHqIlXJXnEDA:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 47.08
+      },
+      {
+        "caseId": "quality-test-policy-001",
+        "split": "test",
+        "category": "policy_docs",
+        "question": "商户被平台处罚后，平台要说明什么，商户能要求人工申诉吗？",
+        "expectedSources": [
+          "policy_docs"
+        ],
+        "relevantChunkIds": [
+          "policy_doc:platform-rules:enforcement-reasons"
+        ],
+        "retrievedChunkIdsBySource": {
+          "policy_docs": [
+            "policy_doc:platform-rules:enforcement-reasons",
+            "policy_doc:platform-rules:rights-protection",
+            "policy_doc:platform-rules:rule-disclosure"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "policy_doc:platform-rules:enforcement-reasons",
+            "source": "policy_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 5.24
+      },
+      {
+        "caseId": "quality-test-policy-002",
+        "split": "test",
+        "category": "policy_docs",
+        "question": "用户能否查询、更正或删除个性化推荐使用的行为数据？",
+        "expectedSources": [
+          "policy_docs"
+        ],
+        "relevantChunkIds": [
+          "policy_doc:privacy-and-recommendation:data-subject-rights"
+        ],
+        "retrievedChunkIdsBySource": {
+          "policy_docs": [
+            "policy_doc:privacy-and-recommendation:data-subject-rights",
+            "policy_doc:privacy-and-recommendation:recommendation-data-use",
+            "policy_doc:privacy-and-recommendation:automated-decision-explanation"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "policy_doc:privacy-and-recommendation:data-subject-rights",
+            "source": "policy_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 4.75
+      },
+      {
+        "caseId": "quality-test-mixed-001",
+        "split": "test",
+        "category": "merchant_reviews",
+        "question": "Paris Baguette 周日营业到几点、是否配送，评论里用 WiFi 办公的实际体验怎么样？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:wP0SSjU7R-m9j-VRhOCzmg:profile",
+          "review:yelp-OTgJteiQbczb4ZV5Nsf_5A"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:wP0SSjU7R-m9j-VRhOCzmg:profile",
+            "merchant_doc:8hgo446H2HoYlZocEi1SJw:profile",
+            "merchant_doc:-OIUunijjcq_ZzyyQhPPFQ:profile"
+          ],
+          "reviews": [
+            "review:yelp-ZMZCxn7QQsG0val9K3945Q",
+            "review:review-409",
+            "review:review-436"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:wP0SSjU7R-m9j-VRhOCzmg:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          },
+          {
+            "chunkId": "review:yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 1,
+        "completeHit": false,
+        "durationMs": 2359.83
+      },
+      {
+        "caseId": "quality-test-mixed-002",
+        "split": "test",
+        "category": "merchant_reviews",
+        "question": "Vineyards Cafe 周六几点关门，评论里大窗户、楼下座位和 chai latte 的体验怎么样？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:GOSVLhjUT6TnrPhkkmDOpw:profile",
+          "review:yelp-REgp10DO01kp2pOONZtq9w"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:GOSVLhjUT6TnrPhkkmDOpw:profile",
+            "merchant_doc:nBr6NgqcZz1GhtAngU0RSQ:profile",
+            "merchant_doc:AWJyivVwe3t9BO-k8D0ynQ:profile"
+          ],
+          "reviews": [
+            "review:review-013",
+            "review:yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "review:review-016"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:GOSVLhjUT6TnrPhkkmDOpw:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          },
+          {
+            "chunkId": "review:yelp-REgp10DO01kp2pOONZtq9w",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 1,
+        "completeHit": false,
+        "durationMs": 2240.72
+      }
+    ]
+  },
+  "shadow": {
+    "methodology": {
+      "sourceSelection": "explicit; router is evaluated separately",
+      "topKPerSource": 3,
+      "globalCrossSourceRanking": false,
+      "completeHit": "all labeled relevant chunks are returned by their source retrievers"
+    },
+    "overall": {
+      "caseCount": 16,
+      "completeHits": 7,
+      "completeHitRate": 0.4375,
+      "relevantChunkCount": 20,
+      "retrievedRelevantChunkCount": 8,
+      "relevantChunkRecall": 0.4,
+      "meanRelevantReciprocalRank": 0.4
+    },
+    "bySplit": {
+      "test": {
+        "caseCount": 8,
+        "completeHits": 5,
+        "completeHitRate": 0.625,
+        "relevantChunkCount": 10,
+        "retrievedRelevantChunkCount": 5,
+        "relevantChunkRecall": 0.5,
+        "meanRelevantReciprocalRank": 0.5
+      },
+      "validation": {
+        "caseCount": 8,
+        "completeHits": 2,
+        "completeHitRate": 0.25,
+        "relevantChunkCount": 10,
+        "retrievedRelevantChunkCount": 3,
+        "relevantChunkRecall": 0.3,
+        "meanRelevantReciprocalRank": 0.3
+      }
+    },
+    "byCategory": {
+      "merchant_docs": {
+        "caseCount": 4,
+        "completeHits": 1,
+        "completeHitRate": 0.25,
+        "relevantChunkCount": 4,
+        "retrievedRelevantChunkCount": 1,
+        "relevantChunkRecall": 0.25,
+        "meanRelevantReciprocalRank": 0.25
+      },
+      "merchant_reviews": {
+        "caseCount": 4,
+        "completeHits": 0,
+        "completeHitRate": 0.0,
+        "relevantChunkCount": 8,
+        "retrievedRelevantChunkCount": 1,
+        "relevantChunkRecall": 0.125,
+        "meanRelevantReciprocalRank": 0.125
+      },
+      "policy_docs": {
+        "caseCount": 4,
+        "completeHits": 4,
+        "completeHitRate": 1.0,
+        "relevantChunkCount": 4,
+        "retrievedRelevantChunkCount": 4,
+        "relevantChunkRecall": 1.0,
+        "meanRelevantReciprocalRank": 1.0
+      },
+      "reviews": {
+        "caseCount": 4,
+        "completeHits": 2,
+        "completeHitRate": 0.5,
+        "relevantChunkCount": 4,
+        "retrievedRelevantChunkCount": 2,
+        "relevantChunkRecall": 0.5,
+        "meanRelevantReciprocalRank": 0.5
+      }
+    },
+    "failures": [
+      {
+        "caseId": "quality-val-review-001",
+        "split": "validation",
+        "category": "reviews",
+        "question": "Alchemy Coffee 的员工服务怎么样，真的帮顾客找回过落下的电脑吗？",
+        "expectedSources": [
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "review:yelp-0raRTiWTrj9ytORRy-kZoA"
+        ],
+        "retrievedChunkIdsBySource": {
+          "reviews": [
+            "review:yelp-CaXYOXHwOkmEu_JL3nEozQ",
+            "review:yelp-G1hVCb7CrOyL-HP1h6rByg",
+            "review:yelp-4AawI-7a186mK_CLziwt3g"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "review:yelp-0raRTiWTrj9ytORRy-kZoA",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2064.56
+      },
+      {
+        "caseId": "quality-val-review-002",
+        "split": "validation",
+        "category": "reviews",
+        "question": "Good Karma Cafe 空间、WiFi 和插座怎么样，付款时有什么要注意？",
+        "expectedSources": [
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "review:yelp-1VyHchVgc9oEfVrsFweNNA"
+        ],
+        "retrievedChunkIdsBySource": {
+          "reviews": [
+            "review:review-247",
+            "review:review-220",
+            "review:review-112"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "review:yelp-1VyHchVgc9oEfVrsFweNNA",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2337.77
+      },
+      {
+        "caseId": "quality-val-merchant-001",
+        "split": "validation",
+        "category": "merchant_docs",
+        "question": "Forin Cafe 的地址在哪里，周六营业到几点？",
+        "expectedSources": [
+          "merchant_docs"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:nBr6NgqcZz1GhtAngU0RSQ:profile"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:s55Hw6gHhQzZctinFhPu-g:profile",
+            "merchant_doc:9nkYaCQRyO0fi8SrXDFhGw:profile",
+            "merchant_doc:RkI3Poei2kGVyhy21N0quA:profile"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:nBr6NgqcZz1GhtAngU0RSQ:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2103.1
+      },
+      {
+        "caseId": "quality-val-merchant-002",
+        "split": "validation",
+        "category": "merchant_docs",
+        "question": "19th St & Market St 那家 Wawa 的评分、评论数和停车方式是什么？",
+        "expectedSources": [
+          "merchant_docs"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:kLS3Sth5HvO0IjrXCCvXxA:profile"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:00Vn4VUTWl71_cFPziRQNQ:profile",
+            "merchant_doc:f8xDi3rajxvIqS73N93Afw:profile",
+            "merchant_doc:bTve2mwLk5Zc01vRKqc2KQ:profile"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:kLS3Sth5HvO0IjrXCCvXxA:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2183.41
+      },
+      {
+        "caseId": "quality-val-mixed-001",
+        "split": "validation",
+        "category": "merchant_reviews",
+        "question": "ReAnimator Coffee 周日营业到几点，评论里中午坐户外用 WiFi 办公的体验怎么样？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:2dlQX5sP9X6Dlm1MmNOlSw:profile",
+          "review:yelp-wiod6zg7n7S_-Iow_O-L9w"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:NDHgJsy-4Lb6WhERPXPs0A:profile",
+            "merchant_doc:f8xDi3rajxvIqS73N93Afw:profile",
+            "merchant_doc:WYrITmacXpS3twSpf6SkPg:profile"
+          ],
+          "reviews": [
+            "review:review-016",
+            "review:yelp-CaXYOXHwOkmEu_JL3nEozQ",
+            "review:review-247"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:2dlQX5sP9X6Dlm1MmNOlSw:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          },
+          {
+            "chunkId": "review:yelp-wiod6zg7n7S_-Iow_O-L9w",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2196.06
+      },
+      {
+        "caseId": "quality-val-mixed-002",
+        "split": "validation",
+        "category": "merchant_reviews",
+        "question": "Lucky Goat Coffeehouse 的地址和营业时间是什么，实际坐前面会不会太吵？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:vdpxxb6fxjYtJMnW_V0GZg:profile",
+          "review:yelp-0jBamrOBDkY6lLTpkY0xZw"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:Xas13kiNejlJtRdejpZ22g:profile",
+            "merchant_doc:o9Gru-QFoxGK26FSWRCLXA:profile",
+            "merchant_doc:71cUrGn9enOIIiPtwqp82w:profile"
+          ],
+          "reviews": [
+            "review:yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "review:review-227",
+            "review:review-119"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:vdpxxb6fxjYtJMnW_V0GZg:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          },
+          {
+            "chunkId": "review:yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "source": "reviews",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 1,
+        "completeHit": false,
+        "durationMs": 2115.18
+      },
+      {
+        "caseId": "quality-test-merchant-002",
+        "split": "test",
+        "category": "merchant_docs",
+        "question": "1528 Walnut St 的 Starbucks 周六营业到几点，价格档位是多少？",
+        "expectedSources": [
+          "merchant_docs"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:OTBWyXkNsBYHqIlXJXnEDA:profile"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:pzhvHwe_3-4JYTC-wXDJpA:profile",
+            "merchant_doc:mNu6xYO2bn-rvacN12h9WA:profile",
+            "merchant_doc:6D_ZBVcUPje3IyVg1n_Edw:profile"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:OTBWyXkNsBYHqIlXJXnEDA:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2202.74
+      },
+      {
+        "caseId": "quality-test-mixed-001",
+        "split": "test",
+        "category": "merchant_reviews",
+        "question": "Paris Baguette 周日营业到几点、是否配送，评论里用 WiFi 办公的实际体验怎么样？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:wP0SSjU7R-m9j-VRhOCzmg:profile",
+          "review:yelp-OTgJteiQbczb4ZV5Nsf_5A"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:NDHgJsy-4Lb6WhERPXPs0A:profile",
+            "merchant_doc:WYrITmacXpS3twSpf6SkPg:profile",
+            "merchant_doc:mNu6xYO2bn-rvacN12h9WA:profile"
+          ],
+          "reviews": [
+            "review:yelp-ZMZCxn7QQsG0val9K3945Q",
+            "review:review-193",
+            "review:review-409"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:wP0SSjU7R-m9j-VRhOCzmg:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          },
+          {
+            "chunkId": "review:yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 1902.73
+      },
+      {
+        "caseId": "quality-test-mixed-002",
+        "split": "test",
+        "category": "merchant_reviews",
+        "question": "Vineyards Cafe 周六几点关门，评论里大窗户、楼下座位和 chai latte 的体验怎么样？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:GOSVLhjUT6TnrPhkkmDOpw:profile",
+          "review:yelp-REgp10DO01kp2pOONZtq9w"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:Xq-8-I0U8Artr7d70SjX-g:profile",
+            "merchant_doc:71cUrGn9enOIIiPtwqp82w:profile",
+            "merchant_doc:WYrITmacXpS3twSpf6SkPg:profile"
+          ],
+          "reviews": [
+            "review:review-013",
+            "review:yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "review:review-016"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:GOSVLhjUT6TnrPhkkmDOpw:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          },
+          {
+            "chunkId": "review:yelp-REgp10DO01kp2pOONZtq9w",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2144.83
+      }
+    ],
+    "details": [
+      {
+        "caseId": "quality-val-review-001",
+        "split": "validation",
+        "category": "reviews",
+        "question": "Alchemy Coffee 的员工服务怎么样，真的帮顾客找回过落下的电脑吗？",
+        "expectedSources": [
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "review:yelp-0raRTiWTrj9ytORRy-kZoA"
+        ],
+        "retrievedChunkIdsBySource": {
+          "reviews": [
+            "review:yelp-CaXYOXHwOkmEu_JL3nEozQ",
+            "review:yelp-G1hVCb7CrOyL-HP1h6rByg",
+            "review:yelp-4AawI-7a186mK_CLziwt3g"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "review:yelp-0raRTiWTrj9ytORRy-kZoA",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2064.56
+      },
+      {
+        "caseId": "quality-val-review-002",
+        "split": "validation",
+        "category": "reviews",
+        "question": "Good Karma Cafe 空间、WiFi 和插座怎么样，付款时有什么要注意？",
+        "expectedSources": [
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "review:yelp-1VyHchVgc9oEfVrsFweNNA"
+        ],
+        "retrievedChunkIdsBySource": {
+          "reviews": [
+            "review:review-247",
+            "review:review-220",
+            "review:review-112"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "review:yelp-1VyHchVgc9oEfVrsFweNNA",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2337.77
+      },
+      {
+        "caseId": "quality-val-merchant-001",
+        "split": "validation",
+        "category": "merchant_docs",
+        "question": "Forin Cafe 的地址在哪里，周六营业到几点？",
+        "expectedSources": [
+          "merchant_docs"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:nBr6NgqcZz1GhtAngU0RSQ:profile"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:s55Hw6gHhQzZctinFhPu-g:profile",
+            "merchant_doc:9nkYaCQRyO0fi8SrXDFhGw:profile",
+            "merchant_doc:RkI3Poei2kGVyhy21N0quA:profile"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:nBr6NgqcZz1GhtAngU0RSQ:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2103.1
+      },
+      {
+        "caseId": "quality-val-merchant-002",
+        "split": "validation",
+        "category": "merchant_docs",
+        "question": "19th St & Market St 那家 Wawa 的评分、评论数和停车方式是什么？",
+        "expectedSources": [
+          "merchant_docs"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:kLS3Sth5HvO0IjrXCCvXxA:profile"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:00Vn4VUTWl71_cFPziRQNQ:profile",
+            "merchant_doc:f8xDi3rajxvIqS73N93Afw:profile",
+            "merchant_doc:bTve2mwLk5Zc01vRKqc2KQ:profile"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:kLS3Sth5HvO0IjrXCCvXxA:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2183.41
+      },
+      {
+        "caseId": "quality-val-policy-001",
+        "split": "validation",
+        "category": "policy_docs",
+        "question": "押金迟迟不退，预付款没有消费完时规则应该怎么处理？",
+        "expectedSources": [
+          "policy_docs"
+        ],
+        "relevantChunkIds": [
+          "policy_doc:consumer-rights:refund-deposit-prepaid"
+        ],
+        "retrievedChunkIdsBySource": {
+          "policy_docs": [
+            "policy_doc:consumer-rights:refund-deposit-prepaid",
+            "policy_doc:consumer-rights:service-information",
+            "policy_doc:consumer-rights:complaint-dispute"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "policy_doc:consumer-rights:refund-deposit-prepaid",
+            "source": "policy_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 1997.97
+      },
+      {
+        "caseId": "quality-val-policy-002",
+        "split": "validation",
+        "category": "policy_docs",
+        "question": "用户下单前，平台和商户应该展示哪些重要服务与限制信息？",
+        "expectedSources": [
+          "policy_docs"
+        ],
+        "relevantChunkIds": [
+          "policy_doc:consumer-rights:service-information"
+        ],
+        "retrievedChunkIdsBySource": {
+          "policy_docs": [
+            "policy_doc:consumer-rights:service-information",
+            "policy_doc:consumer-rights:complaint-dispute",
+            "policy_doc:privacy-and-recommendation:data-minimization"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "policy_doc:consumer-rights:service-information",
+            "source": "policy_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 2171.04
+      },
+      {
+        "caseId": "quality-val-mixed-001",
+        "split": "validation",
+        "category": "merchant_reviews",
+        "question": "ReAnimator Coffee 周日营业到几点，评论里中午坐户外用 WiFi 办公的体验怎么样？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:2dlQX5sP9X6Dlm1MmNOlSw:profile",
+          "review:yelp-wiod6zg7n7S_-Iow_O-L9w"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:NDHgJsy-4Lb6WhERPXPs0A:profile",
+            "merchant_doc:f8xDi3rajxvIqS73N93Afw:profile",
+            "merchant_doc:WYrITmacXpS3twSpf6SkPg:profile"
+          ],
+          "reviews": [
+            "review:review-016",
+            "review:yelp-CaXYOXHwOkmEu_JL3nEozQ",
+            "review:review-247"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:2dlQX5sP9X6Dlm1MmNOlSw:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          },
+          {
+            "chunkId": "review:yelp-wiod6zg7n7S_-Iow_O-L9w",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2196.06
+      },
+      {
+        "caseId": "quality-val-mixed-002",
+        "split": "validation",
+        "category": "merchant_reviews",
+        "question": "Lucky Goat Coffeehouse 的地址和营业时间是什么，实际坐前面会不会太吵？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:vdpxxb6fxjYtJMnW_V0GZg:profile",
+          "review:yelp-0jBamrOBDkY6lLTpkY0xZw"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:Xas13kiNejlJtRdejpZ22g:profile",
+            "merchant_doc:o9Gru-QFoxGK26FSWRCLXA:profile",
+            "merchant_doc:71cUrGn9enOIIiPtwqp82w:profile"
+          ],
+          "reviews": [
+            "review:yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "review:review-227",
+            "review:review-119"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:vdpxxb6fxjYtJMnW_V0GZg:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          },
+          {
+            "chunkId": "review:yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "source": "reviews",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 1,
+        "completeHit": false,
+        "durationMs": 2115.18
+      },
+      {
+        "caseId": "quality-test-review-001",
+        "split": "test",
+        "category": "reviews",
+        "question": "Red Hook Coffee & Tea 适合用电脑工作吗，价格和咖啡有什么特点？",
+        "expectedSources": [
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "review:yelp-mBE3JkCV5YH9UqNdRJMUGg"
+        ],
+        "retrievedChunkIdsBySource": {
+          "reviews": [
+            "review:yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "review:yelp-pZ_z2LRsgODLotM6rAO4VQ",
+            "review:yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "review:yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "source": "reviews",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 2072.71
+      },
+      {
+        "caseId": "quality-test-review-002",
+        "split": "test",
+        "category": "reviews",
+        "question": "Valerio Coffee Roasters 停车、员工服务和带电脑的实际体验怎么样？",
+        "expectedSources": [
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "review:yelp-CaXYOXHwOkmEu_JL3nEozQ"
+        ],
+        "retrievedChunkIdsBySource": {
+          "reviews": [
+            "review:yelp-CaXYOXHwOkmEu_JL3nEozQ",
+            "review:yelp-kSQYotaDVeiDhLA1sxT5Ig",
+            "review:yelp-DY7pvbDYXyBODU__eSQTHg"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "review:yelp-CaXYOXHwOkmEu_JL3nEozQ",
+            "source": "reviews",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 2268.59
+      },
+      {
+        "caseId": "quality-test-merchant-001",
+        "split": "test",
+        "category": "merchant_docs",
+        "question": "J'aime French Bakery 周日几点关门，支持配送吗？",
+        "expectedSources": [
+          "merchant_docs"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:eqNutOMnPqKa9QDAY6KfEw:profile"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:eqNutOMnPqKa9QDAY6KfEw:profile",
+            "merchant_doc:WYrITmacXpS3twSpf6SkPg:profile",
+            "merchant_doc:NDHgJsy-4Lb6WhERPXPs0A:profile"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:eqNutOMnPqKa9QDAY6KfEw:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 2021.45
+      },
+      {
+        "caseId": "quality-test-merchant-002",
+        "split": "test",
+        "category": "merchant_docs",
+        "question": "1528 Walnut St 的 Starbucks 周六营业到几点，价格档位是多少？",
+        "expectedSources": [
+          "merchant_docs"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:OTBWyXkNsBYHqIlXJXnEDA:profile"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:pzhvHwe_3-4JYTC-wXDJpA:profile",
+            "merchant_doc:mNu6xYO2bn-rvacN12h9WA:profile",
+            "merchant_doc:6D_ZBVcUPje3IyVg1n_Edw:profile"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:OTBWyXkNsBYHqIlXJXnEDA:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2202.74
+      },
+      {
+        "caseId": "quality-test-policy-001",
+        "split": "test",
+        "category": "policy_docs",
+        "question": "商户被平台处罚后，平台要说明什么，商户能要求人工申诉吗？",
+        "expectedSources": [
+          "policy_docs"
+        ],
+        "relevantChunkIds": [
+          "policy_doc:platform-rules:enforcement-reasons"
+        ],
+        "retrievedChunkIdsBySource": {
+          "policy_docs": [
+            "policy_doc:platform-rules:enforcement-reasons",
+            "policy_doc:platform-rules:rights-protection",
+            "policy_doc:consumer-rights:complaint-dispute"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "policy_doc:platform-rules:enforcement-reasons",
+            "source": "policy_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 2035.59
+      },
+      {
+        "caseId": "quality-test-policy-002",
+        "split": "test",
+        "category": "policy_docs",
+        "question": "用户能否查询、更正或删除个性化推荐使用的行为数据？",
+        "expectedSources": [
+          "policy_docs"
+        ],
+        "relevantChunkIds": [
+          "policy_doc:privacy-and-recommendation:data-subject-rights"
+        ],
+        "retrievedChunkIdsBySource": {
+          "policy_docs": [
+            "policy_doc:privacy-and-recommendation:data-subject-rights",
+            "policy_doc:privacy-and-recommendation:recommendation-data-use",
+            "policy_doc:privacy-and-recommendation:data-minimization"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "policy_doc:privacy-and-recommendation:data-subject-rights",
+            "source": "policy_docs",
+            "rankWithinSource": 1,
+            "reciprocalRank": 1.0
+          }
+        ],
+        "relevantCount": 1,
+        "retrievedRelevantCount": 1,
+        "completeHit": true,
+        "durationMs": 1967.35
+      },
+      {
+        "caseId": "quality-test-mixed-001",
+        "split": "test",
+        "category": "merchant_reviews",
+        "question": "Paris Baguette 周日营业到几点、是否配送，评论里用 WiFi 办公的实际体验怎么样？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:wP0SSjU7R-m9j-VRhOCzmg:profile",
+          "review:yelp-OTgJteiQbczb4ZV5Nsf_5A"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:NDHgJsy-4Lb6WhERPXPs0A:profile",
+            "merchant_doc:WYrITmacXpS3twSpf6SkPg:profile",
+            "merchant_doc:mNu6xYO2bn-rvacN12h9WA:profile"
+          ],
+          "reviews": [
+            "review:yelp-ZMZCxn7QQsG0val9K3945Q",
+            "review:review-193",
+            "review:review-409"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:wP0SSjU7R-m9j-VRhOCzmg:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          },
+          {
+            "chunkId": "review:yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 1902.73
+      },
+      {
+        "caseId": "quality-test-mixed-002",
+        "split": "test",
+        "category": "merchant_reviews",
+        "question": "Vineyards Cafe 周六几点关门，评论里大窗户、楼下座位和 chai latte 的体验怎么样？",
+        "expectedSources": [
+          "merchant_docs",
+          "reviews"
+        ],
+        "relevantChunkIds": [
+          "merchant_doc:GOSVLhjUT6TnrPhkkmDOpw:profile",
+          "review:yelp-REgp10DO01kp2pOONZtq9w"
+        ],
+        "retrievedChunkIdsBySource": {
+          "merchant_docs": [
+            "merchant_doc:Xq-8-I0U8Artr7d70SjX-g:profile",
+            "merchant_doc:71cUrGn9enOIIiPtwqp82w:profile",
+            "merchant_doc:WYrITmacXpS3twSpf6SkPg:profile"
+          ],
+          "reviews": [
+            "review:review-013",
+            "review:yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "review:review-016"
+          ]
+        },
+        "relevantRanks": [
+          {
+            "chunkId": "merchant_doc:GOSVLhjUT6TnrPhkkmDOpw:profile",
+            "source": "merchant_docs",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          },
+          {
+            "chunkId": "review:yelp-REgp10DO01kp2pOONZtq9w",
+            "source": "reviews",
+            "rankWithinSource": null,
+            "reciprocalRank": 0.0
+          }
+        ],
+        "relevantCount": 2,
+        "retrievedRelevantCount": 0,
+        "completeHit": false,
+        "durationMs": 2144.83
+      }
+    ]
+  },
+  "delta": {
+    "overall": {
+      "completeHitRate": -0.25,
+      "relevantChunkRecall": -0.35,
+      "meanRelevantReciprocalRank": -0.32499999999999996
+    },
+    "validation": {
+      "completeHitRate": -0.375,
+      "relevantChunkRecall": -0.39999999999999997,
+      "meanRelevantReciprocalRank": -0.35000000000000003
+    },
+    "test": {
+      "completeHitRate": -0.125,
+      "relevantChunkRecall": -0.30000000000000004,
+      "meanRelevantReciprocalRank": -0.30000000000000004
+    }
+  }
+}

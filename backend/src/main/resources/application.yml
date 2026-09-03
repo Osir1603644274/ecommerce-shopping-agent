@@ -1,0 +1,158 @@
+server:
+  port: ${SERVER_PORT:8080}
+  shutdown: graceful
+
+spring:
+  application:
+    name: local-life-backend
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:local_life}?useUnicode=true&characterEncoding=utf8&connectionCollation=utf8mb4_unicode_ci&serverTimezone=Asia/Shanghai
+    username: ${DB_USER:local_life}
+    password: ${DB_PASSWORD:local_life_password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 1
+    validate-on-migrate: true
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      properties:
+        enable.idempotence: true
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
+      auto-offset-reset: earliest
+    listener:
+      ack-mode: manual_immediate
+  cloud:
+    openfeign:
+      client:
+        config:
+          commerceCatalog:
+            connectTimeout: ${CATALOG_CONNECT_TIMEOUT_MS:500}
+            readTimeout: ${CATALOG_READ_TIMEOUT_MS:1000}
+            loggerLevel: basic
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: "NULL"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: never
+      status:
+        order: down,out-of-service,degraded,unknown,up
+        http-mapping:
+          degraded: 200
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+logging:
+  pattern:
+    level: "%5p [requestId:%X{requestId:-}]"
+
+agent:
+  base-url: ${AGENT_BASE_URL:http://localhost:8000}
+  review-sync:
+    mode: ${REVIEW_SYNC_MODE:outbox}
+    max-attempts: ${REVIEW_SYNC_MAX_ATTEMPTS:3}
+
+local-life:
+  deployment:
+    role: ${SERVICE_ROLE:monolith}
+    migration-only: ${MIGRATION_ONLY:false}
+    require-internal-token: ${REQUIRE_INTERNAL_SERVICE_TOKEN:false}
+    internal-token: ${INTERNAL_SERVICE_TOKEN:}
+  trade:
+    catalog-base-url: ${CATALOG_SERVICE_URL:http://catalog-search-service:8081}
+  search:
+    enabled: ${SEARCH_ENABLED:false}
+    base-url: ${ELASTICSEARCH_URL:http://localhost:9200}
+    index-prefix: ${SEARCH_INDEX_PREFIX:local-life}
+    connect-timeout: ${SEARCH_CONNECT_TIMEOUT:PT1S}
+    request-timeout: ${SEARCH_REQUEST_TIMEOUT:PT2S}
+    failure-threshold: ${SEARCH_FAILURE_THRESHOLD:3}
+    open-duration: ${SEARCH_OPEN_DURATION:PT30S}
+    reconcile-delay: ${SEARCH_RECONCILE_DELAY:PT5M}
+    reconcile-limit: ${SEARCH_RECONCILE_LIMIT:1500}
+  messaging:
+    enabled: ${MESSAGING_ENABLED:true}
+    transport: ${MESSAGING_TRANSPORT:kafka}
+    topic: ${DOMAIN_EVENT_TOPIC:local-life.domain-events.v1}
+    redis-stream: ${DOMAIN_EVENT_REDIS_STREAM:stream.domain-events}
+    consumer-group: ${DOMAIN_EVENT_CONSUMER_GROUP:local-life-backend}
+    consumer-id: ${DOMAIN_EVENT_CONSUMER_ID:domain-event-projection}
+    max-attempts: ${OUTBOX_MAX_ATTEMPTS:8}
+    relay-delay: ${OUTBOX_RELAY_DELAY:PT1S}
+    stale-claim-after: ${MESSAGE_STALE_CLAIM_AFTER:PT5M}
+  flash-sale:
+    enabled: ${FLASH_SALE_ENABLED:true}
+    stream: ${FLASH_SALE_STREAM:stream.flash-sale-orders}
+    consumer-group: ${FLASH_SALE_CONSUMER_GROUP:flash-sale-order-group}
+    claim-idle-after: ${FLASH_SALE_CLAIM_IDLE_AFTER:PT1M}
+    max-attempts: ${FLASH_SALE_MAX_ATTEMPTS:8}
+  payment:
+    callback-secret: ${PAYMENT_CALLBACK_SECRET:}
+    callback-tolerance: ${PAYMENT_CALLBACK_TOLERANCE:PT5M}
+    simulator-enabled: ${PAYMENT_SIMULATOR_ENABLED:false}
+  memory:
+    enabled: ${SHOPPING_MEMORY_ENABLED:false}
+  rate-limit:
+    enabled: ${RATE_LIMIT_ENABLED:true}
+    auth-limit: ${AUTH_RATE_LIMIT:20}
+    write-limit: ${WRITE_RATE_LIMIT:120}
+    window: ${RATE_LIMIT_WINDOW:PT1M}
+  auth:
+    issuer: ${JWT_ISSUER:local-life-backend}
+    secret: ${JWT_SECRET:}
+    access-ttl: ${JWT_ACCESS_TTL:PT15M}
+    refresh-ttl: ${JWT_REFRESH_TTL:P30D}
+    refresh-store: ${AUTH_REFRESH_STORE:redis}
+  cache:
+    shop:
+      enabled: ${SHOP_CACHE_ENABLED:true}
+      detail-ttl-minutes: ${SHOP_DETAIL_CACHE_TTL_MINUTES:30}
+      empty-detail-ttl-minutes: ${SHOP_EMPTY_DETAIL_CACHE_TTL_MINUTES:2}
+      lock-ttl-seconds: ${SHOP_DETAIL_CACHE_LOCK_TTL_SECONDS:10}
+    product:
+      enabled: ${PRODUCT_CACHE_ENABLED:true}
+      detail-ttl-minutes: ${PRODUCT_DETAIL_CACHE_TTL_MINUTES:60}
+      empty-detail-ttl-minutes: ${PRODUCT_EMPTY_DETAIL_CACHE_TTL_MINUTES:2}
+      lock-ttl-seconds: ${PRODUCT_DETAIL_CACHE_LOCK_TTL_SECONDS:10}
+
+resilience4j:
+  bulkhead:
+    instances:
+      catalogRead:
+        max-concurrent-calls: ${CATALOG_READ_MAX_CONCURRENT_CALLS:8}
+        max-wait-duration: ${CATALOG_READ_MAX_WAIT_DURATION:0ms}
+  circuitbreaker:
+    instances:
+      catalogRead:
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 2
+        ignore-exceptions:
+          - com.example.locallife.common.ResourceNotFoundException

@@ -1,0 +1,495 @@
+{
+  "methodology": {
+    "split": "validation",
+    "testRead": false,
+    "fallbackCountsAsSelection": false,
+    "catalogScope": "beijing-parks-v1 demo snapshot"
+  },
+  "caseCount": 1,
+  "completePasses": 1,
+  "completeAccuracy": 1.0,
+  "fallbackCount": 0,
+  "metrics": {
+    "modelToolSelection": {
+      "applicable": 1,
+      "passed": 1,
+      "accuracy": 1.0
+    },
+    "toolExecution": {
+      "applicable": 1,
+      "passed": 1,
+      "accuracy": 1.0
+    },
+    "forbiddenToolIsolation": {
+      "applicable": 1,
+      "passed": 1,
+      "accuracy": 1.0
+    },
+    "argumentExtraction": {
+      "applicable": 0,
+      "passed": 0,
+      "accuracy": null
+    },
+    "searchResult": {
+      "applicable": 0,
+      "passed": 0,
+      "accuracy": null
+    },
+    "detailResult": {
+      "applicable": 0,
+      "passed": 0,
+      "accuracy": null
+    },
+    "answerBoundary": {
+      "applicable": 0,
+      "passed": 0,
+      "accuracy": null
+    }
+  },
+  "failures": [],
+  "details": [
+    {
+      "caseId": "place-val-06-shop-near-park",
+      "category": "shop_near_landmark",
+      "question": "朝阳公园附近有哪些咖啡店？",
+      "expectedToolSequences": [
+        [
+          "search_shops"
+        ],
+        [
+          "list_shop_types"
+        ],
+        [
+          "search_shops",
+          "list_shop_types"
+        ],
+        [
+          "list_shop_types",
+          "search_shops"
+        ]
+      ],
+      "modelToolNames": [
+        "search_shops"
+      ],
+      "modelToolCalls": [
+        {
+          "name": "search_shops",
+          "arguments": {
+            "typeId": 2
+          }
+        }
+      ],
+      "executedToolNames": [
+        "search_shops"
+      ],
+      "toolTraces": [
+        {
+          "tool": "search_shops",
+          "ok": true,
+          "durationMs": 3259.18,
+          "detail": {
+            "typeId": 2,
+            "name": null,
+            "count": 64,
+            "shops": [
+              {
+                "id": 3,
+                "name": "清晨手冲咖啡",
+                "address": "文化广场 3 号",
+                "avgPrice": 35
+              },
+              {
+                "id": 7,
+                "name": "纸间咖啡书屋",
+                "address": "学院路 18 号",
+                "avgPrice": 42
+              },
+              {
+                "id": 8,
+                "name": "街角共创咖啡",
+                "address": "创业大街 66 号",
+                "avgPrice": 39
+              },
+              {
+                "id": 100001,
+                "name": "St Honore Pastries",
+                "address": "935 Race St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100005,
+                "name": "Wawa",
+                "address": "3604 Chestnut St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100010,
+                "name": "ReAnimator Coffee",
+                "address": "1523 E Susquehanna Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100011,
+                "name": "Red Hook Coffee & Tea",
+                "address": "765 S 4th St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100012,
+                "name": "Watson Adventures Scavenger Hunts",
+                "address": "Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100016,
+                "name": "Brown Sugar Bakery & Cafe",
+                "address": "219 S 52nd St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100027,
+                "name": "NY Bagel & Deli Shop",
+                "address": "1120 Buttonwood St, Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100032,
+                "name": "McDonald's",
+                "address": "501 Franklin Mill Cir, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100040,
+                "name": "Wawa",
+                "address": "3744 Spruce St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100042,
+                "name": "Feet First Team Building",
+                "address": "Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100051,
+                "name": "Forin Cafe",
+                "address": "2041 Coral St, Ste 2, Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100052,
+                "name": "Tony's Luke",
+                "address": "8500 Essington Ave, Philadelphia, PA",
+                "avgPrice": 100
+              },
+              {
+                "id": 100054,
+                "name": "Mood Cafe",
+                "address": "4618 Baltimore Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100060,
+                "name": "Philadelphia Phillies",
+                "address": "Citizens Bank Park, Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100068,
+                "name": "Alchemy Coffee",
+                "address": "119 S 21st St, Philadelphia, PA",
+                "avgPrice": 100
+              },
+              {
+                "id": 100075,
+                "name": "Guavaberry Foods & Drinks",
+                "address": "776 S 4th St, Philadelphia, PA",
+                "avgPrice": 100
+              },
+              {
+                "id": 100078,
+                "name": "Junes Breakfast",
+                "address": "6227 Lancaster Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100079,
+                "name": "Lincoln Chicken Pizza And Grill",
+                "address": "2614 W Girard Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100086,
+                "name": "J'aime French Bakery",
+                "address": "212 S 12th St, Philadelphia, PA",
+                "avgPrice": 100
+              },
+              {
+                "id": 100096,
+                "name": "Vientiane Café",
+                "address": "4728 Baltimore Ave, Philadelphia, PA",
+                "avgPrice": 100
+              },
+              {
+                "id": 100099,
+                "name": "Passero's Coffee Roasters",
+                "address": "1601 John F Kennedy Blvd, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100100,
+                "name": "Starbucks",
+                "address": "1018 N 2nd St, Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100101,
+                "name": "Philadelphia Sports Network",
+                "address": "Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100108,
+                "name": "Vineyards Cafe",
+                "address": "847 N 16th St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100111,
+                "name": "Ron's Caribbean Cuisine",
+                "address": "5726 N Broad St, Philadelphia, PA",
+                "avgPrice": 100
+              },
+              {
+                "id": 100119,
+                "name": "Wawa",
+                "address": "19th St & Market St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100132,
+                "name": "Dunkin'",
+                "address": "7520 City Line Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100134,
+                "name": "Starbucks",
+                "address": "1528 Walnut St, Philadelphia, PA",
+                "avgPrice": 100
+              },
+              {
+                "id": 100142,
+                "name": "Good Music Academy",
+                "address": "4705 Baltimore Ave, Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100143,
+                "name": "Gaetano’s",
+                "address": "3820 Lancaster Ave, Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100151,
+                "name": "Lucky Goat Coffeehouse",
+                "address": "888 N 26th St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100156,
+                "name": "McDonald's",
+                "address": "710 Adams Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100157,
+                "name": "Dunkin'",
+                "address": "300 Erie Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100162,
+                "name": "Oregon Steaks",
+                "address": "2654 S 10th St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100167,
+                "name": "George's Sandwich Shop",
+                "address": "900 S 9th St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100169,
+                "name": "Good Karma Cafe",
+                "address": "928 Pine St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100182,
+                "name": "McDonald's",
+                "address": "5945 Woodland Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100184,
+                "name": "Cake Life Bake Shop",
+                "address": "1306 Frankford Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100192,
+                "name": "Alena’s Cafe",
+                "address": "6669 Germantown Ave, Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100200,
+                "name": "Mr Wish",
+                "address": "5520 Whitaker Ave, Ste 10, Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100204,
+                "name": "Dunkin' Donuts",
+                "address": "14254 Bustleton Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100212,
+                "name": "Cily Chicken Rice",
+                "address": "933 Race St, Philadelphia, PA",
+                "avgPrice": 100
+              },
+              {
+                "id": 100217,
+                "name": "Franny Lou's Porch",
+                "address": "2400 Coral St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100222,
+                "name": "Dunkin'",
+                "address": "3313 Wharton St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100228,
+                "name": "Vientiane Bistro",
+                "address": "2537 Kensington Ave, Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100229,
+                "name": "Izzy's 33",
+                "address": "1703 S 9th St, Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100231,
+                "name": "Wawa",
+                "address": "7236-40 Germantown Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100232,
+                "name": "Joe's Steaks + Soda Shop",
+                "address": "6030 Torresdale Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100234,
+                "name": "Yellow Bicycle Canteen",
+                "address": "930 Locust St, Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100235,
+                "name": "Suraya",
+                "address": "1528 Frankford Ave, Philadelphia, PA",
+                "avgPrice": 180
+              },
+              {
+                "id": 100241,
+                "name": "Park Manor Deli",
+                "address": "240 W Chelten Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100243,
+                "name": "McDonald's",
+                "address": "8901 Franford Ave, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100247,
+                "name": "Tasties",
+                "address": "1212 N 52nd St, Philadelphia, PA",
+                "avgPrice": 100
+              },
+              {
+                "id": 100256,
+                "name": "Paris Baguette",
+                "address": "3816 Chestnut St, Unit  9, Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100261,
+                "name": "Cafe Square One",
+                "address": "50 S 3rd St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100262,
+                "name": "Bai Wei",
+                "address": "1038 Race St, Philadelphia, PA",
+                "avgPrice": 100
+              },
+              {
+                "id": 100270,
+                "name": "7-Eleven",
+                "address": "1912 Liacouras Walk, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100276,
+                "name": "Philadelphia Flyers",
+                "address": "Wells Fargo Ctr, 3601 S Broad St, Philadelphia, PA",
+                "avgPrice": 0
+              },
+              {
+                "id": 100277,
+                "name": "Valerio Coffee Roasters",
+                "address": "4373 Main St, Philadelphia, PA",
+                "avgPrice": 50
+              },
+              {
+                "id": 100298,
+                "name": "Applebee's Grill + Bar",
+                "address": "2535-37 Castor Ave, Philadelphia, PA",
+                "avgPrice": 100
+              },
+              {
+                "id": 100299,
+                "name": "Bury The Hatchet",
+                "address": "1719 Washington Ave, Fl 2, Philadelphia, PA",
+                "avgPrice": 0
+              }
+            ]
+          }
+        }
+      ],
+      "usedFallback": false,
+      "selectionCorrect": true,
+      "executionCorrect": true,
+      "forbiddenToolFree": true,
+      "argumentsCorrect": null,
+      "searchResultCorrect": null,
+      "detailResultCorrect": null,
+      "answerCorrect": null,
+      "complete": true,
+      "answer": "抱歉，目前系统中的咖啡店数据主要是宾夕法尼亚州费城地区的商家记录，无法筛选出北京朝阳公园附近的咖啡店。当前数据未能收录该区域的相关信息。\n\n如需查找北京朝阳公园周边的咖啡店，建议使用地图或本地生活App进行实时查询会更准确。如果你有其他北京地点的商家查询需求，也欢迎告诉我！"
+    }
+  ]
+}

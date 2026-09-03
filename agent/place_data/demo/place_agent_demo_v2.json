@@ -1,0 +1,91 @@
+{
+  "demoVersion": "place-agent-demo-v2",
+  "catalogScope": "beijing-places-v2 demo snapshot",
+  "scenarios": [
+    {
+      "id": "demo-01-structured-filter",
+      "title": "结构化公园筛选",
+      "learningPoint": "行政区、等级、类型应被提取为 search_places 参数，数量必须注明演示目录边界。",
+      "turns": [
+        {
+          "user": "海淀区有哪些一级综合公园？",
+          "expectedToolSequences": [["search_places"]],
+          "requiredAnswerAll": ["当前演示目录", "7"]
+        }
+      ]
+    },
+    {
+      "id": "demo-02-search-detail-chain",
+      "title": "搜索后查询地点详情",
+      "learningPoint": "模型不能猜地址和电话，应先搜索获得 placeId，再调用 get_place_detail。",
+      "turns": [
+        {
+          "user": "北京世界公园的地址和电话是什么？",
+          "expectedToolSequences": [["search_places", "get_place_detail"]],
+          "requiredAnswerAll": ["丰台区花乡大葆台158号", "83613681"]
+        }
+      ]
+    },
+    {
+      "id": "demo-03-ambiguity-follow-up",
+      "title": "同名地点消歧与多轮追问",
+      "learningPoint": "首轮列出同名候选并让用户确认；次轮利用会话历史定位东城区候选并查询详情。",
+      "turns": [
+        {
+          "user": "永定门公园的电话是什么？",
+          "expectedToolSequences": [["search_places"]],
+          "requiredAnswerAll": ["东城", "西城"]
+        },
+        {
+          "user": "我问东城区那个永定门公园，电话是什么？",
+          "expectedToolSequences": [
+            ["search_places", "get_place_detail"],
+            ["get_place_detail"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "demo-04-evidence-boundary",
+      "title": "主观与实时问题的证据边界",
+      "learningPoint": "目录可以提供设施事实，但不能把等级或设施推断成人少、安静等实时结论。",
+      "turns": [
+        {
+          "user": "朝阳区哪个公园最安静、周末人最少？",
+          "expectedToolSequences": [
+            ["search_places"],
+            ["search_places", "get_place_detail"]
+          ],
+          "requiredAnswerAny": ["无法", "不能", "暂无", "不包含", "没有"]
+        }
+      ]
+    },
+    {
+      "id": "demo-05-place-shop-routing",
+      "title": "公园地标附近的商家检索",
+      "learningPoint": "公园只是地标，用户真正要找咖啡店时应进入商家能力，不能误走地点目录或 RAG。",
+      "turns": [
+        {
+          "user": "天坛公园附近有哪些咖啡店？",
+          "expectedToolSequences": [
+            ["search_shops"],
+            ["list_shop_types", "search_shops"]
+          ],
+          "forbiddenTools": ["search_places", "get_place_detail", "search_knowledge"]
+        }
+      ]
+    },
+    {
+      "id": "demo-06-museum-search-detail",
+      "title": "博物馆搜索与详情",
+      "learningPoint": "博物馆复用统一地点工具，先搜索取得placeId，再查询地址、电话和邮编。",
+      "turns": [
+        {
+          "user": "故宫博物院的地址和电话是什么？",
+          "expectedToolSequences": [["search_places", "get_place_detail"]],
+          "requiredAnswerAll": ["北京市东城区景山前街4号", "65132255"]
+        }
+      ]
+    }
+  ]
+}

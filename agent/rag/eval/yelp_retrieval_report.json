@@ -1,0 +1,705 @@
+{
+  "topK": 3,
+  "total": 25,
+  "hits": 15,
+  "hitRate": 0.6,
+  "hitsAt1": 11,
+  "hitAt1Rate": 0.44,
+  "mrr": 0.5133333333333333,
+  "timing": {
+    "totalMs": 7249.9877189966355,
+    "avgMs": 289.9995087598654,
+    "p50Ms": 259.3390210004145,
+    "p95Ms": 329.21329400051036,
+    "maxMs": 1109.8925030000828
+  },
+  "byDifficulty": {
+    "basic": {
+      "total": 16,
+      "hits": 10,
+      "hitRate": 0.625,
+      "hitsAt1": 7,
+      "hitAt1Rate": 0.4375,
+      "mrr": 0.5208333333333334,
+      "timing": {
+        "totalMs": 5058.743965000758,
+        "avgMs": 316.1714978125474,
+        "p50Ms": 263.3279860001494,
+        "p95Ms": 1109.8925030000828,
+        "maxMs": 1109.8925030000828
+      }
+    },
+    "hard": {
+      "total": 9,
+      "hits": 5,
+      "hitRate": 0.5555555555555556,
+      "hitsAt1": 4,
+      "hitAt1Rate": 0.4444444444444444,
+      "mrr": 0.5,
+      "timing": {
+        "totalMs": 2191.2437539958773,
+        "avgMs": 243.47152822176415,
+        "p50Ms": 254.82458599981328,
+        "p95Ms": 329.21329400051036,
+        "maxMs": 329.21329400051036
+      }
+    }
+  },
+  "byChallengeType": {
+    "budget_constraint": {
+      "total": 1,
+      "hits": 1,
+      "hitRate": 1.0,
+      "hitsAt1": 1,
+      "hitAt1Rate": 1.0,
+      "mrr": 1.0,
+      "timing": {
+        "totalMs": 266.82291499855637,
+        "avgMs": 266.82291499855637,
+        "p50Ms": 266.82291499855637,
+        "p95Ms": 266.82291499855637,
+        "maxMs": 266.82291499855637
+      }
+    },
+    "environment_preference": {
+      "total": 8,
+      "hits": 7,
+      "hitRate": 0.875,
+      "hitsAt1": 5,
+      "hitAt1Rate": 0.625,
+      "mrr": 0.75,
+      "timing": {
+        "totalMs": 3010.166427000513,
+        "avgMs": 376.27080337506413,
+        "p50Ms": 274.73356100017554,
+        "p95Ms": 1109.8925030000828,
+        "maxMs": 1109.8925030000828
+      }
+    },
+    "facility_constraint": {
+      "total": 20,
+      "hits": 13,
+      "hitRate": 0.65,
+      "hitsAt1": 9,
+      "hitAt1Rate": 0.45,
+      "mrr": 0.5416666666666667,
+      "timing": {
+        "totalMs": 5089.696340995943,
+        "avgMs": 254.48481704979713,
+        "p50Ms": 258.42629599901557,
+        "p95Ms": 324.62994500019704,
+        "maxMs": 329.21329400051036
+      }
+    },
+    "implicit_intent": {
+      "total": 4,
+      "hits": 2,
+      "hitRate": 0.5,
+      "hitsAt1": 1,
+      "hitAt1Rate": 0.25,
+      "mrr": 0.375,
+      "timing": {
+        "totalMs": 1031.7905550000432,
+        "avgMs": 257.9476387500108,
+        "p50Ms": 273.3845540005859,
+        "p95Ms": 278.0563500000426,
+        "maxMs": 278.0563500000426
+      }
+    },
+    "multi_constraint": {
+      "total": 5,
+      "hits": 2,
+      "hitRate": 0.4,
+      "hitsAt1": 2,
+      "hitAt1Rate": 0.4,
+      "mrr": 0.4,
+      "timing": {
+        "totalMs": 1195.5164259961748,
+        "avgMs": 239.10328519923496,
+        "p50Ms": 254.82458599981328,
+        "p95Ms": 279.575679998743,
+        "maxMs": 279.575679998743
+      }
+    },
+    "negative_constraint": {
+      "total": 9,
+      "hits": 7,
+      "hitRate": 0.7777777777777778,
+      "hitsAt1": 6,
+      "hitAt1Rate": 0.6666666666666666,
+      "mrr": 0.7222222222222222,
+      "timing": {
+        "totalMs": 3013.2898969986854,
+        "avgMs": 334.8099885554095,
+        "p50Ms": 249.08670999866445,
+        "p95Ms": 1109.8925030000828,
+        "maxMs": 1109.8925030000828
+      }
+    },
+    "service_constraint": {
+      "total": 5,
+      "hits": 1,
+      "hitRate": 0.2,
+      "hitsAt1": 1,
+      "hitAt1Rate": 0.2,
+      "mrr": 0.2,
+      "timing": {
+        "totalMs": 1169.7537500003818,
+        "avgMs": 233.95075000007637,
+        "p50Ms": 236.90939199877903,
+        "p95Ms": 273.3845540005859,
+        "maxMs": 273.3845540005859
+      }
+    },
+    "time_constraint": {
+      "total": 6,
+      "hits": 2,
+      "hitRate": 0.3333333333333333,
+      "hitsAt1": 2,
+      "hitAt1Rate": 0.3333333333333333,
+      "mrr": 0.3333333333333333,
+      "timing": {
+        "totalMs": 1678.3443529984652,
+        "avgMs": 279.72405883307755,
+        "p50Ms": 279.575679998743,
+        "p95Ms": 329.21329400051036,
+        "maxMs": 329.21329400051036
+      }
+    }
+  },
+  "details": [
+    {
+      "caseId": "yelp-rag-001",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "environment_preference",
+        "negative_constraint"
+      ],
+      "hit": true,
+      "hitAt1": true,
+      "firstRelevantRank": 1,
+      "reciprocalRank": 1.0,
+      "durationMs": 1109.8925030000828,
+      "expectedReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw"
+      ],
+      "retrievedReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "review-018",
+        "yelp-YmBytIHGjEroySTkyL8m8w"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-002",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "service_constraint"
+      ],
+      "hit": false,
+      "hitAt1": false,
+      "firstRelevantRank": null,
+      "reciprocalRank": 0.0,
+      "durationMs": 263.3279860001494,
+      "expectedReviewIds": [
+        "yelp-0raRTiWTrj9ytORRy-kZoA"
+      ],
+      "retrievedReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-003",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "time_constraint",
+        "multi_constraint"
+      ],
+      "hit": false,
+      "hitAt1": false,
+      "firstRelevantRank": null,
+      "reciprocalRank": 0.0,
+      "durationMs": 254.82458599981328,
+      "expectedReviewIds": [
+        "yelp-1VyHchVgc9oEfVrsFweNNA"
+      ],
+      "retrievedReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "review-013",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-004",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "negative_constraint"
+      ],
+      "hit": true,
+      "hitAt1": false,
+      "firstRelevantRank": 2,
+      "reciprocalRank": 0.5,
+      "durationMs": 241.34270000104152,
+      "expectedReviewIds": [
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+      ],
+      "retrievedReviewIds": [
+        "yelp-G16hQXpXMfiodPlsrLCnLw",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+        "yelp-AR8lhVM0aylAt8W06q6zxg"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-005",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "environment_preference"
+      ],
+      "hit": true,
+      "hitAt1": true,
+      "firstRelevantRank": 1,
+      "reciprocalRank": 1.0,
+      "durationMs": 258.42629599901557,
+      "expectedReviewIds": [
+        "yelp-a6HDkwToJFoIPzlxBiS71g"
+      ],
+      "retrievedReviewIds": [
+        "yelp-a6HDkwToJFoIPzlxBiS71g",
+        "yelp-mhS1SUPKRA3Q6nR3oresqA",
+        "yelp-0raRTiWTrj9ytORRy-kZoA"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-006",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "time_constraint",
+        "negative_constraint"
+      ],
+      "hit": false,
+      "hitAt1": false,
+      "firstRelevantRank": null,
+      "reciprocalRank": 0.0,
+      "durationMs": 216.88657399863587,
+      "expectedReviewIds": [
+        "yelp-AR8lhVM0aylAt8W06q6zxg"
+      ],
+      "retrievedReviewIds": [
+        "review-016",
+        "review-145",
+        "review-307"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-007",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "service_constraint"
+      ],
+      "hit": false,
+      "hitAt1": false,
+      "firstRelevantRank": null,
+      "reciprocalRank": 0.0,
+      "durationMs": 236.90939199877903,
+      "expectedReviewIds": [
+        "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+      ],
+      "retrievedReviewIds": [
+        "review-017",
+        "review-014",
+        "yelp-M980wiRzRJhBOlyQsFeDYw"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-008",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "implicit_intent"
+      ],
+      "hit": true,
+      "hitAt1": true,
+      "firstRelevantRank": 1,
+      "reciprocalRank": 1.0,
+      "durationMs": 226.00233699995442,
+      "expectedReviewIds": [
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+      ],
+      "retrievedReviewIds": [
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-009",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "service_constraint",
+        "multi_constraint"
+      ],
+      "hit": false,
+      "hitAt1": false,
+      "firstRelevantRank": null,
+      "reciprocalRank": 0.0,
+      "durationMs": 224.56070800035377,
+      "expectedReviewIds": [
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+      ],
+      "retrievedReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-010",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint"
+      ],
+      "hit": true,
+      "hitAt1": false,
+      "firstRelevantRank": 3,
+      "reciprocalRank": 0.3333333333333333,
+      "durationMs": 245.7248160008021,
+      "expectedReviewIds": [
+        "yelp-ChYhI05dXfDPbATD9VdiDQ"
+      ],
+      "retrievedReviewIds": [
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-ChYhI05dXfDPbATD9VdiDQ"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-011",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "environment_preference"
+      ],
+      "hit": true,
+      "hitAt1": true,
+      "firstRelevantRank": 1,
+      "reciprocalRank": 1.0,
+      "durationMs": 274.73356100017554,
+      "expectedReviewIds": [
+        "yelp-FXIVmjL3GckScX7Uww2NDw"
+      ],
+      "retrievedReviewIds": [
+        "yelp-FXIVmjL3GckScX7Uww2NDw",
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-012",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "environment_preference",
+        "implicit_intent"
+      ],
+      "hit": false,
+      "hitAt1": false,
+      "firstRelevantRank": null,
+      "reciprocalRank": 0.0,
+      "durationMs": 254.3473139994603,
+      "expectedReviewIds": [
+        "yelp-G1hVCb7CrOyL-HP1h6rByg"
+      ],
+      "retrievedReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-013",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "time_constraint",
+        "facility_constraint",
+        "negative_constraint"
+      ],
+      "hit": true,
+      "hitAt1": true,
+      "firstRelevantRank": 1,
+      "reciprocalRank": 1.0,
+      "durationMs": 329.21329400051036,
+      "expectedReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+      ],
+      "retrievedReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "review-242"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-014",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "time_constraint",
+        "facility_constraint"
+      ],
+      "hit": false,
+      "hitAt1": false,
+      "firstRelevantRank": null,
+      "reciprocalRank": 0.0,
+      "durationMs": 324.62994500019704,
+      "expectedReviewIds": [
+        "yelp-hUIkr15XxOSzheG5l9mYSw"
+      ],
+      "retrievedReviewIds": [
+        "review-019",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "review-013"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-015",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "environment_preference"
+      ],
+      "hit": true,
+      "hitAt1": false,
+      "firstRelevantRank": 2,
+      "reciprocalRank": 0.5,
+      "durationMs": 302.1571080007561,
+      "expectedReviewIds": [
+        "yelp-kmEHaWvhg3O6IXfw7cDf7Q"
+      ],
+      "retrievedReviewIds": [
+        "yelp-mhS1SUPKRA3Q6nR3oresqA",
+        "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+        "yelp-YmBytIHGjEroySTkyL8m8w"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-016",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "budget_constraint",
+        "multi_constraint"
+      ],
+      "hit": true,
+      "hitAt1": true,
+      "firstRelevantRank": 1,
+      "reciprocalRank": 1.0,
+      "durationMs": 266.82291499855637,
+      "expectedReviewIds": [
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+      ],
+      "retrievedReviewIds": [
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-017",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "negative_constraint"
+      ],
+      "hit": true,
+      "hitAt1": true,
+      "firstRelevantRank": 1,
+      "reciprocalRank": 1.0,
+      "durationMs": 266.22544800011383,
+      "expectedReviewIds": [
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+      ],
+      "retrievedReviewIds": [
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-018",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "time_constraint",
+        "facility_constraint",
+        "multi_constraint"
+      ],
+      "hit": false,
+      "hitAt1": false,
+      "firstRelevantRank": null,
+      "reciprocalRank": 0.0,
+      "durationMs": 279.575679998743,
+      "expectedReviewIds": [
+        "yelp-REgp10DO01kp2pOONZtq9w"
+      ],
+      "retrievedReviewIds": [
+        "review-005",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-019",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "environment_preference",
+        "implicit_intent"
+      ],
+      "hit": true,
+      "hitAt1": false,
+      "firstRelevantRank": 2,
+      "reciprocalRank": 0.5,
+      "durationMs": 278.0563500000426,
+      "expectedReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+      ],
+      "retrievedReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-020",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "negative_constraint"
+      ],
+      "hit": false,
+      "hitAt1": false,
+      "firstRelevantRank": null,
+      "reciprocalRank": 0.0,
+      "durationMs": 249.08670999866445,
+      "expectedReviewIds": [
+        "yelp-z2Ia7bFRqSKHicUNi7359Q"
+      ],
+      "retrievedReviewIds": [
+        "review-017",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "review-023"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-021",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "environment_preference",
+        "negative_constraint"
+      ],
+      "hit": true,
+      "hitAt1": true,
+      "firstRelevantRank": 1,
+      "reciprocalRank": 1.0,
+      "durationMs": 259.3390210004145,
+      "expectedReviewIds": [
+        "yelp-T52ED3B5-Lymo9EzCpuTwg"
+      ],
+      "retrievedReviewIds": [
+        "yelp-T52ED3B5-Lymo9EzCpuTwg",
+        "review-144",
+        "review-306"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-022",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "implicit_intent",
+        "service_constraint"
+      ],
+      "hit": false,
+      "hitAt1": false,
+      "firstRelevantRank": null,
+      "reciprocalRank": 0.0,
+      "durationMs": 273.3845540005859,
+      "expectedReviewIds": [
+        "yelp-VJEtJzH0GP_gFYjKDVIstw"
+      ],
+      "retrievedReviewIds": [
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-023",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "time_constraint",
+        "facility_constraint",
+        "environment_preference"
+      ],
+      "hit": true,
+      "hitAt1": true,
+      "firstRelevantRank": 1,
+      "reciprocalRank": 1.0,
+      "durationMs": 273.21427400056564,
+      "expectedReviewIds": [
+        "yelp-wiod6zg7n7S_-Iow_O-L9w"
+      ],
+      "retrievedReviewIds": [
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "review-110",
+        "review-245"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-024",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "negative_constraint",
+        "multi_constraint"
+      ],
+      "hit": true,
+      "hitAt1": true,
+      "firstRelevantRank": 1,
+      "reciprocalRank": 1.0,
+      "durationMs": 169.73253699870838,
+      "expectedReviewIds": [
+        "yelp-RIdKOn-6dE8hdSFPh5RZug"
+      ],
+      "retrievedReviewIds": [
+        "yelp-RIdKOn-6dE8hdSFPh5RZug",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-025",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "service_constraint",
+        "facility_constraint",
+        "negative_constraint"
+      ],
+      "hit": true,
+      "hitAt1": true,
+      "firstRelevantRank": 1,
+      "reciprocalRank": 1.0,
+      "durationMs": 171.57111000051373,
+      "expectedReviewIds": [
+        "yelp-ZMZCxn7QQsG0val9K3945Q"
+      ],
+      "retrievedReviewIds": [
+        "yelp-ZMZCxn7QQsG0val9K3945Q",
+        "review-002",
+        "review-093"
+      ]
+    }
+  ]
+}

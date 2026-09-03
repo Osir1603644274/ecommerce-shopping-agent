@@ -1,0 +1,1861 @@
+{
+  "methodology": {
+    "split": "validation only",
+    "testRead": false,
+    "candidateShopCount": 3,
+    "maxEvidenceBudget": 6,
+    "evidencePerShop": 2,
+    "thresholds": [
+      null,
+      0.35,
+      0.4,
+      0.45,
+      0.5
+    ],
+    "aggregation": "mean of retained review vector scores",
+    "labelCaveat": "qrels contain one known relevant review per case and are not exhaustive"
+  },
+  "caseCount": 4,
+  "timing": {
+    "global": {
+      "averageMs": 2099.9782999861054,
+      "measurementsMs": [
+        2342.698999971617,
+        2002.7534000109881,
+        2005.6795999989845,
+        2048.781199962832
+      ]
+    },
+    "grouped": {
+      "averageMs": 1952.6932500157272,
+      "measurementsMs": [
+        1734.5388000248931,
+        1974.1319000022486,
+        2124.3608000222594,
+        1977.741500013508
+      ]
+    }
+  },
+  "configurations": [
+    {
+      "mode": "global",
+      "scoreThreshold": null,
+      "thresholdLabel": "none",
+      "metrics": {
+        "caseCount": 4,
+        "relevantReviewHits": 4,
+        "relevantReviewHitRate": 1.0,
+        "targetShopHitsAt1": 3,
+        "targetShopHitAt1Rate": 0.75,
+        "targetShopMrr": 0.8333333333333334,
+        "averageShopCoverage": 0.8333333333333333,
+        "averageEvidenceCount": 4.25,
+        "noEvidenceCandidateCount": 2,
+        "filterViolationCount": 0
+      },
+      "details": [
+        {
+          "caseId": "shop-agg-val-001",
+          "expectedTopShopId": 100068,
+          "targetShopRank": 3,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 5,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.5760234799999999,
+              "maxScore": 0.5907167,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5466448399999999,
+              "maxScore": 0.55933744,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.5330827,
+              "maxScore": 0.5330827,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-002",
+          "expectedTopShopId": 100169,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 0.6666666666666666,
+          "evidenceCount": 4,
+          "noEvidenceCandidateCount": 1,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.655955285,
+              "maxScore": 0.65832484,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-1VyHchVgc9oEfVrsFweNNA",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.6224007650000001,
+              "maxScore": 0.6368394,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-UCQtD68x2r2UZUsJozztDw"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": null,
+              "maxScore": null,
+              "evidenceCount": 0,
+              "reviewIds": []
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-003",
+          "expectedTopShopId": 100010,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 5,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5512093,
+              "maxScore": 0.5852624,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-wiod6zg7n7S_-Iow_O-L9w",
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.5380284,
+              "maxScore": 0.5414853,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.48106283,
+              "maxScore": 0.48106283,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-004",
+          "expectedTopShopId": 100151,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 0.6666666666666666,
+          "evidenceCount": 3,
+          "noEvidenceCandidateCount": 1,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.7307056,
+              "maxScore": 0.7307056,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0jBamrOBDkY6lLTpkY0xZw"
+              ]
+            },
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.6290711250000001,
+              "maxScore": 0.63757765,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": null,
+              "maxScore": null,
+              "evidenceCount": 0,
+              "reviewIds": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "global",
+      "scoreThreshold": 0.35,
+      "thresholdLabel": "0.35",
+      "metrics": {
+        "caseCount": 4,
+        "relevantReviewHits": 4,
+        "relevantReviewHitRate": 1.0,
+        "targetShopHitsAt1": 3,
+        "targetShopHitAt1Rate": 0.75,
+        "targetShopMrr": 0.8333333333333334,
+        "averageShopCoverage": 0.8333333333333333,
+        "averageEvidenceCount": 4.25,
+        "noEvidenceCandidateCount": 2,
+        "filterViolationCount": 0
+      },
+      "details": [
+        {
+          "caseId": "shop-agg-val-001",
+          "expectedTopShopId": 100068,
+          "targetShopRank": 3,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 5,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.5760234799999999,
+              "maxScore": 0.5907167,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5466448399999999,
+              "maxScore": 0.55933744,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.5330827,
+              "maxScore": 0.5330827,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-002",
+          "expectedTopShopId": 100169,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 0.6666666666666666,
+          "evidenceCount": 4,
+          "noEvidenceCandidateCount": 1,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.655955285,
+              "maxScore": 0.65832484,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-1VyHchVgc9oEfVrsFweNNA",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.6224007650000001,
+              "maxScore": 0.6368394,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-UCQtD68x2r2UZUsJozztDw"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": null,
+              "maxScore": null,
+              "evidenceCount": 0,
+              "reviewIds": []
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-003",
+          "expectedTopShopId": 100010,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 5,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5512093,
+              "maxScore": 0.5852624,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-wiod6zg7n7S_-Iow_O-L9w",
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.5380284,
+              "maxScore": 0.5414853,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.48106283,
+              "maxScore": 0.48106283,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-004",
+          "expectedTopShopId": 100151,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 0.6666666666666666,
+          "evidenceCount": 3,
+          "noEvidenceCandidateCount": 1,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.7307056,
+              "maxScore": 0.7307056,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0jBamrOBDkY6lLTpkY0xZw"
+              ]
+            },
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.6290711250000001,
+              "maxScore": 0.63757765,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": null,
+              "maxScore": null,
+              "evidenceCount": 0,
+              "reviewIds": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "global",
+      "scoreThreshold": 0.4,
+      "thresholdLabel": "0.40",
+      "metrics": {
+        "caseCount": 4,
+        "relevantReviewHits": 4,
+        "relevantReviewHitRate": 1.0,
+        "targetShopHitsAt1": 3,
+        "targetShopHitAt1Rate": 0.75,
+        "targetShopMrr": 0.8333333333333334,
+        "averageShopCoverage": 0.8333333333333333,
+        "averageEvidenceCount": 4.25,
+        "noEvidenceCandidateCount": 2,
+        "filterViolationCount": 0
+      },
+      "details": [
+        {
+          "caseId": "shop-agg-val-001",
+          "expectedTopShopId": 100068,
+          "targetShopRank": 3,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 5,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.5760234799999999,
+              "maxScore": 0.5907167,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5466448399999999,
+              "maxScore": 0.55933744,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.5330827,
+              "maxScore": 0.5330827,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-002",
+          "expectedTopShopId": 100169,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 0.6666666666666666,
+          "evidenceCount": 4,
+          "noEvidenceCandidateCount": 1,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.655955285,
+              "maxScore": 0.65832484,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-1VyHchVgc9oEfVrsFweNNA",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.6224007650000001,
+              "maxScore": 0.6368394,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-UCQtD68x2r2UZUsJozztDw"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": null,
+              "maxScore": null,
+              "evidenceCount": 0,
+              "reviewIds": []
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-003",
+          "expectedTopShopId": 100010,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 5,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5512093,
+              "maxScore": 0.5852624,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-wiod6zg7n7S_-Iow_O-L9w",
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.5380284,
+              "maxScore": 0.5414853,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.48106283,
+              "maxScore": 0.48106283,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-004",
+          "expectedTopShopId": 100151,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 0.6666666666666666,
+          "evidenceCount": 3,
+          "noEvidenceCandidateCount": 1,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.7307056,
+              "maxScore": 0.7307056,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0jBamrOBDkY6lLTpkY0xZw"
+              ]
+            },
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.6290711250000001,
+              "maxScore": 0.63757765,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": null,
+              "maxScore": null,
+              "evidenceCount": 0,
+              "reviewIds": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "global",
+      "scoreThreshold": 0.45,
+      "thresholdLabel": "0.45",
+      "metrics": {
+        "caseCount": 4,
+        "relevantReviewHits": 4,
+        "relevantReviewHitRate": 1.0,
+        "targetShopHitsAt1": 3,
+        "targetShopHitAt1Rate": 0.75,
+        "targetShopMrr": 0.8333333333333334,
+        "averageShopCoverage": 0.8333333333333333,
+        "averageEvidenceCount": 4.25,
+        "noEvidenceCandidateCount": 2,
+        "filterViolationCount": 0
+      },
+      "details": [
+        {
+          "caseId": "shop-agg-val-001",
+          "expectedTopShopId": 100068,
+          "targetShopRank": 3,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 5,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.5760234799999999,
+              "maxScore": 0.5907167,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5466448399999999,
+              "maxScore": 0.55933744,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.5330827,
+              "maxScore": 0.5330827,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-002",
+          "expectedTopShopId": 100169,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 0.6666666666666666,
+          "evidenceCount": 4,
+          "noEvidenceCandidateCount": 1,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.655955285,
+              "maxScore": 0.65832484,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-1VyHchVgc9oEfVrsFweNNA",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.6224007650000001,
+              "maxScore": 0.6368394,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-UCQtD68x2r2UZUsJozztDw"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": null,
+              "maxScore": null,
+              "evidenceCount": 0,
+              "reviewIds": []
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-003",
+          "expectedTopShopId": 100010,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 5,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5512093,
+              "maxScore": 0.5852624,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-wiod6zg7n7S_-Iow_O-L9w",
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.5380284,
+              "maxScore": 0.5414853,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.48106283,
+              "maxScore": 0.48106283,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-004",
+          "expectedTopShopId": 100151,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 0.6666666666666666,
+          "evidenceCount": 3,
+          "noEvidenceCandidateCount": 1,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.7307056,
+              "maxScore": 0.7307056,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0jBamrOBDkY6lLTpkY0xZw"
+              ]
+            },
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.6290711250000001,
+              "maxScore": 0.63757765,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": null,
+              "maxScore": null,
+              "evidenceCount": 0,
+              "reviewIds": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "global",
+      "scoreThreshold": 0.5,
+      "thresholdLabel": "0.50",
+      "metrics": {
+        "caseCount": 4,
+        "relevantReviewHits": 4,
+        "relevantReviewHitRate": 1.0,
+        "targetShopHitsAt1": 3,
+        "targetShopHitAt1Rate": 0.75,
+        "targetShopMrr": 0.8333333333333334,
+        "averageShopCoverage": 0.75,
+        "averageEvidenceCount": 4.0,
+        "noEvidenceCandidateCount": 3,
+        "filterViolationCount": 0
+      },
+      "details": [
+        {
+          "caseId": "shop-agg-val-001",
+          "expectedTopShopId": 100068,
+          "targetShopRank": 3,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 5,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.5760234799999999,
+              "maxScore": 0.5907167,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5466448399999999,
+              "maxScore": 0.55933744,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.5330827,
+              "maxScore": 0.5330827,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-002",
+          "expectedTopShopId": 100169,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 0.6666666666666666,
+          "evidenceCount": 4,
+          "noEvidenceCandidateCount": 1,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.655955285,
+              "maxScore": 0.65832484,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-1VyHchVgc9oEfVrsFweNNA",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.6224007650000001,
+              "maxScore": 0.6368394,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-UCQtD68x2r2UZUsJozztDw"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": null,
+              "maxScore": null,
+              "evidenceCount": 0,
+              "reviewIds": []
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-003",
+          "expectedTopShopId": 100010,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 0.6666666666666666,
+          "evidenceCount": 4,
+          "noEvidenceCandidateCount": 1,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5512093,
+              "maxScore": 0.5852624,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-wiod6zg7n7S_-Iow_O-L9w",
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.5380284,
+              "maxScore": 0.5414853,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": null,
+              "maxScore": null,
+              "evidenceCount": 0,
+              "reviewIds": []
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-004",
+          "expectedTopShopId": 100151,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 0.6666666666666666,
+          "evidenceCount": 3,
+          "noEvidenceCandidateCount": 1,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.7307056,
+              "maxScore": 0.7307056,
+              "evidenceCount": 1,
+              "reviewIds": [
+                "yelp-0jBamrOBDkY6lLTpkY0xZw"
+              ]
+            },
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.6290711250000001,
+              "maxScore": 0.63757765,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": null,
+              "maxScore": null,
+              "evidenceCount": 0,
+              "reviewIds": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "grouped",
+      "scoreThreshold": null,
+      "thresholdLabel": "none",
+      "metrics": {
+        "caseCount": 4,
+        "relevantReviewHits": 4,
+        "relevantReviewHitRate": 1.0,
+        "targetShopHitsAt1": 3,
+        "targetShopHitAt1Rate": 0.75,
+        "targetShopMrr": 0.8333333333333334,
+        "averageShopCoverage": 1.0,
+        "averageEvidenceCount": 6.0,
+        "noEvidenceCandidateCount": 0,
+        "filterViolationCount": 0
+      },
+      "details": [
+        {
+          "caseId": "shop-agg-val-001",
+          "expectedTopShopId": 100068,
+          "targetShopRank": 3,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.5760234799999999,
+              "maxScore": 0.5907167,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5466448399999999,
+              "maxScore": 0.55933744,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.52454275,
+              "maxScore": 0.5330827,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA",
+                "yelp-mhS1SUPKRA3Q6nR3oresqA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-002",
+          "expectedTopShopId": 100169,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.655955285,
+              "maxScore": 0.65832484,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-1VyHchVgc9oEfVrsFweNNA",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.6224007650000001,
+              "maxScore": 0.6368394,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-UCQtD68x2r2UZUsJozztDw"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.58428983,
+              "maxScore": 0.59290326,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-003",
+          "expectedTopShopId": 100010,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5512093,
+              "maxScore": 0.5852624,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-wiod6zg7n7S_-Iow_O-L9w",
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.5380284,
+              "maxScore": 0.5414853,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.47229843,
+              "maxScore": 0.48106283,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA",
+                "yelp-mhS1SUPKRA3Q6nR3oresqA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-004",
+          "expectedTopShopId": 100151,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.649042775,
+              "maxScore": 0.7307056,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0jBamrOBDkY6lLTpkY0xZw",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.6290711250000001,
+              "maxScore": 0.63757765,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.5763662249999999,
+              "maxScore": 0.59514695,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-mhS1SUPKRA3Q6nR3oresqA",
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "grouped",
+      "scoreThreshold": 0.35,
+      "thresholdLabel": "0.35",
+      "metrics": {
+        "caseCount": 4,
+        "relevantReviewHits": 4,
+        "relevantReviewHitRate": 1.0,
+        "targetShopHitsAt1": 3,
+        "targetShopHitAt1Rate": 0.75,
+        "targetShopMrr": 0.8333333333333334,
+        "averageShopCoverage": 1.0,
+        "averageEvidenceCount": 6.0,
+        "noEvidenceCandidateCount": 0,
+        "filterViolationCount": 0
+      },
+      "details": [
+        {
+          "caseId": "shop-agg-val-001",
+          "expectedTopShopId": 100068,
+          "targetShopRank": 3,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.5760234799999999,
+              "maxScore": 0.5907167,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5466448399999999,
+              "maxScore": 0.55933744,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.52454275,
+              "maxScore": 0.5330827,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA",
+                "yelp-mhS1SUPKRA3Q6nR3oresqA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-002",
+          "expectedTopShopId": 100169,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.655955285,
+              "maxScore": 0.65832484,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-1VyHchVgc9oEfVrsFweNNA",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.6224007650000001,
+              "maxScore": 0.6368394,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-UCQtD68x2r2UZUsJozztDw"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.58428983,
+              "maxScore": 0.59290326,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-003",
+          "expectedTopShopId": 100010,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5512093,
+              "maxScore": 0.5852624,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-wiod6zg7n7S_-Iow_O-L9w",
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.5380284,
+              "maxScore": 0.5414853,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.47229843,
+              "maxScore": 0.48106283,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA",
+                "yelp-mhS1SUPKRA3Q6nR3oresqA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-004",
+          "expectedTopShopId": 100151,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.649042775,
+              "maxScore": 0.7307056,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0jBamrOBDkY6lLTpkY0xZw",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.6290711250000001,
+              "maxScore": 0.63757765,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.5763662249999999,
+              "maxScore": 0.59514695,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-mhS1SUPKRA3Q6nR3oresqA",
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "grouped",
+      "scoreThreshold": 0.4,
+      "thresholdLabel": "0.40",
+      "metrics": {
+        "caseCount": 4,
+        "relevantReviewHits": 4,
+        "relevantReviewHitRate": 1.0,
+        "targetShopHitsAt1": 3,
+        "targetShopHitAt1Rate": 0.75,
+        "targetShopMrr": 0.8333333333333334,
+        "averageShopCoverage": 1.0,
+        "averageEvidenceCount": 6.0,
+        "noEvidenceCandidateCount": 0,
+        "filterViolationCount": 0
+      },
+      "details": [
+        {
+          "caseId": "shop-agg-val-001",
+          "expectedTopShopId": 100068,
+          "targetShopRank": 3,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.5760234799999999,
+              "maxScore": 0.5907167,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5466448399999999,
+              "maxScore": 0.55933744,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.52454275,
+              "maxScore": 0.5330827,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA",
+                "yelp-mhS1SUPKRA3Q6nR3oresqA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-002",
+          "expectedTopShopId": 100169,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.655955285,
+              "maxScore": 0.65832484,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-1VyHchVgc9oEfVrsFweNNA",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.6224007650000001,
+              "maxScore": 0.6368394,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-UCQtD68x2r2UZUsJozztDw"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.58428983,
+              "maxScore": 0.59290326,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-003",
+          "expectedTopShopId": 100010,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5512093,
+              "maxScore": 0.5852624,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-wiod6zg7n7S_-Iow_O-L9w",
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.5380284,
+              "maxScore": 0.5414853,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.47229843,
+              "maxScore": 0.48106283,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA",
+                "yelp-mhS1SUPKRA3Q6nR3oresqA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-004",
+          "expectedTopShopId": 100151,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.649042775,
+              "maxScore": 0.7307056,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0jBamrOBDkY6lLTpkY0xZw",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.6290711250000001,
+              "maxScore": 0.63757765,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.5763662249999999,
+              "maxScore": 0.59514695,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-mhS1SUPKRA3Q6nR3oresqA",
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "grouped",
+      "scoreThreshold": 0.45,
+      "thresholdLabel": "0.45",
+      "metrics": {
+        "caseCount": 4,
+        "relevantReviewHits": 4,
+        "relevantReviewHitRate": 1.0,
+        "targetShopHitsAt1": 3,
+        "targetShopHitAt1Rate": 0.75,
+        "targetShopMrr": 0.8333333333333334,
+        "averageShopCoverage": 1.0,
+        "averageEvidenceCount": 6.0,
+        "noEvidenceCandidateCount": 0,
+        "filterViolationCount": 0
+      },
+      "details": [
+        {
+          "caseId": "shop-agg-val-001",
+          "expectedTopShopId": 100068,
+          "targetShopRank": 3,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.5760234799999999,
+              "maxScore": 0.5907167,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5466448399999999,
+              "maxScore": 0.55933744,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.52454275,
+              "maxScore": 0.5330827,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA",
+                "yelp-mhS1SUPKRA3Q6nR3oresqA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-002",
+          "expectedTopShopId": 100169,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.655955285,
+              "maxScore": 0.65832484,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-1VyHchVgc9oEfVrsFweNNA",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.6224007650000001,
+              "maxScore": 0.6368394,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-UCQtD68x2r2UZUsJozztDw"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.58428983,
+              "maxScore": 0.59290326,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-003",
+          "expectedTopShopId": 100010,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5512093,
+              "maxScore": 0.5852624,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-wiod6zg7n7S_-Iow_O-L9w",
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.5380284,
+              "maxScore": 0.5414853,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.47229843,
+              "maxScore": 0.48106283,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA",
+                "yelp-mhS1SUPKRA3Q6nR3oresqA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-004",
+          "expectedTopShopId": 100151,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.649042775,
+              "maxScore": 0.7307056,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0jBamrOBDkY6lLTpkY0xZw",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.6290711250000001,
+              "maxScore": 0.63757765,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.5763662249999999,
+              "maxScore": 0.59514695,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-mhS1SUPKRA3Q6nR3oresqA",
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "grouped",
+      "scoreThreshold": 0.5,
+      "thresholdLabel": "0.50",
+      "metrics": {
+        "caseCount": 4,
+        "relevantReviewHits": 4,
+        "relevantReviewHitRate": 1.0,
+        "targetShopHitsAt1": 3,
+        "targetShopHitAt1Rate": 0.75,
+        "targetShopMrr": 0.8333333333333334,
+        "averageShopCoverage": 0.9166666666666666,
+        "averageEvidenceCount": 5.5,
+        "noEvidenceCandidateCount": 1,
+        "filterViolationCount": 0
+      },
+      "details": [
+        {
+          "caseId": "shop-agg-val-001",
+          "expectedTopShopId": 100068,
+          "targetShopRank": 3,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.5760234799999999,
+              "maxScore": 0.5907167,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5466448399999999,
+              "maxScore": 0.55933744,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.52454275,
+              "maxScore": 0.5330827,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0raRTiWTrj9ytORRy-kZoA",
+                "yelp-mhS1SUPKRA3Q6nR3oresqA"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-002",
+          "expectedTopShopId": 100169,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.655955285,
+              "maxScore": 0.65832484,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-1VyHchVgc9oEfVrsFweNNA",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.6224007650000001,
+              "maxScore": 0.6368394,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-UCQtD68x2r2UZUsJozztDw"
+              ]
+            },
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.58428983,
+              "maxScore": 0.59290326,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+                "yelp-wiod6zg7n7S_-Iow_O-L9w"
+              ]
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-003",
+          "expectedTopShopId": 100010,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 0.6666666666666666,
+          "evidenceCount": 4,
+          "noEvidenceCandidateCount": 1,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100010,
+              "aggregateScore": 0.5512093,
+              "maxScore": 0.5852624,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-wiod6zg7n7S_-Iow_O-L9w",
+                "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+              ]
+            },
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.5380284,
+              "maxScore": 0.5414853,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": null,
+              "maxScore": null,
+              "evidenceCount": 0,
+              "reviewIds": []
+            }
+          ]
+        },
+        {
+          "caseId": "shop-agg-val-004",
+          "expectedTopShopId": 100151,
+          "targetShopRank": 1,
+          "relevantReviewHit": true,
+          "shopCoverage": 1.0,
+          "evidenceCount": 6,
+          "noEvidenceCandidateCount": 0,
+          "filterViolations": [],
+          "shops": [
+            {
+              "shopId": 100151,
+              "aggregateScore": 0.649042775,
+              "maxScore": 0.7307056,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-0jBamrOBDkY6lLTpkY0xZw",
+                "yelp-k3-x8KcSymMNREMgTGneAA"
+              ]
+            },
+            {
+              "shopId": 100169,
+              "aggregateScore": 0.6290711250000001,
+              "maxScore": 0.63757765,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+                "yelp-YmBytIHGjEroySTkyL8m8w"
+              ]
+            },
+            {
+              "shopId": 100068,
+              "aggregateScore": 0.5763662249999999,
+              "maxScore": 0.59514695,
+              "evidenceCount": 2,
+              "reviewIds": [
+                "yelp-mhS1SUPKRA3Q6nR3oresqA",
+                "yelp-0raRTiWTrj9ytORRy-kZoA"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

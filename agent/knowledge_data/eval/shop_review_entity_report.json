@@ -1,0 +1,153 @@
+{
+  "methodology": {
+    "split": "validation only",
+    "testRead": false,
+    "topK": 3,
+    "chain": "search_shops(name) -> unique shopId -> search_reviews(shopId)",
+    "ambiguityPolicy": "prefer one exact case-insensitive name match; never pick the first ambiguous partial match"
+  },
+  "caseCount": 4,
+  "entityResolution": {
+    "resolved": 4,
+    "resolvedRate": 1.0,
+    "correct": 4,
+    "accuracy": 1.0
+  },
+  "reviewRetrieval": {
+    "total": 4,
+    "hits": 3,
+    "hitRate": 0.75,
+    "hitsAt1": 3,
+    "hitAt1Rate": 0.75,
+    "mrr": 0.75,
+    "details": [
+      {
+        "caseId": "quality-val-review-001",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "yelp-0raRTiWTrj9ytORRy-kZoA"
+        ],
+        "retrievedReviewIds": [
+          "yelp-0raRTiWTrj9ytORRy-kZoA",
+          "yelp-yeXj7dMi8DyZ1i45T8iobw",
+          "yelp-4xICpHnuep1qQmWudTfegA"
+        ]
+      },
+      {
+        "caseId": "quality-val-review-002",
+        "hit": false,
+        "hitAt1": false,
+        "firstRelevantRank": null,
+        "reciprocalRank": 0.0,
+        "expectedReviewIds": [
+          "yelp-1VyHchVgc9oEfVrsFweNNA"
+        ],
+        "retrievedReviewIds": [
+          "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "yelp-AhTsqSS43V1-9yPq-NRX-w",
+          "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+        ]
+      },
+      {
+        "caseId": "quality-val-mixed-001",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "yelp-wiod6zg7n7S_-Iow_O-L9w"
+        ],
+        "retrievedReviewIds": [
+          "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "yelp-rJbcs9MOiK7PwcWaMjp52A"
+        ]
+      },
+      {
+        "caseId": "quality-val-mixed-002",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "yelp-0jBamrOBDkY6lLTpkY0xZw"
+        ],
+        "retrievedReviewIds": [
+          "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "yelp-k3-x8KcSymMNREMgTGneAA"
+        ]
+      }
+    ]
+  },
+  "details": [
+    {
+      "caseId": "quality-val-review-001",
+      "shopName": "Alchemy Coffee",
+      "expectedShopId": 100068,
+      "shopSearchOk": true,
+      "shopCandidateCount": 1,
+      "resolvedShopId": 100068,
+      "resolutionError": null,
+      "resolutionCorrect": true,
+      "reviewSearchOk": true,
+      "retrievedReviewIds": [
+        "yelp-0raRTiWTrj9ytORRy-kZoA",
+        "yelp-yeXj7dMi8DyZ1i45T8iobw",
+        "yelp-4xICpHnuep1qQmWudTfegA"
+      ]
+    },
+    {
+      "caseId": "quality-val-review-002",
+      "shopName": "Good Karma Cafe",
+      "expectedShopId": 100169,
+      "shopSearchOk": true,
+      "shopCandidateCount": 1,
+      "resolvedShopId": 100169,
+      "resolutionError": null,
+      "resolutionCorrect": true,
+      "reviewSearchOk": true,
+      "retrievedReviewIds": [
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-AhTsqSS43V1-9yPq-NRX-w",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+      ]
+    },
+    {
+      "caseId": "quality-val-mixed-001",
+      "shopName": "ReAnimator Coffee",
+      "expectedShopId": 100010,
+      "shopSearchOk": true,
+      "shopCandidateCount": 1,
+      "resolvedShopId": 100010,
+      "resolutionError": null,
+      "resolutionCorrect": true,
+      "reviewSearchOk": true,
+      "retrievedReviewIds": [
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-rJbcs9MOiK7PwcWaMjp52A"
+      ]
+    },
+    {
+      "caseId": "quality-val-mixed-002",
+      "shopName": "Lucky Goat Coffeehouse",
+      "expectedShopId": 100151,
+      "shopSearchOk": true,
+      "shopCandidateCount": 1,
+      "resolvedShopId": 100151,
+      "resolutionError": null,
+      "resolutionCorrect": true,
+      "reviewSearchOk": true,
+      "retrievedReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-k3-x8KcSymMNREMgTGneAA"
+      ]
+    }
+  ],
+  "failures": []
+}

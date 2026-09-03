@@ -1,0 +1,442 @@
+{
+  "methodology": {
+    "split": "validation",
+    "testRead": false,
+    "datasetRole": "temporary diagnostic set, not a production benchmark",
+    "qrelVersion": "fuzzy-shop-zh-validation-v2",
+    "questionSource": "manually written Chinese scenarios; no real user-query logs",
+    "labelMethod": "iterative pooled judging over Vector, BM25, and content-reranker candidates, followed by manual evidence review",
+    "labelScale": {
+      "3": "strongly satisfies the experience preference",
+      "2": "useful and acceptable match",
+      "1": "partially satisfies the preference"
+    },
+    "knownLimitations": [
+      "Yelp contains reviews rather than query-to-shop relevance labels",
+      "judgments are subjective and are not exhaustive outside the pooled candidates",
+      "the Chinese corpus is translated from English rather than native Chinese local-life content"
+    ]
+  },
+  "cases": [
+    {
+      "id": "fuzzy-shop-val-001",
+      "question": "我想一个人安静地待一会儿，看看书放空，不希望周围太吵。",
+      "intent": "quiet_solo_reading",
+      "relevanceJudgments": [
+        {
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-G1hVCb7CrOyL-HP1h6rByg"],
+          "rationale": "有远离繁忙人流的安静空间、沙发座位，适合消磨下午。"
+        },
+        {
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-T52ED3B5-Lymo9EzCpuTwg"],
+          "rationale": "没有吵闹音乐，整体适合安静停留。"
+        },
+        {
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-UO9TXvLjHoMHCZ1C5OXqLg", "yelp-ZLxlEs371svztvnA2Gdp8g"],
+          "rationale": "评论明确提到适合阅读、工作和放松。"
+        },
+        {
+          "shopId": 100217,
+          "shopName": "Franny Lou's Porch",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-FoSx3bBtKJNtWAl6ZXTusQ"],
+          "rationale": "环境放松悠闲并提供读物，但安静程度证据较弱。"
+        },
+        {
+          "shopId": 100108,
+          "shopName": "Vineyards Cafe",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-pEqgXzllsYcBAStBeP1QFw"],
+          "rationale": "小巧安静，评论明确提到适合周六早上看书。"
+        },
+        {
+          "shopId": 100197,
+          "shopName": "Jasmine Rice - Rittenhouse",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-lR1yZPj0q-AR9sml9b1J9Q"],
+          "rationale": "环境安静私密且不会催客，适合独处放松，但没有阅读场景。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-val-002",
+      "question": "想带电脑找个地方待上几个小时，最好坐着舒服，也不会有人一直催我走。",
+      "intent": "long_stay_laptop",
+      "relevanceJudgments": [
+        {
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-2EsM0mPABnQempeoOPIlcA", "yelp-zJUxQgDCQpZXVRfi0aCIRw"],
+          "rationale": "评论明确描述连续待几小时工作，并有舒适座位和自然光。"
+        },
+        {
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-ga3Ehtu88yTkvOEDbFFcUQ"],
+          "rationale": "免费WiFi、座位多、音乐音量低，适合长时间工作。"
+        },
+        {
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-YysS6Zla-HtqtR5SW60TbQ", "yelp-RIdKOn-6dE8hdSFPh5RZug"],
+          "rationale": "有整天学习和带电脑工作的明确体验证据。"
+        },
+        {
+          "shopId": 100277,
+          "shopName": "Valerio Coffee Roasters",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-kmEHaWvhg3O6IXfw7cDf7Q"],
+          "rationale": "空间开阔、座位和插座充足、WiFi良好，评论者计划长期作为工作地点。"
+        },
+        {
+          "shopId": 100217,
+          "shopName": "Franny Lou's Porch",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-ChYhI05dXfDPbATD9VdiDQ"],
+          "rationale": "有免费WiFi和舒适工作空间，但长时间停留证据不够直接。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-val-003",
+      "question": "想找个适合和朋友慢慢聊天的地方，氛围放松，说话不用提高嗓门。",
+      "intent": "relaxed_friend_chat",
+      "relevanceJudgments": [
+        {
+          "shopId": 100141,
+          "shopName": "Smiths Restaurant and Bar",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-ttZo6DvUdCB1qU00SgFcMQ"],
+          "rationale": "评论明确说明不用大喊也能聊天，适合低调朋友聚会。"
+        },
+        {
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-sHAX9dpdXpUtcBEAyD8DKw"],
+          "rationale": "氛围轻松，明确适合朋友聊天和分享热饮。"
+        },
+        {
+          "shopId": 100258,
+          "shopName": "Prohibition Taproom",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-QfJKvCMrzNPMlhakfQBD-A"],
+          "rationale": "适合朋友聚会并分享小食，但安静程度没有直接证据。"
+        },
+        {
+          "shopId": 100071,
+          "shopName": "Olly",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-RvQVDNwTEF7Gq-rfXHmYXQ"],
+          "rationale": "适合朋友一起用餐，但放松和低噪音证据较弱。"
+        },
+        {
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-GEX3lJS5yJObNX0VH0SdKg", "yelp-0jBamrOBDkY6lLTpkY0xZw"],
+          "rationale": "有放松会客区和安静友好的交流体验，但前厅咖啡机噪音构成冲突。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-val-004",
+      "question": "第一次约会想找个有点情调但不会太正式、让人紧张的地方。",
+      "intent": "casual_first_date",
+      "relevanceJudgments": [
+        {
+          "shopId": 100299,
+          "shopName": "Bury The Hatchet",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-u35-OtHG-npYBPXeGDAMMg"],
+          "rationale": "有明确的愉快第一次约会体验，活动形式能降低正式感。"
+        },
+        {
+          "shopId": 100071,
+          "shopName": "Olly",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-RvQVDNwTEF7Gq-rfXHmYXQ"],
+          "rationale": "高质量但不昂贵，评论明确认为适合约会。"
+        },
+        {
+          "shopId": 100258,
+          "shopName": "Prohibition Taproom",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-1leFK2Q4id6cIJ8A_dH-vg"],
+          "rationale": "装饰和酒吧氛围适合第一次约会，但餐食体验较弱。"
+        },
+        {
+          "shopId": 100240,
+          "shopName": "Smiley's Cafe",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-3nKEF-D-FzbZcES_WD45qQ"],
+          "rationale": "价格实惠、服务好，适合轻量快速约会。"
+        },
+        {
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-3d_m7U-jxRF9YTP6DbOhMw"],
+          "rationale": "舒适友好并有实际约会经历，情调证据相对一般。"
+        },
+        {
+          "shopId": 100194,
+          "shopName": "Zorba's Taverna",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-rWrVThcyPncp-wpqZkjYxA"],
+          "rationale": "氛围温馨舒适、服务友好，评论明确认为适合约会。"
+        },
+        {
+          "shopId": 100004,
+          "shopName": "Craft Hall",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-1FIFzSnwuyGw0V0a75-1Nw"],
+          "rationale": "开放空间、沙发和友好调酒师形成轻松约会候选，但缺少直接约会证据。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-val-005",
+      "question": "周末想带孩子一起吃饭，希望店员友善，环境对家庭比较轻松。",
+      "intent": "family_friendly_meal",
+      "relevanceJudgments": [
+        {
+          "shopId": 100004,
+          "shopName": "Craft Hall",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-5-YovLQWy6Srq0UnTdVhuw", "yelp-M-38wpRyPVRT35MgRmLCjQ"],
+          "rationale": "空间大、有儿童活动区域，对带小孩家庭非常友好。"
+        },
+        {
+          "shopId": 100098,
+          "shopName": "Menchie's Frozen Yogurt",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-R4UONMMp4CeDIG1_HHB44g"],
+          "rationale": "明确适合小孩，服务快速友好。"
+        },
+        {
+          "shopId": 100283,
+          "shopName": "The Post",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-_ZA32vrxoGMkPOZeKL_Lxw"],
+          "rationale": "可带孩子并有多种游戏，但周末音乐环境可能更热闹。"
+        },
+        {
+          "shopId": 100224,
+          "shopName": "HipCityVeg - University City",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-Zw4PyOQtIIgyevpB5lDmxw"],
+          "rationale": "带孩子用餐体验良好且员工友善，但家庭设施证据不多。"
+        },
+        {
+          "shopId": 100217,
+          "shopName": "Franny Lou's Porch",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-B0dVmjqgxiiTVXirBAhEYg"],
+          "rationale": "环境友好放松并明确适合孩子。"
+        },
+        {
+          "shopId": 100298,
+          "shopName": "Applebee's Grill + Bar",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-sikPKS_co6hTNCbM2YxzAA"],
+          "rationale": "有和伴侣、孩子一起放松用餐的直接体验，但家庭设施证据较少。"
+        },
+        {
+          "shopId": 100109,
+          "shopName": "PrimoHoagies",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-M_NslcVeH15cjxQh9Epl1w"],
+          "rationale": "员工像家人一样友好，评论者经常带幼儿来且孩子喜欢。"
+        },
+        {
+          "shopId": 100025,
+          "shopName": "Chick-fil-A",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-x4qR8AlRKckcXy8aCml-zQ"],
+          "rationale": "有儿童游乐区，员工礼貌，直接满足轻松家庭用餐需求。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-val-006",
+      "question": "天气不错，想坐在外面晒晒太阳，喝点东西慢慢休息。",
+      "intent": "relaxed_outdoor_seating",
+      "relevanceJudgments": [
+        {
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-NfAtjCeJ_fJWcjENEvF1oA"],
+          "rationale": "天气好时有舒适的户外座位，并有饮品体验。"
+        },
+        {
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-yyAycjhj9pBUWYlZd75IZg"],
+          "rationale": "咖啡和食物之外还有评价很好的户外座位。"
+        },
+        {
+          "shopId": 100190,
+          "shopName": "Dagwood's Pub",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-1kcO-k-zfvaIWlUT6CG9MA"],
+          "rationale": "评论明确推荐天气好时在户外用餐。"
+        },
+        {
+          "shopId": 100194,
+          "shopName": "Zorba's Taverna",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-mNIm1xVzYf0X_l1Wvim2YA"],
+          "rationale": "有舒适的户外午餐和看街景体验。"
+        },
+        {
+          "shopId": 100229,
+          "shopName": "Izzy's 33",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-MKYkStd4EeViJzwX3wP2Pg"],
+          "rationale": "私人露台适合坐在外面喝冰咖啡。"
+        },
+        {
+          "shopId": 100277,
+          "shopName": "Valerio Coffee Roasters",
+          "relevance": 1,
+          "supportingReviewIds": ["yelp-t9Zl9MPb52uRUQpn_NpSmA"],
+          "rationale": "能在窗边晒太阳并喝咖啡，但不是用户要求的户外座位。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-val-007",
+      "question": "我对咖啡不太懂，想找一家店员愿意耐心介绍、不会让新手尴尬的咖啡店。",
+      "intent": "coffee_beginner_friendly",
+      "relevanceJudgments": [
+        {
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-YysS6Zla-HtqtR5SW60TbQ", "yelp-Qkkyk7R9rCK7ZXHOkenT_g"],
+          "rationale": "评论者从非咖啡爱好者逐渐理解咖啡，咖啡师也乐于帮助。"
+        },
+        {
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-ayn3K9Z2AE6D4PqGZ_w09g"],
+          "rationale": "员工主动为不喝咖啡的顾客推荐合适饮品。"
+        },
+        {
+          "shopId": 100217,
+          "shopName": "Franny Lou's Porch",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-URQ0CYIN4F_L3l0W_BDYvA"],
+          "rationale": "咖啡师主动提供试饮和替代饮品建议，氛围热情。"
+        },
+        {
+          "shopId": 100099,
+          "shopName": "Passero's Coffee Roasters",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-rEG-UZKJoyQfHImlCvgEQw"],
+          "rationale": "员工友好并会提供建议，但新手场景不够直接。"
+        },
+        {
+          "shopId": 100068,
+          "shopName": "Alchemy Coffee",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-v2u6TqeimdKovePQl9F_eA"],
+          "rationale": "员工对咖啡了解充分且服务友好，适合咨询。"
+        },
+        {
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-7lwF21HXE6QzmU8pSKI93A"],
+          "rationale": "员工友好且乐于助人，但缺少为咖啡新手具体讲解的直接证据。"
+        },
+        {
+          "shopId": 100051,
+          "shopName": "Forin Cafe",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-59l3jX-M1iv6iQVLIgw8ww"],
+          "rationale": "咖啡师友好且临近打烊仍耐心服务，但没有明确的新手饮品介绍。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-val-008",
+      "question": "刚搬到附近，想找一家比较有人情味、能慢慢熟悉周围人的咖啡馆。",
+      "intent": "neighborhood_belonging",
+      "relevanceJudgments": [
+        {
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-_yfMYUUxKW9nOC1z4O7FWw", "yelp-2EsM0mPABnQempeoOPIlcA"],
+          "rationale": "社区氛围强，常客会与员工、朋友和邻居交流。"
+        },
+        {
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-oHQQ8H-1DF6jyjtdMceKBw", "yelp-3d_m7U-jxRF9YTP6DbOhMw"],
+          "rationale": "社区咖啡馆定位明确，舒适且员工友好。"
+        },
+        {
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-Nx84FOIRRmroK91kOYMn3Q", "yelp-E4SFLVCqfCGgX9tSOzh7Jw"],
+          "rationale": "适合刚搬来的人建立固定去处，环境放松。"
+        },
+        {
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-JSzQlkP67ME2VeZEQPBmgA"],
+          "rationale": "价格合理、员工友善，有明确社区咖啡馆评价。"
+        },
+        {
+          "shopId": 100217,
+          "shopName": "Franny Lou's Porch",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-BJxBmd3_8IaAQqTgI4WQxw", "yelp-IYa67-SLAbhSbiHH6Atgsw"],
+          "rationale": "店主和咖啡师友好，空间温馨并让新访客有被欢迎感。"
+        },
+        {
+          "shopId": 100192,
+          "shopName": "Alena’s Cafe",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-AfuNsT_wgRRXFHoUCiBfOg"],
+          "rationale": "附近的新店舒适、店主友好，适合作为融入社区的候选，但邻里互动证据较弱。"
+        },
+        {
+          "shopId": 100051,
+          "shopName": "Forin Cafe",
+          "relevance": 3,
+          "supportingReviewIds": ["yelp-peOhpNckrMpWPbt41qz3Tw"],
+          "rationale": "员工善于聊天，空间温馨且有明确社区氛围。"
+        },
+        {
+          "shopId": 100054,
+          "shopName": "Mood Cafe",
+          "relevance": 2,
+          "supportingReviewIds": ["yelp-PoeT0PnpGguk63hLivSxfA"],
+          "rationale": "老板对顾客有明显的人情味，但熟悉邻里和长期社区互动证据较弱。"
+        }
+      ]
+    }
+  ]
+}

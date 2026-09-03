@@ -1,0 +1,1005 @@
+{
+  "caseCount": 38,
+  "selectedExact": 38,
+  "selectedAccuracy": 1.0,
+  "citationCovered": 38,
+  "citationCoverageRate": 1.0,
+  "contextDependentCases": [
+    "router-merchant-003"
+  ],
+  "byCategory": {
+    "merchant_docs": {
+      "total": 10,
+      "selectedExact": 10,
+      "citationCovered": 10,
+      "selectedAccuracy": 1.0,
+      "citationCoverageRate": 1.0
+    },
+    "merchant_reviews": {
+      "total": 8,
+      "selectedExact": 8,
+      "citationCovered": 8,
+      "selectedAccuracy": 1.0,
+      "citationCoverageRate": 1.0
+    },
+    "policy_docs": {
+      "total": 10,
+      "selectedExact": 10,
+      "citationCovered": 10,
+      "selectedAccuracy": 1.0,
+      "citationCoverageRate": 1.0
+    },
+    "policy_merchant": {
+      "total": 1,
+      "selectedExact": 1,
+      "citationCovered": 1,
+      "selectedAccuracy": 1.0,
+      "citationCoverageRate": 1.0
+    },
+    "policy_reviews": {
+      "total": 1,
+      "selectedExact": 1,
+      "citationCovered": 1,
+      "selectedAccuracy": 1.0,
+      "citationCoverageRate": 1.0
+    },
+    "reviews": {
+      "total": 8,
+      "selectedExact": 8,
+      "citationCovered": 8,
+      "selectedAccuracy": 1.0,
+      "citationCoverageRate": 1.0
+    }
+  },
+  "failures": [],
+  "details": [
+    {
+      "caseId": "router-review-001",
+      "category": "reviews",
+      "question": "哪家咖啡店实际比较安静，适合办公？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews"
+      ],
+      "requiredCitationSources": [
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 3,
+      "durationMs": 5318.59
+    },
+    {
+      "caseId": "router-review-002",
+      "category": "reviews",
+      "question": "这家店下午会不会很吵，适合学习吗？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews"
+      ],
+      "requiredCitationSources": [
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 3,
+      "durationMs": 4250.75
+    },
+    {
+      "caseId": "router-review-003",
+      "category": "reviews",
+      "question": "哪家餐厅服务体验比较好，不容易排队？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews"
+      ],
+      "requiredCitationSources": [
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 3,
+      "durationMs": 4101.67
+    },
+    {
+      "caseId": "router-review-004",
+      "category": "reviews",
+      "question": "情侣约会哪家氛围更舒服？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews"
+      ],
+      "requiredCitationSources": [
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 3,
+      "durationMs": 4224.32
+    },
+    {
+      "caseId": "router-review-005",
+      "category": "reviews",
+      "question": "这家咖啡口味好不好，大家评价怎么样？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews"
+      ],
+      "requiredCitationSources": [
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 3,
+      "durationMs": 4284.34
+    },
+    {
+      "caseId": "router-review-006",
+      "category": "reviews",
+      "question": "有没有适合聊天的地方，环境不要太拥挤？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews"
+      ],
+      "requiredCitationSources": [
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 3,
+      "durationMs": 4182.63
+    },
+    {
+      "caseId": "router-review-007",
+      "category": "reviews",
+      "question": "哪家健身房实际体验不踩雷？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews"
+      ],
+      "requiredCitationSources": [
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 3,
+      "durationMs": 4141.5
+    },
+    {
+      "caseId": "router-review-008",
+      "category": "reviews",
+      "question": "哪家店更推荐带朋友去？",
+      "expectedSources": [
+        "reviews"
+      ],
+      "actualSources": [
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews"
+      ],
+      "requiredCitationSources": [
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 3,
+      "durationMs": 4182.6
+    },
+    {
+      "caseId": "router-merchant-001",
+      "category": "merchant_docs",
+      "question": "Good Karma Cafe 周末几点关门？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 190,
+      "durationMs": 62.11
+    },
+    {
+      "caseId": "router-merchant-002",
+      "category": "merchant_docs",
+      "question": "Red Hook Coffee & Tea 地址在哪里？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 300,
+      "durationMs": 48.76
+    },
+    {
+      "caseId": "router-merchant-003",
+      "category": "merchant_docs",
+      "question": "这家店电话是多少？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [],
+      "requiredCitationSources": [],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 0,
+      "returnedCount": 0,
+      "candidateCount": 0,
+      "durationMs": 42.03
+    },
+    {
+      "caseId": "router-merchant-004",
+      "category": "merchant_docs",
+      "question": "St Honore Pastries 有没有 WiFi？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 186,
+      "durationMs": 48.08
+    },
+    {
+      "caseId": "router-merchant-005",
+      "category": "merchant_docs",
+      "question": "这家商户支持信用卡吗？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 300,
+      "durationMs": 51.28
+    },
+    {
+      "caseId": "router-merchant-006",
+      "category": "merchant_docs",
+      "question": "这家店可以外带或配送吗？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 234,
+      "durationMs": 46.61
+    },
+    {
+      "caseId": "router-merchant-007",
+      "category": "merchant_docs",
+      "question": "这家店有没有停车位？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 238,
+      "durationMs": 44.35
+    },
+    {
+      "caseId": "router-merchant-008",
+      "category": "merchant_docs",
+      "question": "这家店评分和评论数是多少？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 300,
+      "durationMs": 50.4
+    },
+    {
+      "caseId": "router-merchant-009",
+      "category": "merchant_docs",
+      "question": "这家店属于什么类别？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 300,
+      "durationMs": 48.37
+    },
+    {
+      "caseId": "router-merchant-010",
+      "category": "merchant_docs",
+      "question": "这家店价格档位是多少？",
+      "expectedSources": [
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "merchant_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 208,
+      "durationMs": 47.41
+    },
+    {
+      "caseId": "router-policy-001",
+      "category": "policy_docs",
+      "question": "商户入驻平台需要准备什么材料？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "policy_docs"
+      ],
+      "requiredCitationSources": [
+        "policy_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 12,
+      "durationMs": 6.75
+    },
+    {
+      "caseId": "router-policy-002",
+      "category": "policy_docs",
+      "question": "用户隐私和个人信息会怎么使用？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "policy_docs"
+      ],
+      "requiredCitationSources": [
+        "policy_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 12,
+      "durationMs": 7.03
+    },
+    {
+      "caseId": "router-policy-003",
+      "category": "policy_docs",
+      "question": "平台个性化推荐为什么要用我的信息？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "policy_docs"
+      ],
+      "requiredCitationSources": [
+        "policy_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 12,
+      "durationMs": 6.22
+    },
+    {
+      "caseId": "router-policy-004",
+      "category": "policy_docs",
+      "question": "充值后退款规则是什么？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "policy_docs"
+      ],
+      "requiredCitationSources": [
+        "policy_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 11,
+      "durationMs": 5.29
+    },
+    {
+      "caseId": "router-policy-005",
+      "category": "policy_docs",
+      "question": "商家被投诉后如何申诉？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "policy_docs"
+      ],
+      "requiredCitationSources": [
+        "policy_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 4,
+      "durationMs": 5.91
+    },
+    {
+      "caseId": "router-policy-006",
+      "category": "policy_docs",
+      "question": "平台规则变更会怎么通知？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "policy_docs"
+      ],
+      "requiredCitationSources": [
+        "policy_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 12,
+      "durationMs": 5.78
+    },
+    {
+      "caseId": "router-policy-007",
+      "category": "policy_docs",
+      "question": "自动化决策可以关闭吗？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "policy_docs"
+      ],
+      "requiredCitationSources": [
+        "policy_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 8,
+      "durationMs": 6.43
+    },
+    {
+      "caseId": "router-policy-008",
+      "category": "policy_docs",
+      "question": "消费者权益受损怎么处理？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "policy_docs"
+      ],
+      "requiredCitationSources": [
+        "policy_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 12,
+      "durationMs": 5.45
+    },
+    {
+      "caseId": "router-policy-009",
+      "category": "policy_docs",
+      "question": "商户违规会有什么处罚？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "policy_docs"
+      ],
+      "requiredCitationSources": [
+        "policy_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 11,
+      "durationMs": 5.27
+    },
+    {
+      "caseId": "router-policy-010",
+      "category": "policy_docs",
+      "question": "预付款和押金不退怎么办？",
+      "expectedSources": [
+        "policy_docs"
+      ],
+      "actualSources": [
+        "policy_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "policy_docs"
+      ],
+      "requiredCitationSources": [
+        "policy_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 3,
+      "returnedCount": 3,
+      "candidateCount": 5,
+      "durationMs": 6.06
+    },
+    {
+      "caseId": "router-mixed-001",
+      "category": "merchant_reviews",
+      "question": "这家咖啡店有 WiFi，而且实际适合办公吗？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews",
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 6,
+      "returnedCount": 6,
+      "candidateCount": 234,
+      "durationMs": 4370.2
+    },
+    {
+      "caseId": "router-mixed-002",
+      "category": "merchant_reviews",
+      "question": "哪家店地址方便，环境也安静？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews",
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 6,
+      "returnedCount": 6,
+      "candidateCount": 303,
+      "durationMs": 4361.72
+    },
+    {
+      "caseId": "router-mixed-003",
+      "category": "merchant_reviews",
+      "question": "有停车的店里，哪家服务体验好？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews",
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 6,
+      "returnedCount": 6,
+      "candidateCount": 241,
+      "durationMs": 4225.54
+    },
+    {
+      "caseId": "router-mixed-004",
+      "category": "merchant_reviews",
+      "question": "支持外带的咖啡店，口味评价怎么样？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews",
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 6,
+      "returnedCount": 6,
+      "candidateCount": 243,
+      "durationMs": 4208.58
+    },
+    {
+      "caseId": "router-mixed-005",
+      "category": "merchant_reviews",
+      "question": "评分高的酒店实际安静吗？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews",
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 6,
+      "returnedCount": 6,
+      "candidateCount": 303,
+      "durationMs": 4481.99
+    },
+    {
+      "caseId": "router-mixed-006",
+      "category": "merchant_reviews",
+      "question": "价格档位不高而且适合约会的地方？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews",
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 6,
+      "returnedCount": 6,
+      "candidateCount": 240,
+      "durationMs": 4194.84
+    },
+    {
+      "caseId": "router-mixed-007",
+      "category": "merchant_reviews",
+      "question": "这家店营业到几点，晚上去会不会拥挤？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews",
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 6,
+      "returnedCount": 6,
+      "candidateCount": 303,
+      "durationMs": 4225.99
+    },
+    {
+      "caseId": "router-mixed-008",
+      "category": "merchant_reviews",
+      "question": "能预约而且氛围适合聊天的餐厅？",
+      "expectedSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews",
+        "merchant_docs"
+      ],
+      "requiredCitationSources": [
+        "merchant_docs",
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 6,
+      "returnedCount": 6,
+      "candidateCount": 205,
+      "durationMs": 4087.53
+    },
+    {
+      "caseId": "router-mixed-009",
+      "category": "policy_reviews",
+      "question": "如果评论体验很差，我可以投诉吗？",
+      "expectedSources": [
+        "policy_docs",
+        "reviews"
+      ],
+      "actualSources": [
+        "policy_docs",
+        "reviews"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "reviews",
+        "policy_docs"
+      ],
+      "requiredCitationSources": [
+        "policy_docs",
+        "reviews"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 6,
+      "returnedCount": 6,
+      "candidateCount": 12,
+      "durationMs": 4165.65
+    },
+    {
+      "caseId": "router-mixed-010",
+      "category": "policy_merchant",
+      "question": "商户入驻时需要提供电话和地址吗？",
+      "expectedSources": [
+        "policy_docs",
+        "merchant_docs"
+      ],
+      "actualSources": [
+        "policy_docs",
+        "merchant_docs"
+      ],
+      "selectedExact": true,
+      "citationSources": [
+        "merchant_docs",
+        "policy_docs"
+      ],
+      "requiredCitationSources": [
+        "policy_docs",
+        "merchant_docs"
+      ],
+      "citationCovered": true,
+      "missingCitationSources": [],
+      "citationCount": 6,
+      "returnedCount": 6,
+      "candidateCount": 311,
+      "durationMs": 55.31
+    }
+  ]
+}

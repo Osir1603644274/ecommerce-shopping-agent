@@ -1,0 +1,66 @@
+{
+  "decision": "RAG-PROD-01 staged production readiness",
+  "methodology": {
+    "stage3Inputs": "non-sealed validation plus real Agent canary",
+    "stage4And5Input": "existing Q15 sealed report reused read-only",
+    "sealedTestRerun": false,
+    "sealedReportSha256": "a0b30d8b1968f9b01244a92c7bbd79e4931177b437d07d72db76717dcb933261",
+    "thresholds": {
+      "rerankerAverageLatencyMs": 3000.0,
+      "rerankerMaxLatencyMs": 5000.0,
+      "fullyFaithfulAnswerRate": 0.9
+    }
+  },
+  "stage3ReviewHybrid": {
+    "decision": "canary_ready",
+    "checks": {
+      "retrievalValidationPassed": true,
+      "realAgentCanaryPassed": true,
+      "realAgentCanaryComplete": true,
+      "realAgentCanaryNoFailures": true
+    },
+    "defaultEnabled": false,
+    "fallback": "source-aware Vector, then legacy runtime fallback"
+  },
+  "stage4LlmContentReranker": {
+    "decision": "no_go_keep_shadow",
+    "checks": {
+      "ndcgImprovesOverHybrid": true,
+      "evidenceRecallNonRegression": true,
+      "averageLatencyWithinGate": false,
+      "maxLatencyWithinGate": false
+    },
+    "observed": {
+      "hybridNdcgAt5": 0.3676396574015177,
+      "rerankerNdcgAt5": 0.7877316701968734,
+      "averageLatencyMs": 9052.3617923324,
+      "maxLatencyMs": 10575.307617000362
+    },
+    "defaultEnabled": false
+  },
+  "stage5ContextAndGroundedAnswer": {
+    "decision": "blocked_keep_shadow",
+    "checks": {
+      "stage4Eligible": false,
+      "contextReductionAtLeastHalf": true,
+      "averageSelectedReviewsAtMostTen": true,
+      "citationIdsAlwaysValid": true,
+      "citationShopAlwaysConsistent": true,
+      "fullyFaithfulAnswerRateWithinGate": false
+    },
+    "observed": {
+      "reviewCountReduction": 0.8702064896755162,
+      "averageSelectedReviewCount": 7.333333333333333,
+      "citationIdValidity": 1.0,
+      "citationShopConsistency": 1.0,
+      "fullyFaithfulAnswerRate": 0.5
+    },
+    "defaultEnabled": false
+  },
+  "overall": {
+    "ragProd01EngineeringClosureComplete": true,
+    "highestEligibleStage": 3,
+    "defaultRouteChangeAuthorized": false,
+    "reason": "Stage 3 passed canary gates; Stage 4 exceeds latency gates and Stage 5 fails its upstream and full-faithfulness gates."
+  }
+}

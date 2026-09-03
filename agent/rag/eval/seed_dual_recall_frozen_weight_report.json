@@ -1,0 +1,1688 @@
+{
+  "methodology": {
+    "dataset": "27-case seed review cross-dataset set",
+    "weightSelectionDataset": "25-case Yelp exploration set",
+    "candidateLimitPerRetriever": 10,
+    "topK": 3,
+    "frozenWeights": {
+      "vector": 0.2,
+      "bm25": 0.8
+    },
+    "weightAdjustedAfterRead": false,
+    "caveat": "cross-dataset confirmation, not pristine final test; seed cases were used by earlier project retrieval work"
+  },
+  "methods": {
+    "vector": {
+      "total": 27,
+      "hits": 27,
+      "hitRate": 1.0,
+      "hitsAt1": 19,
+      "hitAt1Rate": 0.7037037037037037,
+      "mrr": 0.845679012345679
+    },
+    "bm25": {
+      "total": 27,
+      "hits": 26,
+      "hitRate": 0.9629629629629629,
+      "hitsAt1": 22,
+      "hitAt1Rate": 0.8148148148148148,
+      "mrr": 0.8765432098765432
+    },
+    "minMax_1_1": {
+      "total": 27,
+      "hits": 27,
+      "hitRate": 1.0,
+      "hitsAt1": 24,
+      "hitAt1Rate": 0.8888888888888888,
+      "mrr": 0.9320987654320988
+    },
+    "minMax_0_2_0_8_frozen": {
+      "total": 27,
+      "hits": 25,
+      "hitRate": 0.9259259259259259,
+      "hitsAt1": 22,
+      "hitAt1Rate": 0.8148148148148148,
+      "mrr": 0.8641975308641975
+    }
+  },
+  "details": {
+    "vector": [
+      {
+        "caseId": "rag-001",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-001"
+        ],
+        "retrievedReviewIds": [
+          "review-001",
+          "review-004",
+          "review-025"
+        ]
+      },
+      {
+        "caseId": "rag-002",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-002"
+        ],
+        "retrievedReviewIds": [
+          "review-002",
+          "review-389",
+          "review-362"
+        ]
+      },
+      {
+        "caseId": "rag-003",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-003"
+        ],
+        "retrievedReviewIds": [
+          "review-003",
+          "review-079",
+          "review-052"
+        ]
+      },
+      {
+        "caseId": "rag-004",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-004"
+        ],
+        "retrievedReviewIds": [
+          "review-004",
+          "review-025",
+          "review-001"
+        ]
+      },
+      {
+        "caseId": "rag-005",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 2,
+        "reciprocalRank": 0.5,
+        "expectedReviewIds": [
+          "review-005"
+        ],
+        "retrievedReviewIds": [
+          "review-018",
+          "review-005",
+          "review-013"
+        ]
+      },
+      {
+        "caseId": "rag-006",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 3,
+        "reciprocalRank": 0.3333333333333333,
+        "expectedReviewIds": [
+          "review-006"
+        ],
+        "retrievedReviewIds": [
+          "review-018",
+          "review-038",
+          "review-006"
+        ]
+      },
+      {
+        "caseId": "rag-007",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 2,
+        "reciprocalRank": 0.5,
+        "expectedReviewIds": [
+          "review-007"
+        ],
+        "retrievedReviewIds": [
+          "review-032",
+          "review-007",
+          "review-026"
+        ]
+      },
+      {
+        "caseId": "rag-008",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-008",
+          "review-030",
+          "review-032"
+        ],
+        "retrievedReviewIds": [
+          "review-032",
+          "review-007",
+          "review-030"
+        ]
+      },
+      {
+        "caseId": "rag-009",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 2,
+        "reciprocalRank": 0.5,
+        "expectedReviewIds": [
+          "review-009"
+        ],
+        "retrievedReviewIds": [
+          "review-038",
+          "review-009",
+          "review-013"
+        ]
+      },
+      {
+        "caseId": "rag-010",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 2,
+        "reciprocalRank": 0.5,
+        "expectedReviewIds": [
+          "review-010"
+        ],
+        "retrievedReviewIds": [
+          "review-036",
+          "review-010",
+          "review-039"
+        ]
+      },
+      {
+        "caseId": "rag-011",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-011"
+        ],
+        "retrievedReviewIds": [
+          "review-011",
+          "review-042",
+          "review-045"
+        ]
+      },
+      {
+        "caseId": "rag-012",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-012"
+        ],
+        "retrievedReviewIds": [
+          "review-012",
+          "review-440",
+          "review-413"
+        ]
+      },
+      {
+        "caseId": "rag-013",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-026"
+        ],
+        "retrievedReviewIds": [
+          "review-026",
+          "review-025",
+          "review-004"
+        ]
+      },
+      {
+        "caseId": "rag-014",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-027"
+        ],
+        "retrievedReviewIds": [
+          "review-027",
+          "review-020",
+          "review-025"
+        ]
+      },
+      {
+        "caseId": "rag-015",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-021"
+        ],
+        "retrievedReviewIds": [
+          "review-021",
+          "review-027",
+          "review-020"
+        ]
+      },
+      {
+        "caseId": "rag-016",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-018"
+        ],
+        "retrievedReviewIds": [
+          "review-018",
+          "review-005",
+          "review-013"
+        ]
+      },
+      {
+        "caseId": "rag-017",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-017"
+        ],
+        "retrievedReviewIds": [
+          "review-017",
+          "review-019",
+          "review-018"
+        ]
+      },
+      {
+        "caseId": "rag-018",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 2,
+        "reciprocalRank": 0.5,
+        "expectedReviewIds": [
+          "review-014"
+        ],
+        "retrievedReviewIds": [
+          "review-018",
+          "review-014",
+          "review-013"
+        ]
+      },
+      {
+        "caseId": "rag-019",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-031"
+        ],
+        "retrievedReviewIds": [
+          "review-031",
+          "review-329",
+          "review-140"
+        ]
+      },
+      {
+        "caseId": "rag-020",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 2,
+        "reciprocalRank": 0.5,
+        "expectedReviewIds": [
+          "review-029"
+        ],
+        "retrievedReviewIds": [
+          "review-022",
+          "review-029",
+          "review-311"
+        ]
+      },
+      {
+        "caseId": "rag-021",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-032"
+        ],
+        "retrievedReviewIds": [
+          "review-032",
+          "review-007",
+          "review-030"
+        ]
+      },
+      {
+        "caseId": "rag-022",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-034"
+        ],
+        "retrievedReviewIds": [
+          "review-034",
+          "review-023",
+          "review-389"
+        ]
+      },
+      {
+        "caseId": "rag-023",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-035"
+        ],
+        "retrievedReviewIds": [
+          "review-035",
+          "review-009",
+          "review-380"
+        ]
+      },
+      {
+        "caseId": "rag-024",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 2,
+        "reciprocalRank": 0.5,
+        "expectedReviewIds": [
+          "review-037"
+        ],
+        "retrievedReviewIds": [
+          "review-038",
+          "review-037",
+          "review-009"
+        ]
+      },
+      {
+        "caseId": "rag-025",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-043"
+        ],
+        "retrievedReviewIds": [
+          "review-043",
+          "review-011",
+          "review-040"
+        ]
+      },
+      {
+        "caseId": "rag-026",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-040"
+        ],
+        "retrievedReviewIds": [
+          "review-040",
+          "review-011",
+          "review-449"
+        ]
+      },
+      {
+        "caseId": "rag-027",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-044"
+        ],
+        "retrievedReviewIds": [
+          "review-044",
+          "review-011",
+          "review-408"
+        ]
+      }
+    ],
+    "bm25": [
+      {
+        "caseId": "rag-001",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-001"
+        ],
+        "retrievedReviewIds": [
+          "review-001",
+          "review-004",
+          "review-025"
+        ]
+      },
+      {
+        "caseId": "rag-002",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-002"
+        ],
+        "retrievedReviewIds": [
+          "review-002",
+          "review-015",
+          "review-038"
+        ]
+      },
+      {
+        "caseId": "rag-003",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-003"
+        ],
+        "retrievedReviewIds": [
+          "review-003",
+          "review-030",
+          "review-028"
+        ]
+      },
+      {
+        "caseId": "rag-004",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-004"
+        ],
+        "retrievedReviewIds": [
+          "review-004",
+          "review-025",
+          "review-001"
+        ]
+      },
+      {
+        "caseId": "rag-005",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 3,
+        "reciprocalRank": 0.3333333333333333,
+        "expectedReviewIds": [
+          "review-005"
+        ],
+        "retrievedReviewIds": [
+          "review-017",
+          "review-018",
+          "review-005"
+        ]
+      },
+      {
+        "caseId": "rag-006",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-006"
+        ],
+        "retrievedReviewIds": [
+          "review-006",
+          "review-018",
+          "review-026"
+        ]
+      },
+      {
+        "caseId": "rag-007",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 3,
+        "reciprocalRank": 0.3333333333333333,
+        "expectedReviewIds": [
+          "review-007"
+        ],
+        "retrievedReviewIds": [
+          "review-042",
+          "review-026",
+          "review-007"
+        ]
+      },
+      {
+        "caseId": "rag-008",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-008",
+          "review-030",
+          "review-032"
+        ],
+        "retrievedReviewIds": [
+          "review-032",
+          "review-008",
+          "review-030"
+        ]
+      },
+      {
+        "caseId": "rag-009",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-009"
+        ],
+        "retrievedReviewIds": [
+          "review-009",
+          "review-002",
+          "review-026"
+        ]
+      },
+      {
+        "caseId": "rag-010",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-010"
+        ],
+        "retrievedReviewIds": [
+          "review-010",
+          "review-039",
+          "review-036"
+        ]
+      },
+      {
+        "caseId": "rag-011",
+        "hit": false,
+        "hitAt1": false,
+        "firstRelevantRank": null,
+        "reciprocalRank": 0.0,
+        "expectedReviewIds": [
+          "review-011"
+        ],
+        "retrievedReviewIds": [
+          "review-188",
+          "review-404",
+          "review-431"
+        ]
+      },
+      {
+        "caseId": "rag-012",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-012"
+        ],
+        "retrievedReviewIds": [
+          "review-012",
+          "review-045",
+          "review-043"
+        ]
+      },
+      {
+        "caseId": "rag-013",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 2,
+        "reciprocalRank": 0.5,
+        "expectedReviewIds": [
+          "review-026"
+        ],
+        "retrievedReviewIds": [
+          "review-025",
+          "review-026",
+          "review-004"
+        ]
+      },
+      {
+        "caseId": "rag-014",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-027"
+        ],
+        "retrievedReviewIds": [
+          "review-027",
+          "review-002",
+          "review-025"
+        ]
+      },
+      {
+        "caseId": "rag-015",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-021"
+        ],
+        "retrievedReviewIds": [
+          "review-021",
+          "review-004",
+          "review-006"
+        ]
+      },
+      {
+        "caseId": "rag-016",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-018"
+        ],
+        "retrievedReviewIds": [
+          "review-018",
+          "review-013",
+          "review-004"
+        ]
+      },
+      {
+        "caseId": "rag-017",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-017"
+        ],
+        "retrievedReviewIds": [
+          "review-017",
+          "review-034",
+          "review-018"
+        ]
+      },
+      {
+        "caseId": "rag-018",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 2,
+        "reciprocalRank": 0.5,
+        "expectedReviewIds": [
+          "review-014"
+        ],
+        "retrievedReviewIds": [
+          "review-016",
+          "review-014",
+          "review-018"
+        ]
+      },
+      {
+        "caseId": "rag-019",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-031"
+        ],
+        "retrievedReviewIds": [
+          "review-031",
+          "review-004",
+          "review-028"
+        ]
+      },
+      {
+        "caseId": "rag-020",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-029"
+        ],
+        "retrievedReviewIds": [
+          "review-029",
+          "review-028",
+          "review-022"
+        ]
+      },
+      {
+        "caseId": "rag-021",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-032"
+        ],
+        "retrievedReviewIds": [
+          "review-032",
+          "review-042",
+          "review-026"
+        ]
+      },
+      {
+        "caseId": "rag-022",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-034"
+        ],
+        "retrievedReviewIds": [
+          "review-034",
+          "review-023",
+          "review-165"
+        ]
+      },
+      {
+        "caseId": "rag-023",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-035"
+        ],
+        "retrievedReviewIds": [
+          "review-035"
+        ]
+      },
+      {
+        "caseId": "rag-024",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-037"
+        ],
+        "retrievedReviewIds": [
+          "review-037",
+          "review-004",
+          "review-038"
+        ]
+      },
+      {
+        "caseId": "rag-025",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-043"
+        ],
+        "retrievedReviewIds": [
+          "review-043",
+          "review-024",
+          "review-003"
+        ]
+      },
+      {
+        "caseId": "rag-026",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-040"
+        ],
+        "retrievedReviewIds": [
+          "review-040",
+          "review-043",
+          "review-011"
+        ]
+      },
+      {
+        "caseId": "rag-027",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-044"
+        ],
+        "retrievedReviewIds": [
+          "review-044",
+          "review-045",
+          "review-002"
+        ]
+      }
+    ],
+    "minMax_1_1": [
+      {
+        "caseId": "rag-001",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-001"
+        ],
+        "retrievedReviewIds": [
+          "review-001",
+          "review-004",
+          "review-025"
+        ]
+      },
+      {
+        "caseId": "rag-002",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-002"
+        ],
+        "retrievedReviewIds": [
+          "review-002",
+          "review-015",
+          "review-038"
+        ]
+      },
+      {
+        "caseId": "rag-003",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-003"
+        ],
+        "retrievedReviewIds": [
+          "review-003",
+          "review-079",
+          "review-052"
+        ]
+      },
+      {
+        "caseId": "rag-004",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-004"
+        ],
+        "retrievedReviewIds": [
+          "review-004",
+          "review-025",
+          "review-001"
+        ]
+      },
+      {
+        "caseId": "rag-005",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 3,
+        "reciprocalRank": 0.3333333333333333,
+        "expectedReviewIds": [
+          "review-005"
+        ],
+        "retrievedReviewIds": [
+          "review-018",
+          "review-017",
+          "review-005"
+        ]
+      },
+      {
+        "caseId": "rag-006",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 2,
+        "reciprocalRank": 0.5,
+        "expectedReviewIds": [
+          "review-006"
+        ],
+        "retrievedReviewIds": [
+          "review-018",
+          "review-006",
+          "review-038"
+        ]
+      },
+      {
+        "caseId": "rag-007",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 3,
+        "reciprocalRank": 0.3333333333333333,
+        "expectedReviewIds": [
+          "review-007"
+        ],
+        "retrievedReviewIds": [
+          "review-032",
+          "review-026",
+          "review-007"
+        ]
+      },
+      {
+        "caseId": "rag-008",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-008",
+          "review-030",
+          "review-032"
+        ],
+        "retrievedReviewIds": [
+          "review-032",
+          "review-030",
+          "review-007"
+        ]
+      },
+      {
+        "caseId": "rag-009",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-009"
+        ],
+        "retrievedReviewIds": [
+          "review-009",
+          "review-038",
+          "review-013"
+        ]
+      },
+      {
+        "caseId": "rag-010",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-010"
+        ],
+        "retrievedReviewIds": [
+          "review-010",
+          "review-036",
+          "review-039"
+        ]
+      },
+      {
+        "caseId": "rag-011",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-011"
+        ],
+        "retrievedReviewIds": [
+          "review-011",
+          "review-188",
+          "review-404"
+        ]
+      },
+      {
+        "caseId": "rag-012",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-012"
+        ],
+        "retrievedReviewIds": [
+          "review-012",
+          "review-043",
+          "review-440"
+        ]
+      },
+      {
+        "caseId": "rag-013",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-026"
+        ],
+        "retrievedReviewIds": [
+          "review-026",
+          "review-025",
+          "review-004"
+        ]
+      },
+      {
+        "caseId": "rag-014",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-027"
+        ],
+        "retrievedReviewIds": [
+          "review-027",
+          "review-025",
+          "review-020"
+        ]
+      },
+      {
+        "caseId": "rag-015",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-021"
+        ],
+        "retrievedReviewIds": [
+          "review-021",
+          "review-027",
+          "review-004"
+        ]
+      },
+      {
+        "caseId": "rag-016",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-018"
+        ],
+        "retrievedReviewIds": [
+          "review-018",
+          "review-013",
+          "review-004"
+        ]
+      },
+      {
+        "caseId": "rag-017",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-017"
+        ],
+        "retrievedReviewIds": [
+          "review-017",
+          "review-034",
+          "review-018"
+        ]
+      },
+      {
+        "caseId": "rag-018",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-014"
+        ],
+        "retrievedReviewIds": [
+          "review-014",
+          "review-018",
+          "review-016"
+        ]
+      },
+      {
+        "caseId": "rag-019",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-031"
+        ],
+        "retrievedReviewIds": [
+          "review-031",
+          "review-028",
+          "review-004"
+        ]
+      },
+      {
+        "caseId": "rag-020",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-029"
+        ],
+        "retrievedReviewIds": [
+          "review-029",
+          "review-022",
+          "review-028"
+        ]
+      },
+      {
+        "caseId": "rag-021",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-032"
+        ],
+        "retrievedReviewIds": [
+          "review-032",
+          "review-007",
+          "review-030"
+        ]
+      },
+      {
+        "caseId": "rag-022",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-034"
+        ],
+        "retrievedReviewIds": [
+          "review-034",
+          "review-023",
+          "review-389"
+        ]
+      },
+      {
+        "caseId": "rag-023",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-035"
+        ],
+        "retrievedReviewIds": [
+          "review-035",
+          "review-009",
+          "review-380"
+        ]
+      },
+      {
+        "caseId": "rag-024",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-037"
+        ],
+        "retrievedReviewIds": [
+          "review-037",
+          "review-038",
+          "review-009"
+        ]
+      },
+      {
+        "caseId": "rag-025",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-043"
+        ],
+        "retrievedReviewIds": [
+          "review-043",
+          "review-024",
+          "review-011"
+        ]
+      },
+      {
+        "caseId": "rag-026",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-040"
+        ],
+        "retrievedReviewIds": [
+          "review-040",
+          "review-011",
+          "review-043"
+        ]
+      },
+      {
+        "caseId": "rag-027",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-044"
+        ],
+        "retrievedReviewIds": [
+          "review-044",
+          "review-011",
+          "review-045"
+        ]
+      }
+    ],
+    "minMax_0_2_0_8_frozen": [
+      {
+        "caseId": "rag-001",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-001"
+        ],
+        "retrievedReviewIds": [
+          "review-001",
+          "review-004",
+          "review-025"
+        ]
+      },
+      {
+        "caseId": "rag-002",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-002"
+        ],
+        "retrievedReviewIds": [
+          "review-002",
+          "review-015",
+          "review-038"
+        ]
+      },
+      {
+        "caseId": "rag-003",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-003"
+        ],
+        "retrievedReviewIds": [
+          "review-003",
+          "review-079",
+          "review-052"
+        ]
+      },
+      {
+        "caseId": "rag-004",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-004"
+        ],
+        "retrievedReviewIds": [
+          "review-004",
+          "review-025",
+          "review-001"
+        ]
+      },
+      {
+        "caseId": "rag-005",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 3,
+        "reciprocalRank": 0.3333333333333333,
+        "expectedReviewIds": [
+          "review-005"
+        ],
+        "retrievedReviewIds": [
+          "review-017",
+          "review-018",
+          "review-005"
+        ]
+      },
+      {
+        "caseId": "rag-006",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-006"
+        ],
+        "retrievedReviewIds": [
+          "review-006",
+          "review-018",
+          "review-026"
+        ]
+      },
+      {
+        "caseId": "rag-007",
+        "hit": false,
+        "hitAt1": false,
+        "firstRelevantRank": null,
+        "reciprocalRank": 0.0,
+        "expectedReviewIds": [
+          "review-007"
+        ],
+        "retrievedReviewIds": [
+          "review-042",
+          "review-026",
+          "review-032"
+        ]
+      },
+      {
+        "caseId": "rag-008",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-008",
+          "review-030",
+          "review-032"
+        ],
+        "retrievedReviewIds": [
+          "review-032",
+          "review-030",
+          "review-008"
+        ]
+      },
+      {
+        "caseId": "rag-009",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-009"
+        ],
+        "retrievedReviewIds": [
+          "review-009",
+          "review-038",
+          "review-013"
+        ]
+      },
+      {
+        "caseId": "rag-010",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-010"
+        ],
+        "retrievedReviewIds": [
+          "review-010",
+          "review-036",
+          "review-039"
+        ]
+      },
+      {
+        "caseId": "rag-011",
+        "hit": false,
+        "hitAt1": false,
+        "firstRelevantRank": null,
+        "reciprocalRank": 0.0,
+        "expectedReviewIds": [
+          "review-011"
+        ],
+        "retrievedReviewIds": [
+          "review-188",
+          "review-404",
+          "review-431"
+        ]
+      },
+      {
+        "caseId": "rag-012",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-012"
+        ],
+        "retrievedReviewIds": [
+          "review-012",
+          "review-043",
+          "review-045"
+        ]
+      },
+      {
+        "caseId": "rag-013",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 2,
+        "reciprocalRank": 0.5,
+        "expectedReviewIds": [
+          "review-026"
+        ],
+        "retrievedReviewIds": [
+          "review-025",
+          "review-026",
+          "review-004"
+        ]
+      },
+      {
+        "caseId": "rag-014",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-027"
+        ],
+        "retrievedReviewIds": [
+          "review-027",
+          "review-025",
+          "review-002"
+        ]
+      },
+      {
+        "caseId": "rag-015",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-021"
+        ],
+        "retrievedReviewIds": [
+          "review-021",
+          "review-004",
+          "review-002"
+        ]
+      },
+      {
+        "caseId": "rag-016",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-018"
+        ],
+        "retrievedReviewIds": [
+          "review-018",
+          "review-013",
+          "review-004"
+        ]
+      },
+      {
+        "caseId": "rag-017",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-017"
+        ],
+        "retrievedReviewIds": [
+          "review-017",
+          "review-034",
+          "review-018"
+        ]
+      },
+      {
+        "caseId": "rag-018",
+        "hit": true,
+        "hitAt1": false,
+        "firstRelevantRank": 2,
+        "reciprocalRank": 0.5,
+        "expectedReviewIds": [
+          "review-014"
+        ],
+        "retrievedReviewIds": [
+          "review-016",
+          "review-014",
+          "review-018"
+        ]
+      },
+      {
+        "caseId": "rag-019",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-031"
+        ],
+        "retrievedReviewIds": [
+          "review-031",
+          "review-004",
+          "review-028"
+        ]
+      },
+      {
+        "caseId": "rag-020",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-029"
+        ],
+        "retrievedReviewIds": [
+          "review-029",
+          "review-028",
+          "review-022"
+        ]
+      },
+      {
+        "caseId": "rag-021",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-032"
+        ],
+        "retrievedReviewIds": [
+          "review-032",
+          "review-042",
+          "review-026"
+        ]
+      },
+      {
+        "caseId": "rag-022",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-034"
+        ],
+        "retrievedReviewIds": [
+          "review-034",
+          "review-023",
+          "review-165"
+        ]
+      },
+      {
+        "caseId": "rag-023",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-035"
+        ],
+        "retrievedReviewIds": [
+          "review-035",
+          "review-009",
+          "review-380"
+        ]
+      },
+      {
+        "caseId": "rag-024",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-037"
+        ],
+        "retrievedReviewIds": [
+          "review-037",
+          "review-038",
+          "review-004"
+        ]
+      },
+      {
+        "caseId": "rag-025",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-043"
+        ],
+        "retrievedReviewIds": [
+          "review-043",
+          "review-024",
+          "review-011"
+        ]
+      },
+      {
+        "caseId": "rag-026",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-040"
+        ],
+        "retrievedReviewIds": [
+          "review-040",
+          "review-043",
+          "review-011"
+        ]
+      },
+      {
+        "caseId": "rag-027",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "review-044"
+        ],
+        "retrievedReviewIds": [
+          "review-044",
+          "review-045",
+          "review-002"
+        ]
+      }
+    ]
+  },
+  "candidateUnion": {
+    "hits": 27,
+    "total": 27
+  }
+}

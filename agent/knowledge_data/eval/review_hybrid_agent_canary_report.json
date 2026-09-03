@@ -1,0 +1,434 @@
+{
+  "experiment": "RAG-PROD-01 stage 3 review Hybrid Agent canary",
+  "methodology": {
+    "sealedDataRead": false,
+    "baseUrl": "http://localhost:8002",
+    "isolatedCanaryPortRequired": true,
+    "defaultAgentChanged": false,
+    "hybridEnabled": true,
+    "warningLatencyMs": 3000.0,
+    "stopLatencyMs": 5000.0,
+    "hybridCanaryPortRequired": true
+  },
+  "summary": {
+    "passed": true,
+    "complete": true,
+    "stoppedEarly": false,
+    "cases": 6,
+    "executed": 6,
+    "passedCases": 6,
+    "failedCases": 0,
+    "warnings": 0,
+    "eligibleForNextStageDiscussion": true
+  },
+  "details": [
+    {
+      "caseId": "generic-review-hybrid",
+      "question": "哪家咖啡店适合安静地用电脑工作？",
+      "passed": true,
+      "checks": {
+        "httpStatusOk": true,
+        "requestStatusOk": true,
+        "toolsAllowedSequence": true,
+        "forbiddenToolIsolation": true,
+        "toolsSucceeded": true,
+        "singleRetrievalTrace": true,
+        "sourceAwareEffective": true,
+        "selectedSourcesExact": true,
+        "returnedEvidence": true,
+        "citationSourceTypeExact": true,
+        "citationsAligned": true,
+        "withinStopLatency": true,
+        "reviewModeExact": true,
+        "hybridStagesPresent": true
+      },
+      "failedChecks": [],
+      "warnings": [],
+      "toolNames": [
+        "search_knowledge"
+      ],
+      "answer": "根据真实用户评论来看，以下几家咖啡店比较适合安静地用电脑工作：\n\n---\n\n### ✅ 推荐适合用电脑工作的咖啡店\n\n**1️⃣ Valerio Coffee Roasters**\n- 评论说这是\"可爱的咖啡店，适合工作\"，空间很大，有室内座位，咖啡也不错 [yelp-MhSusleKbPBIiq2fKHH5mA]\n- ⚠️ 不过附近停车比较困难\n\n**2️⃣ Red Hook Coffee & Tea**\n- 评论提到\"很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作\"，店员友好，咖啡是公平贸易且好喝 [yelp-mBE3JkCV5YH9UqNdRJMUGg]\n- ⚠️ 价格偏贵\n\n---\n\n### ❌ 不太适合安静工作的店\n\n**街角共创咖啡** — 评论指出工作日下午常有创业团队讨论，\"环境比普通咖啡店嘈杂，不适合需要安静专注的人\" [review-018]，所以如果想找个真正安静的地方，这家可能不太适合。\n\n---\n\n如果你对某家店感兴趣，想了解更多详细信息（地址、电话等），或者想进一步了解具体哪家更安静，可以告诉我！",
+      "requestTrace": {
+        "requestId": "req-844f5cb041ab",
+        "route": "/agent/chat-llm",
+        "status": "ok",
+        "totalDurationMs": 5480.49,
+        "slow": true,
+        "slowThresholdMs": 3000.0,
+        "bottleneck": "agent",
+        "agentDurationMs": 5473.07,
+        "llmDurationMs": null,
+        "retrievalDurationMs": null,
+        "toolDurationMs": 432.5,
+        "toolCount": 1,
+        "toolNames": [
+          "search_knowledge"
+        ],
+        "reviewIds": [
+          "yelp-MhSusleKbPBIiq2fKHH5mA",
+          "review-018",
+          "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+        ]
+      },
+      "retrieval": {
+        "tool": "search_knowledge",
+        "selectedSources": [
+          "reviews"
+        ],
+        "runtimeRoute": {
+          "requestedMode": "source_aware",
+          "effectiveMode": "source_aware",
+          "fallback": false
+        },
+        "filters": {
+          "visibility": "public"
+        },
+        "durationMs": 430.88,
+        "citationCount": 3,
+        "citationIds": [
+          "review:yelp-MhSusleKbPBIiq2fKHH5mA",
+          "review:review-018",
+          "review:yelp-mBE3JkCV5YH9UqNdRJMUGg"
+        ],
+        "citationSourceTypes": [
+          "review",
+          "review",
+          "review"
+        ],
+        "citationShopIds": [
+          100277,
+          8,
+          100011
+        ],
+        "reviewHybridRoute": {
+          "requestedMode": "hybrid",
+          "effectiveMode": "hybrid",
+          "fallback": false
+        }
+      }
+    },
+    {
+      "caseId": "named-review-hybrid-filter",
+      "question": "Red Hook Coffee & Tea适合用电脑工作吗？",
+      "passed": true,
+      "checks": {
+        "httpStatusOk": true,
+        "requestStatusOk": true,
+        "toolsAllowedSequence": true,
+        "forbiddenToolIsolation": true,
+        "toolsSucceeded": true,
+        "singleRetrievalTrace": true,
+        "sourceAwareEffective": true,
+        "selectedSourcesExact": true,
+        "returnedEvidence": true,
+        "citationSourceTypeExact": true,
+        "citationsAligned": true,
+        "withinStopLatency": true,
+        "reviewModeExact": true,
+        "hybridStagesPresent": true,
+        "resolvedShopExact": true,
+        "shopFilterExact": true,
+        "citationShopExact": true
+      },
+      "failedChecks": [],
+      "warnings": [],
+      "toolNames": [
+        "search_shop_reviews"
+      ],
+      "answer": "根据顾客的真实评价，**Red Hook Coffee & Tea 很适合用电脑工作**！以下是相关体验总结：\n\n### ✅ 适合用电脑工作的理由\n- **有顾客明确提到**：\"这里很适合坐在舒适的扶手椅上放松，**或者用笔记本电脑工作**。\"[yelp-mBE3JkCV5YH9UqNdRJMUGg]\n- 店内氛围**轻松、时髦、温馨**，不会让人感到拘束，而且员工友好热情[yelp-sKVCrT5KwXIZ7qaepLecIQ]\n\n### ⚠️ 需要注意\n- 有位顾客提到店里**座位较少**：\"只有几把椅子和一张沙发\"[yelp-zDmLvL7TI8hHw7W6DIiGlQ]，所以如果想用电脑工作，建议**早点去占个好位置**。\n- **价格偏贵**，但咖啡是公平贸易的，品质不错[yelp-mBE3JkCV5YH9UqNdRJMUGg]\n\n**总结**：氛围友好、有舒适扶手椅、适合用笔记本办公，但座位有限，建议趁早前往 🚪💻☕",
+      "requestTrace": {
+        "requestId": "req-387c4d140d34",
+        "route": "/agent/chat-llm",
+        "status": "ok",
+        "totalDurationMs": 3879.56,
+        "slow": true,
+        "slowThresholdMs": 3000.0,
+        "bottleneck": "agent",
+        "agentDurationMs": 3874.19,
+        "llmDurationMs": null,
+        "retrievalDurationMs": null,
+        "toolDurationMs": 51.37,
+        "toolCount": 1,
+        "toolNames": [
+          "search_shop_reviews"
+        ],
+        "reviewIds": [
+          "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "yelp-sKVCrT5KwXIZ7qaepLecIQ",
+          "yelp-zDmLvL7TI8hHw7W6DIiGlQ"
+        ]
+      },
+      "retrieval": {
+        "tool": "search_shop_reviews",
+        "selectedSources": [
+          "reviews"
+        ],
+        "runtimeRoute": {
+          "requestedMode": "source_aware",
+          "effectiveMode": "source_aware",
+          "fallback": false
+        },
+        "filters": {
+          "visibility": "public",
+          "shopIds": [
+            100011
+          ]
+        },
+        "durationMs": 32.39,
+        "citationCount": 3,
+        "citationIds": [
+          "review:yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "review:yelp-sKVCrT5KwXIZ7qaepLecIQ",
+          "review:yelp-zDmLvL7TI8hHw7W6DIiGlQ"
+        ],
+        "citationSourceTypes": [
+          "review",
+          "review",
+          "review"
+        ],
+        "citationShopIds": [
+          100011,
+          100011,
+          100011
+        ],
+        "reviewHybridRoute": {
+          "requestedMode": "hybrid",
+          "effectiveMode": "hybrid",
+          "fallback": false
+        }
+      }
+    },
+    {
+      "caseId": "merchant-doc-isolation",
+      "question": "St Honore Pastries 的 WiFi 和周末营业时间是什么？",
+      "passed": true,
+      "checks": {
+        "httpStatusOk": true,
+        "requestStatusOk": true,
+        "toolsAllowedSequence": true,
+        "forbiddenToolIsolation": true,
+        "toolsSucceeded": true,
+        "singleRetrievalTrace": true,
+        "sourceAwareEffective": true,
+        "selectedSourcesExact": true,
+        "returnedEvidence": true,
+        "citationSourceTypeExact": true,
+        "citationsAligned": true,
+        "withinStopLatency": true,
+        "expectedSourcePresent": true,
+        "requiredAnswerTerms": true,
+        "forbiddenAnswerTermsAbsent": true
+      },
+      "failedChecks": [],
+      "warnings": [],
+      "toolNames": [
+        "search_knowledge"
+      ],
+      "answer": "以下是 **St Honore Pastries** 的信息：\n\n**WiFi**：免费提供 🆓\n\n**周末营业时间**：\n- **周六**：7:00 – 21:00\n- **周日**：7:00 – 21:00\n\n（平日周一到周四 7:00–20:00，周五 7:00–21:00。）",
+      "requestTrace": {
+        "requestId": "req-df5e25ff2830",
+        "route": "/agent/chat-llm",
+        "status": "ok",
+        "totalDurationMs": 2448.33,
+        "slow": false,
+        "slowThresholdMs": 3000.0,
+        "bottleneck": "none",
+        "agentDurationMs": 2446.09,
+        "llmDurationMs": null,
+        "retrievalDurationMs": null,
+        "toolDurationMs": 60.32,
+        "toolCount": 1,
+        "toolNames": [
+          "search_knowledge"
+        ],
+        "reviewIds": []
+      },
+      "retrieval": {
+        "tool": "search_knowledge",
+        "selectedSources": [
+          "merchant_docs"
+        ],
+        "runtimeRoute": {
+          "requestedMode": "source_aware",
+          "effectiveMode": "source_aware",
+          "fallback": false
+        },
+        "filters": {
+          "visibility": "public"
+        },
+        "durationMs": 59.8,
+        "citationCount": 3,
+        "citationIds": [
+          "merchant_doc:MTSW4McQd7CbVtyjqoe9mw:profile",
+          "merchant_doc:7J81xJFlMM244_f05k2egw:profile",
+          "merchant_doc:9XpU6r6ATXSWYfbU7kibaQ:profile"
+        ],
+        "citationSourceTypes": [
+          "merchant_doc",
+          "merchant_doc",
+          "merchant_doc"
+        ],
+        "citationShopIds": [
+          100001,
+          100092,
+          100099
+        ],
+        "reviewHybridRoute": {}
+      }
+    },
+    {
+      "caseId": "policy-isolation",
+      "question": "个性化推荐会如何使用我的个人信息？",
+      "passed": true,
+      "checks": {
+        "httpStatusOk": true,
+        "requestStatusOk": true,
+        "toolsAllowedSequence": true,
+        "forbiddenToolIsolation": true,
+        "toolsSucceeded": true,
+        "singleRetrievalTrace": true,
+        "sourceAwareEffective": true,
+        "selectedSourcesExact": true,
+        "returnedEvidence": true,
+        "citationSourceTypeExact": true,
+        "citationsAligned": true,
+        "withinStopLatency": true,
+        "expectedSourcePresent": true
+      },
+      "failedChecks": [],
+      "warnings": [],
+      "toolNames": [
+        "search_knowledge"
+      ],
+      "answer": "关于个性化推荐如何使用您的个人信息，根据相关个人信息保护政策的规定，情况如下：\n\n**1. 遵循最小必要原则**\n平台处理您的信息时，会围绕明确、合理的目的，尽量使用实现推荐功能所**必要的最少数据**。例如，“猜你喜欢”这类功能通常需要您的**浏览、收藏、评分、点击等与商户的交互记录**，但**不一定需要**身份证号、通讯录等与推荐目的无关的信息。\n\n**2. 推荐所使用的数据类型**\n本地生活平台的个性化推荐主要基于您的**用户行为数据**，包括：\n- 浏览记录\n- 收藏内容\n- 评分记录\n- 点击行为\n\n平台会向您说明这些数据的用途和基本处理方式，且**不会以超出必要范围的方式收集与推荐无关的信息**。\n\n**3. 您享有的权利**\n作为用户，您通常有权：\n- **查询和了解**平台如何处理您的个人信息\n- **查阅和复制**自己的行为数据\n- **请求更正或补充**不准确的个人信息\n- **要求删除**与推荐相关的数据\n\n如果您想使用个性化推荐功能，需要提供您的 **userId（用户编号）**，这样我才能根据您之前的行为记录为您做针对性的推荐。您愿意试试吗？",
+      "requestTrace": {
+        "requestId": "req-271f7cbf7020",
+        "route": "/agent/chat-llm",
+        "status": "ok",
+        "totalDurationMs": 4407.4,
+        "slow": true,
+        "slowThresholdMs": 3000.0,
+        "bottleneck": "agent",
+        "agentDurationMs": 4403.62,
+        "llmDurationMs": null,
+        "retrievalDurationMs": null,
+        "toolDurationMs": 27.14,
+        "toolCount": 1,
+        "toolNames": [
+          "search_knowledge"
+        ],
+        "reviewIds": []
+      },
+      "retrieval": {
+        "tool": "search_knowledge",
+        "selectedSources": [
+          "policy_docs"
+        ],
+        "runtimeRoute": {
+          "requestedMode": "source_aware",
+          "effectiveMode": "source_aware",
+          "fallback": false
+        },
+        "filters": {
+          "visibility": "public"
+        },
+        "durationMs": 26.74,
+        "citationCount": 3,
+        "citationIds": [
+          "policy_doc:privacy-and-recommendation:data-minimization",
+          "policy_doc:privacy-and-recommendation:recommendation-data-use",
+          "policy_doc:privacy-and-recommendation:data-subject-rights"
+        ],
+        "citationSourceTypes": [
+          "policy_doc",
+          "policy_doc",
+          "policy_doc"
+        ],
+        "citationShopIds": [],
+        "reviewHybridRoute": {}
+      }
+    },
+    {
+      "caseId": "place-route-isolation",
+      "question": "海淀区有哪些一级综合公园？",
+      "passed": true,
+      "checks": {
+        "httpStatusOk": true,
+        "requestStatusOk": true,
+        "toolsAllowedSequence": true,
+        "forbiddenToolIsolation": true,
+        "toolsSucceeded": true,
+        "noRagTool": true,
+        "noRetrievalTrace": true,
+        "requiredAnswerTerms": true
+      },
+      "failedChecks": [],
+      "warnings": [],
+      "toolNames": [
+        "search_places"
+      ],
+      "answer": "当前演示目录中，海淀区找到 **7 个**一级综合公园，分别是：\n\n1. **西小口公园** — 西三旗街道兴林嘉园南侧\n2. **玲珑公园** — 慈寿寺桥西南侧\n3. **荷清园公园** — 荷清路清华大学北侧\n4. **马甸公园** — 马甸桥西北角\n5. **北坞公园** — 颐和园西门外\n6. **巴沟山水园** — 巴沟路与蓝靛厂北路交叉口西北角\n7. **长春健身园** — 万柳西路西侧\n\n如果你对其中某个公园想了解更多详情（如电话、无障碍设施等），我可以进一步查询。",
+      "requestTrace": {
+        "requestId": "req-f39c065fc443",
+        "route": "/agent/chat-llm",
+        "status": "ok",
+        "totalDurationMs": 2951.69,
+        "slow": false,
+        "slowThresholdMs": 3000.0,
+        "bottleneck": "none",
+        "agentDurationMs": 2949.2,
+        "llmDurationMs": null,
+        "retrievalDurationMs": null,
+        "toolDurationMs": 3.96,
+        "toolCount": 1,
+        "toolNames": [
+          "search_places"
+        ],
+        "reviewIds": []
+      },
+      "retrieval": null
+    },
+    {
+      "caseId": "structured-shop-route-isolation",
+      "question": "当前有哪些咖啡店？",
+      "passed": true,
+      "checks": {
+        "httpStatusOk": true,
+        "requestStatusOk": true,
+        "toolsAllowedSequence": true,
+        "forbiddenToolIsolation": true,
+        "toolsSucceeded": true,
+        "noRagTool": true,
+        "noRetrievalTrace": true
+      },
+      "failedChecks": [],
+      "warnings": [],
+      "toolNames": [
+        "list_shop_types",
+        "search_shops"
+      ],
+      "answer": "当前数据中，咖啡分类下共收录了 **64 家**商户，以下是为您整理的部分代表性咖啡店信息：\n\n**精选咖啡店一览：**\n\n| 店名 | 地址 | 人均价格 |\n|------|------|---------|\n| ☕ 清晨手冲咖啡 | 文化广场 3 号 | 约 ¥35 |\n| ☕ 纸间咖啡书屋 | 学院路 18 号 | 约 ¥42 |\n| ☕ 街角共创咖啡 | 创业大街 66 号 | 约 ¥39 |\n| ☕ Good Karma Cafe | 928 Pine St | 约 ¥50 |\n| ☕ Cafe Square One | 50 S 3rd St | 约 ¥50 |\n| ☕ Valerio Coffee Roasters | 4373 Main St | 约 ¥50 |\n| ☕ Lucky Goat Coffeehouse | 888 N 26th St | 约 ¥50 |\n| ☕ Alchemy Coffee | 119 S 21st St | 约 ¥100 |\n| ☕ ReAnimator Coffee | 1523 E Susquehanna Ave | 约 ¥50 |\n| ☕ Red Hook Coffee & Tea | 765 S 4th St | 约 ¥50 |\n\n此外还有 Starbucks、Dunkin'、Wawa、Paris Baguette 等连锁店。如果您对某家店感兴趣，需要了解电话、详情或顾客评价体验（如是否适合办公、聊天等），随时告诉我！😊",
+      "requestTrace": {
+        "requestId": "req-44fe9fb43616",
+        "route": "/agent/chat-llm",
+        "status": "ok",
+        "totalDurationMs": 4717.97,
+        "slow": true,
+        "slowThresholdMs": 3000.0,
+        "bottleneck": "agent",
+        "agentDurationMs": 4714.6,
+        "llmDurationMs": null,
+        "retrievalDurationMs": null,
+        "toolDurationMs": 32.0,
+        "toolCount": 2,
+        "toolNames": [
+          "list_shop_types",
+          "search_shops"
+        ],
+        "reviewIds": []
+      },
+      "retrieval": null
+    }
+  ],
+  "failures": []
+}

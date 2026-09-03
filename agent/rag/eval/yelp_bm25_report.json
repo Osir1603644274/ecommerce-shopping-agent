@@ -1,0 +1,248 @@
+{
+  "topK": 3,
+  "sourceFilter": "yelp",
+  "candidateLimit": 10,
+  "vector": {
+    "total": 25,
+    "hits": 18,
+    "hitRate": 0.72,
+    "hitsAt1": 12,
+    "hitAt1Rate": 0.48,
+    "mrr": 0.58
+  },
+  "bm25": {
+    "topK": 3,
+    "total": 25,
+    "hits": 24,
+    "hitRate": 0.96,
+    "hitsAt1": 19,
+    "hitAt1Rate": 0.76,
+    "mrr": 0.8466666666666667,
+    "timing": {
+      "totalMs": 8906.628999990062,
+      "avgMs": 356.2651599996025,
+      "p50Ms": 218.6723000049824,
+      "p95Ms": 310.06950000301003,
+      "maxMs": 3547.932600005879
+    },
+    "byDifficulty": {
+      "basic": {
+        "total": 16,
+        "hits": 16,
+        "hitRate": 1.0,
+        "hitsAt1": 14,
+        "hitAt1Rate": 0.875,
+        "mrr": 0.9270833333333334,
+        "timing": {
+          "totalMs": 6912.241599988192,
+          "avgMs": 432.015099999262,
+          "p50Ms": 218.6723000049824,
+          "p95Ms": 3547.932600005879,
+          "maxMs": 3547.932600005879
+        }
+      },
+      "hard": {
+        "total": 9,
+        "hits": 8,
+        "hitRate": 0.8888888888888888,
+        "hitsAt1": 5,
+        "hitAt1Rate": 0.5555555555555556,
+        "mrr": 0.7037037037037037,
+        "timing": {
+          "totalMs": 1994.3874000018695,
+          "avgMs": 221.59860000020774,
+          "p50Ms": 227.9539000010118,
+          "p95Ms": 276.24430001014844,
+          "maxMs": 276.24430001014844
+        }
+      }
+    },
+    "byChallengeType": {
+      "budget_constraint": {
+        "total": 1,
+        "hits": 1,
+        "hitRate": 1.0,
+        "hitsAt1": 0,
+        "hitAt1Rate": 0.0,
+        "mrr": 0.5,
+        "timing": {
+          "totalMs": 168.19630000100005,
+          "avgMs": 168.19630000100005,
+          "p50Ms": 168.19630000100005,
+          "p95Ms": 168.19630000100005,
+          "maxMs": 168.19630000100005
+        }
+      },
+      "environment_preference": {
+        "total": 8,
+        "hits": 8,
+        "hitRate": 1.0,
+        "hitsAt1": 7,
+        "hitAt1Rate": 0.875,
+        "mrr": 0.9375,
+        "timing": {
+          "totalMs": 5073.179100014386,
+          "avgMs": 634.1473875017982,
+          "p50Ms": 218.6723000049824,
+          "p95Ms": 3547.932600005879,
+          "maxMs": 3547.932600005879
+        }
+      },
+      "facility_constraint": {
+        "total": 20,
+        "hits": 19,
+        "hitRate": 0.95,
+        "hitsAt1": 16,
+        "hitAt1Rate": 0.8,
+        "mrr": 0.8666666666666666,
+        "timing": {
+          "totalMs": 4368.1849999848055,
+          "avgMs": 218.40924999924027,
+          "p50Ms": 217.65759999107104,
+          "p95Ms": 276.24430001014844,
+          "maxMs": 310.06950000301003
+        }
+      },
+      "implicit_intent": {
+        "total": 4,
+        "hits": 4,
+        "hitRate": 1.0,
+        "hitsAt1": 3,
+        "hitAt1Rate": 0.75,
+        "mrr": 0.875,
+        "timing": {
+          "totalMs": 848.2125999871641,
+          "avgMs": 212.05314999679103,
+          "p50Ms": 212.21589999913704,
+          "p95Ms": 293.25069999322295,
+          "maxMs": 293.25069999322295
+        }
+      },
+      "multi_constraint": {
+        "total": 5,
+        "hits": 4,
+        "hitRate": 0.8,
+        "hitsAt1": 2,
+        "hitAt1Rate": 0.4,
+        "mrr": 0.5666666666666667,
+        "timing": {
+          "totalMs": 1162.8482000087388,
+          "avgMs": 232.56964000174776,
+          "p50Ms": 242.51969999750145,
+          "p95Ms": 276.24430001014844,
+          "maxMs": 276.24430001014844
+        }
+      },
+      "negative_constraint": {
+        "total": 9,
+        "hits": 9,
+        "hitRate": 1.0,
+        "hitsAt1": 8,
+        "hitAt1Rate": 0.8888888888888888,
+        "mrr": 0.9444444444444444,
+        "timing": {
+          "totalMs": 5394.157799993991,
+          "avgMs": 599.350866665999,
+          "p50Ms": 243.02009999519214,
+          "p95Ms": 3547.932600005879,
+          "maxMs": 3547.932600005879
+        }
+      },
+      "service_constraint": {
+        "total": 5,
+        "hits": 4,
+        "hitRate": 0.8,
+        "hitsAt1": 2,
+        "hitAt1Rate": 0.4,
+        "mrr": 0.5666666666666667,
+        "timing": {
+          "totalMs": 1162.318199989386,
+          "avgMs": 232.46363999787718,
+          "p50Ms": 235.38579999876674,
+          "p95Ms": 293.25069999322295,
+          "maxMs": 293.25069999322295
+        }
+      },
+      "time_constraint": {
+        "total": 6,
+        "hits": 6,
+        "hitRate": 1.0,
+        "hitsAt1": 5,
+        "hitAt1Rate": 0.8333333333333334,
+        "mrr": 0.8888888888888888,
+        "timing": {
+          "totalMs": 1295.4310000059195,
+          "avgMs": 215.90516666765325,
+          "p50Ms": 227.9539000010118,
+          "p95Ms": 247.93399999907706,
+          "maxMs": 247.93399999907706
+        }
+      }
+    }
+  },
+  "hybrid": {
+    "total": 25,
+    "hits": 20,
+    "hitRate": 0.8,
+    "hitsAt1": 18,
+    "hitAt1Rate": 0.72,
+    "mrr": 0.76
+  },
+  "bestBm25Weight": 0.02,
+  "grid": [
+    {
+      "bm25Weight": 0.02,
+      "total": 25,
+      "hits": 20,
+      "hitRate": 0.8,
+      "hitsAt1": 18,
+      "hitAt1Rate": 0.72,
+      "mrr": 0.76
+    },
+    {
+      "bm25Weight": 0.05,
+      "total": 25,
+      "hits": 20,
+      "hitRate": 0.8,
+      "hitsAt1": 18,
+      "hitAt1Rate": 0.72,
+      "mrr": 0.76
+    },
+    {
+      "bm25Weight": 0.1,
+      "total": 25,
+      "hits": 20,
+      "hitRate": 0.8,
+      "hitsAt1": 18,
+      "hitAt1Rate": 0.72,
+      "mrr": 0.76
+    },
+    {
+      "bm25Weight": 0.2,
+      "total": 25,
+      "hits": 20,
+      "hitRate": 0.8,
+      "hitsAt1": 18,
+      "hitAt1Rate": 0.72,
+      "mrr": 0.76
+    },
+    {
+      "bm25Weight": 0.5,
+      "total": 25,
+      "hits": 20,
+      "hitRate": 0.8,
+      "hitsAt1": 18,
+      "hitAt1Rate": 0.72,
+      "mrr": 0.76
+    },
+    {
+      "bm25Weight": 1.0,
+      "total": 25,
+      "hits": 20,
+      "hitRate": 0.8,
+      "hitsAt1": 18,
+      "hitAt1Rate": 0.72,
+      "mrr": 0.76
+    }
+  ]
+}

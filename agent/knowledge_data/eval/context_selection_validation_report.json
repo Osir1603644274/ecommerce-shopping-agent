@@ -1,0 +1,1175 @@
+{
+  "methodology": {
+    "split": "validation only",
+    "testRead": false,
+    "rankingInput": "frozen support-conflict-v1 content reranker audit",
+    "shopOrderChanged": false,
+    "selectionOrder": "one support per shop, second support per shop, then conflict",
+    "limits": {
+      "maxShops": 5,
+      "maxSupportPerShop": 2,
+      "maxConflictPerShop": 1,
+      "maxTotalReviews": 12,
+      "maxTotalChars": 6000,
+      "maxCharsPerReview": 600
+    },
+    "qrelCaveat": "supportingReviewIds are pooled and non-exhaustive"
+  },
+  "metrics": {
+    "caseCount": 8,
+    "averageCandidateReviewCount": 56.25,
+    "averageSelectedReviewCount": 7.75,
+    "reviewCountReduction": 0.8622222222222222,
+    "averageSelectedCharacterCount": 1164.5,
+    "supportedTopShopRate": 1.0,
+    "selectorSupportEligibleShopCoverage": 1.0,
+    "naiveTopNSupportEligibleShopCoverage": 0.975,
+    "relevantTopShopExactEvidenceCoverage": 0.9444444444444444,
+    "selectedSupportQrelPrecision": 0.6428571428571429,
+    "conflictSelectionCoverage": 1.0
+  },
+  "details": [
+    {
+      "caseId": "fuzzy-shop-val-001",
+      "question": "我想一个人安静地待一会儿，看看书放空，不希望周围太吵。",
+      "candidateReviewCount": 60,
+      "selectedReviewCount": 9,
+      "selectedCharacterCount": 1267,
+      "relevantTopShopCount": 5,
+      "exactEvidenceShopHits": 5,
+      "shops": [
+        {
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "shopRank": 1,
+          "evidenceStatus": "mixed",
+          "availableSupportCount": 1,
+          "availableConflictCount": 1,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 1,
+          "selectedReviewIds": [
+            "yelp-G1hVCb7CrOyL-HP1h6rByg",
+            "yelp-0jBamrOBDkY6lLTpkY0xZw"
+          ]
+        },
+        {
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "shopRank": 2,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 2,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug",
+            "yelp-UO9TXvLjHoMHCZ1C5OXqLg"
+          ]
+        },
+        {
+          "shopId": 100197,
+          "shopName": "Jasmine Rice - Rittenhouse",
+          "shopRank": 3,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-lR1yZPj0q-AR9sml9b1J9Q"
+          ]
+        },
+        {
+          "shopId": 100108,
+          "shopName": "Vineyards Cafe",
+          "shopRank": 4,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-pEqgXzllsYcBAStBeP1QFw"
+          ]
+        },
+        {
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "shopRank": 5,
+          "evidenceStatus": "mixed",
+          "availableSupportCount": 2,
+          "availableConflictCount": 1,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 1,
+          "selectedReviewIds": [
+            "yelp-Q4YURNaDi39SsiwCyYYagw",
+            "yelp-T52ED3B5-Lymo9EzCpuTwg",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        }
+      ],
+      "selectedReviews": [
+        {
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "selectedRole": "conflict",
+          "contentScore": 0,
+          "contextText": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "reviewId": "yelp-RIdKOn-6dE8hdSFPh5RZug",
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "我正在骑车逐个探访 Fishtown 的咖啡店。我在这里喝到了一杯很棒的拿铁。咖啡师还算愉快，也很懂咖啡。不幸的是，因为建筑形状奇怪，这里座位并不多，所以会变得拥挤；但如果你抢到一个位置，这里是做工作的好地方。当我想和狗一起读书放松时，我很喜欢外面人行道上的座位。"
+        },
+        {
+          "reviewId": "yelp-UO9TXvLjHoMHCZ1C5OXqLg",
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "好咖啡，漂亮的室内，友好的服务A+ 这是个和朋友闲逛或读书的好地方。外面有几张桌子，如果你想和你的狗一起待着。"
+        },
+        {
+          "reviewId": "yelp-lR1yZPj0q-AR9sml9b1J9Q",
+          "shopId": 100197,
+          "shopName": "Jasmine Rice - Rittenhouse",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "上周三在这里吃了一顿安静美好的晚餐，绝对推荐。我们其实不需要预约，因为整个晚上只有零星几位客人进出，但这里空间不大，所以预约一下以防万一还是不错的（尤其是周末）。 服务友好且不打扰，餐厅内部感觉温馨私密。一进门就有人迎接、安排座位，还为我们自带的白葡萄酒提供了冰桶。饭后我们多待了一会儿喝完酒，完全没有感到不受欢迎或被催促。晚餐本身也很棒；我的绿咖喱辣度刚好，分量小到能吃完，大到能吃饱。在里滕豪斯附近安静街区上的这家店，是度过休闲夜晚的好去处。"
+        },
+        {
+          "reviewId": "yelp-pEqgXzllsYcBAStBeP1QFw",
+          "shopId": 100108,
+          "shopName": "Vineyards Cafe",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "我差点犹豫要不要写评论，因为我不想让它变得太主流。幸运的是，它位置偏僻，所以可能不会。 这个地方很美。咖啡很棒，店主非常友善，斯堪的纳维亚风格，小巧、安静，在咖啡荒漠中算是一片绿洲。所有东西价格都很合理。一个咸味可丽饼、一大杯咖啡，再加上一个周六早上看书的好地方，总共大约10美元。 我吃过蜂蜜可丽饼（马苏里拉奶酪、菠菜、鸡蛋、淋上蜂蜜）和山羊培根（山羊奶酪、培根、蘑菇、番茄），两者都很美味，非常新鲜。谢谢你们的存在。"
+        },
+        {
+          "reviewId": "yelp-Q4YURNaDi39SsiwCyYYagw",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "我从未意识到我离这个绝妙的地方这么近！ 一天早上我溜达进去，发现了我一直错过的东西。便宜又美味的百吉饼三明治；好咖啡和很多桌子。（如果你要在店里吃，付钱前先看看有没有空位，因为我幸运地找到了桌子！） 适合学习/阅读的好氛围，安静平和，我遇到的每个人似乎都很友好！ 我一定会再来的！"
+        },
+        {
+          "reviewId": "yelp-T52ED3B5-Lymo9EzCpuTwg",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+        },
+        {
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "selectedRole": "conflict",
+          "contentScore": 0,
+          "contextText": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        }
+      ]
+    },
+    {
+      "caseId": "fuzzy-shop-val-002",
+      "question": "想带电脑找个地方待上几个小时，最好坐着舒服，也不会有人一直催我走。",
+      "candidateReviewCount": 59,
+      "selectedReviewCount": 8,
+      "selectedCharacterCount": 1304,
+      "relevantTopShopCount": 2,
+      "exactEvidenceShopHits": 1,
+      "shops": [
+        {
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "shopRank": 1,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 2,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-2EsM0mPABnQempeoOPIlcA",
+            "yelp-zJUxQgDCQpZXVRfi0aCIRw"
+          ]
+        },
+        {
+          "shopId": 100278,
+          "shopName": "In the Valley",
+          "shopRank": 2,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-bW7Da6GJXqaSgR8fugsrZQ"
+          ]
+        },
+        {
+          "shopId": 100283,
+          "shopName": "The Post",
+          "shopRank": 3,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 2,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-hjTS0cL43FChxT4Kac83Hw",
+            "yelp-i44x167tnwdgGRuCJvdhkw"
+          ]
+        },
+        {
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "shopRank": 4,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 2,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-NfAtjCeJ_fJWcjENEvF1oA"
+          ]
+        },
+        {
+          "shopId": 100213,
+          "shopName": "Franklin's",
+          "shopRank": 5,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-tMbDmOKQm4kSF2eoXBSPRw"
+          ]
+        }
+      ],
+      "selectedReviews": [
+        {
+          "reviewId": "yelp-2EsM0mPABnQempeoOPIlcA",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "温馨的环境，友好的员工，好喝的咖啡和美味的点心 前厅很舒适，两侧有大窗户，阳光充足，还能很好地观察街区。员工很棒，和蔼可亲。这是我最喜欢的本地咖啡馆，我经常在这里待上几个小时，工作、和员工、朋友以及邻居聊天。"
+        },
+        {
+          "reviewId": "yelp-zJUxQgDCQpZXVRfi0aCIRw",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "我一直想试试这个地方，因为它离我的实习地点很近。这是一个可爱的小地方，似乎适合工作几个小时或者只是放松一下。我进去时人群混杂，包括一个忙着用电脑的男人，以及一位母亲和她的孩子在享用早餐。我点单时还有另外几个人进进出出。 我对我点的制作精美的“幸运山羊”拿铁印象深刻……黑巧克力、榛子、海盐！非常美味。咖啡师在我看菜单时也很有耐心，人很好。我肯定会再回来尝试其他特色饮品，听起来都很棒，或者尝尝新鲜烘焙的糕点。我也对冰咖啡很好奇。 我建议他们更新网站！网站上还列着秋季特饮，我知道他们每个季节都有几款新的特饮！我很快会再来尝试菜单上的更多菜品！"
+        },
+        {
+          "reviewId": "yelp-bW7Da6GJXqaSgR8fugsrZQ",
+          "shopId": 100278,
+          "shopName": "In the Valley",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "我来过这里好几次，每次都很满意。我喜欢这里的鸡尾酒、食物、氛围，尤其是调酒师。我们总是坐在吧台，享受几杯饮料和小吃。员工知识渊博，能够描述菜单上的菜品（包括食物和饮料），所以不会有意外。我是一个很随意的食客，所以我会去Passyunk Ave.，希望能找到ITV的两个吧台凳，同时心里有几个备选餐厅。大约80%的时候我都能成功。吧台通常稳定但不会拥挤到不舒服。我等不及要再来了！"
+        },
+        {
+          "reviewId": "yelp-hjTS0cL43FChxT4Kac83Hw",
+          "shopId": 100283,
+          "shopName": "The Post",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "绝对喜欢这个地方！我和我11岁的儿子在这里待了好几个小时！我在这附近生活和工作，所以非常方便。我也喜欢这里对孩子友好，但我也可以和朋友一起玩，享受欢乐时光，而不觉得像在托儿所。这里的员工非常友好。玉米片、爆米花鸡、薯条，所有我尝过的食物和饮料都很棒！我喜欢Post Mule！"
+        },
+        {
+          "reviewId": "yelp-i44x167tnwdgGRuCJvdhkw",
+          "shopId": 100283,
+          "shopName": "The Post",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "这是一个非常棒、有趣的新地方，昨天刚开业，提供美味的食物和许多有趣的游戏。 它部分是个酒吧，但对家庭非常友好，有像skeeball这样的游戏，还有很多酒吧食物，做得比这种地方通常需要的要好得多，比如爆米花鸡、芝士牛排小汉堡、通心粉奶酪、玉米片等等。 我最喜欢前面的篮球机和辛普森一家街机游戏，但这里有很多东西可以让你玩上几个小时。"
+        },
+        {
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "reviewId": "yelp-NfAtjCeJ_fJWcjENEvF1oA",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "目前只来过一次，但我很喜欢！我们来的时候人很多，但能坐在外面（反正天气很好，坐外面更舒服！）。看到人多我就知道咖啡好喝，果然没错（干得好，Carissa！）。 我发现很多卖花式咖啡的地方，咖啡看起来和尝起来都太苦。这里的冰焦糖咖啡明显有咖啡因，但不会太浓太酸，所以真是享受。我也很欣赏他们提供食物和饮料的纯素选项。 真的没什么负面评价！以后我会试试其他食物/饮料，但至少现在，我是粉丝了。"
+        },
+        {
+          "reviewId": "yelp-tMbDmOKQm4kSF2eoXBSPRw",
+          "shopId": 100213,
+          "shopName": "Franklin's",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "喜欢这个地方。好食物，好啤酒选择，室内和甲板上氛围都很好！我们一岁的孩子可以在甲板上安静地坐几个小时，他们也允许狗进入。好地方！"
+        }
+      ]
+    },
+    {
+      "caseId": "fuzzy-shop-val-003",
+      "question": "想找个适合和朋友慢慢聊天的地方，氛围放松，说话不用提高嗓门。",
+      "candidateReviewCount": 58,
+      "selectedReviewCount": 9,
+      "selectedCharacterCount": 1498,
+      "relevantTopShopCount": 4,
+      "exactEvidenceShopHits": 4,
+      "shops": [
+        {
+          "shopId": 100141,
+          "shopName": "Smiths Restaurant and Bar",
+          "shopRank": 1,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 2,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-ttZo6DvUdCB1qU00SgFcMQ",
+            "yelp-ZbXQjA9GDIk9Ugmqr1MLew"
+          ]
+        },
+        {
+          "shopId": 100024,
+          "shopName": "The Twisted Tail",
+          "shopRank": 2,
+          "evidenceStatus": "mixed",
+          "availableSupportCount": 1,
+          "availableConflictCount": 1,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 1,
+          "selectedReviewIds": [
+            "yelp-XMWTd1rA5TxtgkKKTOAqkQ",
+            "yelp-dIZegYrM8qlIsCcztwJdgQ"
+          ]
+        },
+        {
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "shopRank": 3,
+          "evidenceStatus": "mixed",
+          "availableSupportCount": 1,
+          "availableConflictCount": 1,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 1,
+          "selectedReviewIds": [
+            "yelp-GEX3lJS5yJObNX0VH0SdKg",
+            "yelp-0jBamrOBDkY6lLTpkY0xZw"
+          ]
+        },
+        {
+          "shopId": 100071,
+          "shopName": "Olly",
+          "shopRank": 4,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-RvQVDNwTEF7Gq-rfXHmYXQ"
+          ]
+        },
+        {
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "shopRank": 5,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 2,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-sHAX9dpdXpUtcBEAyD8DKw",
+            "yelp-T52ED3B5-Lymo9EzCpuTwg"
+          ]
+        }
+      ],
+      "selectedReviews": [
+        {
+          "reviewId": "yelp-ttZo6DvUdCB1qU00SgFcMQ",
+          "shopId": 100141,
+          "shopName": "Smiths Restaurant and Bar",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "周三晚上我和朋友去了Smith's，只是深夜喝点东西（没吃东西）。我喜欢这里不用大喊就能聊天，而且不太拥挤。所以，不是周六晚上玩乐的好地方，但周中朋友聚会是个低调的好去处。"
+        },
+        {
+          "reviewId": "yelp-ZbXQjA9GDIk9Ugmqr1MLew",
+          "shopId": 100141,
+          "shopName": "Smiths Restaurant and Bar",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "Smiths是个很酷的聚会场所，啤酒选择丰富，氛围适合和朋友聊天。服务员很可爱。然而，我们吃的食物最多算一般，这很令人失望，因为食物选择看起来非常诱人。 我们点了两份不同口味的鸡翅。经典款和亚洲风味款，两者都没熟透，而且都不特别好吃。然后我们吃了芝士牛排春卷，还行。最后，我们吃了烧烤鸡肉扁面包。虽然不算难吃，但本可以更好。它比我们预想的大得多。 我们最后整晚都在喝酒。正如我所说，这是一个非常酷且独特的酒吧场景，如果你只是想喝鸡尾酒，Smiths是个好地方。"
+        },
+        {
+          "reviewId": "yelp-XMWTd1rA5TxtgkKKTOAqkQ",
+          "shopId": 100024,
+          "shopName": "The Twisted Tail",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "费城最喜欢的地方，就在 Headhouse 广场！氛围很棒，楼下非常舒适，每周大部分晚上都有原声音乐表演。是喝一杯、放松身心的好去处。楼上的酒吧更热闹，有稳定的蓝调和摇滚乐队，旁边的俱乐部房间有沙狐球、飞镖和壁炉旁的沙发，是和朋友们一起放松的有趣地方。 他们有不错的生啤酒，鸡尾酒也是一流的。我大多在酒吧吃小盘菜和开胃菜，都很美味（小龙虾通心粉奶酪是我的首选）。 最重要的是——服务很好，员工很棒。他们不遗余力地让你感到舒适和“宾至如归”。"
+        },
+        {
+          "reviewId": "yelp-dIZegYrM8qlIsCcztwJdgQ",
+          "shopId": 100024,
+          "shopName": "The Twisted Tail",
+          "selectedRole": "conflict",
+          "contentScore": 0,
+          "contextText": "喜欢这个地方！我已经来过两次了，每次都尝试不同的菜，食物一直都很不错。 食物：点炸鸡。还有，点通心粉奶酪。你可以之后感到内疚。 氛围：可爱舒适，有现场音乐。只是要提醒你，坐在音乐家附近意味着你几乎听不到其他任何声音。 服务：总是迅速而有礼貌！"
+        },
+        {
+          "reviewId": "yelp-GEX3lJS5yJObNX0VH0SdKg",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "友好热情的氛氛围、员工和老板，加上非常合理的价格，使这里成为我最喜欢的社区咖啡馆。唯一能让它更好的是有本地面包师提供无麸质烘焙食品出售。 咖啡很好。非常好。他们卖La Colombe咖啡，而且知道怎么制作。他们还有十多种不错的茶选择，少量但精心挑选的烘焙食品、带奶油芝士和熏鲑鱼或其他配料的百吉饼，偶尔还有新鲜水果如香蕉出售，虽然绝对不是一顿完整的午餐。我听说百吉饼很棒。他们已经解决了饮品菜单的问题（另一条评论中提到散乱不清），墙上有一个清晰的横幅，我发现如果你问，他们总能想办法做出来。 有一个小的户外座位区，配有金属框架沙发和柔软干净的靠垫。非常适合春天和夏天，也是在这里社区结交新朋友的好地方。 前厅是一个放松的区域，可以工作、见人、和老板聊天（她在的时候），听她讲述她旅行丰富的生活故事。虽然她有时在工作时安静而不张扬，所以你可能需要主动提问才能让她开口。 员工也类似：安静、礼貌、高效、友好。问个问题，开始对话，他们就有丰富的生活经历可以分享。事实上，我在这里搭过话的大多数人都很有趣、有创意、鼓舞人心。也许是社区的原因，也许是咖啡因的作用，这里有些特别的东西。不装腔作势，从没见过男士发髻，人们真的会微笑。这很好。 后面有一个房间，有棋盘游戏、一张柔软干净的沙发和两把舒适的椅子，布置得像客厅/会客室，还有一张餐桌和椅子，非常适合学习小组和商务会议。 再加点俗气的话……作为摩羯座，我…"
+        },
+        {
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "selectedRole": "conflict",
+          "contentScore": 0,
+          "contextText": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "reviewId": "yelp-RvQVDNwTEF7Gq-rfXHmYXQ",
+          "shopId": 100071,
+          "shopName": "Olly",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "另一个在费城吃高质量、执行出色且不贵的美食的好地方。非常适合和朋友一起去，也适合约会。"
+        },
+        {
+          "reviewId": "yelp-sHAX9dpdXpUtcBEAyD8DKw",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "简直是我喝过最好的热巧克力！氛围轻松。是和朋友聊天、在寒冷的日子里分享热饮的绝佳地点。"
+        },
+        {
+          "reviewId": "yelp-T52ED3B5-Lymo9EzCpuTwg",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+        }
+      ]
+    },
+    {
+      "caseId": "fuzzy-shop-val-004",
+      "question": "第一次约会想找个有点情调但不会太正式、让人紧张的地方。",
+      "candidateReviewCount": 57,
+      "selectedReviewCount": 5,
+      "selectedCharacterCount": 503,
+      "relevantTopShopCount": 5,
+      "exactEvidenceShopHits": 4,
+      "shops": [
+        {
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "shopRank": 1,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-E8DBE1QeXjTE5hpnh0geNQ"
+          ]
+        },
+        {
+          "shopId": 100004,
+          "shopName": "Craft Hall",
+          "shopRank": 2,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-1FIFzSnwuyGw0V0a75-1Nw"
+          ]
+        },
+        {
+          "shopId": 100194,
+          "shopName": "Zorba's Taverna",
+          "shopRank": 3,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-rWrVThcyPncp-wpqZkjYxA"
+          ]
+        },
+        {
+          "shopId": 100299,
+          "shopName": "Bury The Hatchet",
+          "shopRank": 4,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-u35-OtHG-npYBPXeGDAMMg"
+          ]
+        },
+        {
+          "shopId": 100258,
+          "shopName": "Prohibition Taproom",
+          "shopRank": 5,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-1leFK2Q4id6cIJ8A_dH-vg"
+          ]
+        }
+      ],
+      "selectedReviews": [
+        {
+          "reviewId": "yelp-E8DBE1QeXjTE5hpnh0geNQ",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "我们喜欢这个地方，喝杯好咖啡或特调饮品。氛围休闲又吸引人，很适合见朋友或闲逛看书。我也在这里开过几次商务会议。他们注重细节，比如在服务台放一个杯子，让你想加更多奶精时倒掉多余的咖啡（你在星巴克见过多少次人们把咖啡倒进垃圾桶！？）这种对细节和服务的关注贯穿整个店。而且店面很宽敞，不像有些地方那么拥挤。 如果你还没来过，绝对值得一试。"
+        },
+        {
+          "reviewId": "yelp-1FIFzSnwuyGw0V0a75-1Nw",
+          "shopId": 100004,
+          "shopName": "Craft Hall",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "第一次来，太棒了！巨大的开放空间，有多种座位选择（例如：沙发、高桌、吧台）。调酒师亲切、周到，鸡尾酒也很棒。Jeff 为我调了一杯很棒的曼哈顿。啤酒选择丰富，会再来的！"
+        },
+        {
+          "reviewId": "yelp-rWrVThcyPncp-wpqZkjYxA",
+          "shopId": 100194,
+          "shopName": "Zorba's Taverna",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "氛围温馨舒适。进门时厨师和主人都会打招呼。我们在周六晚上来之前提前几小时预订了，到达时桌子已经准备好，面包和水都摆好了。食物很棒；新鲜且上菜快。我们分享了几道主菜，都很好吃。服务一流。适合约会或小团体聚餐的好地方。"
+        },
+        {
+          "reviewId": "yelp-u35-OtHG-npYBPXeGDAMMg",
+          "shopId": 100299,
+          "shopName": "Bury The Hatchet",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "我玩得很开心。这是一个很棒的第一次约会，Lex在教课方面很棒。"
+        },
+        {
+          "reviewId": "yelp-1leFK2Q4id6cIJ8A_dH-vg",
+          "shopId": 100258,
+          "shopName": "Prohibition Taproom",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "四颗星给酒吧和装饰——啤酒选择总是很棒，员工很棒，装饰超酷。 但食物确实有待改进。我不认为我是大多数，但嗯——食物就算了。唯一的例外是炸四季豆。那些非常棒。一定要点。是完美啤酒的完美搭配。 非常适合欢乐时光或喝酒。或者第一次约会。"
+        }
+      ]
+    },
+    {
+      "caseId": "fuzzy-shop-val-005",
+      "question": "周末想带孩子一起吃饭，希望店员友善，环境对家庭比较轻松。",
+      "candidateReviewCount": 55,
+      "selectedReviewCount": 8,
+      "selectedCharacterCount": 863,
+      "relevantTopShopCount": 5,
+      "exactEvidenceShopHits": 5,
+      "shops": [
+        {
+          "shopId": 100004,
+          "shopName": "Craft Hall",
+          "shopRank": 1,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 6,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-5-YovLQWy6Srq0UnTdVhuw",
+            "yelp-LQxtqengwVWA56JXpWxrDg"
+          ]
+        },
+        {
+          "shopId": 100098,
+          "shopName": "Menchie's Frozen Yogurt",
+          "shopRank": 2,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 2,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-R4UONMMp4CeDIG1_HHB44g",
+            "yelp-lZ2-U72Yr0-PfLS7xzCNGA"
+          ]
+        },
+        {
+          "shopId": 100283,
+          "shopName": "The Post",
+          "shopRank": 3,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 3,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-_ZA32vrxoGMkPOZeKL_Lxw",
+            "yelp-i44x167tnwdgGRuCJvdhkw"
+          ]
+        },
+        {
+          "shopId": 100109,
+          "shopName": "PrimoHoagies",
+          "shopRank": 4,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-M_NslcVeH15cjxQh9Epl1w"
+          ]
+        },
+        {
+          "shopId": 100025,
+          "shopName": "Chick-fil-A",
+          "shopRank": 5,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-x4qR8AlRKckcXy8aCml-zQ"
+          ]
+        }
+      ],
+      "selectedReviews": [
+        {
+          "reviewId": "yelp-5-YovLQWy6Srq0UnTdVhuw",
+          "shopId": 100004,
+          "shopName": "Craft Hall",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "适合有8岁以下孩子的家庭的好地方。和超过10个大人以及5个孩子一起去。空间充足，早午餐菜单不错。"
+        },
+        {
+          "reviewId": "yelp-LQxtqengwVWA56JXpWxrDg",
+          "shopId": 100004,
+          "shopName": "Craft Hall",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "和妻子孩子一起周日早午餐。哇！！孩子们玩耍的好地方，早午餐菜单很棒。妻子喝了含羞草鸡尾酒，我喝了本地拉格啤酒！ 鸡肉和华夫饼、饼干和猪肉碎、以及创意早餐都很美味，非常新鲜！一定会再来的。"
+        },
+        {
+          "reviewId": "yelp-R4UONMMp4CeDIG1_HHB44g",
+          "shopId": 100098,
+          "shopName": "Menchie's Frozen Yogurt",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "很棒的地方！非常适合小孩子。有超多配料可选，服务总是又快又友好。强烈推荐，如果你还没来过，或者想带孩子尝试点新东西的话。"
+        },
+        {
+          "reviewId": "yelp-lZ2-U72Yr0-PfLS7xzCNGA",
+          "shopId": 100098,
+          "shopName": "Menchie's Frozen Yogurt",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "员工非常棒，产品质量完美。味道和口感都恰到好处。我把它定为每周日的家庭约会。"
+        },
+        {
+          "reviewId": "yelp-_ZA32vrxoGMkPOZeKL_Lxw",
+          "shopId": 100283,
+          "shopName": "The Post",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "所以这个地方在大学城地区是新开的，我告诉你，这是一个很酷的地方，有各种各样的食物选择，很棒的音乐和不错的鸡尾酒菜单…… 调酒师Frankie很友好，对酒水很了解。你还可以带着孩子一起来，The Post有沙狐球、篮球和吃豆人供孩子们玩！！ 他们周末甚至有DJ，如果你想跳舞，和朋友们一起狂欢！！"
+        },
+        {
+          "reviewId": "yelp-i44x167tnwdgGRuCJvdhkw",
+          "shopId": 100283,
+          "shopName": "The Post",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "这是一个非常棒、有趣的新地方，昨天刚开业，提供美味的食物和许多有趣的游戏。 它部分是个酒吧，但对家庭非常友好，有像skeeball这样的游戏，还有很多酒吧食物，做得比这种地方通常需要的要好得多，比如爆米花鸡、芝士牛排小汉堡、通心粉奶酪、玉米片等等。 我最喜欢前面的篮球机和辛普森一家街机游戏，但这里有很多东西可以让你玩上几个小时。"
+        },
+        {
+          "reviewId": "yelp-M_NslcVeH15cjxQh9Epl1w",
+          "shopId": 100109,
+          "shopName": "PrimoHoagies",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "总是新鲜而且最好！很棒的员工，总是像家人一样！我希望他们营业时间更长，但我还是会去，或者等到第二天。我整个孕期都从这里吃，从未出过问题。现在我带我的孩子们（幼儿）来，他们也很喜欢！"
+        },
+        {
+          "reviewId": "yelp-x4qR8AlRKckcXy8aCml-zQ",
+          "shopId": 100025,
+          "shopName": "Chick-fil-A",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "当你想到所有快餐店时，你会觉得这里也一样。但事实并非如此，我不认为这里是快餐店，我认为它是更偏向健康的好食物。 这是我吃过最好的鸡肉之一。尤其是他们的三明治，华夫饼薯条很棒，奶昔也真的是最好的之一。 这是一个很棒的去处，尤其是在冬天带孩子去，里面有一个不错的游乐区让孩子们玩。 他们的菜单一般，员工很棒，总是很有礼貌，食物总是热的，从没吃过冷的三明治。菜单价格选择也不错。 如果有机会，试试早餐，很好吃，值得一试。我在这里吃饭时更偏向晚餐类型。"
+        }
+      ]
+    },
+    {
+      "caseId": "fuzzy-shop-val-006",
+      "question": "天气不错，想坐在外面晒晒太阳，喝点东西慢慢休息。",
+      "candidateReviewCount": 57,
+      "selectedReviewCount": 6,
+      "selectedCharacterCount": 597,
+      "relevantTopShopCount": 5,
+      "exactEvidenceShopHits": 5,
+      "shops": [
+        {
+          "shopId": 100277,
+          "shopName": "Valerio Coffee Roasters",
+          "shopRank": 1,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-t9Zl9MPb52uRUQpn_NpSmA"
+          ]
+        },
+        {
+          "shopId": 100190,
+          "shopName": "Dagwood's Pub",
+          "shopRank": 2,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-1kcO-k-zfvaIWlUT6CG9MA"
+          ]
+        },
+        {
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "shopRank": 3,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-yyAycjhj9pBUWYlZd75IZg"
+          ]
+        },
+        {
+          "shopId": 100194,
+          "shopName": "Zorba's Taverna",
+          "shopRank": 4,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-mNIm1xVzYf0X_l1Wvim2YA"
+          ]
+        },
+        {
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "shopRank": 5,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 2,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-NfAtjCeJ_fJWcjENEvF1oA",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ]
+        }
+      ],
+      "selectedReviews": [
+        {
+          "reviewId": "yelp-t9Zl9MPb52uRUQpn_NpSmA",
+          "shopId": 100277,
+          "shopName": "Valerio Coffee Roasters",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "喜欢他们的咖啡。服务友好快捷。地方小，但有几个座位区。你可以坐在窗边晒太阳。后面有几张桌子。还有一小块区域有凳子。总体来说不错。"
+        },
+        {
+          "reviewId": "yelp-1kcO-k-zfvaIWlUT6CG9MA",
+          "shopId": 100190,
+          "shopName": "Dagwood's Pub",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "天气好的时候在外面吃饭的好地方，很棒的午餐菜单，价格合理，帕尔马干酪最好吃，我住得很近，很棒的社区酒吧。"
+        },
+        {
+          "reviewId": "yelp-yyAycjhj9pBUWYlZd75IZg",
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "这可能是城里我最喜欢的咖啡店。食物令人难以置信。我点过的任何东西都新鲜、美味、令人愉悦。店里有一种酷酷的时尚氛围，有很多舒适的座位，天气好的时候外面还有一些很棒的位置。绝对值得一试，尤其是如果你还想吃点东西的话。"
+        },
+        {
+          "reviewId": "yelp-mNIm1xVzYf0X_l1Wvim2YA",
+          "shopId": 100194,
+          "shopName": "Zorba's Taverna",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "我们的食物很美味，服务也很好！！氛围很棒。坐在外面看人来人往。很棒的午餐！！"
+        },
+        {
+          "reviewId": "yelp-NfAtjCeJ_fJWcjENEvF1oA",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "目前只来过一次，但我很喜欢！我们来的时候人很多，但能坐在外面（反正天气很好，坐外面更舒服！）。看到人多我就知道咖啡好喝，果然没错（干得好，Carissa！）。 我发现很多卖花式咖啡的地方，咖啡看起来和尝起来都太苦。这里的冰焦糖咖啡明显有咖啡因，但不会太浓太酸，所以真是享受。我也很欣赏他们提供食物和饮料的纯素选项。 真的没什么负面评价！以后我会试试其他食物/饮料，但至少现在，我是粉丝了。"
+        },
+        {
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        }
+      ]
+    },
+    {
+      "caseId": "fuzzy-shop-val-007",
+      "question": "我对咖啡不太懂，想找一家店员愿意耐心介绍、不会让新手尴尬的咖啡店。",
+      "candidateReviewCount": 53,
+      "selectedReviewCount": 9,
+      "selectedCharacterCount": 1253,
+      "relevantTopShopCount": 5,
+      "exactEvidenceShopHits": 5,
+      "shops": [
+        {
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "shopRank": 1,
+          "evidenceStatus": "mixed",
+          "availableSupportCount": 2,
+          "availableConflictCount": 1,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 1,
+          "selectedReviewIds": [
+            "yelp-YysS6Zla-HtqtR5SW60TbQ",
+            "yelp-Qkkyk7R9rCK7ZXHOkenT_g",
+            "yelp-OGimK3J0EzMC_MSnsKi_HA"
+          ]
+        },
+        {
+          "shopId": 100068,
+          "shopName": "Alchemy Coffee",
+          "shopRank": 2,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-v2u6TqeimdKovePQl9F_eA"
+          ]
+        },
+        {
+          "shopId": 100099,
+          "shopName": "Passero's Coffee Roasters",
+          "shopRank": 3,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-rEG-UZKJoyQfHImlCvgEQw"
+          ]
+        },
+        {
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "shopRank": 4,
+          "evidenceStatus": "mixed",
+          "availableSupportCount": 2,
+          "availableConflictCount": 1,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 1,
+          "selectedReviewIds": [
+            "yelp-7lwF21HXE6QzmU8pSKI93A",
+            "yelp-54TPX9GeNPp2WQCcUObxFg",
+            "yelp-0jBamrOBDkY6lLTpkY0xZw"
+          ]
+        },
+        {
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "shopRank": 5,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-ayn3K9Z2AE6D4PqGZ_w09g"
+          ]
+        }
+      ],
+      "selectedReviews": [
+        {
+          "reviewId": "yelp-YysS6Zla-HtqtR5SW60TbQ",
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "咖啡很棒，空间很棒，员工也是最友好的。我从来不是个咖啡爱好者，但多亏了Reanimator的手冲咖啡，我进入了咖啡迷的世界！这是个好地方，可以快速喝一杯，和朋友见面，或者进行一整天的认真学习。"
+        },
+        {
+          "reviewId": "yelp-Qkkyk7R9rCK7ZXHOkenT_g",
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "很棒的咖啡店，有乐于助人的咖啡师和非常好的咖啡。我停下来买过外带杯，也花30分钟慢慢喝过手冲咖啡。"
+        },
+        {
+          "reviewId": "yelp-OGimK3J0EzMC_MSnsKi_HA",
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "selectedRole": "conflict",
+          "contentScore": 0,
+          "contextText": "ReAnimator Coffee的4星和5星评论一定是花钱买的，因为他们的咖啡根本不值得花钱。毫无疑问，自从麦当劳成为大家喝咖啡的首选以来，这是我喝过最差的咖啡。好咖啡店太多了，没必要来这家。#非常低于平均水平 #浅烘难喝"
+        },
+        {
+          "reviewId": "yelp-v2u6TqeimdKovePQl9F_eA",
+          "shopId": 100068,
+          "shopName": "Alchemy Coffee",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "这是一家非常简约的咖啡店，位于美丽的Northern Liberties区南端。他们主要卖咖啡。偶尔会有零食和糕点之类，但这主要是一家咖啡店。员工友好且高效，对他们卖的咖啡非常了解。 有常见的浓缩咖啡饮品、滴滤和手冲咖啡。咖啡选择多样，但都是本地烘焙的。员工非常友好，服务出色。 这是上下班途中或躲雨避寒的好去处。总体强烈推荐。"
+        },
+        {
+          "reviewId": "yelp-rEG-UZKJoyQfHImlCvgEQw",
+          "shopId": 100099,
+          "shopName": "Passero's Coffee Roasters",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "我喜欢最近两次去他们那里。咖啡很好喝，像我以前的咖啡店，员工也很友好。他们会提供建议。我真的很喜欢这个地方。我去的那家在Suburban Station。"
+        },
+        {
+          "reviewId": "yelp-7lwF21HXE6QzmU8pSKI93A",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "街角可爱的小咖啡店。 员工非常友好和乐于助人。 喜欢他们给我做的卡布奇诺。 他们还卖百吉饼和不同种类的咖啡。 座位空间有限且小。 喜欢看到门上的YELP贴纸：）"
+        },
+        {
+          "reviewId": "yelp-54TPX9GeNPp2WQCcUObxFg",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "我两天内来了这家店两次，每次都要了他们的特色拿铁，两种都棒极了。氛围也很好，店员非常友好，所以我很感激这家咖啡店开在我家附近。他们才开业几周，但我感觉随着他们不断添加新品，这里会越来越好。我肯定会再来的。 我是在跟进之前的评论，因为我又来了至少十几次，所以把评分提高到五星。这家店真的是完美的咖啡店，他们增加了很棒的新小吃，特色饮品选择也很棒，总是有不同口味的手工免费饮用水，而且和费城其他地方相比，价格非常合理。除此之外，那里的员工一直都很友好和善，而且我停车也总是很快。"
+        },
+        {
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "selectedRole": "conflict",
+          "contentScore": 0,
+          "contextText": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "reviewId": "yelp-ayn3K9Z2AE6D4PqGZ_w09g",
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "首先我必须承认：我不喝咖啡。这辈子一滴都没喝过。找到一家同样照顾非咖啡爱好者的咖啡店可能是个挑战。这个炎热的周日下午我本打算去别的地方，但那里因为假日周末关门了。Yelp帮我找到了Red Hook。和另一位评论者一样，我注意到我走进去时员工正坐着和朋友聊天，但她立刻站起来帮助我。她推荐了伯爵茶加焦糖拿铁。这是个很棒的选择。味道很好……而且我自己绝不会想到这个搭配。 我对Red Hook的一个（也许是两个）问题是，这个地方感觉有点像去一个大学生合租的房子。不配套的家具很可爱，但破旧且脏。到处都是灰尘和污垢。而且，可能因为外面热和频繁开门，有很多虫子。他们也没有空调。点热饮是我的错，但话说回来……咖啡店应该让人感到舒适：冬天暖和，夏天凉爽。 我可能会再来喝别的饮料，但大概不会久坐。"
+        }
+      ]
+    },
+    {
+      "caseId": "fuzzy-shop-val-008",
+      "question": "刚搬到附近，想找一家比较有人情味、能慢慢熟悉周围人的咖啡馆。",
+      "candidateReviewCount": 51,
+      "selectedReviewCount": 8,
+      "selectedCharacterCount": 2031,
+      "relevantTopShopCount": 5,
+      "exactEvidenceShopHits": 5,
+      "shops": [
+        {
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "shopRank": 1,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 3,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-3d_m7U-jxRF9YTP6DbOhMw",
+            "yelp-1VyHchVgc9oEfVrsFweNNA"
+          ]
+        },
+        {
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "shopRank": 2,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 6,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-2EsM0mPABnQempeoOPIlcA",
+            "yelp-GEX3lJS5yJObNX0VH0SdKg"
+          ]
+        },
+        {
+          "shopId": 100217,
+          "shopName": "Franny Lou's Porch",
+          "shopRank": 3,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 4,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 2,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-URQ0CYIN4F_L3l0W_BDYvA",
+            "yelp-IYa67-SLAbhSbiHH6Atgsw"
+          ]
+        },
+        {
+          "shopId": 100054,
+          "shopName": "Mood Cafe",
+          "shopRank": 4,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-PoeT0PnpGguk63hLivSxfA"
+          ]
+        },
+        {
+          "shopId": 100051,
+          "shopName": "Forin Cafe",
+          "shopRank": 5,
+          "evidenceStatus": "supported",
+          "availableSupportCount": 1,
+          "availableConflictCount": 0,
+          "selectedSupportCount": 1,
+          "selectedConflictCount": 0,
+          "selectedReviewIds": [
+            "yelp-peOhpNckrMpWPbt41qz3Tw"
+          ]
+        }
+      ],
+      "selectedReviews": [
+        {
+          "reviewId": "yelp-3d_m7U-jxRF9YTP6DbOhMw",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "这家咖啡馆是我搬到费城的原因之一。舒适，咖啡很棒，三明治和汤也很出色——员工非常友好。另外：营业时间比一般的咖啡店要晚！任何椰子味的东西都很棒。Colonel Mustard（三明治）一定要试试。我以前也在这里约会过，所以，你知道，这也是个不错的见面地点。"
+        },
+        {
+          "reviewId": "yelp-1VyHchVgc9oEfVrsFweNNA",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "今年我圣诞愿望清单的第一项，是有人能在我家附近开一家巨大、友好、有 WiFi、有很多插座、空间宽敞的咖啡馆。现在还没有实现，但有人在 Washington West 开了一家，这完全不公平，因为从 Good Karma 走到 Chapterhouse 那一带的好地方也很方便。我先压住自己的怨念，只庆幸如果我真的急着去咖啡馆，可以比以前少走整整两个街区。Good Karma 很大、很明亮，有很多插座和 WiFi。除了咖啡和茶之外，还有很多烘焙食品和其他饮品可选，这点不错。他们还有两个不错的洗手间，也没人打扰你，而且营业到很晚。这会是咖啡馆之爱吗？缺点是食物不算好。店里有牌子告诉你不要带外食，我必须尊重，但我也必须承认，当我咬下一块湿润、蛋味过重的司康时，想到外面有 Metropolitan Bakery 做的那些优秀司康，心里会有点难过。就普通滴滤咖啡来说，咖啡还可以，但正如另一位 Yelp 用户说的，拿铁差很多。他们似乎分不清拿铁和卡布奇诺。我点过一次，之后就再也没点过。可我能说什么呢。为了这里真正友好的氛围，我可以忍受糟糕的司康和普通的咖啡饮品；一想到这个街区如此被宠坏，而我住的那片完全没有这种优秀咖啡馆，我嫉妒得脸都像他们的杯子一样绿了。哦，只收现金，不过店内有一台手续费很贵的 ATM。"
+        },
+        {
+          "reviewId": "yelp-2EsM0mPABnQempeoOPIlcA",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "温馨的环境，友好的员工，好喝的咖啡和美味的点心 前厅很舒适，两侧有大窗户，阳光充足，还能很好地观察街区。员工很棒，和蔼可亲。这是我最喜欢的本地咖啡馆，我经常在这里待上几个小时，工作、和员工、朋友以及邻居聊天。"
+        },
+        {
+          "reviewId": "yelp-GEX3lJS5yJObNX0VH0SdKg",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "友好热情的氛氛围、员工和老板，加上非常合理的价格，使这里成为我最喜欢的社区咖啡馆。唯一能让它更好的是有本地面包师提供无麸质烘焙食品出售。 咖啡很好。非常好。他们卖La Colombe咖啡，而且知道怎么制作。他们还有十多种不错的茶选择，少量但精心挑选的烘焙食品、带奶油芝士和熏鲑鱼或其他配料的百吉饼，偶尔还有新鲜水果如香蕉出售，虽然绝对不是一顿完整的午餐。我听说百吉饼很棒。他们已经解决了饮品菜单的问题（另一条评论中提到散乱不清），墙上有一个清晰的横幅，我发现如果你问，他们总能想办法做出来。 有一个小的户外座位区，配有金属框架沙发和柔软干净的靠垫。非常适合春天和夏天，也是在这里社区结交新朋友的好地方。 前厅是一个放松的区域，可以工作、见人、和老板聊天（她在的时候），听她讲述她旅行丰富的生活故事。虽然她有时在工作时安静而不张扬，所以你可能需要主动提问才能让她开口。 员工也类似：安静、礼貌、高效、友好。问个问题，开始对话，他们就有丰富的生活经历可以分享。事实上，我在这里搭过话的大多数人都很有趣、有创意、鼓舞人心。也许是社区的原因，也许是咖啡因的作用，这里有些特别的东西。不装腔作势，从没见过男士发髻，人们真的会微笑。这很好。 后面有一个房间，有棋盘游戏、一张柔软干净的沙发和两把舒适的椅子，布置得像客厅/会客室，还有一张餐桌和椅子，非常适合学习小组和商务会议。 再加点俗气的话……作为摩羯座，我…"
+        },
+        {
+          "reviewId": "yelp-URQ0CYIN4F_L3l0W_BDYvA",
+          "shopId": 100217,
+          "shopName": "Franny Lou's Porch",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "我对这家店太兴奋了！我是附近其他咖啡馆的常客，但一直希望找到一个更温馨、更社区化的地方，今天偶然发现了这家刚开业一周的店。咖啡师Rosemary让我尝试了菊苣茶，这成了我的新咖啡替代品。我喝了冰的，味道很棒（她说这是一种需要培养的口味）。我还见到了店主，非常喜欢她的个性和热情。春天给我的社区带来了好东西。谢谢！"
+        },
+        {
+          "reviewId": "yelp-IYa67-SLAbhSbiHH6Atgsw",
+          "shopId": 100217,
+          "shopName": "Franny Lou's Porch",
+          "selectedRole": "support",
+          "contentScore": 2,
+          "contextText": "这是肯辛顿一家很酷的小咖啡馆，我很高兴我停下来喝了一杯咖啡。咖啡师非常友好，让我感到受欢迎。这个地方绝对有一种俗气的氛围，我喜欢他们为堂食的咖啡准备的各种各样的杯子收藏。 咖啡很美味，给了我一天所需的提神。我非常喜欢蓝莓面包，这是对自己的甜蜜款待。我坐在后面的房间里，那里有大量的文学作品可以阅读。这是一个很棒的小隐藏宝石，如果你在附近，应该去。"
+        },
+        {
+          "reviewId": "yelp-PoeT0PnpGguk63hLivSxfA",
+          "shopId": 100054,
+          "shopName": "Mood Cafe",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "第一个词：太棒了！老板'Hasan'是个艺术家。我丈夫重感冒，但想尝尝咖啡馆的拉西……Hasan确保我丈夫不仅享受拉西，还用一种药用组合照顾他的喉咙痛。味道好极了。 我想要一份辣味Chaat……我已经很久没吃过这么完美的Chaat了……辣味、口感和创新都融合在一起。必须说，即使在印度也没吃过这样的Chaat。 真希望密尔沃基也有一家。我们会为了在你的咖啡馆吃饭而多去费城几次的，Hasan Saab！:)"
+        },
+        {
+          "reviewId": "yelp-peOhpNckrMpWPbt41qz3Tw",
+          "shopId": 100051,
+          "shopName": "Forin Cafe",
+          "selectedRole": "support",
+          "contentScore": 3,
+          "contextText": "我喝了他们的棉花糖摩卡拿铁，1. 超级可爱，有棉花糖串，2. 非常蓬松好喝！员工很友好，善于聊天。这是该地区一家古雅的咖啡馆，给我一种社区氛围的感觉，你懂吗？他们角落的小店和极简风格让Forin成为一个温馨的小地方，适合学习。"
+        }
+      ]
+    }
+  ]
+}

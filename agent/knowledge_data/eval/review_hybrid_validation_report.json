@@ -1,0 +1,2295 @@
+{
+  "experiment": "RAG-PROD-01 stage 3 review Hybrid validation gate",
+  "methodology": {
+    "split": "validation only",
+    "testRead": false,
+    "sealedReportRead": false,
+    "datasetRole": "frozen reused diagnostic set; not an unbiased production benchmark",
+    "qrelVersion": "fuzzy-shop-zh-validation-v2",
+    "bm25Corpus": "all review sources for generic and shop-filtered retrieval",
+    "mixedCorpusLabelStatus": "seed and Yelp strata measured separately; cross-source candidates remain unjudged",
+    "candidateLimitPerRetriever": 30,
+    "topKShops": 5,
+    "weights": {
+      "vector": 0.2,
+      "bm25": 0.8
+    },
+    "weightsRetuned": false,
+    "warningLatencyMs": 3000.0,
+    "stopLatencyMs": 5000.0,
+    "hybridInitialization": {
+      "performedBeforeTimedRequests": true,
+      "durationMs": 4088.1747000094038,
+      "productionEquivalent": "FastAPI startup prewarm when Hybrid flag is enabled"
+    }
+  },
+  "summary": {
+    "passed": true,
+    "eligibleForHybridAgentCanary": true,
+    "checks": {
+      "ndcgNonRegression": true,
+      "recallNonRegression": true,
+      "evidenceRecallNonRegression": true,
+      "averageLatencyWithinWarningLine": true,
+      "maxLatencyWithinStopLine": true
+    }
+  },
+  "methods": {
+    "sourceAwareVector": {
+      "metrics": {
+        "caseCount": 8,
+        "meanPrecisionAt5": 0.2,
+        "meanRecallAt5": 0.1294642857142857,
+        "meanNdcgAt5": 0.22841770678540188,
+        "mrr": 0.44479166666666664,
+        "meanEvidenceShopRecall": 0.29166666666666663
+      },
+      "timing": {
+        "averageMs": 1706.0048375024053,
+        "maxMs": 2003.678300010506
+      },
+      "details": [
+        {
+          "caseId": "fuzzy-shop-val-001",
+          "question": "我想一个人安静地待一会儿，看看书放空，不希望周围太吵。",
+          "relevantShopCount": 6,
+          "precisionAtK": 0.0,
+          "recallAtK": 0.0,
+          "ndcgAtK": 0.0,
+          "reciprocalRank": 0.125,
+          "firstRelevantShopRank": 8,
+          "evidenceShopHits": 2,
+          "evidenceShopRecall": 0.3333333333333333,
+          "topShops": [
+            {
+              "shopId": 8,
+              "shopName": "街角共创咖啡",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "review-018"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-018",
+                  "shopId": 8,
+                  "shopName": "街角共创咖啡",
+                  "text": "工作日下午常有创业团队讨论，虽然适合协作和开会，但环境比普通咖啡店嘈杂，不适合需要安静专注的人。",
+                  "score": 0.59632957
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 13,
+              "shopName": "湖畔青年旅舍",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "review-038",
+                "review-130",
+                "review-131"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-038",
+                  "shopId": 13,
+                  "shopName": "湖畔青年旅舍",
+                  "text": "公共客厅适合认识旅伴，晚上十点前聊天活动较多，氛围热闹但不适合需要绝对安静的人。",
+                  "score": 0.5941556
+                },
+                {
+                  "reviewId": "review-130",
+                  "shopId": 13,
+                  "shopName": "湖畔青年旅舍",
+                  "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。",
+                  "score": 0.5887586
+                },
+                {
+                  "reviewId": "review-131",
+                  "shopId": 13,
+                  "shopName": "湖畔青年旅舍",
+                  "text": "候场区座位有限，人多时可能需要站一会儿。",
+                  "score": 0.5462523
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 3,
+              "shopName": "清晨手冲咖啡",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "review-013",
+                "review-006"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-013",
+                  "shopId": 3,
+                  "shopName": "清晨手冲咖啡",
+                  "text": "工作日下午通常比较安静，插座集中在靠窗座位；店里没有会议室，也不太适合多人讨论。",
+                  "score": 0.5935971
+                },
+                {
+                  "reviewId": "review-006",
+                  "shopId": 3,
+                  "shopName": "清晨手冲咖啡",
+                  "text": "周末下午客人会多一些，但背景音乐不吵。拿铁价格适中，适合和朋友慢慢聊天。",
+                  "score": 0.5609045
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 1,
+              "shopName": "巷子口火锅",
+              "firstReviewRank": 4,
+              "reviewIds": [
+                "review-002"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-002",
+                  "shopId": 1,
+                  "shopName": "巷子口火锅",
+                  "text": "周五晚上七点以后常要排队，服务员会提醒等位时间。想安静聊天可以避开高峰。",
+                  "score": 0.5893933
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 11,
+              "shopName": "欢乐巨幕影城",
+              "firstReviewRank": 6,
+              "reviewIds": [
+                "review-319",
+                "review-320",
+                "review-326"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-319",
+                  "shopId": 11,
+                  "shopName": "欢乐巨幕影城",
+                  "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。",
+                  "score": 0.5887586
+                },
+                {
+                  "reviewId": "review-320",
+                  "shopId": 11,
+                  "shopName": "欢乐巨幕影城",
+                  "text": "候场区座位有限，人多时可能需要站一会儿。",
+                  "score": 0.5462523
+                },
+                {
+                  "reviewId": "review-326",
+                  "shopId": 11,
+                  "shopName": "欢乐巨幕影城",
+                  "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。工作日晚场人少一些，取票和入场都比较从容。",
+                  "score": 0.5432647
+                }
+              ],
+              "judgedRelevance": 0.0
+            }
+          ],
+          "retrievalDurationMs": 2003.678300010506
+        },
+        {
+          "caseId": "fuzzy-shop-val-002",
+          "question": "想带电脑找个地方待上几个小时，最好坐着舒服，也不会有人一直催我走。",
+          "relevantShopCount": 5,
+          "precisionAtK": 0.0,
+          "recallAtK": 0.0,
+          "ndcgAtK": 0.0,
+          "reciprocalRank": 0.0,
+          "firstRelevantShopRank": null,
+          "evidenceShopHits": 0,
+          "evidenceShopRecall": 0.0,
+          "topShops": [
+            {
+              "shopId": 100080,
+              "shopName": "Crab & Claw",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "yelp-01shcPVy1R_oMZmQ4WAe4g"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-01shcPVy1R_oMZmQ4WAe4g",
+                  "shopId": 100080,
+                  "shopName": "Crab & Claw",
+                  "text": "我三年前就不来这儿了。你要等45分钟或更久才能被服务。打电话过去，他们挂断电话，还玩电话游戏，有时占线。那里工作的人都很生气。我猜是因为他们工资低，所以服务不到位。别来这儿，因为你会非常失望！",
+                  "score": 0.68637204
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 1,
+              "shopName": "巷子口火锅",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "review-002"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-002",
+                  "shopId": 1,
+                  "shopName": "巷子口火锅",
+                  "text": "周五晚上七点以后常要排队，服务员会提醒等位时间。想安静聊天可以避开高峰。",
+                  "score": 0.663468
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 10,
+              "shopName": "星河艺术影城",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "review-110",
+                "review-300",
+                "review-314"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-110",
+                  "shopId": 10,
+                  "shopName": "星河艺术影城",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。工作日白天座位周转慢，适合短时间处理消息或阅读。",
+                  "score": 0.6570605
+                },
+                {
+                  "reviewId": "review-300",
+                  "shopId": 10,
+                  "shopName": "星河艺术影城",
+                  "text": "候场区座位有限，人多时可能需要站一会儿。工作日晚场人少一些，取票和入场都比较从容。",
+                  "score": 0.6259472
+                },
+                {
+                  "reviewId": "review-314",
+                  "shopId": 10,
+                  "shopName": "星河艺术影城",
+                  "text": "候场区座位有限，人多时可能需要站一会儿。散场后电梯容易拥挤，赶时间可以提前看好楼梯位置。",
+                  "score": 0.62145203
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 7,
+              "shopName": "纸间咖啡书屋",
+              "firstReviewRank": 4,
+              "reviewIds": [
+                "review-218",
+                "review-232"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-218",
+                  "shopId": 7,
+                  "shopName": "纸间咖啡书屋",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。工作日白天座位周转慢，适合短时间处理消息或阅读。",
+                  "score": 0.6570605
+                },
+                {
+                  "reviewId": "review-232",
+                  "shopId": 7,
+                  "shopName": "纸间咖啡书屋",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。如果需要长时间停留，最好避开周末下午的高峰。",
+                  "score": 0.6463742
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 8,
+              "shopName": "街角共创咖啡",
+              "firstReviewRank": 5,
+              "reviewIds": [
+                "review-245",
+                "review-259",
+                "review-017"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-245",
+                  "shopId": 8,
+                  "shopName": "街角共创咖啡",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。工作日白天座位周转慢，适合短时间处理消息或阅读。",
+                  "score": 0.6570605
+                },
+                {
+                  "reviewId": "review-259",
+                  "shopId": 8,
+                  "shopName": "街角共创咖啡",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。如果需要长时间停留，最好避开周末下午的高峰。",
+                  "score": 0.6463742
+                },
+                {
+                  "reviewId": "review-017",
+                  "shopId": 8,
+                  "shopName": "街角共创咖啡",
+                  "text": "共享长桌配有很多插座和高速无线网络，工作日早上适合带电脑办公，也能预订四人讨论桌。",
+                  "score": 0.6325634
+                }
+              ],
+              "judgedRelevance": 0.0
+            }
+          ],
+          "retrievalDurationMs": 1535.7015999907162
+        },
+        {
+          "caseId": "fuzzy-shop-val-003",
+          "question": "想找个适合和朋友慢慢聊天的地方，氛围放松，说话不用提高嗓门。",
+          "relevantShopCount": 5,
+          "precisionAtK": 0.0,
+          "recallAtK": 0.0,
+          "ndcgAtK": 0.0,
+          "reciprocalRank": 0.0,
+          "firstRelevantShopRank": null,
+          "evidenceShopHits": 0,
+          "evidenceShopRecall": 0.0,
+          "topShops": [
+            {
+              "shopId": 13,
+              "shopName": "湖畔青年旅舍",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "review-038",
+                "review-130"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-038",
+                  "shopId": 13,
+                  "shopName": "湖畔青年旅舍",
+                  "text": "公共客厅适合认识旅伴，晚上十点前聊天活动较多，氛围热闹但不适合需要绝对安静的人。",
+                  "score": 0.6695709
+                },
+                {
+                  "reviewId": "review-130",
+                  "shopId": 13,
+                  "shopName": "湖畔青年旅舍",
+                  "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。",
+                  "score": 0.6522663
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100092,
+              "shopName": "Hammerheads Bar & Grille",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "yelp-yOaoURGWOFSOS8CdFWjHtg",
+                "yelp-_td-Yv5R3rG-Ub4zx-xLiw",
+                "yelp-k_2o94FnPkQFSuT70L5orA"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-yOaoURGWOFSOS8CdFWjHtg",
+                  "shopId": 100092,
+                  "shopName": "Hammerheads Bar & Grille",
+                  "text": "这个地方周末总有DJ，所以你有两个问题：\n\n1) 音乐太吵。我不明白人们怎么能站着互相聊天。\n2) 你听到的是嘻哈音乐。\n\n人群大多是21岁和二十出头的年轻人。对我来说，这不是一个合适的地方。",
+                  "score": 0.6558118
+                },
+                {
+                  "reviewId": "yelp-_td-Yv5R3rG-Ub4zx-xLiw",
+                  "shopId": 100092,
+                  "shopName": "Hammerheads Bar & Grille",
+                  "text": "就其本身而言还不错：一个结识新朋友的酒吧。\n\n尽管很多人来酒吧只是为了坐下来和一起来的人聊天。我不明白。\n\n另外，我觉得这个地方已经关门了。",
+                  "score": 0.60418046
+                },
+                {
+                  "reviewId": "yelp-k_2o94FnPkQFSuT70L5orA",
+                  "shopId": 100092,
+                  "shopName": "Hammerheads Bar & Grille",
+                  "text": "氛围很轻松，喜欢里面有两个酒吧可以选择。调酒师很好，让坐在吧台的时间变得很愉快。唯一令人沮丧的是我错过了食物供应时间。不知为何，即使人不多，饮料也花了更长时间才上来！",
+                  "score": 0.6040335
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 10,
+              "shopName": "星河艺术影城",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "review-292",
+                "review-299",
+                "review-111"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-292",
+                  "shopId": 10,
+                  "shopName": "星河艺术影城",
+                  "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。",
+                  "score": 0.6522663
+                },
+                {
+                  "reviewId": "review-299",
+                  "shopId": 10,
+                  "shopName": "星河艺术影城",
+                  "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。工作日晚场人少一些，取票和入场都比较从容。",
+                  "score": 0.6371744
+                },
+                {
+                  "reviewId": "review-111",
+                  "shopId": 10,
+                  "shopName": "星河艺术影城",
+                  "text": "饮品甜度可以调整，拿铁和燕麦奶选项都有，口味选择比较灵活。工作日白天座位周转慢，适合短时间处理消息或阅读。",
+                  "score": 0.6310456
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 11,
+              "shopName": "欢乐巨幕影城",
+              "firstReviewRank": 5,
+              "reviewIds": [
+                "review-319",
+                "review-326",
+                "review-333"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-319",
+                  "shopId": 11,
+                  "shopName": "欢乐巨幕影城",
+                  "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。",
+                  "score": 0.6522663
+                },
+                {
+                  "reviewId": "review-326",
+                  "shopId": 11,
+                  "shopName": "欢乐巨幕影城",
+                  "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。工作日晚场人少一些，取票和入场都比较从容。",
+                  "score": 0.6371744
+                },
+                {
+                  "reviewId": "review-333",
+                  "shopId": 11,
+                  "shopName": "欢乐巨幕影城",
+                  "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。热门档期零食柜台会排队，建议先取票再买小食。",
+                  "score": 0.6182222
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 1,
+              "shopName": "巷子口火锅",
+              "firstReviewRank": 6,
+              "reviewIds": [
+                "review-002"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-002",
+                  "shopId": 1,
+                  "shopName": "巷子口火锅",
+                  "text": "周五晚上七点以后常要排队，服务员会提醒等位时间。想安静聊天可以避开高峰。",
+                  "score": 0.65037906
+                }
+              ],
+              "judgedRelevance": 0.0
+            }
+          ],
+          "retrievalDurationMs": 1866.4512000104878
+        },
+        {
+          "caseId": "fuzzy-shop-val-004",
+          "question": "第一次约会想找个有点情调但不会太正式、让人紧张的地方。",
+          "relevantShopCount": 7,
+          "precisionAtK": 0.2,
+          "recallAtK": 0.14285714285714285,
+          "ndcgAtK": 0.40301463303053875,
+          "reciprocalRank": 1.0,
+          "firstRelevantShopRank": 1,
+          "evidenceShopHits": 3,
+          "evidenceShopRecall": 0.42857142857142855,
+          "topShops": [
+            {
+              "shopId": 100299,
+              "shopName": "Bury The Hatchet",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "yelp-u35-OtHG-npYBPXeGDAMMg"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-u35-OtHG-npYBPXeGDAMMg",
+                  "shopId": 100299,
+                  "shopName": "Bury The Hatchet",
+                  "text": "我玩得很开心。这是一个很棒的第一次约会，Lex在教课方面很棒。",
+                  "score": 0.63392335
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100207,
+              "shopName": "Lauren Buckley, L.AC",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "yelp-7d_Y6yCyvUEna9dKD808tQ"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-7d_Y6yCyvUEna9dKD808tQ",
+                  "shopId": 100207,
+                  "shopName": "Lauren Buckley, L.AC",
+                  "text": "空间可爱、温暖而诱人，我在预约期间进入了一些最深沉的状态。试试吧，你不会后悔的。",
+                  "score": 0.62704825
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 11,
+              "shopName": "欢乐巨幕影城",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "review-316",
+                "review-323"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-316",
+                  "shopId": 11,
+                  "shopName": "欢乐巨幕影城",
+                  "text": "大厅指引牌清楚，第一次来也容易找到对应影厅和检票口。",
+                  "score": 0.6262009
+                },
+                {
+                  "reviewId": "review-323",
+                  "shopId": 11,
+                  "shopName": "欢乐巨幕影城",
+                  "text": "大厅指引牌清楚，第一次来也容易找到对应影厅和检票口。工作日晚场人少一些，取票和入场都比较从容。",
+                  "score": 0.60794437
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 10,
+              "shopName": "星河艺术影城",
+              "firstReviewRank": 4,
+              "reviewIds": [
+                "review-289",
+                "review-296"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-289",
+                  "shopId": 10,
+                  "shopName": "星河艺术影城",
+                  "text": "大厅指引牌清楚，第一次来也容易找到对应影厅和检票口。",
+                  "score": 0.6262009
+                },
+                {
+                  "reviewId": "review-296",
+                  "shopId": 10,
+                  "shopName": "星河艺术影城",
+                  "text": "大厅指引牌清楚，第一次来也容易找到对应影厅和检票口。工作日晚场人少一些，取票和入场都比较从容。",
+                  "score": 0.60794437
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 12,
+              "shopName": "城际商务酒店",
+              "firstReviewRank": 5,
+              "reviewIds": [
+                "review-127"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-127",
+                  "shopId": 12,
+                  "shopName": "城际商务酒店",
+                  "text": "大厅指引牌清楚，第一次来也容易找到对应影厅和检票口。",
+                  "score": 0.6262009
+                }
+              ],
+              "judgedRelevance": 0.0
+            }
+          ],
+          "retrievalDurationMs": 1593.305499991402
+        },
+        {
+          "caseId": "fuzzy-shop-val-005",
+          "question": "周末想带孩子一起吃饭，希望店员友善，环境对家庭比较轻松。",
+          "relevantShopCount": 8,
+          "precisionAtK": 0.4,
+          "recallAtK": 0.25,
+          "ndcgAtK": 0.46579097037257516,
+          "reciprocalRank": 1.0,
+          "firstRelevantShopRank": 1,
+          "evidenceShopHits": 4,
+          "evidenceShopRecall": 0.5,
+          "topShops": [
+            {
+              "shopId": 100004,
+              "shopName": "Craft Hall",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "yelp-5-YovLQWy6Srq0UnTdVhuw",
+                "yelp-M-38wpRyPVRT35MgRmLCjQ"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-5-YovLQWy6Srq0UnTdVhuw",
+                  "shopId": 100004,
+                  "shopName": "Craft Hall",
+                  "text": "适合有8岁以下孩子的家庭的好地方。和超过10个大人以及5个孩子一起去。空间充足，早午餐菜单不错。",
+                  "score": 0.73540854
+                },
+                {
+                  "reviewId": "yelp-M-38wpRyPVRT35MgRmLCjQ",
+                  "shopId": 100004,
+                  "shopName": "Craft Hall",
+                  "text": "最好的新添成员，尤其适合家庭。美味的食物，很棒的饮品，还有一个室内游乐场。这已经成为我们雨天想出门消耗精力时的首选去处。\n\n如果你没有孩子，别担心！这里基本上有两个独立的区域，你完全可以不跟太多小孩互动，也能度过愉快的时光。",
+                  "score": 0.6943666
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100298,
+              "shopName": "Applebee's Grill + Bar",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "yelp-sikPKS_co6hTNCbM2YxzAA",
+                "yelp-b3gHEv0TQdUODgQrCe4AKA"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-sikPKS_co6hTNCbM2YxzAA",
+                  "shopId": 100298,
+                  "shopName": "Applebee's Grill + Bar",
+                  "text": "工作一天后，和老公孩子来这里放松的好地方。喜欢这里的食物。",
+                  "score": 0.7227293
+                },
+                {
+                  "reviewId": "yelp-b3gHEv0TQdUODgQrCe4AKA",
+                  "shopId": 100298,
+                  "shopName": "Applebee's Grill + Bar",
+                  "text": "食物还不错，没什么特别的，员工可能有点慢，好处是营业时间和饮品特价。如果你需要找个地方坐下来吃饭或快速聚聚，这是个好地方。",
+                  "score": 0.702294
+                }
+              ],
+              "judgedRelevance": 2.0
+            },
+            {
+              "shopId": 100194,
+              "shopName": "Zorba's Taverna",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "yelp-rWrVThcyPncp-wpqZkjYxA"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-rWrVThcyPncp-wpqZkjYxA",
+                  "shopId": 100194,
+                  "shopName": "Zorba's Taverna",
+                  "text": "氛围温馨舒适。进门时厨师和主人都会打招呼。我们在周六晚上来之前提前几小时预订了，到达时桌子已经准备好，面包和水都摆好了。食物很棒；新鲜且上菜快。我们分享了几道主菜，都很好吃。服务一流。适合约会或小团体聚餐的好地方。",
+                  "score": 0.71362233
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 9,
+              "shopName": "河畔家常菜",
+              "firstReviewRank": 4,
+              "reviewIds": [
+                "review-275",
+                "review-270",
+                "review-282"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-275",
+                  "shopId": 9,
+                  "shopName": "河畔家常菜",
+                  "text": "菜品整体稳定，偶尔新品会有试吃活动，想尝鲜可以问问店员。午餐时段上菜更快，适合附近上班族简单聚餐。",
+                  "score": 0.7074981
+                },
+                {
+                  "reviewId": "review-270",
+                  "shopId": 9,
+                  "shopName": "河畔家常菜",
+                  "text": "服务员加汤和收空盘比较及时，整体节奏稳定，适合日常随便吃一顿。午餐时段上菜更快，适合附近上班族简单聚餐。",
+                  "score": 0.6904597
+                },
+                {
+                  "reviewId": "review-282",
+                  "shopId": 9,
+                  "shopName": "河畔家常菜",
+                  "text": "菜品整体稳定，偶尔新品会有试吃活动，想尝鲜可以问问店员。工作日晚餐人流相对稳定，不像周末那样容易拥挤。",
+                  "score": 0.68617135
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 6,
+              "shopName": "活力健身工坊",
+              "firstReviewRank": 5,
+              "reviewIds": [
+                "review-086",
+                "review-081",
+                "review-084"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-086",
+                  "shopId": 6,
+                  "shopName": "活力健身工坊",
+                  "text": "菜品整体稳定，偶尔新品会有试吃活动，想尝鲜可以问问店员。午餐时段上菜更快，适合附近上班族简单聚餐。",
+                  "score": 0.7074981
+                },
+                {
+                  "reviewId": "review-081",
+                  "shopId": 6,
+                  "shopName": "活力健身工坊",
+                  "text": "服务员加汤和收空盘比较及时，整体节奏稳定，适合日常随便吃一顿。午餐时段上菜更快，适合附近上班族简单聚餐。",
+                  "score": 0.6904597
+                },
+                {
+                  "reviewId": "review-084",
+                  "shopId": 6,
+                  "shopName": "活力健身工坊",
+                  "text": "店门口招牌显眼，从路口走过来很好找，外地朋友集合也不费劲。午餐时段上菜更快，适合附近上班族简单聚餐。",
+                  "score": 0.6841744
+                }
+              ],
+              "judgedRelevance": 0.0
+            }
+          ],
+          "retrievalDurationMs": 1562.2711000032723
+        },
+        {
+          "caseId": "fuzzy-shop-val-006",
+          "question": "天气不错，想坐在外面晒晒太阳，喝点东西慢慢休息。",
+          "relevantShopCount": 6,
+          "precisionAtK": 0.0,
+          "recallAtK": 0.0,
+          "ndcgAtK": 0.0,
+          "reciprocalRank": 0.1,
+          "firstRelevantShopRank": 10,
+          "evidenceShopHits": 0,
+          "evidenceShopRecall": 0.0,
+          "topShops": [
+            {
+              "shopId": 7,
+              "shopName": "纸间咖啡书屋",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "review-218",
+                "review-232",
+                "review-211"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-218",
+                  "shopId": 7,
+                  "shopName": "纸间咖啡书屋",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。工作日白天座位周转慢，适合短时间处理消息或阅读。",
+                  "score": 0.6876429
+                },
+                {
+                  "reviewId": "review-232",
+                  "shopId": 7,
+                  "shopName": "纸间咖啡书屋",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。如果需要长时间停留，最好避开周末下午的高峰。",
+                  "score": 0.681845
+                },
+                {
+                  "reviewId": "review-211",
+                  "shopId": 7,
+                  "shopName": "纸间咖啡书屋",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。",
+                  "score": 0.66677713
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 10,
+              "shopName": "星河艺术影城",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "review-110",
+                "review-111"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-110",
+                  "shopId": 10,
+                  "shopName": "星河艺术影城",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。工作日白天座位周转慢，适合短时间处理消息或阅读。",
+                  "score": 0.6876429
+                },
+                {
+                  "reviewId": "review-111",
+                  "shopId": 10,
+                  "shopName": "星河艺术影城",
+                  "text": "饮品甜度可以调整，拿铁和燕麦奶选项都有，口味选择比较灵活。工作日白天座位周转慢，适合短时间处理消息或阅读。",
+                  "score": 0.65091264
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 8,
+              "shopName": "街角共创咖啡",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "review-245",
+                "review-259",
+                "review-238"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-245",
+                  "shopId": 8,
+                  "shopName": "街角共创咖啡",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。工作日白天座位周转慢，适合短时间处理消息或阅读。",
+                  "score": 0.6876429
+                },
+                {
+                  "reviewId": "review-259",
+                  "shopId": 8,
+                  "shopName": "街角共创咖啡",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。如果需要长时间停留，最好避开周末下午的高峰。",
+                  "score": 0.681845
+                },
+                {
+                  "reviewId": "review-238",
+                  "shopId": 8,
+                  "shopName": "街角共创咖啡",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。",
+                  "score": 0.66677713
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 12,
+              "shopName": "城际商务酒店",
+              "firstReviewRank": 5,
+              "reviewIds": [
+                "review-124",
+                "review-125"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-124",
+                  "shopId": 12,
+                  "shopName": "城际商务酒店",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。如果需要长时间停留，最好避开周末下午的高峰。",
+                  "score": 0.681845
+                },
+                {
+                  "reviewId": "review-125",
+                  "shopId": 12,
+                  "shopName": "城际商务酒店",
+                  "text": "饮品甜度可以调整，拿铁和燕麦奶选项都有，口味选择比较灵活。如果需要长时间停留，最好避开周末下午的高峰。",
+                  "score": 0.620731
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 15,
+              "shopName": "全天候综合健身",
+              "firstReviewRank": 7,
+              "reviewIds": [
+                "review-432",
+                "review-435",
+                "review-425"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-432",
+                  "shopId": 15,
+                  "shopName": "全天候综合健身",
+                  "text": "饮水区位置明显，运动中补水方便，纸杯补充也比较及时。工作日中午人相对少，想避开晚高峰可以这个时段来。",
+                  "score": 0.6768639
+                },
+                {
+                  "reviewId": "review-435",
+                  "shopId": 15,
+                  "shopName": "全天候综合健身",
+                  "text": "馆内通风比想象中好，运动后闷热感不明显。工作日中午人相对少，想避开晚高峰可以这个时段来。",
+                  "score": 0.6414031
+                },
+                {
+                  "reviewId": "review-425",
+                  "shopId": 15,
+                  "shopName": "全天候综合健身",
+                  "text": "饮水区位置明显，运动中补水方便，纸杯补充也比较及时。",
+                  "score": 0.6311647
+                }
+              ],
+              "judgedRelevance": 0.0
+            }
+          ],
+          "retrievalDurationMs": 1702.563500002725
+        },
+        {
+          "caseId": "fuzzy-shop-val-007",
+          "question": "我对咖啡不太懂，想找一家店员愿意耐心介绍、不会让新手尴尬的咖啡店。",
+          "relevantShopCount": 7,
+          "precisionAtK": 0.2,
+          "recallAtK": 0.14285714285714285,
+          "ndcgAtK": 0.20150731651526937,
+          "reciprocalRank": 0.3333333333333333,
+          "firstRelevantShopRank": 3,
+          "evidenceShopHits": 4,
+          "evidenceShopRecall": 0.5714285714285714,
+          "topShops": [
+            {
+              "shopId": 100100,
+              "shopName": "Starbucks",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "yelp-tmm4g7EwQcJ8PrNV_KuWDg"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-tmm4g7EwQcJ8PrNV_KuWDg",
+                  "shopId": 100100,
+                  "shopName": "Starbucks",
+                  "text": "不会推荐这家星巴克，因为附近有那么多其他咖啡店。员工似乎缺乏倾听技巧。一杯简单的加奶油和经典糖浆的冰咖啡，他们大多数时候都做不对。过去几个月我一直耐心忍受他们弄错我的订单，但到了某个时候，这家店需要承担责任。除非你不介意被麻烦，否则把钱花在别处吧。",
+                  "score": 0.74216294
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100108,
+              "shopName": "Vineyards Cafe",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "yelp-yflPZ9-fJj6_3H8R2y3JHw",
+                "yelp-I0Zm4zxqNEOHNvn8vEX0jg"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-yflPZ9-fJj6_3H8R2y3JHw",
+                  "shopId": 100108,
+                  "shopName": "Vineyards Cafe",
+                  "text": "好咖啡，好氛围，优质服务，这个地方是个隐藏的宝石。找到了我新的首选咖啡店。",
+                  "score": 0.73196393
+                },
+                {
+                  "reviewId": "yelp-I0Zm4zxqNEOHNvn8vEX0jg",
+                  "shopId": 100108,
+                  "shopName": "Vineyards Cafe",
+                  "text": "我就住在这附近，这里成了我和客人的首选。我吃过菜单上的很多菜品（甜的咸的都有），从未失望过。员工友好，服务高效。咖啡是热的，特色饮品做得很好。一楼和外面座位有限，楼上也有座位。我会继续来这里的！",
+                  "score": 0.6878075
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100010,
+              "shopName": "ReAnimator Coffee",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "yelp-Qkkyk7R9rCK7ZXHOkenT_g",
+                "yelp-YysS6Zla-HtqtR5SW60TbQ"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-Qkkyk7R9rCK7ZXHOkenT_g",
+                  "shopId": 100010,
+                  "shopName": "ReAnimator Coffee",
+                  "text": "很棒的咖啡店，有乐于助人的咖啡师和非常好的咖啡。我停下来买过外带杯，也花30分钟慢慢喝过手冲咖啡。",
+                  "score": 0.724527
+                },
+                {
+                  "reviewId": "yelp-YysS6Zla-HtqtR5SW60TbQ",
+                  "shopId": 100010,
+                  "shopName": "ReAnimator Coffee",
+                  "text": "咖啡很棒，空间很棒，员工也是最友好的。我从来不是个咖啡爱好者，但多亏了Reanimator的手冲咖啡，我进入了咖啡迷的世界！这是个好地方，可以快速喝一杯，和朋友见面，或者进行一整天的认真学习。",
+                  "score": 0.694674
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100169,
+              "shopName": "Good Karma Cafe",
+              "firstReviewRank": 4,
+              "reviewIds": [
+                "yelp-E8DBE1QeXjTE5hpnh0geNQ",
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-E8DBE1QeXjTE5hpnh0geNQ",
+                  "shopId": 100169,
+                  "shopName": "Good Karma Cafe",
+                  "text": "我们喜欢这个地方，喝杯好咖啡或特调饮品。氛围休闲又吸引人，很适合见朋友或闲逛看书。我也在这里开过几次商务会议。他们注重细节，比如在服务台放一个杯子，让你想加更多奶精时倒掉多余的咖啡（你在星巴克见过多少次人们把咖啡倒进垃圾桶！？）这种对细节和服务的关注贯穿整个店。而且店面很宽敞，不像有些地方那么拥挤。\n\n如果你还没来过，绝对值得一试。",
+                  "score": 0.71806234
+                },
+                {
+                  "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                  "shopId": 100169,
+                  "shopName": "Good Karma Cafe",
+                  "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。",
+                  "score": 0.69251275
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 8,
+              "shopName": "街角共创咖啡",
+              "firstReviewRank": 5,
+              "reviewIds": [
+                "review-100",
+                "review-235",
+                "review-249"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-100",
+                  "shopId": 8,
+                  "shopName": "街角共创咖啡",
+                  "text": "菜单上咖啡豆产地标注清楚，店员能简单介绍风味，适合慢慢挑饮品。",
+                  "score": 0.71745336
+                },
+                {
+                  "reviewId": "review-235",
+                  "shopId": 8,
+                  "shopName": "街角共创咖啡",
+                  "text": "菜单上咖啡豆产地标注清楚，店员能简单介绍风味，适合慢慢挑饮品。",
+                  "score": 0.71745336
+                },
+                {
+                  "reviewId": "review-249",
+                  "shopId": 8,
+                  "shopName": "街角共创咖啡",
+                  "text": "菜单上咖啡豆产地标注清楚，店员能简单介绍风味，适合慢慢挑饮品。傍晚外带订单会变多，堂食区通常还能保持基本安静。",
+                  "score": 0.70984834
+                }
+              ],
+              "judgedRelevance": 0.0
+            }
+          ],
+          "retrievalDurationMs": 1690.8414000063203
+        },
+        {
+          "caseId": "fuzzy-shop-val-008",
+          "question": "刚搬到附近，想找一家比较有人情味、能慢慢熟悉周围人的咖啡馆。",
+          "relevantShopCount": 8,
+          "precisionAtK": 0.8,
+          "recallAtK": 0.5,
+          "ndcgAtK": 0.7570287343648318,
+          "reciprocalRank": 1.0,
+          "firstRelevantShopRank": 1,
+          "evidenceShopHits": 4,
+          "evidenceShopRecall": 0.5,
+          "topShops": [
+            {
+              "shopId": 100010,
+              "shopName": "ReAnimator Coffee",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "yelp-E4SFLVCqfCGgX9tSOzh7Jw",
+                "yelp-Nx84FOIRRmroK91kOYMn3Q",
+                "yelp-UO9TXvLjHoMHCZ1C5OXqLg"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-E4SFLVCqfCGgX9tSOzh7Jw",
+                  "shopId": 100010,
+                  "shopName": "ReAnimator Coffee",
+                  "text": "Loco Pez附近一家相当不错、低调的咖啡店。如果我住在附近，我可能会成为这里的常客。",
+                  "score": 0.7483227
+                },
+                {
+                  "reviewId": "yelp-Nx84FOIRRmroK91kOYMn3Q",
+                  "shopId": 100010,
+                  "shopName": "ReAnimator Coffee",
+                  "text": "我去年八月搬到这个地区，花了一些时间想找一家步行距离内不错的咖啡店。不用说，Re-animator有城里最好的咖啡和浓缩咖啡。位置很好，里面比较小，但确实很放松。强烈推荐，尤其是外地/外州来的游客。",
+                  "score": 0.72479093
+                },
+                {
+                  "reviewId": "yelp-UO9TXvLjHoMHCZ1C5OXqLg",
+                  "shopId": 100010,
+                  "shopName": "ReAnimator Coffee",
+                  "text": "好咖啡，漂亮的室内，友好的服务A+\n这是个和朋友闲逛或读书的好地方。外面有几张桌子，如果你想和你的狗一起待着。",
+                  "score": 0.7122848
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100169,
+              "shopName": "Good Karma Cafe",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                "yelp-YmBytIHGjEroySTkyL8m8w",
+                "yelp-E8DBE1QeXjTE5hpnh0geNQ"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                  "shopId": 100169,
+                  "shopName": "Good Karma Cafe",
+                  "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。",
+                  "score": 0.7482997
+                },
+                {
+                  "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+                  "shopId": 100169,
+                  "shopName": "Good Karma Cafe",
+                  "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖啡馆显得诱人的那种舒适感。我本来想坐到空间后方侧面的房间，但那里空气有点闷，所以又移到前面。音乐增添了不错的放松氛围，大幅画作也给原本白色的墙面增加了一些色彩。靠近柜台的前方空间有点空旷，除了两个不太好看的饮料冷柜之外没有什么——如果这里能有更多桌子，或者一条带凳子的吧台，会很好。里面还有一台 ATM，如果你需要一点额外现金，可能算不错（不确定咖啡馆是否接受刷卡）……不过如果机器声音能关掉会更好——每按一下按钮都会大声哔一声，如果你在阅读或学习会有点分散注意力。此外，以这个空间大小来说，在他们开业前，我原本期待它更像一家咖啡馆——那种除了咖啡、茶等之外，还提供汤和三明治的地方，也许最终会有？这个社区真的很需要一个能快速买到三明治或小吃的选择。抛开这些不说，我知道他们才开业大约一周半，还在适应新空间，所以我肯定还会再来。",
+                  "score": 0.7089691
+                },
+                {
+                  "reviewId": "yelp-E8DBE1QeXjTE5hpnh0geNQ",
+                  "shopId": 100169,
+                  "shopName": "Good Karma Cafe",
+                  "text": "我们喜欢这个地方，喝杯好咖啡或特调饮品。氛围休闲又吸引人，很适合见朋友或闲逛看书。我也在这里开过几次商务会议。他们注重细节，比如在服务台放一个杯子，让你想加更多奶精时倒掉多余的咖啡（你在星巴克见过多少次人们把咖啡倒进垃圾桶！？）这种对细节和服务的关注贯穿整个店。而且店面很宽敞，不像有些地方那么拥挤。\n\n如果你还没来过，绝对值得一试。",
+                  "score": 0.7035862
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100192,
+              "shopName": "Alena’s Cafe",
+              "firstReviewRank": 4,
+              "reviewIds": [
+                "yelp-N0Dq5TPfMuf13PB6p9rtYw",
+                "yelp-WGN7zMDwQ07IM4w4HyJMbw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-N0Dq5TPfMuf13PB6p9rtYw",
+                  "shopId": 100192,
+                  "shopName": "Alena’s Cafe",
+                  "text": "我在上班路上找咖啡时偶然发现了这家咖啡店。咖啡和早餐三明治都很棒，所以我又回来吃午餐，没有失望。强烈推荐给附近想找优质咖啡馆的人。",
+                  "score": 0.7201477
+                },
+                {
+                  "reviewId": "yelp-WGN7zMDwQ07IM4w4HyJMbw",
+                  "shopId": 100192,
+                  "shopName": "Alena’s Cafe",
+                  "text": "非常温馨、迷人、袖珍的咖啡馆。非常友好，现点现做的早餐正合我意！我一定要再去尝尝他们展示柜里的烘焙食品！",
+                  "score": 0.7140591
+                }
+              ],
+              "judgedRelevance": 2.0
+            },
+            {
+              "shopId": 100108,
+              "shopName": "Vineyards Cafe",
+              "firstReviewRank": 6,
+              "reviewIds": [
+                "yelp-yflPZ9-fJj6_3H8R2y3JHw",
+                "yelp-I0Zm4zxqNEOHNvn8vEX0jg"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-yflPZ9-fJj6_3H8R2y3JHw",
+                  "shopId": 100108,
+                  "shopName": "Vineyards Cafe",
+                  "text": "好咖啡，好氛围，优质服务，这个地方是个隐藏的宝石。找到了我新的首选咖啡店。",
+                  "score": 0.7131754
+                },
+                {
+                  "reviewId": "yelp-I0Zm4zxqNEOHNvn8vEX0jg",
+                  "shopId": 100108,
+                  "shopName": "Vineyards Cafe",
+                  "text": "我就住在这附近，这里成了我和客人的首选。我吃过菜单上的很多菜品（甜的咸的都有），从未失望过。员工友好，服务高效。咖啡是热的，特色饮品做得很好。一楼和外面座位有限，楼上也有座位。我会继续来这里的！",
+                  "score": 0.6976086
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100151,
+              "shopName": "Lucky Goat Coffeehouse",
+              "firstReviewRank": 8,
+              "reviewIds": [
+                "yelp-1r3lJQYazqTmw50kvk_Yhw",
+                "yelp-2EsM0mPABnQempeoOPIlcA",
+                "yelp-_yfMYUUxKW9nOC1z4O7FWw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-1r3lJQYazqTmw50kvk_Yhw",
+                  "shopId": 100151,
+                  "shopName": "Lucky Goat Coffeehouse",
+                  "text": "这是一家非常不错的小咖啡馆。员工很友好。咖啡和拿铁都很好。\n\n很高兴在附近看到一个热情好客、饮品做得好的地方。",
+                  "score": 0.71128273
+                },
+                {
+                  "reviewId": "yelp-2EsM0mPABnQempeoOPIlcA",
+                  "shopId": 100151,
+                  "shopName": "Lucky Goat Coffeehouse",
+                  "text": "温馨的环境，友好的员工，好喝的咖啡和美味的点心\n\n前厅很舒适，两侧有大窗户，阳光充足，还能很好地观察街区。员工很棒，和蔼可亲。这是我最喜欢的本地咖啡馆，我经常在这里待上几个小时，工作、和员工、朋友以及邻居聊天。",
+                  "score": 0.7075483
+                },
+                {
+                  "reviewId": "yelp-_yfMYUUxKW9nOC1z4O7FWw",
+                  "shopId": 100151,
+                  "shopName": "Lucky Goat Coffeehouse",
+                  "text": "喜欢这个地方！！一个可爱的小社区咖啡馆 :-) 氛围非常好。他们用La Colombe的咖啡。我经常来这里放松...",
+                  "score": 0.6967536
+                }
+              ],
+              "judgedRelevance": 3.0
+            }
+          ],
+          "retrievalDurationMs": 1693.2261000038125
+        }
+      ]
+    },
+    "reviewHybrid": {
+      "metrics": {
+        "caseCount": 8,
+        "meanPrecisionAt5": 0.45,
+        "meanRecallAt5": 0.3319940476190476,
+        "meanNdcgAt5": 0.43288721528730256,
+        "mrr": 0.8541666666666666,
+        "meanEvidenceShopRecall": 0.5907738095238095
+      },
+      "timing": {
+        "averageMs": 1703.4032124938676,
+        "maxMs": 1794.6494999923743
+      },
+      "details": [
+        {
+          "caseId": "fuzzy-shop-val-001",
+          "question": "我想一个人安静地待一会儿，看看书放空，不希望周围太吵。",
+          "relevantShopCount": 6,
+          "precisionAtK": 0.2,
+          "recallAtK": 0.16666666666666666,
+          "ndcgAtK": 0.3666495063604039,
+          "reciprocalRank": 1.0,
+          "firstRelevantShopRank": 1,
+          "evidenceShopHits": 2,
+          "evidenceShopRecall": 0.3333333333333333,
+          "topShops": [
+            {
+              "shopId": 100151,
+              "shopName": "Lucky Goat Coffeehouse",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                "yelp-0jBamrOBDkY6lLTpkY0xZw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+                  "shopId": 100151,
+                  "shopName": "Lucky Goat Coffeehouse",
+                  "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。",
+                  "score": 0.8
+                },
+                {
+                  "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+                  "shopId": 100151,
+                  "shopName": "Lucky Goat Coffeehouse",
+                  "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。",
+                  "score": 0.08904043657241265
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100290,
+              "shopName": "Cappuccio's Meats",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "yelp-mRFf4ct6RcNQKe0EczzQFA"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-mRFf4ct6RcNQKe0EczzQFA",
+                  "shopId": 100290,
+                  "shopName": "Cappuccio's Meats",
+                  "text": "我们第一次来。只买了些意式烟肉——但，很漂亮！和妈妈聊了一会儿，看着她做香肠！我们一定会再来的！",
+                  "score": 0.7445433057695646
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100096,
+              "shopName": "Vientiane Café",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "yelp-c-PGzWXljW7kU0oiBxEF3Q"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-c-PGzWXljW7kU0oiBxEF3Q",
+                  "shopId": 100096,
+                  "shopName": "Vientiane Café",
+                  "text": "我去过几次。我会跳过他们的泰式炒河粉，我喜欢特定的口味，要么合你口味，要么不合。我喜欢的还有很多其他菜品，比如甜罗勒三文鱼或NomNom沙拉。我也看到过很多其他菜品飘过，我愿意尝试。\n\n他们的扩张似乎有了回报，现在坐下来待一会儿更舒适了。",
+                  "score": 0.28712200856545195
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100213,
+              "shopName": "Franklin's",
+              "firstReviewRank": 4,
+              "reviewIds": [
+                "yelp-tMbDmOKQm4kSF2eoXBSPRw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-tMbDmOKQm4kSF2eoXBSPRw",
+                  "shopId": 100213,
+                  "shopName": "Franklin's",
+                  "text": "喜欢这个地方。好食物，好啤酒选择，室内和甲板上氛围都很好！我们一岁的孩子可以在甲板上安静地坐几个小时，他们也允许狗进入。好地方！",
+                  "score": 0.25390015505748154
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100093,
+              "shopName": "Square 1682",
+              "firstReviewRank": 5,
+              "reviewIds": [
+                "yelp-RgqkIVm9KxaHvNuVpiWhTw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-RgqkIVm9KxaHvNuVpiWhTw",
+                  "shopId": 100093,
+                  "shopName": "Square 1682",
+                  "text": "我来这里是因为餐厅周，因为我住在这附近，经常路过。我原本觉得它更像一个酒店餐厅，但结果很棒！我绝对会再来的。因为是餐厅周，菜单有所不同，但我的主菜——三文鱼配藜麦和蔬菜——是我吃过最好的之一！！我吃得很饱，但还是吃完了。他们还在餐厅周搞活动，葡萄酒每瓶35美元，对于一家比较高档的餐厅来说相当不错。员工非常友好，唯一的问题是我们有一会儿找不到女主人安排座位。但我想她跑到后面去了，他们道了歉。总的来说，对传统美食进行了很棒的创新。很喜欢，等不及再来了。",
+                  "score": 0.23600957038809423
+                }
+              ],
+              "judgedRelevance": 0.0
+            }
+          ],
+          "retrievalDurationMs": 1794.6494999923743
+        },
+        {
+          "caseId": "fuzzy-shop-val-002",
+          "question": "想带电脑找个地方待上几个小时，最好坐着舒服，也不会有人一直催我走。",
+          "relevantShopCount": 5,
+          "precisionAtK": 0.2,
+          "recallAtK": 0.2,
+          "ndcgAtK": 0.23133008269506616,
+          "reciprocalRank": 0.5,
+          "firstRelevantShopRank": 2,
+          "evidenceShopHits": 1,
+          "evidenceShopRecall": 0.2,
+          "topShops": [
+            {
+              "shopId": 100080,
+              "shopName": "Crab & Claw",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "yelp-GU4bVDFW0GMTVBQqaqatmw",
+                "yelp-01shcPVy1R_oMZmQ4WAe4g"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-GU4bVDFW0GMTVBQqaqatmw",
+                  "shopId": 100080,
+                  "shopName": "Crab & Claw",
+                  "text": "单凭味道，这家店值得五颗星。他们的蟹腿棒极了。调味料是我吃过最好的之一。\n\n但是他们做我点的10磅螃蟹花了超~~~久。当时是节假日，如果他们提前告诉我们蟹腿要几个小时才能做好，那就没问题了。我们可以等食物好了再回来，而不是在那里待上几个小时。他们说一小时……结果花了2-3小时。",
+                  "score": 0.8
+                },
+                {
+                  "reviewId": "yelp-01shcPVy1R_oMZmQ4WAe4g",
+                  "shopId": 100080,
+                  "shopName": "Crab & Claw",
+                  "text": "我三年前就不来这儿了。你要等45分钟或更久才能被服务。打电话过去，他们挂断电话，还玩电话游戏，有时占线。那里工作的人都很生气。我猜是因为他们工资低，所以服务不到位。别来这儿，因为你会非常失望！",
+                  "score": 0.2
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100151,
+              "shopName": "Lucky Goat Coffeehouse",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "yelp-2EsM0mPABnQempeoOPIlcA",
+                "yelp-zJUxQgDCQpZXVRfi0aCIRw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-2EsM0mPABnQempeoOPIlcA",
+                  "shopId": 100151,
+                  "shopName": "Lucky Goat Coffeehouse",
+                  "text": "温馨的环境，友好的员工，好喝的咖啡和美味的点心\n\n前厅很舒适，两侧有大窗户，阳光充足，还能很好地观察街区。员工很棒，和蔼可亲。这是我最喜欢的本地咖啡馆，我经常在这里待上几个小时，工作、和员工、朋友以及邻居聊天。",
+                  "score": 0.5904117030336989
+                },
+                {
+                  "reviewId": "yelp-zJUxQgDCQpZXVRfi0aCIRw",
+                  "shopId": 100151,
+                  "shopName": "Lucky Goat Coffeehouse",
+                  "text": "我一直想试试这个地方，因为它离我的实习地点很近。这是一个可爱的小地方，似乎适合工作几个小时或者只是放松一下。我进去时人群混杂，包括一个忙着用电脑的男人，以及一位母亲和她的孩子在享用早餐。我点单时还有另外几个人进进出出。\n\n我对我点的制作精美的“幸运山羊”拿铁印象深刻……黑巧克力、榛子、海盐！非常美味。咖啡师在我看菜单时也很有耐心，人很好。我肯定会再回来尝试其他特色饮品，听起来都很棒，或者尝尝新鲜烘焙的糕点。我也对冰咖啡很好奇。\n\n我建议他们更新网站！网站上还列着秋季特饮，我知道他们每个季节都有几款新的特饮！我很快会再来尝试菜单上的更多菜品！",
+                  "score": 0.15184063120283006
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100183,
+              "shopName": "Halal Gyro King",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "yelp-6bKjSdPyjiINvxZHRaSTKg"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-6bKjSdPyjiINvxZHRaSTKg",
+                  "shopId": 100183,
+                  "shopName": "Halal Gyro King",
+                  "text": "我和清真餐车有一段“秘密”恋情。我偷偷溜出工作来这里吃午餐，找个安静的地方吃饭，这样就不会有人说：“清真？又吃？”",
+                  "score": 0.40775431794655903
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 8,
+              "shopName": "街角共创咖啡",
+              "firstReviewRank": 4,
+              "reviewIds": [
+                "review-017",
+                "review-245",
+                "review-259"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-017",
+                  "shopId": 8,
+                  "shopName": "街角共创咖啡",
+                  "text": "共享长桌配有很多插座和高速无线网络，工作日早上适合带电脑办公，也能预订四人讨论桌。",
+                  "score": 0.34428122505290254
+                },
+                {
+                  "reviewId": "review-245",
+                  "shopId": 8,
+                  "shopName": "街角共创咖啡",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。工作日白天座位周转慢，适合短时间处理消息或阅读。",
+                  "score": 0.1167911516538559
+                },
+                {
+                  "reviewId": "review-259",
+                  "shopId": 8,
+                  "shopName": "街角共创咖啡",
+                  "text": "外带窗口动线顺畅，早上买一杯带走比较方便。如果需要长时间停留，最好避开周末下午的高峰。",
+                  "score": 0.086455157158807
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100232,
+              "shopName": "Joe's Steaks + Soda Shop",
+              "firstReviewRank": 5,
+              "reviewIds": [
+                "yelp-6sjRqibBm1nYAv45ZCb6cQ"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-6sjRqibBm1nYAv45ZCb6cQ",
+                  "shopId": 100232,
+                  "shopName": "Joe's Steaks + Soda Shop",
+                  "text": "在过去的二十年里，我一直告诉所有愿意听的人，南街的Ishkibibble's Eatery是我吃过的最好的芝士牛排。我去过其他一些地方，这里就不点名了，但没有一个能比得上Ishkibble's。\n\n几个月前，几个朋友让我试试东北区的Chink's，在被反复催促后，我决定去尝一尝。\n\n当我走进那家店，看到肉的质地和烹饪方式时，我就知道我要大饱口福了。果然，那块牛排和我吃过的任何东西都不一样。味道难以置信，牛排大小也很合适。就价格而言，简直是超值。我走出那家店时感觉像是占了他们的便宜！\n\n我会一直爱Ishkibble's，但我不能再告诉别人那里有我最喜欢的芝士牛排了。这个桂冠现在属于Chink's！",
+                  "score": 0.2794703519678155
+                }
+              ],
+              "judgedRelevance": 0.0
+            }
+          ],
+          "retrievalDurationMs": 1720.474199973978
+        },
+        {
+          "caseId": "fuzzy-shop-val-003",
+          "question": "想找个适合和朋友慢慢聊天的地方，氛围放松，说话不用提高嗓门。",
+          "relevantShopCount": 5,
+          "precisionAtK": 0.2,
+          "recallAtK": 0.2,
+          "ndcgAtK": 0.09759845106038711,
+          "reciprocalRank": 0.3333333333333333,
+          "firstRelevantShopRank": 3,
+          "evidenceShopHits": 4,
+          "evidenceShopRecall": 0.8,
+          "topShops": [
+            {
+              "shopId": 3,
+              "shopName": "清晨手冲咖啡",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "review-006"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-006",
+                  "shopId": 3,
+                  "shopName": "清晨手冲咖啡",
+                  "text": "周末下午客人会多一些，但背景音乐不吵。拿铁价格适中，适合和朋友慢慢聊天。",
+                  "score": 0.9186473943408934
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 13,
+              "shopName": "湖畔青年旅舍",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "review-038",
+                "review-130"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-038",
+                  "shopId": 13,
+                  "shopName": "湖畔青年旅舍",
+                  "text": "公共客厅适合认识旅伴，晚上十点前聊天活动较多，氛围热闹但不适合需要绝对安静的人。",
+                  "score": 0.22637730046874002
+                },
+                {
+                  "reviewId": "review-130",
+                  "shopId": 13,
+                  "shopName": "湖畔青年旅舍",
+                  "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。",
+                  "score": 0.14774912963527717
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100071,
+              "shopName": "Olly",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "yelp-RvQVDNwTEF7Gq-rfXHmYXQ"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-RvQVDNwTEF7Gq-rfXHmYXQ",
+                  "shopId": 100071,
+                  "shopName": "Olly",
+                  "text": "另一个在费城吃高质量、执行出色且不贵的美食的好地方。非常适合和朋友一起去，也适合约会。",
+                  "score": 0.1913775374267158
+                }
+              ],
+              "judgedRelevance": 2.0
+            },
+            {
+              "shopId": 100092,
+              "shopName": "Hammerheads Bar & Grille",
+              "firstReviewRank": 4,
+              "reviewIds": [
+                "yelp-yOaoURGWOFSOS8CdFWjHtg"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-yOaoURGWOFSOS8CdFWjHtg",
+                  "shopId": 100092,
+                  "shopName": "Hammerheads Bar & Grille",
+                  "text": "这个地方周末总有DJ，所以你有两个问题：\n\n1) 音乐太吵。我不明白人们怎么能站着互相聊天。\n2) 你听到的是嘻哈音乐。\n\n人群大多是21岁和二十出头的年轻人。对我来说，这不是一个合适的地方。",
+                  "score": 0.1584546912130151
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 10,
+              "shopName": "星河艺术影城",
+              "firstReviewRank": 5,
+              "reviewIds": [
+                "review-292",
+                "review-299",
+                "review-111"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "review-292",
+                  "shopId": 10,
+                  "shopName": "星河艺术影城",
+                  "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。",
+                  "score": 0.14774912963527717
+                },
+                {
+                  "reviewId": "review-299",
+                  "shopId": 10,
+                  "shopName": "星河艺术影城",
+                  "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。工作日晚场人少一些，取票和入场都比较从容。",
+                  "score": 0.1021794596944893
+                },
+                {
+                  "reviewId": "review-111",
+                  "shopId": 10,
+                  "shopName": "星河艺术影城",
+                  "text": "饮品甜度可以调整，拿铁和燕麦奶选项都有，口味选择比较灵活。工作日白天座位周转慢，适合短时间处理消息或阅读。",
+                  "score": 0.08367367890260069
+                }
+              ],
+              "judgedRelevance": 0.0
+            }
+          ],
+          "retrievalDurationMs": 1635.3565999888815
+        },
+        {
+          "caseId": "fuzzy-shop-val-004",
+          "question": "第一次约会想找个有点情调但不会太正式、让人紧张的地方。",
+          "relevantShopCount": 7,
+          "precisionAtK": 0.4,
+          "recallAtK": 0.2857142857142857,
+          "ndcgAtK": 0.47740132803345475,
+          "reciprocalRank": 1.0,
+          "firstRelevantShopRank": 1,
+          "evidenceShopHits": 4,
+          "evidenceShopRecall": 0.5714285714285714,
+          "topShops": [
+            {
+              "shopId": 100299,
+              "shopName": "Bury The Hatchet",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "yelp-u35-OtHG-npYBPXeGDAMMg"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-u35-OtHG-npYBPXeGDAMMg",
+                  "shopId": 100299,
+                  "shopName": "Bury The Hatchet",
+                  "text": "我玩得很开心。这是一个很棒的第一次约会，Lex在教课方面很棒。",
+                  "score": 1.0
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100158,
+              "shopName": "Queen Sheba",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "yelp-Mg2RV_i4JXrd_aBGkzt_NA"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-Mg2RV_i4JXrd_aBGkzt_NA",
+                  "shopId": 100158,
+                  "shopName": "Queen Sheba",
+                  "text": "食物不错，服务也好。\n最近一场老鹰队比赛期间，我们在吧台吃了午餐。女服务员非常友好，而且2美元的百威啤酒即使是用罐装，也无可挑剔。午餐很好，非常 authentic。\n氛围有点不尽如人意。非常基本的塑料吧台椅，有种70年代老酒吧的感觉。如果你想留下好印象，这不是第一次约会的好地方。",
+                  "score": 0.5261652655030011
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100192,
+              "shopName": "Alena’s Cafe",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "yelp-aEkZCxCYhqrlytQQJ1KaMg"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-aEkZCxCYhqrlytQQJ1KaMg",
+                  "shopId": 100192,
+                  "shopName": "Alena’s Cafe",
+                  "text": "这是喝杯好咖啡、吃美味食物和享受优质服务的好地方。第一次来，但不会是最后一次！",
+                  "score": 0.4617951327874601
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100258,
+              "shopName": "Prohibition Taproom",
+              "firstReviewRank": 4,
+              "reviewIds": [
+                "yelp-1leFK2Q4id6cIJ8A_dH-vg"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-1leFK2Q4id6cIJ8A_dH-vg",
+                  "shopId": 100258,
+                  "shopName": "Prohibition Taproom",
+                  "text": "四颗星给酒吧和装饰——啤酒选择总是很棒，员工很棒，装饰超酷。\n\n但食物确实有待改进。我不认为我是大多数，但嗯——食物就算了。唯一的例外是炸四季豆。那些非常棒。一定要点。是完美啤酒的完美搭配。\n\n非常适合欢乐时光或喝酒。或者第一次约会。",
+                  "score": 0.3754621193304457
+                }
+              ],
+              "judgedRelevance": 2.0
+            },
+            {
+              "shopId": 100044,
+              "shopName": "Chase's Hop Shop",
+              "firstReviewRank": 5,
+              "reviewIds": [
+                "yelp-r62MryJYlNyfvIUH4Dy9Zw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-r62MryJYlNyfvIUH4Dy9Zw",
+                  "shopId": 100044,
+                  "shopName": "Chase's Hop Shop",
+                  "text": "如果你想找个性价比高的地方吃点东西、喝杯啤酒，就是这里了。今天去了一趟，点了两个鸡肉玉米卷和一杯啤酒。上菜很快。员工友好。地方干净。Frank和那位做菜的先生都很棒。绝对会推荐这个地方，还会再来的。",
+                  "score": 0.28342930873272437
+                }
+              ],
+              "judgedRelevance": 0.0
+            }
+          ],
+          "retrievalDurationMs": 1755.25459999335
+        },
+        {
+          "caseId": "fuzzy-shop-val-005",
+          "question": "周末想带孩子一起吃饭，希望店员友善，环境对家庭比较轻松。",
+          "relevantShopCount": 8,
+          "precisionAtK": 0.6,
+          "recallAtK": 0.375,
+          "ndcgAtK": 0.6765473404184138,
+          "reciprocalRank": 1.0,
+          "firstRelevantShopRank": 1,
+          "evidenceShopHits": 6,
+          "evidenceShopRecall": 0.75,
+          "topShops": [
+            {
+              "shopId": 100004,
+              "shopName": "Craft Hall",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "yelp-5-YovLQWy6Srq0UnTdVhuw",
+                "yelp-LQxtqengwVWA56JXpWxrDg",
+                "yelp-9mQgSmbR1tRJAtI3hqiQpQ"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-5-YovLQWy6Srq0UnTdVhuw",
+                  "shopId": 100004,
+                  "shopName": "Craft Hall",
+                  "text": "适合有8岁以下孩子的家庭的好地方。和超过10个大人以及5个孩子一起去。空间充足，早午餐菜单不错。",
+                  "score": 1.0
+                },
+                {
+                  "reviewId": "yelp-LQxtqengwVWA56JXpWxrDg",
+                  "shopId": 100004,
+                  "shopName": "Craft Hall",
+                  "text": "和妻子孩子一起周日早午餐。哇！！孩子们玩耍的好地方，早午餐菜单很棒。妻子喝了含羞草鸡尾酒，我喝了本地拉格啤酒！\n鸡肉和华夫饼、饼干和猪肉碎、以及创意早餐都很美味，非常新鲜！一定会再来的。",
+                  "score": 0.30173095399369076
+                },
+                {
+                  "reviewId": "yelp-9mQgSmbR1tRJAtI3hqiQpQ",
+                  "shopId": 100004,
+                  "shopName": "Craft Hall",
+                  "text": "我一直想知道什么时候人们才会意识到，我们都希望孩子能玩，而我们能吃饭喝酒！除了麦当劳……Craft Hall 是有小孩家庭的必去之地！如果你曾希望像以前一样出去玩，如果你曾渴望再次感觉酷……终于！你可以拥有一切！他们对我们的大家庭非常包容。我喜欢这里只有吧台服务——你想要水？自己去拿！番茄酱？在那边！是的！这就是有孩子的人想要的。让我们自己来，这样我们就不用等任何人！我的孩子们（1岁和3岁）喜欢这里的每一个细节。他们玩了3.5个小时，这比我们在其他地方待的时间多了整整2.5个小时！！！谢谢 Craft Hall——我们还会再来的！！！！",
+                  "score": 0.29411055237171263
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100098,
+              "shopName": "Menchie's Frozen Yogurt",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "yelp-R4UONMMp4CeDIG1_HHB44g"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-R4UONMMp4CeDIG1_HHB44g",
+                  "shopId": 100098,
+                  "shopName": "Menchie's Frozen Yogurt",
+                  "text": "很棒的地方！非常适合小孩子。有超多配料可选，服务总是又快又友好。强烈推荐，如果你还没来过，或者想带孩子尝试点新东西的话。",
+                  "score": 0.7839799055785257
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100283,
+              "shopName": "The Post",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "yelp-_ZA32vrxoGMkPOZeKL_Lxw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-_ZA32vrxoGMkPOZeKL_Lxw",
+                  "shopId": 100283,
+                  "shopName": "The Post",
+                  "text": "所以这个地方在大学城地区是新开的，我告诉你，这是一个很酷的地方，有各种各样的食物选择，很棒的音乐和不错的鸡尾酒菜单……\n调酒师Frankie很友好，对酒水很了解。你还可以带着孩子一起来，The Post有沙狐球、篮球和吃豆人供孩子们玩！！\n他们周末甚至有DJ，如果你想跳舞，和朋友们一起狂欢！！",
+                  "score": 0.47258329891639717
+                }
+              ],
+              "judgedRelevance": 2.0
+            },
+            {
+              "shopId": 100299,
+              "shopName": "Bury The Hatchet",
+              "firstReviewRank": 4,
+              "reviewIds": [
+                "yelp--y5Pup-REQypaXSagBFTvQ"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp--y5Pup-REQypaXSagBFTvQ",
+                  "shopId": 100299,
+                  "shopName": "Bury The Hatchet",
+                  "text": "我们的斧头教练是Keith，他是从KOP借调来的。那真是一个难忘的有趣下午。我们的成年孩子一起长大，这是一次家庭聚会，之后在城里吃了晚餐。Keith让整个过程充满乐趣——就像家庭问答游戏！我是最弱的一环，但他不断鼓励我，调整我的站位和距离，我甚至赢了复仇战！他很快掌握了团队的动态，并据此调整活动，为我们量身定制。谢谢你，Keith！太棒了！毫不费力！！！！",
+                  "score": 0.35403250091703375
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100035,
+              "shopName": "Cedar Park Cafe",
+              "firstReviewRank": 5,
+              "reviewIds": [
+                "yelp-3rVdDwEasykCxd1JkQd-6Q"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-3rVdDwEasykCxd1JkQd-6Q",
+                  "shopId": 100035,
+                  "shopName": "Cedar Park Cafe",
+                  "text": "我喜欢 Cedar Park Cafe！我通常做完礼拜后来这里，这是一家友好的餐厅，有很棒的早午餐。上次我点了鸡肉和华夫饼，美味又饱腹。过去几年里，我几乎尝遍了菜单上所有菜品，没有遇到任何令人失望的菜。\n\n女服务员非常友善，环境也很温馨。\n\n唯一不方便的是，Cedar Park 总是排长队。",
+                  "score": 0.34314904688368
+                }
+              ],
+              "judgedRelevance": 0.0
+            }
+          ],
+          "retrievalDurationMs": 1524.850999994669
+        },
+        {
+          "caseId": "fuzzy-shop-val-006",
+          "question": "天气不错，想坐在外面晒晒太阳，喝点东西慢慢休息。",
+          "relevantShopCount": 6,
+          "precisionAtK": 0.6,
+          "recallAtK": 0.5,
+          "ndcgAtK": 0.3257248852512791,
+          "reciprocalRank": 1.0,
+          "firstRelevantShopRank": 1,
+          "evidenceShopHits": 6,
+          "evidenceShopRecall": 1.0,
+          "topShops": [
+            {
+              "shopId": 100277,
+              "shopName": "Valerio Coffee Roasters",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "yelp-t9Zl9MPb52uRUQpn_NpSmA"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-t9Zl9MPb52uRUQpn_NpSmA",
+                  "shopId": 100277,
+                  "shopName": "Valerio Coffee Roasters",
+                  "text": "喜欢他们的咖啡。服务友好快捷。地方小，但有几个座位区。你可以坐在窗边晒太阳。后面有几张桌子。还有一小块区域有凳子。总体来说不错。",
+                  "score": 0.8
+                }
+              ],
+              "judgedRelevance": 1.0
+            },
+            {
+              "shopId": 100259,
+              "shopName": "Checkers",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "yelp-WW5Nng4LHca59uOQAVbGlA"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-WW5Nng4LHca59uOQAVbGlA",
+                  "shopId": 100259,
+                  "shopName": "Checkers",
+                  "text": "一直是 Checkers 的粉丝。唯一的问题是附近不多。所以当我发现这里要开一家 Checkers 时，有点兴奋！很高兴里面有座位区，而 BLVD 上的那家只有汽车穿梭通道，如果你想坐下来吃，只能坐在外面……\n\n我一直很喜欢调味薯条，在快餐中算是最好的之一。菜单价格很实惠。还有2份4美元、2份3美元的优惠。还有各种奶昔。\n\n希望这家 Checkers 能长久开下去。因为自从以前是 Taco Bell 之后，这个位置变成了 Jack's Way Back Burgers，但没开多久。而且附近有很多其他商店。这是一个在赶时间时快速吃点东西的好地方。服务很快，我拿到食物也很快。不到5分钟。",
+                  "score": 0.4106222990735153
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100187,
+              "shopName": "Copabanana",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "yelp-4NqTQuAiIveKA0c-IhSdoQ",
+                "yelp-4hZ0p5CoRtYg11xVsN_MTg"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-4NqTQuAiIveKA0c-IhSdoQ",
+                  "shopId": 100187,
+                  "shopName": "Copabanana",
+                  "text": "也就那样吧。周一去看了看有什么特价……酒水特价非常有限，广告上5美元的玛格丽特只能选经典口味，而且只能在特定时段。我点了鸡肉玉米片，没被告知要额外加4美元，玉米片也完全不怎么样……缺了些配料。坐在外面还不错，因为天气晴朗。女服务员还行，虽然她忘了给我酸奶油。",
+                  "score": 0.3683442046297978
+                },
+                {
+                  "reviewId": "yelp-4hZ0p5CoRtYg11xVsN_MTg",
+                  "shopId": 100187,
+                  "shopName": "Copabanana",
+                  "text": "我和朋友有一次来这里喝玛格丽特，坐在外面。我们被收了5美元入场费，我从未遇到过像Copa这样糟糕的服务。拿到饮料后，我们就再也没见到女服务员。我们不得不进去结账。",
+                  "score": 0.1592959203504259
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100169,
+              "shopName": "Good Karma Cafe",
+              "firstReviewRank": 4,
+              "reviewIds": [
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                "yelp-NfAtjCeJ_fJWcjENEvF1oA"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                  "shopId": 100169,
+                  "shopName": "Good Karma Cafe",
+                  "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。",
+                  "score": 0.3317669636355938
+                },
+                {
+                  "reviewId": "yelp-NfAtjCeJ_fJWcjENEvF1oA",
+                  "shopId": 100169,
+                  "shopName": "Good Karma Cafe",
+                  "text": "目前只来过一次，但我很喜欢！我们来的时候人很多，但能坐在外面（反正天气很好，坐外面更舒服！）。看到人多我就知道咖啡好喝，果然没错（干得好，Carissa！）。\n\n我发现很多卖花式咖啡的地方，咖啡看起来和尝起来都太苦。这里的冰焦糖咖啡明显有咖啡因，但不会太浓太酸，所以真是享受。我也很欣赏他们提供食物和饮料的纯素选项。\n\n真的没什么负面评价！以后我会试试其他食物/饮料，但至少现在，我是粉丝了。",
+                  "score": 0.22468154047685396
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100194,
+              "shopName": "Zorba's Taverna",
+              "firstReviewRank": 5,
+              "reviewIds": [
+                "yelp-mNIm1xVzYf0X_l1Wvim2YA"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-mNIm1xVzYf0X_l1Wvim2YA",
+                  "shopId": 100194,
+                  "shopName": "Zorba's Taverna",
+                  "text": "我们的食物很美味，服务也很好！！氛围很棒。坐在外面看人来人往。很棒的午餐！！",
+                  "score": 0.31169630626828354
+                }
+              ],
+              "judgedRelevance": 3.0
+            }
+          ],
+          "retrievalDurationMs": 1742.3782999976538
+        },
+        {
+          "caseId": "fuzzy-shop-val-007",
+          "question": "我对咖啡不太懂，想找一家店员愿意耐心介绍、不会让新手尴尬的咖啡店。",
+          "relevantShopCount": 7,
+          "precisionAtK": 0.6,
+          "recallAtK": 0.42857142857142855,
+          "ndcgAtK": 0.5561923438847095,
+          "reciprocalRank": 1.0,
+          "firstRelevantShopRank": 1,
+          "evidenceShopHits": 4,
+          "evidenceShopRecall": 0.5714285714285714,
+          "topShops": [
+            {
+              "shopId": 100010,
+              "shopName": "ReAnimator Coffee",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "yelp-Nx84FOIRRmroK91kOYMn3Q",
+                "yelp-Qkkyk7R9rCK7ZXHOkenT_g",
+                "yelp-ZLxlEs371svztvnA2Gdp8g"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-Nx84FOIRRmroK91kOYMn3Q",
+                  "shopId": 100010,
+                  "shopName": "ReAnimator Coffee",
+                  "text": "我去年八月搬到这个地区，花了一些时间想找一家步行距离内不错的咖啡店。不用说，Re-animator有城里最好的咖啡和浓缩咖啡。位置很好，里面比较小，但确实很放松。强烈推荐，尤其是外地/外州来的游客。",
+                  "score": 0.8
+                },
+                {
+                  "reviewId": "yelp-Qkkyk7R9rCK7ZXHOkenT_g",
+                  "shopId": 100010,
+                  "shopName": "ReAnimator Coffee",
+                  "text": "很棒的咖啡店，有乐于助人的咖啡师和非常好的咖啡。我停下来买过外带杯，也花30分钟慢慢喝过手冲咖啡。",
+                  "score": 0.32243577478599084
+                },
+                {
+                  "reviewId": "yelp-ZLxlEs371svztvnA2Gdp8g",
+                  "shopId": 100010,
+                  "shopName": "ReAnimator Coffee",
+                  "text": "友好的服务和简单的装饰。这正是我对咖啡店的所有需求。咖啡让我保持清醒，但味道足够温和，抑制了我加糖加奶的习惯。这里也是一个安静的好地方，可以工作或阅读。总的来说，是社区的一个极好补充。",
+                  "score": 0.28813189846032955
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100100,
+              "shopName": "Starbucks",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "yelp-tmm4g7EwQcJ8PrNV_KuWDg"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-tmm4g7EwQcJ8PrNV_KuWDg",
+                  "shopId": 100100,
+                  "shopName": "Starbucks",
+                  "text": "不会推荐这家星巴克，因为附近有那么多其他咖啡店。员工似乎缺乏倾听技巧。一杯简单的加奶油和经典糖浆的冰咖啡，他们大多数时候都做不对。过去几个月我一直耐心忍受他们弄错我的订单，但到了某个时候，这家店需要承担责任。除非你不介意被麻烦，否则把钱花在别处吧。",
+                  "score": 0.5300055346886754
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100068,
+              "shopName": "Alchemy Coffee",
+              "firstReviewRank": 3,
+              "reviewIds": [
+                "yelp-v2u6TqeimdKovePQl9F_eA",
+                "yelp-_Y3U9wXsWJMsgR_a2ZQZsw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-v2u6TqeimdKovePQl9F_eA",
+                  "shopId": 100068,
+                  "shopName": "Alchemy Coffee",
+                  "text": "这是一家非常简约的咖啡店，位于美丽的Northern Liberties区南端。他们主要卖咖啡。偶尔会有零食和糕点之类，但这主要是一家咖啡店。员工友好且高效，对他们卖的咖啡非常了解。\n\n有常见的浓缩咖啡饮品、滴滤和手冲咖啡。咖啡选择多样，但都是本地烘焙的。员工非常友好，服务出色。\n\n这是上下班途中或躲雨避寒的好去处。总体强烈推荐。",
+                  "score": 0.4978466670743852
+                },
+                {
+                  "reviewId": "yelp-_Y3U9wXsWJMsgR_a2ZQZsw",
+                  "shopId": 100068,
+                  "shopName": "Alchemy Coffee",
+                  "text": "几天前我路过这里，想喝杯好咖啡，Alchemy做到了。他们供应Elixir咖啡，能看出对菜单的热情……一个真正的咖啡爱好者。我看到有人喝薄荷冰咖啡，他们说非常好喝，所以我非常期待下次试试。我很高兴支持一家真正知道如何做好咖啡的新本地咖啡店。",
+                  "score": 0.08882583707920635
+                }
+              ],
+              "judgedRelevance": 2.0
+            },
+            {
+              "shopId": 100277,
+              "shopName": "Valerio Coffee Roasters",
+              "firstReviewRank": 4,
+              "reviewIds": [
+                "yelp-MhSusleKbPBIiq2fKHH5mA"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-MhSusleKbPBIiq2fKHH5mA",
+                  "shopId": 100277,
+                  "shopName": "Valerio Coffee Roasters",
+                  "text": "可爱的咖啡店，适合工作。停车在附近比较困难，但除此之外，空间很大，目前有室内座位。咖啡不错，咸味吐司也很好吃。",
+                  "score": 0.4341818849264567
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100099,
+              "shopName": "Passero's Coffee Roasters",
+              "firstReviewRank": 7,
+              "reviewIds": [
+                "yelp-rEG-UZKJoyQfHImlCvgEQw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-rEG-UZKJoyQfHImlCvgEQw",
+                  "shopId": 100099,
+                  "shopName": "Passero's Coffee Roasters",
+                  "text": "我喜欢最近两次去他们那里。咖啡很好喝，像我以前的咖啡店，员工也很友好。他们会提供建议。我真的很喜欢这个地方。我去的那家在Suburban Station。",
+                  "score": 0.28396782770263174
+                }
+              ],
+              "judgedRelevance": 2.0
+            }
+          ],
+          "retrievalDurationMs": 1686.1046999983955
+        },
+        {
+          "caseId": "fuzzy-shop-val-008",
+          "question": "刚搬到附近，想找一家比较有人情味、能慢慢熟悉周围人的咖啡馆。",
+          "relevantShopCount": 8,
+          "precisionAtK": 0.8,
+          "recallAtK": 0.5,
+          "ndcgAtK": 0.7316537845947063,
+          "reciprocalRank": 1.0,
+          "firstRelevantShopRank": 1,
+          "evidenceShopHits": 4,
+          "evidenceShopRecall": 0.5,
+          "topShops": [
+            {
+              "shopId": 100010,
+              "shopName": "ReAnimator Coffee",
+              "firstReviewRank": 1,
+              "reviewIds": [
+                "yelp-Nx84FOIRRmroK91kOYMn3Q",
+                "yelp-Qkkyk7R9rCK7ZXHOkenT_g",
+                "yelp-E4SFLVCqfCGgX9tSOzh7Jw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-Nx84FOIRRmroK91kOYMn3Q",
+                  "shopId": 100010,
+                  "shopName": "ReAnimator Coffee",
+                  "text": "我去年八月搬到这个地区，花了一些时间想找一家步行距离内不错的咖啡店。不用说，Re-animator有城里最好的咖啡和浓缩咖啡。位置很好，里面比较小，但确实很放松。强烈推荐，尤其是外地/外州来的游客。",
+                  "score": 0.9176131600363906
+                },
+                {
+                  "reviewId": "yelp-Qkkyk7R9rCK7ZXHOkenT_g",
+                  "shopId": 100010,
+                  "shopName": "ReAnimator Coffee",
+                  "text": "很棒的咖啡店，有乐于助人的咖啡师和非常好的咖啡。我停下来买过外带杯，也花30分钟慢慢喝过手冲咖啡。",
+                  "score": 0.45018307392587803
+                },
+                {
+                  "reviewId": "yelp-E4SFLVCqfCGgX9tSOzh7Jw",
+                  "shopId": 100010,
+                  "shopName": "ReAnimator Coffee",
+                  "text": "Loco Pez附近一家相当不错、低调的咖啡店。如果我住在附近，我可能会成为这里的常客。",
+                  "score": 0.3268711328053254
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100192,
+              "shopName": "Alena’s Cafe",
+              "firstReviewRank": 2,
+              "reviewIds": [
+                "yelp-N0Dq5TPfMuf13PB6p9rtYw",
+                "yelp-WGN7zMDwQ07IM4w4HyJMbw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-N0Dq5TPfMuf13PB6p9rtYw",
+                  "shopId": 100192,
+                  "shopName": "Alena’s Cafe",
+                  "text": "我在上班路上找咖啡时偶然发现了这家咖啡店。咖啡和早餐三明治都很棒，所以我又回来吃午餐，没有失望。强烈推荐给附近想找优质咖啡馆的人。",
+                  "score": 0.6806844935675518
+                },
+                {
+                  "reviewId": "yelp-WGN7zMDwQ07IM4w4HyJMbw",
+                  "shopId": 100192,
+                  "shopName": "Alena’s Cafe",
+                  "text": "非常温馨、迷人、袖珍的咖啡馆。非常友好，现点现做的早餐正合我意！我一定要再去尝尝他们展示柜里的烘焙食品！",
+                  "score": 0.08004005946951116
+                }
+              ],
+              "judgedRelevance": 2.0
+            },
+            {
+              "shopId": 100011,
+              "shopName": "Red Hook Coffee & Tea",
+              "firstReviewRank": 5,
+              "reviewIds": [
+                "yelp-imLgc2BetqIr8jfvOoIQsQ",
+                "yelp-sKVCrT5KwXIZ7qaepLecIQ"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-imLgc2BetqIr8jfvOoIQsQ",
+                  "shopId": 100011,
+                  "shopName": "Red Hook Coffee & Tea",
+                  "text": "刚搬到这个地区，正在寻找一家有很多无麸质选择的好早午餐/早餐店。所有三明治都有无麸质面包，他们送餐时还特意注明在我的Lil Goat鸡蛋三明治（超好吃！）上放了无麸质面包。份量也很大。",
+                  "score": 0.27822740492644665
+                },
+                {
+                  "reviewId": "yelp-sKVCrT5KwXIZ7qaepLecIQ",
+                  "shopId": 100011,
+                  "shopName": "Red Hook Coffee & Tea",
+                  "text": "Red Hook是我的最爱！这家店专注于他们的饮品和丰富的食物选择。我非常欣赏这一点。他们一点也不做作，有一种轻松、时髦、温馨的氛围。那里的人相当友好和热情。我在Red Hook喝到了不错的饮品。但如果你在寻找一家能提供好饮品和好食物的咖啡馆，那么Red Hook完胜竞争对手。我去过一些咖啡馆，饮品不错但食物不好。这家店两者兼备！",
+                  "score": 0.228515376610572
+                }
+              ],
+              "judgedRelevance": 3.0
+            },
+            {
+              "shopId": 100261,
+              "shopName": "Cafe Square One",
+              "firstReviewRank": 7,
+              "reviewIds": [
+                "yelp-_wGW6_KiaSXZA834B9OH8g",
+                "yelp-Xfp-I4SzRS_Y-oaJi_aYXw"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-_wGW6_KiaSXZA834B9OH8g",
+                  "shopId": 100261,
+                  "shopName": "Cafe Square One",
+                  "text": "我爱这个地方！这是老城第三街上一家可爱的小咖啡馆。空间虽小但设计合理，有很多座位和活动空间。座位区有典型的咖啡馆座位，比如桌子、吧台和阅读椅。他们也提供典型的咖啡馆食物，比如百吉饼和三明治。我来过好几次了，都挺不错的。员工也非常友好。",
+                  "score": 0.22199765373340302
+                },
+                {
+                  "reviewId": "yelp-Xfp-I4SzRS_Y-oaJi_aYXw",
+                  "shopId": 100261,
+                  "shopName": "Cafe Square One",
+                  "text": "这是一家非常可爱的咖啡馆，食物美味！份量也很足。我和朋友们来这儿参加一个会议，第二年我们回来时，就知道第一个想去的地方就是Cafe Square One。强烈推荐！而且员工非常友好！",
+                  "score": 0.061193521258271634
+                }
+              ],
+              "judgedRelevance": 0.0
+            },
+            {
+              "shopId": 100169,
+              "shopName": "Good Karma Cafe",
+              "firstReviewRank": 8,
+              "reviewIds": [
+                "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                "yelp-3d_m7U-jxRF9YTP6DbOhMw",
+                "yelp-1VyHchVgc9oEfVrsFweNNA"
+              ],
+              "evidence": [
+                {
+                  "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+                  "shopId": 100169,
+                  "shopName": "Good Karma Cafe",
+                  "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。",
+                  "score": 0.1999194749345603
+                },
+                {
+                  "reviewId": "yelp-3d_m7U-jxRF9YTP6DbOhMw",
+                  "shopId": 100169,
+                  "shopName": "Good Karma Cafe",
+                  "text": "这家咖啡馆是我搬到费城的原因之一。舒适，咖啡很棒，三明治和汤也很出色——员工非常友好。另外：营业时间比一般的咖啡店要晚！任何椰子味的东西都很棒。Colonel Mustard（三明治）一定要试试。我以前也在这里约会过，所以，你知道，这也是个不错的见面地点。",
+                  "score": 0.14845532942946713
+                },
+                {
+                  "reviewId": "yelp-1VyHchVgc9oEfVrsFweNNA",
+                  "shopId": 100169,
+                  "shopName": "Good Karma Cafe",
+                  "text": "今年我圣诞愿望清单的第一项，是有人能在我家附近开一家巨大、友好、有 WiFi、有很多插座、空间宽敞的咖啡馆。现在还没有实现，但有人在 Washington West 开了一家，这完全不公平，因为从 Good Karma 走到 Chapterhouse 那一带的好地方也很方便。我先压住自己的怨念，只庆幸如果我真的急着去咖啡馆，可以比以前少走整整两个街区。Good Karma 很大、很明亮，有很多插座和 WiFi。除了咖啡和茶之外，还有很多烘焙食品和其他饮品可选，这点不错。他们还有两个不错的洗手间，也没人打扰你，而且营业到很晚。这会是咖啡馆之爱吗？缺点是食物不算好。店里有牌子告诉你不要带外食，我必须尊重，但我也必须承认，当我咬下一块湿润、蛋味过重的司康时，想到外面有 Metropolitan Bakery 做的那些优秀司康，心里会有点难过。就普通滴滤咖啡来说，咖啡还可以，但正如另一位 Yelp 用户说的，拿铁差很多。他们似乎分不清拿铁和卡布奇诺。我点过一次，之后就再也没点过。可我能说什么呢。为了这里真正友好的氛围，我可以忍受糟糕的司康和普通的咖啡饮品；一想到这个街区如此被宠坏，而我住的那片完全没有这种优秀咖啡馆，我嫉妒得脸都像他们的杯子一样绿了。哦，只收现金，不过店内有一台手续费很贵的 ATM。",
+                  "score": 0.14130819445772766
+                }
+              ],
+              "judgedRelevance": 3.0
+            }
+          ],
+          "retrievalDurationMs": 1768.1568000116386
+        }
+      ]
+    }
+  }
+}

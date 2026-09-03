@@ -1,0 +1,1533 @@
+{
+  "topK": 3,
+  "evaluationMode": "batch_qdrant_retrieval_then_tool_detail_shape_equivalence",
+  "questionCount": 52,
+  "retrievalDurationMs": 4624.475399992662,
+  "avgQuestionDurationMs": 88.9322192306281,
+  "datasets": {
+    "legacy": {
+      "total": 27,
+      "exactMatches": 27,
+      "exactMatchRate": 1.0,
+      "sameHits": 27,
+      "sameHitRate": 1.0,
+      "candidateRegressions": 0,
+      "candidateSourcesOk": 27,
+      "candidateSourcesOkRate": 1.0,
+      "mismatches": [],
+      "regressions": [],
+      "sourceMismatches": [],
+      "details": [
+        {
+          "caseId": "rag-001",
+          "question": "两个人吃火锅，不能吃太辣，有什么依据可以推荐？",
+          "expectedReviewIds": [
+            "review-001"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-001",
+            "review-004",
+            "review-025"
+          ],
+          "candidateReviewIds": [
+            "review-001",
+            "review-004",
+            "review-025"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-002",
+          "question": "想周五晚上安静聊天，巷子口火锅要注意什么？",
+          "expectedReviewIds": [
+            "review-002"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-002",
+            "review-173",
+            "review-362"
+          ],
+          "candidateReviewIds": [
+            "review-002",
+            "review-173",
+            "review-362"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-003",
+          "question": "看完电影后还想吃东西，有适合的店吗？",
+          "expectedReviewIds": [
+            "review-003"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-003",
+            "review-079",
+            "review-052"
+          ],
+          "candidateReviewIds": [
+            "review-003",
+            "review-079",
+            "review-052"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-004",
+          "question": "预算 150 元以内，两个人吃烧烤合适吗？",
+          "expectedReviewIds": [
+            "review-004"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-004",
+            "review-025",
+            "review-001"
+          ],
+          "candidateReviewIds": [
+            "review-004",
+            "review-025",
+            "review-001"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-005",
+          "question": "哪家咖啡店适合下午带电脑办公？",
+          "expectedReviewIds": [
+            "review-005"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+          ],
+          "candidateReviewIds": [
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+          ],
+          "exactMatch": true,
+          "legacyHit": false,
+          "candidateHit": false,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-006",
+          "question": "周末和朋友安静喝咖啡聊天，环境怎么样？",
+          "expectedReviewIds": [
+            "review-006"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-018",
+            "yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "review-038"
+          ],
+          "candidateReviewIds": [
+            "review-018",
+            "yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "review-038"
+          ],
+          "exactMatch": true,
+          "legacyHit": false,
+          "candidateHit": false,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-007",
+          "question": "周末看热门电影需要提前做什么？",
+          "expectedReviewIds": [
+            "review-007"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-032",
+            "review-007",
+            "review-026"
+          ],
+          "candidateReviewIds": [
+            "review-032",
+            "review-007",
+            "review-026"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-008",
+          "question": "情侣去影院想选情侣专座，有什么座位方面的建议？",
+          "expectedReviewIds": [
+            "review-008",
+            "review-030",
+            "review-032"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-032",
+            "review-007",
+            "review-030"
+          ],
+          "candidateReviewIds": [
+            "review-032",
+            "review-007",
+            "review-030"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-009",
+          "question": "想住得安静、休息好，酒店有什么可参考的信息？",
+          "expectedReviewIds": [
+            "review-009"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-038",
+            "review-009",
+            "review-013"
+          ],
+          "candidateReviewIds": [
+            "review-038",
+            "review-009",
+            "review-013"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-010",
+          "question": "出差早到酒店，能先寄存行李吗？",
+          "expectedReviewIds": [
+            "review-010"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-036",
+            "review-010",
+            "review-039"
+          ],
+          "candidateReviewIds": [
+            "review-036",
+            "review-010",
+            "review-039"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-011",
+          "question": "健身新手第一次去，需要避开哪个时段，能得到什么帮助？",
+          "expectedReviewIds": [
+            "review-011"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-011",
+            "review-042",
+            "review-045"
+          ],
+          "candidateReviewIds": [
+            "review-011",
+            "review-042",
+            "review-045"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-012",
+          "question": "下班后直接健身方便吗？",
+          "expectedReviewIds": [
+            "review-012"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-012",
+            "review-197",
+            "review-413"
+          ],
+          "candidateReviewIds": [
+            "review-012",
+            "review-197",
+            "review-413"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-013",
+          "question": "周末三个人想找安静包间吃饭，预算只有 200 元，需要注意什么？",
+          "expectedReviewIds": [
+            "review-026"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-026",
+            "review-025",
+            "review-004"
+          ],
+          "candidateReviewIds": [
+            "review-026",
+            "review-025",
+            "review-004"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-014",
+          "question": "带老人和孩子晚上九点以后吃饭，想要清淡无烟的环境，河畔家常菜合适吗？",
+          "expectedReviewIds": [
+            "review-027"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-027",
+            "review-020",
+            "review-025"
+          ],
+          "candidateReviewIds": [
+            "review-027",
+            "review-020",
+            "review-025"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-015",
+          "question": "下雨天去深夜食堂烧烤，想坐露天位避开室内烟味并和朋友聊天，可以吗？",
+          "expectedReviewIds": [
+            "review-021"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-021",
+            "review-027",
+            "review-020"
+          ],
+          "candidateReviewIds": [
+            "review-021",
+            "review-027",
+            "review-020"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-016",
+          "question": "工作日下午想一个人安静写代码，街角共创咖啡合适吗？",
+          "expectedReviewIds": [
+            "review-018"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-018",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "review-005"
+          ],
+          "candidateReviewIds": [
+            "review-018",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "review-005"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-017",
+          "question": "四个人需要高速网络、充足插座并讨论项目，哪家咖啡店更合适？",
+          "expectedReviewIds": [
+            "review-017"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-017",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "review-019"
+          ],
+          "candidateReviewIds": [
+            "review-017",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "review-019"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-018",
+          "question": "工作日上午只想安静看书、不需要电脑，纸间咖啡书屋有什么优缺点？",
+          "expectedReviewIds": [
+            "review-014"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-018",
+            "review-014",
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ],
+          "candidateReviewIds": [
+            "review-018",
+            "review-014",
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-019",
+          "question": "预算每人 50 元以内但想看巨幕电影，欢乐巨幕影城合适吗？",
+          "expectedReviewIds": [
+            "review-031"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-031",
+            "review-140",
+            "review-302"
+          ],
+          "candidateReviewIds": [
+            "review-031",
+            "review-140",
+            "review-302"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-020",
+          "question": "想开车去看文艺片，星河艺术影城停车方便吗？",
+          "expectedReviewIds": [
+            "review-029"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-022",
+            "review-029",
+            "review-149"
+          ],
+          "candidateReviewIds": [
+            "review-022",
+            "review-029",
+            "review-149"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-021",
+          "question": "情侣周末看热门电影，想坐电动躺椅，需要提前准备吗？",
+          "expectedReviewIds": [
+            "review-032"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-032",
+            "review-007",
+            "review-030"
+          ],
+          "candidateReviewIds": [
+            "review-032",
+            "review-007",
+            "review-030"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-022",
+          "question": "出差要赶早班高铁，还需要在房间办公，城际商务酒店合适吗？",
+          "expectedReviewIds": [
+            "review-034"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-034",
+            "review-023",
+            "review-173"
+          ],
+          "candidateReviewIds": [
+            "review-034",
+            "review-023",
+            "review-173"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-023",
+          "question": "睡眠很浅但又想看城市景观，住城际商务酒店该怎么选房？",
+          "expectedReviewIds": [
+            "review-035"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-035",
+            "review-009",
+            "review-164"
+          ],
+          "candidateReviewIds": [
+            "review-035",
+            "review-009",
+            "review-164"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-024",
+          "question": "预算每晚 100 元以内但不能接受公共卫浴，湖畔青年旅舍合适吗？",
+          "expectedReviewIds": [
+            "review-037"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-038",
+            "review-037",
+            "review-009"
+          ],
+          "candidateReviewIds": [
+            "review-038",
+            "review-037",
+            "review-009"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-025",
+          "question": "晚上十一点以后下班，还想练自由力量，有二十四小时营业且人少的健身房吗？",
+          "expectedReviewIds": [
+            "review-043"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-043",
+            "review-011",
+            "review-040"
+          ],
+          "candidateReviewIds": [
+            "review-043",
+            "review-011",
+            "review-040"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-026",
+          "question": "健身新手想在安静小班里学动作，同时练自由力量，静力瑜伽馆都能满足吗？",
+          "expectedReviewIds": [
+            "review-040"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-040",
+            "review-011",
+            "review-206"
+          ],
+          "candidateReviewIds": [
+            "review-040",
+            "review-011",
+            "review-206"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "rag-027",
+          "question": "工作日晚上七点去综合健身房，想立即使用热门器械不用等待，现实吗？",
+          "expectedReviewIds": [
+            "review-044"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-044",
+            "review-011",
+            "review-192"
+          ],
+          "candidateReviewIds": [
+            "review-044",
+            "review-011",
+            "review-192"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        }
+      ]
+    },
+    "yelp": {
+      "total": 25,
+      "exactMatches": 25,
+      "exactMatchRate": 1.0,
+      "sameHits": 25,
+      "sameHitRate": 1.0,
+      "candidateRegressions": 0,
+      "candidateSourcesOk": 25,
+      "candidateSourcesOkRate": 1.0,
+      "mismatches": [],
+      "regressions": [],
+      "sourceMismatches": [],
+      "details": [
+        {
+          "caseId": "yelp-rag-001",
+          "question": "这家小咖啡店如果坐前面会不会太吵？",
+          "expectedReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "review-018",
+            "yelp-YmBytIHGjEroySTkyL8m8w"
+          ],
+          "candidateReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "review-018",
+            "yelp-YmBytIHGjEroySTkyL8m8w"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-002",
+          "question": "有没有咖啡店员工服务特别好，甚至帮顾客找回落下的电脑？",
+          "expectedReviewIds": [
+            "yelp-0raRTiWTrj9ytORRy-kZoA"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+          ],
+          "candidateReviewIds": [
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+          ],
+          "exactMatch": true,
+          "legacyHit": false,
+          "candidateHit": false,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-003",
+          "question": "想找空间大、插座多、开到很晚的咖啡馆，付款上有什么要注意？",
+          "expectedReviewIds": [
+            "yelp-1VyHchVgc9oEfVrsFweNNA"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "review-013",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ],
+          "candidateReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "review-013",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+          ],
+          "exactMatch": true,
+          "legacyHit": false,
+          "candidateHit": false,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-004",
+          "question": "想吃法式糕点但还要办公，有哪家店因为没有 WiFi 不太合适？",
+          "expectedReviewIds": [
+            "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-G16hQXpXMfiodPlsrLCnLw",
+            "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+            "yelp-AR8lhVM0aylAt8W06q6zxg"
+          ],
+          "candidateReviewIds": [
+            "yelp-G16hQXpXMfiodPlsrLCnLw",
+            "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+            "yelp-AR8lhVM0aylAt8W06q6zxg"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-005",
+          "question": "哪家咖啡店咖啡很浓、WiFi 很快，而且适合找创意？",
+          "expectedReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-0raRTiWTrj9ytORRy-kZoA"
+          ],
+          "candidateReviewIds": [
+            "yelp-a6HDkwToJFoIPzlxBiS71g",
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-0raRTiWTrj9ytORRy-kZoA"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-006",
+          "question": "哪家 WaWa 有座位、免费 WiFi 和充电站，但午餐时间会很挤？",
+          "expectedReviewIds": [
+            "yelp-AR8lhVM0aylAt8W06q6zxg"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-016",
+            "review-145",
+            "review-307"
+          ],
+          "candidateReviewIds": [
+            "review-016",
+            "review-145",
+            "review-307"
+          ],
+          "exactMatch": true,
+          "legacyHit": false,
+          "candidateHit": false,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-007",
+          "question": "哪家星巴克有桌子可以用电脑，但桌子附近没有插座？",
+          "expectedReviewIds": [
+            "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-017",
+            "review-014",
+            "yelp-M980wiRzRJhBOlyQsFeDYw"
+          ],
+          "candidateReviewIds": [
+            "review-017",
+            "review-014",
+            "yelp-M980wiRzRJhBOlyQsFeDYw"
+          ],
+          "exactMatch": true,
+          "legacyHit": false,
+          "candidateHit": false,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-008",
+          "question": "有没有适合在沙发上用笔记本电脑工作的咖啡店？",
+          "expectedReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+          ],
+          "candidateReviewIds": [
+            "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-009",
+          "question": "哪家咖啡烘焙店停车不太方便，但员工很热情，店里也有人带电脑？",
+          "expectedReviewIds": [
+            "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+            "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+          ],
+          "candidateReviewIds": [
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+            "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+          ],
+          "exactMatch": true,
+          "legacyHit": false,
+          "candidateHit": false,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-010",
+          "question": "哪家咖啡店有免费 WiFi 和舒适工作空间，还提供不错的美式？",
+          "expectedReviewIds": [
+            "yelp-ChYhI05dXfDPbATD9VdiDQ"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+            "yelp-ChYhI05dXfDPbATD9VdiDQ"
+          ],
+          "candidateReviewIds": [
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+            "yelp-ChYhI05dXfDPbATD9VdiDQ"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-011",
+          "question": "哪家 Good Karma 有自然光、免费 WiFi、很多插座，还能喝 3 美元无限续杯咖啡？",
+          "expectedReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw",
+            "yelp-1VyHchVgc9oEfVrsFweNNA",
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+          ],
+          "candidateReviewIds": [
+            "yelp-FXIVmjL3GckScX7Uww2NDw",
+            "yelp-1VyHchVgc9oEfVrsFweNNA",
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-012",
+          "question": "Fairmount 附近有没有安静喝咖啡、下午放松的地方？",
+          "expectedReviewIds": [
+            "yelp-G1hVCb7CrOyL-HP1h6rByg"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "yelp-wiod6zg7n7S_-Iow_O-L9w",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+          ],
+          "candidateReviewIds": [
+            "yelp-0jBamrOBDkY6lLTpkY0xZw",
+            "yelp-wiod6zg7n7S_-Iow_O-L9w",
+            "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+          ],
+          "exactMatch": true,
+          "legacyHit": false,
+          "candidateHit": false,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-013",
+          "question": "周末想去咖啡店学习，哪家要早上九点或十点前到才容易有位置？",
+          "expectedReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "review-215"
+          ],
+          "candidateReviewIds": [
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "review-215"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-014",
+          "question": "哪家咖啡馆晚上人更少、开到十点，还有很多插座？",
+          "expectedReviewIds": [
+            "yelp-hUIkr15XxOSzheG5l9mYSw"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-019",
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "review-013"
+          ],
+          "candidateReviewIds": [
+            "review-019",
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+            "review-013"
+          ],
+          "exactMatch": true,
+          "legacyHit": false,
+          "candidateHit": false,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-015",
+          "question": "哪家新咖啡店空间开阔、自然光足，还有很多座位插座和很棒的 WiFi？",
+          "expectedReviewIds": [
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+            "yelp-YmBytIHGjEroySTkyL8m8w"
+          ],
+          "candidateReviewIds": [
+            "yelp-mhS1SUPKRA3Q6nR3oresqA",
+            "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+            "yelp-YmBytIHGjEroySTkyL8m8w"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-016",
+          "question": "Red Hook 适合用电脑工作吗？价格和咖啡有什么特点？",
+          "expectedReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ],
+          "candidateReviewIds": [
+            "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+            "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-017",
+          "question": "哪家店糕点咖啡不错，但 WiFi 太差导致电脑工作做不了多少？",
+          "expectedReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+          ],
+          "candidateReviewIds": [
+            "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+            "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-018",
+          "question": "周六早上想和朋友学习，哪家有大窗户和楼下座位，但 chai latte 可能偏甜？",
+          "expectedReviewIds": [
+            "yelp-REgp10DO01kp2pOONZtq9w"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-005",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-M980wiRzRJhBOlyQsFeDYw"
+          ],
+          "candidateReviewIds": [
+            "review-005",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-M980wiRzRJhBOlyQsFeDYw"
+          ],
+          "exactMatch": true,
+          "legacyHit": false,
+          "candidateHit": false,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-019",
+          "question": "Mt Airy 有没有适合学习的隐藏小店，桌子能放电脑、笔记本和咖啡？",
+          "expectedReviewIds": [
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ],
+          "candidateReviewIds": [
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-020",
+          "question": "Alchemy Coffee 有桌子和 WiFi 吗？如果要带电脑去，电源方面要注意什么？",
+          "expectedReviewIds": [
+            "yelp-z2Ia7bFRqSKHicUNi7359Q"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "review-017",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "review-023"
+          ],
+          "candidateReviewIds": [
+            "review-017",
+            "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+            "review-023"
+          ],
+          "exactMatch": true,
+          "legacyHit": false,
+          "candidateHit": false,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-021",
+          "question": "哪家店不放吵闹的大学兄弟音乐，但后面区域地板还是有点吵？",
+          "expectedReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg",
+            "review-144",
+            "review-306"
+          ],
+          "candidateReviewIds": [
+            "yelp-T52ED3B5-Lymo9EzCpuTwg",
+            "review-144",
+            "review-306"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-022",
+          "question": "Red Hook 除了咖啡，适合午餐或不用排队的早午餐吗？",
+          "expectedReviewIds": [
+            "yelp-VJEtJzH0GP_gFYjKDVIstw"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+            "yelp-pZ_z2LRsgODLotM6rAO4VQ"
+          ],
+          "candidateReviewIds": [
+            "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+            "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+            "yelp-pZ_z2LRsgODLotM6rAO4VQ"
+          ],
+          "exactMatch": true,
+          "legacyHit": false,
+          "candidateHit": false,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-023",
+          "question": "ReAnimator 适合中午坐户外、用 WiFi 工作吗？",
+          "expectedReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w",
+            "review-218",
+            "review-110"
+          ],
+          "candidateReviewIds": [
+            "yelp-wiod6zg7n7S_-Iow_O-L9w",
+            "review-218",
+            "review-110"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-024",
+          "question": "哪家咖啡店座位不多但抢到位置后适合工作，也有户外人行道座位可以带狗读书？",
+          "expectedReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+          ],
+          "candidateReviewIds": [
+            "yelp-RIdKOn-6dE8hdSFPh5RZug",
+            "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+            "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        },
+        {
+          "caseId": "yelp-rag-025",
+          "question": "Valerio 的咸派等待体验怎么样？人多时 WiFi 稳定吗？",
+          "expectedReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q"
+          ],
+          "legacyOk": true,
+          "candidateOk": true,
+          "legacyReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q",
+            "review-002",
+            "review-066"
+          ],
+          "candidateReviewIds": [
+            "yelp-ZMZCxn7QQsG0val9K3945Q",
+            "review-002",
+            "review-066"
+          ],
+          "exactMatch": true,
+          "legacyHit": true,
+          "candidateHit": true,
+          "sameHit": true,
+          "candidateRegression": false,
+          "candidateSources": [
+            "reviews"
+          ],
+          "candidateSourcesOk": true
+        }
+      ]
+    }
+  },
+  "liveToolSmoke": {
+    "caseId": "rag-001",
+    "question": "两个人吃火锅，不能吃太辣，有什么依据可以推荐？",
+    "legacyToolOk": true,
+    "candidateToolOk": true,
+    "legacyWallMs": 1625.070100009907,
+    "candidateWallMs": 2243.2832999911625,
+    "comparison": {
+      "caseId": "rag-001",
+      "question": "两个人吃火锅，不能吃太辣，有什么依据可以推荐？",
+      "expectedReviewIds": [
+        "review-001"
+      ],
+      "legacyOk": true,
+      "candidateOk": true,
+      "legacyReviewIds": [
+        "review-001",
+        "review-004",
+        "review-025"
+      ],
+      "candidateReviewIds": [
+        "review-001",
+        "review-004",
+        "review-025"
+      ],
+      "exactMatch": true,
+      "legacyHit": true,
+      "candidateHit": true,
+      "sameHit": true,
+      "candidateRegression": false,
+      "candidateSources": [
+        "reviews"
+      ],
+      "candidateSourcesOk": true
+    }
+  }
+}

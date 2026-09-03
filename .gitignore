@@ -1,0 +1,87 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.cache/
+*.egg-info/
+
+target/
+*.class
+
+.idea/
+.vscode/
+*.iml
+.claude/
+.codex/
+
+.github/modernize/
+backend/.github/modernize/
+
+node_modules/
+dist/
+build/
+
+*.log
+.runtime/
+.artifacts/
+.tmp/
+outputs/
+review-bundles/
+stability-logs/
+downloads/
+symbols/
+
+# Resumable local checkpoints for long-running Yelp translation jobs.
+agent/translation_runs/
+
+# External RAG benchmark datasets downloaded for local experiments.
+agent/rag_benchmarks/data/raw/
+
+# External product/search datasets and generated local experiment snapshots.
+data/raw/ecommerce/
+data/processed/ecommerce/*
+!data/processed/ecommerce/README.md
+
+# External recommendation datasets downloaded for local experiments.
+# Keep tiny README files, but never commit downloaded raw datasets.
+agent/recommendation/data/raw/*
+!agent/recommendation/data/raw/README.md
+!agent/recommendation/data/raw/yelp/
+agent/recommendation/data/raw/yelp/*
+!agent/recommendation/data/raw/yelp/README.md
+# Generated Yelp sample outputs. Regenerate from raw/fixtures when needed.
+agent/recommendation/data/processed/yelp_*_sample.json
+db/yelp*_sample.sql
+!db/yelp_content_zh_sample.sql
+
+# Derived offline recommendation datasets and similarity tables. The scripts
+# and compact reports are project artifacts; these large intermediates are
+# rebuilt from external MovieLens/Yelp data when an experiment is rerun.
+agent/recommendation/data/processed/item_similarity.json
+agent/recommendation/data/processed/movielens_cases.json
+agent/recommendation/data/processed/movielens_case_splits.json
+agent/recommendation/data/processed/yelp_item_similarity.json
+agent/recommendation/data/processed/yelp_recommendation_cases.json
+agent/recommendation/data/processed/yelp_recommendation_items.json
+agent/recommendation/data/processed/yelp_recommendation_case_splits.json
+agent/recommendation/data/processed/beijing_shop_projection.json
+
+# External Beijing public datasets downloaded for local place-data experiments.
+data/raw/beijing/official/*
+!data/raw/beijing/official/README.md
+
+# Reproducible Beijing place-data staging outputs.
+data/processed/beijing/*
+!data/processed/beijing/README.md
+
+# Local course/reference repositories. They may be useful while learning, but
+# they are not part of this project's source tree or deliverable.
+redis-main/
+claude-code-philosophy-main/
+
+# Local scratch directories and an accidental empty directory created by a
+# malformed shell path. Keep them out of the project checkpoint.
+tmp/
+backend;D/

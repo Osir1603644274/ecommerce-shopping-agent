@@ -1,0 +1,4191 @@
+{
+  "topK": 3,
+  "analysisTopK": 10,
+  "sourceFilter": "yelp",
+  "caseCount": 25,
+  "hitAtTopK": 18,
+  "hitAtTopKRate": 0.72,
+  "failureCount": 7,
+  "failureRate": 0.28,
+  "recoveredBeyondTopK": 3,
+  "recoveredBeyondTopKCaseIds": [
+    "yelp-rag-002",
+    "yelp-rag-009",
+    "yelp-rag-022"
+  ],
+  "failureReasons": {
+    "semantic_miss_not_in_analysis_top_k": 4,
+    "top_k_too_small": 3,
+    "service_experience_queries_are_weak": 3,
+    "multi_constraint_queries_are_weak": 3,
+    "time_constraint_queries_are_weak": 2,
+    "implicit_intent_queries_are_weak": 2
+  },
+  "failureChallengeTypes": {
+    "facility_constraint": 4,
+    "service_constraint": 3,
+    "multi_constraint": 3,
+    "time_constraint": 2,
+    "implicit_intent": 2,
+    "environment_preference": 1,
+    "negative_constraint": 1
+  },
+  "failures": [
+    {
+      "caseId": "yelp-rag-002",
+      "question": "有没有咖啡店员工服务特别好，甚至帮顾客找回落下的电脑？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "service_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-0raRTiWTrj9ytORRy-kZoA"
+      ],
+      "expectedEvidenceText": "费城有很多很棒的咖啡店，所以我偶然走进 Alchemy Coffee 时标准其实挺高，但有三点让这家新店轻松跻身其中。第一，咖啡很好喝，也让人印象深刻——我非常喜欢一款带有柑橘风味的埃塞俄比亚拼配。第二，咖啡师非常友好、熟练而且高效——我在这家店太开心了，以至于不小心把笔记本电脑落下了。他追到街上把电脑还给我。第三，这里就像海明威会说的那种“干净明亮的地方”。高高的天花板、白色墙面和能透进自然光的大窗户。装修很有品味，只是稍微有点简朴。",
+      "hitAtTopK": false,
+      "firstRelevantRank": 4,
+      "topKReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.69253683,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6452663,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.63362813,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-0raRTiWTrj9ytORRy-kZoA",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-k3-x8KcSymMNREMgTGneAA"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.69253683,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6452663,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.63362813,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-0raRTiWTrj9ytORRy-kZoA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.62898743,
+          "text": "费城有很多很棒的咖啡店，所以我偶然走进 Alchemy Coffee 时标准其实挺高，但有三点让这家新店轻松跻身其中。第一，咖啡很好喝，也让人印象深刻——我非常喜欢一款带有柑橘风味的埃塞俄比亚拼配。第二，咖啡师非常友好、熟练而且高效——我在这家店太开心了，以至于不小心把笔记本电脑落下了。他追到街上把电脑还给我。第三，这里就像海明威会说的那种“干净明亮的地方”。高高的天花板、白色墙面和能透进自然光的大窗户。装修很有品味，只是稍微有点简朴。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.62691283,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.62242705,
+          "text": "先说明，我不是咖啡发烧友，但我当然喜欢一杯好咖啡。必须说，我在这里喝过的咖啡摩卡和美式都没有让我惊艳，不过我还是会为了外带再来，因为它就在我家附近。在我看来，外带就对了。上次我进去时，至少有两只狗乖乖坐在主人旁边，而主人们正在用笔记本电脑。店里也挺满的。不过我本来也不是那种会一个人在咖啡店久坐的人。我注意到牛奶和糖旁边贴着一套规则——它们真的让我感觉很受欢迎。那是一套非常有亲和力的规则。店家确实很感谢顾客。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+          "shopName": "Starbucks",
+          "score": 0.6219797,
+          "text": "我上班时想补充咖啡因，这里是一个适合跑来喝咖啡的好地方。我也喜欢他们的沙发，非常适合用笔记本电脑做一点或很多工作。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.62000227,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.61641204,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.6150018,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        }
+      ],
+      "failureReasons": [
+        "top_k_too_small",
+        "service_experience_queries_are_weak"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-003",
+      "question": "想找空间大、插座多、开到很晚的咖啡馆，付款上有什么要注意？",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "time_constraint",
+        "multi_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-1VyHchVgc9oEfVrsFweNNA"
+      ],
+      "expectedEvidenceText": "今年我圣诞愿望清单的第一项，是有人能在我家附近开一家巨大、友好、有 WiFi、有很多插座、空间宽敞的咖啡馆。现在还没有实现，但有人在 Washington West 开了一家，这完全不公平，因为从 Good Karma 走到 Chapterhouse 那一带的好地方也很方便。我先压住自己的怨念，只庆幸如果我真的急着去咖啡馆，可以比以前少走整整两个街区。Good Karma 很大、很明亮，有很多插座和 WiFi。除了咖啡和茶之外，还有很多烘焙食品和其他饮品可选，这点不错。他们还有两个不错的洗手间，也没人打扰你，而且营业到很晚。这会是咖啡馆之爱吗？缺点是食物不算好。店里有牌子告诉你不要带外食，我必须尊重，但我也必须承认，当我咬下一块湿润、蛋味过重的司康时，想到外面有 Metropolitan Bakery 做的那些优秀司康，心里会有点难过。就普通滴滤咖啡来说，咖啡还可以，但正如另一位 Yelp 用户说的，拿铁差很多。他们似乎分不清拿铁和卡布奇诺。我点过一次，之后就再也没点过。可我能说什么呢。为了这里真正友好的氛围，我可以忍受糟糕的司康和普通的咖啡饮品；一想到这个街区如此被宠坏，而我住的那片完全没有这种优秀咖啡馆，我嫉妒得脸都像…",
+      "hitAtTopK": false,
+      "firstRelevantRank": null,
+      "topKReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-YmBytIHGjEroySTkyL8m8w"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6791248,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6629807,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6241522,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-AhTsqSS43V1-9yPq-NRX-w",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-k3-x8KcSymMNREMgTGneAA",
+        "yelp-hUIkr15XxOSzheG5l9mYSw"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6791248,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6629807,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6241522,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.6207119,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.62008834,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-AhTsqSS43V1-9yPq-NRX-w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6200477,
+          "text": "这是个不错的地方，可以学习、工作，或者做其他类似的事。员工很棒，友好又爱笑。咖啡馆食品价格适中。桌子和插座都很充足。毫无疑问，这是我在费城最喜欢的咖啡馆之一。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.61508226,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6133131,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.612099,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-hUIkr15XxOSzheG5l9mYSw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6120571,
+          "text": "这是我最喜欢的店之一。我以前很喜欢来这里完成工作，甚至只是阅读。大窗户、很多桌子、到处都是插座。咖啡不错。我试过的饮品一直都很好喝。氛围简直完美。我喜欢晚上坐在这里——明亮的灯光、大桌子、刚刚好的背景音乐。营业到晚上 10 点。而且晚上人更少。我喜欢咖啡店，而这里绝对是其中之一。"
+        }
+      ],
+      "failureReasons": [
+        "semantic_miss_not_in_analysis_top_k",
+        "time_constraint_queries_are_weak",
+        "multi_constraint_queries_are_weak"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-009",
+      "question": "哪家咖啡烘焙店停车不太方便，但员工很热情，店里也有人带电脑？",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "service_constraint",
+        "multi_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+      ],
+      "expectedEvidenceText": "我第一次认识 Valerio Coffee Roasters 是通过使用剩余食物 app。这是少数让我各方面都印象深刻的商家之一。这里停车有点难处理，但我今天运气不错。这是一个值得费力找车位的地方。员工对每个进来的人都非常有帮助。我并不觉得他们给了我什么特殊待遇，员工只是两个精力充沛、在服务行业工作的人。至于氛围，外面有几张远离路边的双人小酒馆风格桌子，不会让你觉得有危险。里面的装修很现代，像半波西米亚风的咖啡店。目前座位间隔较开，但在 Covid 期间也足够容纳三到四组四人客人。整体清爽干净。当时有几个人在用笔记本电脑，一边喝茶或咖啡。至于体验，员工友好、积极，而且能介绍产品。我们吃了美味的鸡肉沙拉和牛角包，还喝了好喝又香的茶，我觉得可能是木槿和某种东西；我只知道很好喝！很棒的体验，我非常推荐，也会再来。",
+      "hitAtTopK": false,
+      "firstRelevantRank": 7,
+      "topKReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6797843,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.65874875,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+          "shopName": "J'aime French Bakery",
+          "score": 0.64770925,
+          "text": "咖啡相当普通。饮品选择就是常见那些，也有一些法式烘焙点心。店内环境很好，也很干净，但没有 Wi-Fi，这对想工作的人来说挺扫兴。有一些法式糕点和烘焙食品，不过都稍微有点贵。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+        "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+        "yelp-1VyHchVgc9oEfVrsFweNNA"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6797843,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.65874875,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+          "shopName": "J'aime French Bakery",
+          "score": 0.64770925,
+          "text": "咖啡相当普通。饮品选择就是常见那些，也有一些法式烘焙点心。店内环境很好，也很干净，但没有 Wi-Fi，这对想工作的人来说挺扫兴。有一些法式糕点和烘焙食品，不过都稍微有点贵。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6467609,
+          "text": "先说明，我不是咖啡发烧友，但我当然喜欢一杯好咖啡。必须说，我在这里喝过的咖啡摩卡和美式都没有让我惊艳，不过我还是会为了外带再来，因为它就在我家附近。在我看来，外带就对了。上次我进去时，至少有两只狗乖乖坐在主人旁边，而主人们正在用笔记本电脑。店里也挺满的。不过我本来也不是那种会一个人在咖啡店久坐的人。我注意到牛奶和糖旁边贴着一套规则——它们真的让我感觉很受欢迎。那是一套非常有亲和力的规则。店家确实很感谢顾客。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.6320643,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.62985814,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.6297807,
+          "text": "我第一次认识 Valerio Coffee Roasters 是通过使用剩余食物 app。这是少数让我各方面都印象深刻的商家之一。这里停车有点难处理，但我今天运气不错。这是一个值得费力找车位的地方。员工对每个进来的人都非常有帮助。我并不觉得他们给了我什么特殊待遇，员工只是两个精力充沛、在服务行业工作的人。至于氛围，外面有几张远离路边的双人小酒馆风格桌子，不会让你觉得有危险。里面的装修很现代，像半波西米亚风的咖啡店。目前座位间隔较开，但在 Covid 期间也足够容纳三到四组四人客人。整体清爽干净。当时有几个人在用笔…"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.6286736,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+          "shopName": "Starbucks",
+          "score": 0.62603813,
+          "text": "我上班时想补充咖啡因，这里是一个适合跑来喝咖啡的好地方。我也喜欢他们的沙发，非常适合用笔记本电脑做一点或很多工作。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-1VyHchVgc9oEfVrsFweNNA",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6191963,
+          "text": "今年我圣诞愿望清单的第一项，是有人能在我家附近开一家巨大、友好、有 WiFi、有很多插座、空间宽敞的咖啡馆。现在还没有实现，但有人在 Washington West 开了一家，这完全不公平，因为从 Good Karma 走到 Chapterhouse 那一带的好地方也很方便。我先压住自己的怨念，只庆幸如果我真的急着去咖啡馆，可以比以前少走整整两个街区。Good Karma 很大、很明亮，有很多插座和 WiFi。除了咖啡和茶之外，还有很多烘焙食品和其他饮品可选，这点不错。他们还有两个不错的洗手间，也没人打扰你，而且…"
+        }
+      ],
+      "failureReasons": [
+        "top_k_too_small",
+        "service_experience_queries_are_weak",
+        "multi_constraint_queries_are_weak"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-012",
+      "question": "Fairmount 附近有没有安静喝咖啡、下午放松的地方？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "environment_preference",
+        "implicit_intent"
+      ],
+      "expectedReviewIds": [
+        "yelp-G1hVCb7CrOyL-HP1h6rByg"
+      ],
+      "expectedEvidenceText": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。",
+      "hitAtTopK": false,
+      "firstRelevantRank": null,
+      "topKReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.66660935,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.66425073,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.66066825,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-k3-x8KcSymMNREMgTGneAA",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-a6HDkwToJFoIPzlxBiS71g",
+        "yelp-T52ED3B5-Lymo9EzCpuTwg",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.66660935,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.66425073,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.66066825,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+          "shopName": "J'aime French Bakery",
+          "score": 0.655873,
+          "text": "环境非常古朴、宁静而明亮，适合早上或下午喝咖啡。我们大约 11 点去的时候不太忙。我们试了撒糖的 choquette，很好吃，里面填的是非常轻盈的 Nutella 奶油。我朋友喝的 Anastasia 茶闻起来非常香，卡布奇诺也很浓。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.64830947,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.64177704,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6384545,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-a6HDkwToJFoIPzlxBiS71g",
+          "shopName": "Forin Cafe",
+          "score": 0.62571764,
+          "text": "必须喜欢 Forin Cafe。咖啡很浓，WiFi 很快，氛围里满是创造力。虽然对我这个南费城人来说它不算本地咖啡馆，但我发现自己每个月都会来这里几次，开个会，或者在工作日中途找点创意。很快还会再见你们 :)"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-T52ED3B5-Lymo9EzCpuTwg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6217359,
+          "text": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.6186003,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        }
+      ],
+      "failureReasons": [
+        "semantic_miss_not_in_analysis_top_k",
+        "implicit_intent_queries_are_weak"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-018",
+      "question": "周六早上想和朋友学习，哪家有大窗户和楼下座位，但 chai latte 可能偏甜？",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "time_constraint",
+        "facility_constraint",
+        "multi_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-REgp10DO01kp2pOONZtq9w"
+      ],
+      "expectedEvidenceText": "周六早上我和朋友来这里学习。我们点了两杯印度香料拿铁，坐在前面大窗户旁边，那里有很多自然光。前面有座位，楼下也有更多座位，所以这是带笔记本电脑来做工作的好地方（而且员工也非常可爱）。这杯拿铁是用紫色 Oregon 液体印度香料茶混合物做的（很多人都用这个）。对我来说有点太甜了，所以下次我可能只点茶。",
+      "hitAtTopK": false,
+      "firstRelevantRank": null,
+      "topKReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-T52ED3B5-Lymo9EzCpuTwg"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.5343469,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5320158,
+          "text": "这是学习的完美地方！这里有大量桌子，也有一些插座（以防坐不到插座旁，最好带着充好电的设备来！）。Good Karma 总有季节限定，比如我这周已经喝过两次的冰薰衣草拿铁。他们现在也接受信用卡，所以我会更常回来。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-T52ED3B5-Lymo9EzCpuTwg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.52017474,
+          "text": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-T52ED3B5-Lymo9EzCpuTwg",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.5343469,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5320158,
+          "text": "这是学习的完美地方！这里有大量桌子，也有一些插座（以防坐不到插座旁，最好带着充好电的设备来！）。Good Karma 总有季节限定，比如我这周已经喝过两次的冰薰衣草拿铁。他们现在也接受信用卡，所以我会更常回来。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-T52ED3B5-Lymo9EzCpuTwg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.52017474,
+          "text": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5170721,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+          "shopName": "J'aime French Bakery",
+          "score": 0.503894,
+          "text": "环境非常古朴、宁静而明亮，适合早上或下午喝咖啡。我们大约 11 点去的时候不太忙。我们试了撒糖的 choquette，很好吃，里面填的是非常轻盈的 Nutella 奶油。我朋友喝的 Anastasia 茶闻起来非常香，卡布奇诺也很浓。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.49921504,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.49714267,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.4855172,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.4791721,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.47885278,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        }
+      ],
+      "failureReasons": [
+        "semantic_miss_not_in_analysis_top_k",
+        "time_constraint_queries_are_weak",
+        "multi_constraint_queries_are_weak"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-020",
+      "question": "Alchemy Coffee 有桌子和 WiFi 吗？如果要带电脑去，电源方面要注意什么？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "negative_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-z2Ia7bFRqSKHicUNi7359Q"
+      ],
+      "expectedEvidenceText": "我不知道他们怎么做到的，但 Alchemy Coffee 能把普通咖啡变成纯金。说真的，他们的拿铁非常好——顺滑的浓缩咖啡和柔滑的燕麦奶。热的和冰的都很棒！他们的糕点好吃到要命——babka 太美味了。它有点偏甜，但配咖啡就很完美。他们也是我见过最有美感的咖啡店之一（想象 CB2 那种现代时髦风）。注意：他们有桌子和 WiFi，但请把设备充满电，因为他们没有插座。总体来说，我推荐你来看看这个小地方，你不会后悔！我保证这不是巫术，只是科学。",
+      "hitAtTopK": false,
+      "firstRelevantRank": null,
+      "topKReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.6336556,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.58102596,
+          "text": "这是学习的完美地方！这里有大量桌子，也有一些插座（以防坐不到插座旁，最好带着充好电的设备来！）。Good Karma 总有季节限定，比如我这周已经喝过两次的冰薰衣草拿铁。他们现在也接受信用卡，所以我会更常回来。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5513212,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-AR8lhVM0aylAt8W06q6zxg",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+        "yelp-a6HDkwToJFoIPzlxBiS71g"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.6336556,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.58102596,
+          "text": "这是学习的完美地方！这里有大量桌子，也有一些插座（以防坐不到插座旁，最好带着充好电的设备来！）。Good Karma 总有季节限定，比如我这周已经喝过两次的冰薰衣草拿铁。他们现在也接受信用卡，所以我会更常回来。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5513212,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.54545295,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.5446294,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-AR8lhVM0aylAt8W06q6zxg",
+          "shopName": "Wawa",
+          "score": 0.53935456,
+          "text": "作为较新的 WaWa 之一，这家备货充足，有座位、免费 WiFi 和充电站。这是好消息。坏消息是午餐时间这里会极其拥挤，而且某个天才把收银台放在三明治柜台正对面。等三明治的人太多时，你很难排进收银队伍，因为路被等三明治的人挡住了。这家店也有 WaWa 最大的问题。最大的问题是他们在店内自己烤 hoagie 面包卷，而不是买 Amoroso 的面包卷。Amoroso 的面包卷曾经很完美。店里烤的面包卷即使烤得刚好也无法相比。而且很多时候它们还烤过头，让情况更糟。hoagie 仍然不错，但附近别处能买到更好的；过去可…"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.53730255,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.5332291,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.5272021,
+          "text": "我第一次认识 Valerio Coffee Roasters 是通过使用剩余食物 app。这是少数让我各方面都印象深刻的商家之一。这里停车有点难处理，但我今天运气不错。这是一个值得费力找车位的地方。员工对每个进来的人都非常有帮助。我并不觉得他们给了我什么特殊待遇，员工只是两个精力充沛、在服务行业工作的人。至于氛围，外面有几张远离路边的双人小酒馆风格桌子，不会让你觉得有危险。里面的装修很现代，像半波西米亚风的咖啡店。目前座位间隔较开，但在 Covid 期间也足够容纳三到四组四人客人。整体清爽干净。当时有几个人在用笔…"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-a6HDkwToJFoIPzlxBiS71g",
+          "shopName": "Forin Cafe",
+          "score": 0.52024907,
+          "text": "必须喜欢 Forin Cafe。咖啡很浓，WiFi 很快，氛围里满是创造力。虽然对我这个南费城人来说它不算本地咖啡馆，但我发现自己每个月都会来这里几次，开个会，或者在工作日中途找点创意。很快还会再见你们 :)"
+        }
+      ],
+      "failureReasons": [
+        "semantic_miss_not_in_analysis_top_k"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-022",
+      "question": "Red Hook 除了咖啡，适合午餐或不用排队的早午餐吗？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "implicit_intent",
+        "service_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-VJEtJzH0GP_gFYjKDVIstw"
+      ],
+      "expectedEvidenceText": "这里有很棒的咖啡、漂亮的杯子、很好的氛围、令人愉快的员工，以及（对咖啡店来说最令人惊讶的）很棒的食物！说真的，来这里吃午饭吧。或者更好，来吃一顿好吃又不用排队的早午餐。他们的鸡蛋似乎最受欢迎，但我最喜欢的是 Red Hook 三明治。每个三明治都会配一小碗沙拉，那就像一幅味觉的画。我经常来这里工作（它离我家近）。我不是每次需要工作都来的唯一原因，是我不想对它厌倦！这里很舒适，但似乎从不拥挤。另外，他们每个月会在非营业时间举办有趣活动，供应食物和饮品，并展示本地艺术家。真正以社区为导向的商家。这里肯定有关系紧密的常客，但也总给新面孔留有空间。",
+      "hitAtTopK": false,
+      "firstRelevantRank": 5,
+      "topKReviewIds": [
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+          "shopName": "J'aime French Bakery",
+          "score": 0.67650163,
+          "text": "环境非常古朴、宁静而明亮，适合早上或下午喝咖啡。我们大约 11 点去的时候不太忙。我们试了撒糖的 choquette，很好吃，里面填的是非常轻盈的 Nutella 奶油。我朋友喝的 Anastasia 茶闻起来非常香，卡布奇诺也很浓。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6654228,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.66397774,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-ChYhI05dXfDPbATD9VdiDQ",
+        "yelp-VJEtJzH0GP_gFYjKDVIstw",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-Mq03w7IM-glofyCkUyAsog",
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+        "yelp-z2Ia7bFRqSKHicUNi7359Q"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+          "shopName": "J'aime French Bakery",
+          "score": 0.67650163,
+          "text": "环境非常古朴、宁静而明亮，适合早上或下午喝咖啡。我们大约 11 点去的时候不太忙。我们试了撒糖的 choquette，很好吃，里面填的是非常轻盈的 Nutella 奶油。我朋友喝的 Anastasia 茶闻起来非常香，卡布奇诺也很浓。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6654228,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.66397774,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-ChYhI05dXfDPbATD9VdiDQ",
+          "shopName": "Franny Lou's Porch",
+          "score": 0.64580667,
+          "text": "一家非常不错的咖啡店，有很棒的冰咖啡、制作精良的咖啡饮品（我喝了一杯很好的美式）和丰富的糕点选择。这里有免费 wi-fi，也有舒适的工作空间。我想再回来看看午餐时间还有什么。如果我的咖啡体验能预示之后的东西，我期待会有一些好吃的新选择！这是附近一个有趣的地方！我们还会再来。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-VJEtJzH0GP_gFYjKDVIstw",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.64222556,
+          "text": "这里有很棒的咖啡、漂亮的杯子、很好的氛围、令人愉快的员工，以及（对咖啡店来说最令人惊讶的）很棒的食物！说真的，来这里吃午饭吧。或者更好，来吃一顿好吃又不用排队的早午餐。他们的鸡蛋似乎最受欢迎，但我最喜欢的是 Red Hook 三明治。每个三明治都会配一小碗沙拉，那就像一幅味觉的画。我经常来这里工作（它离我家近）。我不是每次需要工作都来的唯一原因，是我不想对它厌倦！这里很舒适，但似乎从不拥挤。另外，他们每个月会在非营业时间举办有趣活动，供应食物和饮品，并展示本地艺术家。真正以社区为导向的商家。这里肯定有关系紧密的常…"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.64181685,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.636827,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-Mq03w7IM-glofyCkUyAsog",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.6366588,
+          "text": "自从这家店开业以来，我觉得没有哪一个周日早晨我没有踉踉跄跄地走进来，身上还穿着前一晚的衣服，想要某种咖啡因来驱散我悲惨周六夜晚留在灵魂里的东西。咖啡很棒，空间很舒适。他们的贝果很好吃，自制蔬菜奶油奶酪也很棒。我几乎总是在这里点冰咖啡，即使在隆冬。他们会加一份浓缩咖啡，简直神奇。谁还需要 Advil？他们还提供方便的水果风味免费饮水机，给那些在等咖啡制作时觉得需要享受一下的顾客。我通常会喝。他们把每杯咖啡都做得独一无二，这和那些直接从隐藏冰箱里的桶倒冰咖啡的店完全不同。不，先生，这里可不是那样。如果你是喜欢阅读的人…"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+          "shopName": "Starbucks",
+          "score": 0.63502365,
+          "text": "我上班时想补充咖啡因，这里是一个适合跑来喝咖啡的好地方。我也喜欢他们的沙发，非常适合用笔记本电脑做一点或很多工作。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-z2Ia7bFRqSKHicUNi7359Q",
+          "shopName": "Alchemy Coffee",
+          "score": 0.6344198,
+          "text": "我不知道他们怎么做到的，但 Alchemy Coffee 能把普通咖啡变成纯金。说真的，他们的拿铁非常好——顺滑的浓缩咖啡和柔滑的燕麦奶。热的和冰的都很棒！他们的糕点好吃到要命——babka 太美味了。它有点偏甜，但配咖啡就很完美。他们也是我见过最有美感的咖啡店之一（想象 CB2 那种现代时髦风）。注意：他们有桌子和 WiFi，但请把设备充满电，因为他们没有插座。总体来说，我推荐你来看看这个小地方，你不会后悔！我保证这不是巫术，只是科学。"
+        }
+      ],
+      "failureReasons": [
+        "top_k_too_small",
+        "service_experience_queries_are_weak",
+        "implicit_intent_queries_are_weak"
+      ]
+    }
+  ],
+  "details": [
+    {
+      "caseId": "yelp-rag-001",
+      "question": "这家小咖啡店如果坐前面会不会太吵？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "environment_preference",
+        "negative_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw"
+      ],
+      "expectedEvidenceText": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 1,
+      "topKReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.7320162,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6465578,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6276657,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-k3-x8KcSymMNREMgTGneAA",
+        "yelp-UCQtD68x2r2UZUsJozztDw",
+        "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-hUIkr15XxOSzheG5l9mYSw"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.7320162,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6465578,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6276657,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.62035453,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-UCQtD68x2r2UZUsJozztDw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.6047212,
+          "text": "很棒的社区小店。2 美元的茶？当然要。这里工作的人非常友好。他们也有一些小吃，比如贝果和糕点，都很好吃。后面的小座位区不错，也很安静。唯一抱怨是他们有时音乐放得太大，让人很难集中注意力。但总的来说，这是一家非常可靠的咖啡店。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6044419,
+          "text": "先说明，我不是咖啡发烧友，但我当然喜欢一杯好咖啡。必须说，我在这里喝过的咖啡摩卡和美式都没有让我惊艳，不过我还是会为了外带再来，因为它就在我家附近。在我看来，外带就对了。上次我进去时，至少有两只狗乖乖坐在主人旁边，而主人们正在用笔记本电脑。店里也挺满的。不过我本来也不是那种会一个人在咖啡店久坐的人。我注意到牛奶和糖旁边贴着一套规则——它们真的让我感觉很受欢迎。那是一套非常有亲和力的规则。店家确实很感谢顾客。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6008694,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-1VyHchVgc9oEfVrsFweNNA",
+          "shopName": "Good Karma Cafe",
+          "score": 0.600427,
+          "text": "今年我圣诞愿望清单的第一项，是有人能在我家附近开一家巨大、友好、有 WiFi、有很多插座、空间宽敞的咖啡馆。现在还没有实现，但有人在 Washington West 开了一家，这完全不公平，因为从 Good Karma 走到 Chapterhouse 那一带的好地方也很方便。我先压住自己的怨念，只庆幸如果我真的急着去咖啡馆，可以比以前少走整整两个街区。Good Karma 很大、很明亮，有很多插座和 WiFi。除了咖啡和茶之外，还有很多烘焙食品和其他饮品可选，这点不错。他们还有两个不错的洗手间，也没人打扰你，而且…"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.5973638,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-hUIkr15XxOSzheG5l9mYSw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5952991,
+          "text": "这是我最喜欢的店之一。我以前很喜欢来这里完成工作，甚至只是阅读。大窗户、很多桌子、到处都是插座。咖啡不错。我试过的饮品一直都很好喝。氛围简直完美。我喜欢晚上坐在这里——明亮的灯光、大桌子、刚刚好的背景音乐。营业到晚上 10 点。而且晚上人更少。我喜欢咖啡店，而这里绝对是其中之一。"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-002",
+      "question": "有没有咖啡店员工服务特别好，甚至帮顾客找回落下的电脑？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "service_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-0raRTiWTrj9ytORRy-kZoA"
+      ],
+      "expectedEvidenceText": "费城有很多很棒的咖啡店，所以我偶然走进 Alchemy Coffee 时标准其实挺高，但有三点让这家新店轻松跻身其中。第一，咖啡很好喝，也让人印象深刻——我非常喜欢一款带有柑橘风味的埃塞俄比亚拼配。第二，咖啡师非常友好、熟练而且高效——我在这家店太开心了，以至于不小心把笔记本电脑落下了。他追到街上把电脑还给我。第三，这里就像海明威会说的那种“干净明亮的地方”。高高的天花板、白色墙面和能透进自然光的大窗户。装修很有品味，只是稍微有点简朴。",
+      "hitAtTopK": false,
+      "firstRelevantRank": 4,
+      "topKReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.69253683,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6452663,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.63362813,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-0raRTiWTrj9ytORRy-kZoA",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-k3-x8KcSymMNREMgTGneAA"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.69253683,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6452663,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.63362813,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-0raRTiWTrj9ytORRy-kZoA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.62898743,
+          "text": "费城有很多很棒的咖啡店，所以我偶然走进 Alchemy Coffee 时标准其实挺高，但有三点让这家新店轻松跻身其中。第一，咖啡很好喝，也让人印象深刻——我非常喜欢一款带有柑橘风味的埃塞俄比亚拼配。第二，咖啡师非常友好、熟练而且高效——我在这家店太开心了，以至于不小心把笔记本电脑落下了。他追到街上把电脑还给我。第三，这里就像海明威会说的那种“干净明亮的地方”。高高的天花板、白色墙面和能透进自然光的大窗户。装修很有品味，只是稍微有点简朴。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.62691283,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.62242705,
+          "text": "先说明，我不是咖啡发烧友，但我当然喜欢一杯好咖啡。必须说，我在这里喝过的咖啡摩卡和美式都没有让我惊艳，不过我还是会为了外带再来，因为它就在我家附近。在我看来，外带就对了。上次我进去时，至少有两只狗乖乖坐在主人旁边，而主人们正在用笔记本电脑。店里也挺满的。不过我本来也不是那种会一个人在咖啡店久坐的人。我注意到牛奶和糖旁边贴着一套规则——它们真的让我感觉很受欢迎。那是一套非常有亲和力的规则。店家确实很感谢顾客。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+          "shopName": "Starbucks",
+          "score": 0.6219797,
+          "text": "我上班时想补充咖啡因，这里是一个适合跑来喝咖啡的好地方。我也喜欢他们的沙发，非常适合用笔记本电脑做一点或很多工作。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.62000227,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.61641204,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.6150018,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        }
+      ],
+      "failureReasons": [
+        "top_k_too_small",
+        "service_experience_queries_are_weak"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-003",
+      "question": "想找空间大、插座多、开到很晚的咖啡馆，付款上有什么要注意？",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "time_constraint",
+        "multi_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-1VyHchVgc9oEfVrsFweNNA"
+      ],
+      "expectedEvidenceText": "今年我圣诞愿望清单的第一项，是有人能在我家附近开一家巨大、友好、有 WiFi、有很多插座、空间宽敞的咖啡馆。现在还没有实现，但有人在 Washington West 开了一家，这完全不公平，因为从 Good Karma 走到 Chapterhouse 那一带的好地方也很方便。我先压住自己的怨念，只庆幸如果我真的急着去咖啡馆，可以比以前少走整整两个街区。Good Karma 很大、很明亮，有很多插座和 WiFi。除了咖啡和茶之外，还有很多烘焙食品和其他饮品可选，这点不错。他们还有两个不错的洗手间，也没人打扰你，而且营业到很晚。这会是咖啡馆之爱吗？缺点是食物不算好。店里有牌子告诉你不要带外食，我必须尊重，但我也必须承认，当我咬下一块湿润、蛋味过重的司康时，想到外面有 Metropolitan Bakery 做的那些优秀司康，心里会有点难过。就普通滴滤咖啡来说，咖啡还可以，但正如另一位 Yelp 用户说的，拿铁差很多。他们似乎分不清拿铁和卡布奇诺。我点过一次，之后就再也没点过。可我能说什么呢。为了这里真正友好的氛围，我可以忍受糟糕的司康和普通的咖啡饮品；一想到这个街区如此被宠坏，而我住的那片完全没有这种优秀咖啡馆，我嫉妒得脸都像…",
+      "hitAtTopK": false,
+      "firstRelevantRank": null,
+      "topKReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-YmBytIHGjEroySTkyL8m8w"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6791248,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6629807,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6241522,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-AhTsqSS43V1-9yPq-NRX-w",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-k3-x8KcSymMNREMgTGneAA",
+        "yelp-hUIkr15XxOSzheG5l9mYSw"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6791248,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6629807,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6241522,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.6207119,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.62008834,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-AhTsqSS43V1-9yPq-NRX-w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6200477,
+          "text": "这是个不错的地方，可以学习、工作，或者做其他类似的事。员工很棒，友好又爱笑。咖啡馆食品价格适中。桌子和插座都很充足。毫无疑问，这是我在费城最喜欢的咖啡馆之一。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.61508226,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6133131,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.612099,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-hUIkr15XxOSzheG5l9mYSw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6120571,
+          "text": "这是我最喜欢的店之一。我以前很喜欢来这里完成工作，甚至只是阅读。大窗户、很多桌子、到处都是插座。咖啡不错。我试过的饮品一直都很好喝。氛围简直完美。我喜欢晚上坐在这里——明亮的灯光、大桌子、刚刚好的背景音乐。营业到晚上 10 点。而且晚上人更少。我喜欢咖啡店，而这里绝对是其中之一。"
+        }
+      ],
+      "failureReasons": [
+        "semantic_miss_not_in_analysis_top_k",
+        "time_constraint_queries_are_weak",
+        "multi_constraint_queries_are_weak"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-004",
+      "question": "想吃法式糕点但还要办公，有哪家店因为没有 WiFi 不太合适？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "negative_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+      ],
+      "expectedEvidenceText": "咖啡相当普通。饮品选择就是常见那些，也有一些法式烘焙点心。店内环境很好，也很干净，但没有 Wi-Fi，这对想工作的人来说挺扫兴。有一些法式糕点和烘焙食品，不过都稍微有点贵。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 2,
+      "topKReviewIds": [
+        "yelp-G16hQXpXMfiodPlsrLCnLw",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+        "yelp-AR8lhVM0aylAt8W06q6zxg"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-G16hQXpXMfiodPlsrLCnLw",
+          "shopName": "J'aime French Bakery",
+          "score": 0.6385789,
+          "text": "我是外地来的，偶然发现了这家可爱的法国烘焙店。真是惊喜！它完全就如自己所说，是法式的，也是烘焙店。我连续两天来，吃了一片美味的橙子橄榄油蛋糕，喝了一壶英式早餐茶。我太喜欢他们的茶品牌了（来自巴黎的 Kusmi），后来在附近商店看到时还买了一盒。这里的氛围令人放松，是忙碌一天中的愉快休憩。哦，员工也很乐于帮忙，而且非常好。强烈推荐。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+          "shopName": "J'aime French Bakery",
+          "score": 0.63158554,
+          "text": "咖啡相当普通。饮品选择就是常见那些，也有一些法式烘焙点心。店内环境很好，也很干净，但没有 Wi-Fi，这对想工作的人来说挺扫兴。有一些法式糕点和烘焙食品，不过都稍微有点贵。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-AR8lhVM0aylAt8W06q6zxg",
+          "shopName": "Wawa",
+          "score": 0.5878104,
+          "text": "作为较新的 WaWa 之一，这家备货充足，有座位、免费 WiFi 和充电站。这是好消息。坏消息是午餐时间这里会极其拥挤，而且某个天才把收银台放在三明治柜台正对面。等三明治的人太多时，你很难排进收银队伍，因为路被等三明治的人挡住了。这家店也有 WaWa 最大的问题。最大的问题是他们在店内自己烤 hoagie 面包卷，而不是买 Amoroso 的面包卷。Amoroso 的面包卷曾经很完美。店里烤的面包卷即使烤得刚好也无法相比。而且很多时候它们还烤过头，让情况更糟。hoagie 仍然不错，但附近别处能买到更好的；过去可…"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-G16hQXpXMfiodPlsrLCnLw",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+        "yelp-AR8lhVM0aylAt8W06q6zxg",
+        "yelp-z2Ia7bFRqSKHicUNi7359Q",
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-c0Dx03QmIih0dFhTYp-kFQ",
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-G16hQXpXMfiodPlsrLCnLw",
+          "shopName": "J'aime French Bakery",
+          "score": 0.6385789,
+          "text": "我是外地来的，偶然发现了这家可爱的法国烘焙店。真是惊喜！它完全就如自己所说，是法式的，也是烘焙店。我连续两天来，吃了一片美味的橙子橄榄油蛋糕，喝了一壶英式早餐茶。我太喜欢他们的茶品牌了（来自巴黎的 Kusmi），后来在附近商店看到时还买了一盒。这里的氛围令人放松，是忙碌一天中的愉快休憩。哦，员工也很乐于帮忙，而且非常好。强烈推荐。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+          "shopName": "J'aime French Bakery",
+          "score": 0.63158554,
+          "text": "咖啡相当普通。饮品选择就是常见那些，也有一些法式烘焙点心。店内环境很好，也很干净，但没有 Wi-Fi，这对想工作的人来说挺扫兴。有一些法式糕点和烘焙食品，不过都稍微有点贵。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-AR8lhVM0aylAt8W06q6zxg",
+          "shopName": "Wawa",
+          "score": 0.5878104,
+          "text": "作为较新的 WaWa 之一，这家备货充足，有座位、免费 WiFi 和充电站。这是好消息。坏消息是午餐时间这里会极其拥挤，而且某个天才把收银台放在三明治柜台正对面。等三明治的人太多时，你很难排进收银队伍，因为路被等三明治的人挡住了。这家店也有 WaWa 最大的问题。最大的问题是他们在店内自己烤 hoagie 面包卷，而不是买 Amoroso 的面包卷。Amoroso 的面包卷曾经很完美。店里烤的面包卷即使烤得刚好也无法相比。而且很多时候它们还烤过头，让情况更糟。hoagie 仍然不错，但附近别处能买到更好的；过去可…"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-z2Ia7bFRqSKHicUNi7359Q",
+          "shopName": "Alchemy Coffee",
+          "score": 0.584693,
+          "text": "我不知道他们怎么做到的，但 Alchemy Coffee 能把普通咖啡变成纯金。说真的，他们的拿铁非常好——顺滑的浓缩咖啡和柔滑的燕麦奶。热的和冰的都很棒！他们的糕点好吃到要命——babka 太美味了。它有点偏甜，但配咖啡就很完美。他们也是我见过最有美感的咖啡店之一（想象 CB2 那种现代时髦风）。注意：他们有桌子和 WiFi，但请把设备充满电，因为他们没有插座。总体来说，我推荐你来看看这个小地方，你不会后悔！我保证这不是巫术，只是科学。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+          "shopName": "Paris Baguette",
+          "score": 0.5837494,
+          "text": "糕点和咖啡不错。不过 Wifi 很糟，所以我没法在笔记本电脑上完成多少工作。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.57747877,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.5617933,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-c0Dx03QmIih0dFhTYp-kFQ",
+          "shopName": "Dunkin' Donuts",
+          "score": 0.5615473,
+          "text": "这家位于费城东北远郊 Bustleton Avenue 的 Dunkin Donuts，在这类油炸圆面团门店里算是平均水平。店面不大，但有一个角落休息区，里面是磨损的人造皮沙发和扶手椅，还有板岩装饰墙。这些小细节不错，但最终还是要看他们的基本功——咖啡和甜甜圈。在这方面，他们无法和那些为了我的钱更努力的新式咖啡馆、烘焙店和甜甜圈专门店竞争。过去两周里，我在城里和郊区喝到了好得多的咖啡，也吃到了豪华得多的蛋糕和油炸面点，比昨晚在这里尝到的强多了。也许贵一点，但品质差异很明显。另外，当你坐着享用他们的东西时，他们不会…"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-1VyHchVgc9oEfVrsFweNNA",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5605778,
+          "text": "今年我圣诞愿望清单的第一项，是有人能在我家附近开一家巨大、友好、有 WiFi、有很多插座、空间宽敞的咖啡馆。现在还没有实现，但有人在 Washington West 开了一家，这完全不公平，因为从 Good Karma 走到 Chapterhouse 那一带的好地方也很方便。我先压住自己的怨念，只庆幸如果我真的急着去咖啡馆，可以比以前少走整整两个街区。Good Karma 很大、很明亮，有很多插座和 WiFi。除了咖啡和茶之外，还有很多烘焙食品和其他饮品可选，这点不错。他们还有两个不错的洗手间，也没人打扰你，而且…"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-b8dIMHMGEWXMZi5BXaRfCw",
+          "shopName": "Starbucks",
+          "score": 0.5588889,
+          "text": "7 月 4 日，在他们有限营业时间里，店里干净而且半空。我给自己买了 3 美元促销的 Double Fudge Bar 星冰乐，也给朋友买了 Caramel Waffle Cone。焦糖华夫筒对我来说太甜，Double Fudge Bar 也是。早知道还是点我平常喝的抹茶星冰乐，但这种 3 美元星冰乐促销的意义就在于让你尝试舒适区之外的东西。总之，牛奶都空了，我把它们放到星巴克柜台并告知员工更换。30 分钟后，他们完全没有这么做。至少他们有不错的桌子，可以让你用笔记本电脑工作，不过桌子附近没有插座。"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-005",
+      "question": "哪家咖啡店咖啡很浓、WiFi 很快，而且适合找创意？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "environment_preference"
+      ],
+      "expectedReviewIds": [
+        "yelp-a6HDkwToJFoIPzlxBiS71g"
+      ],
+      "expectedEvidenceText": "必须喜欢 Forin Cafe。咖啡很浓，WiFi 很快，氛围里满是创造力。虽然对我这个南费城人来说它不算本地咖啡馆，但我发现自己每个月都会来这里几次，开个会，或者在工作日中途找点创意。很快还会再见你们 :)",
+      "hitAtTopK": true,
+      "firstRelevantRank": 1,
+      "topKReviewIds": [
+        "yelp-a6HDkwToJFoIPzlxBiS71g",
+        "yelp-mhS1SUPKRA3Q6nR3oresqA",
+        "yelp-0raRTiWTrj9ytORRy-kZoA"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-a6HDkwToJFoIPzlxBiS71g",
+          "shopName": "Forin Cafe",
+          "score": 0.7306423,
+          "text": "必须喜欢 Forin Cafe。咖啡很浓，WiFi 很快，氛围里满是创造力。虽然对我这个南费城人来说它不算本地咖啡馆，但我发现自己每个月都会来这里几次，开个会，或者在工作日中途找点创意。很快还会再见你们 :)"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-mhS1SUPKRA3Q6nR3oresqA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.71266085,
+          "text": "Rittenhouse 区域最漂亮（也可能最好看？）的咖啡店。咖啡师 Maya 不仅在我第一次来之后就记住了我的名字和点单，咖啡也真的很好喝，而且这里有 WiFi、插座和不错的氛围。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-0raRTiWTrj9ytORRy-kZoA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.6892029,
+          "text": "费城有很多很棒的咖啡店，所以我偶然走进 Alchemy Coffee 时标准其实挺高，但有三点让这家新店轻松跻身其中。第一，咖啡很好喝，也让人印象深刻——我非常喜欢一款带有柑橘风味的埃塞俄比亚拼配。第二，咖啡师非常友好、熟练而且高效——我在这家店太开心了，以至于不小心把笔记本电脑落下了。他追到街上把电脑还给我。第三，这里就像海明威会说的那种“干净明亮的地方”。高高的天花板、白色墙面和能透进自然光的大窗户。装修很有品味，只是稍微有点简朴。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-a6HDkwToJFoIPzlxBiS71g",
+        "yelp-mhS1SUPKRA3Q6nR3oresqA",
+        "yelp-0raRTiWTrj9ytORRy-kZoA",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-z2Ia7bFRqSKHicUNi7359Q",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+        "yelp-WtbJcI8-FAkvxwyt0MtJgQ"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-a6HDkwToJFoIPzlxBiS71g",
+          "shopName": "Forin Cafe",
+          "score": 0.7306423,
+          "text": "必须喜欢 Forin Cafe。咖啡很浓，WiFi 很快，氛围里满是创造力。虽然对我这个南费城人来说它不算本地咖啡馆，但我发现自己每个月都会来这里几次，开个会，或者在工作日中途找点创意。很快还会再见你们 :)"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-mhS1SUPKRA3Q6nR3oresqA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.71266085,
+          "text": "Rittenhouse 区域最漂亮（也可能最好看？）的咖啡店。咖啡师 Maya 不仅在我第一次来之后就记住了我的名字和点单，咖啡也真的很好喝，而且这里有 WiFi、插座和不错的氛围。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-0raRTiWTrj9ytORRy-kZoA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.6892029,
+          "text": "费城有很多很棒的咖啡店，所以我偶然走进 Alchemy Coffee 时标准其实挺高，但有三点让这家新店轻松跻身其中。第一，咖啡很好喝，也让人印象深刻——我非常喜欢一款带有柑橘风味的埃塞俄比亚拼配。第二，咖啡师非常友好、熟练而且高效——我在这家店太开心了，以至于不小心把笔记本电脑落下了。他追到街上把电脑还给我。第三，这里就像海明威会说的那种“干净明亮的地方”。高高的天花板、白色墙面和能透进自然光的大窗户。装修很有品味，只是稍微有点简朴。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6855692,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6784375,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-z2Ia7bFRqSKHicUNi7359Q",
+          "shopName": "Alchemy Coffee",
+          "score": 0.6702807,
+          "text": "我不知道他们怎么做到的，但 Alchemy Coffee 能把普通咖啡变成纯金。说真的，他们的拿铁非常好——顺滑的浓缩咖啡和柔滑的燕麦奶。热的和冰的都很棒！他们的糕点好吃到要命——babka 太美味了。它有点偏甜，但配咖啡就很完美。他们也是我见过最有美感的咖啡店之一（想象 CB2 那种现代时髦风）。注意：他们有桌子和 WiFi，但请把设备充满电，因为他们没有插座。总体来说，我推荐你来看看这个小地方，你不会后悔！我保证这不是巫术，只是科学。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.67020106,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.66438067,
+          "text": "这是一家新咖啡店，和 Bald Birds Brewing Company 连在一起。它很快会成为我做工作的常去地点。这里有漂亮开阔的空间、很多座位和插座、充足自然光，以及很棒的 WiFi。咖啡很好喝，服务也很优秀。我肯定会经常回来！"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+          "shopName": "J'aime French Bakery",
+          "score": 0.6613922,
+          "text": "环境非常古朴、宁静而明亮，适合早上或下午喝咖啡。我们大约 11 点去的时候不太忙。我们试了撒糖的 choquette，很好吃，里面填的是非常轻盈的 Nutella 奶油。我朋友喝的 Anastasia 茶闻起来非常香，卡布奇诺也很浓。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-WtbJcI8-FAkvxwyt0MtJgQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.65741134,
+          "text": "这是我在费城去的第一家咖啡店（我想从 Starbucks 之外拓展一下），它没有让我失望！氛围是我最喜欢的！这里空间充足，也有很多桌子，可以一边喝咖啡，一边拿出书来学习（他们提供免费 wifi）。门口前面的灌木增加了魅力，让你觉得这里像是一个秘密地点（哈哈）。另外，洗手间也很漂亮、很干净！员工非常棒！点单很快，制作也很快。我看到他们多次四处清洁。我点了一杯杏仁奶南瓜香料拿铁。很好喝！它没有很重的南瓜味，而是有很多香料味，有些人可能不喜欢。我觉得小杯大约 5 美元有点贵，但其他地方拿铁通常也差不多这个价。总而言之，…"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-006",
+      "question": "哪家 WaWa 有座位、免费 WiFi 和充电站，但午餐时间会很挤？",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "time_constraint",
+        "negative_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-AR8lhVM0aylAt8W06q6zxg"
+      ],
+      "expectedEvidenceText": "作为较新的 WaWa 之一，这家备货充足，有座位、免费 WiFi 和充电站。这是好消息。坏消息是午餐时间这里会极其拥挤，而且某个天才把收银台放在三明治柜台正对面。等三明治的人太多时，你很难排进收银队伍，因为路被等三明治的人挡住了。这家店也有 WaWa 最大的问题。最大的问题是他们在店内自己烤 hoagie 面包卷，而不是买 Amoroso 的面包卷。Amoroso 的面包卷曾经很完美。店里烤的面包卷即使烤得刚好也无法相比。而且很多时候它们还烤过头，让情况更糟。hoagie 仍然不错，但附近别处能买到更好的；过去可不能这么说，尤其是金枪鱼 hoagie。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 1,
+      "topKReviewIds": [
+        "yelp-AR8lhVM0aylAt8W06q6zxg",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-AR8lhVM0aylAt8W06q6zxg",
+          "shopName": "Wawa",
+          "score": 0.5852527,
+          "text": "作为较新的 WaWa 之一，这家备货充足，有座位、免费 WiFi 和充电站。这是好消息。坏消息是午餐时间这里会极其拥挤，而且某个天才把收银台放在三明治柜台正对面。等三明治的人太多时，你很难排进收银队伍，因为路被等三明治的人挡住了。这家店也有 WaWa 最大的问题。最大的问题是他们在店内自己烤 hoagie 面包卷，而不是买 Amoroso 的面包卷。Amoroso 的面包卷曾经很完美。店里烤的面包卷即使烤得刚好也无法相比。而且很多时候它们还烤过头，让情况更糟。hoagie 仍然不错，但附近别处能买到更好的；过去可…"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.5741941,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.5676265,
+          "text": "我第一次认识 Valerio Coffee Roasters 是通过使用剩余食物 app。这是少数让我各方面都印象深刻的商家之一。这里停车有点难处理，但我今天运气不错。这是一个值得费力找车位的地方。员工对每个进来的人都非常有帮助。我并不觉得他们给了我什么特殊待遇，员工只是两个精力充沛、在服务行业工作的人。至于氛围，外面有几张远离路边的双人小酒馆风格桌子，不会让你觉得有危险。里面的装修很现代，像半波西米亚风的咖啡店。目前座位间隔较开，但在 Covid 期间也足够容纳三到四组四人客人。整体清爽干净。当时有几个人在用笔…"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-AR8lhVM0aylAt8W06q6zxg",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-mhS1SUPKRA3Q6nR3oresqA",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-AR8lhVM0aylAt8W06q6zxg",
+          "shopName": "Wawa",
+          "score": 0.5852527,
+          "text": "作为较新的 WaWa 之一，这家备货充足，有座位、免费 WiFi 和充电站。这是好消息。坏消息是午餐时间这里会极其拥挤，而且某个天才把收银台放在三明治柜台正对面。等三明治的人太多时，你很难排进收银队伍，因为路被等三明治的人挡住了。这家店也有 WaWa 最大的问题。最大的问题是他们在店内自己烤 hoagie 面包卷，而不是买 Amoroso 的面包卷。Amoroso 的面包卷曾经很完美。店里烤的面包卷即使烤得刚好也无法相比。而且很多时候它们还烤过头，让情况更糟。hoagie 仍然不错，但附近别处能买到更好的；过去可…"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.5741941,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.5676265,
+          "text": "我第一次认识 Valerio Coffee Roasters 是通过使用剩余食物 app。这是少数让我各方面都印象深刻的商家之一。这里停车有点难处理，但我今天运气不错。这是一个值得费力找车位的地方。员工对每个进来的人都非常有帮助。我并不觉得他们给了我什么特殊待遇，员工只是两个精力充沛、在服务行业工作的人。至于氛围，外面有几张远离路边的双人小酒馆风格桌子，不会让你觉得有危险。里面的装修很现代，像半波西米亚风的咖啡店。目前座位间隔较开，但在 Covid 期间也足够容纳三到四组四人客人。整体清爽干净。当时有几个人在用笔…"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5633646,
+          "text": "这是学习的完美地方！这里有大量桌子，也有一些插座（以防坐不到插座旁，最好带着充好电的设备来！）。Good Karma 总有季节限定，比如我这周已经喝过两次的冰薰衣草拿铁。他们现在也接受信用卡，所以我会更常回来。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.56170213,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.55660903,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.54932725,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-mhS1SUPKRA3Q6nR3oresqA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.54191107,
+          "text": "Rittenhouse 区域最漂亮（也可能最好看？）的咖啡店。咖啡师 Maya 不仅在我第一次来之后就记住了我的名字和点单，咖啡也真的很好喝，而且这里有 WiFi、插座和不错的氛围。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.5374379,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.53425246,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-007",
+      "question": "哪家星巴克有桌子可以用电脑，但桌子附近没有插座？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "service_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+      ],
+      "expectedEvidenceText": "7 月 4 日，在他们有限营业时间里，店里干净而且半空。我给自己买了 3 美元促销的 Double Fudge Bar 星冰乐，也给朋友买了 Caramel Waffle Cone。焦糖华夫筒对我来说太甜，Double Fudge Bar 也是。早知道还是点我平常喝的抹茶星冰乐，但这种 3 美元星冰乐促销的意义就在于让你尝试舒适区之外的东西。总之，牛奶都空了，我把它们放到星巴克柜台并告知员工更换。30 分钟后，他们完全没有这么做。至少他们有不错的桌子，可以让你用笔记本电脑工作，不过桌子附近没有插座。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 3,
+      "topKReviewIds": [
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-b8dIMHMGEWXMZi5BXaRfCw"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.55080616,
+          "text": "这是学习的完美地方！这里有大量桌子，也有一些插座（以防坐不到插座旁，最好带着充好电的设备来！）。Good Karma 总有季节限定，比如我这周已经喝过两次的冰薰衣草拿铁。他们现在也接受信用卡，所以我会更常回来。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5195179,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-b8dIMHMGEWXMZi5BXaRfCw",
+          "shopName": "Starbucks",
+          "score": 0.5164829,
+          "text": "7 月 4 日，在他们有限营业时间里，店里干净而且半空。我给自己买了 3 美元促销的 Double Fudge Bar 星冰乐，也给朋友买了 Caramel Waffle Cone。焦糖华夫筒对我来说太甜，Double Fudge Bar 也是。早知道还是点我平常喝的抹茶星冰乐，但这种 3 美元星冰乐促销的意义就在于让你尝试舒适区之外的东西。总之，牛奶都空了，我把它们放到星巴克柜台并告知员工更换。30 分钟后，他们完全没有这么做。至少他们有不错的桌子，可以让你用笔记本电脑工作，不过桌子附近没有插座。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-b8dIMHMGEWXMZi5BXaRfCw",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-AhTsqSS43V1-9yPq-NRX-w",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-T52ED3B5-Lymo9EzCpuTwg"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.55080616,
+          "text": "这是学习的完美地方！这里有大量桌子，也有一些插座（以防坐不到插座旁，最好带着充好电的设备来！）。Good Karma 总有季节限定，比如我这周已经喝过两次的冰薰衣草拿铁。他们现在也接受信用卡，所以我会更常回来。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5195179,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-b8dIMHMGEWXMZi5BXaRfCw",
+          "shopName": "Starbucks",
+          "score": 0.5164829,
+          "text": "7 月 4 日，在他们有限营业时间里，店里干净而且半空。我给自己买了 3 美元促销的 Double Fudge Bar 星冰乐，也给朋友买了 Caramel Waffle Cone。焦糖华夫筒对我来说太甜，Double Fudge Bar 也是。早知道还是点我平常喝的抹茶星冰乐，但这种 3 美元星冰乐促销的意义就在于让你尝试舒适区之外的东西。总之，牛奶都空了，我把它们放到星巴克柜台并告知员工更换。30 分钟后，他们完全没有这么做。至少他们有不错的桌子，可以让你用笔记本电脑工作，不过桌子附近没有插座。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.49343544,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.49177423,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-AhTsqSS43V1-9yPq-NRX-w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.4828961,
+          "text": "这是个不错的地方，可以学习、工作，或者做其他类似的事。员工很棒，友好又爱笑。咖啡馆食品价格适中。桌子和插座都很充足。毫无疑问，这是我在费城最喜欢的咖啡馆之一。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.48008692,
+          "text": "我第一次认识 Valerio Coffee Roasters 是通过使用剩余食物 app。这是少数让我各方面都印象深刻的商家之一。这里停车有点难处理，但我今天运气不错。这是一个值得费力找车位的地方。员工对每个进来的人都非常有帮助。我并不觉得他们给了我什么特殊待遇，员工只是两个精力充沛、在服务行业工作的人。至于氛围，外面有几张远离路边的双人小酒馆风格桌子，不会让你觉得有危险。里面的装修很现代，像半波西米亚风的咖啡店。目前座位间隔较开，但在 Covid 期间也足够容纳三到四组四人客人。整体清爽干净。当时有几个人在用笔…"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.4770707,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.47337002,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-T52ED3B5-Lymo9EzCpuTwg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.4716066,
+          "text": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-008",
+      "question": "有没有适合在沙发上用笔记本电脑工作的咖啡店？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "implicit_intent"
+      ],
+      "expectedReviewIds": [
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ"
+      ],
+      "expectedEvidenceText": "我上班时想补充咖啡因，这里是一个适合跑来喝咖啡的好地方。我也喜欢他们的沙发，非常适合用笔记本电脑做一点或很多工作。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 1,
+      "topKReviewIds": [
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+          "shopName": "Starbucks",
+          "score": 0.744421,
+          "text": "我上班时想补充咖啡因，这里是一个适合跑来喝咖啡的好地方。我也喜欢他们的沙发，非常适合用笔记本电脑做一点或很多工作。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.69157964,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.64541554,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-0raRTiWTrj9ytORRy-kZoA",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+        "yelp-AhTsqSS43V1-9yPq-NRX-w",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+          "shopName": "Starbucks",
+          "score": 0.744421,
+          "text": "我上班时想补充咖啡因，这里是一个适合跑来喝咖啡的好地方。我也喜欢他们的沙发，非常适合用笔记本电脑做一点或很多工作。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.69157964,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.64541554,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-0raRTiWTrj9ytORRy-kZoA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.6298551,
+          "text": "费城有很多很棒的咖啡店，所以我偶然走进 Alchemy Coffee 时标准其实挺高，但有三点让这家新店轻松跻身其中。第一，咖啡很好喝，也让人印象深刻——我非常喜欢一款带有柑橘风味的埃塞俄比亚拼配。第二，咖啡师非常友好、熟练而且高效——我在这家店太开心了，以至于不小心把笔记本电脑落下了。他追到街上把电脑还给我。第三，这里就像海明威会说的那种“干净明亮的地方”。高高的天花板、白色墙面和能透进自然光的大窗户。装修很有品味，只是稍微有点简朴。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.62169677,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6187182,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.616894,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+          "shopName": "Paris Baguette",
+          "score": 0.616291,
+          "text": "糕点和咖啡不错。不过 Wifi 很糟，所以我没法在笔记本电脑上完成多少工作。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-AhTsqSS43V1-9yPq-NRX-w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.61543506,
+          "text": "这是个不错的地方，可以学习、工作，或者做其他类似的事。员工很棒，友好又爱笑。咖啡馆食品价格适中。桌子和插座都很充足。毫无疑问，这是我在费城最喜欢的咖啡馆之一。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6101298,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-009",
+      "question": "哪家咖啡烘焙店停车不太方便，但员工很热情，店里也有人带电脑？",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "service_constraint",
+        "multi_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+      ],
+      "expectedEvidenceText": "我第一次认识 Valerio Coffee Roasters 是通过使用剩余食物 app。这是少数让我各方面都印象深刻的商家之一。这里停车有点难处理，但我今天运气不错。这是一个值得费力找车位的地方。员工对每个进来的人都非常有帮助。我并不觉得他们给了我什么特殊待遇，员工只是两个精力充沛、在服务行业工作的人。至于氛围，外面有几张远离路边的双人小酒馆风格桌子，不会让你觉得有危险。里面的装修很现代，像半波西米亚风的咖啡店。目前座位间隔较开，但在 Covid 期间也足够容纳三到四组四人客人。整体清爽干净。当时有几个人在用笔记本电脑，一边喝茶或咖啡。至于体验，员工友好、积极，而且能介绍产品。我们吃了美味的鸡肉沙拉和牛角包，还喝了好喝又香的茶，我觉得可能是木槿和某种东西；我只知道很好喝！很棒的体验，我非常推荐，也会再来。",
+      "hitAtTopK": false,
+      "firstRelevantRank": 7,
+      "topKReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6797843,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.65874875,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+          "shopName": "J'aime French Bakery",
+          "score": 0.64770925,
+          "text": "咖啡相当普通。饮品选择就是常见那些，也有一些法式烘焙点心。店内环境很好，也很干净，但没有 Wi-Fi，这对想工作的人来说挺扫兴。有一些法式糕点和烘焙食品，不过都稍微有点贵。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+        "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+        "yelp-1VyHchVgc9oEfVrsFweNNA"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6797843,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.65874875,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+          "shopName": "J'aime French Bakery",
+          "score": 0.64770925,
+          "text": "咖啡相当普通。饮品选择就是常见那些，也有一些法式烘焙点心。店内环境很好，也很干净，但没有 Wi-Fi，这对想工作的人来说挺扫兴。有一些法式糕点和烘焙食品，不过都稍微有点贵。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6467609,
+          "text": "先说明，我不是咖啡发烧友，但我当然喜欢一杯好咖啡。必须说，我在这里喝过的咖啡摩卡和美式都没有让我惊艳，不过我还是会为了外带再来，因为它就在我家附近。在我看来，外带就对了。上次我进去时，至少有两只狗乖乖坐在主人旁边，而主人们正在用笔记本电脑。店里也挺满的。不过我本来也不是那种会一个人在咖啡店久坐的人。我注意到牛奶和糖旁边贴着一套规则——它们真的让我感觉很受欢迎。那是一套非常有亲和力的规则。店家确实很感谢顾客。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.6320643,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.62985814,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.6297807,
+          "text": "我第一次认识 Valerio Coffee Roasters 是通过使用剩余食物 app。这是少数让我各方面都印象深刻的商家之一。这里停车有点难处理，但我今天运气不错。这是一个值得费力找车位的地方。员工对每个进来的人都非常有帮助。我并不觉得他们给了我什么特殊待遇，员工只是两个精力充沛、在服务行业工作的人。至于氛围，外面有几张远离路边的双人小酒馆风格桌子，不会让你觉得有危险。里面的装修很现代，像半波西米亚风的咖啡店。目前座位间隔较开，但在 Covid 期间也足够容纳三到四组四人客人。整体清爽干净。当时有几个人在用笔…"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.6286736,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+          "shopName": "Starbucks",
+          "score": 0.62603813,
+          "text": "我上班时想补充咖啡因，这里是一个适合跑来喝咖啡的好地方。我也喜欢他们的沙发，非常适合用笔记本电脑做一点或很多工作。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-1VyHchVgc9oEfVrsFweNNA",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6191963,
+          "text": "今年我圣诞愿望清单的第一项，是有人能在我家附近开一家巨大、友好、有 WiFi、有很多插座、空间宽敞的咖啡馆。现在还没有实现，但有人在 Washington West 开了一家，这完全不公平，因为从 Good Karma 走到 Chapterhouse 那一带的好地方也很方便。我先压住自己的怨念，只庆幸如果我真的急着去咖啡馆，可以比以前少走整整两个街区。Good Karma 很大、很明亮，有很多插座和 WiFi。除了咖啡和茶之外，还有很多烘焙食品和其他饮品可选，这点不错。他们还有两个不错的洗手间，也没人打扰你，而且…"
+        }
+      ],
+      "failureReasons": [
+        "top_k_too_small",
+        "service_experience_queries_are_weak",
+        "multi_constraint_queries_are_weak"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-010",
+      "question": "哪家咖啡店有免费 WiFi 和舒适工作空间，还提供不错的美式？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-ChYhI05dXfDPbATD9VdiDQ"
+      ],
+      "expectedEvidenceText": "一家非常不错的咖啡店，有很棒的冰咖啡、制作精良的咖啡饮品（我喝了一杯很好的美式）和丰富的糕点选择。这里有免费 wi-fi，也有舒适的工作空间。我想再回来看看午餐时间还有什么。如果我的咖啡体验能预示之后的东西，我期待会有一些好吃的新选择！这是附近一个有趣的地方！我们还会再来。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 3,
+      "topKReviewIds": [
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-ChYhI05dXfDPbATD9VdiDQ"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.7109376,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6954721,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-ChYhI05dXfDPbATD9VdiDQ",
+          "shopName": "Franny Lou's Porch",
+          "score": 0.69123566,
+          "text": "一家非常不错的咖啡店，有很棒的冰咖啡、制作精良的咖啡饮品（我喝了一杯很好的美式）和丰富的糕点选择。这里有免费 wi-fi，也有舒适的工作空间。我想再回来看看午餐时间还有什么。如果我的咖啡体验能预示之后的东西，我期待会有一些好吃的新选择！这是附近一个有趣的地方！我们还会再来。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-ChYhI05dXfDPbATD9VdiDQ",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-mhS1SUPKRA3Q6nR3oresqA",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-k3-x8KcSymMNREMgTGneAA",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-FXIVmjL3GckScX7Uww2NDw",
+        "yelp-kmEHaWvhg3O6IXfw7cDf7Q"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.7109376,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6954721,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-ChYhI05dXfDPbATD9VdiDQ",
+          "shopName": "Franny Lou's Porch",
+          "score": 0.69123566,
+          "text": "一家非常不错的咖啡店，有很棒的冰咖啡、制作精良的咖啡饮品（我喝了一杯很好的美式）和丰富的糕点选择。这里有免费 wi-fi，也有舒适的工作空间。我想再回来看看午餐时间还有什么。如果我的咖啡体验能预示之后的东西，我期待会有一些好吃的新选择！这是附近一个有趣的地方！我们还会再来。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6882169,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-mhS1SUPKRA3Q6nR3oresqA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.68684757,
+          "text": "Rittenhouse 区域最漂亮（也可能最好看？）的咖啡店。咖啡师 Maya 不仅在我第一次来之后就记住了我的名字和点单，咖啡也真的很好喝，而且这里有 WiFi、插座和不错的氛围。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6855842,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.68373615,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.6791465,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-FXIVmjL3GckScX7Uww2NDw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.67340904,
+          "text": "毫无疑问，这是我在费城最喜欢的咖啡馆。有很多自然光、免费 wifi、合适大小的桌子、很多插座，还有 3 美元无限续杯咖啡（豆奶也免费！）。这里是工作或学习的完美地方，我每次来都超级高效。冰 sundew 绿茶很好喝，也很清爽——完美的夏日饮品。他们的汤很好，贝果三明治也不错。我每次来到 Good Karma cafe 都忍不住心情变好 :)"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.6702448,
+          "text": "这是一家新咖啡店，和 Bald Birds Brewing Company 连在一起。它很快会成为我做工作的常去地点。这里有漂亮开阔的空间、很多座位和插座、充足自然光，以及很棒的 WiFi。咖啡很好喝，服务也很优秀。我肯定会经常回来！"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-011",
+      "question": "哪家 Good Karma 有自然光、免费 WiFi、很多插座，还能喝 3 美元无限续杯咖啡？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "environment_preference"
+      ],
+      "expectedReviewIds": [
+        "yelp-FXIVmjL3GckScX7Uww2NDw"
+      ],
+      "expectedEvidenceText": "毫无疑问，这是我在费城最喜欢的咖啡馆。有很多自然光、免费 wifi、合适大小的桌子、很多插座，还有 3 美元无限续杯咖啡（豆奶也免费！）。这里是工作或学习的完美地方，我每次来都超级高效。冰 sundew 绿茶很好喝，也很清爽——完美的夏日饮品。他们的汤很好，贝果三明治也不错。我每次来到 Good Karma cafe 都忍不住心情变好 :)",
+      "hitAtTopK": true,
+      "firstRelevantRank": 1,
+      "topKReviewIds": [
+        "yelp-FXIVmjL3GckScX7Uww2NDw",
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-FXIVmjL3GckScX7Uww2NDw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6975378,
+          "text": "毫无疑问，这是我在费城最喜欢的咖啡馆。有很多自然光、免费 wifi、合适大小的桌子、很多插座，还有 3 美元无限续杯咖啡（豆奶也免费！）。这里是工作或学习的完美地方，我每次来都超级高效。冰 sundew 绿茶很好喝，也很清爽——完美的夏日饮品。他们的汤很好，贝果三明治也不错。我每次来到 Good Karma cafe 都忍不住心情变好 :)"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-1VyHchVgc9oEfVrsFweNNA",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6249577,
+          "text": "今年我圣诞愿望清单的第一项，是有人能在我家附近开一家巨大、友好、有 WiFi、有很多插座、空间宽敞的咖啡馆。现在还没有实现，但有人在 Washington West 开了一家，这完全不公平，因为从 Good Karma 走到 Chapterhouse 那一带的好地方也很方便。我先压住自己的怨念，只庆幸如果我真的急着去咖啡馆，可以比以前少走整整两个街区。Good Karma 很大、很明亮，有很多插座和 WiFi。除了咖啡和茶之外，还有很多烘焙食品和其他饮品可选，这点不错。他们还有两个不错的洗手间，也没人打扰你，而且…"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.62487245,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-FXIVmjL3GckScX7Uww2NDw",
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-6aNRVdlFyr-Lhl7ZkQdkxQ",
+        "yelp-WtbJcI8-FAkvxwyt0MtJgQ",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-b8dIMHMGEWXMZi5BXaRfCw",
+        "yelp-z2Ia7bFRqSKHicUNi7359Q",
+        "yelp-a6HDkwToJFoIPzlxBiS71g"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-FXIVmjL3GckScX7Uww2NDw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6975378,
+          "text": "毫无疑问，这是我在费城最喜欢的咖啡馆。有很多自然光、免费 wifi、合适大小的桌子、很多插座，还有 3 美元无限续杯咖啡（豆奶也免费！）。这里是工作或学习的完美地方，我每次来都超级高效。冰 sundew 绿茶很好喝，也很清爽——完美的夏日饮品。他们的汤很好，贝果三明治也不错。我每次来到 Good Karma cafe 都忍不住心情变好 :)"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-1VyHchVgc9oEfVrsFweNNA",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6249577,
+          "text": "今年我圣诞愿望清单的第一项，是有人能在我家附近开一家巨大、友好、有 WiFi、有很多插座、空间宽敞的咖啡馆。现在还没有实现，但有人在 Washington West 开了一家，这完全不公平，因为从 Good Karma 走到 Chapterhouse 那一带的好地方也很方便。我先压住自己的怨念，只庆幸如果我真的急着去咖啡馆，可以比以前少走整整两个街区。Good Karma 很大、很明亮，有很多插座和 WiFi。除了咖啡和茶之外，还有很多烘焙食品和其他饮品可选，这点不错。他们还有两个不错的洗手间，也没人打扰你，而且…"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.62487245,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.62234,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-6aNRVdlFyr-Lhl7ZkQdkxQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.6207944,
+          "text": "免费 wifi、可刷信用卡、友好而不是假惺惺的微笑服务，还有相当认真的咖啡。绝对是升级！我迷上了他们的南瓜面包和意式浓缩类饮品。我买了一个很大的可重复使用杯子，Passero's 把收益捐给了本地慈善机构。现在我有了一个环保杯，每次续杯还能打折。这里的咖啡依然强得惊人。它就像在寒冷冬日早晨把我唤醒、让我动起来所需要的那一脚。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-WtbJcI8-FAkvxwyt0MtJgQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6202291,
+          "text": "这是我在费城去的第一家咖啡店（我想从 Starbucks 之外拓展一下），它没有让我失望！氛围是我最喜欢的！这里空间充足，也有很多桌子，可以一边喝咖啡，一边拿出书来学习（他们提供免费 wifi）。门口前面的灌木增加了魅力，让你觉得这里像是一个秘密地点（哈哈）。另外，洗手间也很漂亮、很干净！员工非常棒！点单很快，制作也很快。我看到他们多次四处清洁。我点了一杯杏仁奶南瓜香料拿铁。很好喝！它没有很重的南瓜味，而是有很多香料味，有些人可能不喜欢。我觉得小杯大约 5 美元有点贵，但其他地方拿铁通常也差不多这个价。总而言之，…"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6188487,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-b8dIMHMGEWXMZi5BXaRfCw",
+          "shopName": "Starbucks",
+          "score": 0.6172216,
+          "text": "7 月 4 日，在他们有限营业时间里，店里干净而且半空。我给自己买了 3 美元促销的 Double Fudge Bar 星冰乐，也给朋友买了 Caramel Waffle Cone。焦糖华夫筒对我来说太甜，Double Fudge Bar 也是。早知道还是点我平常喝的抹茶星冰乐，但这种 3 美元星冰乐促销的意义就在于让你尝试舒适区之外的东西。总之，牛奶都空了，我把它们放到星巴克柜台并告知员工更换。30 分钟后，他们完全没有这么做。至少他们有不错的桌子，可以让你用笔记本电脑工作，不过桌子附近没有插座。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-z2Ia7bFRqSKHicUNi7359Q",
+          "shopName": "Alchemy Coffee",
+          "score": 0.61263126,
+          "text": "我不知道他们怎么做到的，但 Alchemy Coffee 能把普通咖啡变成纯金。说真的，他们的拿铁非常好——顺滑的浓缩咖啡和柔滑的燕麦奶。热的和冰的都很棒！他们的糕点好吃到要命——babka 太美味了。它有点偏甜，但配咖啡就很完美。他们也是我见过最有美感的咖啡店之一（想象 CB2 那种现代时髦风）。注意：他们有桌子和 WiFi，但请把设备充满电，因为他们没有插座。总体来说，我推荐你来看看这个小地方，你不会后悔！我保证这不是巫术，只是科学。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-a6HDkwToJFoIPzlxBiS71g",
+          "shopName": "Forin Cafe",
+          "score": 0.60512775,
+          "text": "必须喜欢 Forin Cafe。咖啡很浓，WiFi 很快，氛围里满是创造力。虽然对我这个南费城人来说它不算本地咖啡馆，但我发现自己每个月都会来这里几次，开个会，或者在工作日中途找点创意。很快还会再见你们 :)"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-012",
+      "question": "Fairmount 附近有没有安静喝咖啡、下午放松的地方？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "environment_preference",
+        "implicit_intent"
+      ],
+      "expectedReviewIds": [
+        "yelp-G1hVCb7CrOyL-HP1h6rByg"
+      ],
+      "expectedEvidenceText": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。",
+      "hitAtTopK": false,
+      "firstRelevantRank": null,
+      "topKReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.66660935,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.66425073,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.66066825,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-k3-x8KcSymMNREMgTGneAA",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-a6HDkwToJFoIPzlxBiS71g",
+        "yelp-T52ED3B5-Lymo9EzCpuTwg",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.66660935,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.66425073,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.66066825,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+          "shopName": "J'aime French Bakery",
+          "score": 0.655873,
+          "text": "环境非常古朴、宁静而明亮，适合早上或下午喝咖啡。我们大约 11 点去的时候不太忙。我们试了撒糖的 choquette，很好吃，里面填的是非常轻盈的 Nutella 奶油。我朋友喝的 Anastasia 茶闻起来非常香，卡布奇诺也很浓。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.64830947,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.64177704,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6384545,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-a6HDkwToJFoIPzlxBiS71g",
+          "shopName": "Forin Cafe",
+          "score": 0.62571764,
+          "text": "必须喜欢 Forin Cafe。咖啡很浓，WiFi 很快，氛围里满是创造力。虽然对我这个南费城人来说它不算本地咖啡馆，但我发现自己每个月都会来这里几次，开个会，或者在工作日中途找点创意。很快还会再见你们 :)"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-T52ED3B5-Lymo9EzCpuTwg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6217359,
+          "text": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.6186003,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        }
+      ],
+      "failureReasons": [
+        "semantic_miss_not_in_analysis_top_k",
+        "implicit_intent_queries_are_weak"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-013",
+      "question": "周末想去咖啡店学习，哪家要早上九点或十点前到才容易有位置？",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "time_constraint",
+        "facility_constraint",
+        "negative_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+      ],
+      "expectedEvidenceText": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 1,
+      "topKReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-YmBytIHGjEroySTkyL8m8w"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.7183212,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6812171,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6389382,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-k3-x8KcSymMNREMgTGneAA",
+        "yelp-WtbJcI8-FAkvxwyt0MtJgQ",
+        "yelp-Mq03w7IM-glofyCkUyAsog",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-ChYhI05dXfDPbATD9VdiDQ",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-a6HDkwToJFoIPzlxBiS71g"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.7183212,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6812171,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6389382,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.6289716,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-WtbJcI8-FAkvxwyt0MtJgQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.62413985,
+          "text": "这是我在费城去的第一家咖啡店（我想从 Starbucks 之外拓展一下），它没有让我失望！氛围是我最喜欢的！这里空间充足，也有很多桌子，可以一边喝咖啡，一边拿出书来学习（他们提供免费 wifi）。门口前面的灌木增加了魅力，让你觉得这里像是一个秘密地点（哈哈）。另外，洗手间也很漂亮、很干净！员工非常棒！点单很快，制作也很快。我看到他们多次四处清洁。我点了一杯杏仁奶南瓜香料拿铁。很好喝！它没有很重的南瓜味，而是有很多香料味，有些人可能不喜欢。我觉得小杯大约 5 美元有点贵，但其他地方拿铁通常也差不多这个价。总而言之，…"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-Mq03w7IM-glofyCkUyAsog",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.6125716,
+          "text": "自从这家店开业以来，我觉得没有哪一个周日早晨我没有踉踉跄跄地走进来，身上还穿着前一晚的衣服，想要某种咖啡因来驱散我悲惨周六夜晚留在灵魂里的东西。咖啡很棒，空间很舒适。他们的贝果很好吃，自制蔬菜奶油奶酪也很棒。我几乎总是在这里点冰咖啡，即使在隆冬。他们会加一份浓缩咖啡，简直神奇。谁还需要 Advil？他们还提供方便的水果风味免费饮水机，给那些在等咖啡制作时觉得需要享受一下的顾客。我通常会喝。他们把每杯咖啡都做得独一无二，这和那些直接从隐藏冰箱里的桶倒冰咖啡的店完全不同。不，先生，这里可不是那样。如果你是喜欢阅读的人…"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.61256474,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-ChYhI05dXfDPbATD9VdiDQ",
+          "shopName": "Franny Lou's Porch",
+          "score": 0.6085283,
+          "text": "一家非常不错的咖啡店，有很棒的冰咖啡、制作精良的咖啡饮品（我喝了一杯很好的美式）和丰富的糕点选择。这里有免费 wi-fi，也有舒适的工作空间。我想再回来看看午餐时间还有什么。如果我的咖啡体验能预示之后的东西，我期待会有一些好吃的新选择！这是附近一个有趣的地方！我们还会再来。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6085069,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-a6HDkwToJFoIPzlxBiS71g",
+          "shopName": "Forin Cafe",
+          "score": 0.6075363,
+          "text": "必须喜欢 Forin Cafe。咖啡很浓，WiFi 很快，氛围里满是创造力。虽然对我这个南费城人来说它不算本地咖啡馆，但我发现自己每个月都会来这里几次，开个会，或者在工作日中途找点创意。很快还会再见你们 :)"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-014",
+      "question": "哪家咖啡馆晚上人更少、开到十点，还有很多插座？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "time_constraint",
+        "facility_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-hUIkr15XxOSzheG5l9mYSw"
+      ],
+      "expectedEvidenceText": "这是我最喜欢的店之一。我以前很喜欢来这里完成工作，甚至只是阅读。大窗户、很多桌子、到处都是插座。咖啡不错。我试过的饮品一直都很好喝。氛围简直完美。我喜欢晚上坐在这里——明亮的灯光、大桌子、刚刚好的背景音乐。营业到晚上 10 点。而且晚上人更少。我喜欢咖啡店，而这里绝对是其中之一。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 3,
+      "topKReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-hUIkr15XxOSzheG5l9mYSw"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.64690447,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.62190497,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-hUIkr15XxOSzheG5l9mYSw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6081435,
+          "text": "这是我最喜欢的店之一。我以前很喜欢来这里完成工作，甚至只是阅读。大窗户、很多桌子、到处都是插座。咖啡不错。我试过的饮品一直都很好喝。氛围简直完美。我喜欢晚上坐在这里——明亮的灯光、大桌子、刚刚好的背景音乐。营业到晚上 10 点。而且晚上人更少。我喜欢咖啡店，而这里绝对是其中之一。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-hUIkr15XxOSzheG5l9mYSw",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-mhS1SUPKRA3Q6nR3oresqA",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-FXIVmjL3GckScX7Uww2NDw",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.64690447,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.62190497,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-hUIkr15XxOSzheG5l9mYSw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6081435,
+          "text": "这是我最喜欢的店之一。我以前很喜欢来这里完成工作，甚至只是阅读。大窗户、很多桌子、到处都是插座。咖啡不错。我试过的饮品一直都很好喝。氛围简直完美。我喜欢晚上坐在这里——明亮的灯光、大桌子、刚刚好的背景音乐。营业到晚上 10 点。而且晚上人更少。我喜欢咖啡店，而这里绝对是其中之一。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.59093356,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-1VyHchVgc9oEfVrsFweNNA",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5725608,
+          "text": "今年我圣诞愿望清单的第一项，是有人能在我家附近开一家巨大、友好、有 WiFi、有很多插座、空间宽敞的咖啡馆。现在还没有实现，但有人在 Washington West 开了一家，这完全不公平，因为从 Good Karma 走到 Chapterhouse 那一带的好地方也很方便。我先压住自己的怨念，只庆幸如果我真的急着去咖啡馆，可以比以前少走整整两个街区。Good Karma 很大、很明亮，有很多插座和 WiFi。除了咖啡和茶之外，还有很多烘焙食品和其他饮品可选，这点不错。他们还有两个不错的洗手间，也没人打扰你，而且…"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.5696157,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-mhS1SUPKRA3Q6nR3oresqA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.56740475,
+          "text": "Rittenhouse 区域最漂亮（也可能最好看？）的咖啡店。咖啡师 Maya 不仅在我第一次来之后就记住了我的名字和点单，咖啡也真的很好喝，而且这里有 WiFi、插座和不错的氛围。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.56585133,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-FXIVmjL3GckScX7Uww2NDw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.56570524,
+          "text": "毫无疑问，这是我在费城最喜欢的咖啡馆。有很多自然光、免费 wifi、合适大小的桌子、很多插座，还有 3 美元无限续杯咖啡（豆奶也免费！）。这里是工作或学习的完美地方，我每次来都超级高效。冰 sundew 绿茶很好喝，也很清爽——完美的夏日饮品。他们的汤很好，贝果三明治也不错。我每次来到 Good Karma cafe 都忍不住心情变好 :)"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.5646675,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-015",
+      "question": "哪家新咖啡店空间开阔、自然光足，还有很多座位插座和很棒的 WiFi？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "environment_preference"
+      ],
+      "expectedReviewIds": [
+        "yelp-kmEHaWvhg3O6IXfw7cDf7Q"
+      ],
+      "expectedEvidenceText": "这是一家新咖啡店，和 Bald Birds Brewing Company 连在一起。它很快会成为我做工作的常去地点。这里有漂亮开阔的空间、很多座位和插座、充足自然光，以及很棒的 WiFi。咖啡很好喝，服务也很优秀。我肯定会经常回来！",
+      "hitAtTopK": true,
+      "firstRelevantRank": 2,
+      "topKReviewIds": [
+        "yelp-mhS1SUPKRA3Q6nR3oresqA",
+        "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+        "yelp-YmBytIHGjEroySTkyL8m8w"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-mhS1SUPKRA3Q6nR3oresqA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.71482337,
+          "text": "Rittenhouse 区域最漂亮（也可能最好看？）的咖啡店。咖啡师 Maya 不仅在我第一次来之后就记住了我的名字和点单，咖啡也真的很好喝，而且这里有 WiFi、插座和不错的氛围。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.70609903,
+          "text": "这是一家新咖啡店，和 Bald Birds Brewing Company 连在一起。它很快会成为我做工作的常去地点。这里有漂亮开阔的空间、很多座位和插座、充足自然光，以及很棒的 WiFi。咖啡很好喝，服务也很优秀。我肯定会经常回来！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6849824,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-mhS1SUPKRA3Q6nR3oresqA",
+        "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-1VyHchVgc9oEfVrsFweNNA",
+        "yelp-k3-x8KcSymMNREMgTGneAA",
+        "yelp-FXIVmjL3GckScX7Uww2NDw",
+        "yelp-0raRTiWTrj9ytORRy-kZoA",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-mhS1SUPKRA3Q6nR3oresqA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.71482337,
+          "text": "Rittenhouse 区域最漂亮（也可能最好看？）的咖啡店。咖啡师 Maya 不仅在我第一次来之后就记住了我的名字和点单，咖啡也真的很好喝，而且这里有 WiFi、插座和不错的氛围。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.70609903,
+          "text": "这是一家新咖啡店，和 Bald Birds Brewing Company 连在一起。它很快会成为我做工作的常去地点。这里有漂亮开阔的空间、很多座位和插座、充足自然光，以及很棒的 WiFi。咖啡很好喝，服务也很优秀。我肯定会经常回来！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6849824,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6621062,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.64932764,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-1VyHchVgc9oEfVrsFweNNA",
+          "shopName": "Good Karma Cafe",
+          "score": 0.64115584,
+          "text": "今年我圣诞愿望清单的第一项，是有人能在我家附近开一家巨大、友好、有 WiFi、有很多插座、空间宽敞的咖啡馆。现在还没有实现，但有人在 Washington West 开了一家，这完全不公平，因为从 Good Karma 走到 Chapterhouse 那一带的好地方也很方便。我先压住自己的怨念，只庆幸如果我真的急着去咖啡馆，可以比以前少走整整两个街区。Good Karma 很大、很明亮，有很多插座和 WiFi。除了咖啡和茶之外，还有很多烘焙食品和其他饮品可选，这点不错。他们还有两个不错的洗手间，也没人打扰你，而且…"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.6319276,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-FXIVmjL3GckScX7Uww2NDw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.62481886,
+          "text": "毫无疑问，这是我在费城最喜欢的咖啡馆。有很多自然光、免费 wifi、合适大小的桌子、很多插座，还有 3 美元无限续杯咖啡（豆奶也免费！）。这里是工作或学习的完美地方，我每次来都超级高效。冰 sundew 绿茶很好喝，也很清爽——完美的夏日饮品。他们的汤很好，贝果三明治也不错。我每次来到 Good Karma cafe 都忍不住心情变好 :)"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-0raRTiWTrj9ytORRy-kZoA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.6225132,
+          "text": "费城有很多很棒的咖啡店，所以我偶然走进 Alchemy Coffee 时标准其实挺高，但有三点让这家新店轻松跻身其中。第一，咖啡很好喝，也让人印象深刻——我非常喜欢一款带有柑橘风味的埃塞俄比亚拼配。第二，咖啡师非常友好、熟练而且高效——我在这家店太开心了，以至于不小心把笔记本电脑落下了。他追到街上把电脑还给我。第三，这里就像海明威会说的那种“干净明亮的地方”。高高的天花板、白色墙面和能透进自然光的大窗户。装修很有品味，只是稍微有点简朴。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.62127066,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-016",
+      "question": "Red Hook 适合用电脑工作吗？价格和咖啡有什么特点？",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "budget_constraint",
+        "multi_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg"
+      ],
+      "expectedEvidenceText": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 1,
+      "topKReviewIds": [
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.7074038,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.6930062,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+          "shopName": "Paris Baguette",
+          "score": 0.6905899,
+          "text": "糕点和咖啡不错。不过 Wifi 很糟，所以我没法在笔记本电脑上完成多少工作。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+        "yelp-0raRTiWTrj9ytORRy-kZoA",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-z2Ia7bFRqSKHicUNi7359Q"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.7074038,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.6930062,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+          "shopName": "Paris Baguette",
+          "score": 0.6905899,
+          "text": "糕点和咖啡不错。不过 Wifi 很糟，所以我没法在笔记本电脑上完成多少工作。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6867513,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+          "shopName": "Starbucks",
+          "score": 0.6828583,
+          "text": "我上班时想补充咖啡因，这里是一个适合跑来喝咖啡的好地方。我也喜欢他们的沙发，非常适合用笔记本电脑做一点或很多工作。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+          "shopName": "J'aime French Bakery",
+          "score": 0.67264014,
+          "text": "咖啡相当普通。饮品选择就是常见那些，也有一些法式烘焙点心。店内环境很好，也很干净，但没有 Wi-Fi，这对想工作的人来说挺扫兴。有一些法式糕点和烘焙食品，不过都稍微有点贵。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-0raRTiWTrj9ytORRy-kZoA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.67111564,
+          "text": "费城有很多很棒的咖啡店，所以我偶然走进 Alchemy Coffee 时标准其实挺高，但有三点让这家新店轻松跻身其中。第一，咖啡很好喝，也让人印象深刻——我非常喜欢一款带有柑橘风味的埃塞俄比亚拼配。第二，咖啡师非常友好、熟练而且高效——我在这家店太开心了，以至于不小心把笔记本电脑落下了。他追到街上把电脑还给我。第三，这里就像海明威会说的那种“干净明亮的地方”。高高的天花板、白色墙面和能透进自然光的大窗户。装修很有品味，只是稍微有点简朴。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.66839,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.65816474,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-z2Ia7bFRqSKHicUNi7359Q",
+          "shopName": "Alchemy Coffee",
+          "score": 0.6525738,
+          "text": "我不知道他们怎么做到的，但 Alchemy Coffee 能把普通咖啡变成纯金。说真的，他们的拿铁非常好——顺滑的浓缩咖啡和柔滑的燕麦奶。热的和冰的都很棒！他们的糕点好吃到要命——babka 太美味了。它有点偏甜，但配咖啡就很完美。他们也是我见过最有美感的咖啡店之一（想象 CB2 那种现代时髦风）。注意：他们有桌子和 WiFi，但请把设备充满电，因为他们没有插座。总体来说，我推荐你来看看这个小地方，你不会后悔！我保证这不是巫术，只是科学。"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-017",
+      "question": "哪家店糕点咖啡不错，但 WiFi 太差导致电脑工作做不了多少？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "negative_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+      ],
+      "expectedEvidenceText": "糕点和咖啡不错。不过 Wifi 很糟，所以我没法在笔记本电脑上完成多少工作。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 1,
+      "topKReviewIds": [
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+          "shopName": "Paris Baguette",
+          "score": 0.8108934,
+          "text": "糕点和咖啡不错。不过 Wifi 很糟，所以我没法在笔记本电脑上完成多少工作。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+          "shopName": "J'aime French Bakery",
+          "score": 0.65048826,
+          "text": "咖啡相当普通。饮品选择就是常见那些，也有一些法式烘焙点心。店内环境很好，也很干净，但没有 Wi-Fi，这对想工作的人来说挺扫兴。有一些法式糕点和烘焙食品，不过都稍微有点贵。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.64576423,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+        "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-z2Ia7bFRqSKHicUNi7359Q",
+        "yelp-ChYhI05dXfDPbATD9VdiDQ",
+        "yelp-UCQtD68x2r2UZUsJozztDw",
+        "yelp-b8dIMHMGEWXMZi5BXaRfCw",
+        "yelp-0raRTiWTrj9ytORRy-kZoA"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+          "shopName": "Paris Baguette",
+          "score": 0.8108934,
+          "text": "糕点和咖啡不错。不过 Wifi 很糟，所以我没法在笔记本电脑上完成多少工作。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+          "shopName": "J'aime French Bakery",
+          "score": 0.65048826,
+          "text": "咖啡相当普通。饮品选择就是常见那些，也有一些法式烘焙点心。店内环境很好，也很干净，但没有 Wi-Fi，这对想工作的人来说挺扫兴。有一些法式糕点和烘焙食品，不过都稍微有点贵。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.64576423,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6447505,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.63253117,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-z2Ia7bFRqSKHicUNi7359Q",
+          "shopName": "Alchemy Coffee",
+          "score": 0.62100434,
+          "text": "我不知道他们怎么做到的，但 Alchemy Coffee 能把普通咖啡变成纯金。说真的，他们的拿铁非常好——顺滑的浓缩咖啡和柔滑的燕麦奶。热的和冰的都很棒！他们的糕点好吃到要命——babka 太美味了。它有点偏甜，但配咖啡就很完美。他们也是我见过最有美感的咖啡店之一（想象 CB2 那种现代时髦风）。注意：他们有桌子和 WiFi，但请把设备充满电，因为他们没有插座。总体来说，我推荐你来看看这个小地方，你不会后悔！我保证这不是巫术，只是科学。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-ChYhI05dXfDPbATD9VdiDQ",
+          "shopName": "Franny Lou's Porch",
+          "score": 0.61601174,
+          "text": "一家非常不错的咖啡店，有很棒的冰咖啡、制作精良的咖啡饮品（我喝了一杯很好的美式）和丰富的糕点选择。这里有免费 wi-fi，也有舒适的工作空间。我想再回来看看午餐时间还有什么。如果我的咖啡体验能预示之后的东西，我期待会有一些好吃的新选择！这是附近一个有趣的地方！我们还会再来。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-UCQtD68x2r2UZUsJozztDw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.61388296,
+          "text": "很棒的社区小店。2 美元的茶？当然要。这里工作的人非常友好。他们也有一些小吃，比如贝果和糕点，都很好吃。后面的小座位区不错，也很安静。唯一抱怨是他们有时音乐放得太大，让人很难集中注意力。但总的来说，这是一家非常可靠的咖啡店。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-b8dIMHMGEWXMZi5BXaRfCw",
+          "shopName": "Starbucks",
+          "score": 0.61358684,
+          "text": "7 月 4 日，在他们有限营业时间里，店里干净而且半空。我给自己买了 3 美元促销的 Double Fudge Bar 星冰乐，也给朋友买了 Caramel Waffle Cone。焦糖华夫筒对我来说太甜，Double Fudge Bar 也是。早知道还是点我平常喝的抹茶星冰乐，但这种 3 美元星冰乐促销的意义就在于让你尝试舒适区之外的东西。总之，牛奶都空了，我把它们放到星巴克柜台并告知员工更换。30 分钟后，他们完全没有这么做。至少他们有不错的桌子，可以让你用笔记本电脑工作，不过桌子附近没有插座。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-0raRTiWTrj9ytORRy-kZoA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.6125212,
+          "text": "费城有很多很棒的咖啡店，所以我偶然走进 Alchemy Coffee 时标准其实挺高，但有三点让这家新店轻松跻身其中。第一，咖啡很好喝，也让人印象深刻——我非常喜欢一款带有柑橘风味的埃塞俄比亚拼配。第二，咖啡师非常友好、熟练而且高效——我在这家店太开心了，以至于不小心把笔记本电脑落下了。他追到街上把电脑还给我。第三，这里就像海明威会说的那种“干净明亮的地方”。高高的天花板、白色墙面和能透进自然光的大窗户。装修很有品味，只是稍微有点简朴。"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-018",
+      "question": "周六早上想和朋友学习，哪家有大窗户和楼下座位，但 chai latte 可能偏甜？",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "time_constraint",
+        "facility_constraint",
+        "multi_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-REgp10DO01kp2pOONZtq9w"
+      ],
+      "expectedEvidenceText": "周六早上我和朋友来这里学习。我们点了两杯印度香料拿铁，坐在前面大窗户旁边，那里有很多自然光。前面有座位，楼下也有更多座位，所以这是带笔记本电脑来做工作的好地方（而且员工也非常可爱）。这杯拿铁是用紫色 Oregon 液体印度香料茶混合物做的（很多人都用这个）。对我来说有点太甜了，所以下次我可能只点茶。",
+      "hitAtTopK": false,
+      "firstRelevantRank": null,
+      "topKReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-T52ED3B5-Lymo9EzCpuTwg"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.5343469,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5320158,
+          "text": "这是学习的完美地方！这里有大量桌子，也有一些插座（以防坐不到插座旁，最好带着充好电的设备来！）。Good Karma 总有季节限定，比如我这周已经喝过两次的冰薰衣草拿铁。他们现在也接受信用卡，所以我会更常回来。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-T52ED3B5-Lymo9EzCpuTwg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.52017474,
+          "text": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-T52ED3B5-Lymo9EzCpuTwg",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.5343469,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5320158,
+          "text": "这是学习的完美地方！这里有大量桌子，也有一些插座（以防坐不到插座旁，最好带着充好电的设备来！）。Good Karma 总有季节限定，比如我这周已经喝过两次的冰薰衣草拿铁。他们现在也接受信用卡，所以我会更常回来。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-T52ED3B5-Lymo9EzCpuTwg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.52017474,
+          "text": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5170721,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+          "shopName": "J'aime French Bakery",
+          "score": 0.503894,
+          "text": "环境非常古朴、宁静而明亮，适合早上或下午喝咖啡。我们大约 11 点去的时候不太忙。我们试了撒糖的 choquette，很好吃，里面填的是非常轻盈的 Nutella 奶油。我朋友喝的 Anastasia 茶闻起来非常香，卡布奇诺也很浓。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.49921504,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.49714267,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.4855172,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.4791721,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.47885278,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        }
+      ],
+      "failureReasons": [
+        "semantic_miss_not_in_analysis_top_k",
+        "time_constraint_queries_are_weak",
+        "multi_constraint_queries_are_weak"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-019",
+      "question": "Mt Airy 有没有适合学习的隐藏小店，桌子能放电脑、笔记本和咖啡？",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "environment_preference",
+        "implicit_intent"
+      ],
+      "expectedReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ"
+      ],
+      "expectedEvidenceText": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 2,
+      "topKReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.616325,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.6097038,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.60146254,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-0raRTiWTrj9ytORRy-kZoA",
+        "yelp-AhTsqSS43V1-9yPq-NRX-w",
+        "yelp-T52ED3B5-Lymo9EzCpuTwg",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-OTgJteiQbczb4ZV5Nsf_5A"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.616325,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.6097038,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.60146254,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.58695006,
+          "text": "这是学习的完美地方！这里有大量桌子，也有一些插座（以防坐不到插座旁，最好带着充好电的设备来！）。Good Karma 总有季节限定，比如我这周已经喝过两次的冰薰衣草拿铁。他们现在也接受信用卡，所以我会更常回来。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-0raRTiWTrj9ytORRy-kZoA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.57790375,
+          "text": "费城有很多很棒的咖啡店，所以我偶然走进 Alchemy Coffee 时标准其实挺高，但有三点让这家新店轻松跻身其中。第一，咖啡很好喝，也让人印象深刻——我非常喜欢一款带有柑橘风味的埃塞俄比亚拼配。第二，咖啡师非常友好、熟练而且高效——我在这家店太开心了，以至于不小心把笔记本电脑落下了。他追到街上把电脑还给我。第三，这里就像海明威会说的那种“干净明亮的地方”。高高的天花板、白色墙面和能透进自然光的大窗户。装修很有品味，只是稍微有点简朴。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-AhTsqSS43V1-9yPq-NRX-w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5693595,
+          "text": "这是个不错的地方，可以学习、工作，或者做其他类似的事。员工很棒，友好又爱笑。咖啡馆食品价格适中。桌子和插座都很充足。毫无疑问，这是我在费城最喜欢的咖啡馆之一。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-T52ED3B5-Lymo9EzCpuTwg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.56892276,
+          "text": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.56585765,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5643958,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-OTgJteiQbczb4ZV5Nsf_5A",
+          "shopName": "Paris Baguette",
+          "score": 0.5637349,
+          "text": "糕点和咖啡不错。不过 Wifi 很糟，所以我没法在笔记本电脑上完成多少工作。"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-020",
+      "question": "Alchemy Coffee 有桌子和 WiFi 吗？如果要带电脑去，电源方面要注意什么？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "facility_constraint",
+        "negative_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-z2Ia7bFRqSKHicUNi7359Q"
+      ],
+      "expectedEvidenceText": "我不知道他们怎么做到的，但 Alchemy Coffee 能把普通咖啡变成纯金。说真的，他们的拿铁非常好——顺滑的浓缩咖啡和柔滑的燕麦奶。热的和冰的都很棒！他们的糕点好吃到要命——babka 太美味了。它有点偏甜，但配咖啡就很完美。他们也是我见过最有美感的咖啡店之一（想象 CB2 那种现代时髦风）。注意：他们有桌子和 WiFi，但请把设备充满电，因为他们没有插座。总体来说，我推荐你来看看这个小地方，你不会后悔！我保证这不是巫术，只是科学。",
+      "hitAtTopK": false,
+      "firstRelevantRank": null,
+      "topKReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.6336556,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.58102596,
+          "text": "这是学习的完美地方！这里有大量桌子，也有一些插座（以防坐不到插座旁，最好带着充好电的设备来！）。Good Karma 总有季节限定，比如我这周已经喝过两次的冰薰衣草拿铁。他们现在也接受信用卡，所以我会更常回来。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5513212,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-M980wiRzRJhBOlyQsFeDYw",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-AR8lhVM0aylAt8W06q6zxg",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+        "yelp-a6HDkwToJFoIPzlxBiS71g"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.6336556,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.58102596,
+          "text": "这是学习的完美地方！这里有大量桌子，也有一些插座（以防坐不到插座旁，最好带着充好电的设备来！）。Good Karma 总有季节限定，比如我这周已经喝过两次的冰薰衣草拿铁。他们现在也接受信用卡，所以我会更常回来。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5513212,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.54545295,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.5446294,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-AR8lhVM0aylAt8W06q6zxg",
+          "shopName": "Wawa",
+          "score": 0.53935456,
+          "text": "作为较新的 WaWa 之一，这家备货充足，有座位、免费 WiFi 和充电站。这是好消息。坏消息是午餐时间这里会极其拥挤，而且某个天才把收银台放在三明治柜台正对面。等三明治的人太多时，你很难排进收银队伍，因为路被等三明治的人挡住了。这家店也有 WaWa 最大的问题。最大的问题是他们在店内自己烤 hoagie 面包卷，而不是买 Amoroso 的面包卷。Amoroso 的面包卷曾经很完美。店里烤的面包卷即使烤得刚好也无法相比。而且很多时候它们还烤过头，让情况更糟。hoagie 仍然不错，但附近别处能买到更好的；过去可…"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.53730255,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.5332291,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.5272021,
+          "text": "我第一次认识 Valerio Coffee Roasters 是通过使用剩余食物 app。这是少数让我各方面都印象深刻的商家之一。这里停车有点难处理，但我今天运气不错。这是一个值得费力找车位的地方。员工对每个进来的人都非常有帮助。我并不觉得他们给了我什么特殊待遇，员工只是两个精力充沛、在服务行业工作的人。至于氛围，外面有几张远离路边的双人小酒馆风格桌子，不会让你觉得有危险。里面的装修很现代，像半波西米亚风的咖啡店。目前座位间隔较开，但在 Covid 期间也足够容纳三到四组四人客人。整体清爽干净。当时有几个人在用笔…"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-a6HDkwToJFoIPzlxBiS71g",
+          "shopName": "Forin Cafe",
+          "score": 0.52024907,
+          "text": "必须喜欢 Forin Cafe。咖啡很浓，WiFi 很快，氛围里满是创造力。虽然对我这个南费城人来说它不算本地咖啡馆，但我发现自己每个月都会来这里几次，开个会，或者在工作日中途找点创意。很快还会再见你们 :)"
+        }
+      ],
+      "failureReasons": [
+        "semantic_miss_not_in_analysis_top_k"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-021",
+      "question": "哪家店不放吵闹的大学兄弟音乐，但后面区域地板还是有点吵？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "environment_preference",
+        "negative_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-T52ED3B5-Lymo9EzCpuTwg"
+      ],
+      "expectedEvidenceText": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 1,
+      "topKReviewIds": [
+        "yelp-T52ED3B5-Lymo9EzCpuTwg",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-YmBytIHGjEroySTkyL8m8w"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-T52ED3B5-Lymo9EzCpuTwg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.77051365,
+          "text": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.5051784,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.4567666,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-T52ED3B5-Lymo9EzCpuTwg",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-YmBytIHGjEroySTkyL8m8w",
+        "yelp-T870mmM6D8i-zBRW8aWevQ",
+        "yelp-c0Dx03QmIih0dFhTYp-kFQ",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-hUIkr15XxOSzheG5l9mYSw",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-mhS1SUPKRA3Q6nR3oresqA",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-T52ED3B5-Lymo9EzCpuTwg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.77051365,
+          "text": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.5051784,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-YmBytIHGjEroySTkyL8m8w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.4567666,
+          "text": "这篇评论写的是位于 Pine Street、9 街和 10 街之间的新开第二家分店。今天早上我进去看看这里的咖啡。从 Washington Square 街区到市中心之间，能喝到好咖啡的咖啡馆选择很少（而且我已经厌倦了看着空着的 Ethnics 店面），所以 Good Karma Cafe 是这个街区受欢迎的新成员。我点了一杯冰咖啡——很高兴知道他们有两种尺寸，16 和 20 盎司，还会加一份浓缩咖啡（不额外收费），并且也有豆奶。我决定拿着杂志和咖啡坐下来感受新空间的氛围——它非常开阔，但仍然有点空，稍微缺少让咖…"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-T870mmM6D8i-zBRW8aWevQ",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.44712195,
+          "text": "Cute and well managed small cafe with seven tables upfront and a big table in the back, friendly staff with a good smile. Soft quiet background music. Delicious pastries. Decent coffee."
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-c0Dx03QmIih0dFhTYp-kFQ",
+          "shopName": "Dunkin' Donuts",
+          "score": 0.44630712,
+          "text": "这家位于费城东北远郊 Bustleton Avenue 的 Dunkin Donuts，在这类油炸圆面团门店里算是平均水平。店面不大，但有一个角落休息区，里面是磨损的人造皮沙发和扶手椅，还有板岩装饰墙。这些小细节不错，但最终还是要看他们的基本功——咖啡和甜甜圈。在这方面，他们无法和那些为了我的钱更努力的新式咖啡馆、烘焙店和甜甜圈专门店竞争。过去两周里，我在城里和郊区喝到了好得多的咖啡，也吃到了豪华得多的蛋糕和油炸面点，比昨晚在这里尝到的强多了。也许贵一点，但品质差异很明显。另外，当你坐着享用他们的东西时，他们不会…"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.44438988,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-hUIkr15XxOSzheG5l9mYSw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.43709058,
+          "text": "这是我最喜欢的店之一。我以前很喜欢来这里完成工作，甚至只是阅读。大窗户、很多桌子、到处都是插座。咖啡不错。我试过的饮品一直都很好喝。氛围简直完美。我喜欢晚上坐在这里——明亮的灯光、大桌子、刚刚好的背景音乐。营业到晚上 10 点。而且晚上人更少。我喜欢咖啡店，而这里绝对是其中之一。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.43540487,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-mhS1SUPKRA3Q6nR3oresqA",
+          "shopName": "Alchemy Coffee",
+          "score": 0.43199825,
+          "text": "Rittenhouse 区域最漂亮（也可能最好看？）的咖啡店。咖啡师 Maya 不仅在我第一次来之后就记住了我的名字和点单，咖啡也真的很好喝，而且这里有 WiFi、插座和不错的氛围。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.43114927,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-022",
+      "question": "Red Hook 除了咖啡，适合午餐或不用排队的早午餐吗？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "implicit_intent",
+        "service_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-VJEtJzH0GP_gFYjKDVIstw"
+      ],
+      "expectedEvidenceText": "这里有很棒的咖啡、漂亮的杯子、很好的氛围、令人愉快的员工，以及（对咖啡店来说最令人惊讶的）很棒的食物！说真的，来这里吃午饭吧。或者更好，来吃一顿好吃又不用排队的早午餐。他们的鸡蛋似乎最受欢迎，但我最喜欢的是 Red Hook 三明治。每个三明治都会配一小碗沙拉，那就像一幅味觉的画。我经常来这里工作（它离我家近）。我不是每次需要工作都来的唯一原因，是我不想对它厌倦！这里很舒适，但似乎从不拥挤。另外，他们每个月会在非营业时间举办有趣活动，供应食物和饮品，并展示本地艺术家。真正以社区为导向的商家。这里肯定有关系紧密的常客，但也总给新面孔留有空间。",
+      "hitAtTopK": false,
+      "firstRelevantRank": 5,
+      "topKReviewIds": [
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+          "shopName": "J'aime French Bakery",
+          "score": 0.67650163,
+          "text": "环境非常古朴、宁静而明亮，适合早上或下午喝咖啡。我们大约 11 点去的时候不太忙。我们试了撒糖的 choquette，很好吃，里面填的是非常轻盈的 Nutella 奶油。我朋友喝的 Anastasia 茶闻起来非常香，卡布奇诺也很浓。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6654228,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.66397774,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-ChYhI05dXfDPbATD9VdiDQ",
+        "yelp-VJEtJzH0GP_gFYjKDVIstw",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-Mq03w7IM-glofyCkUyAsog",
+        "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+        "yelp-z2Ia7bFRqSKHicUNi7359Q"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+          "shopName": "J'aime French Bakery",
+          "score": 0.67650163,
+          "text": "环境非常古朴、宁静而明亮，适合早上或下午喝咖啡。我们大约 11 点去的时候不太忙。我们试了撒糖的 choquette，很好吃，里面填的是非常轻盈的 Nutella 奶油。我朋友喝的 Anastasia 茶闻起来非常香，卡布奇诺也很浓。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6654228,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.66397774,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-ChYhI05dXfDPbATD9VdiDQ",
+          "shopName": "Franny Lou's Porch",
+          "score": 0.64580667,
+          "text": "一家非常不错的咖啡店，有很棒的冰咖啡、制作精良的咖啡饮品（我喝了一杯很好的美式）和丰富的糕点选择。这里有免费 wi-fi，也有舒适的工作空间。我想再回来看看午餐时间还有什么。如果我的咖啡体验能预示之后的东西，我期待会有一些好吃的新选择！这是附近一个有趣的地方！我们还会再来。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-VJEtJzH0GP_gFYjKDVIstw",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.64222556,
+          "text": "这里有很棒的咖啡、漂亮的杯子、很好的氛围、令人愉快的员工，以及（对咖啡店来说最令人惊讶的）很棒的食物！说真的，来这里吃午饭吧。或者更好，来吃一顿好吃又不用排队的早午餐。他们的鸡蛋似乎最受欢迎，但我最喜欢的是 Red Hook 三明治。每个三明治都会配一小碗沙拉，那就像一幅味觉的画。我经常来这里工作（它离我家近）。我不是每次需要工作都来的唯一原因，是我不想对它厌倦！这里很舒适，但似乎从不拥挤。另外，他们每个月会在非营业时间举办有趣活动，供应食物和饮品，并展示本地艺术家。真正以社区为导向的商家。这里肯定有关系紧密的常…"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.64181685,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.636827,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-Mq03w7IM-glofyCkUyAsog",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.6366588,
+          "text": "自从这家店开业以来，我觉得没有哪一个周日早晨我没有踉踉跄跄地走进来，身上还穿着前一晚的衣服，想要某种咖啡因来驱散我悲惨周六夜晚留在灵魂里的东西。咖啡很棒，空间很舒适。他们的贝果很好吃，自制蔬菜奶油奶酪也很棒。我几乎总是在这里点冰咖啡，即使在隆冬。他们会加一份浓缩咖啡，简直神奇。谁还需要 Advil？他们还提供方便的水果风味免费饮水机，给那些在等咖啡制作时觉得需要享受一下的顾客。我通常会喝。他们把每杯咖啡都做得独一无二，这和那些直接从隐藏冰箱里的桶倒冰咖啡的店完全不同。不，先生，这里可不是那样。如果你是喜欢阅读的人…"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+          "shopName": "Starbucks",
+          "score": 0.63502365,
+          "text": "我上班时想补充咖啡因，这里是一个适合跑来喝咖啡的好地方。我也喜欢他们的沙发，非常适合用笔记本电脑做一点或很多工作。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-z2Ia7bFRqSKHicUNi7359Q",
+          "shopName": "Alchemy Coffee",
+          "score": 0.6344198,
+          "text": "我不知道他们怎么做到的，但 Alchemy Coffee 能把普通咖啡变成纯金。说真的，他们的拿铁非常好——顺滑的浓缩咖啡和柔滑的燕麦奶。热的和冰的都很棒！他们的糕点好吃到要命——babka 太美味了。它有点偏甜，但配咖啡就很完美。他们也是我见过最有美感的咖啡店之一（想象 CB2 那种现代时髦风）。注意：他们有桌子和 WiFi，但请把设备充满电，因为他们没有插座。总体来说，我推荐你来看看这个小地方，你不会后悔！我保证这不是巫术，只是科学。"
+        }
+      ],
+      "failureReasons": [
+        "top_k_too_small",
+        "service_experience_queries_are_weak",
+        "implicit_intent_queries_are_weak"
+      ]
+    },
+    {
+      "caseId": "yelp-rag-023",
+      "question": "ReAnimator 适合中午坐户外、用 WiFi 工作吗？",
+      "difficulty": "basic",
+      "challengeTypes": [
+        "time_constraint",
+        "facility_constraint",
+        "environment_preference"
+      ],
+      "expectedReviewIds": [
+        "yelp-wiod6zg7n7S_-Iow_O-L9w"
+      ],
+      "expectedEvidenceText": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 1,
+      "topKReviewIds": [
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-k3-x8KcSymMNREMgTGneAA"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.585757,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.56214845,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.5382424,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-k3-x8KcSymMNREMgTGneAA",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-AR8lhVM0aylAt8W06q6zxg",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+        "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.585757,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.56214845,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.5382424,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.53123945,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-AR8lhVM0aylAt8W06q6zxg",
+          "shopName": "Wawa",
+          "score": 0.5303532,
+          "text": "作为较新的 WaWa 之一，这家备货充足，有座位、免费 WiFi 和充电站。这是好消息。坏消息是午餐时间这里会极其拥挤，而且某个天才把收银台放在三明治柜台正对面。等三明治的人太多时，你很难排进收银队伍，因为路被等三明治的人挡住了。这家店也有 WaWa 最大的问题。最大的问题是他们在店内自己烤 hoagie 面包卷，而不是买 Amoroso 的面包卷。Amoroso 的面包卷曾经很完美。店里烤的面包卷即使烤得刚好也无法相比。而且很多时候它们还烤过头，让情况更糟。hoagie 仍然不错，但附近别处能买到更好的；过去可…"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.5276228,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.5163362,
+          "text": "我第一次认识 Valerio Coffee Roasters 是通过使用剩余食物 app。这是少数让我各方面都印象深刻的商家之一。这里停车有点难处理，但我今天运气不错。这是一个值得费力找车位的地方。员工对每个进来的人都非常有帮助。我并不觉得他们给了我什么特殊待遇，员工只是两个精力充沛、在服务行业工作的人。至于氛围，外面有几张远离路边的双人小酒馆风格桌子，不会让你觉得有危险。里面的装修很现代，像半波西米亚风的咖啡店。目前座位间隔较开，但在 Covid 期间也足够容纳三到四组四人客人。整体清爽干净。当时有几个人在用笔…"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.51212084,
+          "text": "咖啡圈的人总是酷得让人有点受不了，Reanimator 的员工也不例外。可能是因为他们整天都能喝到那么棒的咖啡吧！咖啡格外好，浓度也恰到好处。绝对是非常需要的提神之选。有很多品种可以现场饮用，也有袋装咖啡豆可以带回家。空间极简但实用，有几把椅子、几张桌子、免费 wifi，还有大约三张小户外桌。这样就够用了。我唯一希望的是食物选择能更多一些。我去的时候可选的只有两个贝果和一个牛角包。好吃的烘焙食品总是好主意，所以多加一些吧！"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.51211965,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.5107211,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-024",
+      "question": "哪家咖啡店座位不多但抢到位置后适合工作，也有户外人行道座位可以带狗读书？",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "facility_constraint",
+        "negative_constraint",
+        "multi_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-RIdKOn-6dE8hdSFPh5RZug"
+      ],
+      "expectedEvidenceText": "我正在骑车逐个探访 Fishtown 的咖啡店。我在这里喝到了一杯很棒的拿铁。咖啡师还算愉快，也很懂咖啡。不幸的是，因为建筑形状奇怪，这里座位并不多，所以会变得拥挤；但如果你抢到一个位置，这里是做工作的好地方。当我想和狗一起读书放松时，我很喜欢外面人行道上的座位。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 1,
+      "topKReviewIds": [
+        "yelp-RIdKOn-6dE8hdSFPh5RZug",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-2Jvq02Zzsoq8tPFQYWq6Vg"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-RIdKOn-6dE8hdSFPh5RZug",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6557901,
+          "text": "我正在骑车逐个探访 Fishtown 的咖啡店。我在这里喝到了一杯很棒的拿铁。咖啡师还算愉快，也很懂咖啡。不幸的是，因为建筑形状奇怪，这里座位并不多，所以会变得拥挤；但如果你抢到一个位置，这里是做工作的好地方。当我想和狗一起读书放松时，我很喜欢外面人行道上的座位。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.65008855,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.64536875,
+          "text": "先说明，我不是咖啡发烧友，但我当然喜欢一杯好咖啡。必须说，我在这里喝过的咖啡摩卡和美式都没有让我惊艳，不过我还是会为了外带再来，因为它就在我家附近。在我看来，外带就对了。上次我进去时，至少有两只狗乖乖坐在主人旁边，而主人们正在用笔记本电脑。店里也挺满的。不过我本来也不是那种会一个人在咖啡店久坐的人。我注意到牛奶和糖旁边贴着一套规则——它们真的让我感觉很受欢迎。那是一套非常有亲和力的规则。店家确实很感谢顾客。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-RIdKOn-6dE8hdSFPh5RZug",
+        "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+        "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+        "yelp-AhTsqSS43V1-9yPq-NRX-w",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-k3-x8KcSymMNREMgTGneAA"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-RIdKOn-6dE8hdSFPh5RZug",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6557901,
+          "text": "我正在骑车逐个探访 Fishtown 的咖啡店。我在这里喝到了一杯很棒的拿铁。咖啡师还算愉快，也很懂咖啡。不幸的是，因为建筑形状奇怪，这里座位并不多，所以会变得拥挤；但如果你抢到一个位置，这里是做工作的好地方。当我想和狗一起读书放松时，我很喜欢外面人行道上的座位。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopName": "Good Karma Cafe",
+          "score": 0.65008855,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+          "shopName": "Good Karma Cafe",
+          "score": 0.64536875,
+          "text": "先说明，我不是咖啡发烧友，但我当然喜欢一杯好咖啡。必须说，我在这里喝过的咖啡摩卡和美式都没有让我惊艳，不过我还是会为了外带再来，因为它就在我家附近。在我看来，外带就对了。上次我进去时，至少有两只狗乖乖坐在主人旁边，而主人们正在用笔记本电脑。店里也挺满的。不过我本来也不是那种会一个人在咖啡店久坐的人。我注意到牛奶和糖旁边贴着一套规则——它们真的让我感觉很受欢迎。那是一套非常有亲和力的规则。店家确实很感谢顾客。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6444633,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.6134783,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6074368,
+          "text": "这是我最喜欢的、适合完成工作的咖啡店之一。他们有免费 wifi、很多座位，并且以低音量播放独立音乐。Good Karma 后面还有一个户外小绿洲，似乎知道的人不多。我不会说这里适合咖啡鉴赏家，因为我不认为他们自己烘焙或冲煮咖啡。不过饮品稳定地好喝，也很有特色。氛围也非常放松。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "shopName": "Passero's Coffee Roasters",
+          "score": 0.60359484,
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我…"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-AhTsqSS43V1-9yPq-NRX-w",
+          "shopName": "Good Karma Cafe",
+          "score": 0.6028942,
+          "text": "这是个不错的地方，可以学习、工作，或者做其他类似的事。员工很棒，友好又爱笑。咖啡馆食品价格适中。桌子和插座都很充足。毫无疑问，这是我在费城最喜欢的咖啡馆之一。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.60023165,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.5974517,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        }
+      ],
+      "failureReasons": []
+    },
+    {
+      "caseId": "yelp-rag-025",
+      "question": "Valerio 的咸派等待体验怎么样？人多时 WiFi 稳定吗？",
+      "difficulty": "hard",
+      "challengeTypes": [
+        "service_constraint",
+        "facility_constraint",
+        "negative_constraint"
+      ],
+      "expectedReviewIds": [
+        "yelp-ZMZCxn7QQsG0val9K3945Q"
+      ],
+      "expectedEvidenceText": "我没吃早餐，想着在 Valerio 吃一顿像样的早午餐。坏主意。下午 12:45 点了咸派，被告知虽然刚刚卖完，但最多 1 小时内会有新的可以上。我一直等到下午 2:15，饿得不行，才走到柜台礼貌询问咸派进度。得到的是冷冷的一眼和一句：“实际上还要 45 分钟，因为我们还得让它冷却。”好吧。我等到 3 点，还是没有。最奇怪的是，他们已经提前从我的卡里收了咸派的钱。在我还没来得及要求退款，好去买别的东西之前，她就粗鲁地说：“如果这样能让你好受些，你可以一直来柜台问，但我现在就是不能切咸派。”我太震惊了，只说了好吧，说实话还有点被吓到。等它终于做好时（2.5 小时后），它基本上就是四口量的蔬菜蛋饼，没有饼皮。如果能听到一句“抱歉让你久等了”，而不是被甩脸色，会好很多。如果你做这个就是要 2 到 3 小时，完全没问题。只是不要为了让顾客买东西而撒谎。也不要极其粗鲁，好吗？另外值得一提的是——如果人很多，这里的 wifi 就不能用。",
+      "hitAtTopK": true,
+      "firstRelevantRank": 1,
+      "topKReviewIds": [
+        "yelp-ZMZCxn7QQsG0val9K3945Q",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg"
+      ],
+      "topKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-ZMZCxn7QQsG0val9K3945Q",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.6962527,
+          "text": "我没吃早餐，想着在 Valerio 吃一顿像样的早午餐。坏主意。下午 12:45 点了咸派，被告知虽然刚刚卖完，但最多 1 小时内会有新的可以上。我一直等到下午 2:15，饿得不行，才走到柜台礼貌询问咸派进度。得到的是冷冷的一眼和一句：“实际上还要 45 分钟，因为我们还得让它冷却。”好吧。我等到 3 点，还是没有。最奇怪的是，他们已经提前从我的卡里收了咸派的钱。在我还没来得及要求退款，好去买别的东西之前，她就粗鲁地说：“如果这样能让你好受些，你可以一直来柜台问，但我现在就是不能切咸派。”我太震惊了，只说了好吧，…"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.5634218,
+          "text": "我第一次认识 Valerio Coffee Roasters 是通过使用剩余食物 app。这是少数让我各方面都印象深刻的商家之一。这里停车有点难处理，但我今天运气不错。这是一个值得费力找车位的地方。员工对每个进来的人都非常有帮助。我并不觉得他们给了我什么特殊待遇，员工只是两个精力充沛、在服务行业工作的人。至于氛围，外面有几张远离路边的双人小酒馆风格桌子，不会让你觉得有危险。里面的装修很现代，像半波西米亚风的咖啡店。目前座位间隔较开，但在 Covid 期间也足够容纳三到四组四人客人。整体清爽干净。当时有几个人在用笔…"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.5431156,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        }
+      ],
+      "analysisTopKReviewIds": [
+        "yelp-ZMZCxn7QQsG0val9K3945Q",
+        "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-wiod6zg7n7S_-Iow_O-L9w",
+        "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+        "yelp-k3-x8KcSymMNREMgTGneAA",
+        "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+        "yelp-MeHfRwBPr11Cs5ZLoL15ew"
+      ],
+      "analysisTopKResults": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-ZMZCxn7QQsG0val9K3945Q",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.6962527,
+          "text": "我没吃早餐，想着在 Valerio 吃一顿像样的早午餐。坏主意。下午 12:45 点了咸派，被告知虽然刚刚卖完，但最多 1 小时内会有新的可以上。我一直等到下午 2:15，饿得不行，才走到柜台礼貌询问咸派进度。得到的是冷冷的一眼和一句：“实际上还要 45 分钟，因为我们还得让它冷却。”好吧。我等到 3 点，还是没有。最奇怪的是，他们已经提前从我的卡里收了咸派的钱。在我还没来得及要求退款，好去买别的东西之前，她就粗鲁地说：“如果这样能让你好受些，你可以一直来柜台问，但我现在就是不能切咸派。”我太震惊了，只说了好吧，…"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+          "shopName": "Valerio Coffee Roasters",
+          "score": 0.5634218,
+          "text": "我第一次认识 Valerio Coffee Roasters 是通过使用剩余食物 app。这是少数让我各方面都印象深刻的商家之一。这里停车有点难处理，但我今天运气不错。这是一个值得费力找车位的地方。员工对每个进来的人都非常有帮助。我并不觉得他们给了我什么特殊待遇，员工只是两个精力充沛、在服务行业工作的人。至于氛围，外面有几张远离路边的双人小酒馆风格桌子，不会让你觉得有危险。里面的装修很现代，像半波西米亚风的咖啡店。目前座位间隔较开，但在 Covid 期间也足够容纳三到四组四人客人。整体清爽干净。当时有几个人在用笔…"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.5431156,
+          "text": "这家店正是 Art Museum/Fairmount 区域所需要的。它小巧、古朴，价格真的很不错。员工也非常友好。他们会在开门前让你进去，也会在关门后让你多待一会儿。后面也有座位，包括一张长沙发和几把沙发椅。所以不要被窗外看到的前面几张桌子骗了。员工还在增加更多艺术品和装饰，所以这里只会越来越好。如果你想找一个新的地方安静地消磨一个下午，喝很棒的咖啡，又离 Fairmount Ave 繁忙的人流足够远，那就来这里。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "shopName": "Alena’s Cafe",
+          "score": 0.53999704,
+          "text": "Little Jimmy's 关门时我挺沮丧的，所以我很兴奋地过来看看 Alena's。甜点非常新鲜，服务也很出色。我后来又回来吃他们的咸派，太棒了！！因为我过敏，我询问了坚果问题，前台那位女士打电话给老板再次确认。他们也真的非常非常亲切。还有一个额外优点，他们播放的音乐很好。这里适合学习，桌子中等大小。我可以把笔记本电脑、笔记本和一杯咖啡都放在桌上，完全没问题。他们有 WiFi 和几个插座。我非常推荐大家来看看，他们是 Mt Airy 隐藏的宝石。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.5343081,
+          "text": "这个地方很可爱，但是小而且吵。如果你坐在前面，咖啡机声音很大。我相信后面会安静一些。我点了一杯冰拿铁，饮品相当不错。不过服务一般——我问了一个关于饮品菜单的问题，却感觉自己像是在打扰咖啡师。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopName": "ReAnimator Coffee",
+          "score": 0.5299779,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "shopName": "Red Hook Coffee & Tea",
+          "score": 0.51959443,
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-k3-x8KcSymMNREMgTGneAA",
+          "shopName": "Lucky Goat Coffeehouse",
+          "score": 0.515021,
+          "text": "很棒的小地方。我喜欢他们所有特色饮品，也喜欢咖啡师在其中投入的用心。他们有免费 WiFi，也有很多可以坐下来完成一些工作的地方。周末店里很快会坐满。如果我住得更近，我肯定会把这里变成常去的店。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "shopName": "Good Karma Cafe",
+          "score": 0.5131383,
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+          "shopName": "J'aime French Bakery",
+          "score": 0.51124126,
+          "text": "环境非常古朴、宁静而明亮，适合早上或下午喝咖啡。我们大约 11 点去的时候不太忙。我们试了撒糖的 choquette，很好吃，里面填的是非常轻盈的 Nutella 奶油。我朋友喝的 Anastasia 茶闻起来非常香，卡布奇诺也很浓。"
+        }
+      ],
+      "failureReasons": []
+    }
+  ]
+}

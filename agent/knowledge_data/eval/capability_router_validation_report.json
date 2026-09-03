@@ -1,0 +1,213 @@
+{
+  "methodology": {
+    "split": "validation",
+    "testRead": false,
+    "selectionSource": "model-emitted tool calls from turn_messages",
+    "fallbackCountsAsSelection": false
+  },
+  "caseCount": 6,
+  "completePasses": 6,
+  "completeAccuracy": 1.0,
+  "metrics": {
+    "toolSelection": {
+      "applicable": 6,
+      "passed": 6,
+      "accuracy": 1.0
+    },
+    "argumentExtraction": {
+      "applicable": 3,
+      "passed": 3,
+      "accuracy": 1.0
+    },
+    "sourceConstraint": {
+      "applicable": 2,
+      "passed": 2,
+      "accuracy": 1.0
+    },
+    "entityResolution": {
+      "applicable": 3,
+      "passed": 3,
+      "accuracy": 1.0
+    },
+    "reviewPurity": {
+      "applicable": 2,
+      "passed": 2,
+      "accuracy": 1.0
+    },
+    "clarification": {
+      "applicable": 1,
+      "passed": 1,
+      "accuracy": 1.0
+    }
+  },
+  "byCategory": {
+    "ambiguous_named_experience": {
+      "total": 1,
+      "completePasses": 1,
+      "accuracy": 1.0
+    },
+    "generic_experience": {
+      "total": 2,
+      "completePasses": 2,
+      "accuracy": 1.0
+    },
+    "named_experience": {
+      "total": 2,
+      "completePasses": 2,
+      "accuracy": 1.0
+    },
+    "structured_fact": {
+      "total": 1,
+      "completePasses": 1,
+      "accuracy": 1.0
+    }
+  },
+  "fallbackCount": 0,
+  "failures": [],
+  "details": [
+    {
+      "caseId": "capability-val-generic-001",
+      "category": "generic_experience",
+      "question": "有没有安静、适合带电脑工作的咖啡店？",
+      "expectedTools": [
+        "search_knowledge"
+      ],
+      "modelToolNames": [
+        "search_knowledge"
+      ],
+      "executedToolNames": [
+        "search_knowledge"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": true,
+      "forbiddenToolFree": true,
+      "argumentCorrect": null,
+      "sourcesCorrect": true,
+      "resolutionCorrect": null,
+      "reviewPurityCorrect": null,
+      "clarificationCorrect": null,
+      "complete": true,
+      "answer": "根据真实评论，我为你找到了以下适合带电脑工作的咖啡店推荐：\n\n---\n\n### ✅ 推荐：适合带电脑工作\n\n**1️⃣ Red Hook Coffee & Tea** 🏆 \n- 评论说：\"这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作\" [yelp-mBE3JkCV5YH9UqNdRJMUGg]\n- 环境温馨，有舒适的扶手椅，装饰很酷，员工友好。咖啡是公平贸易的，味道不错。位置在4街和Catherine街，不过价格偏贵一些。\n\n**2️⃣ Good Karma Cafe**\n- 周末\"满是用笔记本电脑的人\"，说明很多人带电脑去工作 [yelp-oHQQ8H-1DF6jyjtdMceKBw]\n- 不过要注意：环境比较小巧，周末人多桌子紧张，建议早点到。饮品和食物需要等一会儿。\n\n### ⚠️ 不太推荐\n\n**❌ 街角共创咖啡**\n- 评论指出\"工作日下午常有创业团队讨论，环境比普通咖啡店嘈杂，不适合需要安静专注的人\" [review-018]\n- 虽然适合协作开会，但如果你想安静工作，可能不太合适。\n\n---\n\n**小结：** 如果你想要安静专注地工作，**Red Hook Coffee & Tea** 是最推荐的选择，氛围安静舒适，适合用笔记本电脑。如果想了解更多细节（如具体地址、营业时间等），可以告诉我你想了解哪家店哦！😊"
+    },
+    {
+      "caseId": "capability-val-generic-002",
+      "category": "generic_experience",
+      "question": "想找一个能静下心写东西的咖啡馆，大家实际感受怎么样？",
+      "expectedTools": [
+        "search_knowledge"
+      ],
+      "modelToolNames": [
+        "search_knowledge"
+      ],
+      "executedToolNames": [
+        "search_knowledge"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": true,
+      "forbiddenToolFree": true,
+      "argumentCorrect": null,
+      "sourcesCorrect": true,
+      "resolutionCorrect": null,
+      "reviewPurityCorrect": null,
+      "clarificationCorrect": null,
+      "complete": true,
+      "answer": "根据大家的真实体验，我找到了几家店，帮你分析一下是否适合静下心写东西：\n\n---\n\n### ☕ 推荐尝试\n\n**1️⃣ Starbucks**\n> 有顾客提到他们的沙发\"非常适合用笔记本电脑做一点或很多工作\" [yelp-ca5-l1hCUfQvkVfykIUyuQ]，适合带电脑去写东西。\n\n**2️⃣ Good Karma Cafe**\n> 环境和食物评价不错，但**周末人特别多**，\"满是用笔记本电脑的人\"，建议早点去占桌子或选择外带/室外座位 [yelp-oHQQ8H-1DF6jyjtdMceKBw]。工作日下午可能相对好一些。\n\n---\n\n### ❌ 不太推荐\n\n**街角共创咖啡**\n> 工作日下午常有创业团队讨论，\"环境比普通咖啡店嘈杂，不适合需要安静专注的人\" [review-018]。如果你想安安静静写东西，这家可能不太合适。\n\n---\n\n整体来看，如果你要找一个真正能静下心写东西的地方，**Starbucks** 的沙发区口碑还不错；**Good Karma Cafe** 则需要挑对时间（建议工作日去、早点到）。你更倾向于哪家？或者想了解某家店的具体地址和营业时间？"
+    },
+    {
+      "caseId": "capability-val-named-001",
+      "category": "named_experience",
+      "question": "Alchemy Coffee 的员工服务体验怎么样？",
+      "expectedTools": [
+        "search_shop_reviews"
+      ],
+      "modelToolNames": [
+        "search_shop_reviews"
+      ],
+      "executedToolNames": [
+        "search_shop_reviews"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": true,
+      "forbiddenToolFree": true,
+      "argumentCorrect": true,
+      "sourcesCorrect": null,
+      "resolutionCorrect": true,
+      "reviewPurityCorrect": true,
+      "clarificationCorrect": null,
+      "complete": true,
+      "answer": "Alchemy Coffee 的员工服务体验相当不错，以下是顾客们的真实评价：\n\n1️⃣ **咖啡师超级友好、熟练且高效** — 有位顾客说自己在店里太开心了，不小心把笔记本电脑落在了店里，咖啡师竟然追到街上把电脑还给了他 🥹[yelp-0raRTiWTrj9ytORRy-kZoA]\n\n2️⃣ **服务贴心** — 另一位顾客点了拿铁，虽然下单时店员说机器没办法精确调温，但咖啡师 reassured 说可以做到，最终顾客表示满意，评价\"美味的拿铁和服务！\"[yelp-yeXj7dMi8DyZ1i45T8iobw]\n\n3️⃣ 还有顾客提到 **香草冷萃 Shakerato 超棒**，整体体验很好[yelp-4xICpHnuep1qQmWudTfegA]\n\n总结来看，Alchemy Coffee 的员工给人的印象是非常 **友善、专业且贴心**，服务态度备受好评！☕✨"
+    },
+    {
+      "caseId": "capability-val-named-002",
+      "category": "named_experience",
+      "question": "Good Karma Cafe 的空间、WiFi和插座实际怎么样？",
+      "expectedTools": [
+        "search_shop_reviews"
+      ],
+      "modelToolNames": [
+        "search_shop_reviews"
+      ],
+      "executedToolNames": [
+        "search_shop_reviews"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": true,
+      "forbiddenToolFree": true,
+      "argumentCorrect": true,
+      "sourcesCorrect": null,
+      "resolutionCorrect": true,
+      "reviewPurityCorrect": true,
+      "clarificationCorrect": null,
+      "complete": true,
+      "answer": "以下是根据真实评论整理的 Good Karma Cafe 在空间、WiFi 和插座方面的实际情况：\n\n---\n\n### 🪑 空间环境\n- **整体感觉**：空间开阔，有大量桌子，适合学习和工作。墙上挂有大画作，音乐氛围轻松，没有吵闹的音乐 [yelp-T52ED3B5-Lymo9EzCpuTwg]。\n- **注意**：有评论提到部分区域（如后方侧间）空气有些闷，前方靠柜台区域略显空旷，如果能多放几张桌子或吧台凳会更好 [yelp-YmBytIHGjEroySTkyL8m8w]。\n- **整体评价**：**适合学习/办公**的好地方，有顾客直接说\"这是学习的完美地方\" [yelp-M980wiRzRJhBOlyQsFeDYw]。\n\n### 📶 WiFi\n- 评论中未直接提及 WiFi 的具体情况（如速度快慢、是否免费），如果你很在意这一点，可能需要亲自到店确认。\n\n### 🔌 插座\n- **有插座，但数量有限**。评论提到\"有一些插座\"，但也建议\"最好带着充好电的设备来，以防坐不到插座旁边\" [yelp-M980wiRzRJhBOlyQsFeDYw]。\n\n---\n\n**总结**：Good Karma Cafe 空间开阔、桌子多、氛围安静，**很适合学习或办公**，有插座不过数量不算特别充裕。如果你打算长时间待着用电脑，建议早到占插座位或自备满电设备。"
+    },
+    {
+      "caseId": "capability-val-ambiguous-001",
+      "category": "ambiguous_named_experience",
+      "question": "Starbucks适合带电脑工作吗？",
+      "expectedTools": [
+        "search_shop_reviews"
+      ],
+      "modelToolNames": [
+        "search_shop_reviews"
+      ],
+      "executedToolNames": [
+        "search_shop_reviews"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": true,
+      "forbiddenToolFree": true,
+      "argumentCorrect": true,
+      "sourcesCorrect": null,
+      "resolutionCorrect": true,
+      "reviewPurityCorrect": null,
+      "clarificationCorrect": true,
+      "complete": true,
+      "answer": "我找到了两家 Starbucks，请问您指的是哪一家呢？\n\n1. **Starbucks** - 1018 N 2nd St, Philadelphia, PA\n2. **Starbucks** - 1528 Walnut St, Philadelphia, PA\n\n麻烦告诉我您想去的是哪家店，我来帮您查查适不适合带电脑工作～"
+    },
+    {
+      "caseId": "capability-val-non-experience-001",
+      "category": "structured_fact",
+      "question": "Red Hook Coffee & Tea的地址在哪里？",
+      "expectedTools": [
+        "search_shops"
+      ],
+      "modelToolNames": [
+        "search_shops"
+      ],
+      "executedToolNames": [
+        "search_shops"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": true,
+      "forbiddenToolFree": true,
+      "argumentCorrect": null,
+      "sourcesCorrect": null,
+      "resolutionCorrect": null,
+      "reviewPurityCorrect": null,
+      "clarificationCorrect": null,
+      "complete": true,
+      "answer": "Red Hook Coffee & Tea 的地址是 **765 S 4th St, Philadelphia, PA**。"
+    }
+  ]
+}

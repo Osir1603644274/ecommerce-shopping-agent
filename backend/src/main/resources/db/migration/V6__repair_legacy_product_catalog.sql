@@ -1,0 +1,47 @@
+-- Some pre-Flyway installations had a partial V1 schema and were baselined at
+-- version 1. Re-declare the catalog tables idempotently so those installations
+-- converge without changing clean V1 -> V6 installations.
+CREATE TABLE IF NOT EXISTS product (
+    id BIGINT PRIMARY KEY,
+    source VARCHAR(64) NOT NULL,
+    source_item_id VARCHAR(128) NOT NULL,
+    title VARCHAR(512) NOT NULL,
+    brand VARCHAR(128) NOT NULL,
+    seller VARCHAR(255) NOT NULL,
+    category_l1 VARCHAR(128) NOT NULL,
+    category_l2 VARCHAR(128) NOT NULL,
+    category_l3 VARCHAR(128) NOT NULL,
+    snapshot_price_minor BIGINT,
+    currency VARCHAR(16),
+    price_status VARCHAR(32) NOT NULL DEFAULT 'missing',
+    attribute_text TEXT,
+    data_nature VARCHAR(64) NOT NULL DEFAULT 'historical_dataset_snapshot',
+    dataset_revision VARCHAR(128) NOT NULL,
+    source_license VARCHAR(64) NOT NULL,
+    provenance_url VARCHAR(512) NOT NULL,
+    imported_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uk_product_source_item (source, source_item_id),
+    INDEX idx_product_category_l3 (category_l3),
+    INDEX idx_product_brand (brand),
+    INDEX idx_product_price (price_status, snapshot_price_minor)
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS product_attribute (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    product_id BIGINT NOT NULL,
+    attribute_key VARCHAR(64) NOT NULL,
+    value_type VARCHAR(16) NOT NULL,
+    raw_value VARCHAR(512) NOT NULL,
+    normalized_text VARCHAR(255),
+    normalized_number DECIMAL(18, 4),
+    normalized_boolean BOOLEAN,
+    unit VARCHAR(32),
+    evidence_field VARCHAR(64) NOT NULL,
+    extraction_method VARCHAR(64) NOT NULL,
+    confidence DECIMAL(5, 4) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uk_product_attribute (product_id, attribute_key),
+    INDEX idx_product_attribute_product (product_id)
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

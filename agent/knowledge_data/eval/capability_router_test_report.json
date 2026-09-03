@@ -1,0 +1,266 @@
+{
+  "methodology": {
+    "split": "test",
+    "testRead": true,
+    "selectionSource": "model-emitted tool calls from turn_messages",
+    "fallbackCountsAsSelection": false
+  },
+  "caseCount": 6,
+  "completePasses": 4,
+  "completeAccuracy": 0.6666666666666666,
+  "metrics": {
+    "toolSelection": {
+      "applicable": 6,
+      "passed": 4,
+      "accuracy": 0.6666666666666666
+    },
+    "argumentExtraction": {
+      "applicable": 3,
+      "passed": 2,
+      "accuracy": 0.6666666666666666
+    },
+    "sourceConstraint": {
+      "applicable": 2,
+      "passed": 2,
+      "accuracy": 1.0
+    },
+    "entityResolution": {
+      "applicable": 3,
+      "passed": 2,
+      "accuracy": 0.6666666666666666
+    },
+    "reviewPurity": {
+      "applicable": 2,
+      "passed": 2,
+      "accuracy": 1.0
+    },
+    "clarification": {
+      "applicable": 1,
+      "passed": 1,
+      "accuracy": 1.0
+    }
+  },
+  "byCategory": {
+    "ambiguous_named_experience": {
+      "total": 1,
+      "completePasses": 0,
+      "accuracy": 0.0
+    },
+    "generic_experience": {
+      "total": 2,
+      "completePasses": 1,
+      "accuracy": 0.5
+    },
+    "named_experience": {
+      "total": 2,
+      "completePasses": 2,
+      "accuracy": 1.0
+    },
+    "structured_fact": {
+      "total": 1,
+      "completePasses": 1,
+      "accuracy": 1.0
+    }
+  },
+  "fallbackCount": 0,
+  "failures": [
+    {
+      "caseId": "capability-test-generic-002",
+      "category": "generic_experience",
+      "question": "想找一家坐久了也舒服的咖啡馆。",
+      "expectedTools": [
+        "search_knowledge"
+      ],
+      "modelToolNames": [
+        "search_shops",
+        "search_knowledge"
+      ],
+      "executedToolNames": [
+        "search_shops",
+        "search_knowledge"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": false,
+      "forbiddenToolFree": true,
+      "argumentCorrect": null,
+      "sourcesCorrect": true,
+      "resolutionCorrect": null,
+      "reviewPurityCorrect": null,
+      "clarificationCorrect": null,
+      "complete": false,
+      "answer": "根据大家的真实评价，我为你找到了以下几家很适合久坐的咖啡馆：\n\n---\n\n### ☕ 推荐这几家：\n\n**1. Red Hook Coffee & Tea**（765 S 4th St）\n> 有舒适的**扶手椅**，很适合放松或用笔记本电脑工作，装饰很酷，员工友好。咖啡是公平贸易的，好喝但价格偏高。[yelp-mBE3JkCV5YH9UqNdRJMUGg]\n\n**2. Lucky Goat Coffeehouse**（888 N 26th St）\n> 有**免费WiFi**和充足的座位，适合坐下来工作或学习，特色饮品很棒，周末会很快坐满，建议避开高峰时段去。[yelp-k3-x8KcSymMNREMgTGneAA]\n\n**3. Good Karma Cafe**（928 Pine St）\n> **桌子和插座都很充足**，食品价格适中，员工友好，是学习、工作的好去处。[yelp-AhTsqSS43V1-9yPq-NRX-w]\n\n---\n\n如果想了解其中某家店的更多详情（营业时间、电话等），或者想知道离你最近的是哪家，随时告诉我！😊"
+    },
+    {
+      "caseId": "capability-test-ambiguous-001",
+      "category": "ambiguous_named_experience",
+      "question": "Wawa的停车和店内体验怎么样？",
+      "expectedTools": [
+        "search_shop_reviews"
+      ],
+      "modelToolNames": [
+        "search_knowledge"
+      ],
+      "executedToolNames": [
+        "search_knowledge"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": false,
+      "forbiddenToolFree": true,
+      "argumentCorrect": false,
+      "sourcesCorrect": null,
+      "resolutionCorrect": false,
+      "reviewPurityCorrect": null,
+      "clarificationCorrect": true,
+      "complete": false,
+      "answer": "抱歉，我查询了相关的评论信息，但返回的结果中并没有找到名为 \"Wawa\" 的商户的停车和店内体验评论。检索到的评论分别对应的是 **Valerio Coffee Roasters**、**Lucky Goat Coffeehouse** 和 **城市光影影院**，都不是 Wawa。\n\n请问你指的是哪家 **Wawa** 呢？比如是 Wawa 便利店（连锁店），还是其他同名的商户？如果你能提供更具体的信息（比如城市或门店名称），我可以帮你再查一查。"
+    }
+  ],
+  "details": [
+    {
+      "caseId": "capability-test-generic-001",
+      "category": "generic_experience",
+      "question": "周末想找一家适合朋友聊天、不会太拥挤的咖啡店。",
+      "expectedTools": [
+        "search_knowledge"
+      ],
+      "modelToolNames": [
+        "search_knowledge"
+      ],
+      "executedToolNames": [
+        "search_knowledge"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": true,
+      "forbiddenToolFree": true,
+      "argumentCorrect": null,
+      "sourcesCorrect": true,
+      "resolutionCorrect": null,
+      "reviewPurityCorrect": null,
+      "clarificationCorrect": null,
+      "complete": true,
+      "answer": "根据大家的真实体验，我帮你看了几家店的情况，给你一些参考：\n\n---\n\n### ☕ 推荐参考\n\n从评论来看，**不太推荐**以下类型：\n\n- **Good Karma Cafe** — 有评论提到周末这里\"满是用笔记本电脑的人\"，而且有顾客反映\"不太适合随便聊天，因为大多数人把它当图书馆，甚至会投来厌恶的眼神\"[yelp-GOfMeMJLlr2vaLRxNgkSnQ]。所以如果你想轻松聊天，这里可能不太合适。\n\n- **街角共创咖啡** — 有评论说工作日下午常有创业团队讨论，环境比较嘈杂，也不太适合安静聊天[review-018]。\n\n---\n\n目前查到的信息中，**没有明确提到既适合朋友聊天、又不会太拥挤的咖啡店**。你是否有具体的店名想了解一下？或者你方便提供一些偏好，比如你所在的区域，我可以用商户列表工具帮你找找看？"
+    },
+    {
+      "caseId": "capability-test-generic-002",
+      "category": "generic_experience",
+      "question": "想找一家坐久了也舒服的咖啡馆。",
+      "expectedTools": [
+        "search_knowledge"
+      ],
+      "modelToolNames": [
+        "search_shops",
+        "search_knowledge"
+      ],
+      "executedToolNames": [
+        "search_shops",
+        "search_knowledge"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": false,
+      "forbiddenToolFree": true,
+      "argumentCorrect": null,
+      "sourcesCorrect": true,
+      "resolutionCorrect": null,
+      "reviewPurityCorrect": null,
+      "clarificationCorrect": null,
+      "complete": false,
+      "answer": "根据大家的真实评价，我为你找到了以下几家很适合久坐的咖啡馆：\n\n---\n\n### ☕ 推荐这几家：\n\n**1. Red Hook Coffee & Tea**（765 S 4th St）\n> 有舒适的**扶手椅**，很适合放松或用笔记本电脑工作，装饰很酷，员工友好。咖啡是公平贸易的，好喝但价格偏高。[yelp-mBE3JkCV5YH9UqNdRJMUGg]\n\n**2. Lucky Goat Coffeehouse**（888 N 26th St）\n> 有**免费WiFi**和充足的座位，适合坐下来工作或学习，特色饮品很棒，周末会很快坐满，建议避开高峰时段去。[yelp-k3-x8KcSymMNREMgTGneAA]\n\n**3. Good Karma Cafe**（928 Pine St）\n> **桌子和插座都很充足**，食品价格适中，员工友好，是学习、工作的好去处。[yelp-AhTsqSS43V1-9yPq-NRX-w]\n\n---\n\n如果想了解其中某家店的更多详情（营业时间、电话等），或者想知道离你最近的是哪家，随时告诉我！😊"
+    },
+    {
+      "caseId": "capability-test-named-001",
+      "category": "named_experience",
+      "question": "Red Hook Coffee & Tea适合用电脑工作吗？",
+      "expectedTools": [
+        "search_shop_reviews"
+      ],
+      "modelToolNames": [
+        "search_shop_reviews"
+      ],
+      "executedToolNames": [
+        "search_shop_reviews"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": true,
+      "forbiddenToolFree": true,
+      "argumentCorrect": true,
+      "sourcesCorrect": null,
+      "resolutionCorrect": true,
+      "reviewPurityCorrect": true,
+      "clarificationCorrect": null,
+      "complete": true,
+      "answer": "Red Hook Coffee & Tea 总体来说是适合用电脑工作的，不过体验因人而异，我给你整理一下大家的评价：\n\n**✅ 好评方面：**\n- 有客人说这里 **很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作**，氛围很放松，店员友好 [yelp-mBE3JkCV5YH9UqNdRJMUGg]\n- 另一位客人也提到，来这里吃早餐并 **用电脑工作/阅读**，空间虽小但很安静（当时只有一两桌其他客人），体验不错 [yelp-GJVjEx3bCZawRTydNcZgpQ]\n\n**⚠️ 需要注意的地方：**\n- 有客人反映，店内 **没有空调**，夏天会比较闷热，加上频繁开关门会有蚊虫，家具也有些陈旧，**不太适合久坐** [yelp-ayn3K9Z2AE6D4PqGZ_w09g]\n- 价格方面偏贵，不过咖啡是公平贸易的，品质不错\n\n**总结：** 如果想找个安静的地方带电脑去坐一两个小时，环境是OK的，有舒适的扶手椅，氛围也不错。但如果是夏天去、或者打算坐很久长时间办公，可能会不太舒适哦～"
+    },
+    {
+      "caseId": "capability-test-named-002",
+      "category": "named_experience",
+      "question": "Valerio Coffee Roasters停车和员工服务的实际体验怎么样？",
+      "expectedTools": [
+        "search_shop_reviews"
+      ],
+      "modelToolNames": [
+        "search_shop_reviews"
+      ],
+      "executedToolNames": [
+        "search_shop_reviews"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": true,
+      "forbiddenToolFree": true,
+      "argumentCorrect": true,
+      "sourcesCorrect": null,
+      "resolutionCorrect": true,
+      "reviewPurityCorrect": true,
+      "clarificationCorrect": null,
+      "complete": true,
+      "answer": "以下是 Valerio Coffee Roasters 在**停车**和**员工服务**方面的真实顾客体验：\n\n---\n\n### 🅿️ 停车体验\n- **停车比较难**，一位顾客提到 \"这里停车有点难处理\"（[yelp-CaXYOXHwOkmEu_JL3nEozQ]），但评论也说 **\"这是一个值得费力找车位的地方\"**，可见虽不便，但值得。\n- 这位顾客当天运气不错，顺利找到了车位。\n\n### 👥 员工服务\n- **员工非常热情友好**：顾客评价员工对每个进来的人都非常有帮助，是\"两个精力充沛、在服务行业工作的人\"（[yelp-CaXYOXHwOkmEu_JL3nEozQ]）。\n- **服务专业且细心**：员工友好、积极，还能详细介绍产品。\n- **服务优秀**：另一位顾客也称赞服务\"excellent（优秀）\"（[yelp-kmEHaWvhg3O6IXfw7cDf7Q]），还有顾客提到客服很棒，订单准时准备好（[yelp-K_SWLvM1dSTat6MvuMeesA]）。\n\n### 📍 总结\n**停车确实是个小挑战**，尤其在繁忙时段可能需要花点时间找车位；但 **员工服务非常出色**，普遍反馈热情、专业、乐于助人。综合来看，是值得为美食和服务专程跑一趟的地方！"
+    },
+    {
+      "caseId": "capability-test-ambiguous-001",
+      "category": "ambiguous_named_experience",
+      "question": "Wawa的停车和店内体验怎么样？",
+      "expectedTools": [
+        "search_shop_reviews"
+      ],
+      "modelToolNames": [
+        "search_knowledge"
+      ],
+      "executedToolNames": [
+        "search_knowledge"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": false,
+      "forbiddenToolFree": true,
+      "argumentCorrect": false,
+      "sourcesCorrect": null,
+      "resolutionCorrect": false,
+      "reviewPurityCorrect": null,
+      "clarificationCorrect": true,
+      "complete": false,
+      "answer": "抱歉，我查询了相关的评论信息，但返回的结果中并没有找到名为 \"Wawa\" 的商户的停车和店内体验评论。检索到的评论分别对应的是 **Valerio Coffee Roasters**、**Lucky Goat Coffeehouse** 和 **城市光影影院**，都不是 Wawa。\n\n请问你指的是哪家 **Wawa** 呢？比如是 Wawa 便利店（连锁店），还是其他同名的商户？如果你能提供更具体的信息（比如城市或门店名称），我可以帮你再查一查。"
+    },
+    {
+      "caseId": "capability-test-non-experience-001",
+      "category": "structured_fact",
+      "question": "Alchemy Coffee的地址在哪里？",
+      "expectedTools": [
+        "search_shops"
+      ],
+      "modelToolNames": [
+        "search_shops"
+      ],
+      "executedToolNames": [
+        "search_shops"
+      ],
+      "usedFallback": false,
+      "toolSelectionCorrect": true,
+      "forbiddenToolFree": true,
+      "argumentCorrect": null,
+      "sourcesCorrect": null,
+      "resolutionCorrect": null,
+      "reviewPurityCorrect": null,
+      "clarificationCorrect": null,
+      "complete": true,
+      "answer": "Alchemy Coffee 的地址是 **119 S 21st St, Philadelphia, PA**。"
+    }
+  ]
+}

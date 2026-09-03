@@ -1,0 +1,188 @@
+{
+  "methodology": {
+    "split": "validation only",
+    "testRead": false,
+    "topK": 3,
+    "baseline": "Qdrant vector search filtered only by source=yelp",
+    "candidate": "same vector search filtered by source=yelp and labeled shopId",
+    "caveat": "shopId is supplied by evaluation labels; entity resolution is not implemented"
+  },
+  "caseCount": 4,
+  "unfilteredYelp": {
+    "total": 4,
+    "hits": 1,
+    "hitRate": 0.25,
+    "hitsAt1": 1,
+    "hitAt1Rate": 0.25,
+    "mrr": 0.25,
+    "details": [
+      {
+        "caseId": "quality-val-review-001",
+        "hit": false,
+        "hitAt1": false,
+        "firstRelevantRank": null,
+        "reciprocalRank": 0.0,
+        "expectedReviewIds": [
+          "yelp-0raRTiWTrj9ytORRy-kZoA"
+        ],
+        "retrievedReviewIds": [
+          "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+          "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "yelp-4AawI-7a186mK_CLziwt3g"
+        ]
+      },
+      {
+        "caseId": "quality-val-review-002",
+        "hit": false,
+        "hitAt1": false,
+        "firstRelevantRank": null,
+        "reciprocalRank": 0.0,
+        "expectedReviewIds": [
+          "yelp-1VyHchVgc9oEfVrsFweNNA"
+        ],
+        "retrievedReviewIds": [
+          "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "yelp-CaXYOXHwOkmEu_JL3nEozQ"
+        ]
+      },
+      {
+        "caseId": "quality-val-mixed-001",
+        "hit": false,
+        "hitAt1": false,
+        "firstRelevantRank": null,
+        "reciprocalRank": 0.0,
+        "expectedReviewIds": [
+          "yelp-wiod6zg7n7S_-Iow_O-L9w"
+        ],
+        "retrievedReviewIds": [
+          "yelp-CaXYOXHwOkmEu_JL3nEozQ",
+          "yelp-YSKJAZCSVaHN2HP7ThqHqQ",
+          "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+        ]
+      },
+      {
+        "caseId": "quality-val-mixed-002",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "yelp-0jBamrOBDkY6lLTpkY0xZw"
+        ],
+        "retrievedReviewIds": [
+          "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "yelp-M980wiRzRJhBOlyQsFeDYw"
+        ]
+      }
+    ]
+  },
+  "filteredByShop": {
+    "total": 4,
+    "hits": 3,
+    "hitRate": 0.75,
+    "hitsAt1": 3,
+    "hitAt1Rate": 0.75,
+    "mrr": 0.75,
+    "details": [
+      {
+        "caseId": "quality-val-review-001",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "yelp-0raRTiWTrj9ytORRy-kZoA"
+        ],
+        "retrievedReviewIds": [
+          "yelp-0raRTiWTrj9ytORRy-kZoA",
+          "yelp-yeXj7dMi8DyZ1i45T8iobw",
+          "yelp-4xICpHnuep1qQmWudTfegA"
+        ]
+      },
+      {
+        "caseId": "quality-val-review-002",
+        "hit": false,
+        "hitAt1": false,
+        "firstRelevantRank": null,
+        "reciprocalRank": 0.0,
+        "expectedReviewIds": [
+          "yelp-1VyHchVgc9oEfVrsFweNNA"
+        ],
+        "retrievedReviewIds": [
+          "yelp-M980wiRzRJhBOlyQsFeDYw",
+          "yelp-AhTsqSS43V1-9yPq-NRX-w",
+          "yelp-GOfMeMJLlr2vaLRxNgkSnQ"
+        ]
+      },
+      {
+        "caseId": "quality-val-mixed-001",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "yelp-wiod6zg7n7S_-Iow_O-L9w"
+        ],
+        "retrievedReviewIds": [
+          "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "yelp-y_pX6YwUrW1XbG-b9PgnWw",
+          "yelp-rJbcs9MOiK7PwcWaMjp52A"
+        ]
+      },
+      {
+        "caseId": "quality-val-mixed-002",
+        "hit": true,
+        "hitAt1": true,
+        "firstRelevantRank": 1,
+        "reciprocalRank": 1.0,
+        "expectedReviewIds": [
+          "yelp-0jBamrOBDkY6lLTpkY0xZw"
+        ],
+        "retrievedReviewIds": [
+          "yelp-0jBamrOBDkY6lLTpkY0xZw",
+          "yelp-G1hVCb7CrOyL-HP1h6rByg",
+          "yelp-k3-x8KcSymMNREMgTGneAA"
+        ]
+      }
+    ]
+  },
+  "delta": {
+    "hits": 2,
+    "hitsAt1": 2,
+    "mrr": 0.5,
+    "recoveredCaseIds": [
+      "quality-val-review-001",
+      "quality-val-mixed-001"
+    ],
+    "regressedCaseIds": []
+  },
+  "filterViolations": [],
+  "cases": [
+    {
+      "caseId": "quality-val-review-001",
+      "category": "reviews",
+      "shopId": 100068,
+      "question": "Alchemy Coffee 的员工服务怎么样，真的帮顾客找回过落下的电脑吗？"
+    },
+    {
+      "caseId": "quality-val-review-002",
+      "category": "reviews",
+      "shopId": 100169,
+      "question": "Good Karma Cafe 空间、WiFi 和插座怎么样，付款时有什么要注意？"
+    },
+    {
+      "caseId": "quality-val-mixed-001",
+      "category": "merchant_reviews",
+      "shopId": 100010,
+      "question": "ReAnimator Coffee 周日营业到几点，评论里中午坐户外用 WiFi 办公的体验怎么样？"
+    },
+    {
+      "caseId": "quality-val-mixed-002",
+      "category": "merchant_reviews",
+      "shopId": 100151,
+      "question": "Lucky Goat Coffeehouse 的地址和营业时间是什么，实际坐前面会不会太吵？"
+    }
+  ]
+}

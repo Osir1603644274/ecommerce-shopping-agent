@@ -1,0 +1,45 @@
+server:
+  port: ${SERVER_PORT:8080}
+  shutdown: graceful
+
+spring:
+  application:
+    name: local-life-gateway
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  cloud:
+    gateway:
+      routes:
+        - id: catalog-search-service
+          uri: ${CATALOG_SERVICE_URL:http://catalog-search-service:8081}
+          predicates:
+            - Path=/api/products/**,/api/admin/products/**,/api/shops/**,/api/shop-types/**,/api/reviews/**,/api/recommendations/**,/api/user-behaviors/**
+        - id: trade-service
+          uri: ${TRADE_SERVICE_URL:http://trade-service:8082}
+          predicates:
+            - Path=/api/auth/**,/api/identity/**,/api/orders/**,/api/inventory/**,/api/payments/**,/api/flash-sales/**,/api/coupons/**,/api/memory/**
+
+gateway:
+  auth:
+    issuer: ${JWT_ISSUER:local-life-backend}
+    secret: ${JWT_SECRET:}
+  rate-limit:
+    enabled: ${RATE_LIMIT_ENABLED:true}
+    auth-limit: ${AUTH_RATE_LIMIT:20}
+    write-limit: ${WRITE_RATE_LIMIT:120}
+    window: ${RATE_LIMIT_WINDOW:PT1M}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,gateway
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}

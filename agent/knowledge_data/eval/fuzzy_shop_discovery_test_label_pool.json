@@ -1,0 +1,3448 @@
+{
+  "methodology": {
+    "purpose": "manual qrel pooling only; not a test result",
+    "candidatePool": "independent Vector/BM25 Top-30 union",
+    "displayOrder": "frozen Min-Max Vector:BM25=0.20:0.80",
+    "qrelsVisibleToRetrievers": false
+  },
+  "cases": [
+    {
+      "id": "fuzzy-shop-test-001",
+      "question": "周末想带狗出去坐坐，最好有户外座位，店员对宠物也比较友好。",
+      "intent": "dog_friendly_outdoor",
+      "candidateCount": 60,
+      "candidates": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-Y4J-TaWVO7jtshCpaZrf1Q",
+          "shopId": 100056,
+          "shopName": "Southgate",
+          "vectorRank": null,
+          "bm25Rank": 1,
+          "fusionScore": 0.8,
+          "text": "我很喜欢石锅拌饭（点了豆腐的），装在热碗里。有户外座位，很不错，但下次我可能会坐在里面。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-3UnQ8OwqRTcTG2uuWGCDXg",
+          "shopId": 100175,
+          "shopName": "Mac's Tavern",
+          "vectorRank": null,
+          "bm25Rank": 2,
+          "fusionScore": 0.6304254035785428,
+          "text": "Mac's 是个好地方，适合很多场合。他们有很多电视，所以很适合看比赛等。啤酒种类丰富。非常美味的酒吧食物。他们有户外座位，很适合看人来人往，员工也很友好！总的来说是个让人感到宾至如归的地方。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-eHen9-DW-BN5wkBfAoS7KQ",
+          "shopId": 100194,
+          "shopName": "Zorba's Taverna",
+          "vectorRank": null,
+          "bm25Rank": 3,
+          "fusionScore": 0.5140532282482663,
+          "text": "太棒了。特别推荐烤肉卷、皮塔饼和tzatziki酱。鸡肉也非常嫩滑多汁。所有份量都很足，吃完后我没有觉得太撑。质量和价格都很实在。我只是希望我有更多的胃容量来吃更多他们美味的食物。有户外座位。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-0DT_b_ZRSTgGfoxwDoOPRw",
+          "shopId": 100173,
+          "shopName": "The Palace of Indian",
+          "vectorRank": null,
+          "bm25Rank": 4,
+          "fusionScore": 0.4925774213429672,
+          "text": "食物太棒了！味道浓郁辛辣，但没有一些印度餐厅那种油腻的奶油。餐厅环境诱人，位置很好，甚至大到可以办活动。他们还有户外座位。服务员很勤快，食物上得很快！总之是一家很棒的餐厅，我会带朋友再来的。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-wiod6zg7n7S_-Iow_O-L9w",
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "vectorRank": null,
+          "bm25Rank": 5,
+          "fusionScore": 0.4750543107779782,
+          "text": "啊，简单真好。ReAnimator 有充足而多样的咖啡和奶油供应，能满足你所有提神需求。在这里真正完成工作，远远逃离那座吞噬灵魂的城市。我推荐中午来。找一个舒适的户外座位。有 WiFi。还有咖啡订阅。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-lz3Dxf1HLC5-K3a9oUFjFg",
+          "shopId": 100063,
+          "shopName": "O Sole Mio",
+          "vectorRank": null,
+          "bm25Rank": 6,
+          "fusionScore": 0.4604964066452281,
+          "text": "Spicy Diavolo Pizza 太——好吃了！上面的蜂蜜真是天才！老板非常友好。所有东西都是现点现做，而且超级快。有户外和室内座位。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-D8-ftmy2638cmB9Ark4dUg",
+          "shopId": 100051,
+          "shopName": "Forin Cafe",
+          "vectorRank": null,
+          "bm25Rank": 7,
+          "fusionScore": 0.4226563639311988,
+          "text": "这么漂亮的空间。它位于Harbison Dairy公寓楼内，所以如果你不熟悉这个区域，可能会有点难找。\n咖啡很棒。我点过开心果拿铁和普通香草拿铁，都很好喝。\\n还没尝过任何糕点，因为它们通常都卖完了，但这是个好迹象！\n他们有户外座位和室内的阁楼区域。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-bxXvLc72X4EH9vKjsRrJAw",
+          "shopId": 100243,
+          "shopName": "McDonald's",
+          "vectorRank": null,
+          "bm25Rank": 8,
+          "fusionScore": 0.2849586215670797,
+          "text": "和我妈妈在这里停下来吃早餐。店里很干净，员工很友好。我们都点了鸡蛋麦满分配薯饼，吃得很开心。他们有一个小的户外座位区，很不错。卫生间隔间有点挤，但很干净。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-N67WeyGj2HX65y8PX3zxaQ",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "vectorRank": null,
+          "bm25Rank": 9,
+          "fusionScore": 0.23520905711920853,
+          "text": "绝对是我最喜欢坐下来工作的地方之一。咖啡好喝，咖啡师友好，空间大，有很多桌子和户外座位。3美元无限续杯的咖啡在期末考试周需要整天学习时很划算！总是有很棒的艺术品，氛围恰到好处。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-Quapyu-LOnI0Um1ZZjAw8A",
+          "shopId": 100051,
+          "shopName": "Forin Cafe",
+          "vectorRank": null,
+          "bm25Rank": 10,
+          "fusionScore": 0.2044717761753579,
+          "text": "- 小杯卡布奇诺4美元\n- 楼上区域不错，适合工作。空间小。楼下开放空间，所以可能会吵\n- 户外座位在小街上，车不多，所以不错\n- 免费水\n- 干净的卫生间"
+        },
+        {
+          "rank": 11,
+          "reviewId": "yelp-tMbDmOKQm4kSF2eoXBSPRw",
+          "shopId": 100213,
+          "shopName": "Franklin's",
+          "vectorRank": 1,
+          "bm25Rank": null,
+          "fusionScore": 0.2,
+          "text": "喜欢这个地方。好食物，好啤酒选择，室内和甲板上氛围都很好！我们一岁的孩子可以在甲板上安静地坐几个小时，他们也允许狗进入。好地方！"
+        },
+        {
+          "rank": 12,
+          "reviewId": "yelp-UO9TXvLjHoMHCZ1C5OXqLg",
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "vectorRank": 2,
+          "bm25Rank": null,
+          "fusionScore": 0.19571889986526536,
+          "text": "好咖啡，漂亮的室内，友好的服务A+\n这是个和朋友闲逛或读书的好地方。外面有几张桌子，如果你想和你的狗一起待着。"
+        },
+        {
+          "rank": 13,
+          "reviewId": "yelp-umb0oNXU8sQbaSJkAdf9XA",
+          "shopId": 100166,
+          "shopName": "SET NoLibs",
+          "vectorRank": null,
+          "bm25Rank": 11,
+          "fusionScore": 0.19550317381152935,
+          "text": "这家的鱼和虾玉米卷会让你想要更多。冷冻玛格丽特是今年夏天你能找到最好的！如果你想要一杯冻玫瑰酒，Set's的完美——不太甜，酸度刚好。户外座位为了适应COVID规定而设置，很迷人，有足够空间容纳你的团体，同时保持社交距离。服务一流——员工友好、乐于助人，让用餐体验达到10/10。你一定会想来这家店的。"
+        },
+        {
+          "rank": 14,
+          "reviewId": "yelp-GD3-pad9viWb7QPOSSy6rA",
+          "shopId": 100162,
+          "shopName": "Oregon Steaks",
+          "vectorRank": null,
+          "bm25Rank": 12,
+          "fusionScore": 0.1927082908464118,
+          "text": "为了在林肯金融体育场看演唱会来到城里。交通拥堵得可怕，我们被指引绕道经过南费城……感谢上帝！如果没有那点小挫折，我们绝不会偶然发现这个地方！营业到很晚，户外座位不错……食物也棒极了。点了一份加芝士酱和洋葱的芝士牛排。简直太棒了！还有芝士薯条和樱桃可乐……说实话，没有比这更好的了。好地方，很高兴我们遇到了它！"
+        },
+        {
+          "rank": 15,
+          "reviewId": "yelp-EU__S61KyXAntrvr9qUmkQ",
+          "shopId": 100071,
+          "shopName": "Olly",
+          "vectorRank": null,
+          "bm25Rank": 13,
+          "fusionScore": 0.14536726971387381,
+          "text": "周三晚上在Olly吃了一顿很棒的晚餐。很喜欢我的龙舌兰大黄鸡尾酒。奶酪球作为开胃菜很不错。我们点了周三特供——千层面，一大叠自制面条、牛肉和大量奶酪。说到奶酪，西兰花沙拉里有40%的奶酪，这意味着非常非常美味。乳清干酪团子可能是当晚的最爱。我把浓缩酱汁喝得一滴不剩。他们在选酒上给了很好的指导，我们通常不喜欢梅洛，但这次却惊喜地享用了。\n\n可爱的街角社区小店，有户外座位，很快还会开一家附设的披萨店。"
+        },
+        {
+          "rank": 16,
+          "reviewId": "yelp-_kY1URwnNMEidIg_Rkr4hA",
+          "shopId": 100108,
+          "shopName": "Vineyards Cafe",
+          "vectorRank": null,
+          "bm25Rank": 14,
+          "fusionScore": 0.12707168091898766,
+          "text": "这个地方是我在Fairmount/Francisville/Temple地区的最爱之一。我点了火鸡山羊奶酪法棍三明治，我妻子点了费城法棍三明治（熏鲑鱼和奶油奶酪加番茄）。食物很美味。冰茶和冰印度奶茶也很棒。可爱的户外座位。一切都超级干净整洁，员工也非常友好。强烈推荐作为晚早餐或清淡午餐。"
+        },
+        {
+          "rank": 17,
+          "reviewId": "yelp-XbHS5n1H2Nf-JEpEpiPOeA",
+          "shopId": 100002,
+          "shopName": "Tuna Bar",
+          "vectorRank": null,
+          "bm25Rank": 15,
+          "fusionScore": 0.1234905332612678,
+          "text": "我对这家相当新但似乎很受欢迎的餐厅抱有很高的期望。于是，一个周五的晚上，我和一个朋友去了那里。\n\n晚上7点30分，人非常多，幸运的是我们提前预订了。我们很快被安排坐在窗边。服务员很友好。我们每人点了一杯饮料。我点了荔枝鸡尾酒——15美元。这杯饮料平淡无奇，几乎尝不出酒味。以我付的价格，我期待一杯出色的鸡尾酒。谁不是呢？\n\n然后是寿司。我们还点了一份炒饭。那是非常普通的炒饭，就像你在唐人街花8美元就能买到的那种。但在这家“高档”餐厅，你要付双倍的价格。寿司还行，只是还行。我是个寿司爱好者，去过很多寿司店，有好有坏。我们吃的寿司只是平均水平，完全没有惊艳到我。\n\n总的来说，这家餐厅的食物定价过高，但我必须称赞它的氛围，非常现代和浪漫。他们还有户外座位。这是一个适合约会之夜的好餐厅，但别指望有好吃的食物。"
+        },
+        {
+          "rank": 18,
+          "reviewId": "yelp-b_fRHp4nu1zTzuV6Q25kTg",
+          "shopId": 100256,
+          "shopName": "Paris Baguette",
+          "vectorRank": null,
+          "bm25Rank": 16,
+          "fusionScore": 0.12251778022810685,
+          "text": "虽然这家面包店是连锁店，但我对它说不出任何负面评价！从服务到食物再到糕点，我只能给出好评。因为是连锁店，每家店布局都一样。我发现市中心店有更多单独包装的商品（2021年），但在这家店你可以用夹子自己挑选。有些包装了，有些没有。\n\n这里的员工非常乐于助人，座位区井井有条且干净。考虑到这是在校园里，这已经很不错了！但他们做到了。座位间距很大，还有户外座位。\n\n我家人的最爱是蒜香牛角包包裹的香肠，当然普通牛角包也很美味。我偶然买了一个三明治，里面有奶油白酱、蔬菜和装饰性但美味的黄瓜。不知道它叫什么，但很好吃！\n\n我喜欢Paris Baguette的一切，强烈推荐去试试。"
+        },
+        {
+          "rank": 19,
+          "reviewId": "yelp-wqXnLSB2T-D24e64tzFzmQ",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "vectorRank": null,
+          "bm25Rank": 17,
+          "fusionScore": 0.12226930208829286,
+          "text": "我想我和妻子会再次来这里。我们总是路过 aloft，一直想试试。\n\n它看起来非常现代时尚，所以一直很吸引人。我们终于有时间了，在 hotels.com 上找到了一个优惠，就决定去住。我们订了一间标准 loft，配有一张特大床。\n\n酒店非常干净，风格像 TW max，大堂有现代照明和座位。酒吧很酷，我觉得如果有时间，我可以和妻子在那里坐一整晚。餐饮区有各种松饼、水果和包装食品。没有免费的，但价格不算太贵。有一台自助卡布奇诺咖啡机。\n\n游泳池和健身区 24 小时开放，这很棒。还有一个户外座位区，非常酷。对宠物主人来说，另一个好处是 40 磅以下的狗可以免费入住。\n\n房间和酒店其他地方很像——现代、干净，而且设计周到。步入式淋浴间和水疗品质的肥皂、乳液很有趣。\n\n可惜服务要扣一星。我想其他人也提到了——员工对我来说有点太随意了；我喜欢他们也很时尚，但这是酒店，不是咖啡店。我的房间里也没有熨斗，要求后，送来的人我觉得可能不是真正的员工，而是员工的某个朋友。我知道，这很奇怪——但我可能错了。\n\n总的来说，这个地方非常酷。试试吧，尤其是如果你在转机或找到了很好的优惠。"
+        },
+        {
+          "rank": 20,
+          "reviewId": "yelp-8bvszd1WReQMeORy3Br9Gg",
+          "shopId": 100250,
+          "shopName": "The Original Hot Dog Factory",
+          "vectorRank": 3,
+          "bm25Rank": null,
+          "fusionScore": 0.1130712927228868,
+          "text": "这个地方绝对是费城需要的！他们的热狗太棒了，尤其是孟菲斯热狗！疫情期间他们非常配合，提供自取和外卖。我强烈推荐！"
+        },
+        {
+          "rank": 21,
+          "reviewId": "yelp-PsVbx5bJktlDZe7axbwZQw",
+          "shopId": 100252,
+          "shopName": "Misconduct Tavern",
+          "vectorRank": null,
+          "bm25Rank": 18,
+          "fusionScore": 0.09697302966026711,
+          "text": "在20街和市场街工作，当Misconduct在肯尼迪大道开业时，我超级兴奋——离工作地点近，又在去火车站的路上=完美。这是个不错的欢乐时光选择，还有不错的户外座位。我遇到的女招待和侍者有时可能很粗鲁，但调酒师一直很友好。欢乐时光时这里很快就会满座，所以如果想有桌子，一定要早点到。"
+        },
+        {
+          "rank": 22,
+          "reviewId": "yelp-3AGUftNqCy7Gxp1xeQoC6Q",
+          "shopId": 100239,
+          "shopName": "Lloyd Whiskey Bar",
+          "vectorRank": null,
+          "bm25Rank": 19,
+          "fusionScore": 0.09376824797215837,
+          "text": "Lloyd是个小宝石般的酒吧——氛围轻松（夏季新增户外座位），抱子甘蓝配菜可能是我整个宇宙中最喜欢的食物，还有各种鸡尾酒、啤酒，以及（最重要的是）种类繁多的威士忌。威士忌和抱子甘蓝离家步行可达？当然要！"
+        },
+        {
+          "rank": 23,
+          "reviewId": "yelp-1R8XqVMfqGLb2ILeUtkxTg",
+          "shopId": 100131,
+          "shopName": "Charlie's Roast Pork",
+          "vectorRank": null,
+          "bm25Rank": 20,
+          "fusionScore": 0.09013672006862128,
+          "text": "这是一家低调美味的芝士牛排店。他们的猪肉三明治显然很好，但他们做的鸡肉帕尔马干酪也很棒。户外座位就在赫尔曼咖啡旁边，离蛋糕和乔面包店一个街区……如果计划得当，一次旅行可以消耗很多卡路里！"
+        },
+        {
+          "rank": 24,
+          "reviewId": "yelp-fkKhBLGf3hhzjKNzz1yOZg",
+          "shopId": 100250,
+          "shopName": "The Original Hot Dog Factory",
+          "vectorRank": 4,
+          "bm25Rank": null,
+          "fusionScore": 0.08245402514616545,
+          "text": "服务10/10，那里的工作人员非常友好和热情！热狗做得很好，所有配料正是我们想要的。绝对会再来这里！"
+        },
+        {
+          "rank": 25,
+          "reviewId": "yelp-ASXMj10gPjPX-N7Vc8esjg",
+          "shopId": 100178,
+          "shopName": "Jamaican Jerk Hut",
+          "vectorRank": null,
+          "bm25Rank": 21,
+          "fusionScore": 0.07738343491067146,
+          "text": "去了 Jamaican Jerk Hut 之后大约一个月，我一听到雷鬼音乐就感到身体不适。我希望我在开玩笑，但我真的很不喜欢那里的食物。我们桌（一大群人）付了“娱乐费”来听糟糕的现场音乐。我们还被收取了每瓶葡萄酒和每六罐啤酒的开瓶费——尽管我们自己带了开瓶器，服务员实际上什么也没开。如果你想对酒收费，请拿到酒类许可证。服务糟透了。他们搞混了我们的食物订单，花了将近一个半小时才上菜。我能想到的唯一优点是他们有户外座位，这意味着吸烟者可以在等一个半小时食物的时候尽情抽烟。"
+        },
+        {
+          "rank": 26,
+          "reviewId": "yelp-2Jvq02Zzsoq8tPFQYWq6Vg",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "vectorRank": 5,
+          "bm25Rank": null,
+          "fusionScore": 0.07243404209546839,
+          "text": "先说明，我不是咖啡发烧友，但我当然喜欢一杯好咖啡。必须说，我在这里喝过的咖啡摩卡和美式都没有让我惊艳，不过我还是会为了外带再来，因为它就在我家附近。在我看来，外带就对了。上次我进去时，至少有两只狗乖乖坐在主人旁边，而主人们正在用笔记本电脑。店里也挺满的。不过我本来也不是那种会一个人在咖啡店久坐的人。我注意到牛奶和糖旁边贴着一套规则——它们真的让我感觉很受欢迎。那是一套非常有亲和力的规则。店家确实很感谢顾客。"
+        },
+        {
+          "rank": 27,
+          "reviewId": "yelp-3MEepaKm8eqJ2FS1hb8-8g",
+          "shopId": 100089,
+          "shopName": "Pub & Kitchen",
+          "vectorRank": null,
+          "bm25Rank": 22,
+          "fusionScore": 0.06993305835597591,
+          "text": "这是酒吧！这是厨房！这是Pub & Kitchen！\n\n我来过这里吃早午餐、欢乐时光和深夜晚餐，三次都很不错。他们有户外座位，天气好的时候会打开大窗户，所以即使坐在里面也能享受阳光。\n\n他们的厨房营业到很晚，这对我来说是个大加分。我曾在周三晚上11点后在这里吃过，所以他们工作日晚上至少营业到12点。非常喜欢。\n\n你可能听说过他们的汉堡很好。这是真的。完全名副其实。虽然P&K有不错的啤酒选择，但我选择用香槟来配汉堡，因为这是我的风格。\n\n最重要的是，员工总是很友好，他们播放的音乐听起来像我在Pandora上的独立音乐电台。我每次去都越来越喜欢这个地方。等不及再去尝试威尔士干酪了。"
+        },
+        {
+          "rank": 28,
+          "reviewId": "yelp-ZHfg-YJQsWMOIrsGPrRCCg",
+          "shopId": 100282,
+          "shopName": "DK Sushi",
+          "vectorRank": 6,
+          "bm25Rank": null,
+          "fusionScore": 0.06606705330849935,
+          "text": "我强烈推荐选择外带。\n简单而有品味。包装也很好。午餐时间可能会很拥挤。要求沙拉额外加酱。"
+        },
+        {
+          "rank": 29,
+          "reviewId": "yelp-xudDXEThx6uGim3suuBn6w",
+          "shopId": 100086,
+          "shopName": "J'aime French Bakery",
+          "vectorRank": null,
+          "bm25Rank": 23,
+          "fusionScore": 0.06306656868579122,
+          "text": "我迷上了J'aime。\n\n它是我公寓最近的咖啡店，我感激不尽。它的内部是最赏心悦目、明亮的，可以坐下来享受咖啡并完成一些工作。有很多桌子可以坐，这在城里找地方工作时总是个问题。\n\n他们的咖啡很棒，而且有不错的菜单供选择不同种类。他们还有几种非乳制品奶精选择！我的女朋友对他们的糕点赞不绝口，说她完全吃不够。她每周都买一个巧克力牛角包！\n\n在费城很难找到可爱舒适的咖啡店，但我保证你不会失望。天气好的时候，前面有户外座位；天气不好时，有大窗户可以看人！来这里吧，我保证你会喜欢的。"
+        },
+        {
+          "rank": 30,
+          "reviewId": "yelp-wkd66bZD2KOI2lcl1KQT0A",
+          "shopId": 100074,
+          "shopName": "Kimpton Hotel Monaco Philadelphia",
+          "vectorRank": 7,
+          "bm25Rank": null,
+          "fusionScore": 0.062169427237832725,
+          "text": "总体而言，除了几个小问题，这是一次非常愉快和舒适的住宿。首先，地理位置无可挑剔。如果你来费城旅游，想探索老城的一些景点，这里绝对是首选。我们在七月四日国庆周末入住，正好置身于所有庆祝活动之中。房间漂亮、色彩丰富、有趣且家具齐全。前台和门卫人员总是非常乐于助人。房间宽敞，视野极佳，至少我们的房间是这样。一定要注册奖励计划，这样你可以享受免费WiFi和十美元的消费额度，可用于迷你吧或楼下的酒吧。酒店也允许携带宠物，这对带宠物旅行的人来说是个很好的选择。住宿期间出现了一些问题。床非常硬，所以如果你对这种床有意见，请注意。另外，停车只能代客泊车，费用为50美元，相当昂贵。如果你不介意走路，大约一个半街区外有一个停车场Bourse，只收28美元。房间里也没有垃圾袋，带宠物旅行时这很烦人。我所在的楼层还有一只狗连续几个晚上不停地叫了大约五个小时。酒店工作人员似乎无法处理这种情况，除了打电话给我的房间，让我控制和管好我的狗，而我的狗一直很安静。最后，火警响了，迫使我们带着狗从十楼疏散，走楼梯可不好玩。如果可能的话，即使视野没那么好，带宠物旅行时尽量住低楼层以防万一。"
+        },
+        {
+          "rank": 31,
+          "reviewId": "yelp-0R0kz7nVTS52XiAotwLooQ",
+          "shopId": 100201,
+          "shopName": "Cactus Restaurant & Bar",
+          "vectorRank": null,
+          "bm25Rank": 24,
+          "fusionScore": 0.06211801018065184,
+          "text": "我来过几次，喝酒和吃饭。这个地方晚上放音乐，所以对我来说是个加分项。他们的莎莎酱给我留下了深刻印象，我对莎莎酱很挑剔，辣度恰到好处，让你不得不一直吃，否则舌头会烧起来。\n他们的户外座位在夏季/秋季/春季非常惬意。"
+        },
+        {
+          "rank": 32,
+          "reviewId": "yelp-u9KfYIV-mFYwDqyheDQ0Hg",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "vectorRank": 8,
+          "bm25Rank": null,
+          "fusionScore": 0.05858427892098822,
+          "text": "员工很棒，氛围很好。他们都很努力，动作很快，我没什么可抱怨的，而且这里允许宠物进入！"
+        },
+        {
+          "rank": 33,
+          "reviewId": "yelp-7vemddPMpFDMHLeFCX6mlg",
+          "shopId": 100217,
+          "shopName": "Franny Lou's Porch",
+          "vectorRank": null,
+          "bm25Rank": 25,
+          "fusionScore": 0.05538803518422587,
+          "text": "- 非常可爱和古怪的咖啡店，提供咖啡、冰沙、自制三明治和酸奶配格兰诺拉麦片。\n- 户外座位\n- 服务一般，不太微笑，但高效！\n\n点了苹果覆盆子冰沙，非常好喝。当我找不到喜欢的组合时，他们还让我自己制作三明治。如果我住在这里，我会经常来！"
+        },
+        {
+          "rank": 34,
+          "reviewId": "yelp-FKHuQHUP4AdhQfSrhNbd7g",
+          "shopId": 100074,
+          "shopName": "Kimpton Hotel Monaco Philadelphia",
+          "vectorRank": 9,
+          "bm25Rank": null,
+          "fusionScore": 0.0542304071331188,
+          "text": "Kimpton酒店是我最喜欢的酒店之一。\n\n它们时尚而现代。装饰很漂亮。我喜欢它们允许宠物入住且不收取额外费用。入住时他们会为你的宠物提供花生酱味的零食。他们还可以提供借用宠物床、水碗、垫子，甚至如果你忘了带食物也可以提供。\n\n房间干净通风。每个房间都配有免费的瑜伽垫和雨伞。你还可以借用自行车在城市里骑行。\n\n员工很友好，确保你感到受欢迎。每天下午5点到6点有免费欢乐时光，早上有免费咖啡和茶。\n\n位于老城区，独立厅对面。\n\n那个区域有很多流浪汉，所以一定要小心。我们走路时，一个流浪汉冲向我们，很吓人。他显然是嗑药了，当我们叫他停下并离我们远点时，他骂我们，叫我们脏婊子。幸运的是我们没事，能够继续走。"
+        },
+        {
+          "rank": 35,
+          "reviewId": "yelp-ULP4icuHzOPHqPYOtcH1WQ",
+          "shopId": 100250,
+          "shopName": "The Original Hot Dog Factory",
+          "vectorRank": 10,
+          "bm25Rank": null,
+          "fusionScore": 0.05129841094627692,
+          "text": "热狗价格过高。我宁愿去Wawa。就他们收的钱来说，没什么特别的。这家店一次就够了。"
+        },
+        {
+          "rank": 36,
+          "reviewId": "yelp-T2TGmnGfeUNEDjrCfRnKsA",
+          "shopId": 100250,
+          "shopName": "The Original Hot Dog Factory",
+          "vectorRank": 11,
+          "bm25Rank": null,
+          "fusionScore": 0.0449715762381841,
+          "text": "即使没有疫情，Original Hot Dog Factory也更像一个室内热狗摊，而不是坐下来吃的餐厅。它太小了，最多只能放几张桌子。\n\n所以计划好点外卖。他们有很多种热狗创意，可以通过触摸屏点餐。我试了一个芝加哥热狗和一个孟菲斯热狗。单点热狗大约5-6美元。加3美元可以升级套餐。套餐只是加一份薯条或洋葱圈，但不含饮料；所以性价比不高。\n\n总的来说，味道不错，有一些经典的地方特色热狗。如果我们路过附近想快速外带，会再试试。"
+        },
+        {
+          "rank": 37,
+          "reviewId": "yelp-Ng_Ic9ae3kxa7rCaWx81Jg",
+          "shopId": 100239,
+          "shopName": "Lloyd Whiskey Bar",
+          "vectorRank": null,
+          "bm25Rank": 26,
+          "fusionScore": 0.044691997408119355,
+          "text": "Lloyd是Fishtown这个新兴社区里一家很酷的美食酒吧。它就在Girard大街上，有户外座位。如果你还记得第五街和Girard街以前的样子，坐在Girard大街上，周围都是时髦的酒吧和餐厅，感觉很不真实。他们的鸡尾酒单很棒，威士忌种类很多。食物准备得很好，几乎所有的东西都是自制的。我们点了腌蔬菜，一般般；冷玉米汤特供，非常好；蜜饯波兰香肠，煮过并淋上类似早餐糖浆的东西；鸭肝酱吐司，很不错；还有爷爷汉堡，非常大，上面盖着一块甜味的猪五花肉。总的来说，食物很好，我肯定会再来的。菜单有点偏重口味，但仔细看的话也有一些清淡的选择。"
+        },
+        {
+          "rank": 38,
+          "reviewId": "yelp-60LU-MgN_YCbe63R2DB2dA",
+          "shopId": 100250,
+          "shopName": "The Original Hot Dog Factory",
+          "vectorRank": 12,
+          "bm25Rank": null,
+          "fusionScore": 0.03898245700145624,
+          "text": "费城最好的热狗！我爱这个地方！他们的奶昔也超棒！唯一的缺点是等待时间很长，但完全值得！"
+        },
+        {
+          "rank": 39,
+          "reviewId": "yelp-5zshjWpLgojkRnfIkeBUew",
+          "shopId": 100178,
+          "shopName": "Jamaican Jerk Hut",
+          "vectorRank": null,
+          "bm25Rank": 27,
+          "fusionScore": 0.03800258578180575,
+          "text": "我周六下午来这里吃午餐，体验相当一般。这个地方看起来应该很有趣，有户外座位区可以听现场雷鬼音乐，内部设计也很好，让人想起热带。价格偏高，但食物本身还不错。服务简直糟透了。我们从下单开始等了45分钟才拿到一份面包和一杯饮料。又等了20分钟才上主菜。牛肋骨和烤鸡很正宗，让我想起了去牙买加的旅行。米饭一般，卷心菜和大蕉也一样，而且我觉得椰子面包不值得。我想给这家店更高的评分，因为去那里的目的是烤鸡，但服务差到让你后悔去。话虽如此，我计划去参加他们的现场雷鬼演出，并在想吃烤鸡时点外卖。"
+        },
+        {
+          "rank": 40,
+          "reviewId": "yelp-DwDQ9LzVmA51-dU39tZQ9A",
+          "shopId": 100119,
+          "shopName": "Wawa",
+          "vectorRank": 13,
+          "bm25Rank": null,
+          "fusionScore": 0.03357613758141544,
+          "text": "下午5点后，他们除了前门外锁上所有门。他们还关闭了用餐区，门口有保安。这不是一个有趣的地方，你还要特别点热狗！疯了！差评WaWa！"
+        },
+        {
+          "rank": 41,
+          "reviewId": "yelp-t9Zl9MPb52uRUQpn_NpSmA",
+          "shopId": 100277,
+          "shopName": "Valerio Coffee Roasters",
+          "vectorRank": 14,
+          "bm25Rank": null,
+          "fusionScore": 0.027726208708265695,
+          "text": "喜欢他们的咖啡。服务友好快捷。地方小，但有几个座位区。你可以坐在窗边晒太阳。后面有几张桌子。还有一小块区域有凳子。总体来说不错。"
+        },
+        {
+          "rank": 42,
+          "reviewId": "yelp-IKVR6oNTt_BFBXnEyRVTJQ",
+          "shopId": 100004,
+          "shopName": "Craft Hall",
+          "vectorRank": null,
+          "bm25Rank": 28,
+          "fusionScore": 0.025812959245187974,
+          "text": "大型酿酒厂，有餐厅座位！我们和同事来这里参加生日派对/欢乐时光，这个地方没有让我们失望。有足够的桌子和座位容纳我们的大团体。啤酒很棒，食物更好。我们也很喜欢户外座位选项！你可以随时直接走到户外桌子。他们还有一个儿童区或游戏区，有很多东西可以玩。这是个很酷的地方！我想白天带孩子的成年人来很不错。晚上不一定，但似乎有足够多的东西让孩子玩。我指的是大一点的孩子，不确定婴儿行不行哈哈。卫生间非常干净宽敞！这里比 Goose Island 更酷一点，只因为这里有额外的空间和游戏（电子游戏）！"
+        },
+        {
+          "rank": 43,
+          "reviewId": "yelp-xZbffjPKgUt7uYdiCt-mBA",
+          "shopId": 100025,
+          "shopName": "Chick-fil-A",
+          "vectorRank": 15,
+          "bm25Rank": null,
+          "fusionScore": 0.0255565656444346,
+          "text": "这里的食物不仅美味，服务也很棒！免下车通道的员工总是告诉我他们很荣幸为我服务，当我开车带着我的狗经过时，他们还给了我的狗一块饼干。餐厅内部也很棒，如果你要求，他们会免费续杯，有时他们甚至会在餐厅里走动提供续杯并清理你的托盘。队伍有时看起来很长，但实际很快。总体来说，这是一家管理得很好的餐厅！"
+        },
+        {
+          "rank": 44,
+          "reviewId": "yelp-mN7ZQ4lGkE6whTXGnbx-nA",
+          "shopId": 100250,
+          "shopName": "The Original Hot Dog Factory",
+          "vectorRank": 16,
+          "bm25Rank": null,
+          "fusionScore": 0.023971967683885806,
+          "text": "对于喜欢普通或特色热狗的人来说，这是个很酷的地方！\n\n午餐时进去，The Original Hot Dog Factory的员工非常友好，帮我选了我可能会喜欢的热狗。\n\n我点了夏威夷热狗，配有培根、奶酪、烤洋葱和烤菠萝（我要求不加烧烤酱）。我点了套餐，包括薯条和饮料。热狗和薯条都很好吃！\n\n我也很想试试其他热狗！"
+        },
+        {
+          "rank": 45,
+          "reviewId": "yelp-CZy4rmwjPGHevxmn-zSzdw",
+          "shopId": 100192,
+          "shopName": "Alena’s Cafe",
+          "vectorRank": null,
+          "bm25Rank": 29,
+          "fusionScore": 0.021612351950898088,
+          "text": "这个地方在路边有户外用餐区，我们带着小孩坐在一个阳光充足的好位置。非常好的煎蛋卷三明治和不错的咖啡。服务很棒。"
+        },
+        {
+          "rank": 46,
+          "reviewId": "yelp-r6npOzwXwVPhXOVT0xRQlw",
+          "shopId": 100069,
+          "shopName": "Cannuli's Quality Meats & Poultry",
+          "vectorRank": 17,
+          "bm25Rank": null,
+          "fusionScore": 0.021416953375840497,
+          "text": "我不怎么吃肉，但当我办晚宴需要点什么，或者想尝试新食谱时，我会来这里。昨晚我想给我家狗的生日买根骨头。我提前下班，希望能赶上。我就住在拐角，但在西费城上班。我到的时候他们已经关门了，一片漆黑，门也锁了。于是我决定打个电话，看看有没有人接，也许有人在后面打扫。结果有人接了，那位先生说“你只需要一根骨头”，我说“是的”，他说“我马上来”。他让我进去了，我拿到了生日骨头。我觉得这真的很贴心！卖东西的男士们都非常好，总是很愉快。我唯一的抱怨是你永远不知道谁在排队，但这似乎是南费城的风格。"
+        },
+        {
+          "rank": 47,
+          "reviewId": "yelp-WV1c-CZmznfrZ8kHGzMMYQ",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "vectorRank": 18,
+          "bm25Rank": null,
+          "fusionScore": 0.020312307181662177,
+          "text": "员工非常友好，能做出超美味的 la coulombe 咖啡饮品。我们每周至少来一次。后面有个可爱的小区域，如果你想学习或边喝咖啡边陪宝宝玩。外面的座位通常满座，你坐在外面时会有流浪汉讨钱、要烟等，但你仍然很幸运能找到座位，尤其是在周末。"
+        },
+        {
+          "rank": 48,
+          "reviewId": "yelp-gtkxanXW_D-_MYXcgHWi_w",
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "vectorRank": 19,
+          "bm25Rank": null,
+          "fusionScore": 0.017657299296180828,
+          "text": "很棒的地方——可惜有个讨厌的女人抱怨狗——我们的小狗很喜欢来！"
+        },
+        {
+          "rank": 49,
+          "reviewId": "yelp-Tsb8cIGTGcQASd0B-Hq9-w",
+          "shopId": 100250,
+          "shopName": "The Original Hot Dog Factory",
+          "vectorRank": 20,
+          "bm25Rank": null,
+          "fusionScore": 0.013063094816016028,
+          "text": "这家小型全国连锁店的费城分店在疫情来袭时在市中心开业。时机不佳，因为外卖热狗店本可以在疫情期间蓬勃发展——就像许多披萨店一样。我去的时候，我是唯一的顾客。\n\n我在这里点的东西很享受，在去费城圣诞市场之前吃午餐很完美。现在基本的热狗（我发现大多数美国热狗）缺乏一点味道、实质和香料。但你加在上面的东西完全让它变得美味。原味热狗有足够的芥末、番茄酱、调味酱来增加风味（虽然我更喜欢辣芥末而不是那种黄色的）……但我不会再点了。而夏威夷热狗配培根、碎奶酪和烤菠萝——我会立刻再点。我相信他们其他以地方和城市命名的特色热狗也会符合要求。附带的薯条不错，我尝试了他们的“Try Me”酱，与薯条完美搭配，因为它有蛋黄酱基底。\n\n柜台后面的女士友好且高效地处理了我的订单。现在我很高兴市中心又多了一家热狗店——而且这家就在市政厅和 Love Park 附近。"
+        },
+        {
+          "rank": 50,
+          "reviewId": "yelp-25yWGJQdtHtvrW53eH-viA",
+          "shopId": 100277,
+          "shopName": "Valerio Coffee Roasters",
+          "vectorRank": 21,
+          "bm25Rank": null,
+          "fusionScore": 0.010866369070463509,
+          "text": "咖啡店氛围不错。员工非常友好！我们在这附近时每天都来喝早晨的拿铁和吃羊角面包。"
+        },
+        {
+          "rank": 51,
+          "reviewId": "yelp-rySbR1Vu5aLr72MVQWk3Dg",
+          "shopId": 100250,
+          "shopName": "The Original Hot Dog Factory",
+          "vectorRank": 22,
+          "bm25Rank": null,
+          "fusionScore": 0.006903873363051222,
+          "text": "热狗种类不错，有点贵，但如今很难找到卖火鸡热狗的地方了。"
+        },
+        {
+          "rank": 52,
+          "reviewId": "yelp-cnuR8niOoU5Q_PGiS18j5g",
+          "shopId": 100034,
+          "shopName": "CVS Optical",
+          "vectorRank": 23,
+          "bm25Rank": null,
+          "fusionScore": 0.0048708794857213284,
+          "text": "这是一家不错的 CVS。有停车场。进门时有员工打招呼。药房通常有帮助。"
+        },
+        {
+          "rank": 53,
+          "reviewId": "yelp-Cv8SNQ5wd4dCBWsq44_pzQ",
+          "shopId": 100292,
+          "shopName": "Non Stop Pizza & Grille",
+          "vectorRank": 24,
+          "bm25Rank": null,
+          "fusionScore": 0.003920949202740372,
+          "text": "食物服务给4星，啊……取决于你遇到谁。食物很好，找大G来给你做饭。这个地区最好的，尤其这条街上这么多披萨店。"
+        },
+        {
+          "rank": 54,
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "vectorRank": 25,
+          "bm25Rank": null,
+          "fusionScore": 0.0031624252506669962,
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。"
+        },
+        {
+          "rank": 55,
+          "reviewId": "yelp-MhSusleKbPBIiq2fKHH5mA",
+          "shopId": 100277,
+          "shopName": "Valerio Coffee Roasters",
+          "vectorRank": 26,
+          "bm25Rank": null,
+          "fusionScore": 0.0029185244672708106,
+          "text": "可爱的咖啡店，适合工作。停车在附近比较困难，但除此之外，空间很大，目前有室内座位。咖啡不错，咸味吐司也很好吃。"
+        },
+        {
+          "rank": 56,
+          "reviewId": "yelp-C_R9SG7eYPS8YlGdp1UL1Q",
+          "shopId": 100048,
+          "shopName": "Breakfast Boutique Chestnut Hill",
+          "vectorRank": 27,
+          "bm25Rank": null,
+          "fusionScore": 0.0023637994356845984,
+          "text": "他们全天供应早餐，下午有午餐选择。员工非常友好。空间不大，所以最好早点到，以免客满。"
+        },
+        {
+          "rank": 57,
+          "reviewId": "yelp-E9m91YP2-WpWROYnGuaurA",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "vectorRank": 28,
+          "bm25Rank": null,
+          "fusionScore": 0.0011349488605518717,
+          "text": "我喜欢这个地方，座位充足，食物和饮料都不错，还有Wi-Fi！！！"
+        },
+        {
+          "rank": 58,
+          "reviewId": "yelp-ZVljSWtRv2OK0vaFQLiDBA",
+          "shopId": 100166,
+          "shopName": "SET NoLibs",
+          "vectorRank": 29,
+          "bm25Rank": null,
+          "fusionScore": 4.530605431959237e-05,
+          "text": "这是一次很棒的用餐体验，尤其是在疫情期间。他们有带暖气的多种座位选择，也有室内座位。食物比看起来更好吃。等餐时间（不算太长）值得。他们有有趣的饮品，比如含羞草塔，大到足够四个人分享。早午餐体验很棒，还会回来吃晚餐。"
+        },
+        {
+          "rank": 59,
+          "reviewId": "yelp-7alM-mJbIG8R5FIK2SqmPg",
+          "shopId": 100089,
+          "shopName": "Pub & Kitchen",
+          "vectorRank": 30,
+          "bm25Rank": null,
+          "fusionScore": 0.0,
+          "text": "就在我们家拐角处——这是我们（我和我丈夫）解决一切需求的地方！早午餐、鸡尾酒、深夜小吃、约会之夜！\n\n我们非常喜欢Pub and Kitchen——氛围很酷，人很好，食物也是最好的:)\n\n爱它！"
+        },
+        {
+          "rank": 60,
+          "reviewId": "yelp-qKhO1NWSDqnNSJXGcnf-SQ",
+          "shopId": 100256,
+          "shopName": "Paris Baguette",
+          "vectorRank": null,
+          "bm25Rank": 30,
+          "fusionScore": 0.0,
+          "text": "PB 是那种可能会榨干我所有钱的烘焙店，因为我太常来了。我去过唐人街店，也经常去大学店，当我想吃稍微甜但不过分的糕点或甜点时。此外，这里是一个布置得很好的学习地点，有户外座位。\n\nPB 受到亚洲/法式糕点工艺的影响，这很明显。我享受了大部分糕点，无论是原味还是稍作修改。\n\n- 夹心可颂冷吃更好，因为奶油馅凝固了，或者干脆用吸管喝可颂，因为奶油加热后会流淌。\n- 火腿布里可颂外面大蒜盐太多，擦掉后味道不错。\n- 香肠包/蟹肉可乐饼在家加热后趁热吃更好。冷吃对胃不好，味道也差些。\n- 抹茶糕点用的是真抹茶，不是加了一点点抹茶的糖，所以如果你不喜欢苦味，要小心。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-test-002",
+      "question": "想找一家适合几个人庆祝生日的地方，气氛热闹一点，店员能配合庆祝更好。",
+      "intent": "group_birthday_celebration",
+      "candidateCount": 52,
+      "candidates": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-56jZrih-qKrlKLzED3sttg",
+          "shopId": 100091,
+          "shopName": "Three 12 Sport Bar and Lounge",
+          "vectorRank": null,
+          "bm25Rank": 1,
+          "fusionScore": 0.8,
+          "text": "这里的食物很好吃，我总是点他们的鸡肉阿尔弗雷多配西兰花。饮料不错，酒也没有掺水。周末很忙，但如果你想找一个有轻松音乐的休闲休息室，可以在欢乐时光来。我要在这里庆祝生日，所以非常兴奋xx"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-tPazX2ZYTN1Z1pKQROYuEQ",
+          "shopId": 100286,
+          "shopName": "Uptown Grill Breakfast",
+          "vectorRank": 10,
+          "bm25Rank": 2,
+          "fusionScore": 0.4869259305873717,
+          "text": "当你想到一个真正的早餐店，不是“早午餐店”或“小餐馆”，而是一个专门为社区提供早餐的地方——你会想到这样的地方。这是一个真正的、地道的西费城周六早晨社区小店。他们的菜单相当丰富，而且每样东西，我是说每样东西，价格都合理。\n\n服务友好且足够快。周末早上这里会非常拥挤，所以要么早点到，要么做好等待的准备。\n\n任何从市中心、大学城或郊区读到这条评论的人，请特意来这家店，这样你就可以和友好、快乐、充满活力的当地人交流。你经常会听到老朋友偶遇或家庭庆祝生日的声音。这是一个很棒的地方，你们都该来看看。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-hClndlZGPR0Ltolm8xhIjw",
+          "shopId": 100198,
+          "shopName": "Xochitl",
+          "vectorRank": 1,
+          "bm25Rank": 9,
+          "fusionScore": 0.40911125700770656,
+          "text": "来这里庆祝朋友的生日。餐厅周期间一共12人。不用说，很多客人的盘子很多。服务很棒！而且我们没等多久食物就上来了。食物很棒！非常美味可口。每个人都对自己的菜很满意。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-XUGbYgUspHYQ7XV2Gj_bBw",
+          "shopId": 100059,
+          "shopName": "Angelina's",
+          "vectorRank": null,
+          "bm25Rank": 3,
+          "fusionScore": 0.3764515488509026,
+          "text": "喜欢Angelina's Ristorante的一切。员工很棒。我们坐着等餐时，可以看到老板Angelina用新鲜食材烹饪我们的食物。意大利面煮得恰到好处，酱汁绝对美味。我们有16个人庆祝我女儿毕业。员工再好不过了！我迫不及待想再回Angelina's。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-rZoMm-GEATvPUe01XvADHw",
+          "shopId": 100227,
+          "shopName": "Buena Onda",
+          "vectorRank": 19,
+          "bm25Rank": 4,
+          "fusionScore": 0.35230538688082325,
+          "text": "我很少去Fairmount地区，但我肯定会再回来这里吃饭！我和几个女性朋友来Buena Onda庆祝生日，食物真的很棒。首先，装饰非常明亮干净，等位时还有Yards的免费啤酒！我点了鸡肉、烤虾和烤鬼头刀鱼玉米卷，都很好吃，但我最喜欢鬼头刀鱼。我们点了鳄梨酱分享，每张桌子上都有很棒的绿色和红色酱汁，让玉米卷更上一层楼。工作人员还让我们在生日纸杯蛋糕上点蜡烛:) 总的来说是一次很棒的用餐体验！"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-ie09ROCrbKCD76aCRq1H_A",
+          "shopId": 100039,
+          "shopName": "Flambo Caribbean Restaurant",
+          "vectorRank": null,
+          "bm25Rank": 5,
+          "fusionScore": 0.3384488507400144,
+          "text": "食物很棒！氛围舒适，员工友好且乐于助人。老板出来和我们聊天。咖喱贻贝很好吃。牛尾让人舔手指，escovitch鱼也非常好。我们为妈妈庆祝生日，他们甚至给了她一份免费甜点。下次来城里一定会再来。我姐姐说卫生间很干净，味道也很好。总的来说，对我妈妈来说这是一个美好的生日！"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-eTEi7e7cHD2R2RlVd8VTKA",
+          "shopId": 100175,
+          "shopName": "Mac's Tavern",
+          "vectorRank": null,
+          "bm25Rank": 6,
+          "fusionScore": 0.3288692580633061,
+          "text": "今年夏天为了庆祝生日去了那里，因为我是《阳光灿烂》的超级粉丝。我点了鹰嘴豆泥，这样就不会太快喝醉。太好吃了，凌晨2点还打包了一份。如果你去Mac's不点鹰嘴豆泥，我只能为你感到遗憾。好吃到几乎犯罪。相信我，我有点胖，我懂食物 :P"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-k1gQVmNyMdNlsfGGxugeAQ",
+          "shopId": 100145,
+          "shopName": "Las Cazuelas Restaurant BYOB",
+          "vectorRank": 2,
+          "bm25Rank": 10,
+          "fusionScore": 0.30677802278303423,
+          "text": "和另外四个人一起来这里庆祝朋友的生日，非常棒！！我们的女服务员非常友好，食物令人难以置信（我点了 carnitas 玉米卷）。一定要自带龙舌兰酒，点一壶芒果玛格丽塔——太棒了！我肯定会再来的。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-4dKJ7hZ8dfw0NG0jbgeBkg",
+          "shopId": 100085,
+          "shopName": "Chuck's Alibi",
+          "vectorRank": 20,
+          "bm25Rank": 7,
+          "fusionScore": 0.24863335157556762,
+          "text": "酒很烈，食物很好，我推荐这个地方。昨天我去那里庆祝朋友的生日，这个月我还会再去一次。我竖起大拇指。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-sur7si2m4TiM2R2Z3PeJFQ",
+          "shopId": 100184,
+          "shopName": "Cake Life Bake Shop",
+          "vectorRank": null,
+          "bm25Rank": 8,
+          "fusionScore": 0.2266818024080647,
+          "text": "我觉得Cake Life的蛋糕非常棒。味道很微妙。质地完美，不太蓬松也不太密实。湿润。糖霜，奶油般顺滑。配咖啡完美。这是一家适合更精致口味的面包店。"
+        },
+        {
+          "rank": 11,
+          "reviewId": "yelp-jSO17JsXOrasD3FdjuSdXw",
+          "shopId": 100091,
+          "shopName": "Three 12 Sport Bar and Lounge",
+          "vectorRank": 3,
+          "bm25Rank": 14,
+          "fusionScore": 0.21735958944730455,
+          "text": "别在这里过生日！！！！！！！！！！ VIP个屁！所谓的“VIP”就是普通座位。我们被安排在前面（休息区）。前面的音乐很放松，我们根本没法好好派对，因为点了水烟，还得轮流去后面。联系我的主持人糟糕透顶，根本没跟我讲清楚细节和生日安排。我一点也没感到特别，我的客人也没得到好的招待。调酒师态度粗鲁，上酒慢得要命。然后还有人过来让我们买卡座。这根本就是设局赚我们的钱！！！他们免费入场，把我们安排在烂透了的“VIP”区，然后建议我们12个人每人出20美元买一瓶酒，才能换到更好的位置。不了，谢谢！！！这里适合欢乐时光，但不适合过生日。"
+        },
+        {
+          "rank": 12,
+          "reviewId": "yelp-l-j7Rlf6Mq71PCAheNa0ew",
+          "shopId": 100293,
+          "shopName": "Frank's Spaghetti House",
+          "vectorRank": null,
+          "bm25Rank": 11,
+          "fusionScore": 0.1924478958804553,
+          "text": "这是我享用美味餐点的首选之地。我全家都喜欢这里。事实上，我们今晚要去那里庆祝我岳母的生日。食物很美味。我最喜欢的是茄子帕尔马干酪和鸡肉帕尔马干酪。这不是一个高档的地方。食物非常令人享受。去那里吧。你不会失望的。"
+        },
+        {
+          "rank": 13,
+          "reviewId": "yelp-Z5WSIk85xUmCrGcYxjbDkw",
+          "shopId": 100283,
+          "shopName": "The Post",
+          "vectorRank": 16,
+          "bm25Rank": 12,
+          "fusionScore": 0.18064081613011773,
+          "text": "这个地方挺不错的。我和朋友们来这里庆祝生日。我们喜欢这里的氛围，非常放松和有趣。我来的时候不拥挤，但人足够多，生意相当不错。游戏不多，但足够玩得开心。有些游戏需要付费玩。我认为饮料的价格对于地点和质量来说相当合理。它们不便宜，但你不能指望这么棒的地方有便宜的饮料。调酒师相当专注和快速。酒吧食物很好吃！我喜欢玉米片，辣椒芝士薯条很快就变软了，所以我建议用叉子吃。爆米花鸡肉是小块的，但分量还可以。他们播放的音乐也很棒，从老歌到新歌都有。Cira Green也在上面，景色非常好！很快就会再来这个地方。但我也认为带一群有趣的朋友来这里更有意思。玩得很开心！"
+        },
+        {
+          "rank": 14,
+          "reviewId": "yelp-F894ab1fIqsOt-PsHrRj3Q",
+          "shopId": 100238,
+          "shopName": "Full & Happy",
+          "vectorRank": null,
+          "bm25Rank": 13,
+          "fusionScore": 0.1275484541036334,
+          "text": "5星！如果你在寻找一个私密、有趣、美味的学习体验，就是这里了。我了解的一些烹饪课需要更大团体，并在大型商业设施里进行。这里的设置完美——设备齐全的厨房/烹饪工作室，配有温馨的用餐区，灯光柔和。我们围着一张宽敞的木制准备台，喝酒、揉面、擀面、切、混合等等，还品尝。我们问的每个问题都得到了认真、清晰、信息丰富的回答和简短演示。可以看出Onna热爱她的工作，这也是她如此擅长的重要原因，这无疑提升了我们的体验。她的助手Dari也是选择这家公司的卖点。她在协助时温和地补充了有价值的意见，两人配合默契，化学反应很好。最后但同样重要的是，食物非常出色。这是一个很棒的家庭之夜，庆祝我妻子的生日。强烈推荐。"
+        },
+        {
+          "rank": 15,
+          "reviewId": "yelp-UeyzF4JViJ0okTaF1g-7NQ",
+          "shopId": 100078,
+          "shopName": "Junes Breakfast",
+          "vectorRank": 5,
+          "bm25Rank": 24,
+          "fusionScore": 0.06944033164743652,
+          "text": "很适合家庭聚餐的地方。大概能容纳八口之家。虽然忙得不可开交，但他们似乎井井有条。员工友好高效。早餐价格合理，食材新鲜。薯饼酥脆，煎蛋卷做得完美。单面煎蛋不错，蛋黄流心，吐司分量足。培根煎得恰到好处。周六上午10点，等位或用餐时间都不长。如果你不介意那种热闹、油腻的小馆子氛围，这是个不错的小地方。我们肯定会再来的。"
+        },
+        {
+          "rank": 16,
+          "reviewId": "yelp-Nx84FOIRRmroK91kOYMn3Q",
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "vectorRank": null,
+          "bm25Rank": 15,
+          "fusionScore": 0.06553279727893793,
+          "text": "我去年八月搬到这个地区，花了一些时间想找一家步行距离内不错的咖啡店。不用说，Re-animator有城里最好的咖啡和浓缩咖啡。位置很好，里面比较小，但确实很放松。强烈推荐，尤其是外地/外州来的游客。"
+        },
+        {
+          "rank": 17,
+          "reviewId": "yelp-stk7G-L4fzVwk05V8XF9UQ",
+          "shopId": 100271,
+          "shopName": "Zio Pizza Palace & Grill",
+          "vectorRank": null,
+          "bm25Rank": 16,
+          "fusionScore": 0.061316045828176124,
+          "text": "我认为Zio值得五星。这不是一家令人惊艳的披萨/三明治/烧烤店。内部看起来也比较老旧。抛开这些，接受Zio本来的样子：一家即买即走的店。我点了费城芝士牛排和蒜香结配奶酪。两者都不错。我相信你能找到更好的，但我非常满意。价格在费城市中心很合理。员工非常友好。如果你在寻找一个雅痞/花哨的地方，去别处吧。如果你想吃点东西，就点吧！享受吧！"
+        },
+        {
+          "rank": 18,
+          "reviewId": "yelp-5-YovLQWy6Srq0UnTdVhuw",
+          "shopId": 100004,
+          "shopName": "Craft Hall",
+          "vectorRank": 4,
+          "bm25Rank": null,
+          "fusionScore": 0.06065028182198406,
+          "text": "适合有8岁以下孩子的家庭的好地方。和超过10个大人以及5个孩子一起去。空间充足，早午餐菜单不错。"
+        },
+        {
+          "rank": 19,
+          "reviewId": "yelp-iDxEptzR419w-FcOGG8_sQ",
+          "shopId": 100235,
+          "shopName": "Suraya",
+          "vectorRank": null,
+          "bm25Rank": 17,
+          "fusionScore": 0.05823944668327444,
+          "text": "食物太棒了！我和一大群朋友在这里庆祝我的生日，我们尝了菜单上90%的菜。都很好吃，但不要错过：巴巴甘努什、生鱼片（黄尾鱼）、辣土豆（点两份——它们太好吃了）、卡瓦尔马和虾。我们喝的白葡萄酒也很棒，清爽可口。"
+        },
+        {
+          "rank": 20,
+          "reviewId": "yelp-QP0s3b7YcPVBmiT2UP8owQ",
+          "shopId": 100210,
+          "shopName": "The Frosted Fox Cake Shop",
+          "vectorRank": null,
+          "bm25Rank": 18,
+          "fusionScore": 0.05704637936053891,
+          "text": "你能相信我们社区里有这么一家梦幻的小烘焙店吗？它等待着庆祝、糟糕的日子和 cravings。买饼干吧！它们都很好吃（我为了团队尝了所有口味）。"
+        },
+        {
+          "rank": 21,
+          "reviewId": "yelp-rf0hu3NFS_gnUqtFf3b1Dw",
+          "shopId": 100141,
+          "shopName": "Smiths Restaurant and Bar",
+          "vectorRank": 6,
+          "bm25Rank": null,
+          "fusionScore": 0.05322093648549057,
+          "text": "很棒的酒吧，服务快速友好，价格合理，人群也很棒。这应该是你的首选去处。"
+        },
+        {
+          "rank": 22,
+          "reviewId": "yelp-4TIyajXPBe2V_oKdhxy1LQ",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "vectorRank": 7,
+          "bm25Rank": null,
+          "fusionScore": 0.04459698460435383,
+          "text": "我爱这个地方。我为了生日去了费城，和男朋友住在这里。我们都很喜欢，尤其是步入式淋浴间。我们都不想出来！！\n\n我喜欢现代风格和设计，虽然我希望有更大的衣柜。床很舒服，即插即用功能很棒。我们插上iPod和便携DVD播放器，玩得很开心！\n\n真希望我知道房间里有冰箱，这样我就会带些生日蛋糕了！\n\n酒吧/休息区很棒。苹果马提尼让我一觉到天亮！他们还出租酒吧空间办派对，如果你像我一样住在二楼，可能会不高兴。幸运的是我喜欢音乐，第二晚我也加入了狂欢！！\n\n价格合理，酒店也不错。绝对值得一试。"
+        },
+        {
+          "rank": 23,
+          "reviewId": "yelp-42maJAcKLwNLC7L5Kmdfig",
+          "shopId": 100299,
+          "shopName": "Bury The Hatchet",
+          "vectorRank": 8,
+          "bm25Rank": null,
+          "fusionScore": 0.041852197813141145,
+          "text": "超级好玩的地方。以前从没试过，但为了朋友的生日去了。真的很酷。干净安全，员工也很好。"
+        },
+        {
+          "rank": 24,
+          "reviewId": "yelp-s53g35q53QY8SyLlYnVmoQ",
+          "shopId": 100126,
+          "shopName": "New England Pizza",
+          "vectorRank": null,
+          "bm25Rank": 19,
+          "fusionScore": 0.04128834202448442,
+          "text": "这里的披萨其实真的很好吃，尽管我确信他们用了橡皮筋做饼皮，橡皮筋做奶酪，ragu 做酱料。\n\n老实说，我不知道为什么我喜欢它，但我就是喜欢。我也喜欢用上面那个贴切的描述来调侃我的朋友——这让她气疯了 ;)\n\n装修有点欠缺，但这里不是城市里特别好的地段。如果你对这个区域很熟悉，并且想找一家看起来不错的家庭式小餐馆，我会推荐这里。"
+        },
+        {
+          "rank": 25,
+          "reviewId": "yelp-L6MFeutO4xYFJU5joRX7EQ",
+          "shopId": 100145,
+          "shopName": "Las Cazuelas Restaurant BYOB",
+          "vectorRank": 9,
+          "bm25Rank": null,
+          "fusionScore": 0.040798860762014826,
+          "text": "我们也是去那里参加一个团体生日聚会，非常棒。服务员们非常周到。我们组里没有人饿着离开。拿起你最喜欢的瓶子，在这个小宝石里享受一顿美餐。"
+        },
+        {
+          "rank": 26,
+          "reviewId": "yelp-UKMhAnw3TygeDYmIQYsCXg",
+          "shopId": 100071,
+          "shopName": "Olly",
+          "vectorRank": 11,
+          "bm25Rank": null,
+          "fusionScore": 0.03490589336573121,
+          "text": "我和丈夫今年结婚纪念日来了这里，体验非常棒。我们到预约时间时，店里已经挤满了人，但一切都很顺利。员工很棒，饮品好喝，食物分量远超预期！我们度过了一个愉快的夜晚，肯定会再来的。"
+        },
+        {
+          "rank": 27,
+          "reviewId": "yelp-Kxm2LoQh6PiyKFOcGu0wyA",
+          "shopId": 100254,
+          "shopName": "So Korean Grill",
+          "vectorRank": null,
+          "bm25Rank": 20,
+          "fusionScore": 0.03434078296090749,
+          "text": "这家店太棒了。\n\n上周我来这里庆祝室内用餐的第一天，那顿饭可能是我有史以来最喜欢的一顿。\n\n我在家试过几次韩式烧烤，但这家店简直是完美。我们四个人点了：\n\n拌冷面\n炖牛排骨\nLA牛排骨\n海鲜煎饼\n辣炒猪肉\n啤酒和烧酒\n\n我一点也不后悔点的每一样东西。等不及要再来了！\n\n再次感谢那顿美味的饭菜！！！"
+        },
+        {
+          "rank": 28,
+          "reviewId": "yelp-8CVfXy330UrKVuRxIeAAXg",
+          "shopId": 100145,
+          "shopName": "Las Cazuelas Restaurant BYOB",
+          "vectorRank": 12,
+          "bm25Rank": null,
+          "fusionScore": 0.028020574000677215,
+          "text": "上周为30人的聚会做了预订，我们被安排在二楼，宽敞舒适。我们甚至有自己的吧台，最棒的是可以自带龙舌兰。食物新鲜美味，员工友好热情。我们聚会中有素食者，他们也很配合。爱你们，Las Cazuelas。我们肯定很快会再在那里办聚会。"
+        },
+        {
+          "rank": 29,
+          "reviewId": "yelp-Xtb2kH5Ptj6V9xY_tLXcJg",
+          "shopId": 100068,
+          "shopName": "Alchemy Coffee",
+          "vectorRank": null,
+          "bm25Rank": 21,
+          "fusionScore": 0.027382201369319955,
+          "text": "偶然发现了Alchemy Coffee！！！推荐给需要安静学习/工作场所的人。\n\n多年来我一直在找一个学习的地方，但其他咖啡馆更适合见朋友，而Alchemy很完美。\n\n环境完美。他们的咖啡完美。拉花艺术完美。糕点完美。我真的很喜欢今天的到访！一定会再来的~~"
+        },
+        {
+          "rank": 30,
+          "reviewId": "yelp-eKWXPi0aJWFrbhb_EwXAkQ",
+          "shopId": 100138,
+          "shopName": "Loco Lucho's Latino Kitchen",
+          "vectorRank": 13,
+          "bm25Rank": null,
+          "fusionScore": 0.023968013702722713,
+          "text": "嗨，我能说什么呢！我是一个自豪的波多黎各人！！！这个地方让我想起了家！几天前我生日那天顺道去了那里，我的意思是，我享受了与他们相处时的那种能量和氛围！我记得我看起来很困惑，然后一位可爱的年轻女士帮助了我，她帮我从他们提供的所有美味选择中做了决定！她和厨师本人确保我的食物完全符合我的喜好！她努力让我的日子更美好，她一直和我聊天，还和厨师开了些有趣的玩笑。我喜欢的是，当下一个顾客来时，她没有粗鲁地打断我们的谈话，而是礼貌地请我挪一下位置以便接待下一位顾客，而且她没有就此结束我们的谈话，而是尽力把下一位顾客也纳入进来，这样他们就不会觉得被冷落！这很能说明问题，很难找到在工作中关心别人并愿意保持对话的人了！\n\n这个地方的能量让我想起了一个大家庭企业！很少看到员工一起工作，真正表现出团队合作和同理心！\n\n如果你想要一个家庭般温馨的地方，吃到新鲜的食物，我强烈推荐在这里吃！这绝对是个好去处！！！\n\n质量永远胜过数量！再次感谢你们在我生日时给了我一段美好的时光，Loco Lucho's!!!!"
+        },
+        {
+          "rank": 31,
+          "reviewId": "yelp-rWrVThcyPncp-wpqZkjYxA",
+          "shopId": 100194,
+          "shopName": "Zorba's Taverna",
+          "vectorRank": 14,
+          "bm25Rank": null,
+          "fusionScore": 0.023963034515724332,
+          "text": "氛围温馨舒适。进门时厨师和主人都会打招呼。我们在周六晚上来之前提前几小时预订了，到达时桌子已经准备好，面包和水都摆好了。食物很棒；新鲜且上菜快。我们分享了几道主菜，都很好吃。服务一流。适合约会或小团体聚餐的好地方。"
+        },
+        {
+          "rank": 32,
+          "reviewId": "yelp-lPJllmr41qPPYqZ19cFR5w",
+          "shopId": 100238,
+          "shopName": "Full & Happy",
+          "vectorRank": null,
+          "bm25Rank": 22,
+          "fusionScore": 0.021700327046849772,
+          "text": "在不透露年龄的情况下，我想以一种非常特别的方式庆祝一个里程碑式的生日：与一小群最亲密的朋友共度一个晚上，在美妙的环境中享用美食。几周前，Onna和她的妈妈Doree欢迎我们来到他们的空间，从开始到结束创造了一个完美的夜晚，真正超出了我们的期望。在之前的几周里，Onna花时间与我们一起计划了一份精心设计的新奥尔良菜单，我们很兴奋地学习和烹饪，她细心倾听了我们对夜晚的期望和烹饪兴趣。她在厨房的教学风格既信息丰富、易于理解又亲切——感觉更像是和亲爱的朋友一起做饭。我找不到更好的方式来庆祝40岁（哎呀，好吧，我说漏嘴了）。非常感谢Onna和她的妈妈创造了这样一个难忘的夜晚和美妙的烹饪体验。我们计划很快再来！"
+        },
+        {
+          "rank": 33,
+          "reviewId": "yelp-C_R9SG7eYPS8YlGdp1UL1Q",
+          "shopId": 100048,
+          "shopName": "Breakfast Boutique Chestnut Hill",
+          "vectorRank": 15,
+          "bm25Rank": null,
+          "fusionScore": 0.020793562907048518,
+          "text": "他们全天供应早餐，下午有午餐选择。员工非常友好。空间不大，所以最好早点到，以免客满。"
+        },
+        {
+          "rank": 34,
+          "reviewId": "yelp-k_2o94FnPkQFSuT70L5orA",
+          "shopId": 100092,
+          "shopName": "Hammerheads Bar & Grille",
+          "vectorRank": 17,
+          "bm25Rank": null,
+          "fusionScore": 0.017384333486028455,
+          "text": "氛围很轻松，喜欢里面有两个酒吧可以选择。调酒师很好，让坐在吧台的时间变得很愉快。唯一令人沮丧的是我错过了食物供应时间。不知为何，即使人不多，饮料也花了更长时间才上来！"
+        },
+        {
+          "rank": 35,
+          "reviewId": "yelp-d9uislpPZxNepNvLmm6t0g",
+          "shopId": 100093,
+          "shopName": "Square 1682",
+          "vectorRank": null,
+          "bm25Rank": 23,
+          "fusionScore": 0.017233639159912124,
+          "text": "偶然发现这个地方，想找一家新年后的早餐店。即使没有预订，我们也几乎立刻被安排入座。一行四人点了煎饼、鸡蛋和意式蛋饼，味道都不错，问题是服务。我们中的两个人先上了菜，另外两个人没有。没有什么比一半的人吃上了而另一半还要等更糟糕的了！！！没吃到的人说“先吃吧，别等了”。在我看来，这是餐馆对客人能做的最糟糕的事情之一。尽管食物不错，但我们这次用餐中得到的服务导致了一次糟糕的用餐体验。不幸的是，我们离开时发誓再也不回来了。请 1682 改进这个问题，这很重要，对顾客体验影响巨大。食物打 4 星，服务打 1 星。"
+        },
+        {
+          "rank": 36,
+          "reviewId": "yelp-G8mllqptz26vGz0tlcCGtA",
+          "shopId": 100189,
+          "shopName": "Foodery",
+          "vectorRank": 18,
+          "bm25Rank": null,
+          "fusionScore": 0.013492700511860516,
+          "text": "对我来说，Foodery不仅适合买我最爱的饮品，还是个绝佳的临时礼品店！要出城参加生日或周年纪念？顺路去Foodery，拿个容器，装上一堆费城本地精酿，或者如果你的朋友是环球旅行者，就从每个大洲选一种啤酒！一份既社交又享受的绝佳实惠礼物！"
+        },
+        {
+          "rank": 37,
+          "reviewId": "yelp-YCnvrzRDXpUUfFDen2Byhw",
+          "shopId": 100120,
+          "shopName": "The Black Sheep Pub & Restaurant",
+          "vectorRank": null,
+          "bm25Rank": 25,
+          "fusionScore": 0.012647760396155708,
+          "text": "我在Black Sheep的地下酒吧为我丈夫举办了惊喜生日派对，大约35人。我不能再要求更好的体验了。从我第一次打电话询问举办派对的事，和老板James交谈，到派对当晚我们的调酒师Adam确保一切顺利，我接触的每个人都棒极了。总之，一次很棒的体验。"
+        },
+        {
+          "rank": 38,
+          "reviewId": "yelp-_LjTWjukWQrHDojvdjDZyA",
+          "shopId": 100186,
+          "shopName": "Chuck E. Cheese",
+          "vectorRank": null,
+          "bm25Rank": 26,
+          "fusionScore": 0.012115637739436837,
+          "text": "在Chuck E. Cheese的评分标准上，这地方稳稳的2星——也许3星。我们参加了孩子朋友的生日派对，这里一片混乱。很多游戏机都坏了，而且地方明显人手不足。\n\n不过，在场的员工非常细心，帮我们派对的那位女士很棒，对孩子们很有耐心，过生日的女孩还在票券机里拿到了“1000张票”的票券。\n\n我通常讨厌Chuck E. Cheese——但我的孩子喜欢——而且我们确实玩得很开心。"
+        },
+        {
+          "rank": 39,
+          "reviewId": "yelp-NZIZ3qrGRKMg1ha5eW5HqQ",
+          "shopId": 100021,
+          "shopName": "The Love",
+          "vectorRank": null,
+          "bm25Rank": 27,
+          "fusionScore": 0.011400191919268466,
+          "text": "我最近带我父亲去 The Love 庆祝他的生日和父亲节！预订时，我备注了这些庆祝活动，女主人迎接我们时，第一件事就是对我亲爱的爸爸提及了这些！\n\n氛围非常时髦，而且相当私密。我们坐在他们的卡座式软垫座位上，非常舒适。我绝对是卡座爱好者！\n\n我点了虾仁玉米粥配小酪乳饼干，我父亲点了鲶鱼和玉米球，纯正南方风味。能说说那些饼干吗？太好吃了。无法用语言表达为什么我一口气吃了五个。虾仁玉米粥很棒，这话出自一个从不吃玉米粥的人之口。我父亲对鲶鱼和玉米球不太满意，但这话出自一个在南方出生长大的人。我也尝了玉米球，和饼干相比就逊色了。\n\n我们的服务员非常亲切，考虑到餐厅客满，服务也算周到。整体体验下来，我会再来的。但如果我想吃真正惊艳的南方菜（尽管他们的菜单上有），我会去别的地方。"
+        },
+        {
+          "rank": 40,
+          "reviewId": "yelp-hACxROUcGHG3XTJ8k8kHjA",
+          "shopId": 100120,
+          "shopName": "The Black Sheep Pub & Restaurant",
+          "vectorRank": 21,
+          "bm25Rank": null,
+          "fusionScore": 0.006873747734469849,
+          "text": "来地下室的生日派对。地方不错但很小。很快就挤满了人！停车很糟糕。不过地下室很酷。感觉就像高中时在朋友家的地下室闲逛。位置是他们成功的关键，但仍然是家普通酒吧。蟹肉球不错，因为裹了薄薄的面糊，吃起来就像在马里兰州一样。"
+        },
+        {
+          "rank": 41,
+          "reviewId": "yelp-Cv8SNQ5wd4dCBWsq44_pzQ",
+          "shopId": 100292,
+          "shopName": "Non Stop Pizza & Grille",
+          "vectorRank": 22,
+          "bm25Rank": null,
+          "fusionScore": 0.005101077496066524,
+          "text": "食物服务给4星，啊……取决于你遇到谁。食物很好，找大G来给你做饭。这个地区最好的，尤其这条街上这么多披萨店。"
+        },
+        {
+          "rank": 42,
+          "reviewId": "yelp-qlWItZZVzVC4zHpTkpUmMQ",
+          "shopId": 100244,
+          "shopName": "Germantown Cab",
+          "vectorRank": null,
+          "bm25Rank": 28,
+          "fusionScore": 0.00503257808182136,
+          "text": "我是Manayunk（就在Germantown外面）的一家本地企业经理。\n\n我试图在凌晨1点为一位顾客叫出租车。那时公交车已经停运，他们选择有限。\n\n当我告诉Germantown Cab的接线员我的店铺位置和顾客要去的目的地时，她回答说：“我们不干这个。”请注意，我的店铺和目的地都在Germantown十分钟车程内。\n\nGermantown Cab的名片明确写着“本地和长途”。我真的不明白问题出在哪里。\n\n她知道我代表一家本地企业，我以为这能换来一点职业礼貌。但事实并非如此，所以我会找一家新的出租车公司，把所有的顾客都介绍过去。"
+        },
+        {
+          "rank": 43,
+          "reviewId": "yelp-ns6wifYahOk9JkDEC9-v-A",
+          "shopId": 100044,
+          "shopName": "Chase's Hop Shop",
+          "vectorRank": 23,
+          "bm25Rank": null,
+          "fusionScore": 0.004968750622398455,
+          "text": "啤酒选择丰富，食物美味独特，员工友好，是该地区很棒的新成员，希望生意能长久。"
+        },
+        {
+          "rank": 44,
+          "reviewId": "yelp-gpCtjvUvFfk8PmN8d1GjTA",
+          "shopId": 100283,
+          "shopName": "The Post",
+          "vectorRank": 24,
+          "bm25Rank": null,
+          "fusionScore": 0.004444820649684436,
+          "text": "喜欢这个地方！六月份在那里举办了毕业派对，经理很容易沟通和策划。每个人都喜欢食物，点了芝士牛排、通心粉和奶酪、沙拉等托盘。通心粉和奶酪大受欢迎！我很感激经理给我的派对客人发了腕带，这样他们可以轻松在吧台点饮料，调酒师也知道谁是我的派对客人。我的客人们喜欢在酒吧玩游戏，我推荐这个地方办派对，也推荐作为喝几杯的地方！"
+        },
+        {
+          "rank": 45,
+          "reviewId": "yelp-ZYPPm6qyDooPY4Ng4oKWeg",
+          "shopId": 100005,
+          "shopName": "Wawa",
+          "vectorRank": 25,
+          "bm25Rank": null,
+          "fusionScore": 0.003986137943396686,
+          "text": "我在宾夕法尼亚大学的时候，这就是那个Wawa——有由“常驻”流浪汉组成的欢迎委员会，日复一日都是同一批人。\n\n这个繁忙地段的店生意很好。\n\n香烟、咖啡、垃圾食品、三明治、冰淇淋——大学生临时需要的一切都有。"
+        },
+        {
+          "rank": 46,
+          "reviewId": "yelp-GEX3lJS5yJObNX0VH0SdKg",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "vectorRank": 26,
+          "bm25Rank": null,
+          "fusionScore": 0.0029624170965365324,
+          "text": "友好热情的氛氛围、员工和老板，加上非常合理的价格，使这里成为我最喜欢的社区咖啡馆。唯一能让它更好的是有本地面包师提供无麸质烘焙食品出售。\n\n咖啡很好。非常好。他们卖La Colombe咖啡，而且知道怎么制作。他们还有十多种不错的茶选择，少量但精心挑选的烘焙食品、带奶油芝士和熏鲑鱼或其他配料的百吉饼，偶尔还有新鲜水果如香蕉出售，虽然绝对不是一顿完整的午餐。我听说百吉饼很棒。他们已经解决了饮品菜单的问题（另一条评论中提到散乱不清），墙上有一个清晰的横幅，我发现如果你问，他们总能想办法做出来。\n\n有一个小的户外座位区，配有金属框架沙发和柔软干净的靠垫。非常适合春天和夏天，也是在这里社区结交新朋友的好地方。\n\n前厅是一个放松的区域，可以工作、见人、和老板聊天（她在的时候），听她讲述她旅行丰富的生活故事。虽然她有时在工作时安静而不张扬，所以你可能需要主动提问才能让她开口。\n\n员工也类似：安静、礼貌、高效、友好。问个问题，开始对话，他们就有丰富的生活经历可以分享。事实上，我在这里搭过话的大多数人都很有趣、有创意、鼓舞人心。也许是社区的原因，也许是咖啡因的作用，这里有些特别的东西。不装腔作势，从没见过男士发髻，人们真的会微笑。这很好。\n\n后面有一个房间，有棋盘游戏、一张柔软干净的沙发和两把舒适的椅子，布置得像客厅/会客室，还有一张餐桌和椅子，非常适合学习小组和商务会议。\n\n再加点俗气的话……作为摩羯座，我是发现这颗宝石的幸运山羊！;)"
+        },
+        {
+          "rank": 47,
+          "reviewId": "yelp-LqK7a0lK4txvTC3DiRK3zg",
+          "shopId": 100184,
+          "shopName": "Cake Life Bake Shop",
+          "vectorRank": null,
+          "bm25Rank": 29,
+          "fusionScore": 0.002627274433195505,
+          "text": "让他们为生日做了一个定制寿司蛋糕，他们做得非常棒。蛋糕不仅漂亮，看起来完全像一卷寿司，而且味道也很好。蛋糕湿润，一点也不干，这对于翻糖蛋糕来说可能不常见。如果你在寻找一个独特、制作精良的定制蛋糕，一定要来这家店。谢谢，Ally！"
+        },
+        {
+          "rank": 48,
+          "reviewId": "yelp-CG-fJqYqj96CQGmePXZhaA",
+          "shopId": 100283,
+          "shopName": "The Post",
+          "vectorRank": 27,
+          "bm25Rank": null,
+          "fusionScore": 0.0022586588061901205,
+          "text": "The Post是漫长一天工作后欢乐时光的好去处。我和同事大约3:30去的。那时很安静，但到5:30生意就好起来了！适合大团体聚会的好地方！"
+        },
+        {
+          "rank": 49,
+          "reviewId": "yelp-uKRVroomsODsNisZYFZ0Tw",
+          "shopId": 100203,
+          "shopName": "Hibachi 2 Go",
+          "vectorRank": 28,
+          "bm25Rank": null,
+          "fusionScore": 0.00029110318867136626,
+          "text": "寿司相当不错，送餐通常很快。\n\n价格很棒。南费城有个寿司店真好。"
+        },
+        {
+          "rank": 50,
+          "reviewId": "yelp-zhPdjFcjVlH6ERrBEDQekw",
+          "shopId": 100178,
+          "shopName": "Jamaican Jerk Hut",
+          "vectorRank": 29,
+          "bm25Rank": null,
+          "fusionScore": 0.00014830010555876122,
+          "text": "我在这里办了一个大型生日派对，因为朋友说可以自带啤酒。我以为这样能省很多钱。确实省了——但安排派对的过程很混乱麻烦。我觉得我没有提前得到所有信息，尽管我亲自去确认过日期。在计划过程中，我不断收到关于费用的新信息。我甚至直到派对当天才知道有乐队，但我很高兴有乐队。派对当天异常寒冷，派对空间没有隔热，所以我建议只在天气好的时候在这里办派对。但我的朋友们勇敢地挺过来了，并得到了美食的回报。"
+        },
+        {
+          "rank": 51,
+          "reviewId": "yelp-E6QacDIL4UvNOTqAulLiKQ",
+          "shopId": 100091,
+          "shopName": "Three 12 Sport Bar and Lounge",
+          "vectorRank": 30,
+          "bm25Rank": null,
+          "fusionScore": 0.0,
+          "text": "他们提供了一场“免费生日派对”，但除了免费入场之外几乎什么都没有。我问能不能选座位，结果被告知要付400美元。我说绝对不行，他们就把我领到一张双人小桌。从食物到饮料，所有东西都很贵！食物很好吃，饮料也不错，但就是定价过高。就连入场费，女性收20美元，男性收30美元，而且这还是周五晚上哈哈。总的来说，这个地方不错，音乐也很好，食物也不错。但所有东西都太贵了，连水烟也是。我经常去312 Lounge，他们现在和刚开业时完全不一样了，我觉得是因为太受欢迎了。"
+        },
+        {
+          "rank": 52,
+          "reviewId": "yelp-n55sojtAvOSImO_B5Yx4Yw",
+          "shopId": 100205,
+          "shopName": "Williams-Sonoma",
+          "vectorRank": null,
+          "bm25Rank": 30,
+          "fusionScore": 0.0,
+          "text": "更像是3.5星。不到4星，因为我觉得有些年长的女店员有点势利。大概我看上去不像典型的 Williams-Sonoma 顾客？*耸肩*\n\n真可惜，因为我本来准备在这里大花一笔，作为对自己最近经历的一切和节日的犒劳。\n\n总之，半星给那两个年轻男店员，他们过来问我是否需要帮助。我觉得他们很友好，乐于助人。\n\n在店里转了好几圈，花了太多时间后，我终于只拿了几样小东西。因为是送礼节日前夕，队伍很长，但流动很快很顺畅。给我结账的员工还行……不差，也不好。\n\n嗯……我还是喜欢 Williams-Sonoma，所以也许更好的方式是在他们的网站上购物。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-test-003",
+      "question": "早上想慢慢吃顿早餐，不想排很久的队，环境轻松一点。",
+      "intent": "relaxed_breakfast_without_long_wait",
+      "candidateCount": 58,
+      "candidates": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-GRdGkquPgtw1wzN1HGajmA",
+          "shopId": 100208,
+          "shopName": "Day Break Eggs",
+          "vectorRank": 15,
+          "bm25Rank": 1,
+          "fusionScore": 0.8441990247456266,
+          "text": "刚搬到南费城，我很担心早餐不会像在西费城那样好，但我大错特错了。每样东西都很好吃——一定要点法式吐司条！我会经常点单的！"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-F2SNNPLFpe32N0Xy8U9GlA",
+          "shopId": 100139,
+          "shopName": "Potito's Italian American Pastries",
+          "vectorRank": null,
+          "bm25Rank": 2,
+          "fusionScore": 0.7270577011579326,
+          "text": "美味的蛋糕和糕点。有点贵，但很好吃，值得。附近最好的乳清干酪卡诺里卷。不过节假日我会远离这家店。我拿着号码牌站在那里，看着员工的朋友在我已经等了很久的情况下先被服务。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-EPkcvL2A7xX14NWCtbea1A",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "vectorRank": null,
+          "bm25Rank": 3,
+          "fusionScore": 0.6476579945237427,
+          "text": "咖啡好喝，环境宜人，员工友好，周日早上7点就开门！不能再要求更多了。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-QjYZXDOIbk73Bu89N7BtHQ",
+          "shopId": 100048,
+          "shopName": "Breakfast Boutique Chestnut Hill",
+          "vectorRank": null,
+          "bm25Rank": 4,
+          "fusionScore": 0.6457504178011528,
+          "text": "食物美味……毫无疑问。我周日早上9点到达，这个迷人而私密的空间已经坐满了。服务员很快招呼了我，10分钟内我就坐到了三人桌。一位顾客推荐了鳕鱼配玉米面包和粗玉米粉，我表姐点了这个，她没有失望！我点了样品拼盘，简直是早餐的极致享受。想象一下：一块红丝绒华夫饼、一片法式吐司、一块肉桂煎饼，配火鸡 scrapple 配菜。这里非常繁忙，接受预订以确保快速入座。周末不要计划慢慢享用早餐！准备好吃完就走，为每五分钟到来的客人让位。夫妻店主是出色的厨师，我会再来的！"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-m9IgGPcymhXUBDLIWqukBQ",
+          "shopId": 100134,
+          "shopName": "Starbucks",
+          "vectorRank": null,
+          "bm25Rank": 5,
+          "fusionScore": 0.5161666277651199,
+          "text": "连续三天去了这家店，到第三天咖啡师就记住了我的订单。而且几乎记住了（很长的）队伍里每个人的订单。早上这里非常繁忙，但可以理解。它的黄金位置和令人愉快的服务让那里美味的咖啡显得更棒了。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-OsVbMW8TkZttXzgWx2tTUg",
+          "shopId": 100215,
+          "shopName": "Philadelphia Marriott Old City",
+          "vectorRank": null,
+          "bm25Rank": 6,
+          "fusionScore": 0.510647609249894,
+          "text": "在俱乐部楼层住了两个周末晚上。有一天晚上想在俱乐部房间的“欢乐时光”拿点零食，结果大约一小时后除了奶酪就什么都没有了。不过能拿到瓶装水还不错。早餐一般，有些半生不熟的乳蛋饼和香肠，还有燕麦片和水果。早餐食物一开始也缺货，但很多人抱怨后他们最终拿出了一些。另外，我不知道这是否常见，但酒店里有无数小孩，早上会在走廊里跑来跑去尖叫。墙壁隔音效果不太好，所以如果你想睡懒觉，我不会选择这家酒店。房间本身还行，没什么特别的，但除了没有冰箱外没有其他问题。我以为所有酒店房间都有小冰箱。这意味着我们不能带回任何剩菜，也不能让水保持冰凉。我们把车停在街对面的停车场以省钱。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-UaGm6C2mttxiCiMMdAfnjg",
+          "shopId": 100272,
+          "shopName": "Authentic LanZhou Handpulled Noodles",
+          "vectorRank": null,
+          "bm25Rank": 7,
+          "fusionScore": 0.48558435591371607,
+          "text": "上周六我和朋友去了兰州吃午餐。我们本来想尝尝手工拉面汤，但天气太热了，不想喝热汤。我们试了煎饺和冷芝麻面，都非常好吃，正是我们在费城逛了一天之后想要的。服务也很好。总的来说，我很享受这顿饭，在唐人街想吃顿快速美味的饭，这里是个不错的选择。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-I7UxXaYSkYrCkaxygPWSAA",
+          "shopId": 100037,
+          "shopName": "The Coventry Deli",
+          "vectorRank": null,
+          "bm25Rank": 8,
+          "fusionScore": 0.4263636520711795,
+          "text": "Coventry绝对是费城最好的休闲早餐和午餐地点。所有食物都味道惊人且新鲜，份量也很足。\n\n最受欢迎的包括他们早上的各种燕麦粥。钢切燕麦，每天新鲜制作。午餐，我总是点牛肉辣椒，里面大约70%是肉，闻所未闻！他们的煎蛋卷和熟食很扎实，当然三明治也很棒。\n\nCoventry最棒的是服务人员，他们都在那里很久了，总是带着微笑迎接你，服务迅速。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-hqlDiADrO8Jhx2_IrBZmag",
+          "shopId": 100172,
+          "shopName": "Athenian Restaurant",
+          "vectorRank": 21,
+          "bm25Rank": 9,
+          "fusionScore": 0.3912387778233259,
+          "text": "不在最好的街区。把车停在后面的街道上可以省去往停车计时器里投硬币。\n\n前几天停下来吃早餐。地方不是最大的，但空间足够，桌子大小也不错。\n\n我到的时候，老板迎接了我，安排我坐下。然后一位女服务员过来招呼我，给我端来了一杯热咖啡。\n\n菜单不错，有很多早餐选择。我点了早餐特价。包括两个鸡蛋、家常薯条、吐司和咖啡。还不错，就是普通的早餐。不到5美元。\n\n走进去的时候，看起来很多都是常客。每个人都互相认识名字，一起闲逛。\n\n如果我在附近，我会再来吃早餐的。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-Oee0RlKVkmSseSUVILgAYA",
+          "shopId": 100027,
+          "shopName": "NY Bagel & Deli Shop",
+          "vectorRank": null,
+          "bm25Rank": 10,
+          "fusionScore": 0.33365096760067436,
+          "text": "百吉饼早餐三明治价格合理，还行。一天早上，其他几家店关门后，我仍然想吃早餐百吉饼，很快就送到了。有点油腻，不太烤，但培根不错，香肠也管用。"
+        },
+        {
+          "rank": 11,
+          "reviewId": "yelp-jH5FCvCwdSuNf7ZMT9JVgg",
+          "shopId": 100202,
+          "shopName": "Mom Mom's Kitchen and Polish Food Cart",
+          "vectorRank": null,
+          "bm25Rank": 11,
+          "fusionScore": 0.2897271540188921,
+          "text": "应该是4.5星。一对不错的年轻夫妇，瑞安和凯特琳，自己制作波兰饺子，他们是从第八街和布朗街的大教堂教区的乌克兰女士们那里学来的。他们通常用土豆和奶酪做馅，但也用蓝莓或樱桃等其他食材。他们从Czerws买好的波兰香肠。但我特别喜欢他们的白菜卷或galubki（holupchi）。作为乌克兰人，我吃这些食物已经很久了。他们的galubki比我最近尝过的任何都要好。配上一点辣番茄酱，就像我妈妈做的一样。他们经常移动位置，海军造船厂、林肯金融球场，以及大多数周六在克拉克公园。查看他们的FB页面。如果你看到他们的小推车，停下来吃顿不错的午餐。"
+        },
+        {
+          "rank": 12,
+          "reviewId": "yelp-9FC_YdMYLmFOXtUXyc77wA",
+          "shopId": 100092,
+          "shopName": "Hammerheads Bar & Grille",
+          "vectorRank": null,
+          "bm25Rank": 12,
+          "fusionScore": 0.2528317548402473,
+          "text": "前几天晚上想去那里，但在门口因为穿靴子被拦下了，尽管我之前穿着靴子去过十几次，而且其他人也穿着靴子进进出出。"
+        },
+        {
+          "rank": 13,
+          "reviewId": "yelp-PhSTV90rgRdj3eMMnnSVYA",
+          "shopId": 100281,
+          "shopName": "Shing Kee",
+          "vectorRank": null,
+          "bm25Rank": 13,
+          "fusionScore": 0.2528090217466254,
+          "text": "南费城不错的唐人街风味。我通常在这里吃馄饨面汤，和唐人街餐厅的差不多。环境干净友好。如果你不想去市中心堵车，我建议来这里。"
+        },
+        {
+          "rank": 14,
+          "reviewId": "yelp-xi3fKKWupXm059uQHjvIlQ",
+          "shopId": 100192,
+          "shopName": "Alena’s Cafe",
+          "vectorRank": null,
+          "bm25Rank": 14,
+          "fusionScore": 0.2523232212121722,
+          "text": "氛围非常好！一定要去。糕点非常美味，早餐和咖啡也是。员工很亲切。黑人拥有的企业，这总是加分项。从来不用等很久。"
+        },
+        {
+          "rank": 15,
+          "reviewId": "yelp-RzGSv8skwrW0RZugxumkLw",
+          "shopId": 100235,
+          "shopName": "Suraya",
+          "vectorRank": null,
+          "bm25Rank": 15,
+          "fusionScore": 0.24785450626191682,
+          "text": "这绝对是费城最好的早餐店。如果你厌倦了经典的早餐套路，你一定要来这家店，体验独特的口味、超快的服务、美味的咖啡和友好的环境。强烈推荐这家店吃早餐、午餐或早午餐。它不像普通的经典美式早餐。有点贵，但每一分钱都值得。快来享受中东式的热情好客吧。"
+        },
+        {
+          "rank": 16,
+          "reviewId": "yelp-G0qjFCA-mZhL5xyDmt0jtQ",
+          "shopId": 100245,
+          "shopName": "Happy Joy Family Restaurant",
+          "vectorRank": 1,
+          "bm25Rank": null,
+          "fusionScore": 0.2,
+          "text": "我在医院上班的日子里常去的早餐店\n食物好，服务快。\n没有抱怨。"
+        },
+        {
+          "rank": 17,
+          "reviewId": "yelp-r-GH5e3Qih2VCiwJjCHpCw",
+          "shopId": 100272,
+          "shopName": "Authentic LanZhou Handpulled Noodles",
+          "vectorRank": null,
+          "bm25Rank": 16,
+          "fusionScore": 0.19718484031066802,
+          "text": "他们早餐菜单上的每样东西都很正宗。Tofunao很棒。很合我的口味，虽然我希望他们有干辣椒碎。环境干净宜人，开门早。"
+        },
+        {
+          "rank": 18,
+          "reviewId": "yelp-XnbgeNEhPR6njJpVVCxFfw",
+          "shopId": 100245,
+          "shopName": "Happy Joy Family Restaurant",
+          "vectorRank": 2,
+          "bm25Rank": null,
+          "fusionScore": 0.19300258357574362,
+          "text": "这么好的店。简单、经典的早餐食物，当你想要那种油腻便宜的早餐时。服务很快，有家的感觉。喜欢。"
+        },
+        {
+          "rank": 19,
+          "reviewId": "yelp-fyi9c_fH8E9F_6iC0oHnBA",
+          "shopId": 100139,
+          "shopName": "Potito's Italian American Pastries",
+          "vectorRank": null,
+          "bm25Rank": 17,
+          "fusionScore": 0.18742946763537144,
+          "text": "我花了一个小时到这里……完全值得。他们的草莓脆饼好吃到死……不仅有香草味……还有巧克力草莓脆饼！！它轻盈蓬松……一点也不厚重，而且他们用的是真正的草莓……不是果冻……太棒了……他们的奶油甜馅煎饼卷也很棒……所有的甜点看起来都很专业、美味，而且价格我简直不敢相信！完美无缺。"
+        },
+        {
+          "rank": 20,
+          "reviewId": "yelp-z3YmkYIW7Fswbnw2RHt2lA",
+          "shopId": 100281,
+          "shopName": "Shing Kee",
+          "vectorRank": null,
+          "bm25Rank": 18,
+          "fusionScore": 0.18553818937915006,
+          "text": "吃顿好饭、享受友好服务的好地方。菜单不错，选择很多。还有一个加分项是“免费停车”。"
+        },
+        {
+          "rank": 21,
+          "reviewId": "yelp-KyTBE9fOJiZmU6-IjrX2oQ",
+          "shopId": 100048,
+          "shopName": "Breakfast Boutique Chestnut Hill",
+          "vectorRank": null,
+          "bm25Rank": 19,
+          "fusionScore": 0.15206107413838835,
+          "text": "这周第一次在那里用餐。总的来说——菜单选择很棒，很难只选一个（幸好我们是一群人，可以互相品尝对方的盘子！）。氛围温馨，即使是工作日的早上，也很拥挤！唯一的小问题是，在这里用餐要确保有时间坐下来放松——从点餐到上菜确实需要一点时间！不过总的来说，我们一群人都很享受美味的早餐和整体氛围！我们打算再去！"
+        },
+        {
+          "rank": 22,
+          "reviewId": "yelp-iqug3IbAKTpgGYHCEBsg5g",
+          "shopId": 100057,
+          "shopName": "Falls Deli",
+          "vectorRank": null,
+          "bm25Rank": 20,
+          "fusionScore": 0.15134383275937113,
+          "text": "多么美味的早餐三明治！长卷面包里的肉、蛋和奶酪让我一直饱到晚餐。装饰很温馨，他们很乐意让我坐下吃半个三明治，然后把剩下的打包带走。我肯定会在不久的将来再来吃午餐或和朋友一起来，这个地方对社区来说是一笔巨大的财富，我很高兴他们开业了！"
+        },
+        {
+          "rank": 23,
+          "reviewId": "yelp-oquzomw_WPlZ93RX-YNG8A",
+          "shopId": 100245,
+          "shopName": "Happy Joy Family Restaurant",
+          "vectorRank": 3,
+          "bm25Rank": null,
+          "fusionScore": 0.09818791026967863,
+          "text": "今天早上在这里吃早餐，周二店里居然挤满了人。食物不错，服务有点慢，但上菜后一切都好了。只是给老板一个建议，需要投资一些咖啡杯，而不是用泡沫塑料杯供应咖啡/茶，我实在不喜欢这样，但食物很棒。"
+        },
+        {
+          "rank": 24,
+          "reviewId": "yelp-uApHoQ33PBbULJs4GUl8SA",
+          "shopId": 100024,
+          "shopName": "The Twisted Tail",
+          "vectorRank": null,
+          "bm25Rank": 21,
+          "fusionScore": 0.09643562986650893,
+          "text": "这条评论是针对楼下的酒吧、饮料和服务。这个地方不拥挤，但酒保表现得好像他根本不想给我们调酒。如果你要在宣传高端鸡尾酒的环境里工作，至少假装你喜欢调它们。"
+        },
+        {
+          "rank": 25,
+          "reviewId": "yelp-6zti1LSVNNAdikyrvcIsXA",
+          "shopId": 100114,
+          "shopName": "Los Compadres",
+          "vectorRank": null,
+          "bm25Rank": 22,
+          "fusionScore": 0.08499476079407402,
+          "text": "今天早上我路过时，想着应该吃个早餐卷饼，结果它就在我面前。有人推荐了辣香肠、鸡蛋和奶酪早餐卷饼。我要求加一些 pico de gallo，他们欣然答应了。餐车里的两个男人非常友好。辣香肠的辣度适中，鸡蛋是现做的。加了 pico de gallo 后，这个简单的早餐卷饼味道丰富。只要 5 美元，这个早餐卷饼既美味又健康。下次想吃的时候，我一定会再来的。"
+        },
+        {
+          "rank": 26,
+          "reviewId": "yelp-BuwX_oaOhhJoKaVv4H1QdQ",
+          "shopId": 100084,
+          "shopName": "Pho Nam Giang",
+          "vectorRank": null,
+          "bm25Rank": 23,
+          "fusionScore": 0.07665776165364196,
+          "text": "我们晚上9点进去，环境安静舒适。食物端上来，天哪，太好吃了。我们点了招牌组合河粉和烤猪排饭。我似乎总是点这个，这是我很久以来吃过的最好的之一。我肯定会再来。分量对得起价格，内部装修现代且更新过。"
+        },
+        {
+          "rank": 27,
+          "reviewId": "yelp-BmyJwFcG6S3iuSIvxQJPQw",
+          "shopId": 100048,
+          "shopName": "Breakfast Boutique Chestnut Hill",
+          "vectorRank": 4,
+          "bm25Rank": null,
+          "fusionScore": 0.07576372434787067,
+          "text": "对Chestnut Hill来说是一个极好的补充！尽管有些评论让人有点担心，我们还是想试试。看来自从那些评论写出来之后，管理层做了一些重大改变。\n\n首先，食物美味，份量很大。我们一行人点了基本的鸡蛋培根、家常薯条等。还有三文鱼饼、玉米粥、以及烤鸡和华夫饼。\n\n所有食物都很美味。如果有什么建议的话，烤鸡调味料里的盐可以少一点。除此之外，我们对所有口味都很满意。\n\n关于服务，我们进去后很快喝到了咖啡，点了单，等了一会儿食物就上来了。店里人满为患，里面有人在等，甚至外面人行道上也有人。如果你想要一个快速的早餐三明治，也许去别的地方。如果你愿意等几分钟吃美食——你会喜欢这个地方的。"
+        },
+        {
+          "rank": 28,
+          "reviewId": "yelp-BpTXO-5uR9VqB3lpGxmbpg",
+          "shopId": 100147,
+          "shopName": "TSA Checkpoint C - Philadelphia International Airport",
+          "vectorRank": null,
+          "bm25Rank": 24,
+          "fusionScore": 0.07383210368604058,
+          "text": "只给一颗星是因为我必须至少选一个。宁愿选零。\n\n我在费城的安检体验一直很糟糕。我很少看到员工微笑，缺乏组织导致安检队伍严重积压。我今天早上到达机场，在航班登机前2小时就排队安检。我知道周一早上通常很忙，但我以为2小时足够了。我被穿着橙色polo衫的员工像对待牲口一样大喊着从一条队伍赶到另一条队伍。然后我们被指示跟着一个穿橙色衣服的员工穿过航站楼到另一个TSA检查点。我们以为这意味着队伍更短。不幸的是，它更长了。我现在已经排了一个半小时的队，希望不要错过航班。\n\n我要补充一点，一旦我通过了队伍，TSA官员比穿橙色衣服的员工更友好（至少没有大喊大叫）。\n\n整个体验需要彻底改革。流程改进研究可以帮助规划更有效的排队方式，一些员工培训也会大有帮助。"
+        },
+        {
+          "rank": 29,
+          "reviewId": "yelp-GJVjEx3bCZawRTydNcZgpQ",
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "vectorRank": 5,
+          "bm25Rank": null,
+          "fusionScore": 0.06757165374921181,
+          "text": "在附近，需要找个地方快速吃早餐并做些工作/阅读。Red Hook是个好地方。小店很安静，只有一两桌其他顾客，但有很多人进来买咖啡。我犹豫不决，请他们推荐早餐三明治。点了Preacher Man，甜咸搭配得很好。额外加分的是有豆豉培根和素香肠选项。我想所有三明治都配有一份土豆沙拉，也很好吃。如果再来这一带，肯定会再来的。"
+        },
+        {
+          "rank": 30,
+          "reviewId": "yelp-nhXkmob768xr3UuKqRLF2g",
+          "shopId": 100035,
+          "shopName": "Cedar Park Cafe",
+          "vectorRank": 6,
+          "bm25Rank": null,
+          "fusionScore": 0.0623137915732416,
+          "text": "找不到比这更便宜的早餐了。我想吃又好又便宜的食物时总是来这里。分量足，味道好，服务快。绝对值得一试。（标准 diner 食物——别指望有任何花哨的东西）"
+        },
+        {
+          "rank": 31,
+          "reviewId": "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+          "shopId": 100086,
+          "shopName": "J'aime French Bakery",
+          "vectorRank": null,
+          "bm25Rank": 25,
+          "fusionScore": 0.06098035978720909,
+          "text": "环境非常古朴、宁静而明亮，适合早上或下午喝咖啡。我们大约 11 点去的时候不太忙。我们试了撒糖的 choquette，很好吃，里面填的是非常轻盈的 Nutella 奶油。我朋友喝的 Anastasia 茶闻起来非常香，卡布奇诺也很浓。"
+        },
+        {
+          "rank": 32,
+          "reviewId": "yelp-AnnWNtzCWTici0J2VEQ5gQ",
+          "shopId": 100263,
+          "shopName": "Earl of Sandwich",
+          "vectorRank": 7,
+          "bm25Rank": null,
+          "fusionScore": 0.05657469978157967,
+          "text": "我赶早班机，起飞前有点时间，找到了这个地方休息。我喜欢喝杯好茶，但有时很难找到，他们这里选择还不错。有鸡蛋、奶酪和香肠三明治，但我点了早餐BLT，非常好吃。他们只用了少量调味蛋黄酱，没有过量。完美。员工非常友好，这在费城真是难得，这里通常粗鲁的人很多。"
+        },
+        {
+          "rank": 33,
+          "reviewId": "yelp-CkTCzg_MNUxjI_4P-Yv_fw",
+          "shopId": 100048,
+          "shopName": "Breakfast Boutique Chestnut Hill",
+          "vectorRank": 8,
+          "bm25Rank": null,
+          "fusionScore": 0.05651975444011137,
+          "text": "菜单很棒，早餐种类丰富。他们的煎饼又轻又蓬松。服务友好及时。氛围很好！"
+        },
+        {
+          "rank": 34,
+          "reviewId": "yelp-b7HlB8UvAmmf__Eu6QO8tQ",
+          "shopId": 100192,
+          "shopName": "Alena’s Cafe",
+          "vectorRank": 9,
+          "bm25Rank": null,
+          "fusionScore": 0.05585234660488036,
+          "text": "早餐三明治太棒了！！！！而且客户服务一直很好。我很幸运每次去都不用排队，考虑到整体质量，这让我很惊讶。"
+        },
+        {
+          "rank": 35,
+          "reviewId": "yelp-ehq2CuE0a3N-CPmXkvbnYw",
+          "shopId": 100035,
+          "shopName": "Cedar Park Cafe",
+          "vectorRank": 10,
+          "bm25Rank": null,
+          "fusionScore": 0.051795726956756966,
+          "text": "早餐选择丰富，价格合理，服务好。他们的培根配菜份量很足，这是我漫长一夜后早晨放松的最爱去处。\n\n我一定会再来的。我一点也不介意等待。"
+        },
+        {
+          "rank": 36,
+          "reviewId": "yelp-18Qb2xAjC1A_EyobO_0q5w",
+          "shopId": 100035,
+          "shopName": "Cedar Park Cafe",
+          "vectorRank": 11,
+          "bm25Rank": null,
+          "fusionScore": 0.049035486677726045,
+          "text": "食物很棒，但等待时间太糟糕了。我们等了一个小时才入座。入座后又等了一个小时才上菜。比我们晚下单的桌子反而先上菜，这很烦人。份量很大，食物也很好吃。但当你饿着肚子只想吃早餐时，等两个小时不值得！"
+        },
+        {
+          "rank": 37,
+          "reviewId": "yelp-Nve12ZRm2B7QmDMYvdVaww",
+          "shopId": 100167,
+          "shopName": "George's Sandwich Shop",
+          "vectorRank": null,
+          "bm25Rank": 26,
+          "fusionScore": 0.048384535025124055,
+          "text": "芝士牛排很好吃。我喜欢面包酥脆的口感，里面又很软。"
+        },
+        {
+          "rank": 38,
+          "reviewId": "yelp-qW1ULddZFbdhzuUMRWUPmg",
+          "shopId": 100005,
+          "shopName": "Wawa",
+          "vectorRank": 12,
+          "bm25Rank": null,
+          "fusionScore": 0.047552801900803465,
+          "text": "这是个黄金地段，非常方便。早餐和午餐时间通常会很拥挤。根据你去的时间，等待时间有时可能很长。服务还行，但小吃和饮料的选择很棒。我的食物总是对的，但摆盘和整洁度就不好说了。\n\nWawa永远是我的最爱哈哈\n\n糖果选择很棒，饮料种类繁多。早餐时，收银台旁边总有早餐三明治和薯饼；午餐时，有百吉饼三明治和各种鸡肉食品。咖啡总是新鲜的，咖啡站总是满满的。早餐我通常点一个早餐卷饼，非常好吃。"
+        },
+        {
+          "rank": 39,
+          "reviewId": "yelp-pW40FCj5bBDtgo4btIuuiA",
+          "shopId": 100208,
+          "shopName": "Day Break Eggs",
+          "vectorRank": 13,
+          "bm25Rank": null,
+          "fusionScore": 0.04685878627521323,
+          "text": "太棒了。点了一个早餐三明治，味道和它的凌乱程度一样好。土豆也不错，但三明治很饱腹，以后我不会再点它作为配菜，除非是分享。现在的目标是午餐时再去，那时看起来更好。"
+        },
+        {
+          "rank": 40,
+          "reviewId": "yelp-ePWx-C8oHYWs3-i6jYiSZw",
+          "shopId": 100182,
+          "shopName": "McDonald's",
+          "vectorRank": 14,
+          "bm25Rank": null,
+          "fusionScore": 0.044963935124305625,
+          "text": "没了胃口。点了早餐，然后去洗手间。有人在便池和地上拉了屎。臭得要命。早餐吃不下了。"
+        },
+        {
+          "rank": 41,
+          "reviewId": "yelp-KQF_YgCjntxKHl2l8AP0rw",
+          "shopId": 100245,
+          "shopName": "Happy Joy Family Restaurant",
+          "vectorRank": null,
+          "bm25Rank": 27,
+          "fusionScore": 0.043858227532273975,
+          "text": "早上不想做饭时，我总是点他们的煎饼和培根。员工非常友好，上菜也很快……就价格而言，这真是我附近最好的。唯一能让我停止点餐的理由就是他们关门了。我希望这永远不会发生。"
+        },
+        {
+          "rank": 42,
+          "reviewId": "yelp-b3gHEv0TQdUODgQrCe4AKA",
+          "shopId": 100298,
+          "shopName": "Applebee's Grill + Bar",
+          "vectorRank": 16,
+          "bm25Rank": null,
+          "fusionScore": 0.03933651465164601,
+          "text": "食物还不错，没什么特别的，员工可能有点慢，好处是营业时间和饮品特价。如果你需要找个地方坐下来吃饭或快速聚聚，这是个好地方。"
+        },
+        {
+          "rank": 43,
+          "reviewId": "yelp-4s5OP2Trmdp_UVL5rZ6Hqw",
+          "shopId": 100035,
+          "shopName": "Cedar Park Cafe",
+          "vectorRank": 17,
+          "bm25Rank": null,
+          "fusionScore": 0.03703415221818271,
+          "text": "食物又好又便宜！！服务慢且少，所以你需要什么就一次性要齐，因为你会等很久！！"
+        },
+        {
+          "rank": 44,
+          "reviewId": "yelp-jM2C9S1NrI6GkmWow0BUhQ",
+          "shopId": 100172,
+          "shopName": "Athenian Restaurant",
+          "vectorRank": 18,
+          "bm25Rank": null,
+          "fusionScore": 0.0353749555317939,
+          "text": "我偶尔来这里吃早餐，一直都很稳定，就像你对老式小餐馆的期望一样——实惠又满足。\n女服务员朴实又周到。\n社区已经不如从前了。"
+        },
+        {
+          "rank": 45,
+          "reviewId": "yelp--PC34yR2-krOlUbCWj82Dw",
+          "shopId": 100189,
+          "shopName": "Foodery",
+          "vectorRank": 19,
+          "bm25Rank": null,
+          "fusionScore": 0.032358176470954805,
+          "text": "简单明了：这个地方无可挑剔。啤酒选择很棒，早上的咖啡相当不错，三明治也很好。"
+        },
+        {
+          "rank": 46,
+          "reviewId": "yelp-87O4yTR7xdV-r5S8nqlnvw",
+          "shopId": 100286,
+          "shopName": "Uptown Grill Breakfast",
+          "vectorRank": 20,
+          "bm25Rank": null,
+          "fusionScore": 0.029647666813484394,
+          "text": "我喜欢这里的食物。服务一直很好，但如果你周六去，请做好等30到45分钟才能上菜的准备。另外，周末他们几乎不接电话，因为餐厅里太挤了。"
+        },
+        {
+          "rank": 47,
+          "reviewId": "yelp-sCjkJ6_GtagHOaUMyZNQig",
+          "shopId": 100027,
+          "shopName": "NY Bagel & Deli Shop",
+          "vectorRank": 22,
+          "bm25Rank": null,
+          "fusionScore": 0.02724342655938238,
+          "text": "快速停留的好地方，有百吉饼、咖啡、沙拉、三明治、卷饼、拼盘等。没有室内座位或卫生间。走进去，点餐，然后走人。街边停车选择不错，因为位置有点偏僻。"
+        },
+        {
+          "rank": 48,
+          "reviewId": "yelp-2MQ5QOeVDst4rhwMk8_cSg",
+          "shopId": 100172,
+          "shopName": "Athenian Restaurant",
+          "vectorRank": 23,
+          "bm25Rank": null,
+          "fusionScore": 0.02325279219633692,
+          "text": "不错的早餐和友好的服务员！老式餐厅氛围，喜欢！"
+        },
+        {
+          "rank": 49,
+          "reviewId": "yelp-wwAqE9iAA4M6kkRkOocksA",
+          "shopId": 100247,
+          "shopName": "Tasties",
+          "vectorRank": 24,
+          "bm25Rank": null,
+          "fusionScore": 0.021591942062172336,
+          "text": "里面没有拥挤的人群，食物不错……52街一如既往地繁忙。第一步点餐，第二步等大约20分钟，第三步拿到食物然后赶紧离开……"
+        },
+        {
+          "rank": 50,
+          "reviewId": "yelp-WoowXhMuNWl3aR4lrfJBHA",
+          "shopId": 100199,
+          "shopName": "Al Sham Restaurant - Philadelphia",
+          "vectorRank": 25,
+          "bm25Rank": null,
+          "fusionScore": 0.021182115952731225,
+          "text": "食物一直很到位，但员工有点手忙脚乱，做菜时间比电话里说的要长。"
+        },
+        {
+          "rank": 51,
+          "reviewId": "yelp-4h4D3htj7vdlxRRr0w_LRA",
+          "shopId": 100111,
+          "shopName": "Ron's Caribbean Cuisine",
+          "vectorRank": 26,
+          "bm25Rank": null,
+          "fusionScore": 0.009595415320007614,
+          "text": "食物真的很好，但给3星是因为排队平均等待时间大约30分钟，而且提前打电话时，他们要么不接电话，要么你到店里后还得等。对于这样一个繁忙的地方，我觉得他们可以多雇些人。"
+        },
+        {
+          "rank": 52,
+          "reviewId": "yelp-aPAyPmkHIfFkZhHSMeZtVg",
+          "shopId": 100245,
+          "shopName": "Happy Joy Family Restaurant",
+          "vectorRank": 27,
+          "bm25Rank": null,
+          "fusionScore": 0.008697084424661763,
+          "text": "食物美味且价格合理。来吃早餐，当我开始感到饱时，非常沮丧。食物味道好，服务很棒，氛围超级放松。感觉就像妈妈和爸爸的早餐店。值得！哦，煎饼蓬松完美！！！"
+        },
+        {
+          "rank": 53,
+          "reviewId": "yelp-NYxYahcPBsyVSE88IHNivA",
+          "shopId": 100108,
+          "shopName": "Vineyards Cafe",
+          "vectorRank": 28,
+          "bm25Rank": null,
+          "fusionScore": 0.007223862456547683,
+          "text": "老实说，直到我朋友建议周末来吃早午餐，我才知道这个地方。我简直不敢相信我住在四个街区外，之前竟然没来过！我点了蜂蜜蜂巢可丽饼和一个杏仁羊角面包。我通常会把剩菜带回家，但食物太好吃了，一点都没剩下，让我的朋友们很惊讶。楼下有一个小的座位区，一楼有一些靠窗的座位。如果你和一群人一起来并且想坐下，我建议早点到。我也推荐小团体来。肯定会再去的。"
+        },
+        {
+          "rank": 54,
+          "reviewId": "yelp-YloJRgYPc9Vb_6rAyRpvEw",
+          "shopId": 100208,
+          "shopName": "Day Break Eggs",
+          "vectorRank": 29,
+          "bm25Rank": null,
+          "fusionScore": 0.005338550427422662,
+          "text": "做好周六在这里等至少45分钟才能拿到订单的准备。我丈夫打电话下单时，被告知大约需要25分钟。我们到店后又等了大约20分钟，排队的其他人也一样。\n\n早餐三明治不错。这里松软的奶油面包让它与其他早餐三明治店不同。有点失望的是鸡蛋煮过头了，尽管我们一拿到三明治就吃了。我不喜欢干蛋黄。但总的来说，我很喜欢Free Bird三明治，我丈夫也喜欢香肠鸡蛋奶酪三明治。提醒一下，三明治里的香肠不是早餐香肠，而是他们自制的香肠对半切开。"
+        },
+        {
+          "rank": 55,
+          "reviewId": "yelp-ra9fNjYUumKp_iaqv-jjDg",
+          "shopId": 100137,
+          "shopName": "DoubleTree by Hilton Hotel Philadelphia Center City",
+          "vectorRank": null,
+          "bm25Rank": 28,
+          "fusionScore": 0.0034904914484831847,
+          "text": "舒适的床，不错的早餐，快速的网络，绝佳的位置，低廉的价格。总的来说，我对这个地方印象非常深刻。不过，如果你住在顶层，早上等电梯可能要等上15分钟。"
+        },
+        {
+          "rank": 56,
+          "reviewId": "yelp-IyyqoqrGuT6thytspvG1eg",
+          "shopId": 100125,
+          "shopName": "Lazos Pizza & Grill",
+          "vectorRank": null,
+          "bm25Rank": 29,
+          "fusionScore": 0.0012165224817385738,
+          "text": "奶酪牛排很可怕，转身就跑。如果我要慷慨的话，给0星，但Yelp不允许。"
+        },
+        {
+          "rank": 57,
+          "reviewId": "yelp-5wsbpidU2R0KTuSRCfnfsw",
+          "shopId": 100120,
+          "shopName": "The Black Sheep Pub & Restaurant",
+          "vectorRank": null,
+          "bm25Rank": 30,
+          "fusionScore": 0.0,
+          "text": "我和丈夫每年大约去Black Sheep吃六次。大多数时候食物不错，我也喜欢那里的氛围。但上次（2016年8月14日）我们和两位客人去吃早午餐，四个人中有三个觉得食物太咸，根本尝不出味道，也享受不了。也许只是那天失常，但我觉得这一顿早午餐就让我摄入了超过一周推荐量的钠！"
+        },
+        {
+          "rank": 58,
+          "reviewId": "yelp-PkPwvtexDu9lhASQ3iqivQ",
+          "shopId": 100078,
+          "shopName": "Junes Breakfast",
+          "vectorRank": 30,
+          "bm25Rank": null,
+          "fusionScore": 0.0,
+          "text": "喜欢他们的自制冰茶，但作为早餐店价格偏高，等待时间也长。建议提前电话下单。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-test-004",
+      "question": "晚上想听听现场音乐、喝点东西，热闹一些也没关系。",
+      "intent": "live_music_and_drinks",
+      "candidateCount": 55,
+      "candidates": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-ttZo6DvUdCB1qU00SgFcMQ",
+          "shopId": 100141,
+          "shopName": "Smiths Restaurant and Bar",
+          "vectorRank": 1,
+          "bm25Rank": 2,
+          "fusionScore": 0.8612708411474097,
+          "text": "周三晚上我和朋友去了Smith's，只是深夜喝点东西（没吃东西）。我喜欢这里不用大喊就能聊天，而且不太拥挤。所以，不是周六晚上玩乐的好地方，但周中朋友聚会是个低调的好去处。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-4eqTJbn-DDTI1cWe3C8oOg",
+          "shopId": 100190,
+          "shopName": "Dagwood's Pub",
+          "vectorRank": null,
+          "bm25Rank": 1,
+          "fusionScore": 0.8,
+          "text": "食物很棒，服务一流。生啤冰凉好喝。周五晚上有很棒的现场音乐。酒保Bob很棒。服务员非常专业和有礼貌。店里很干净。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-NmmBBEAHBMnbv-cySZP1pQ",
+          "shopId": 100024,
+          "shopName": "The Twisted Tail",
+          "vectorRank": 2,
+          "bm25Rank": 3,
+          "fusionScore": 0.7466455234983699,
+          "text": "我住在附近，很高兴每周有5晚现场音乐。我们在这里吃过早午餐和晚餐——都非常好，完全不是标准酒吧食物。他们追求美食酒吧风格，有些菜单菜品很到位，比如洋葱挞和素食牧羊人派。内部氛围很棒。还有我们提到的现场音乐……Headhouse Square上的一个爵士酒吧……拜托，你们一定会喜欢的。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-nkeVmSjW7zQdiwKGPbqnew",
+          "shopId": 100024,
+          "shopName": "The Twisted Tail",
+          "vectorRank": null,
+          "bm25Rank": 4,
+          "fusionScore": 0.5681463677357428,
+          "text": "现场音乐和南方风格舒适食物？算我一个！酒单也很棒。服务一直很好，会继续光顾。绝对是费城我最爱的餐厅！"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-AJr5sbXhhVH01G0A3D7lDQ",
+          "shopId": 100024,
+          "shopName": "The Twisted Tail",
+          "vectorRank": 6,
+          "bm25Rank": 5,
+          "fusionScore": 0.5635324219840305,
+          "text": "我不太确定我是否理解这个地方。它是个酒吧，但感觉不像，而且价格也绝对不像酒吧。现场音乐很酷，但总的来说，这个地方缺乏特色。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-4UMLeJRzWNMOYj46vReUuA",
+          "shopId": 100024,
+          "shopName": "The Twisted Tail",
+          "vectorRank": null,
+          "bm25Rank": 6,
+          "fusionScore": 0.5055287168978168,
+          "text": "我把这里当成第二个家！员工非常友好，鸡尾酒和酒吧小吃都很美味。楼上有一种时髦的客厅氛围，有酒吧游戏、电视和很棒的现场音乐。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-sbPqTg8to_d6COKV5iN78A",
+          "shopId": 100024,
+          "shopName": "The Twisted Tail",
+          "vectorRank": null,
+          "bm25Rank": 7,
+          "fusionScore": 0.4440341780438972,
+          "text": "多么棒的体验！我们是在餐厅周去的，这绝对是我经历过的最好的餐厅周体验。食物非常棒，饮料更胜一筹。整个晚上最棒的部分是服务。我看到经理们端菜、记饮料订单并帮助他们的服务员。我会强烈推荐给任何想找一个有美食、美酒和现场音乐的夜晚的人。五花肉简直不可思议！"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-yHTcWIFsYGVkqPuKrWGxXA",
+          "shopId": 100145,
+          "shopName": "Las Cazuelas Restaurant BYOB",
+          "vectorRank": null,
+          "bm25Rank": 8,
+          "fusionScore": 0.43453419932653725,
+          "text": "这是城里和地区最好的用餐地点之一。服务很好，食物非常非常好吃，装饰也很棒。我来过几次，但这次他们有现场音乐，增加了体验。\n\n一个你必须去的地方。在时尚的 Girard Ave 上。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-dIZegYrM8qlIsCcztwJdgQ",
+          "shopId": 100024,
+          "shopName": "The Twisted Tail",
+          "vectorRank": 30,
+          "bm25Rank": 9,
+          "fusionScore": 0.3890503291159444,
+          "text": "喜欢这个地方！我已经来过两次了，每次都尝试不同的菜，食物一直都很不错。\n\n食物：点炸鸡。还有，点通心粉奶酪。你可以之后感到内疚。\n\n氛围：可爱舒适，有现场音乐。只是要提醒你，坐在音乐家附近意味着你几乎听不到其他任何声音。\n\n服务：总是迅速而有礼貌！"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-vPkxuxLj53lX67Xp9-G2XQ",
+          "shopId": 100183,
+          "shopName": "Halal Gyro King",
+          "vectorRank": null,
+          "bm25Rank": 10,
+          "fusionScore": 0.31743386385285155,
+          "text": "Annie的评论基本说了一切！我就是因为这一条评论才去这个餐车的！如果她的评论完全不准确，那也没关系，因为只要5美元！！我最后点了羊肉和米饭——太棒了！我忘了要辣酱，但我肯定加了会更棒。\n\n便宜又美味。"
+        },
+        {
+          "rank": 11,
+          "reviewId": "yelp-ASXMj10gPjPX-N7Vc8esjg",
+          "shopId": 100178,
+          "shopName": "Jamaican Jerk Hut",
+          "vectorRank": null,
+          "bm25Rank": 11,
+          "fusionScore": 0.28861476560260807,
+          "text": "去了 Jamaican Jerk Hut 之后大约一个月，我一听到雷鬼音乐就感到身体不适。我希望我在开玩笑，但我真的很不喜欢那里的食物。我们桌（一大群人）付了“娱乐费”来听糟糕的现场音乐。我们还被收取了每瓶葡萄酒和每六罐啤酒的开瓶费——尽管我们自己带了开瓶器，服务员实际上什么也没开。如果你想对酒收费，请拿到酒类许可证。服务糟透了。他们搞混了我们的食物订单，花了将近一个半小时才上菜。我能想到的唯一优点是他们有户外座位，这意味着吸烟者可以在等一个半小时食物的时候尽情抽烟。"
+        },
+        {
+          "rank": 12,
+          "reviewId": "yelp-lyMgcNIhoYeL4XKZQY_CeQ",
+          "shopId": 100178,
+          "shopName": "Jamaican Jerk Hut",
+          "vectorRank": null,
+          "bm25Rank": 12,
+          "fusionScore": 0.2834258377470302,
+          "text": "我试过了。我记得几年前去过 Jerk Hut。我不喜欢，但我以为是因为我对加勒比菜不熟悉。我记得食物太辣了，而我喜欢辣。我记得鸡肉很硬。那么，回到现在，我有一张 Groupon/LivingSocial 的优惠券，就说：“好，我再试一次！”到了那里，点餐。我注意到食物很贵，不过没关系，我愿意为好食物付钱。我们准备外带，所以坐着等啊等。不知道为什么，但我们坐着。我点了一个鸡肉馅饼来打发时间。收银员既不友好也不刻薄，她只是不在乎。她从未提及我们坐了多久，什么也没说。没关系，好食物能弥补一切，尤其是外带的时候。食物终于来了。牛尾、豌豆饭和卷心菜。耶！带回家后，味道一点都不好。许多痛苦的回忆涌上心头，我后悔自己竟然又回去了。没关系，我知道一个不会让我失望的地方……街那头的 Caribbean Delight。"
+        },
+        {
+          "rank": 13,
+          "reviewId": "yelp-5zshjWpLgojkRnfIkeBUew",
+          "shopId": 100178,
+          "shopName": "Jamaican Jerk Hut",
+          "vectorRank": null,
+          "bm25Rank": 13,
+          "fusionScore": 0.22849398475377544,
+          "text": "我周六下午来这里吃午餐，体验相当一般。这个地方看起来应该很有趣，有户外座位区可以听现场雷鬼音乐，内部设计也很好，让人想起热带。价格偏高，但食物本身还不错。服务简直糟透了。我们从下单开始等了45分钟才拿到一份面包和一杯饮料。又等了20分钟才上主菜。牛肋骨和烤鸡很正宗，让我想起了去牙买加的旅行。米饭一般，卷心菜和大蕉也一样，而且我觉得椰子面包不值得。我想给这家店更高的评分，因为去那里的目的是烤鸡，但服务差到让你后悔去。话虽如此，我计划去参加他们的现场雷鬼演出，并在想吃烤鸡时点外卖。"
+        },
+        {
+          "rank": 14,
+          "reviewId": "yelp-lBs4oeILTi1ViIUAVp6OFA",
+          "shopId": 100069,
+          "shopName": "Cannuli's Quality Meats & Poultry",
+          "vectorRank": null,
+          "bm25Rank": 14,
+          "fusionScore": 0.2140289639091183,
+          "text": "蒜香黄油鸡腿。\n\n……哦，我需要写更多吗？好吧。\n\n当我们想要高品质的肉类和合理的价格时，我们去Cannuli's。员工总是非常友好，随时准备回答你的任何问题。如果你只从Cannuli买一样东西，那就买蒜香黄油鸡腿。放在烤架上，用平底锅在炉子上煎，或者放进烤箱烤，都没关系。无论怎么烹饪，它们都味道浓郁、肉质鲜嫩，只需要配上一些美味的配菜就行。"
+        },
+        {
+          "rank": 15,
+          "reviewId": "yelp-9FC_YdMYLmFOXtUXyc77wA",
+          "shopId": 100092,
+          "shopName": "Hammerheads Bar & Grille",
+          "vectorRank": null,
+          "bm25Rank": 15,
+          "fusionScore": 0.1773025966927264,
+          "text": "前几天晚上想去那里，但在门口因为穿靴子被拦下了，尽管我之前穿着靴子去过十几次，而且其他人也穿着靴子进进出出。"
+        },
+        {
+          "rank": 16,
+          "reviewId": "yelp-kNnrNzvedtCMNBx90BZW6A",
+          "shopId": 100089,
+          "shopName": "Pub & Kitchen",
+          "vectorRank": null,
+          "bm25Rank": 16,
+          "fusionScore": 0.16056253857395789,
+          "text": "我一直没去尝试P & K，因为汉堡标价12美元，尽管有人推荐。昨天我决定去喝点东西。饮品的加价几乎一样糟糕。然而真正让人反感的是服务。女招待和服务员都冷漠且不投入。假设1：管理层故意雇佣傲慢的员工。假设2：他们被迫穿着非常紧身的衣服，几乎无法呼吸，无法与顾客交谈。谁知道呢？"
+        },
+        {
+          "rank": 17,
+          "reviewId": "yelp-4EbXtQ1CZI8MeqXH9e1GsQ",
+          "shopId": 100190,
+          "shopName": "Dagwood's Pub",
+          "vectorRank": null,
+          "bm25Rank": 17,
+          "fusionScore": 0.15753296933510064,
+          "text": "上周四晚上，看了Yelp评论后第一次去了Dagwood's。打电话问是否需要预订，他们不接受预订。大约6:45到达，酒吧里挤满了人，可能是常客。等了大约25分钟，不算太糟。\n似乎只有两个女服务员，忙得不可开交，还要收拾桌子。\n给老板的提示：建议你提供一个勤杂工。\n我们一行4人，服务员是Mary Kate。她非常出色——细心、礼貌，带着真诚的微笑和愉快的个性。\n免费沙拉和汤吧，自助服务，“限一份”，显然之前有过需要写下来的情况。\n我的饮品不错，实际上比平均水平好，考虑到大多数调酒师调不好“extra dry martini”。\n食物很好，很新鲜。他们菠菜用完了，自动替换成了混合蔬菜，我没意见。\n噪音水平非常高，而且还有现场音乐，音响对我来说太响了。希望他们能装个吊顶来吸收一些噪音。\n食物和服务=5星。"
+        },
+        {
+          "rank": 18,
+          "reviewId": "yelp-_6kEOetsR1iB-qXASKMFCw",
+          "shopId": 100069,
+          "shopName": "Cannuli's Quality Meats & Poultry",
+          "vectorRank": null,
+          "bm25Rank": 18,
+          "fusionScore": 0.14635857708003705,
+          "text": "镇上最好的肉店！！！从未失望过！！客户服务一流！价格超棒！肉类新鲜！美味！物有所值！街边停车要么有要么没有，但为了Cannuli's，我愿意碰碰运气。走几步路没关系。"
+        },
+        {
+          "rank": 19,
+          "reviewId": "yelp-UhNeV_jHv85t_OH9Buz5bA",
+          "shopId": 100044,
+          "shopName": "Chase's Hop Shop",
+          "vectorRank": null,
+          "bm25Rank": 19,
+          "fusionScore": 0.13561637339879307,
+          "text": "认识的朋友来过。我有机会去了一次。芝士牛排不错。喜欢酱油蒜味鸡翅。我能尝到里面的糖。很像酱油鸡。人很好。不过，他们确实忘了一个订单。没关系。还会再来。"
+        },
+        {
+          "rank": 20,
+          "reviewId": "yelp-0WydWJYA5UyYKtT23wB-Ug",
+          "shopId": 100024,
+          "shopName": "The Twisted Tail",
+          "vectorRank": null,
+          "bm25Rank": 20,
+          "fusionScore": 0.1317597412417738,
+          "text": "我在费城最喜欢的地方！去年第一次发现这个地方，但没记住名字，Yelp 救了我！很高兴我找到了这里。装饰美得令人惊叹，从室外座位到一楼餐厅，再到楼上的侧厅和带现场音乐的酒吧区，应有尽有。\n\n现场音乐很棒，需要在 DC 也找到这样的地方！我去的两次，乐队和歌手都让人们站起来跳舞，大家鼓掌。饮品很棒，调酒师更像是调酒师，食物也不是普通的酒吧食物。从未喝过难喝的饮品，它们清淡、清爽又烈！我和男朋友点了手撕猪肉馅饼，我点了蘑菇沙拉。两个中等大小的馅饼端上来时热气腾腾，里面填满了嫩滑、烹饪完美的猪肉。猪肉没有覆盖过多的调味料或酱汁，这很好，因为让猪肉的自然风味得以展现，如果他们不用其他味道掩盖，你就知道它很好！蘑菇沙拉清淡但管饱（如果这说得通的话），看起来小，但当我混合均匀后，分量适中。酸酸的调味汁与奶油山羊奶酪完美搭配，结晶姜带来一点甜味。蘑菇是完美的配料，完美融合。调酒师非常友好、细心且快速。这个地方满分10分……嗯，5星。"
+        },
+        {
+          "rank": 21,
+          "reviewId": "yelp-2ERd_nEJ-zXQjuWCkR9Q3Q",
+          "shopId": 100086,
+          "shopName": "J'aime French Bakery",
+          "vectorRank": null,
+          "bm25Rank": 21,
+          "fusionScore": 0.12641327963970264,
+          "text": "咖啡相当普通。饮品选择就是常见那些，也有一些法式烘焙点心。店内环境很好，也很干净，但没有 Wi-Fi，这对想工作的人来说挺扫兴。有一些法式糕点和烘焙食品，不过都稍微有点贵。"
+        },
+        {
+          "rank": 22,
+          "reviewId": "yelp-bp8VNGUNXrjwvALnw_bBlw",
+          "shopId": 100185,
+          "shopName": "Maria's Ristorante on Summit",
+          "vectorRank": null,
+          "bm25Rank": 22,
+          "fusionScore": 0.11877944643291577,
+          "text": "非常费城风格的地方，Maria's，我的意思是他们很友好但不完美！良好的精神和取悦顾客的意愿能起到很大作用。周四晚上在这里吃了一顿不错的晚餐，只是披萨和沙拉。科布沙拉还是冰凉的，这不是大多数食客（包括我）想要的吃法。但披萨很美味，“个人”尺寸太大，我们俩都吃不完。第二天晚上我们又吃了一顿。我对Maria's一贯的标准感到满意；桌上有亚麻桌布，菜单上有我们多年来在这里吃过的最好的菜。已经一年没来了，但期待很快再来。哦，对了，店酒也不是10美元一杯。离开时，我注意到吧台那里人很多。不错。晚餐期间，餐厅里开始了现场音乐，但对我来说，对于房间的大小来说有点太吵了。歌手过于热情，虽然他唱得不错。\n\n如果我是第一次来这里的陌生人，我会给这次体验打三星。但我们在Maria's积累的好感让我无法纠结于这里或那里的小失误。根据我们的经验，他们擅长的东西确实做得很好。周四晚上的服务非常好，这里通常也是如此。这也有帮助。"
+        },
+        {
+          "rank": 23,
+          "reviewId": "yelp-rIw50nj25uVDCez6hfb2cg",
+          "shopId": 100231,
+          "shopName": "Wawa",
+          "vectorRank": null,
+          "bm25Rank": 23,
+          "fusionScore": 0.11163634285213855,
+          "text": "这次好多了！！！我的焦糖芝士蛋糕冰沙很到位！！！他甚至把焦糖放在杯子里面。这家店平时很忙，我很高兴我的饮料及时做好了！！！唯一的问题是我没看到公共厕所，但没关系。谢谢WAWA。"
+        },
+        {
+          "rank": 24,
+          "reviewId": "yelp-KG691mQV2o6qXLtx2HvyHw",
+          "shopId": 100091,
+          "shopName": "Three 12 Sport Bar and Lounge",
+          "vectorRank": 3,
+          "bm25Rank": null,
+          "fusionScore": 0.10892622248212652,
+          "text": "我们喜欢这里的音乐，周六晚上来的。他们有好喝的饮料，我们也很享受水烟。"
+        },
+        {
+          "rank": 25,
+          "reviewId": "yelp-5P-g-9ox-NVDHXmBf64iTw",
+          "shopId": 100158,
+          "shopName": "Queen Sheba",
+          "vectorRank": 4,
+          "bm25Rank": null,
+          "fusionScore": 0.09638771045693639,
+          "text": "长话短说……\n\n周五晚上和朋友来这里喝酒——我们试过的其他地方都挤满了人。最后在吧台边找到了座位，玩得很开心——酒水便宜，可以和各种有趣/古怪的人聊天，最棒的是整晚视线里都没有讨厌的家伙。他们有自动点唱机——这是我喝醉时最喜欢的东西之一。不过凳子有点不舒服，虽然可能只是因为我老了。我们一直待到酒吧打烊。\n\n下次周五或周六晚上在西费城，我会来这里，和朋友一起跟着《玫瑰之吻》摇摆，给周围的人点PBR和烈酒。"
+        },
+        {
+          "rank": 26,
+          "reviewId": "yelp-6eOKMGg2LPdtvcxFBBJEjA",
+          "shopId": 100004,
+          "shopName": "Craft Hall",
+          "vectorRank": null,
+          "bm25Rank": 24,
+          "fusionScore": 0.06576880141856231,
+          "text": "在过去的9年里，我一直梦想有一个舒适的空间，可以带孩子去玩，喝点东西，吃点东西，同时和朋友放松。于是我们全家坐上小货车，朝圣般来到城里，和另外两个女友的家庭会合。这个大型工业建筑很宽敞，位于特拉华大道，位置便利，周围有很多免费停车位。外面有一些户外座位，一个鸡舍，一个兔子笼，还有一个小花园区域，里面有几张桌子。\n\n里面巨大无比，有很多大桌子可供大团体选择。我们很容易就找到了一张能容纳8个孩子和6个成人的桌子。下层有一个儿童游乐区和另一个酒吧。有一个攀爬架、篮球游戏、绳球、一些电子游戏（马里奥、卡比等）、迷你沙狐球、一个电话亭、照相亭，还有一个坏了的弹球机和坏了的沙狐球桌。儿童区确实很有趣，但仔细看，似乎不太安全或考虑不周。比如滑梯开口附近的篮球游戏。我女儿的头被砸中了。舞台上的金属绳球周围是混凝土，看起来有点危险。我有点担心让孩子们在那里玩。\n\n这次我没有喝啤酒，但大家的共识是啤酒一般。我们点了薯条、配芝士酱的椒盐卷饼、贻贝、一些披萨和一些羽衣甘蓝。食物作为啤酒厂的食物来说还不错。他们有儿童菜单。我们这次的服务也不太好。"
+        },
+        {
+          "rank": 27,
+          "reviewId": "yelp-yOaoURGWOFSOS8CdFWjHtg",
+          "shopId": 100092,
+          "shopName": "Hammerheads Bar & Grille",
+          "vectorRank": 5,
+          "bm25Rank": null,
+          "fusionScore": 0.06033120319445293,
+          "text": "这个地方周末总有DJ，所以你有两个问题：\n\n1) 音乐太吵。我不明白人们怎么能站着互相聊天。\n2) 你听到的是嘻哈音乐。\n\n人群大多是21岁和二十出头的年轻人。对我来说，这不是一个合适的地方。"
+        },
+        {
+          "rank": 28,
+          "reviewId": "yelp-RpqsZ1-m0_6PwaZMEnBBAw",
+          "shopId": 100137,
+          "shopName": "DoubleTree by Hilton Hotel Philadelphia Center City",
+          "vectorRank": 14,
+          "bm25Rank": 25,
+          "fusionScore": 0.05891131192585651,
+          "text": "我和姐姐在这里住了一晚，以便参加一场音乐会。位置靠近地铁，这很好，因为我们可以坐地铁往返音乐会。房间很干净，姐姐喜欢入住时给她的饼干，这是我在其他DoubleTree酒店也体验过的贴心服务。我唯一的抱怨是空调会变得很冷，然后好像关掉了，我们在半夜出汗，等它重新启动后又冻得发抖。"
+        },
+        {
+          "rank": 29,
+          "reviewId": "yelp--VcnxccifKoEm9R1PvN7nA",
+          "shopId": 100124,
+          "shopName": "Slices Pizza",
+          "vectorRank": 7,
+          "bm25Rank": null,
+          "fusionScore": 0.04409463024589833,
+          "text": "只有深夜食物。披萨 literally 没有酱，面团很厚，我喝醉的时候都几乎咽不下去。我喝醉的时候都几乎吃不下，清醒时肯定不会来。四颗星……去你的吧。"
+        },
+        {
+          "rank": 30,
+          "reviewId": "yelp-jqRSK_3XBg5wYPfiYBFYTw",
+          "shopId": 100187,
+          "shopName": "Copabanana",
+          "vectorRank": 8,
+          "bm25Rank": null,
+          "fusionScore": 0.043186436550641534,
+          "text": "我没有特别印象深刻，但话说回来，这是个校园区的酒吧。\n\n我到的时候，地方挤满了人；店里一个空位都没有。但人群年龄多样，从大学生群体到四十多岁的中年人都有。\n\n大约半小时后，人们开始散去。但服务很慢，因为在一个半空的吧台，花了大约10分钟才有人问我要不要点什么。再点一杯酒也是如此；花了差不多同样时间后，我意识到我宁愿离开也不愿试图引起他们的注意。\n\n音乐很棒，但这不是个跳舞的地方。我听说他们有很好的欢乐时光特价，但我在那的一个小时里无聊透顶，可能不会再来了。"
+        },
+        {
+          "rank": 31,
+          "reviewId": "yelp-0R0kz7nVTS52XiAotwLooQ",
+          "shopId": 100201,
+          "shopName": "Cactus Restaurant & Bar",
+          "vectorRank": 9,
+          "bm25Rank": null,
+          "fusionScore": 0.03941214032521309,
+          "text": "我来过几次，喝酒和吃饭。这个地方晚上放音乐，所以对我来说是个加分项。他们的莎莎酱给我留下了深刻印象，我对莎莎酱很挑剔，辣度恰到好处，让你不得不一直吃，否则舌头会烧起来。\n他们的户外座位在夏季/秋季/春季非常惬意。"
+        },
+        {
+          "rank": 32,
+          "reviewId": "yelp-OsVbMW8TkZttXzgWx2tTUg",
+          "shopId": 100215,
+          "shopName": "Philadelphia Marriott Old City",
+          "vectorRank": 10,
+          "bm25Rank": null,
+          "fusionScore": 0.03530313041986741,
+          "text": "在俱乐部楼层住了两个周末晚上。有一天晚上想在俱乐部房间的“欢乐时光”拿点零食，结果大约一小时后除了奶酪就什么都没有了。不过能拿到瓶装水还不错。早餐一般，有些半生不熟的乳蛋饼和香肠，还有燕麦片和水果。早餐食物一开始也缺货，但很多人抱怨后他们最终拿出了一些。另外，我不知道这是否常见，但酒店里有无数小孩，早上会在走廊里跑来跑去尖叫。墙壁隔音效果不太好，所以如果你想睡懒觉，我不会选择这家酒店。房间本身还行，没什么特别的，但除了没有冰箱外没有其他问题。我以为所有酒店房间都有小冰箱。这意味着我们不能带回任何剩菜，也不能让水保持冰凉。我们把车停在街对面的停车场以省钱。"
+        },
+        {
+          "rank": 33,
+          "reviewId": "yelp-T52ED3B5-Lymo9EzCpuTwg",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "vectorRank": 11,
+          "bm25Rank": null,
+          "fusionScore": 0.03512378460549929,
+          "text": "没有吵闹的大学兄弟音乐。食物和咖啡都不错。这些人懂行。我唯一希望的是后面区域的地板能安静一点，但其他方面他们都做得很好。"
+        },
+        {
+          "rank": 34,
+          "reviewId": "yelp-S7y4OIDXh10fR8xFe6vPaA",
+          "shopId": 100043,
+          "shopName": "The Lunar Inn",
+          "vectorRank": 12,
+          "bm25Rank": null,
+          "fusionScore": 0.03176616078645543,
+          "text": "一定要点薯条。黄瓜沙拉不错。一个现代版的Cheers，音乐精心挑选。有趣的啤酒和饮品。服务很好。而且他们有大屏幕播放体育比赛。无与伦比。"
+        },
+        {
+          "rank": 35,
+          "reviewId": "yelp-5SrC07IbFiJFzJDWtbj6PA",
+          "shopId": 100107,
+          "shopName": "George's Wings",
+          "vectorRank": null,
+          "bm25Rank": 26,
+          "fusionScore": 0.031331529583627435,
+          "text": "对无骨鸡翅非常失望。通过Grub Hub花了25美元买了15个鸡翅和薯条。没注意到我点了无骨，但好吧，没关系。可惜的是，无骨鸡翅尝起来像冷冻鸡块微波加热后泡在Sweet Baby Rays烧烤酱里。以后我想试试他们的普通鸡翅，但现在，我建议不要点无骨鸡翅。"
+        },
+        {
+          "rank": 36,
+          "reviewId": "yelp-AsEpyWnq1ZdSLaVDkscWXA",
+          "shopId": 100066,
+          "shopName": "Taqueria La Hacienda",
+          "vectorRank": null,
+          "bm25Rank": 27,
+          "fusionScore": 0.03120031618698084,
+          "text": "我点了外卖，但他们没有给我我点的一些东西，薯片也没有煮好。他们需要在各个方面改进一下。"
+        },
+        {
+          "rank": 37,
+          "reviewId": "yelp-vTN_VHaE8oTdGyucLmk6Sw",
+          "shopId": 100158,
+          "shopName": "Queen Sheba",
+          "vectorRank": 13,
+          "bm25Rank": null,
+          "fusionScore": 0.02878233701460315,
+          "text": "和当地人一起喝便宜饮料的好社区酒吧。我在周五晚上8:30左右点了食物，那绝对是喝酒时间，所以我觉得食物或多或少是加热过的，英吉拉是冷的。我仍然喜欢它，因为我喜欢埃塞俄比亚食物，也喜欢支持本地店！"
+        },
+        {
+          "rank": 38,
+          "reviewId": "yelp-6WsnfORzRud-YkVTWkDfLA",
+          "shopId": 100025,
+          "shopName": "Chick-fil-A",
+          "vectorRank": 15,
+          "bm25Rank": null,
+          "fusionScore": 0.026856920166672616,
+          "text": "我和男朋友周三晚上大约6点或7点去快速吃个晚餐，那里人满为患。他们点餐很有条理。有很多小孩跑来跑去，老人大声说话，但店里坐满了。如果这种事情让你心烦，记住这不是市中心私密的BYOB餐厅。"
+        },
+        {
+          "rank": 39,
+          "reviewId": "yelp-PY7qyCz43zwDSKaSgaJFTg",
+          "shopId": 100001,
+          "shopName": "St Honore Pastries",
+          "vectorRank": 16,
+          "bm25Rank": null,
+          "fusionScore": 0.02567967220064346,
+          "text": "点心很棒，但最好早点去。经常卖光。"
+        },
+        {
+          "rank": 40,
+          "reviewId": "yelp-galen_dLtSt_l7yjPkWC0w",
+          "shopId": 100089,
+          "shopName": "Pub & Kitchen",
+          "vectorRank": 17,
+          "bm25Rank": null,
+          "fusionScore": 0.025161915587488645,
+          "text": "啤酒不错，食物还行。适合和朋友喝一杯，但可能比附近其他选择贵。下班后可能会很挤，小心那些雅痞。"
+        },
+        {
+          "rank": 41,
+          "reviewId": "yelp-uzL9_64WWFqg5hrd9Fp7Mw",
+          "shopId": 100091,
+          "shopName": "Three 12 Sport Bar and Lounge",
+          "vectorRank": 18,
+          "bm25Rank": null,
+          "fusionScore": 0.02457466024943998,
+          "text": "真的很想喜欢这个地方，但一开始就“不行”。入座后15-20分钟无人服务，我们终于拦住领班找服务员来点单。又等了5分钟服务员才来，我们点了无限续杯的含羞草鸡尾酒。含羞草酒来得太慢，我甚至不觉得是无限续杯。绝对不值这个价。食物没有同时上桌，我们想等齐了一起吃，结果食物都凉了。又花了25分钟才上最后一道菜。食物还算可以到好。调味可以更好。另外音乐太吵了，跟朋友说话得喊。我不介意DJ，但不想在早午餐时喊哑嗓子。这个地方白天还开频闪灯……我想要早午餐的感觉，而不是夜店的感觉。不会再来了。"
+        },
+        {
+          "rank": 42,
+          "reviewId": "yelp-ng0z9bktfyNAUY_CnUc65Q",
+          "shopId": 100178,
+          "shopName": "Jamaican Jerk Hut",
+          "vectorRank": 19,
+          "bm25Rank": null,
+          "fusionScore": 0.024409605221469455,
+          "text": "食物很好，服务糟糕……如果你打算带酒，我建议自带开瓶器……服务员花了半小时才找到开瓶器。外面的音乐非常吵。"
+        },
+        {
+          "rank": 43,
+          "reviewId": "yelp-yyAycjhj9pBUWYlZd75IZg",
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "vectorRank": null,
+          "bm25Rank": 28,
+          "fusionScore": 0.024103546376631074,
+          "text": "这可能是城里我最喜欢的咖啡店。食物令人难以置信。我点过的任何东西都新鲜、美味、令人愉悦。店里有一种酷酷的时尚氛围，有很多舒适的座位，天气好的时候外面还有一些很棒的位置。绝对值得一试，尤其是如果你还想吃点东西的话。"
+        },
+        {
+          "rank": 44,
+          "reviewId": "yelp-x5FVypcFw-XTI0FdLL25Cg",
+          "shopId": 100274,
+          "shopName": "Cucina Zapata",
+          "vectorRank": null,
+          "bm25Rank": 29,
+          "fusionScore": 0.014558755213643118,
+          "text": "这是我吃过最好的费城玉米卷之一，值得等待。我点了牛小排玉米卷，很好吃。味道不错。员工非常友好和乐于助人，因为这是我第一次去，不知道点什么。\n\n光是想想，我就想再去买一些，也许我会尝试脆皮罗非鱼玉米卷或卷饼。"
+        },
+        {
+          "rank": 45,
+          "reviewId": "yelp-Flv_bxthIK2u7NpTthoJeA",
+          "shopId": 100133,
+          "shopName": "New Liberty Distillery",
+          "vectorRank": 20,
+          "bm25Rank": null,
+          "fusionScore": 0.013082201794258114,
+          "text": "下午5点30分去的，他们没开门。去之前先打电话，这样你就不会在还没尝到产品之前就失望了。"
+        },
+        {
+          "rank": 46,
+          "reviewId": "yelp-977-WLfAhxTNjsjrkxJjdQ",
+          "shopId": 100091,
+          "shopName": "Three 12 Sport Bar and Lounge",
+          "vectorRank": 21,
+          "bm25Rank": null,
+          "fusionScore": 0.012235366052539047,
+          "text": "周六晚上来的，就一般般。门口的保安很粗鲁，但调酒师和前台不错。里面几乎空荡荡的，没人跳舞，很尴尬。我们最后走了，去了别的地方。"
+        },
+        {
+          "rank": 47,
+          "reviewId": "yelp-Qw4jEl3kmMV4AqtoiQflGQ",
+          "shopId": 100092,
+          "shopName": "Hammerheads Bar & Grille",
+          "vectorRank": 22,
+          "bm25Rank": null,
+          "fusionScore": 0.010321271631144801,
+          "text": "便宜的好饮料，周末还有更多饮料特价，周末也有DJ，所以如果你周五或周六晚上来，准备好听 loud 音乐。不过是个不错的梅菲尔酒吧。"
+        },
+        {
+          "rank": 48,
+          "reviewId": "yelp-QepB1hPVRykkyp72hjA5CA",
+          "shopId": 100204,
+          "shopName": "Dunkin' Donuts",
+          "vectorRank": 23,
+          "bm25Rank": null,
+          "fusionScore": 0.009849266863994507,
+          "text": "周五下午6点想去买一打甜甜圈，结果他们连12个甜甜圈都没有。"
+        },
+        {
+          "rank": 49,
+          "reviewId": "yelp-vqIykSZ2JOJ64DZNPsKi9A",
+          "shopId": 100017,
+          "shopName": "Best Tours",
+          "vectorRank": 24,
+          "bm25Rank": null,
+          "fusionScore": 0.009017912807539571,
+          "text": "本来计划今晚参加晚上7点的幽灵之旅。要么是幽灵在带队，要么是他们没出现。等了30分钟。没人可以打电话，也没人可以在他们的支持团队里“聊天”。别浪费时间了，找别的公司吧。"
+        },
+        {
+          "rank": 50,
+          "reviewId": "yelp-9bMEojVyS1MmDBOVwzn80A",
+          "shopId": 100034,
+          "shopName": "CVS Optical",
+          "vectorRank": 25,
+          "bm25Rank": null,
+          "fusionScore": 0.008044521842996078,
+          "text": "我有时喝醉了进来，或者通过狡猾的借记卡购买取现金。上夜班的人很棒，有时很混蛋，但后来你意识到他们上夜班，一直要应付醉汉。我希望有人拍一部关于那个指出我讲了个蠢笑话的家伙的传记片。\n\n隔壁的 Dunkin Donuts 晚上从来都没有甜甜圈。\n\n还有……这是 CVS。你还能指望什么？"
+        },
+        {
+          "rank": 51,
+          "reviewId": "yelp-PzSlMzF9ia4M_pvXSvz_Nw",
+          "shopId": 100252,
+          "shopName": "Misconduct Tavern",
+          "vectorRank": 26,
+          "bm25Rank": null,
+          "fusionScore": 0.005501508397836736,
+          "text": "什么？我听不见？哇，我们去过无数地方，这家店是最吵的。从来没有。肯定没收到声学备忘录。嗯，隔音板呢？？安装一些吸音的东西吧。有很多声学工程公司可以帮忙。我真的觉得我们可能有听力损失。这不是那种充满活力的吵闹，而是像有100个老人在我周围尖叫，因为他们听不见彼此。请改正这一点！！"
+        },
+        {
+          "rank": 52,
+          "reviewId": "yelp-Ge8dVz1WkESUGARaWpVgIg",
+          "shopId": 100137,
+          "shopName": "DoubleTree by Hilton Hotel Philadelphia Center City",
+          "vectorRank": 27,
+          "bm25Rank": null,
+          "fusionScore": 0.004111285055419119,
+          "text": "房间破旧，而且就在饮水机旁边。完全没有隔音，所以我整晚都在听十几岁的女孩敲不同的门。我不得不打电话给保安处理噪音问题，他们甚至花了不少时间才把噪音控制住。"
+        },
+        {
+          "rank": 53,
+          "reviewId": "yelp-I8_Vb4UOJzLF_O6YmtqREA",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "vectorRank": 28,
+          "bm25Rank": null,
+          "fusionScore": 0.002362867773343519,
+          "text": "啊！\n\n如果你喜欢你的手机每隔15分钟发出响亮的、烦人的哔哔声，并且听别人嘿咻到凌晨3点……那么这家酒店就是为你准备的！我大约凌晨2点下楼去前台投诉噪音，那位女工作人员说她会马上派保安上来……但根本没人来过，“丛林噪音”又持续了大约一个小时。至于电话，我室友把它塞进了迷你冰箱……哈哈。\n\n唯一的优点：装饰很酷，我喜欢休息室、走廊和房间的配色方案。\n\n机场附近还有其他更好的酒店可以住！我们一到那里就应该掉头走人，尤其是当我们走进那个俱乐部般的大堂时……"
+        },
+        {
+          "rank": 54,
+          "reviewId": "yelp-qO5Kr6v0bBPwP4CUhV1MIQ",
+          "shopId": 100120,
+          "shopName": "The Black Sheep Pub & Restaurant",
+          "vectorRank": 29,
+          "bm25Rank": null,
+          "fusionScore": 0.0009892459166166191,
+          "text": "地方很棒..食物不错，鸡翅超赞。晚上晚些时候会变得非常拥挤.."
+        },
+        {
+          "rank": 55,
+          "reviewId": "yelp-0nm78C_l4x4mbIx_u36DbA",
+          "shopId": 100189,
+          "shopName": "Foodery",
+          "vectorRank": null,
+          "bm25Rank": 30,
+          "fusionScore": 0.0,
+          "text": "要点：Foodery 是个不错的小地方。有来自世界各地的数百种精酿啤酒，还有知识渊博、乐于助人的员工（不过晚上更热闹一些）。虽然也提供普通国产啤酒，但如果你想买几罐，避开狭窄的过道和昂贵的花哨商品，去熟食店吧。周末晚上别来这个地方。\n\n详细说：同意，根据酿酒厂不同，啤酒可能很贵。但当你按瓶购买限量比利时啤酒时，这就是你要面对的价格。一瓶 Chimay 和 St. Bernardus 花了我 15 美元。我几乎没什么好抱怨的。如果是一流的啤酒，那么价格冲击不应该那么令人震惊。\n\nFoodery 对啤酒的保存非常讲究，在展示柜中使用适当的照明以防止啤酒变味。此外，如果你打算窖藏，或者只是喜欢室温饮用，你可以要求拿一瓶常温的。\n\n我去过 Foodery 很多次，当时并不知道自己想买什么。如果你只是随便看看或者没有计划，试着在工作日下午去。一旦有几个顾客进来，过道就会堵塞。在你能够花时间逐个货架慢慢看、发现一些你从未听说过的东西时再去。如上所述，避免在周五或周六晚上去 Foodery。如果某个满身麦芽酒味的蠢货撞到你，试图找一罐 Olde English 大罐啤酒，完美的啤酒也会失去吸引力。\n\n我给初学者的建议是：参考店后面的价格指南，混合六瓶（购买六种不同的啤酒）可以省几块钱。如果你需要推荐，就问。你会被种类繁多的啤酒淹没。我问了那个戴眼镜的光头关于当地酿酒厂的事，学到了多得记不住的信息。真是个啤酒大师。\n\n我给 WSW Foodery 打了 4/5 分。我想象中的啤酒博物馆应该有宽敞豪华的过道，每瓶酒下面都有价格标签，收银台前站着一位特拉普派修士。但我知道这不可能，Foodery 已经足够了，而且做得相当不错。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-test-005",
+      "question": "朋友吃素，想找素食选择不只是沙拉、店员也清楚配料的地方。",
+      "intent": "substantial_vegetarian_options",
+      "candidateCount": 56,
+      "candidates": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-stgtJtE4aM_3z9TRu1XYRw",
+          "shopId": 100224,
+          "shopName": "HipCityVeg - University City",
+          "vectorRank": 6,
+          "bm25Rank": 1,
+          "fusionScore": 0.8900002734130749,
+          "text": "点牙买加烤鸡凯撒沙拉不会错，史上最好的凯撒酱。素鸡肉不错，大蕉片也不错……我喜欢这个地方。快速的素食/纯素食——我的祈祷得到了回应（我是个肉食者，正在尝试吃素）。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-wL6FxIIVbz6kT-aBAePZ5Q",
+          "shopId": 100043,
+          "shopName": "The Lunar Inn",
+          "vectorRank": null,
+          "bm25Rank": 2,
+          "fusionScore": 0.6839854266403972,
+          "text": "这个地方太棒了。很棒的小社区酒吧和餐厅。氛围非常轻松，员工超级乐于助人且细心。素食选择很棒，从爆米花到黄瓜沙拉到素食汉堡。我会再来的。他们还会放唱片，这是社区的一个很好的小补充。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-Yn0bB38aZ4RbtnnQrM_twg",
+          "shopId": 100289,
+          "shopName": "Cold Stone Creamery",
+          "vectorRank": null,
+          "bm25Rank": 3,
+          "fusionScore": 0.502509814284757,
+          "text": "爱爱爱Cold Stone。这家连锁店总是让我像孩子一样微笑。Cold Stone是唯一一个他们会在一块石头上混合你选择的配料的地方，这样你就能得到混合的口味。另外，他们的巧克力蛋糕加冰淇淋太棒了。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-1OfFGitmSPGlQ7PzXbLGMg",
+          "shopId": 100096,
+          "shopName": "Vientiane Café",
+          "vectorRank": null,
+          "bm25Rank": 4,
+          "fusionScore": 0.46424518342067467,
+          "text": "这绝对是一个必去的地方。\n\n这里的一切都近乎完美。\n\n食物新鲜干净；你能看出它没有被冷冻或放在冰箱里。\n\n服务很棒！所有员工都很友好和乐于助人（我连“perform”都发不准音）。\n\n他们有很多无麸质和素食选择，这很好。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-TLT_lnf9E3e-NT4llsDH3g",
+          "shopId": 100166,
+          "shopName": "SET NoLibs",
+          "vectorRank": null,
+          "bm25Rank": 5,
+          "fusionScore": 0.4330549614641694,
+          "text": "服务很棒，食物真的很好。听说他们刚推出了有素食选择的午餐菜单？算我一个。天冷的时候有很棒的热托迪。喜欢这个地方！！"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-Jv1v6NMjEucou7pEDHTyig",
+          "shopId": 100039,
+          "shopName": "Flambo Caribbean Restaurant",
+          "vectorRank": 11,
+          "bm25Rank": 7,
+          "fusionScore": 0.42654512510404563,
+          "text": "绝对美味！员工热情周到，食物风味十足。来这里品尝地道美食，氛围绝佳。素食选择也很多！"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-xO0979mVDERcGBq0gHogmg",
+          "shopId": 100047,
+          "shopName": "Golden Triangle",
+          "vectorRank": null,
+          "bm25Rank": 6,
+          "fusionScore": 0.3804888001300619,
+          "text": "比起唐人街的Banana Leaf或Penang，我更喜欢这家。食物味道不错，素食选择也很好。我就是喜欢这种融合了亚洲特定地区美食的餐厅。\n\n和朋友一起来的第一印象很好。肯定会再来尝试更多菜品。"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-qyFL1nqtrICzHBgJ-kC69w",
+          "shopId": 100194,
+          "shopName": "Zorba's Taverna",
+          "vectorRank": null,
+          "bm25Rank": 8,
+          "fusionScore": 0.34095449392773003,
+          "text": "费城Fairmount区中心的正宗希腊小酒馆。这家家庭经营的餐厅提供美味希腊美食的绝佳选择。无论是沙拉、希腊卷饼还是主菜，选择这家经典本地最爱都不会错。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-iuI5nBOvWMhKCw3HUecyzw",
+          "shopId": 100043,
+          "shopName": "The Lunar Inn",
+          "vectorRank": null,
+          "bm25Rank": 9,
+          "fusionScore": 0.3253829401482558,
+          "text": "Lunar inn已经成为我在这个街区的首选。令人难以置信的素食选择和饮品。欢乐时光优惠很大，员工也很棒。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-llDs1Uln2o_Wl8Re1Qmqbw",
+          "shopId": 100098,
+          "shopName": "Menchie's Frozen Yogurt",
+          "vectorRank": null,
+          "bm25Rank": 10,
+          "fusionScore": 0.30713648499263657,
+          "text": "这个地方真的很好，酸奶种类繁多。配料的选择也很棒！他们有我喜欢的那种爆珠，甚至还有巧克力草莓！价格也很实惠。我装满杯子，花的钱从来不会像在市中心那么多。"
+        },
+        {
+          "rank": 11,
+          "reviewId": "yelp-yn25TK7-9dBm7TgD48llng",
+          "shopId": 100242,
+          "shopName": "iPho Vietnamese Restaurant",
+          "vectorRank": null,
+          "bm25Rank": 11,
+          "fusionScore": 0.2851506005246565,
+          "text": "非常好，素食选择非常有限，正宗且做得好。我去了两次，很满意……而且价格很棒……你可以花不到20美元吃一顿很棒的晚餐……"
+        },
+        {
+          "rank": 12,
+          "reviewId": "yelp-tpYhU2-KevQtcca4y19LoA",
+          "shopId": 100211,
+          "shopName": "Bitar's",
+          "vectorRank": null,
+          "bm25Rank": 12,
+          "fusionScore": 0.24972971034059427,
+          "text": "我决定来这家店看看，因为朋友们对它赞不绝口。我确实喜欢加了所有配料的 delicious 法拉费。我也喜欢他们烤而不是油炸法拉费。然而，服务很糟糕。给我点单的那个家伙好像有人偷了他的小毯子似的！除了服务差，我还是会再来的。谁知道呢？也许他只是今天心情不好。"
+        },
+        {
+          "rank": 13,
+          "reviewId": "yelp-sCjkJ6_GtagHOaUMyZNQig",
+          "shopId": 100027,
+          "shopName": "NY Bagel & Deli Shop",
+          "vectorRank": null,
+          "bm25Rank": 13,
+          "fusionScore": 0.24123640270337565,
+          "text": "快速停留的好地方，有百吉饼、咖啡、沙拉、三明治、卷饼、拼盘等。没有室内座位或卫生间。走进去，点餐，然后走人。街边停车选择不错，因为位置有点偏僻。"
+        },
+        {
+          "rank": 14,
+          "reviewId": "yelp-CVob0T821YK5f3y6uB4mfQ",
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "vectorRank": null,
+          "bm25Rank": 14,
+          "fusionScore": 0.21953933596938643,
+          "text": "这个地方太棒了！很酷，但又不至于烦人的嬉皮士风格。饮料价格很棒——比星巴克或类似的地方便宜得多。食物很好吃！他们有素食、纯素和肉食选项。价格都很合理，非常美味！音乐非常 eclectic，员工非常友好。装饰很有趣。地方不大，这对我来说正好。非常好。我绝对推荐这个地方！！！"
+        },
+        {
+          "rank": 15,
+          "reviewId": "yelp-rsYYHl3M8fEZ4EJ_HUQmaQ",
+          "shopId": 100224,
+          "shopName": "HipCityVeg - University City",
+          "vectorRank": 1,
+          "bm25Rank": null,
+          "fusionScore": 0.2,
+          "text": "少数几家时髦的素食店之一，到处用木头来营造自然感。价格合理，分量很大。我推荐bistro bella，他们做的橄榄酱和蘑菇很搭。不推荐乌冬沙拉。就像放了3天的中餐，底下垫着生菜，很可怜。\n\n这个地方相当受欢迎，所以排队可能很长，座位也不多，不适合团体。而且太吵了，无法工作或好好交谈。说实话，我更喜欢外卖。你也可以提前下单自取。"
+        },
+        {
+          "rank": 16,
+          "reviewId": "yelp-v-s0EMmeRV32sXl6O_-GSw",
+          "shopId": 100037,
+          "shopName": "The Coventry Deli",
+          "vectorRank": 2,
+          "bm25Rank": null,
+          "fusionScore": 0.16296976526893142,
+          "text": "快速用餐的好地方。沙拉现做或从菜单选择。还有热食和意面吧。价格合理。"
+        },
+        {
+          "rank": 17,
+          "reviewId": "yelp-aH2XcxvuFNLmiSoK5lqDoA",
+          "shopId": 100224,
+          "shopName": "HipCityVeg - University City",
+          "vectorRank": null,
+          "bm25Rank": 15,
+          "fusionScore": 0.15559147524157568,
+          "text": "大部分东西都定价过高。他们的香蕉冰淇淋确实不错，但同样太贵了。\n作为一个素食者，我本希望能有好的餐食选择，但这对我来说太贵了，而且就分量而言完全可以更便宜。"
+        },
+        {
+          "rank": 18,
+          "reviewId": "yelp-mx9gblhPPTctjfOgfr6YUg",
+          "shopId": 100293,
+          "shopName": "Frank's Spaghetti House",
+          "vectorRank": 3,
+          "bm25Rank": null,
+          "fusionScore": 0.14988992151855995,
+          "text": "好地方，食物很棒。女服务员很出色，非常友好热情。沙拉？只有生菜，也许需要西红柿和其他蔬菜。还是喝汤吧！"
+        },
+        {
+          "rank": 19,
+          "reviewId": "yelp-deJnfh4eh9m5NZdfxmrjJQ",
+          "shopId": 100233,
+          "shopName": "Little Caesars Pizza",
+          "vectorRank": 20,
+          "bm25Rank": 18,
+          "fusionScore": 0.14213665946400678,
+          "text": "披萨真的很好吃！尝试了素食选项，没有让人失望。价格实惠，员工也很友好。干杯。"
+        },
+        {
+          "rank": 20,
+          "reviewId": "yelp-hJvv8CyoRHFnNJMUGyCrVw",
+          "shopId": 100224,
+          "shopName": "HipCityVeg - University City",
+          "vectorRank": null,
+          "bm25Rank": 16,
+          "fusionScore": 0.13861852883312467,
+          "text": "\"因为是素食，不代表它健康\"——一个朋友的朋友说，我觉得他说得完全对——而且是好的方面。\n\n在秋天第一个寒冷的日子里，我不想午餐啃纤维沙拉。我想要温暖而放纵的东西——只要素食且环保，足以让我享受一点第一世界的优越感。所以，我点了脆皮鸡三明治和红薯条；这两样东西真的很合我意。如果你想要更健康的餐食，还有其他选择，说实话，城里还有其他地方可去。然而，如果你想填补灵魂中一个Chik-fil-a三明治大小的空洞——这可能适合你。\n\n一些备注：三明治非常好——面包可能有点多，牧场酱可能有点多，但这些很容易调整。\n\n薯条——很棒——而且是在我不得不走半英里回到办公室之后（是的，在寒冷中）。更棒的是酱料：是拉差蛋黄酱（好吃！）和黑豆香菜酱（好吃）。\n\n总体服务非常亲切，装饰也很可爱。是的，有点贵，但大多数素食选项都这样……是的，它严重依赖仿制肉，但记住那个三明治大小的灵魂空洞。"
+        },
+        {
+          "rank": 21,
+          "reviewId": "yelp-r0Z9ipc89OvakH0BfbwtXA",
+          "shopId": 100109,
+          "shopName": "PrimoHoagies",
+          "vectorRank": null,
+          "bm25Rank": 17,
+          "fusionScore": 0.12969114948374738,
+          "text": "我住在离这家Primo's几个街区时，生活勉强维持，所以只能每月一两次奢侈地买一个巨大的Primo's三明治。但天哪，毫不夸张地说，他们做的三明治是我吃过最好吃的。如果你是素食者，不要被肉食选择（我听说很好吃）吓到——让Veggie Diablo加所有配料惊艳你吧。\n\n就在这家店，一位老人建议我提前打电话预订，一小时后取，让油充分渗入。这听起来可能有点恶心，但五年后我打字时还在流口水。Primo，我永远爱你。"
+        },
+        {
+          "rank": 22,
+          "reviewId": "yelp-JMXRBEucanI-qNZ_4l4baA",
+          "shopId": 100181,
+          "shopName": "Chez Yasmine",
+          "vectorRank": null,
+          "bm25Rank": 19,
+          "fusionScore": 0.11525151539414068,
+          "text": "午餐时我很想吃越南三明治，但在大学城工作通常没有越南三明治的选择。为了满足口腹之欲，我没有去市中心，而是决定在校园里午餐时间逛逛。我在 37 街和 Spruce 街交口、Vance Hall 前面偶然发现了 Chez Yasmine，立刻兴奋地发现菜单上有豆腐越南三明治，以及其他一些素食友好的选择。\n\n哇，那真是个辣三明治。我让餐车厨师少放点辣，他照做了，但我不小心咬到了一个墨西哥辣椒。哎呀。总的来说，味道很好。调味豆腐碎、黄瓜片和胡萝卜丝夹在美味的脆皮法棍面包里。非常不错，我特别高兴能在工作午餐中增加一个素食三明治的选择。我一定会再来尝试其他素食选项，比如 Gretchen 藜麦沙拉或素食库斯库斯。老板/厨师非常热情和温暖。他给我拍了照片放在他的 Facebook 顾客相册里，这让我感到很受欢迎。"
+        },
+        {
+          "rank": 23,
+          "reviewId": "yelp-x3bkW2T_C90u68nqyAZG1A",
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "vectorRank": null,
+          "bm25Rank": 20,
+          "fusionScore": 0.1045533126223365,
+          "text": "咖啡还行，没什么特别的。场地虽小但非常舒适可爱！我喜欢这里的装饰和音乐。\n\n我没有在这里吃东西，但打算下次试试。他们有很好的汤和三明治选择。最棒的是他们有无麸质烘焙食品和素食选项！"
+        },
+        {
+          "rank": 24,
+          "reviewId": "yelp-tEH8K8cEJreI9e7DMqdNMg",
+          "shopId": 100258,
+          "shopName": "Prohibition Taproom",
+          "vectorRank": null,
+          "bm25Rank": 21,
+          "fusionScore": 0.1022646598490225,
+          "text": "躺在床上，梦到 Pro Tap 汉堡，忍不住写这条评论——这汉堡是所有其他汉堡长大后想成为的样子。我爱它不只是因为它离我家就一个街区——我愿意走 500 英里倒在 Pro Tap 门口就为吃这个汉堡。我也是布里欧修面包的超级粉丝。薯条裹着一种你从未尝过的蒜香草本调料。帮自己一个忙，跳过你孩子的独奏会，放你那个玩了好几周电话捉迷藏的朋友鸽子……但别带那个总问“这是无麸质素食薯条吗？”的朋友……来点他们超棒的啤酒，一个汉堡，也许先来点他们的通心粉奶酪？我就说说……"
+        },
+        {
+          "rank": 25,
+          "reviewId": "yelp-ZHfg-YJQsWMOIrsGPrRCCg",
+          "shopId": 100282,
+          "shopName": "DK Sushi",
+          "vectorRank": 4,
+          "bm25Rank": null,
+          "fusionScore": 0.09988968376805996,
+          "text": "我强烈推荐选择外带。\n简单而有品味。包装也很好。午餐时间可能会很拥挤。要求沙拉额外加酱。"
+        },
+        {
+          "rank": 26,
+          "reviewId": "yelp-8jxIvzl8D-jYJ9-ZQZEypA",
+          "shopId": 100070,
+          "shopName": "Saladworks",
+          "vectorRank": 5,
+          "bm25Rank": null,
+          "fusionScore": 0.09379878343069208,
+          "text": "我真的很喜欢这个地方，概念很棒。人们友好且乐于助人。\n一开始菜单可能有点让人不知所措——但记住你可以从各种食材中“创造自己的”沙拉，你可以自由发挥，做出“完美适合你”的沙拉。食材新鲜，味道很好。每份沙拉都会配一个面包卷，但我最近不吃面包，所以无法评价它的质量，因为我没吃。我大概每周在这里吃两次沙拉。\n从未失望过。\n如果你在遵循任何饮食计划，这里是个理想的地方，他们提供的种类繁多，你很容易找到符合你偏好的东西。\n再说说这里的工作人员，他们非常友好。我亲眼看到他们轻松专业地处理难缠的顾客。"
+        },
+        {
+          "rank": 27,
+          "reviewId": "yelp-GJVjEx3bCZawRTydNcZgpQ",
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "vectorRank": 7,
+          "bm25Rank": null,
+          "fusionScore": 0.08902074135360855,
+          "text": "在附近，需要找个地方快速吃早餐并做些工作/阅读。Red Hook是个好地方。小店很安静，只有一两桌其他顾客，但有很多人进来买咖啡。我犹豫不决，请他们推荐早餐三明治。点了Preacher Man，甜咸搭配得很好。额外加分的是有豆豉培根和素香肠选项。我想所有三明治都配有一份土豆沙拉，也很好吃。如果再来这一带，肯定会再来的。"
+        },
+        {
+          "rank": 28,
+          "reviewId": "yelp-ViNMO4TAArVqoXI5WHRQYw",
+          "shopId": 100261,
+          "shopName": "Cafe Square One",
+          "vectorRank": 8,
+          "bm25Rank": null,
+          "fusionScore": 0.08776440827466832,
+          "text": "食物和氛围都很棒。科布沙拉很好吃。绝对推荐这家店。"
+        },
+        {
+          "rank": 29,
+          "reviewId": "yelp-GVFDXufmakdWjYhr54P35A",
+          "shopId": 100181,
+          "shopName": "Chez Yasmine",
+          "vectorRank": null,
+          "bm25Rank": 22,
+          "fusionScore": 0.08708413167212659,
+          "text": "6美元的价格超划算！\n\n我和几个朋友意外来到这里。我之前听说过这辆餐车有不错的素食选择，但听说价格大约6-7美元，所以一直没来尝试。\n\n然而，在朋友们的怂恿下，我站在餐车前看了看菜单——结果发现了惊喜！每道菜的价格都包含了菜品、一份水果和一瓶水！所以完全物有所值——尤其是食物味道还不错。\n\n我很欣赏他们标注清晰的菜单，最后点了一份素食越南三明治（还有一瓶水和一根香蕉！）。味道很丰富，我能很好地品尝到每一种味道和口感，面包尤其棒。不过，不太管饱……但我想水果就是用来填肚子的吧？\n\n一定会再来尝试其他选择！更多人需要知道这个超值优惠。"
+        },
+        {
+          "rank": 30,
+          "reviewId": "yelp-S2WJ5a52IlkCQZEXI-C-mA",
+          "shopId": 100048,
+          "shopName": "Breakfast Boutique Chestnut Hill",
+          "vectorRank": 9,
+          "bm25Rank": null,
+          "fusionScore": 0.0666878264611551,
+          "text": "非常吸引人！装饰得很好。他们有早餐菜单，包含一些南方特色菜。一定要尝尝粗玉米粉和虾！他们还做沙拉——以色列沙拉很棒！"
+        },
+        {
+          "rank": 31,
+          "reviewId": "yelp-mCyGnkavLqLJTV_qPPpFWA",
+          "shopId": 100226,
+          "shopName": "Goldie",
+          "vectorRank": null,
+          "bm25Rank": 23,
+          "fusionScore": 0.06320325013856153,
+          "text": "很久以来吃过的最好的法拉费！我点了法拉费沙拉套餐。我希望法拉费能再多一点，但嘿，这是沙拉。\n\n甜菜姜汁汽水非常清爽；不会太甜，酸酸的很提神。\n\n午餐时间去，队伍走得很快，而且速度更快了。"
+        },
+        {
+          "rank": 32,
+          "reviewId": "yelp-ok__xGjEnwOwmyKusAbBCA",
+          "shopId": 100234,
+          "shopName": "Yellow Bicycle Canteen",
+          "vectorRank": 10,
+          "bm25Rank": null,
+          "fusionScore": 0.06103643764160998,
+          "text": "我不是素食者，但我喜欢素食餐厅。为什么？因为我确信，为了生存，食物必须*非常好*，而Yellow Bicycle Canteen没有偏离这个规则！我的伴侣最近从那里带了些食物回家，味道非常浓郁。我还在想着那个茄子（？）三明治，尽管我不太喜欢甜菜，但那些甜菜调味得很好。我们一定会再来的！"
+        },
+        {
+          "rank": 33,
+          "reviewId": "yelp-UOfpciAn1koaoGYDTFoW7g",
+          "shopId": 100224,
+          "shopName": "HipCityVeg - University City",
+          "vectorRank": 12,
+          "bm25Rank": 30,
+          "fusionScore": 0.05627774251145362,
+          "text": "好吧，我撒谎了。这里没有falafel。回去点了ziggy汉堡（嗯），脆皮鸡肉三明治（太棒了！），藜麦辣椒（好吃），乌冬沙拉（嗯），和红薯薯条（还不错）。有个素食快餐店的选择很好，因为谁知道那些地方在肉里放了什么。"
+        },
+        {
+          "rank": 34,
+          "reviewId": "yelp-DwSwMOW4ErGGQ8SqImv58A",
+          "shopId": 100211,
+          "shopName": "Bitar's",
+          "vectorRank": 13,
+          "bm25Rank": null,
+          "fusionScore": 0.047179625257662124,
+          "text": "我买了这家店的团购券，昨天终于决定用了。我和男朋友都点了素食拼盘，吃得太饱了，连汤都点不了。拼盘包括美味的塔布勒沙拉、两个法拉费、鹰嘴豆泥、巴巴加努什、腌萝卜条和皮塔饼。非常美味！\n\n唯一的问题是员工态度冷淡。不是粗鲁，只是他们似乎不在乎我在那里。这让我不想留下来尝试更多东西。下次我会点外卖。"
+        },
+        {
+          "rank": 35,
+          "reviewId": "yelp-zvBfEu3hY7_0ZI_OCBGw6Q",
+          "shopId": 100188,
+          "shopName": "Rangoli: Vibrant Flavors of India",
+          "vectorRank": 14,
+          "bm25Rank": null,
+          "fusionScore": 0.04381081954974819,
+          "text": "素食和纯素汤品、开胃菜、主菜种类丰富。服务员知识渊博、细心周到又有趣。绝对会再来的。"
+        },
+        {
+          "rank": 36,
+          "reviewId": "yelp-ldgaDke71ihqVBcH7ZTxoA",
+          "shopId": 100261,
+          "shopName": "Cafe Square One",
+          "vectorRank": 15,
+          "bm25Rank": null,
+          "fusionScore": 0.04119413754817407,
+          "text": "服务快速友好。蛋白质沙拉味道很好，份量大。新鲜食材，很快就能填饱你。当他们叫你的名字时准备好。如果你不够快，他们会每半秒重复一次直到你取餐。"
+        },
+        {
+          "rank": 37,
+          "reviewId": "yelp-DNyyPiR-WeZybHGRYFTGGw",
+          "shopId": 100071,
+          "shopName": "Olly",
+          "vectorRank": 16,
+          "bm25Rank": null,
+          "fusionScore": 0.04078282918339828,
+          "text": "今天我和一个朋友来这里吃早午餐，我很高兴来了。我觉得价格相当合理，装饰简单但诱人。咖啡也不错。\n\n我的朋友点了煎蛋卷，他基本上狼吞虎咽地吃完了，我点了法罗沙拉配土豆。首先，我很高兴在菜单上看到这样的菜——不太不健康也不太无聊，除了藜麦之外还有其他谷物（不是讨厌，只是欢迎不同的谷物），而且没有水波蛋的话可能就变成素食了。土豆做得不错，调味也很好，但对我来说有点苦/焦。我还觉得辣椒籽增加了奇怪的口感，所以我把辣椒挑了出来。\n\n所以，我喜欢这里的食物，但会改变一些东西。总的来说，我绝对是粉丝。"
+        },
+        {
+          "rank": 38,
+          "reviewId": "yelp-WdligyWVn_4gf72gah6VPA",
+          "shopId": 100047,
+          "shopName": "Golden Triangle",
+          "vectorRank": 17,
+          "bm25Rank": null,
+          "fusionScore": 0.03605676530934913,
+          "text": "红咖喱太棒了！食材新鲜。他们迎合素食者和纯素食者。是我点泰式外卖的首选！食物质量和份量价格都很棒。"
+        },
+        {
+          "rank": 39,
+          "reviewId": "yelp-BNAGSW3lPfUcTjPCMVJqAQ",
+          "shopId": 100027,
+          "shopName": "NY Bagel & Deli Shop",
+          "vectorRank": null,
+          "bm25Rank": 24,
+          "fusionScore": 0.03558768668927995,
+          "text": "在一个食物选择不多的地区，很棒的小型本地百吉饼店。百吉饼和我在这座城市吃过的其他任何一家一样好，服务超级友好。咖啡不是最好的，但考虑到你支付的价格，一切都很便宜。绝对是该地区的一个好地方。"
+        },
+        {
+          "rank": 40,
+          "reviewId": "yelp-FISTpfTILbaxWrIyr0AA1g",
+          "shopId": 100044,
+          "shopName": "Chase's Hop Shop",
+          "vectorRank": 18,
+          "bm25Rank": null,
+          "fusionScore": 0.034673651776352746,
+          "text": "几个月前我尝试了这家宝藏店。他们的菜单虽小但令人满意。每个人都能找到适合自己的东西。我正在节食，老板特意为我做了一份菜单上没有的美味沙拉来满足我的需求。价格合理，我绝对会推荐这个地方。"
+        },
+        {
+          "rank": 41,
+          "reviewId": "yelp-dWnOHZLH9AP0aBGpzzZ-oQ",
+          "shopId": 100118,
+          "shopName": "Kurry Shack",
+          "vectorRank": 19,
+          "bm25Rank": null,
+          "fusionScore": 0.032616069794036605,
+          "text": "美味！为每个人提供了很多选择；素食、纯素和无麸质选项。清真。可定制的辣度。点了外卖。服务及时友好。"
+        },
+        {
+          "rank": 42,
+          "reviewId": "yelp-_4PusVWRhPMAQOhyxAEtFQ",
+          "shopId": 100070,
+          "shopName": "Saladworks",
+          "vectorRank": null,
+          "bm25Rank": 25,
+          "fusionScore": 0.023519581161760367,
+          "text": "我经常来这家Saladworks，因为我知道能吃到新鲜的食材和得到礼貌的服务。他们刚开业时出名的是有超多种沙拉可选，而且居然还提供“自创”选项。我仍然喜欢这个主意，因为有时候你不想动脑子，只想选个不用思考的，哈哈。而其他时候你又想自由发挥，混搭出美味组合，哈哈。\n\n说实话，我去Saladworks只吃沙拉。我从没吃过他们的三明治，有几次喝汤觉得太咸了。\n\n我最喜欢的Saladworks沙拉是Sophie's沙拉、Nicoise和Mandarin Chicken（我点的时候会去掉橘子，因为我不能吃太多柑橘）。相信我，用苹果代替或者加其他咸味配料一样好吃。Nicoise（读作“nee-swah”）是我几年前想减肥时的首选沙拉。我称它为奇迹午餐。最后，Sophie's沙拉让我开心得跳起来——超爱那种混合风味！\n\n以下是我其他最爱的清单：\n\n额外添加：在沙拉里加些黑橄榄，增添风味，对健康也有好处。\n\n配料：毫无疑问，蜜糖山核桃让沙拉体验超棒！！\n\n奶酪：切达、蓝纹和羊乳酪是我的首选奶酪。\n\n酱汁：如果沙拉里有鸡蛋，我通常会选千岛酱或法式酱。否则，东方芝麻酱很美味，覆盆子油醋汁是水果味的提神剂——让沙拉吃起来更有趣！\n\n祝你沉迷沙拉快乐！"
+        },
+        {
+          "rank": 43,
+          "reviewId": "yelp--jegMmvffouxq_XXwWDN7w",
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "vectorRank": 21,
+          "bm25Rank": null,
+          "fusionScore": 0.022430808660775365,
+          "text": "喜欢这里的氛围和菜单。我经常来喝冰咖啡或芒果牛油果冰沙（加豆奶很棒），还有带tofutti的百吉饼，所有这些我都喜欢。今天我尝试了他们的纯素鸡肉沙拉配土豆沙拉，简直不可思议。喜欢每种的味道和口感，绝对会把它加入常点清单。"
+        },
+        {
+          "rank": 44,
+          "reviewId": "yelp-STq9_zJ9xKWgF8CArKOu2Q",
+          "shopId": 100081,
+          "shopName": "Urban Eatery",
+          "vectorRank": null,
+          "bm25Rank": 26,
+          "fusionScore": 0.02063033162840519,
+          "text": "从食物方面来说，我喜欢这个地方。我在附近工作，选择不多，所以有一个品种丰富的地方（披萨、沙拉吧、“国际”食品、犹太洁食、烧烤）很不错。\n\n然而——每次我在这里点餐，基本上都要花至少30分钟等他们上菜。在这里工作的人，最差是缺乏动力，最好是完全困惑。加热一个素汉堡而已，又不是造火箭。上次我去的时候，即使店里很空，他们还是搞不清我点了什么（收据都打印出来了……）\n\n价格也太贵了。午餐加上薯条和饮料大概要12美元左右。"
+        },
+        {
+          "rank": 45,
+          "reviewId": "yelp-ax4PW7LnxO7Sszb8eVo8qw",
+          "shopId": 100181,
+          "shopName": "Chez Yasmine",
+          "vectorRank": null,
+          "bm25Rank": 27,
+          "fusionScore": 0.01985561501809867,
+          "text": "到目前为止，Spruce街上我最喜欢的餐车之一！找到一辆提供多种健康选择的餐车真是令人耳目一新。\n\n我尝试了鸡肉越南三明治。虽然不够正宗，但法棍面包很美味，食材新鲜！我对三明治里的芥末蛋黄酱有点怀疑，因为我不喜欢芥末，但芥末味很淡，实际上和味道组合搭配得很好。5美元的价格很划算，还附带一根香蕉和一杯饮料。\n\n还有很多素食和无麸质选择。其他菜单包括更多“法式”三明治、藜麦沙拉和浆果沙拉。\n\n我绝对认为这会成为我常去的地方之一。"
+        },
+        {
+          "rank": 46,
+          "reviewId": "yelp-96qCG9BV8GfZhr3X2NDh5A",
+          "shopId": 100070,
+          "shopName": "Saladworks",
+          "vectorRank": 22,
+          "bm25Rank": null,
+          "fusionScore": 0.019299367108169513,
+          "text": "快餐五星\n\n服务5/5\n做沙拉的师傅动作很快，而且面带微笑地做沙拉。他们都非常好，服务意识很强。\n\n沙拉4/5\n我喜欢全麦面包卷，沙拉新鲜且制作精美，但调料（淡凯撒）没味道。如果我再回来（我可能会），我会选别的调料。"
+        },
+        {
+          "rank": 47,
+          "reviewId": "yelp-dS-sb5QW4KSsypYBnffzDQ",
+          "shopId": 100096,
+          "shopName": "Vientiane Café",
+          "vectorRank": 23,
+          "bm25Rank": null,
+          "fusionScore": 0.01706228349845099,
+          "text": "食物很棒，员工友好，可以自带酒水，餐厅小巧舒适。我每次都点咖喱鸭（辣）、Pad Se Eww、木瓜沙拉和Naam沙拉。"
+        },
+        {
+          "rank": 48,
+          "reviewId": "yelp-06ukq71sa6kGSvEAzTvfJA",
+          "shopId": 100234,
+          "shopName": "Yellow Bicycle Canteen",
+          "vectorRank": 24,
+          "bm25Rank": null,
+          "fusionScore": 0.012834009733505498,
+          "text": "真的很好吃，有很多纯素选项和可以做成纯素的菜品。我点了烤纯素，因为强烈推荐！小店，氛围轻松，员工友好。下次来城里我一定会再来这里！"
+        },
+        {
+          "rank": 49,
+          "reviewId": "yelp-keRAl8LMMtLOPVgWhOMsPA",
+          "shopId": 100211,
+          "shopName": "Bitar's",
+          "vectorRank": null,
+          "bm25Rank": 28,
+          "fusionScore": 0.009379629712477945,
+          "text": "今天和Mike F一起吃了中东陀螺。这家店真不错。忘了你在郊区或海边吃过的陀螺吧。这家店加了中东配料，让它们变得特别。这里也不是约会的地方。只是一个小吃店，附带一个市场区。我两边都消费了。"
+        },
+        {
+          "rank": 50,
+          "reviewId": "yelp-ckf8JS9hcOkOSe80Qd49qg",
+          "shopId": 100115,
+          "shopName": "Rittenhouse Market",
+          "vectorRank": 25,
+          "bm25Rank": null,
+          "fusionScore": 0.006990577947690146,
+          "text": "一般。\n这家店有杂货店该有的食物。有点贵，熟食区不太靠谱，但位置不错。店里需要更多有机选择。内部环境让你想快点拿完食物就走。"
+        },
+        {
+          "rank": 51,
+          "reviewId": "yelp-04y5uyioa2xUXt5WusNUwQ",
+          "shopId": 100078,
+          "shopName": "Junes Breakfast",
+          "vectorRank": 26,
+          "bm25Rank": null,
+          "fusionScore": 0.006911823094607948,
+          "text": "路过时看起来不起眼，但里面充满了美味的食物和更好的客户服务。我点了一些简单快捷的东西。味道相当不错。如果你外带玉米粥，记得要盐和胡椒，因为上面只放了黄油。当然，那味道很淡。除此之外，我没什么可抱怨的。来看看这个地方，亲自体验一下吧。"
+        },
+        {
+          "rank": 52,
+          "reviewId": "yelp-KEY5K6jrl18LLtyZ8bfDxg",
+          "shopId": 100284,
+          "shopName": "Fortune Chinese Restaurant",
+          "vectorRank": 27,
+          "bm25Rank": null,
+          "fusionScore": 0.00601847559134487,
+          "text": "没什么特别的，但如果你想吃简单的中餐外卖，这是附近最好的地方。食物似乎比你有时遇到的油腻少，而且人们非常友好。"
+        },
+        {
+          "rank": 53,
+          "reviewId": "yelp-Kgru_DpJf-0o4mMe4VxlCA",
+          "shopId": 100082,
+          "shopName": "Dragon House",
+          "vectorRank": null,
+          "bm25Rank": 29,
+          "fusionScore": 0.005299443775091117,
+          "text": "Dragon House是我快速、便宜、好吃的中餐首选。店主超级超级好，如果你想要一些奇怪的平装书、DVD或廉价珠宝配餐，他们也能满足你。素食豆腐汤2.98美元/品脱，素食捞面4.25美元/品脱，素佛跳墙5美元/品脱，其他10种素食选项7.75美元。质量稳定美味，酱料可口，分量也足。"
+        },
+        {
+          "rank": 54,
+          "reviewId": "yelp-h4vPGRsHbBA6DaBkJvzYOA",
+          "shopId": 100096,
+          "shopName": "Vientiane Café",
+          "vectorRank": 28,
+          "bm25Rank": null,
+          "fusionScore": 0.0029265303405301567,
+          "text": "尽管万象餐厅几乎我想点的东西都卖完了，我还是给四星。他们的食物就是那么好，菜单那么丰富。\n\n（但说真的，多进点豆腐。这是西费城，素食者/纯素食者可能比非素食者还多……呃！！！）\n\n尽管他们没能提供我所需的蛋白质摄入，我仍然很享受我的餐点。我们先点了木瓜黄瓜沙拉，口感细腻又复杂。然后我点了蔬菜菠萝炒饭，并让他们多加蔬菜，因为豆腐没了。他们照做了，盘子里的食物很美味。我选了辣度4/5，但觉得不是很辣，可能是我耐辣度高。\n\n甜点我们点了芒果糯米饭和巧克力香蕉炸某物……都很好吃。芒果糯米饭有新鲜芒果片和椰子浇头。\n\n我会再来的。希望到时候他们有我点的东西。"
+        },
+        {
+          "rank": 55,
+          "reviewId": "yelp-tPIPBD3p-CMTVfxtni-aBA",
+          "shopId": 100224,
+          "shopName": "HipCityVeg - University City",
+          "vectorRank": 29,
+          "bm25Rank": null,
+          "fusionScore": 0.0010887189765317086,
+          "text": "Hip City Veg 绝对是费城最好的快餐式素食餐厅，最令人印象深刻的是他们的食物肯定能吸引所有人！店主不遗余力地开发健康、美味且广受欢迎的素食食谱，无论你点什么，都不会失望。我喜欢烤“鸡肉”三明治配红薯条和一杯groothie（绿色冰沙），为了你和你的健康，去那里吃午餐吧！"
+        },
+        {
+          "rank": 56,
+          "reviewId": "yelp-avKMOOMOFmrJnBJI8B-f_w",
+          "shopId": 100073,
+          "shopName": "Han Dynasty",
+          "vectorRank": 30,
+          "bm25Rank": null,
+          "fusionScore": 0.0,
+          "text": "很棒的中餐。他们有费城地区一些更好的菜品和选择。对素食者也很友好，因为几乎所有菜品都有豆腐/蔬菜替代品。"
+        }
+      ]
+    },
+    {
+      "id": "fuzzy-shop-test-006",
+      "question": "准备开车过去，想找停车比较省心、下车后不用走太远的店。",
+      "intent": "easy_parking",
+      "candidateCount": 58,
+      "candidates": [
+        {
+          "rank": 1,
+          "reviewId": "yelp-E0LuSaJKfZUguAwteNOUxQ",
+          "shopId": 100091,
+          "shopName": "Three 12 Sport Bar and Lounge",
+          "vectorRank": null,
+          "bm25Rank": 1,
+          "fusionScore": 0.8,
+          "text": "这些人连电话都不接，我想在从泽西开车过去看看之前问问他们酒吧的情况。现在是下午4点半。我刚来这个地区，看来我不会去这里了。"
+        },
+        {
+          "rank": 2,
+          "reviewId": "yelp-r1NZMjev5Hq-UVl9gSb7mg",
+          "shopId": 100033,
+          "shopName": "Pacifico Hyundai",
+          "vectorRank": null,
+          "bm25Rank": 2,
+          "fusionScore": 0.7829079018382927,
+          "text": "我找到了一家经销商，他们有一辆Equus在停车场，我和妻子可以看看、获取信息并试驾。我们从宾夕法尼亚州米迪亚开车过去。一位经理迎接了我们，说会给我们找个销售员。在展厅里坐了20分钟，就我们两个人，我们决定走出去离开。多么糟糕的经历，真不敢相信他们还在营业。"
+        },
+        {
+          "rank": 3,
+          "reviewId": "yelp-hRgARHr6tPji3iTWmrqyow",
+          "shopId": 100006,
+          "shopName": "Golden Chopstick Chinese Restaurant",
+          "vectorRank": null,
+          "bm25Rank": 3,
+          "fusionScore": 0.6235665387454121,
+          "text": "过去几个月里第二次点餐，过去几个月里第二次被送餐员吼，所以我想我再也不会点Golden Chopstick了。不知道这个司机什么时候开始干的，但他从车里打电话给你，拒绝下车把食物送上来。对于一个本来就一般的店来说，这算不上什么送餐服务。"
+        },
+        {
+          "rank": 4,
+          "reviewId": "yelp-GgU4I2agYJ1LgtKlwfwmsg",
+          "shopId": 100016,
+          "shopName": "Brown Sugar Bakery & Cafe",
+          "vectorRank": null,
+          "bm25Rank": 4,
+          "fusionScore": 0.6135670211469985,
+          "text": "令人惊叹的咖喱山羊rotis和牛尾。周末晚上他们会卖完，所以一定要早点去。我曾在周五或周六去过，那时他们只剩下炖鸡。我从fishtown地区开车过去，完全值得！！如果我能点外卖，我可能会吃这些菜吃得太多。"
+        },
+        {
+          "rank": 5,
+          "reviewId": "yelp-31wSSJpUAOeB_p3STls-Yg",
+          "shopId": 100281,
+          "shopName": "Shing Kee",
+          "vectorRank": null,
+          "bm25Rank": 5,
+          "fusionScore": 0.6072199462044382,
+          "text": "很棒的正宗中餐。省去你在唐人街找停车位的麻烦。"
+        },
+        {
+          "rank": 6,
+          "reviewId": "yelp-Nx84FOIRRmroK91kOYMn3Q",
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "vectorRank": null,
+          "bm25Rank": 6,
+          "fusionScore": 0.5938632315090617,
+          "text": "我去年八月搬到这个地区，花了一些时间想找一家步行距离内不错的咖啡店。不用说，Re-animator有城里最好的咖啡和浓缩咖啡。位置很好，里面比较小，但确实很放松。强烈推荐，尤其是外地/外州来的游客。"
+        },
+        {
+          "rank": 7,
+          "reviewId": "yelp-n-jdU8elhf1XbdP1xE5tuw",
+          "shopId": 100281,
+          "shopName": "Shing Kee",
+          "vectorRank": null,
+          "bm25Rank": 7,
+          "fusionScore": 0.5255326512578807,
+          "text": "完美！开了45分钟车到Minados，结果因为我们在关门前半小时到被拒之门外，于是我们决定开回费城来这家店。服务很棒！食物超赞！我来过几次，每次都是美妙的体验。我本以为他们快打烊了会催我们，但并没有。只有另一家人在用餐，所以没什么干扰。所有服务员都会主动过来服务，不用叫，这很加分。我绝对会再来，也会推荐给所有人。我们点了六道菜，上菜速度适中。价格也很合理！比周五晚上开车去唐人街找停车位强多了！"
+        },
+        {
+          "rank": 8,
+          "reviewId": "yelp-ZgAEy80gCA39nr6EhP2WcQ",
+          "shopId": 100022,
+          "shopName": "Jong Ka Jib",
+          "vectorRank": null,
+          "bm25Rank": 8,
+          "fusionScore": 0.44534600662534163,
+          "text": "城里最好的软豆腐。毫无疑问。没有对手。每次都值得从市中心开车过来……如果你好这口的话。"
+        },
+        {
+          "rank": 9,
+          "reviewId": "yelp-tmWuNaK3fuCb0LP1sZZeZQ",
+          "shopId": 100032,
+          "shopName": "McDonald's",
+          "vectorRank": null,
+          "bm25Rank": 9,
+          "fusionScore": 0.4388913144613309,
+          "text": "简直是我这辈子去过的最差的麦当劳。开车到得来速，被问想要什么，然后我试图点一个汉堡时被打断，被告知我得等着，她还没准备好。然后我等了 15 分钟，没人应答，我准备开走离开时，我前面根本没有排队的人。之前有一次，总有员工在骂人和打架。甚至经理走到第一个窗口的人面前，大声说她不在乎顾客的订单是否错了，而他们正坐在那里边吃边接单。我以为我会给他们第二次机会，但再也不会了。"
+        },
+        {
+          "rank": 10,
+          "reviewId": "yelp-oy--WjOsjZGDaitx5VdfLg",
+          "shopId": 100108,
+          "shopName": "Vineyards Cafe",
+          "vectorRank": null,
+          "bm25Rank": 10,
+          "fusionScore": 0.3421775474434976,
+          "text": "我和妻子从日耳曼敦一路开车过来。这是我们在城里最喜欢的咖啡店。咖啡好喝，食物也一直很棒。（我最喜欢Honeybee）。员工也很热情高效。"
+        },
+        {
+          "rank": 11,
+          "reviewId": "yelp-3BhjvsFTHbIImEx3OHWGbw",
+          "shopId": 100236,
+          "shopName": "National Car Rental",
+          "vectorRank": null,
+          "bm25Rank": 11,
+          "fusionScore": 0.3247302434506123,
+          "text": "当我读到关于National的许多评论时，给一星的人是因为班车让他们在机场等待。他们因为等班车比租其他公司的人久这样的小事而大惊小怪。确实，我在费城不得不站在湿热空气中，用骨折的脚趾等了半小时。然而，当我到达租车公司时，客服人员竭尽全力加快服务。他们给了我瓶装冷水，升级了车辆，并让我加入了翡翠俱乐部。我很快就上路了。我发现为什么机场其他人对等班车不那么在意，因为一旦他们到达租车公司，就跳下车，跳进车里，在班车还没离开下车区时就走了。他们是经验丰富的租车者。\n\n还车时，手续快捷顺畅。我甚至不用等收据，因为他们发邮件给我。班车也很快出发，及时送我们到航站楼。现在我是翡翠俱乐部会员，可以跳下班车，跳进车里，直接上路。"
+        },
+        {
+          "rank": 12,
+          "reviewId": "yelp-sZ1vHgdqijeUdfkOW6E_UQ",
+          "shopId": 100222,
+          "shopName": "Dunkin'",
+          "vectorRank": 24,
+          "bm25Rank": 12,
+          "fusionScore": 0.2828397894182666,
+          "text": "这是我早高峰绕路的地方。哈哈。开车上班路上喝杯咖啡吃个百吉饼。员工友好且乐于助人。食物和员工从未出过问题。很棒的免下车服务点。"
+        },
+        {
+          "rank": 13,
+          "reviewId": "yelp-Glx1qk3RhR1xvMGrfzSX1A",
+          "shopId": 100281,
+          "shopName": "Shing Kee",
+          "vectorRank": null,
+          "bm25Rank": 13,
+          "fusionScore": 0.22997329920943513,
+          "text": "在费城所有的中餐馆里，这家是我心目中的顶级餐厅之一。他们是南费城唯一一家正宗的粤式中餐馆，非常方便。\n我不记得在这里吃过多少次了。\n我每次都点他们的铁板牛仔骨或者鸡肉茄子煲。\n这里的停车比唐人街容易多了！"
+        },
+        {
+          "rank": 14,
+          "reviewId": "yelp-8ccNTS9HfxzL2KHyLGWg-g",
+          "shopId": 100212,
+          "shopName": "Cily Chicken Rice",
+          "vectorRank": null,
+          "bm25Rank": 14,
+          "fusionScore": 0.22709173503365215,
+          "text": "刚离开这里就已经想再吃了，炸鸡太棒了，包括酱汁，不得不额外要了一份。这是社区的瑰宝，不幸的是我住在纽约，一直想尝试这个地方，完全值得开车过来，等不及要回来再吃，写这条评论时还在纠结要不要在开车回家前再去买点……*更新* 发完这条后我们又回去买了，哈哈"
+        },
+        {
+          "rank": 15,
+          "reviewId": "yelp-MhSusleKbPBIiq2fKHH5mA",
+          "shopId": 100277,
+          "shopName": "Valerio Coffee Roasters",
+          "vectorRank": 16,
+          "bm25Rank": 18,
+          "fusionScore": 0.2270168097040478,
+          "text": "可爱的咖啡店，适合工作。停车在附近比较困难，但除此之外，空间很大，目前有室内座位。咖啡不错，咸味吐司也很好吃。"
+        },
+        {
+          "rank": 16,
+          "reviewId": "yelp-7aEjHcDeiM6j2OfQAe0_NA",
+          "shopId": 100015,
+          "shopName": "Baltic Bakery",
+          "vectorRank": null,
+          "bm25Rank": 15,
+          "fusionScore": 0.21500758320138666,
+          "text": "我喜欢这家面包店，但我希望他们能收信用卡。我没带信用卡，想找银行，结果走了大概两个小时才找到。幸运的是，好心的女士让我把东西放在她的面包店里，这样我就不用提着到处走了。\n\n我喜欢所有的糕点，每样都很好吃！如果你来城里，我推荐这家面包店。我在马里兰州，所以当我开车去费城时，我一定会去这家面包店。"
+        },
+        {
+          "rank": 17,
+          "reviewId": "yelp-waTjYKyOtyOviLjivMQlYA",
+          "shopId": 100119,
+          "shopName": "Wawa",
+          "vectorRank": null,
+          "bm25Rank": 16,
+          "fusionScore": 0.20272312660410996,
+          "text": "我很喜欢这家Wawa，因为它的中心位置。虽然他们总是很忙，但应对高峰时段做得不错。有一次我的墨西哥卷饼做得不对，直到我回到办公室才发现。当然，我的午餐时间已经结束了，所以没时间回去换。我打电话过去，那位年轻女士（她说自己是经理）非常友善、道歉并理解我不能立即返回。她让我在更方便的时间轻松更换了订单。我到的时候已经准备好了，而且是新鲜的。优点是员工总是很友善；根据我的经验，你付出什么就得到什么。位置离市中心任何地方都很近，如果不在附近，你知道几个街区外就有一家……哈哈。他们通常库存充足。外面直接有Lyft上车点，如果你开车，还有收费街边停车。缺点是午餐高峰，但全世界中午12点不都这样吗？收费停车也是个缺点。没有停车场对开车的人不方便（但考虑到位置……嗯，我理解）。我遇到的另一个问题是晚上没有柠檬水。大家让蓝莓石榴柠檬水一直供应吧！"
+        },
+        {
+          "rank": 18,
+          "reviewId": "yelp-sCjkJ6_GtagHOaUMyZNQig",
+          "shopId": 100027,
+          "shopName": "NY Bagel & Deli Shop",
+          "vectorRank": 1,
+          "bm25Rank": null,
+          "fusionScore": 0.2,
+          "text": "快速停留的好地方，有百吉饼、咖啡、沙拉、三明治、卷饼、拼盘等。没有室内座位或卫生间。走进去，点餐，然后走人。街边停车选择不错，因为位置有点偏僻。"
+        },
+        {
+          "rank": 19,
+          "reviewId": "yelp-T6nwnFEgqp8TUueoQa8M_w",
+          "shopId": 100276,
+          "shopName": "Philadelphia Flyers",
+          "vectorRank": null,
+          "bm25Rank": 17,
+          "fusionScore": 0.19954655878262634,
+          "text": "出差期间，我和几个同事决定去看一场飞人队的比赛，很高兴我们去了。我们从酒店打Uber过去，避开了停车场和那些混乱。在停车场外下车，直接走进去。球场外有储物柜，如果你不想整晚拖着外套或任何其他不想随身携带的东西，可以放进去。球场非常干净，包括洗手间。我们坐在200区，但仍然感觉就在比赛现场。场内没有不好的座位。食物和饮料选择很多。虽然饮料和食物价格便宜点会更好，但我去过很多更贵的地方。很棒的体验，等不及再看一场比赛了。强烈推荐。"
+        },
+        {
+          "rank": 20,
+          "reviewId": "yelp-mNQ3jCHzSk1A56LZnF7Ohg",
+          "shopId": 100019,
+          "shopName": "Federal Donuts",
+          "vectorRank": 2,
+          "bm25Rank": null,
+          "fusionScore": 0.16367249872600648,
+          "text": "喜欢来这家店，因为停车方便！！！还喜欢这条街上还有其他几家餐饮选择，所以如果你想从别家比如Goldie买点东西，也可以！而且整个杂货店显然也就在你手边！不过这家店关门比其他店早一点，所以要注意！"
+        },
+        {
+          "rank": 21,
+          "reviewId": "yelp-k1la20QgzGZeE4tSJg83fg",
+          "shopId": 100144,
+          "shopName": "Rite Aid",
+          "vectorRank": null,
+          "bm25Rank": 19,
+          "fusionScore": 0.15919050293757675,
+          "text": "我能说什么……库存充足且干净，这是好事。我不用他们的药房——我去 Ridge Ave 那家，以前是24小时营业，现在改成10小时药房，服务很好……但回到这家店，停车方便，客户服务在过去两年有所改善——他们只需要在排队人数达到5人时增加一个收银员，他们增加了一个保安，这很好。"
+        },
+        {
+          "rank": 22,
+          "reviewId": "yelp-goO_YBabC-PyWbgBkoqxVA",
+          "shopId": 100264,
+          "shopName": "Termini Bros Bakery",
+          "vectorRank": null,
+          "bm25Rank": 20,
+          "fusionScore": 0.14485173002898324,
+          "text": "关键在于奶油甜馅煎饼卷！别想分享——行不通的。你需要自己点一个。我很想尝尝他们的其他烘焙食品，但我无法抗拒那新鲜制作、完美酥脆的外壳，以及那令人惊叹的、不太甜的、奶油巧克力碎馅料。为了它，值得费心找停车位，侧身穿过Reading Terminal的人群。"
+        },
+        {
+          "rank": 23,
+          "reviewId": "yelp-z3YmkYIW7Fswbnw2RHt2lA",
+          "shopId": 100281,
+          "shopName": "Shing Kee",
+          "vectorRank": 3,
+          "bm25Rank": null,
+          "fusionScore": 0.13708353647371815,
+          "text": "吃顿好饭、享受友好服务的好地方。菜单不错，选择很多。还有一个加分项是“免费停车”。"
+        },
+        {
+          "rank": 24,
+          "reviewId": "yelp-hqlDiADrO8Jhx2_IrBZmag",
+          "shopId": 100172,
+          "shopName": "Athenian Restaurant",
+          "vectorRank": 4,
+          "bm25Rank": null,
+          "fusionScore": 0.12676363724605616,
+          "text": "不在最好的街区。把车停在后面的街道上可以省去往停车计时器里投硬币。\n\n前几天停下来吃早餐。地方不是最大的，但空间足够，桌子大小也不错。\n\n我到的时候，老板迎接了我，安排我坐下。然后一位女服务员过来招呼我，给我端来了一杯热咖啡。\n\n菜单不错，有很多早餐选择。我点了早餐特价。包括两个鸡蛋、家常薯条、吐司和咖啡。还不错，就是普通的早餐。不到5美元。\n\n走进去的时候，看起来很多都是常客。每个人都互相认识名字，一起闲逛。\n\n如果我在附近，我会再来吃早餐的。"
+        },
+        {
+          "rank": 25,
+          "reviewId": "yelp-ZZz2zVeV_Ad3NA6S2Kmafg",
+          "shopId": 100124,
+          "shopName": "Slices Pizza",
+          "vectorRank": null,
+          "bm25Rank": 21,
+          "fusionScore": 0.12466966135189349,
+          "text": "员工友好，食物美味，停车方便（前面免费两小时）。我觉得一份沙拉9美元有点贵，但我比较抠门。东方快车沙拉真的很好吃，里面有蜜饯核桃和橘子片。"
+        },
+        {
+          "rank": 26,
+          "reviewId": "yelp-8JFTnZ-G_i4rWoWWJiCOMg",
+          "shopId": 100053,
+          "shopName": "Sunoco",
+          "vectorRank": null,
+          "bm25Rank": 22,
+          "fusionScore": 0.11291710459041274,
+          "text": "这些Sunoco加油站同时加油是怎么回事？你去Aramingo那家，“正在加油，请稍后再来”，所以你开车到Allegheny这家，结果一样！！！\n\n拜托Sunoco，这可不是你们第一次这样做了。有时候你们甚至不放告示牌，让人下车进去问，结果只说“没油了”……太不地道了！"
+        },
+        {
+          "rank": 27,
+          "reviewId": "yelp-QAncGMLgGqXGD0v4ueYcyA",
+          "shopId": 100009,
+          "shopName": "Wendy's",
+          "vectorRank": 5,
+          "bm25Rank": null,
+          "fusionScore": 0.08373095903586808,
+          "text": "有时候这家店出餐又快又慢。但现在，有时候店里甚至不开免下车窗口的订单，让顾客进店点餐。既然他们老这样，那要免下车窗口有什么用。另外，店里有些年轻员工有时候话太多，不帮顾客点单。不过话说回来，食物还是不错的，但有时候员工很差劲。"
+        },
+        {
+          "rank": 28,
+          "reviewId": "yelp-_mlFQ8v62tB6lI-UuNs4kg",
+          "shopId": 100245,
+          "shopName": "Happy Joy Family Restaurant",
+          "vectorRank": 6,
+          "bm25Rank": null,
+          "fusionScore": 0.07847431827557533,
+          "text": "有点不起眼的小店。一个朋友推荐我来这里，因为我开车经过这个地方好几年了。食物不错；员工很棒。就在市中心，离Broad & Girard大约一个街区。这个地方很快就挤满了人，因为不太大。你也可以提前打电话点单。哦，我忘了说价格非常合理。来这里不会让你破产。"
+        },
+        {
+          "rank": 29,
+          "reviewId": "yelp-YJ4JMsrsAP-2gqi7xdmlsQ",
+          "shopId": 100298,
+          "shopName": "Applebee's Grill + Bar",
+          "vectorRank": 7,
+          "bm25Rank": null,
+          "fusionScore": 0.07549813699125749,
+          "text": "超级干净，停车不是问题，食物美味，服务员友好……还需要我多说吗？绝佳的用餐地点，我们一定会再来的。"
+        },
+        {
+          "rank": 30,
+          "reviewId": "yelp-aq_y8muz3s9z7v7nAEodbw",
+          "shopId": 100035,
+          "shopName": "Cedar Park Cafe",
+          "vectorRank": 8,
+          "bm25Rank": null,
+          "fusionScore": 0.07360263314059823,
+          "text": "食物很棒。员工友好。停车有点困难，因为交通繁忙，但整体体验很好，我会再来的！"
+        },
+        {
+          "rank": 31,
+          "reviewId": "yelp-u9j4UAksAZ1bKXjA-HpcUA",
+          "shopId": 100257,
+          "shopName": "Hertz Rent A Car",
+          "vectorRank": null,
+          "bm25Rank": 23,
+          "fusionScore": 0.07177506075411198,
+          "text": "我提前几周在 Hertz 预订了30街的车，打算开车去纽约参加一个周末婚礼。我特别要求了一辆小型紧凑型车。当我到 Hertz 时，他们说只有一辆车可用，是一辆非常大的轿车。当我问柜台的人‘提前预订有什么意义？’时，那人回答说‘确实没什么意义。’我对得到的服务非常失望。\n\n另外，更不用说取车和还车的停车场非常难找。\n\n我再也不会用 Hertz 了。"
+        },
+        {
+          "rank": 32,
+          "reviewId": "yelp-_rztwcvgHII7hDnFtSJXmA",
+          "shopId": 100013,
+          "shopName": "CVS Pharmacy",
+          "vectorRank": null,
+          "bm25Rank": 24,
+          "fusionScore": 0.07079357184061914,
+          "text": "我通常不在CVS购物，但当我购物时，我会来这家。这里停车位充足，商店总是很整洁。这里的药剂师也非常友好，总是面带微笑。这真是一家令人愉快的购物商店。\n\n他们还有免下车药房，非常方便。\n\n总的来说，我推荐这家店。"
+        },
+        {
+          "rank": 33,
+          "reviewId": "yelp-OvyJsrO3HPdWKruTXjo3Pw",
+          "shopId": 100229,
+          "shopName": "Izzy's 33",
+          "vectorRank": 9,
+          "bm25Rank": null,
+          "fusionScore": 0.06974994429725194,
+          "text": "食物和服务都很好，少一颗星只是因为空间大小。停车有点麻烦，但很值得。"
+        },
+        {
+          "rank": 34,
+          "reviewId": "yelp-FfkbCIujH-kbn7bgwKePdQ",
+          "shopId": 100251,
+          "shopName": "Bell Beverage",
+          "vectorRank": 10,
+          "bm25Rank": null,
+          "fusionScore": 0.06815221299848451,
+          "text": "有什么不喜欢的呢？\n\n如果你在找什么，他们都有！友好，服务快捷。仓库干净，价格合理。停车方便。很多次员工都主动帮我（找东西、装车等）。"
+        },
+        {
+          "rank": 35,
+          "reviewId": "yelp-Sb_X0QUiPQb-HXWNVIW1-Q",
+          "shopId": 100257,
+          "shopName": "Hertz Rent A Car",
+          "vectorRank": 11,
+          "bm25Rank": null,
+          "fusionScore": 0.06638221129982642,
+          "text": "这是最差的赫兹租车门店。我因为工作每周租车一到两次，去过很多赫兹门店。这里客户服务差，取车地点不方便，而且车从来都不是满油。让我分享一些经验教训，赫兹的人应该告诉你但没说：\n\n1. 离开租车柜台前，确保你有一张停车票才能出车库。\n2. 我从未在这个门店租到过满油的车。他们告诉你油“比满油少一点”。你怎么还车时也“比满油少一点”？我最后总是帮他们加满油，因为不知道什么时候该停。\n3. 以前车在30街车站的地下停车场。现在不是了。走出租车办公室右转，上坡道直到找到扶梯。乘扶梯上去。走过天桥，再乘扶梯下去。离开大楼，穿过走道到租车区，车在室外。所以，如果下雨或下雪，祝你好运。\n4. 用第一条的停车票离开停车场。\n5. 还车时，随便停在一个位置，把钥匙带回租车柜台（回到大楼，上扶梯，过天桥，下扶梯，穿过整个车站）还钥匙。别指望有人口头确认总金额，别指望微笑或祝你愉快。直接走开，发誓下次打车。"
+        },
+        {
+          "rank": 36,
+          "reviewId": "yelp-LanAhNhwD3YeY7goVd6FAA",
+          "shopId": 100257,
+          "shopName": "Hertz Rent A Car",
+          "vectorRank": 12,
+          "bm25Rank": null,
+          "fusionScore": 0.061512886637737955,
+          "text": "我拿着预订（准时）走到柜台，但没有车可用……柜台的人建议我“去喝杯咖啡，耐心等待。”我不想喝咖啡，我只想要一辆车。等了一会儿后，我又走了20分钟才到停车场。还车晚了30分钟，被多收了一天的费用。把钥匙扔进还车箱后。\n\n工作人员对账单问题不理会。避之不及！"
+        },
+        {
+          "rank": 37,
+          "reviewId": "yelp-fu-zQRC8vDV-QbEXcWF6zg",
+          "shopId": 100285,
+          "shopName": "30th Street Station",
+          "vectorRank": 13,
+          "bm25Rank": null,
+          "fusionScore": 0.05784753551188067,
+          "text": "30街车站相当不错。容易导航，非常干净，工作人员相对乐于助人（按费城标准），食物选择也很好。有很多座位可以坐着等车。建筑本身令人印象深刻，是个坐着看人的好地方。停车有点问题，所以计划好让人接送或打车。火车站的位置有点偏远，不在社区里，所以别指望从那里步行去任何地方。我上大学时经常坐火车，从没在那里有过糟糕的经历。"
+        },
+        {
+          "rank": 38,
+          "reviewId": "yelp-0JOfyXafzQXxRjChhQmw8g",
+          "shopId": 100160,
+          "shopName": "Ricci's Hoagies",
+          "vectorRank": 14,
+          "bm25Rank": null,
+          "fusionScore": 0.0533364732770204,
+          "text": "唯一的问题是南费城的停车位太糟糕了，我转了一圈又一圈，然后找到了一个。结果店里空无一人。下次我会打电话下单并并排停车。我拿了一份菜单，下次想吃三明治时会打电话下单。"
+        },
+        {
+          "rank": 39,
+          "reviewId": "yelp-9QpT_JCQEMRAOUcw1EJRrw",
+          "shopId": 100115,
+          "shopName": "Rittenhouse Market",
+          "vectorRank": 15,
+          "bm25Rank": null,
+          "fusionScore": 0.047328209415860155,
+          "text": "不错但昂贵的超市。如果你住在市中心且没有车，这里很方便。我每周去一到两次。"
+        },
+        {
+          "rank": 40,
+          "reviewId": "yelp-eW0Xp7iG9WlAHI1Sj0F-gw",
+          "shopId": 100208,
+          "shopName": "Day Break Eggs",
+          "vectorRank": 17,
+          "bm25Rank": null,
+          "fusionScore": 0.03607868095892561,
+          "text": "有外卖窗口，可以提前下单。想找点路上方便吃又美味的东西——不仅吃到了，还超出了预期！！"
+        },
+        {
+          "rank": 41,
+          "reviewId": "yelp-oZtnBm7ZVv9a0a2jKtLpoQ",
+          "shopId": 100257,
+          "shopName": "Hertz Rent A Car",
+          "vectorRank": 18,
+          "bm25Rank": null,
+          "fusionScore": 0.03505255912763991,
+          "text": "和最近其他几位评论者一样，我不明白为什么这个地点评分这么低。\n\n我坐火车去费城参加朋友的派对——需要一辆车到处跑（派对在新泽西）。虽然我晚了几分钟，但车已经准备好等我了。租车代理立刻微笑着帮我，甚至陪我走到自动扶梯，解释如何使用车票出车库，如何还车等等。\n\n车是新的，干净（除了后备箱有个污渍——但这是租来的车，所以），油也加满了，我就上路了。下班后还车很容易——除了没有空车位——租车合同的前面夹层里有快速还车表，你把它拿到楼上的租车办公室，投进保险箱。\n\n我进去时的一个担忧是不知道如何回到还车区——正如其他评论者所说，30街附近有一个环岛，标志清晰，沿着它绕一圈（绕回起点约3/4处），有一个指向下坡道的标志。\n\n我唯一的负面评论是，停车场的出口很难找到，而且停车场里的一些操作可能很困难（我看到几个人在艰难地掉头）——另外，这个地点会在开门时检查你的车，所以如果你不是后来才取车，早上7点收到租车收据时不要惊慌。"
+        },
+        {
+          "rank": 42,
+          "reviewId": "yelp-rqLGg7ZNOd7WFuHy9Zbs7A",
+          "shopId": 100251,
+          "shopName": "Bell Beverage",
+          "vectorRank": 19,
+          "bm25Rank": null,
+          "fusionScore": 0.033663056834451574,
+          "text": "位置方便，停车场狭窄且危险。商品种类齐全——但没有标价——杂乱地摆放在狭窄的过道里，周围没人能帮你找东西。根据他们网站上声称的‘有货’，我开了一个多小时的车去买一款评价很高的季节性（一年一次）啤酒……到达后被告知‘下周才到货’和‘我们只进四箱，所以通过抽签出售’……‘但网站上写着……’‘我只是在这里工作，不是老板’……而我只是在这里购物，再也不会回来了……"
+        },
+        {
+          "rank": 43,
+          "reviewId": "yelp-36Wdo0aV-_gB0Bbr0pXf4w",
+          "shopId": 100008,
+          "shopName": "Giant Food Stores",
+          "vectorRank": 20,
+          "bm25Rank": null,
+          "fusionScore": 0.02682562723500378,
+          "text": "来看女儿，需要囤货，因为我要在这里待一周。我对车库能找到一个车位印象深刻。\n商店很大，非常干净，货品充足。我有点困惑，因为布局不像我在兰开斯特的“家乡店”。\n每次我向员工求助找东西，他们都很乐意带我去找。\n这20分钟车程值了!!!!!"
+        },
+        {
+          "rank": 44,
+          "reviewId": "yelp-DTtcoSEJHTB-NiObdubnMg",
+          "shopId": 100115,
+          "shopName": "Rittenhouse Market",
+          "vectorRank": null,
+          "bm25Rank": 25,
+          "fusionScore": 0.02532275429028453,
+          "text": "刚搬进这个社区，这家店位置非常方便，满足我所有的杂货需求。他们有单独的饮料区和新鲜果蔬区。布局非常美观，物品容易找到。\n\n额外的好处是，你还可以买到新鲜咖啡和精选肉类。这家店比其他杂货店贵一点，但如果你需要补给，又不想开车去更远的便宜店，那么这里就很完美。店员非常乐于助人。"
+        },
+        {
+          "rank": 45,
+          "reviewId": "yelp-_xms0MjR4ca7x0Z6zPX8Gg",
+          "shopId": 100022,
+          "shopName": "Jong Ka Jib",
+          "vectorRank": null,
+          "bm25Rank": 26,
+          "fusionScore": 0.02489316809182117,
+          "text": "关于这个地方的所有好评都是真的，所以再说别的都是多余。只能说他们的冷面和拌冷面是我吃过最好的。\n\n另外，你不一定需要开车去。从市中心可以坐47路公交车再走5个街区，或者坐宽街线到Fern Rock再转70路公交车，它就在餐厅对面的街角下车。还有，Melrose Park区域铁路线也很近。"
+        },
+        {
+          "rank": 46,
+          "reviewId": "yelp-cM36DnD43s4eEsNUPkGsvw",
+          "shopId": 100033,
+          "shopName": "Pacifico Hyundai",
+          "vectorRank": 21,
+          "bm25Rank": null,
+          "fusionScore": 0.0221832829986389,
+          "text": "我几乎从不在Yelp上写评论，但我绝对建议不要在这里买车。事实上，我后悔从Pacifico Hyundai的人那里买了车。销售部门从一开始就让我很不舒服，选车和谈价的过程都让我感到仓促，既繁琐又漫长。我被迫和很多人交谈，他们不断把数字挪来挪去，让我看起来像是得到了优惠，但事后回想，他们是在操纵数字。事后诸葛亮。买车后，我被要求回去两次完成文件，然后我遇到了定位问题，第一次去服务部门也没解决。我不得不去服务部门三次才把车重新定位好。而且，我从未及时收到注册文件，又被要求再去一次取替换的注册文件。买车后的两个月里，我不得不联系该部门好几次，总共开车去那里九次解决问题。我强烈建议，如果你考虑在这里买车，请三思。整个过程耗时太长，极其不便，而且非常不舒服。"
+        },
+        {
+          "rank": 47,
+          "reviewId": "yelp-r5nW53HuPjFy0QJobYBF-Q",
+          "shopId": 100033,
+          "shopName": "Pacifico Hyundai",
+          "vectorRank": 22,
+          "bm25Rank": null,
+          "fusionScore": 0.020837526665622417,
+          "text": "如果你想买车，别去这家店。我们遇到的销售员还不错，但经理一介入，就变成了咄咄逼人、充满敌意、总体很糟糕的对话。这让我非常反感。\n\n顺便说一句：离开后我们去了另一家经销商，当天就买了车。这正好说明，如果你的态度很差，不愿意与人合作，你只是在损害自己的生意。"
+        },
+        {
+          "rank": 48,
+          "reviewId": "yelp-K0IkLdSysCTRitDHye-K-w",
+          "shopId": 100257,
+          "shopName": "Hertz Rent A Car",
+          "vectorRank": 23,
+          "bm25Rank": null,
+          "fusionScore": 0.01917328297657847,
+          "text": "租车服务本身很棒——完全没有抱怨。我通过电话预订，只需要去30街车站取钥匙。那里的工作人员并不出色。正如其他评论者所说，他们不礼貌，也没有让我感到他们重视我的生意。他们做事非常缓慢和懒散，当我在柜台等待他们处理我的预订时，他们互相谈论私事。我会再去吗？可能会，因为就像我说的，租车服务很好。但是，如果下次我有选择，我可能会尝试从不同的地点取车。不过，停车场的工作人员非常棒——不知道他们是服务于所有租车公司还是只服务于Hertz。"
+        },
+        {
+          "rank": 49,
+          "reviewId": "yelp-wIMVJDO6vGv_iGbQ7kkLCA",
+          "shopId": 100140,
+          "shopName": "Atlantic Physical Therapy",
+          "vectorRank": null,
+          "bm25Rank": 27,
+          "fusionScore": 0.016407956438948715,
+          "text": "我七月份出了事故，十月份从康复医院出院。我想找一个近的治疗师，这样我最终可以走路过去，因为我不能开车。Atlantic用Lyft接我，我能够坐着楼梯椅到治疗室。那里明亮、干净、舒适，管理员GeorgeAnn非常友好。Michele和她的物理治疗师们和我合作得很好，迅速改善了我的状况。\n\n我的医生对我一个月内取得的进步感到惊讶，看起来我避免了ACL和PCL手术。下个月如果我的进步持续，他会看看我是否也能避免半月板手术。他说那些提供个性化服务的小地方是最好的，现在我明白为什么了。效果显著！"
+        },
+        {
+          "rank": 50,
+          "reviewId": "yelp-vCJ3RQ_EY9fPEqbdW5aTcg",
+          "shopId": 100122,
+          "shopName": "CVS Pharmacy",
+          "vectorRank": 25,
+          "bm25Rank": null,
+          "fusionScore": 0.012436008021195821,
+          "text": "我喜欢免下车药房以及自动续药和电话提醒服务。"
+        },
+        {
+          "rank": 51,
+          "reviewId": "yelp-cnuR8niOoU5Q_PGiS18j5g",
+          "shopId": 100034,
+          "shopName": "CVS Optical",
+          "vectorRank": 26,
+          "bm25Rank": null,
+          "fusionScore": 0.01215619271165408,
+          "text": "这是一家不错的 CVS。有停车场。进门时有员工打招呼。药房通常有帮助。"
+        },
+        {
+          "rank": 52,
+          "reviewId": "yelp-lKC_XS7eZllR78GwhQSF9w",
+          "shopId": 100138,
+          "shopName": "Loco Lucho's Latino Kitchen",
+          "vectorRank": null,
+          "bm25Rank": 28,
+          "fusionScore": 0.010740353579432054,
+          "text": "鸡肉饭相当不错！\n\n在雷丁终端市场逛了一圈，想找点不是猪肉、牛肉或油炸的健康食物，发现了这家提供各种波多黎各美食的店。\n\n来说说鸡肉饭！米饭本身饱满金黄，配上多汁的鸡肉块。盘子里还有两片脆脆的大蕉饼。好吃！"
+        },
+        {
+          "rank": 53,
+          "reviewId": "yelp-6hyrC2E_ex33fVu68S5Rbw",
+          "shopId": 100157,
+          "shopName": "Dunkin'",
+          "vectorRank": null,
+          "bm25Rank": 29,
+          "fusionScore": 0.0076918779833794046,
+          "text": "最差的Dunkin！如果可以给0星，我一定给。每次开车经过免下车通道，无一例外，我都会拿到错误的商品。如果我要羊角面包三明治，结果给我的是松饼三明治。如果我要火鸡香肠，他们放的是培根。今天我买了一个卷饼，它甚至没有包好，所有馅料都掉进了袋子里。而且他们从不给餐巾纸。太糟糕了。"
+        },
+        {
+          "rank": 54,
+          "reviewId": "yelp-DEKr4rAr5yXPUPlmCBnX-Q",
+          "shopId": 100245,
+          "shopName": "Happy Joy Family Restaurant",
+          "vectorRank": 27,
+          "bm25Rank": null,
+          "fusionScore": 0.007512546906126067,
+          "text": "* 服务良好且友好\n* 点了一份简单的早餐拼盘，有芝士鸡蛋、猪肉培根和家常薯条，份量完美\n* 价格不会让你破产\n* 街边停车——区域不错，我没遇到找车位的问题"
+        },
+        {
+          "rank": 55,
+          "reviewId": "yelp-kVB0_y_g7je35_gaJrcWfg",
+          "shopId": 100040,
+          "shopName": "Wawa",
+          "vectorRank": 28,
+          "bm25Rank": null,
+          "fusionScore": 0.005974709849348961,
+          "text": "我爱Wawa，这家也不例外。位置非常便利，靠近很多地方，在电车停靠站，在一个主要路口。停车位紧张，白天几乎不可能，但这是一个步行+公交区域，深夜你可以轻松在附近停车。\n\n我经常在这里买零碎东西。\n\n这家店的员工也非常友好。=)"
+        },
+        {
+          "rank": 56,
+          "reviewId": "yelp-yYnObp7DZej9A1Z3-O0ewg",
+          "shopId": 100121,
+          "shopName": "Armada Chauffeured Services",
+          "vectorRank": 29,
+          "bm25Rank": null,
+          "fusionScore": 0.005478569332824609,
+          "text": "我用这家公司租了一辆班车，整体体验很棒，性价比高。两位老板知识渊博，更重要的是，容易联系。签合同前后我都可以打电话问很多问题，他们回复都很及时。他们还仔细列出了行程的所有细节，包括时间、站点、接送点等，以尽量减少服务当天出错的可能。服务当天，班车到达时很干净，司机也很有礼貌。最后，在我联系过的所有豪华轿车公司中，他们报价最划算。没有隐藏费用或额外旅行时间费用，也没有那些费城县的豪华轿车公司非法收取的销售税废话。总之是一家很棒的豪华轿车公司。"
+        },
+        {
+          "rank": 57,
+          "reviewId": "yelp-K7uDl5KA8EesSEaCOr4-kQ",
+          "shopId": 100137,
+          "shopName": "DoubleTree by Hilton Hotel Philadelphia Center City",
+          "vectorRank": 30,
+          "bm25Rank": null,
+          "fusionScore": 0.0,
+          "text": "停车很麻烦，因为车库不收信用卡。墙壁薄得像纸一样，我能听到隔壁两间房的一切声音。我一整晚都没睡，第二天开会时筋疲力尽！门关上的声音很响，我不明白他们为什么不调整一下。真是一次糟糕的经历。我再也不会住这里了，也不会推荐给任何人。"
+        },
+        {
+          "rank": 58,
+          "reviewId": "yelp-mLqHg1jvmD0Z6ZsSDr9bgw",
+          "shopId": 100184,
+          "shopName": "Cake Life Bake Shop",
+          "vectorRank": null,
+          "bm25Rank": 30,
+          "fusionScore": 0.0,
+          "text": "地方很好，舒适，可爱。员工友好。纸杯蛋糕非常好吃。一切看起来都漂亮又美味。不用排长队，品种多样。街边停车。"
+        }
+      ]
+    }
+  ]
+}

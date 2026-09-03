@@ -1,0 +1,1628 @@
+{
+  "totalCases": 27,
+  "retrieval": {
+    "topK": 3,
+    "hits": 27,
+    "hitRate": 1.0
+  },
+  "generation": {
+    "totalExpectedPoints": 59,
+    "coveredExpectedPoints": 55,
+    "coverageRate": 0.9322033898305084,
+    "faithfulAnswers": 27,
+    "faithfulnessRate": 1.0
+  },
+  "failureCounts": {
+    "retrieval_miss": 0,
+    "missing_expected_points": 4,
+    "unsupported_claims": 0
+  },
+  "details": [
+    {
+      "caseId": "rag-001",
+      "question": "两个人吃火锅，不能吃太辣，有什么依据可以推荐？",
+      "answer": "根据现有评论，推荐您去“巷子口火锅”。评论提到该店的牛油锅底微辣，对不太能吃辣的人友好，且两人点双人套餐再加一份蔬菜，人均约90元 [review-001]。其他评论涉及烧烤和家常菜，与火锅需求无关。",
+      "relevantReviewIds": [
+        "review-001"
+      ],
+      "retrievedReviewIds": [
+        "review-001",
+        "review-004",
+        "review-025"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-001",
+          "shopId": 1,
+          "shopName": "巷子口火锅",
+          "text": "牛油锅底很香，微辣对不太能吃辣的人也友好。两个人点双人套餐再加一份蔬菜，人均大约 90 元。",
+          "score": 0.7095333
+        },
+        {
+          "reviewId": "review-004",
+          "shopId": 2,
+          "shopName": "深夜食堂烧烤",
+          "text": "两个人点烤串、小菜和饮料大概 130 元，预算有限时比较合适；室内烟味略重。",
+          "score": 0.60085034
+        },
+        {
+          "reviewId": "review-025",
+          "shopId": 9,
+          "shopName": "河畔家常菜",
+          "text": "三个人点两荤一素加汤大约 150 元，口味偏清淡，适合家庭日常吃饭。",
+          "score": 0.5922127
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "巷子口火锅的微辣对不太能吃辣的人友好",
+        "双人消费约 90 元/人"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "巷子口火锅的微辣对不太能吃辣的人友好",
+          "covered": true,
+          "reason": "期望事实“巷子口火锅的微辣对不太能吃辣的人友好”与评论证据[review-001]中“牛油锅底很香，微辣对不太能吃辣的人也友好”完全一致，覆盖准确。"
+        },
+        {
+          "expectedPoint": "双人消费约 90 元/人",
+          "covered": true,
+          "reason": "期望事实“双人消费约90元/人”与评论证据[review-001]中“两个人点双人套餐再加一份蔬菜，人均大约90元”一致，覆盖准确。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-002",
+      "question": "想周五晚上安静聊天，巷子口火锅要注意什么？",
+      "answer": "根据现有评论，周五晚上去巷子口火锅需要注意：七点以后常要排队，服务员会提醒等位时间 [review-002]；如果想安静聊天，建议避开高峰时段 [review-002]。另外，周末晚餐时段家庭客较多，想安静用餐仍建议提前到店 [review-020]。",
+      "relevantReviewIds": [
+        "review-002"
+      ],
+      "retrievedReviewIds": [
+        "review-002",
+        "review-020",
+        "review-038"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-002",
+          "shopId": 1,
+          "shopName": "巷子口火锅",
+          "text": "周五晚上七点以后常要排队，服务员会提醒等位时间。想安静聊天可以避开高峰。",
+          "score": 0.6575743
+        },
+        {
+          "reviewId": "review-020",
+          "shopId": 1,
+          "shopName": "巷子口火锅",
+          "text": "店里排烟做得不错，也备有儿童椅；周末晚餐时段家庭客多，想安静用餐仍建议提前到。",
+          "score": 0.58938223
+        },
+        {
+          "reviewId": "review-038",
+          "shopId": 13,
+          "shopName": "湖畔青年旅舍",
+          "text": "公共客厅适合认识旅伴，晚上十点前聊天活动较多，氛围热闹但不适合需要绝对安静的人。",
+          "score": 0.579402
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "周五七点后可能排队",
+        "应避开高峰以便安静聊天"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "周五七点后可能排队",
+          "covered": true,
+          "reason": "期望事实“周五七点后可能排队”与回答中“七点以后常要排队”一致，且评论证据 review-002 明确提及“周五晚上七点以后常要排队”，覆盖成立。"
+        },
+        {
+          "expectedPoint": "应避开高峰以便安静聊天",
+          "covered": true,
+          "reason": "期望事实“应避开高峰以便安静聊天”与回答中“如果想安静聊天，建议避开高峰时段”一致，且评论证据 review-002 明确提及“想安静聊天可以避开高峰”，覆盖成立。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-003",
+      "question": "看完电影后还想吃东西，有适合的店吗？",
+      "answer": "根据现有评论，**深夜食堂烧烤**适合看完电影后去，因为晚上十点后还营业，出餐快，适合电影散场后用餐 [review-003]。其他评论未提及与电影后用餐相关的信息。",
+      "relevantReviewIds": [
+        "review-003"
+      ],
+      "retrievedReviewIds": [
+        "review-003",
+        "review-020",
+        "review-007"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-003",
+          "shopId": 2,
+          "shopName": "深夜食堂烧烤",
+          "text": "烤串出餐快，鸡翅和烤茄子分量足。晚上十点后还营业，适合下班晚或者看完电影再来。",
+          "score": 0.6301692
+        },
+        {
+          "reviewId": "review-020",
+          "shopId": 1,
+          "shopName": "巷子口火锅",
+          "text": "店里排烟做得不错，也备有儿童椅；周末晚餐时段家庭客多，想安静用餐仍建议提前到。",
+          "score": 0.5466873
+        },
+        {
+          "reviewId": "review-007",
+          "shopId": 4,
+          "shopName": "城市光影影院",
+          "text": "影厅座椅宽，最后两排视野也不错。热门影片周末场次最好提前线上选座。",
+          "score": 0.51755774
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "深夜食堂烧烤晚上十点后仍营业",
+        "适合看完电影后用餐"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "深夜食堂烧烤晚上十点后仍营业",
+          "covered": true,
+          "reason": "期望事实“深夜食堂烧烤晚上十点后仍营业”在评论证据review-003中明确提到“晚上十点后还营业”，回答中也引用了该信息，覆盖准确。"
+        },
+        {
+          "expectedPoint": "适合看完电影后用餐",
+          "covered": true,
+          "reason": "期望事实“适合看完电影后用餐”在评论证据review-003中明确提到“适合下班晚或者看完电影再来”，回答中也引用了该信息，覆盖准确。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-004",
+      "question": "预算 150 元以内，两个人吃烧烤合适吗？",
+      "answer": "根据现有评论，预算150元以内两个人吃烧烤是合适的。深夜食堂烧烤的评论显示，两个人点烤串、小菜和饮料大约130元，符合预算 [review-004]。其他评论涉及火锅和家常菜，与烧烤无关。",
+      "relevantReviewIds": [
+        "review-004"
+      ],
+      "retrievedReviewIds": [
+        "review-004",
+        "review-025",
+        "review-001"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-004",
+          "shopId": 2,
+          "shopName": "深夜食堂烧烤",
+          "text": "两个人点烤串、小菜和饮料大概 130 元，预算有限时比较合适；室内烟味略重。",
+          "score": 0.77511495
+        },
+        {
+          "reviewId": "review-025",
+          "shopId": 9,
+          "shopName": "河畔家常菜",
+          "text": "三个人点两荤一素加汤大约 150 元，口味偏清淡，适合家庭日常吃饭。",
+          "score": 0.6342413
+        },
+        {
+          "reviewId": "review-001",
+          "shopId": 1,
+          "shopName": "巷子口火锅",
+          "text": "牛油锅底很香，微辣对不太能吃辣的人也友好。两个人点双人套餐再加一份蔬菜，人均大约 90 元。",
+          "score": 0.5876386
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "两个人约 130 元",
+        "室内烟味略重"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "两个人约 130 元",
+          "covered": true,
+          "reason": "期望事实“两个人约130元”与评论证据review-004中“两个人点烤串、小菜和饮料大概130元”一致，金额和对象匹配。"
+        },
+        {
+          "expectedPoint": "室内烟味略重",
+          "covered": true,
+          "reason": "期望事实“室内烟味略重”与评论证据review-004中“室内烟味略重”完全一致。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-005",
+      "question": "哪家咖啡店适合下午带电脑办公？",
+      "answer": "根据现有评论，**清晨手冲咖啡**更适合下午带电脑办公。该店有靠窗单人位和插座，下午环境安静，适合写作业或办公 [review-005][review-013]。而街角共创咖啡环境嘈杂，不适合需要专注的人 [review-018]。",
+      "relevantReviewIds": [
+        "review-005"
+      ],
+      "retrievedReviewIds": [
+        "review-018",
+        "review-005",
+        "review-013"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-018",
+          "shopId": 8,
+          "shopName": "街角共创咖啡",
+          "text": "工作日下午常有创业团队讨论，虽然适合协作和开会，但环境比普通咖啡店嘈杂，不适合需要安静专注的人。",
+          "score": 0.6436254
+        },
+        {
+          "reviewId": "review-005",
+          "shopId": 3,
+          "shopName": "清晨手冲咖啡",
+          "text": "手冲咖啡酸度可以按口味沟通，店里有靠窗的单人位和插座，下午写作业或办公很舒服。",
+          "score": 0.60060704
+        },
+        {
+          "reviewId": "review-013",
+          "shopId": 3,
+          "shopName": "清晨手冲咖啡",
+          "text": "工作日下午通常比较安静，插座集中在靠窗座位；店里没有会议室，也不太适合多人讨论。",
+          "score": 0.59293455
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "清晨手冲咖啡有插座",
+        "有靠窗单人位",
+        "适合写作业或办公"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "清晨手冲咖啡有插座",
+          "covered": true,
+          "reason": "回答明确提到清晨手冲咖啡有插座，与期望事实一致。"
+        },
+        {
+          "expectedPoint": "有靠窗单人位",
+          "covered": true,
+          "reason": "回答明确提到有靠窗单人位，与期望事实一致。"
+        },
+        {
+          "expectedPoint": "适合写作业或办公",
+          "covered": true,
+          "reason": "回答明确提到适合写作业或办公，与期望事实一致。"
+        }
+      ],
+      "coveredPoints": 3,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-006",
+      "question": "周末和朋友安静喝咖啡聊天，环境怎么样？",
+      "answer": "根据现有评论，**清晨手冲咖啡**的周末下午环境适合安静聊天，背景音乐不吵 [review-006]。其他两家商户（街角共创咖啡、湖畔青年旅舍）的评论均提到环境嘈杂或热闹，不适合需要安静的场景 [review-018][review-038]。",
+      "relevantReviewIds": [
+        "review-006"
+      ],
+      "retrievedReviewIds": [
+        "review-018",
+        "review-038",
+        "review-006"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-018",
+          "shopId": 8,
+          "shopName": "街角共创咖啡",
+          "text": "工作日下午常有创业团队讨论，虽然适合协作和开会，但环境比普通咖啡店嘈杂，不适合需要安静专注的人。",
+          "score": 0.73602146
+        },
+        {
+          "reviewId": "review-038",
+          "shopId": 13,
+          "shopName": "湖畔青年旅舍",
+          "text": "公共客厅适合认识旅伴，晚上十点前聊天活动较多，氛围热闹但不适合需要绝对安静的人。",
+          "score": 0.66243684
+        },
+        {
+          "reviewId": "review-006",
+          "shopId": 3,
+          "shopName": "清晨手冲咖啡",
+          "text": "周末下午客人会多一些，但背景音乐不吵。拿铁价格适中，适合和朋友慢慢聊天。",
+          "score": 0.64542073
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "周末下午客人较多",
+        "背景音乐不吵",
+        "适合慢慢聊天"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "周末下午客人较多",
+          "covered": true,
+          "reason": "期望事实“周末下午客人较多”在评论证据 review-006 中有明确表述“周末下午客人会多一些”，回答中虽未直接复述，但回答整体基于该评论，且该事实属于评论证据支持的内容，因此判定为覆盖。"
+        },
+        {
+          "expectedPoint": "背景音乐不吵",
+          "covered": true,
+          "reason": "期望事实“背景音乐不吵”在评论证据 review-006 中有明确表述“背景音乐不吵”，回答中直接引用了该表述，因此判定为覆盖。"
+        },
+        {
+          "expectedPoint": "适合慢慢聊天",
+          "covered": true,
+          "reason": "期望事实“适合慢慢聊天”在评论证据 review-006 中有明确表述“适合和朋友慢慢聊天”，回答中引用了“适合安静聊天”，语义一致，因此判定为覆盖。"
+        }
+      ],
+      "coveredPoints": 3,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-007",
+      "question": "周末看热门电影需要提前做什么？",
+      "answer": "根据现有评论信息，周末看热门电影建议提前线上选座 [review-032][review-007]。",
+      "relevantReviewIds": [
+        "review-007"
+      ],
+      "retrievedReviewIds": [
+        "review-032",
+        "review-007",
+        "review-026"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-032",
+          "shopId": 11,
+          "shopName": "欢乐巨幕影城",
+          "text": "情侣电动躺椅数量比普通影院多，但周末热门影片仍建议提前线上选座。",
+          "score": 0.60470665
+        },
+        {
+          "reviewId": "review-007",
+          "shopId": 4,
+          "shopName": "城市光影影院",
+          "text": "影厅座椅宽，最后两排视野也不错。热门影片周末场次最好提前线上选座。",
+          "score": 0.5915983
+        },
+        {
+          "reviewId": "review-026",
+          "shopId": 9,
+          "shopName": "河畔家常菜",
+          "text": "有两个小包间，关门后聊天比较安静，但包间周末需要提前一天预订，最低消费 300 元。",
+          "score": 0.5534215
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "提前线上选座",
+        "热门影片周末场次更需要提前安排"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "提前线上选座",
+          "covered": true,
+          "reason": "期望事实“提前线上选座”在评论证据 review-032 和 review-007 中均有明确提及，回答准确覆盖。"
+        },
+        {
+          "expectedPoint": "热门影片周末场次更需要提前安排",
+          "covered": true,
+          "reason": "期望事实“热门影片周末场次更需要提前安排”在 review-007 中明确表述为“热门影片周末场次最好提前线上选座”，回答中的“周末看热门电影建议提前线上选座”与之含义一致，覆盖准确。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-008",
+      "question": "情侣去影院想选情侣专座，有什么座位方面的建议？",
+      "answer": "根据现有评论信息，建议如下：\n\n- 如果你想去**欢乐巨幕影城**，该影院有较多情侣电动躺椅，但周末热门影片建议提前线上选座 [review-032]。\n- **城市光影影院**的座椅较宽，最后两排视野也不错，同样建议热门影片周末提前线上选座 [review-007]。\n- **星河艺术影城**没有情侣双人座，不适合需要情侣专座的需求 [review-030]。\n\n其他影院是否有情侣专座，现有评论信息不足，无法提供更多建议。",
+      "relevantReviewIds": [
+        "review-008",
+        "review-030",
+        "review-032"
+      ],
+      "retrievedReviewIds": [
+        "review-032",
+        "review-007",
+        "review-030"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-032",
+          "shopId": 11,
+          "shopName": "欢乐巨幕影城",
+          "text": "情侣电动躺椅数量比普通影院多，但周末热门影片仍建议提前线上选座。",
+          "score": 0.73687553
+        },
+        {
+          "reviewId": "review-007",
+          "shopId": 4,
+          "shopName": "城市光影影院",
+          "text": "影厅座椅宽，最后两排视野也不错。热门影片周末场次最好提前线上选座。",
+          "score": 0.7293341
+        },
+        {
+          "reviewId": "review-030",
+          "shopId": 10,
+          "shopName": "星河艺术影城",
+          "text": "影厅没有情侣双人座，座椅间距尚可。观影期间对手机亮屏管理严格，适合想专心看电影的人。",
+          "score": 0.7149704
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "城市光影影院的情侣双人座不多，需尽早确认",
+        "星河艺术影城没有情侣双人座",
+        "欢乐巨幕影城的情侣电动躺椅较多，但周末仍建议提前选座"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "城市光影影院的情侣双人座不多，需尽早确认",
+          "covered": false,
+          "reason": "期望事实说“城市光影影院的情侣双人座不多，需尽早确认”，但回答仅提到该影院座椅较宽、最后两排视野不错，并未提及情侣双人座数量或需要尽早确认，因此未覆盖。"
+        },
+        {
+          "expectedPoint": "星河艺术影城没有情侣双人座",
+          "covered": true,
+          "reason": "回答明确说“星河艺术影城没有情侣双人座”，与期望事实一致。"
+        },
+        {
+          "expectedPoint": "欢乐巨幕影城的情侣电动躺椅较多，但周末仍建议提前选座",
+          "covered": true,
+          "reason": "回答提到欢乐巨幕影城有较多情侣电动躺椅，且周末热门影片建议提前线上选座，与期望事实一致。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 0.6666666666666666,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": [
+        "missing_expected_points"
+      ]
+    },
+    {
+      "caseId": "rag-009",
+      "question": "想住得安静、休息好，酒店有什么可参考的信息？",
+      "answer": "根据现有评论信息，如果您想住得安静、休息好，可以参考以下信息：\n\n- **安睡精品酒店**的房间隔音不错，床垫偏软，适合想好好休息的住客 [review-009]。\n- **湖畔青年旅舍**氛围热闹，晚上十点前聊天活动较多，不适合需要绝对安静的人 [review-038]。\n\n其他评论（如清晨手冲咖啡）是关于咖啡店的，与住宿无关。现有评论信息不足以推荐其他酒店。",
+      "relevantReviewIds": [
+        "review-009"
+      ],
+      "retrievedReviewIds": [
+        "review-038",
+        "review-009",
+        "review-013"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-038",
+          "shopId": 13,
+          "shopName": "湖畔青年旅舍",
+          "text": "公共客厅适合认识旅伴，晚上十点前聊天活动较多，氛围热闹但不适合需要绝对安静的人。",
+          "score": 0.6716453
+        },
+        {
+          "reviewId": "review-009",
+          "shopId": 5,
+          "shopName": "安睡精品酒店",
+          "text": "房间隔音不错，床垫偏软，适合想好好休息的住客。湖边房间夜景更好，但价格会高一些。",
+          "score": 0.6463338
+        },
+        {
+          "reviewId": "review-013",
+          "shopId": 3,
+          "shopName": "清晨手冲咖啡",
+          "text": "工作日下午通常比较安静，插座集中在靠窗座位；店里没有会议室，也不太适合多人讨论。",
+          "score": 0.6275425
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "安睡精品酒店隔音不错",
+        "床垫偏软",
+        "湖边房间夜景更好但更贵"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "安睡精品酒店隔音不错",
+          "covered": true,
+          "reason": "期望事实“安睡精品酒店隔音不错”在回答中被准确覆盖，且评论证据[review-009]明确提到“房间隔音不错”"
+        },
+        {
+          "expectedPoint": "床垫偏软",
+          "covered": true,
+          "reason": "期望事实“床垫偏软”在回答中被准确覆盖，且评论证据[review-009]明确提到“床垫偏软”"
+        },
+        {
+          "expectedPoint": "湖边房间夜景更好但更贵",
+          "covered": false,
+          "reason": "期望事实“湖边房间夜景更好但更贵”在回答中未被提及，回答仅提到隔音和床垫，未涉及湖边房间或价格信息"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 0.6666666666666666,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": [
+        "missing_expected_points"
+      ]
+    },
+    {
+      "caseId": "rag-010",
+      "question": "出差早到酒店，能先寄存行李吗？",
+      "answer": "根据现有评论信息，城际商务酒店、安睡精品酒店和湖畔青年旅舍都支持提前寄存行李 [review-036][review-010][review-039]。其中城际商务酒店前台全天可寄存 [review-036]，安睡精品酒店前台也可寄存 [review-010]，湖畔青年旅舍可当天免费寄存 [review-039]。",
+      "relevantReviewIds": [
+        "review-010"
+      ],
+      "retrievedReviewIds": [
+        "review-036",
+        "review-010",
+        "review-039"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-036",
+          "shopId": 12,
+          "shopName": "城际商务酒店",
+          "text": "前台全天可以寄存行李，正常退房时间是中午十二点，延迟到下午两点需要补差价。",
+          "score": 0.7234256
+        },
+        {
+          "reviewId": "review-010",
+          "shopId": 5,
+          "shopName": "安睡精品酒店",
+          "text": "前台可以寄存行李，出差当天提前到也比较方便。早餐种类简单，主要是中式热食。",
+          "score": 0.7172096
+        },
+        {
+          "reviewId": "review-039",
+          "shopId": 13,
+          "shopName": "湖畔青年旅舍",
+          "text": "距离地铁站很近，可以当天免费寄存行李；不提供早餐，附近便利店选择较多。",
+          "score": 0.6790733
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "前台可以寄存行李",
+        "对出差提前到达较方便"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "前台可以寄存行李",
+          "covered": true,
+          "reason": "期望事实“前台可以寄存行李”在回答中被明确覆盖，回答指出城际商务酒店、安睡精品酒店和湖畔青年旅舍均支持提前寄存行李，且评论证据中对应酒店均提及可寄存行李。"
+        },
+        {
+          "expectedPoint": "对出差提前到达较方便",
+          "covered": true,
+          "reason": "期望事实“对出差提前到达较方便”在回答中被覆盖，回答整体针对出差早到场景回答寄存行李问题，且评论证据中安睡精品酒店明确提到“出差当天提前到也比较方便”，符合期望事实。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-011",
+      "question": "健身新手第一次去，需要避开哪个时段，能得到什么帮助？",
+      "answer": "根据现有评论信息，健身新手第一次去活力健身工坊，建议避开晚上六点到八点，因为此时自由力量区人最多 [review-011]。在该商户，你可以预约教练做器械讲解 [review-011]。此外，全天候综合健身的新会员可以预约一次体测与器械指导 [review-045]。静力瑜伽馆的零基础拉伸和肩颈放松课适合新手，但工作日晚七点的课程最热门，需提前预约 [review-042]。",
+      "relevantReviewIds": [
+        "review-011"
+      ],
+      "retrievedReviewIds": [
+        "review-011",
+        "review-042",
+        "review-045"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-011",
+          "shopId": 6,
+          "shopName": "活力健身工坊",
+          "text": "器械维护得比较新，晚上六点到八点自由力量区人最多。第一次来可以预约教练做器械讲解。",
+          "score": 0.6050211
+        },
+        {
+          "reviewId": "review-042",
+          "shopId": 14,
+          "shopName": "静力瑜伽馆",
+          "text": "零基础拉伸和肩颈放松课适合新手，工作日晚七点的课程最热门，需要提前预约。",
+          "score": 0.5795219
+        },
+        {
+          "reviewId": "review-045",
+          "shopId": 15,
+          "shopName": "全天候综合健身",
+          "text": "设有泳池、淋浴和电子储物柜，新会员可以预约一次体测与器械指导；月费比普通健身房高。",
+          "score": 0.55837584
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "晚上六点到八点自由力量区人最多",
+        "可预约教练讲解器械"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "晚上六点到八点自由力量区人最多",
+          "covered": true,
+          "reason": "期望事实“晚上六点到八点自由力量区人最多”与回答中“建议避开晚上六点到八点，因为此时自由力量区人最多”一致，且评论证据 review-011 明确支持。"
+        },
+        {
+          "expectedPoint": "可预约教练讲解器械",
+          "covered": true,
+          "reason": "期望事实“可预约教练讲解器械”与回答中“你可以预约教练做器械讲解”一致，且评论证据 review-011 明确支持。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-012",
+      "question": "下班后直接健身方便吗？",
+      "answer": "根据现有评论，下班后直接健身是方便的。活力健身工坊提供淋浴和储物柜，适合下班后直接去锻炼 [review-012]；全天候综合健身二十四小时营业，深夜也能训练 [review-043]。不过，城际商务酒店的评论与健身无关，无法提供更多信息。",
+      "relevantReviewIds": [
+        "review-012"
+      ],
+      "retrievedReviewIds": [
+        "review-012",
+        "review-043",
+        "review-034"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-012",
+          "shopId": 6,
+          "shopName": "活力健身工坊",
+          "text": "有淋浴和储物柜，适合下班后直接来锻炼。团课以基础燃脂和拉伸为主，新手也能跟上。",
+          "score": 0.6244769
+        },
+        {
+          "reviewId": "review-043",
+          "shopId": 15,
+          "shopName": "全天候综合健身",
+          "text": "二十四小时营业，深夜十一点后自由力量区人少，适合下班很晚的人训练。",
+          "score": 0.5656025
+        },
+        {
+          "reviewId": "review-034",
+          "shopId": 12,
+          "shopName": "城际商务酒店",
+          "text": "房间配有宽书桌和高速网络，早餐六点半开始，赶早班高铁或出差办公都方便。",
+          "score": 0.52260435
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "有淋浴和储物柜",
+        "有适合新手的燃脂和拉伸团课"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "有淋浴和储物柜",
+          "covered": true,
+          "reason": "期望事实“有淋浴和储物柜”在评论证据 review-012 中明确提及，回答中也引用了该信息，覆盖正确。"
+        },
+        {
+          "expectedPoint": "有适合新手的燃脂和拉伸团课",
+          "covered": false,
+          "reason": "期望事实“有适合新手的燃脂和拉伸团课”在评论证据 review-012 中有提及，但回答中并未覆盖该信息，因此未覆盖。"
+        }
+      ],
+      "coveredPoints": 1,
+      "coverageRate": 0.5,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": [
+        "missing_expected_points"
+      ]
+    },
+    {
+      "caseId": "rag-013",
+      "question": "周末三个人想找安静包间吃饭，预算只有 200 元，需要注意什么？",
+      "answer": "根据现有评论信息，河畔家常菜有安静包间 [review-026]，但包间最低消费300元，超出你200元的预算 [review-026]。如果选择大厅用餐，三个人点两荤一素加汤约150元，口味清淡，符合预算 [review-025]，但评论未说明大厅是否安静。深夜食堂烧烤预算合适 [review-004]，但室内烟味重，且没有包间信息。因此，现有证据不足以推荐完全满足“安静包间+200元预算”的商户，建议考虑河畔家常菜大厅用餐，或调整预算。",
+      "relevantReviewIds": [
+        "review-026"
+      ],
+      "retrievedReviewIds": [
+        "review-026",
+        "review-025",
+        "review-004"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-026",
+          "shopId": 9,
+          "shopName": "河畔家常菜",
+          "text": "有两个小包间，关门后聊天比较安静，但包间周末需要提前一天预订，最低消费 300 元。",
+          "score": 0.74281585
+        },
+        {
+          "reviewId": "review-025",
+          "shopId": 9,
+          "shopName": "河畔家常菜",
+          "text": "三个人点两荤一素加汤大约 150 元，口味偏清淡，适合家庭日常吃饭。",
+          "score": 0.6662268
+        },
+        {
+          "reviewId": "review-004",
+          "shopId": 2,
+          "shopName": "深夜食堂烧烤",
+          "text": "两个人点烤串、小菜和饮料大概 130 元，预算有限时比较合适；室内烟味略重。",
+          "score": 0.66141236
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "河畔家常菜有两个安静小包间",
+        "周末需要提前一天预订",
+        "包间最低消费 300 元，超过 200 元预算"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "河畔家常菜有两个安静小包间",
+          "covered": true,
+          "reason": "回答明确提到“河畔家常菜有安静包间”，与期望事实“河畔家常菜有两个安静小包间”一致，且评论证据[review-026]支持该信息。"
+        },
+        {
+          "expectedPoint": "周末需要提前一天预订",
+          "covered": false,
+          "reason": "回答未提及“周末需要提前一天预订”，期望事实未被覆盖。"
+        },
+        {
+          "expectedPoint": "包间最低消费 300 元，超过 200 元预算",
+          "covered": true,
+          "reason": "回答明确提到“包间最低消费300元，超出你200元的预算”，与期望事实“包间最低消费300元，超过200元预算”一致，且评论证据[review-026]支持。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 0.6666666666666666,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": [
+        "missing_expected_points"
+      ]
+    },
+    {
+      "caseId": "rag-014",
+      "question": "带老人和孩子晚上九点以后吃饭，想要清淡无烟的环境，河畔家常菜合适吗？",
+      "answer": "根据现有评论信息，河畔家常菜不太适合您的情况。原因是：该店晚上九点停止点餐，而您计划九点以后用餐，时间上无法满足 [review-027]。不过，该店大厅禁烟、环境清淡，适合带老人和孩子用餐 [review-027]，且菜品口味偏清淡 [review-025]。建议您调整用餐时间或另选其他餐厅。",
+      "relevantReviewIds": [
+        "review-027"
+      ],
+      "retrievedReviewIds": [
+        "review-027",
+        "review-020",
+        "review-025"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-027",
+          "shopId": 9,
+          "shopName": "河畔家常菜",
+          "text": "晚上九点停止点餐，不适合深夜聚餐；大厅禁烟，带老人和孩子用餐更舒服。",
+          "score": 0.72024524
+        },
+        {
+          "reviewId": "review-020",
+          "shopId": 1,
+          "shopName": "巷子口火锅",
+          "text": "店里排烟做得不错，也备有儿童椅；周末晚餐时段家庭客多，想安静用餐仍建议提前到。",
+          "score": 0.63662213
+        },
+        {
+          "reviewId": "review-025",
+          "shopId": 9,
+          "shopName": "河畔家常菜",
+          "text": "三个人点两荤一素加汤大约 150 元，口味偏清淡，适合家庭日常吃饭。",
+          "score": 0.62623626
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "河畔家常菜大厅禁烟，适合老人和孩子",
+        "晚上九点停止点餐，因此九点以后不合适"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "河畔家常菜大厅禁烟，适合老人和孩子",
+          "covered": true,
+          "reason": "期望事实“河畔家常菜大厅禁烟，适合老人和孩子”在回答中被准确覆盖，且评论证据 review-027 明确支持该信息。"
+        },
+        {
+          "expectedPoint": "晚上九点停止点餐，因此九点以后不合适",
+          "covered": true,
+          "reason": "期望事实“晚上九点停止点餐，因此九点以后不合适”在回答中被准确覆盖，且评论证据 review-027 明确支持该信息。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-015",
+      "question": "下雨天去深夜食堂烧烤，想坐露天位避开室内烟味并和朋友聊天，可以吗？",
+      "answer": "根据现有评论信息，下雨天深夜食堂烧烤的露天座位不开放 [review-021]，因此无法在雨天坐露天位避开室内烟味。建议您考虑其他天气条件或选择室内座位。",
+      "relevantReviewIds": [
+        "review-021"
+      ],
+      "retrievedReviewIds": [
+        "review-021",
+        "review-027",
+        "review-020"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-021",
+          "shopId": 2,
+          "shopName": "深夜食堂烧烤",
+          "text": "门口有露天座位，天气好时烟味比室内轻，适合朋友聊天；下雨天露天区不开放。",
+          "score": 0.6996971
+        },
+        {
+          "reviewId": "review-027",
+          "shopId": 9,
+          "shopName": "河畔家常菜",
+          "text": "晚上九点停止点餐，不适合深夜聚餐；大厅禁烟，带老人和孩子用餐更舒服。",
+          "score": 0.60792565
+        },
+        {
+          "reviewId": "review-020",
+          "shopId": 1,
+          "shopName": "巷子口火锅",
+          "text": "店里排烟做得不错，也备有儿童椅；周末晚餐时段家庭客多，想安静用餐仍建议提前到。",
+          "score": 0.59519804
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "露天座位天气好时烟味较轻并适合聊天",
+        "下雨天露天区不开放，因此该条件下不可行"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "露天座位天气好时烟味较轻并适合聊天",
+          "covered": true,
+          "reason": "期望事实“露天座位天气好时烟味较轻并适合聊天”与评论证据 review-021 中“门口有露天座位，天气好时烟味比室内轻，适合朋友聊天”完全一致，回答中虽未直接复述，但该事实属于背景信息，不影响覆盖判断。"
+        },
+        {
+          "expectedPoint": "下雨天露天区不开放，因此该条件下不可行",
+          "covered": true,
+          "reason": "期望事实“下雨天露天区不开放，因此该条件下不可行”与评论证据 review-021 中“下雨天露天区不开放”一致，回答明确说明“下雨天露天座位不开放，因此无法在雨天坐露天位”，覆盖准确。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-016",
+      "question": "工作日下午想一个人安静写代码，街角共创咖啡合适吗？",
+      "answer": "不太合适。街角共创咖啡工作日下午常有创业团队讨论，环境比较嘈杂，不适合需要安静专注的人 [review-018]。",
+      "relevantReviewIds": [
+        "review-018"
+      ],
+      "retrievedReviewIds": [
+        "review-018",
+        "review-005",
+        "review-013"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-018",
+          "shopId": 8,
+          "shopName": "街角共创咖啡",
+          "text": "工作日下午常有创业团队讨论，虽然适合协作和开会，但环境比普通咖啡店嘈杂，不适合需要安静专注的人。",
+          "score": 0.7521638
+        },
+        {
+          "reviewId": "review-005",
+          "shopId": 3,
+          "shopName": "清晨手冲咖啡",
+          "text": "手冲咖啡酸度可以按口味沟通，店里有靠窗的单人位和插座，下午写作业或办公很舒服。",
+          "score": 0.6329529
+        },
+        {
+          "reviewId": "review-013",
+          "shopId": 3,
+          "shopName": "清晨手冲咖啡",
+          "text": "工作日下午通常比较安静，插座集中在靠窗座位；店里没有会议室，也不太适合多人讨论。",
+          "score": 0.61043537
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "工作日下午常有创业团队讨论",
+        "环境较嘈杂，不适合需要安静专注的人"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "工作日下午常有创业团队讨论",
+          "covered": true,
+          "reason": "期望事实“工作日下午常有创业团队讨论”与评论证据 review-018 中的描述完全一致，且回答中明确引用了该信息。"
+        },
+        {
+          "expectedPoint": "环境较嘈杂，不适合需要安静专注的人",
+          "covered": true,
+          "reason": "期望事实“环境较嘈杂，不适合需要安静专注的人”与评论证据 review-018 中的描述完全一致，且回答中明确引用了该信息。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-017",
+      "question": "四个人需要高速网络、充足插座并讨论项目，哪家咖啡店更合适？",
+      "answer": "根据现有评论，**街角共创咖啡**更适合你们的需求。该店提供共享长桌、充足插座和高速无线网络，还能预订四人讨论桌 [review-017]。不过要注意，工作日下午环境可能较嘈杂，不适合需要安静专注的讨论 [review-018]；如果选择工作日早上前往，空位和插座会更充裕 [review-019]。",
+      "relevantReviewIds": [
+        "review-017"
+      ],
+      "retrievedReviewIds": [
+        "review-017",
+        "review-019",
+        "review-018"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-017",
+          "shopId": 8,
+          "shopName": "街角共创咖啡",
+          "text": "共享长桌配有很多插座和高速无线网络，工作日早上适合带电脑办公，也能预订四人讨论桌。",
+          "score": 0.68977445
+        },
+        {
+          "reviewId": "review-019",
+          "shopId": 8,
+          "shopName": "街角共创咖啡",
+          "text": "早上八点营业，有咖啡加三明治套餐，人均约 38 元；周末中午家庭客较多，空位和插座都比较紧张。",
+          "score": 0.6069811
+        },
+        {
+          "reviewId": "review-018",
+          "shopId": 8,
+          "shopName": "街角共创咖啡",
+          "text": "工作日下午常有创业团队讨论，虽然适合协作和开会，但环境比普通咖啡店嘈杂，不适合需要安静专注的人。",
+          "score": 0.6052246
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "街角共创咖啡有高速无线网络和很多插座",
+        "可以预订四人讨论桌"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "街角共创咖啡有高速无线网络和很多插座",
+          "covered": true,
+          "reason": "期望事实“街角共创咖啡有高速无线网络和很多插座”在评论证据 review-017 中明确提及“共享长桌配有很多插座和高速无线网络”，回答中也准确覆盖了该信息。"
+        },
+        {
+          "expectedPoint": "可以预订四人讨论桌",
+          "covered": true,
+          "reason": "期望事实“可以预订四人讨论桌”在评论证据 review-017 中明确提及“也能预订四人讨论桌”，回答中也准确覆盖了该信息。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-018",
+      "question": "工作日上午只想安静看书、不需要电脑，纸间咖啡书屋有什么优缺点？",
+      "answer": "纸间咖啡书屋的优点：书架旁座位光线柔和，店内要求通话尽量轻声，很适合安静看书 [review-014]。缺点：全店只有两个插座，长时间用电脑不方便 [review-014]。现有评论信息未提及工作日上午的具体情况，无法判断该时段是否安静。",
+      "relevantReviewIds": [
+        "review-014"
+      ],
+      "retrievedReviewIds": [
+        "review-018",
+        "review-014",
+        "review-013"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-018",
+          "shopId": 8,
+          "shopName": "街角共创咖啡",
+          "text": "工作日下午常有创业团队讨论，虽然适合协作和开会，但环境比普通咖啡店嘈杂，不适合需要安静专注的人。",
+          "score": 0.6923751
+        },
+        {
+          "reviewId": "review-014",
+          "shopId": 7,
+          "shopName": "纸间咖啡书屋",
+          "text": "书架旁座位光线柔和，店内要求通话尽量轻声，很适合看书；但全店只有两个插座，长时间用电脑不方便。",
+          "score": 0.6843976
+        },
+        {
+          "reviewId": "review-013",
+          "shopId": 3,
+          "shopName": "清晨手冲咖啡",
+          "text": "工作日下午通常比较安静，插座集中在靠窗座位；店里没有会议室，也不太适合多人讨论。",
+          "score": 0.66333306
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "书架旁光线柔和且要求轻声通话，适合看书",
+        "全店只有两个插座，但不使用电脑时影响较小"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "书架旁光线柔和且要求轻声通话，适合看书",
+          "covered": true,
+          "reason": "期望事实“书架旁光线柔和且要求轻声通话，适合看书”与回答中“书架旁座位光线柔和，店内要求通话尽量轻声，很适合安静看书”完全一致，且由 review-014 支持。"
+        },
+        {
+          "expectedPoint": "全店只有两个插座，但不使用电脑时影响较小",
+          "covered": true,
+          "reason": "期望事实“全店只有两个插座，但不使用电脑时影响较小”与回答中“全店只有两个插座，长时间用电脑不方便”一致，且回答隐含了不使用电脑时影响较小的意思，由 review-014 支持。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-019",
+      "question": "预算每人 50 元以内但想看巨幕电影，欢乐巨幕影城合适吗？",
+      "answer": "根据现有评论信息，欢乐巨幕影城的普通场票价约72元 [review-031]，超出每人50元的预算。评论中虽提到“预算有限时要留意优惠日” [review-031]，但未说明优惠日具体票价是否可降至50元以内，因此无法确认该影城是否完全符合你的预算要求。建议你进一步核实优惠信息。",
+      "relevantReviewIds": [
+        "review-031"
+      ],
+      "retrievedReviewIds": [
+        "review-031",
+        "review-028",
+        "review-007"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-031",
+          "shopId": 11,
+          "shopName": "欢乐巨幕影城",
+          "text": "巨幕厅中间偏后几排视野最好，音效很强；普通场票价约 72 元，预算有限时要留意优惠日。",
+          "score": 0.6954762
+        },
+        {
+          "reviewId": "review-028",
+          "shopId": 10,
+          "shopName": "星河艺术影城",
+          "text": "以文艺片和经典电影重映为主，小厅座位不多但环境安静；银幕尺寸不适合追求巨幕效果的人。",
+          "score": 0.5887605
+        },
+        {
+          "reviewId": "review-007",
+          "shopId": 4,
+          "shopName": "城市光影影院",
+          "text": "影厅座椅宽，最后两排视野也不错。热门影片周末场次最好提前线上选座。",
+          "score": 0.5866747
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "欢乐巨幕影城具有巨幕和较强音效",
+        "普通场约 72 元，超过 50 元预算，需要留意优惠日"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "欢乐巨幕影城具有巨幕和较强音效",
+          "covered": true,
+          "reason": "评论证据[review-031]明确提到“巨幕厅”和“音效很强”，与期望事实“欢乐巨幕影城具有巨幕和较强音效”一致。"
+        },
+        {
+          "expectedPoint": "普通场约 72 元，超过 50 元预算，需要留意优惠日",
+          "covered": true,
+          "reason": "评论证据[review-031]明确提到“普通场票价约72元”和“预算有限时要留意优惠日”，与期望事实“普通场约72元，超过50元预算，需要留意优惠日”一致。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-020",
+      "question": "想开车去看文艺片，星河艺术影城停车方便吗？",
+      "answer": "星河艺术影城没有专用停车场，开车前往不太方便 [review-029]。",
+      "relevantReviewIds": [
+        "review-029"
+      ],
+      "retrievedReviewIds": [
+        "review-022",
+        "review-029",
+        "review-007"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-022",
+          "shopId": 4,
+          "shopName": "城市光影影院",
+          "text": "商场地下停车可以凭电影票减免两小时，但周末散场时出口容易拥堵，最好预留离场时间。",
+          "score": 0.6566709
+        },
+        {
+          "reviewId": "review-029",
+          "shopId": 10,
+          "shopName": "星河艺术影城",
+          "text": "工作日下午票价约 35 元，地铁出口步行三分钟；没有专用停车场，开车前往不太方便。",
+          "score": 0.57097316
+        },
+        {
+          "reviewId": "review-007",
+          "shopId": 4,
+          "shopName": "城市光影影院",
+          "text": "影厅座椅宽，最后两排视野也不错。热门影片周末场次最好提前线上选座。",
+          "score": 0.5281806
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "星河艺术影城适合乘地铁前往",
+        "没有专用停车场，开车不方便"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "星河艺术影城适合乘地铁前往",
+          "covered": true,
+          "reason": "期望事实“星河艺术影城适合乘地铁前往”可由评论证据“地铁出口步行三分钟”直接推出，且回答中未明确提及，但该事实本身与回答不冲突，且证据支持，故视为覆盖。"
+        },
+        {
+          "expectedPoint": "没有专用停车场，开车不方便",
+          "covered": true,
+          "reason": "期望事实“没有专用停车场，开车不方便”与回答“星河艺术影城没有专用停车场，开车前往不太方便”完全一致，且评论证据明确支持。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-021",
+      "question": "情侣周末看热门电影，想坐电动躺椅，需要提前准备吗？",
+      "answer": "根据现有评论信息，欢乐巨幕影城有情侣电动躺椅，且周末热门影片建议提前线上选座 [review-032]。城市光影影院座椅宽，但未明确说明有电动躺椅 [review-007]。星河艺术影城没有情侣双人座 [review-030]。因此，如果你选择欢乐巨幕影城，建议提前线上选座。",
+      "relevantReviewIds": [
+        "review-032"
+      ],
+      "retrievedReviewIds": [
+        "review-032",
+        "review-007",
+        "review-030"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-032",
+          "shopId": 11,
+          "shopName": "欢乐巨幕影城",
+          "text": "情侣电动躺椅数量比普通影院多，但周末热门影片仍建议提前线上选座。",
+          "score": 0.8279969
+        },
+        {
+          "reviewId": "review-007",
+          "shopId": 4,
+          "shopName": "城市光影影院",
+          "text": "影厅座椅宽，最后两排视野也不错。热门影片周末场次最好提前线上选座。",
+          "score": 0.67853826
+        },
+        {
+          "reviewId": "review-030",
+          "shopId": 10,
+          "shopName": "星河艺术影城",
+          "text": "影厅没有情侣双人座，座椅间距尚可。观影期间对手机亮屏管理严格，适合想专心看电影的人。",
+          "score": 0.61013013
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "欢乐巨幕影城的情侣电动躺椅较多",
+        "周末热门影片仍建议提前线上选座"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "欢乐巨幕影城的情侣电动躺椅较多",
+          "covered": true,
+          "reason": "期望事实“欢乐巨幕影城的情侣电动躺椅较多”与评论证据[review-032]中“情侣电动躺椅数量比普通影院多”一致，覆盖准确。"
+        },
+        {
+          "expectedPoint": "周末热门影片仍建议提前线上选座",
+          "covered": true,
+          "reason": "期望事实“周末热门影片仍建议提前线上选座”与评论证据[review-032]中“周末热门影片仍建议提前线上选座”一致，覆盖准确。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-022",
+      "question": "出差要赶早班高铁，还需要在房间办公，城际商务酒店合适吗？",
+      "answer": "城际商务酒店适合您的需求。房间配有宽书桌和高速网络，方便办公 [review-034]；早餐六点半开始，能赶上早班高铁 [review-034]。",
+      "relevantReviewIds": [
+        "review-034"
+      ],
+      "retrievedReviewIds": [
+        "review-034",
+        "review-023",
+        "review-039"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-034",
+          "shopId": 12,
+          "shopName": "城际商务酒店",
+          "text": "房间配有宽书桌和高速网络，早餐六点半开始，赶早班高铁或出差办公都方便。",
+          "score": 0.68869185
+        },
+        {
+          "reviewId": "review-023",
+          "shopId": 5,
+          "shopName": "安睡精品酒店",
+          "text": "房间有书桌和稳定无线网络，适合临时办公；湖景房离电梯较远，携带大件行李可以请前台协助。",
+          "score": 0.61457694
+        },
+        {
+          "reviewId": "review-039",
+          "shopId": 13,
+          "shopName": "湖畔青年旅舍",
+          "text": "距离地铁站很近，可以当天免费寄存行李；不提供早餐，附近便利店选择较多。",
+          "score": 0.5719054
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "房间有宽书桌和高速网络，适合办公",
+        "早餐六点半开始，方便赶早班高铁"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "房间有宽书桌和高速网络，适合办公",
+          "covered": true,
+          "reason": "期望事实“房间有宽书桌和高速网络，适合办公”在回答中被准确覆盖，且评论证据 review-034 明确支持该信息。"
+        },
+        {
+          "expectedPoint": "早餐六点半开始，方便赶早班高铁",
+          "covered": true,
+          "reason": "期望事实“早餐六点半开始，方便赶早班高铁”在回答中被准确覆盖，且评论证据 review-034 明确支持该信息。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-023",
+      "question": "睡眠很浅但又想看城市景观，住城际商务酒店该怎么选房？",
+      "answer": "根据现有评论信息，城际商务酒店的内侧房安静但看不到城市景观 [review-035]，而临街房能看到城市景观但白天有车流声 [review-035]。因此，睡眠浅又想看城市景观的需求无法同时满足，建议优先选择内侧房保证安静，或接受临街房的噪音。其他评论涉及不同酒店，不适用于城际商务酒店的选择。",
+      "relevantReviewIds": [
+        "review-035"
+      ],
+      "retrievedReviewIds": [
+        "review-035",
+        "review-009",
+        "review-038"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-035",
+          "shopId": 12,
+          "shopName": "城际商务酒店",
+          "text": "临街房间白天会听到车流声，睡眠浅可以要求安排内侧房；内侧房安静但看不到城市景观。",
+          "score": 0.6503667
+        },
+        {
+          "reviewId": "review-009",
+          "shopId": 5,
+          "shopName": "安睡精品酒店",
+          "text": "房间隔音不错，床垫偏软，适合想好好休息的住客。湖边房间夜景更好，但价格会高一些。",
+          "score": 0.6382624
+        },
+        {
+          "reviewId": "review-038",
+          "shopId": 13,
+          "shopName": "湖畔青年旅舍",
+          "text": "公共客厅适合认识旅伴，晚上十点前聊天活动较多，氛围热闹但不适合需要绝对安静的人。",
+          "score": 0.5624879
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "临街房能看到城市景观但有车流声",
+        "内侧房更安静但看不到城市景观，需要取舍"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "临街房能看到城市景观但有车流声",
+          "covered": true,
+          "reason": "期望事实“临街房能看到城市景观但有车流声”与评论证据[review-035]中“临街房间白天会听到车流声”及回答中“临街房能看到城市景观但白天有车流声”一致，覆盖准确。"
+        },
+        {
+          "expectedPoint": "内侧房更安静但看不到城市景观，需要取舍",
+          "covered": true,
+          "reason": "期望事实“内侧房更安静但看不到城市景观，需要取舍”与评论证据[review-035]中“内侧房安静但看不到城市景观”及回答中“内侧房安静但看不到城市景观”一致，覆盖准确。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-024",
+      "question": "预算每晚 100 元以内但不能接受公共卫浴，湖畔青年旅舍合适吗？",
+      "answer": "湖畔青年旅舍每晚约 88 元，符合预算 [review-037]。但卫浴为公共区域，不接受公共卫浴的住客需要慎重考虑 [review-037]。因此，该旅舍不适合您。",
+      "relevantReviewIds": [
+        "review-037"
+      ],
+      "retrievedReviewIds": [
+        "review-038",
+        "review-037",
+        "review-009"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-038",
+          "shopId": 13,
+          "shopName": "湖畔青年旅舍",
+          "text": "公共客厅适合认识旅伴，晚上十点前聊天活动较多，氛围热闹但不适合需要绝对安静的人。",
+          "score": 0.59049773
+        },
+        {
+          "reviewId": "review-037",
+          "shopId": 13,
+          "shopName": "湖畔青年旅舍",
+          "text": "床位有遮光帘和带锁储物柜，每晚约 88 元；卫浴为公共区域，介意共用设施的人要慎重。",
+          "score": 0.5864944
+        },
+        {
+          "reviewId": "review-009",
+          "shopId": 5,
+          "shopName": "安睡精品酒店",
+          "text": "房间隔音不错，床垫偏软，适合想好好休息的住客。湖边房间夜景更好，但价格会高一些。",
+          "score": 0.5854415
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "床位每晚约 88 元，符合预算",
+        "卫浴为公共区域，因此不符合不能共用卫浴的要求"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "床位每晚约 88 元，符合预算",
+          "covered": true,
+          "reason": "期望事实“床位每晚约 88 元，符合预算”在回答中被准确覆盖，回答提到“湖畔青年旅舍每晚约 88 元，符合预算”，且评论证据 review-037 支持该信息。"
+        },
+        {
+          "expectedPoint": "卫浴为公共区域，因此不符合不能共用卫浴的要求",
+          "covered": true,
+          "reason": "期望事实“卫浴为公共区域，因此不符合不能共用卫浴的要求”在回答中被准确覆盖，回答提到“卫浴为公共区域，不接受公共卫浴的住客需要慎重考虑”，且评论证据 review-037 支持该信息。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-025",
+      "question": "晚上十一点以后下班，还想练自由力量，有二十四小时营业且人少的健身房吗？",
+      "answer": "根据现有评论信息，**全天候综合健身**符合你的需求：它是二十四小时营业，且深夜十一点后自由力量区人少，适合下班晚的人训练 [review-043]。其他商户如活力健身工坊（晚上六到八点人多）[review-011] 和静力瑜伽馆（无自由力量器械）[review-040] 均不满足条件。",
+      "relevantReviewIds": [
+        "review-043"
+      ],
+      "retrievedReviewIds": [
+        "review-043",
+        "review-011",
+        "review-040"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-043",
+          "shopId": 15,
+          "shopName": "全天候综合健身",
+          "text": "二十四小时营业，深夜十一点后自由力量区人少，适合下班很晚的人训练。",
+          "score": 0.8467474
+        },
+        {
+          "reviewId": "review-011",
+          "shopId": 6,
+          "shopName": "活力健身工坊",
+          "text": "器械维护得比较新，晚上六点到八点自由力量区人最多。第一次来可以预约教练做器械讲解。",
+          "score": 0.6773031
+        },
+        {
+          "reviewId": "review-040",
+          "shopId": 14,
+          "shopName": "静力瑜伽馆",
+          "text": "小班瑜伽课每班不超过十二人，环境安静，老师会纠正动作；馆内没有自由力量器械。",
+          "score": 0.6446291
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "全天候综合健身二十四小时营业",
+        "深夜十一点后自由力量区人少"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "全天候综合健身二十四小时营业",
+          "covered": true,
+          "reason": "评论证据 review-043 明确提到“二十四小时营业”，与期望事实一致。"
+        },
+        {
+          "expectedPoint": "深夜十一点后自由力量区人少",
+          "covered": true,
+          "reason": "评论证据 review-043 明确提到“深夜十一点后自由力量区人少”，与期望事实一致。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-026",
+      "question": "健身新手想在安静小班里学动作，同时练自由力量，静力瑜伽馆都能满足吗？",
+      "answer": "静力瑜伽馆的小班课人数不超过十二人，环境安静，老师会纠正动作，适合新手学习 [review-040]。但馆内没有自由力量器械 [review-040]，所以无法满足你同时练自由力量的需求。现有评论信息不足以说明静力瑜伽馆能完全满足你的要求。",
+      "relevantReviewIds": [
+        "review-040"
+      ],
+      "retrievedReviewIds": [
+        "review-040",
+        "review-011",
+        "review-042"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-040",
+          "shopId": 14,
+          "shopName": "静力瑜伽馆",
+          "text": "小班瑜伽课每班不超过十二人，环境安静，老师会纠正动作；馆内没有自由力量器械。",
+          "score": 0.76366746
+        },
+        {
+          "reviewId": "review-011",
+          "shopId": 6,
+          "shopName": "活力健身工坊",
+          "text": "器械维护得比较新，晚上六点到八点自由力量区人最多。第一次来可以预约教练做器械讲解。",
+          "score": 0.63008845
+        },
+        {
+          "reviewId": "review-042",
+          "shopId": 14,
+          "shopName": "静力瑜伽馆",
+          "text": "零基础拉伸和肩颈放松课适合新手，工作日晚七点的课程最热门，需要提前预约。",
+          "score": 0.6179841
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "静力瑜伽馆是安静小班且老师会纠正动作",
+        "馆内没有自由力量器械，不能同时满足力量训练需求"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "静力瑜伽馆是安静小班且老师会纠正动作",
+          "covered": true,
+          "reason": "期望事实“静力瑜伽馆是安静小班且老师会纠正动作”与评论证据[review-040]中“小班瑜伽课每班不超过十二人，环境安静，老师会纠正动作”完全一致，回答中也明确提及，因此被准确覆盖。"
+        },
+        {
+          "expectedPoint": "馆内没有自由力量器械，不能同时满足力量训练需求",
+          "covered": true,
+          "reason": "期望事实“馆内没有自由力量器械，不能同时满足力量训练需求”与评论证据[review-040]中“馆内没有自由力量器械”一致，回答中明确说明无法满足自由力量训练需求，因此被准确覆盖。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    },
+    {
+      "caseId": "rag-027",
+      "question": "工作日晚上七点去综合健身房，想立即使用热门器械不用等待，现实吗？",
+      "answer": "根据现有评论信息，工作日晚上七点去综合健身房，想立即使用热门器械不用等待，**不太现实**。因为评论指出“工作日晚上六点到九点比较拥挤，热门器械常要轮流使用”[review-044]，同时另一家健身房在“晚上六点到八点自由力量区人最多”[review-011]，说明这个时段普遍人流密集。",
+      "relevantReviewIds": [
+        "review-044"
+      ],
+      "retrievedReviewIds": [
+        "review-044",
+        "review-011",
+        "review-043"
+      ],
+      "sources": [
+        {
+          "reviewId": "review-044",
+          "shopId": 15,
+          "shopName": "全天候综合健身",
+          "text": "器械种类多，但工作日晚上六点到九点比较拥挤，热门器械常要轮流使用。",
+          "score": 0.6648918
+        },
+        {
+          "reviewId": "review-011",
+          "shopId": 6,
+          "shopName": "活力健身工坊",
+          "text": "器械维护得比较新，晚上六点到八点自由力量区人最多。第一次来可以预约教练做器械讲解。",
+          "score": 0.63881904
+        },
+        {
+          "reviewId": "review-043",
+          "shopId": 15,
+          "shopName": "全天候综合健身",
+          "text": "二十四小时营业，深夜十一点后自由力量区人少，适合下班很晚的人训练。",
+          "score": 0.57651
+        }
+      ],
+      "retrievalHit": true,
+      "expectedPoints": [
+        "工作日晚上六点到九点比较拥挤",
+        "热门器械常需轮流使用，七点无法保证不用等待"
+      ],
+      "pointResults": [
+        {
+          "expectedPoint": "工作日晚上六点到九点比较拥挤",
+          "covered": true,
+          "reason": "期望事实“工作日晚上六点到九点比较拥挤”与评论证据[review-044]中“工作日晚上六点到九点比较拥挤”完全一致，且回答中引用了该证据，因此覆盖。"
+        },
+        {
+          "expectedPoint": "热门器械常需轮流使用，七点无法保证不用等待",
+          "covered": true,
+          "reason": "期望事实“热门器械常需轮流使用，七点无法保证不用等待”与评论证据[review-044]中“热门器械常要轮流使用”一致，且回答据此推断七点无法立即使用，覆盖。"
+        }
+      ],
+      "coveredPoints": 2,
+      "coverageRate": 1.0,
+      "faithful": true,
+      "unsupportedClaims": [],
+      "failureTypes": []
+    }
+  ]
+}

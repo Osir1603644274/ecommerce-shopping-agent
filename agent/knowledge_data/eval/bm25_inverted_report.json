@@ -1,0 +1,78 @@
+{
+  "experiment": "BM25 forward scan versus inverted posting search",
+  "methodology": {
+    "split": "validation questions only",
+    "sealedDataRead": false,
+    "documentCount": 6774,
+    "topK": 30,
+    "sameTokenizerAndBm25Formula": true
+  },
+  "summary": {
+    "passed": true,
+    "checks": {
+      "allRankingsEquivalent": true,
+      "invertedAverageFaster": true
+    },
+    "averageReferenceScanMs": 126.33678749625687,
+    "averageInvertedSearchMs": 17.588712500582915,
+    "averageSpeedup": 7.182833165990399
+  },
+  "details": [
+    {
+      "case": 1,
+      "rankingEquivalent": true,
+      "referenceScanMs": 123.36229998618364,
+      "invertedSearchMs": 20.9337999986019,
+      "returned": 30
+    },
+    {
+      "case": 2,
+      "rankingEquivalent": true,
+      "referenceScanMs": 137.2613999992609,
+      "invertedSearchMs": 26.573500013910234,
+      "returned": 30
+    },
+    {
+      "case": 3,
+      "rankingEquivalent": true,
+      "referenceScanMs": 126.0822000040207,
+      "invertedSearchMs": 16.69889999902807,
+      "returned": 30
+    },
+    {
+      "case": 4,
+      "rankingEquivalent": true,
+      "referenceScanMs": 124.41049999324605,
+      "invertedSearchMs": 24.626500002341345,
+      "returned": 30
+    },
+    {
+      "case": 5,
+      "rankingEquivalent": true,
+      "referenceScanMs": 116.90759999328293,
+      "invertedSearchMs": 7.700200018007308,
+      "returned": 30
+    },
+    {
+      "case": 6,
+      "rankingEquivalent": true,
+      "referenceScanMs": 101.88649999327026,
+      "invertedSearchMs": 13.105299993185326,
+      "returned": 30
+    },
+    {
+      "case": 7,
+      "rankingEquivalent": true,
+      "referenceScanMs": 148.27580002020113,
+      "invertedSearchMs": 18.308699975023046,
+      "returned": 30
+    },
+    {
+      "case": 8,
+      "rankingEquivalent": true,
+      "referenceScanMs": 132.50799998058937,
+      "invertedSearchMs": 12.762800004566088,
+      "returned": 30
+    }
+  ]
+}

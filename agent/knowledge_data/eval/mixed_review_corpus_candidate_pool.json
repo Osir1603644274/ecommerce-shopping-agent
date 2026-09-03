@@ -1,0 +1,4465 @@
+{
+  "methodology": {
+    "datasetVersion": "mixed-review-validation-v1",
+    "split": "validation candidate pool only",
+    "sealedDataRead": false,
+    "requiresHumanJudgment": true,
+    "poolMethods": [
+      "bm25AllReviews",
+      "hybridAllBm25V02B08"
+    ],
+    "poolDepth": 10,
+    "instruction": "Unjudged cross-source candidates are not negative. Assistant-reviewed labels are disclosed separately from independent human judgments."
+  },
+  "caseCount": 31,
+  "candidateCount": 213,
+  "candidateCountsByPriority": {
+    "high": 35,
+    "normal": 178
+  },
+  "judgmentSummary": {
+    "judgedCount": 35,
+    "unjudgedCount": 178,
+    "judgedCountsByPriority": {
+      "high": 35
+    },
+    "judgedCountsByRelevance": {
+      "0": 18,
+      "1": 7,
+      "2": 3,
+      "3": 7
+    },
+    "judgedCountsByStratum": {
+      "seed_known_evidence": 33,
+      "yelp_shop_discovery": 2
+    },
+    "top3CrossSourceByMethod": {
+      "bm25AllReviews": {
+        "candidateCount": 31,
+        "countsByRelevance": {
+          "0": 17,
+          "1": 6,
+          "2": 1,
+          "3": 7
+        },
+        "irrelevantCaseCount": 12,
+        "irrelevantCaseIds": [
+          "rag-001",
+          "rag-002",
+          "rag-008",
+          "rag-012",
+          "rag-013",
+          "rag-014",
+          "rag-018",
+          "rag-019",
+          "rag-020",
+          "rag-022",
+          "rag-023",
+          "rag-024"
+        ]
+      },
+      "hybridAllBm25V02B08": {
+        "candidateCount": 26,
+        "countsByRelevance": {
+          "0": 11,
+          "1": 7,
+          "2": 2,
+          "3": 6
+        },
+        "irrelevantCaseCount": 8,
+        "irrelevantCaseIds": [
+          "rag-001",
+          "rag-002",
+          "rag-013",
+          "rag-019",
+          "rag-020",
+          "rag-022",
+          "rag-023",
+          "rag-024"
+        ]
+      }
+    },
+    "highPriorityComplete": true
+  },
+  "cases": [
+    {
+      "caseId": "rag-001",
+      "stratum": "seed_known_evidence",
+      "question": "两个人吃火锅，不能吃太辣，有什么依据可以推荐？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-001"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-d9uislpPZxNepNvLmm6t0g",
+          "source": "yelp",
+          "shopId": 100093,
+          "shopName": "Square 1682",
+          "text": "偶然发现这个地方，想找一家新年后的早餐店。即使没有预订，我们也几乎立刻被安排入座。一行四人点了煎饼、鸡蛋和意式蛋饼，味道都不错，问题是服务。我们中的两个人先上了菜，另外两个人没有。没有什么比一半的人吃上了而另一半还要等更糟糕的了！！！没吃到的人说“先吃吧，别等了”。在我看来，这是餐馆对客人能做的最糟糕的事情之一。尽管食物不错，但我们这次用餐中得到的服务导致了一次糟糕的用餐体验。不幸的是，我们离开时发誓再也不回来了。请 1682 改进这个问题，这很重要，对顾客体验影响巨大。食物打 4 星，服务打 1 星。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 1
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 2
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "早餐和上菜服务体验，没有火锅或辣度证据。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-tNLjoDyn0k0UHeS3PXoFhg",
+          "source": "yelp",
+          "shopId": 100300,
+          "shopName": "Fabio's Chicken Restaurant Takeout",
+          "text": "通常我点“bandeja paisa”，它很棒。够两个人吃，15美元，一点也不贵。\n但你必须提前点单，他们通常说20分钟，但至少需要30分钟。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 2
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 3
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 1,
+            "label": "tangential",
+            "rationale": "只覆盖两人份量和价格，没有火锅或辣度信息。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-HZVZUo9KX_UoksF5eU34Og",
+          "source": "yelp",
+          "shopId": 100054,
+          "shopName": "Mood Cafe",
+          "text": "不是普通的馕和咖喱。如果你想尝试不同的、更清淡的东西，一定要去Mood Cafe。\n\nMood Cafe提供各种chaats（小吃），基本上是脆片混合枣子、不同的香料/酱汁、肉类（可选）、豆类、土豆等。我问老板有什么推荐，他推荐了鸡肉沙拉chaat（中辣）。选这个准没错！味道在口中爆发，同时又感觉很健康。我本来想点微辣（虽然我喜欢辣，但受不了太辣），但很高兴我听了他的推荐选了中辣。非常完美（一点也不太辣）。\n\n这里的拉西选择可能是我见过最丰富的。我点了芒果味，还尝了朋友点的蜜瓜味。两种都很好喝！\n\n空间很小，只有几个座位，所以更适合外卖。让这个地方达到五星的真正原因是老板非常友好！这是一次很棒的体验。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-UIR3sxd3gPNhImc5ldETkw",
+          "source": "yelp",
+          "shopId": 100252,
+          "shopName": "Misconduct Tavern",
+          "text": "老实说，我想不出有什么特别好的地方。食物还行，饮料够好，氛围也还可以。我可能会因为位置好而回来参加欢乐时光，但这个地方没有什么让我觉得特别惊艳的。\n\n不过如果你来了，我推荐爱尔兰骡子。我一晚上让三个不同的调酒师做了这杯酒，味道都不一样，但都很好喝。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-1LQ4MtQCkP8bYDDs7OwcFg",
+          "source": "yelp",
+          "shopId": 100005,
+          "shopName": "Wawa",
+          "text": "不能说我对这里的三明治有什么印象。芝士牛排的肉让我的面包卷变得湿软。通心粉和奶酪一般般，但整体有点'加油站'的感觉，而且价格也有点贵。也许换个Wawa会好点，但我对这家小店期望更高，因为之前被大力推荐过！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-bx273_xX2zdby1hLyyxGKg",
+          "source": "yelp",
+          "shopId": 100234,
+          "shopName": "Yellow Bicycle Canteen",
+          "text": "相当不错。我来这里是因为我原本要去的那家是我在费城的最爱，但它倒闭了。我崩溃了。我仍然很难过。最好的素食麻辣火锅！不过，我走了很远，因为我抽嗨了，走远点没问题。我点了香肠卷饼，很好吃。也超大。有点贵。但嘿，它不像那些占领我们城市、推高生活成本的时髦店那么糟。价格合理。你懂吗？我本来可以加点辣酱的。但没看到。不知道他们有没有。不过我包里通常有！哈哈。呃，没有。但还是很好吃。经营的人看起来是独自在忙。他们很好地招呼了我，让我这个汗流浃背的家伙感到受欢迎。因为天气潮湿得要命，我浑身黏糊糊的，哈哈。但嗯，不错的东西。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-dFxVzx1RexlOx-u7mQSeOg",
+          "source": "yelp",
+          "shopId": 100062,
+          "shopName": "Gigi and Big R",
+          "text": "7月4日在Wawa Welcome America Fest吃了Gigi和Big R。超棒的烤鸡（大份够两个人吃），通心粉和奶酪，以及羽衣甘蓝。烤鸡是慢炖的，非常嫩，加上腌制的香料。绝对又辣又香，是我吃过最好的烤鸡之一。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-_niVGewdDcuhrR_1f6rcAw",
+          "source": "yelp",
+          "shopId": 100188,
+          "shopName": "Rangoli: Vibrant Flavors of India",
+          "text": "食物非常好，虽然有点辣——我不介意，但给可能对辣有意见的人提个醒。服务也不错，但我们是店里唯一的客人，所以不好说如果人多会怎样。\n\n我觉得价格有点高，尤其是标题为“主菜”的部分。除非两个人从那个部分点菜，否则米饭要额外收费2.99美元，我觉得一份米饭这个价格也太高了（考虑到32盎司的Basmati米不到5美元）。总之，这就是为什么我给它4星而不是5星。食物不错，但就印度素食而言，我觉得贵了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-lxnrpg0MZAUGmUPgqazqgQ",
+          "source": "yelp",
+          "shopId": 100139,
+          "shopName": "Potito's Italian American Pastries",
+          "text": "当然，他们做的奶油甜馅煎饼卷不错，但问题是……你只能吃这么多煎饼卷 ;)\n\n无聊的笑话放一边，我一直对这个地方印象深刻。好人。价格公道。美味的草莓酥饼。还有什么可挑剔的呢？",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-002",
+      "stratum": "seed_known_evidence",
+      "question": "想周五晚上安静聊天，巷子口火锅要注意什么？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-002"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-asrIj-S38MQhTKC8fLrvVQ",
+          "source": "yelp",
+          "shopId": 100065,
+          "shopName": "Fine Wine & Good Spirits - Premium Collection",
+          "text": "每周五晚上（6-8点）和周六下午（4-6点）的免费品酒活动给4星。负责免费品酒活动的店员知识渊博且友好。选择相当广泛，商店也很大。店员水平参差不齐，但最终，我只想快点进出。提示/要点：-周五晚上排队超级长。-周五晚上6-8点和周六下午4-6点有免费品酒！-我通常用 Vivino 应用来缩小选酒范围。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 3
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "问题点名巷子口火锅，候选是葡萄酒商店。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp--T8GPIoS0pu5aIOUlYN0gw",
+          "source": "yelp",
+          "shopId": 100177,
+          "shopName": "Tiffin-Etc",
+          "text": "印度披萨。你可能会犹豫，但很好吃。\n\n饼皮薄，外脆内韧。配料不多，但个人披萨应该能让你吃饱。我们还点了parathas（小份、很薄的扁平面包三明治），也非常棒。\n\n店里很安静，我们是周五晚上6:30第一个坐下用餐的，换句话说，没什么氛围。我肯定会再来，因为食物便宜、好吃、管饱。我建议和几个朋友一起去，点各种菜品分享。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-fQoc6QejSaDTIiYoQfUm1w",
+          "source": "yelp",
+          "shopId": 100198,
+          "shopName": "Xochitl",
+          "text": "我真的很希望他们能把这个地方好好利用起来，因为它曾是我独自一人时最爱的老地方。这是以前的Filo's，我很多个夜晚在那里喝几杯，听Worship crew放的好音乐跳舞，然后走回家。\n\n一个周五晚上，有个外地朋友来访，我们决定去看看这个地方。楼下休息区的氛围和食物都很棒。DJ放的音乐很好听，有放克风格，又不太吵，我们还能聊天。食物很出色，我们点了西瓜扇贝酸橘汁腌鱼，我不知道会是什么味道，它不像我以前吃过的典型酸橘汁腌鱼，但很好吃。我们还点了奶酪火锅，一个加香肠，另一个加蘑菇。两者都很美味！\n\n休息区还有反向欢乐时光特惠：周四至周六，晚上10点到12点。我们喝了一些美味的玛格丽特（虽然不是我喝过最好的，但价格合理），离开时感觉很好，不太饱，食物量恰到好处，口袋里还有钱！\n\n我绝对期待再去Xochitl。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-ug9G2vVNhNqrzjMCc_3RBA",
+          "source": "yelp",
+          "shopId": 100085,
+          "shopName": "Chuck's Alibi",
+          "text": "Chuck's介于本地酒吧、亚特兰大夜店和餐厅之间。我只是评价这里的夜生活，因为我是周五晚上来喝酒的。音乐绝对是这个周五晚上体验中最棒的部分。全是老派的Mase、112、SWV，非常适合喝几杯……也许再来杯烈酒。我肯定会再来的，每个人似乎都很享受他们的餐点，不幸的是我午夜过后不久就离开了，因为第二天还要上班。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-vpycsMydn0sWc1hywNewBA",
+          "source": "yelp",
+          "shopId": 100066,
+          "shopName": "Taqueria La Hacienda",
+          "text": "这家店的食物真的很好。周五晚上店里很空，但他们很快接待了我们，食物也很快做好了。很棒的墨西哥风味。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-5P-g-9ox-NVDHXmBf64iTw",
+          "source": "yelp",
+          "shopId": 100158,
+          "shopName": "Queen Sheba",
+          "text": "长话短说……\n\n周五晚上和朋友来这里喝酒——我们试过的其他地方都挤满了人。最后在吧台边找到了座位，玩得很开心——酒水便宜，可以和各种有趣/古怪的人聊天，最棒的是整晚视线里都没有讨厌的家伙。他们有自动点唱机——这是我喝醉时最喜欢的东西之一。不过凳子有点不舒服，虽然可能只是因为我老了。我们一直待到酒吧打烊。\n\n下次周五或周六晚上在西费城，我会来这里，和朋友一起跟着《玫瑰之吻》摇摆，给周围的人点PBR和烈酒。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-4eqTJbn-DDTI1cWe3C8oOg",
+          "source": "yelp",
+          "shopId": 100190,
+          "shopName": "Dagwood's Pub",
+          "text": "食物很棒，服务一流。生啤冰凉好喝。周五晚上有很棒的现场音乐。酒保Bob很棒。服务员非常专业和有礼貌。店里很干净。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-003",
+      "stratum": "seed_known_evidence",
+      "question": "看完电影后还想吃东西，有适合的店吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-003"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-n776BOF8hqrv54i6IDNVLw",
+          "source": "yelp",
+          "shopId": 100046,
+          "shopName": "Beck's Cajun Cafe",
+          "text": "我们爱这个地方！波旁街早餐非常适合当你还想吃早餐但又想同时吃午餐的时候。他们的埃托菲也很棒！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 2
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 2
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 1,
+            "label": "tangential",
+            "rationale": "说明可同时吃早餐和午餐，但没有电影后时段或营业证据。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-174T3AbgqiGNBpg2D_qjrQ",
+          "source": "yelp",
+          "shopId": 100077,
+          "shopName": "México Lindo",
+          "text": "食物美味，价格合理！我们在看电影前吃了晚餐，感觉就像在坎昆享受晚餐！强烈推荐，尤其是考虑到价格的真实性。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 3
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 2,
+            "label": "relevant_with_missing_constraint",
+            "rationale": "直接描述看电影前用餐且价格合理，但没有电影后营业时间。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-yyAycjhj9pBUWYlZd75IZg",
+          "source": "yelp",
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "text": "这可能是城里我最喜欢的咖啡店。食物令人难以置信。我点过的任何东西都新鲜、美味、令人愉悦。店里有一种酷酷的时尚氛围，有很多舒适的座位，天气好的时候外面还有一些很棒的位置。绝对值得一试，尤其是如果你还想吃点东西的话。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 2,
+            "label": "relevant_with_missing_constraint",
+            "rationale": "明确适合还想吃东西的场景，但缺少电影后时段证据。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-YpDx1X1OvnwUgdkHeZNvWw",
+          "source": "yelp",
+          "shopId": 100184,
+          "shopName": "Cake Life Bake Shop",
+          "text": "漂亮干净的店铺，有让你惊叹的一切……\n自制早餐挞和鸡肉馅饼。\n所有甜点看起来都非常漂亮和美味。\n我觉得有些东西有点贵，考虑到尺寸偏小。但我知道优质品质成本更高……\n这对当地人来说是个好地方，如果从市中心等地过来也值得一游。\n我发现柜台员工非常友好和健谈。\n会再来的，当然也会推荐。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-ebaTICIzMFIhg5Ku7v-0WQ",
+          "source": "yelp",
+          "shopId": 100205,
+          "shopName": "Williams-Sonoma",
+          "text": "这家店闻起来像烤饼干的味道，员工友好且乐于助人。他们卖的东西有点贵，但他们的家用厨具做得不错。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-AJoEgRYv4cJjqMiUAyVrYw",
+          "source": "yelp",
+          "shopId": 100178,
+          "shopName": "Jamaican Jerk Hut",
+          "text": "周五又在这里吃了，和往常一样，我的食物非常棒！！！我现在多加一颗星，因为我们的服务员好心地把我们的桌子搬到外面，这样我和男朋友可以在外面吃。不幸的是，开始下雨了，但我很感激他的努力！\n\n那些来这里期待奢华和魅力的人对正宗的牙买加餐馆知之甚少。别管它是不是出现在电影里……如果你想要某种梦幻般的用餐体验，去Beaches度假村之类的地方吃，或者去Bahama Breeze吃。\n\n我的食物15分钟内就上来了，服务也很好。Yah Mon……",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-WD_BvDlsjEK4JOeZz1_f2w",
+          "source": "yelp",
+          "shopId": 100183,
+          "shopName": "Halal Gyro King",
+          "text": "我想吃无麸质的肉食，羊肉似乎正合适。简单的订单——羊肉、米饭、“白酱”和“辣酱”（我说要一点，但他挤了满满一瓶子）。这是我吃过最好吃的东西之一。不是特别辣，有适量的孜然，白酱（tzatziki）很 creamy，和红酱搭配得很好。只要5美元，你就能得到所有这些，外加一杯饮料（如果你想要的话）。（我不想要饮料，但5美元还是很划算。）我仍然有点怀疑羊肉里没有掺小麦类的东西，但卡车里的那个人说“没有面粉”。我肯定会再去的。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-q4_dkTv7KmGLo44aW0hkpA",
+          "source": "yelp",
+          "shopId": 100194,
+          "shopName": "Zorba's Taverna",
+          "text": "我是费城的新人，来自一个拥有几位铁人料理冠军的美食城。这是我最喜欢去的地方。这里有适合每个人的选择，食物的品质让我光是等着就流口水。服务员和员工都很棒，非常愉快。在这里的用餐总是很享受。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-TjNj7WopzI77yxoWHXYIHA",
+          "source": "yelp",
+          "shopId": 100091,
+          "shopName": "Three 12 Sport Bar and Lounge",
+          "text": "服务糟糕，店里空荡荡的。谁会在早午餐时段坐在桌边时提前提供信用卡？服务员从不记单，上错东西后还争辩。还看到她在吧台顾客那边喝了一杯含羞草鸡尾酒。难怪店里空荡荡的，真可惜，因为有大电视适合看橄榄球。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-004",
+      "stratum": "seed_known_evidence",
+      "question": "预算 150 元以内，两个人吃烧烤合适吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-004"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-tNLjoDyn0k0UHeS3PXoFhg",
+          "source": "yelp",
+          "shopId": 100300,
+          "shopName": "Fabio's Chicken Restaurant Takeout",
+          "text": "通常我点“bandeja paisa”，它很棒。够两个人吃，15美元，一点也不贵。\n但你必须提前点单，他们通常说20分钟，但至少需要30分钟。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 2
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 3
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 1,
+            "label": "tangential",
+            "rationale": "覆盖两人份量和价格，但不是烧烤且币种不同。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-dFxVzx1RexlOx-u7mQSeOg",
+          "source": "yelp",
+          "shopId": 100062,
+          "shopName": "Gigi and Big R",
+          "text": "7月4日在Wawa Welcome America Fest吃了Gigi和Big R。超棒的烤鸡（大份够两个人吃），通心粉和奶酪，以及羽衣甘蓝。烤鸡是慢炖的，非常嫩，加上腌制的香料。绝对又辣又香，是我吃过最好的烤鸡之一。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-fTk_zmVa4YXD8WXbECPZow",
+          "source": "yelp",
+          "shopId": 100062,
+          "shopName": "Gigi and Big R",
+          "text": "去过这辆餐车很多次了，现在才来评论。鳕鱼晚餐很好吃，我通常会点通心粉和奶酪配羽衣甘蓝作为配菜。大份大概有5到6块鱼。足够两个人吃。通心粉和奶酪很棒。值得等待，而且不会让你破产。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-3IHp6f-QzZ2YiTaSR3LdOA",
+          "source": "yelp",
+          "shopId": 100111,
+          "shopName": "Ron's Caribbean Cuisine",
+          "text": "这是我最喜欢的加勒比餐厅！他们的食物都很好吃。没给五星的唯一原因是牛肉饼卖得太快，而且有时等待时间长得离谱。但除此之外，食物太好吃了，我愿意等。而且价格实惠，小份的量足够两个人吃或当两顿饭！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-qQk2xOnNULG2xBrMi_px_Q",
+          "source": "yelp",
+          "shopId": 100094,
+          "shopName": "Franzone's Pizzeria & Restaurant",
+          "text": "为《权力的游戏》大结局点了两个披萨。点了一个普通披萨，因为我们组里没人吃过，还有一个芝士牛排披萨。两个都很好吃。切片切得有点奇怪，有些大有些小。这是我唯一的抱怨。会再从这里点餐。可能这周末！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-IxbmjteN5Rrc-TvtnW0h_A",
+          "source": "yelp",
+          "shopId": 100269,
+          "shopName": "Fresh Gulf Seafood",
+          "text": "我渴望吃一些蒜蓉黄油酱的蒸海鲜，在Yelp上找到了这个地方，决定试一试。一进门我就立刻被接待了。我决定点蒸拼盘1，里面有雪蟹和虾，我男朋友点了蒸拼盘2，里面有珍宝蟹和虾。我很兴奋地回家吃。我觉得分量够两个人吃，如果你不太饿的话，但如果饿了，只够一个人。价格比Ons and Son稍微便宜一点，但我认为螃蟹很小。我觉得需要更多调味料，而且我的黄油里没有大蒜。所以味道很淡。不如Ons and Son好。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-GwWYvNw7PdBa-q_Tq-5UeA",
+          "source": "yelp",
+          "shopId": 100254,
+          "shopName": "So Korean Grill",
+          "text": "这是该地区比较好的韩式烤肉店之一。服务很好，我们免费得到了杂菜。有些小菜不新鲜（酱汁干了，蔬菜也不那么新鲜），但总的来说，所有食物味道都很好。\n\n套餐A两个人吃绰绰有余，我们还打包了一些剩菜。有一种肉的味道和高级牛小排几乎一模一样，所以没必要额外加牛小排（$32.99）。\n\n氛围和装饰都很棒！我肯定会再去的。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-d9uislpPZxNepNvLmm6t0g",
+          "source": "yelp",
+          "shopId": 100093,
+          "shopName": "Square 1682",
+          "text": "偶然发现这个地方，想找一家新年后的早餐店。即使没有预订，我们也几乎立刻被安排入座。一行四人点了煎饼、鸡蛋和意式蛋饼，味道都不错，问题是服务。我们中的两个人先上了菜，另外两个人没有。没有什么比一半的人吃上了而另一半还要等更糟糕的了！！！没吃到的人说“先吃吧，别等了”。在我看来，这是餐馆对客人能做的最糟糕的事情之一。尽管食物不错，但我们这次用餐中得到的服务导致了一次糟糕的用餐体验。不幸的是，我们离开时发誓再也不回来了。请 1682 改进这个问题，这很重要，对顾客体验影响巨大。食物打 4 星，服务打 1 星。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-005",
+      "stratum": "seed_known_evidence",
+      "question": "哪家咖啡店适合下午带电脑办公？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-005"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-MhSusleKbPBIiq2fKHH5mA",
+          "source": "yelp",
+          "shopId": 100277,
+          "shopName": "Valerio Coffee Roasters",
+          "text": "可爱的咖啡店，适合工作。停车在附近比较困难，但除此之外，空间很大，目前有室内座位。咖啡不错，咸味吐司也很好吃。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 2
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 2
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 3,
+            "label": "directly_relevant",
+            "rationale": "咖啡店评论明确说明适合工作、空间大且有室内座位。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-ca5-l1hCUfQvkVfykIUyuQ",
+          "source": "yelp",
+          "shopId": 100134,
+          "shopName": "Starbucks",
+          "text": "我上班时想补充咖啡因，这里是一个适合跑来喝咖啡的好地方。我也喜欢他们的沙发，非常适合用笔记本电脑做一点或很多工作。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-uYgYgz3VRU-nQMsRuUZ7Dg",
+          "source": "yelp",
+          "shopId": 100277,
+          "shopName": "Valerio Coffee Roasters",
+          "text": "前一天晚上散步回家时偶然发现这个地方，想来看看。这家咖啡店似乎是新开的/从One Nickel重新品牌，与新的Bald Bird Brewing Company相连。看起来咖啡馆每天在啤酒厂开门时关门，所以这绝对是一个上午/下午的去处。服务友好热情，食物美味，冷萃咖啡提神。绝对会再来的！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-N0Dq5TPfMuf13PB6p9rtYw",
+          "source": "yelp",
+          "shopId": 100192,
+          "shopName": "Alena’s Cafe",
+          "text": "我在上班路上找咖啡时偶然发现了这家咖啡店。咖啡和早餐三明治都很棒，所以我又回来吃午餐，没有失望。强烈推荐给附近想找优质咖啡馆的人。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-v2u6TqeimdKovePQl9F_eA",
+          "source": "yelp",
+          "shopId": 100068,
+          "shopName": "Alchemy Coffee",
+          "text": "这是一家非常简约的咖啡店，位于美丽的Northern Liberties区南端。他们主要卖咖啡。偶尔会有零食和糕点之类，但这主要是一家咖啡店。员工友好且高效，对他们卖的咖啡非常了解。\n\n有常见的浓缩咖啡饮品、滴滤和手冲咖啡。咖啡选择多样，但都是本地烘焙的。员工非常友好，服务出色。\n\n这是上下班途中或躲雨避寒的好去处。总体强烈推荐。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "source": "yelp",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-qoqi3Fk5ipeAP1OKDJ6ylQ",
+          "source": "yelp",
+          "shopId": 100086,
+          "shopName": "J'aime French Bakery",
+          "text": "在Yelp上发现这家可爱的小咖啡馆后，我顺道去了。我就在附近，需要在活动前找个地方快速放松一下。空间狭长，但座位充足，明亮通风。整体美学非常令人愉悦。下午晚些时候糕点柜不太满，但有足够的选择，比如柠檬挞，很好吃！咖啡菜单本身相当小。我点了一杯摩卡，巧克力味更苦，我不介意，但如果你习惯像星巴克那样的甜味，这可能不适合你。这里的工作人员很友好。咖啡和糕点的价格有点贵，尤其是咖啡并不特别精致。我也希望他们能用真正的杯子。他们可能有，但没有问我的订单是带走还是堂食。他们也卖面包。员工很好，卫生间干净。总的来说，费城一家很棒的咖啡馆，适合下午提神。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-3d_m7U-jxRF9YTP6DbOhMw",
+          "source": "yelp",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "text": "这家咖啡馆是我搬到费城的原因之一。舒适，咖啡很棒，三明治和汤也很出色——员工非常友好。另外：营业时间比一般的咖啡店要晚！任何椰子味的东西都很棒。Colonel Mustard（三明治）一定要试试。我以前也在这里约会过，所以，你知道，这也是个不错的见面地点。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-pZ_z2LRsgODLotM6rAO4VQ",
+          "source": "yelp",
+          "shopId": 100099,
+          "shopName": "Passero's Coffee Roasters",
+          "text": "3.5 星。我坐红眼航班到了 Suburban station 后来到这里。我点了店内拼配咖啡和燕麦粥，一共合理地花了 4 美元。事实上我还以为服务员少收了我钱。咖啡一般；燕麦粥尝起来像 Trader Joe's 的那种（Starbucks 仍然有最好的外带燕麦）。我读到其他评论说 Passero's 的咖啡豆多么棒，但你可能得点特殊冲煮，而不是店内拼配，才会有同样感觉。我坐在使用率不高的咖啡吧一侧，那里似乎是常客等咖啡准备好的地方。目前车站里有免费的 Verizon wifi，可能是车站广告活动的一部分，所以我拿出笔记本电脑，在去办公室前做了些工作。我会再来这里，因为座位适合用笔记本电脑，而且离洗手间近。附：附近的饮水机似乎吸引了所有看起来无家可归、想找水喝的人。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-mBE3JkCV5YH9UqNdRJMUGg",
+          "source": "yelp",
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "text": "我喜欢 Red Hook。我到这一带时经常会来。这里很适合坐在舒适的扶手椅上放松，或者用笔记本电脑工作。他们有很酷的装饰，员工也非常友好、偏年轻。这里有点贵，但咖啡是公平贸易的，而且很好喝。另外，位于 4 街和 Catherine 的位置也无可挑剔。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-xdfCiJxCUSg4vieLR9OMoA",
+          "source": "yelp",
+          "shopId": 100215,
+          "shopName": "Philadelphia Marriott Old City",
+          "text": "这家酒店适合商务旅行或短期停留费城，但度假我不会住这里。酒店离地铁也很近。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-006",
+      "stratum": "seed_known_evidence",
+      "question": "周末和朋友安静喝咖啡聊天，环境怎么样？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-006"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-MeHfRwBPr11Cs5ZLoL15ew",
+          "source": "yelp",
+          "shopId": 100086,
+          "shopName": "J'aime French Bakery",
+          "text": "环境非常古朴、宁静而明亮，适合早上或下午喝咖啡。我们大约 11 点去的时候不太忙。我们试了撒糖的 choquette，很好吃，里面填的是非常轻盈的 Nutella 奶油。我朋友喝的 Anastasia 茶闻起来非常香，卡布奇诺也很浓。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 3
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 3,
+            "label": "directly_relevant",
+            "rationale": "直接提供宁静明亮、适合上午或下午喝咖啡的环境证据。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-A5507Y8h2ofnM-73QDm6hA",
+          "source": "yelp",
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "text": "我不怎么喝咖啡，但我丈夫是，他非常喜欢他的埃塞俄比亚混合咖啡。他还买了一袋带走。我呢？我点了冰木槿浆果茶，非常好喝——即使不加任何甜味剂。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-2EsM0mPABnQempeoOPIlcA",
+          "source": "yelp",
+          "shopId": 100151,
+          "shopName": "Lucky Goat Coffeehouse",
+          "text": "温馨的环境，友好的员工，好喝的咖啡和美味的点心\n\n前厅很舒适，两侧有大窗户，阳光充足，还能很好地观察街区。员工很棒，和蔼可亲。这是我最喜欢的本地咖啡馆，我经常在这里待上几个小时，工作、和员工、朋友以及邻居聊天。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-Tt5CawSo4Yvumt4SdWbNuA",
+          "source": "yelp",
+          "shopId": 100281,
+          "shopName": "Shing Kee",
+          "text": "上周末和几个朋友去了那里。食物很棒，服务也非常出色！员工非常友好，我们一进门就打招呼。我肯定会再去这个隐藏的宝石！再次感谢！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-ayn3K9Z2AE6D4PqGZ_w09g",
+          "source": "yelp",
+          "shopId": 100011,
+          "shopName": "Red Hook Coffee & Tea",
+          "text": "首先我必须承认：我不喝咖啡。这辈子一滴都没喝过。找到一家同样照顾非咖啡爱好者的咖啡店可能是个挑战。这个炎热的周日下午我本打算去别的地方，但那里因为假日周末关门了。Yelp帮我找到了Red Hook。和另一位评论者一样，我注意到我走进去时员工正坐着和朋友聊天，但她立刻站起来帮助我。她推荐了伯爵茶加焦糖拿铁。这是个很棒的选择。味道很好……而且我自己绝不会想到这个搭配。\n\n我对Red Hook的一个（也许是两个）问题是，这个地方感觉有点像去一个大学生合租的房子。不配套的家具很可爱，但破旧且脏。到处都是灰尘和污垢。而且，可能因为外面热和频繁开门，有很多虫子。他们也没有空调。点热饮是我的错，但话说回来……咖啡店应该让人感到舒适：冬天暖和，夏天凉爽。\n\n我可能会再来喝别的饮料，但大概不会久坐。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-Xtb2kH5Ptj6V9xY_tLXcJg",
+          "source": "yelp",
+          "shopId": 100068,
+          "shopName": "Alchemy Coffee",
+          "text": "偶然发现了Alchemy Coffee！！！推荐给需要安静学习/工作场所的人。\n\n多年来我一直在找一个学习的地方，但其他咖啡馆更适合见朋友，而Alchemy很完美。\n\n环境完美。他们的咖啡完美。拉花艺术完美。糕点完美。我真的很喜欢今天的到访！一定会再来的~~",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-sHAX9dpdXpUtcBEAyD8DKw",
+          "source": "yelp",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "text": "简直是我喝过最好的热巧克力！氛围轻松。是和朋友聊天、在寒冷的日子里分享热饮的绝佳地点。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-007",
+      "stratum": "seed_known_evidence",
+      "question": "周末看热门电影需要提前做什么？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-007"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-lBuaNF4QriCiu5O1D8Eq7g",
+          "source": "yelp",
+          "shopId": 100060,
+          "shopName": "Philadelphia Phillies",
+          "text": "来城里度个长周末，看了费城人对阵勇士队的比赛。我们在StubHub上买了前排票，尽管有风，还是很享受这个体育场。\n\n吃了一个很棒的烧烤猪肉三明治，但没点蟹肉薯条……",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "source": "yelp",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-bVVaD7Z2EwRbcjenpVUGhw",
+          "source": "yelp",
+          "shopId": 100184,
+          "shopName": "Cake Life Bake Shop",
+          "text": "从Cake Life订了一个生日蛋糕，很难决定选他们哪款美味的蛋糕！最后选了他们的Fiesta Cake，一点也不后悔。非常好吃。员工非常友好和乐于助人。我不得不反复查看他们当天是否有蛋糕。注意，他们周一关门。如果你想提前订购，需要提前整整两天。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-008",
+      "stratum": "seed_known_evidence",
+      "question": "情侣去影院想选情侣专座，有什么座位方面的建议？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-008",
+        "review-030",
+        "review-032"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-kgkYAh008o8oX9anuepynA",
+          "source": "yelp",
+          "shopId": 100134,
+          "shopName": "Starbucks",
+          "text": "说实话？我尽量不来这里。这家店对于顾客数量来说太小了。我的建议是拿杯饮料就走，因为座位太挤了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 2
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "候选是星巴克座位拥挤信息，不是影院情侣专座。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-mOv_DUc3fZsWKRazpmRDSw",
+          "source": "yelp",
+          "shopId": 100134,
+          "shopName": "Starbucks",
+          "text": "清晨这里干净整洁。WiFi信号强，电源插座有限，卫生间需要密码才能进入。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-ye0m7ks-BPxeiCtQuK2Q6w",
+          "source": "yelp",
+          "shopId": 100285,
+          "shopName": "30th Street Station",
+          "text": "你在这里的体验会有所不同，取决于你在这里待多久、来的频率、有多饿或者多需要找公共厕所。\n\n不过总的来说，30街车站有一种很棒的“有趣旅行”的感觉，让你喜欢来这里。人群和火车来来往往，加上酷炫的建筑，让人振奋，感觉自己像在某个故事里。在费城残酷的夏天，里面总是凉爽舒适，你几乎可以在任何地方坐下来观察人群，或者看几只鸟在高高的天花板上飞来飞去。\n\n四处走走，你会看到很多不同的零食和食物选择——我的建议是坚持吃零食和更贵的店，比如Cosi或Au Bon Pain，因为那里的标准快餐店——赛百味、塔可钟/必胜客——经营的人并不真正在乎他们的工作。他们在客户服务和卫生方面都很随意，所以我建议避开那些地方。\n\n这里的厕所也好不到哪去，但嘿，这是一个每天服务成千上万人的公共火车站，你还能期待什么？我见过更糟的。\n\n总之，你在这里待的时间越短，它就越迷人。并不是说它在某些方面不棒，甚至可能有点让人上瘾，但如果你在这里坐几个小时或更久，事情就会变得麻烦。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-rqAp3zJS6XFW5Y0atq5GbA",
+          "source": "yelp",
+          "shopId": 100047,
+          "shopName": "Golden Triangle",
+          "text": "棒极了，芳香四溢，新鲜。周三晚上9点偶然发现这个地方，只有另一对情侣在那里。我吃了妈妈黄面条配虾，这是我第一次吃缅甸菜。我妈妈吃了柠檬草鸡。辣度恰到好处，摆盘精美。非常低调，食物很棒。价格实惠，分量足。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-UR9jI-e-cL8ftygjEhGDmg",
+          "source": "yelp",
+          "shopId": 100005,
+          "shopName": "Wawa",
+          "text": "这家Wawa位于繁忙地段，但员工似乎能很好地应对压力。我不喜欢咖啡的选择，普通咖啡太多了。我喜欢深焙，但通常没有。我的建议是冲泡不同口味的咖啡，并保持热度。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-1k13Pyc4XtFUPnaSgQmiYQ",
+          "source": "yelp",
+          "shopId": 100207,
+          "shopName": "Lauren Buckley, L.AC",
+          "text": "这里环境安静，Eva是我多年来遇到的最好的针灸师。我强烈推荐来这里，因为我之后总是感觉很好。价格合理，护理到位。我唯一的建议是提前在线预约，因为名额很快就被抢光了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-23lfzs7CA9_dH5IATcmIUw",
+          "source": "yelp",
+          "shopId": 100061,
+          "shopName": "Crown Fried Chicken",
+          "text": "还能说什么呢，这是Crown Fried Chicken。营业到很晚，食物又快又美味，是堵塞动脉的美味。美味的炸鸡，价格低廉。菜单上还有很多其他东西。我得说，如果你在这附近，想换换口味不去街对面的麦当劳或Checkers，试试他们大小适中的汉堡。好吃。还有什么比羽衣甘蓝配鸡肉更搭的呢？他们的羽衣甘蓝里撒了嫩猪肉块，没错。\n\n别让那群游荡的人吓到你！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-009",
+      "stratum": "seed_known_evidence",
+      "question": "想住得安静、休息好，酒店有什么可参考的信息？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-009"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-9fe28udUTSQhcbe9wqo7VQ",
+          "source": "yelp",
+          "shopId": 100137,
+          "shopName": "DoubleTree by Hilton Hotel Philadelphia Center City",
+          "text": "这是一家很棒的酒店。我喜欢它（尽管是城市酒店）有游泳池和热水浴缸。不错的健身中心。房间漂亮、舒适、安静。你能想到的一切都有。另外，Doubletree 在入住时会给你免费饼干！太好吃了……",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 1
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 1
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 3,
+            "label": "directly_relevant",
+            "rationale": "酒店评论直接说明房间舒适且安静。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-xY5o8VmJpXlUcI2EpNv7Bw",
+          "source": "yelp",
+          "shopId": 100215,
+          "shopName": "Philadelphia Marriott Old City",
+          "text": "不错的酒店，但价格过高。孩子们喜欢游泳池。食物一般。房间干净，我们觉得安全。我幸运地享受了亲友折扣——如果没有这个折扣，我不知道我们是否会住在这里。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 2
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 2
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 1,
+            "label": "tangential",
+            "rationale": "只说明干净和安全，没有安静或睡眠质量证据。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-owWHNdxlTdQFPwSus5yTdQ",
+          "source": "yelp",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "text": "第一次走进酒店时，给人印象深刻。非常现代，看起来很干净。但到了你所在的楼层，情况就变了。电梯门一打开，我就知道楼下只是表面功夫。地板上到处都是污渍，我房间里还有一大块红色的。房间本身还行，但我所在的楼层简直是一场噩梦。我一个人，被一群吵闹的人吓到了，他们不停地摔门、互相大喊大叫。然后凌晨12点15分，有人开始敲我的门。我吓坏了，没休息好，赶上了早上6点的航班。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 3
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 3,
+            "label": "directly_relevant",
+            "rationale": "作为负面证据，直接说明噪声导致无法休息。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-3A9DzlnlxFAiydZHgrWDjg",
+          "source": "yelp",
+          "shopId": 100136,
+          "shopName": "City Food Tours",
+          "text": "Kelly做得非常出色，在“美食之旅”中告诉我们的信息远超预期，她以有趣且引人入胜的方式分享信息。我会尝试他们更多的旅行——就是那么好。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-J-GACQ4GKqQ5QDkMToGJCg",
+          "source": "yelp",
+          "shopId": 100176,
+          "shopName": "Roosevelt Inn",
+          "text": "在对面的酒店住得很糟糕后，我入住罗斯福酒店并住了四晚。他们允许我很早办理入住。前台员工很棒，非常友好和合作。房间不豪华但干净舒适。住宿安静。我提前一天退房，他们全额退款。我把钱包落在房间，但直到回家才发现。经理把钱包寄回给我，没有钱、信用卡等丢失。我提出支付运费，但经理拒绝了。我肯定会再住这里。\n\n显示较少",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-MhAmSeurnV2RzWQHXAkS1g",
+          "source": "yelp",
+          "shopId": 100074,
+          "shopName": "Kimpton Hotel Monaco Philadelphia",
+          "text": "当我想在夏天穿着亚麻西装，喝着免费的欢乐时光葡萄酒时，我就住这里。\n\n如果你想要完整的酒店/酒吧/俱乐部/休息室体验，就住这里。\n\n屋顶酒吧/休息室周末会排长队……但当你预订这家超独特的酒店时，就可以轻松越过排队。\n\n买些美味的丝绸时装，在这家酒店住下、喝酒、休闲。\n\n像我一样。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-lxnrpg0MZAUGmUPgqazqgQ",
+          "source": "yelp",
+          "shopId": 100139,
+          "shopName": "Potito's Italian American Pastries",
+          "text": "当然，他们做的奶油甜馅煎饼卷不错，但问题是……你只能吃这么多煎饼卷 ;)\n\n无聊的笑话放一边，我一直对这个地方印象深刻。好人。价格公道。美味的草莓酥饼。还有什么可挑剔的呢？",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-SaZAdxk6Hb1bCk6lRGB7MQ",
+          "source": "yelp",
+          "shopId": 100049,
+          "shopName": "The Inn at The Union League",
+          "text": "如果不是因为晚上的噪音，我会给联盟酒店打5星……我很快发现为什么房间里放了耳塞。我知道噪音和身处城市有关，但很难入睡。我想我们住在了特别吵的一侧，每天早上大约3点开始收垃圾，持续将近一个小时。\n\n除了噪音，这家酒店非常棒。健身房很棒，床舒适，房间干净，早餐美味。酒店有些楼层有着装要求，所以如果你打算住在这里，一定要带合适的衣服。除了这些设施，酒店就位于市中心！\n\n如果你愿意多花一点钱，这家酒店是费城之旅的绝佳选择！:)",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-rGRItSR_3iW-bmpHdzmR1A",
+          "source": "yelp",
+          "shopId": 100265,
+          "shopName": "Capriotti Bros",
+          "text": "这家店有什么不让人喜欢的？！水果总是那么新鲜，价格低到你无法想象。更别提种类了。我这辈子从不知道有这么多不同种类的洋葱。你肯定能在那里找到你要的东西。只是要小心……PPA在Frankford大道上毫不留情。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-bVALI8kzmuyHFU28hBEymg",
+          "source": "yelp",
+          "shopId": 100247,
+          "shopName": "Tasties",
+          "text": "我听到很多关于这里食物的好评……真希望我也有什么可夸的！我点了一份牙鳕鱼三明治，我的鱼是小块的，像迷你鱼排。等了30分钟，我喜欢自制鸡柳，酱汁很棒，鸡肉大小也不错……我希望不久的将来能再来。也许我会点意面而不是鱼……",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-goNsCNa0x7eEPu7dizmnkw",
+          "source": "yelp",
+          "shopId": 100074,
+          "shopName": "Kimpton Hotel Monaco Philadelphia",
+          "text": "我不确定我能否写出足够多的正面词汇来描述我在这里的美妙体验。\n\n这次入住是因为我从华盛顿特区搬到费城工作。我需要在这附近开始工作，但我的公寓还要过几天才能准备好。老实说，我不知道还有哪家酒店有更好的服务。员工非常友好和乐于助人。这可能适用于所有Kimpton酒店，但我两次入住这里时尤其注意到了这一点。\n\n位置极佳，如果你想参观城市的历史景点，这家酒店是最好的之一。独立厅、自由钟等都在步行距离内，就在街对面。\n\n如果你喜欢好鸡尾酒，屋顶休息室有几款相当美味的。\n\n根据一年中的时间或城市的活动，房价可能会高，但如果你能在这里住一晚，你不会后悔的。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-010",
+      "stratum": "seed_known_evidence",
+      "question": "出差早到酒店，能先寄存行李吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-010"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-wvixD_3UexQ9pFUfl0JLDg",
+          "source": "yelp",
+          "shopId": 100297,
+          "shopName": "JetBlue",
+          "text": "如果我能给零颗星，我会给的。我和丈夫去西班牙度蜜月。到达时我们的行李没到。我们打电话给乘坐的两家航空公司，似乎没人能帮我们。JetBlue 花了5天才找到我们的行李，显然它根本没离开过费城。所以整整5天，我们只有身上的衣服，被迫花了几百美元买衣服、洗漱用品等。我们昨晚刚回来……他们又把我的行李弄丢了。幸运的是我丈夫的行李到了。更别提我们的航班延误了7小时。如果你碰巧乘坐这家糟糕的航空公司，记得带个随身行李。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-zLbgO3KNFrkT1gS0bx-w_Q",
+          "source": "yelp",
+          "shopId": 100137,
+          "shopName": "DoubleTree by Hilton Hotel Philadelphia Center City",
+          "text": "作为希尔顿荣誉会员，我和一群朋友住在这里。它位于市中心，步行可到自由钟和许多市中心的旅游景点。附近几个街区有很多很棒的餐厅，而且靠近公共交通。\n\n早上的自助餐很棒，价格合理，而且非常方便。房间干净，入住手续办理得很顺利。最后一天退房时，他们还帮我们寄存了行李。要求住高楼层，可以欣赏到城市最好的景色！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-GEHezJuYUrESDFeZ-l5p2A",
+          "source": "yelp",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "text": "如果你真的想睡觉，就避开这个地方。酒店非常吵，因为它就在机场旁边。不是商务出差的理想基地。\n床硬得像石头，枕头上有黑头发（我是金发），地毯又脏又有污渍。浴室瓷砖上缺了大块的勾缝剂，感觉不干净。\n员工很棒，这是唯一的可取之处。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-9qoE2X6gkOqkEJd4mVr1gg",
+          "source": "yelp",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "text": "看到差评有点担心，但我在5楼住得很舒适。免费WiFi能用。床单有点粗糙，但枕头很舒服。房间有一瓶免费瓶装水，有迷你冰箱。衣柜不大，有房间保险箱和咖啡服务。只有淋浴，但有很好的大瓶装 Bliss 护发洗发水和沐浴露。房间感觉很干净。\n\n免费班车每20分钟到机场，在行李提取区外的4号区上车。班车每小时整点从酒店出发，比叫出租车快。早上6点从酒店到D航站楼大约花了20分钟。\n\n附近没有餐厅，所以我从前台给我的菜单上点了外卖。还行。\n\n我不会住在这里游览费城，但作为早班机前一晚的住宿，确实很舒适，我会再住。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-dLO2hHyvhuv6je7Q3ONw7Q",
+          "source": "yelp",
+          "shopId": 100215,
+          "shopName": "Philadelphia Marriott Old City",
+          "text": "预订这家酒店过新年夜，主要是看中它的位置，位置确实很棒。离河边只有一个街区，特别是Penns Landing和Spruce Harbor Park。可以看到本杰明·富兰克林大桥和河的美景。不幸的是，这是我们入住期间唯一的优点。\n\n我们要求升级套房，但我觉得我们被安排了一个普通房间，挤在一个小角落里。我们几乎无法把行李车推进去，不得不左转右转，撞到墙壁。房间大小一般，但有股怪味。浴室比正常的小。我猜房间的味道是因为允许宠物进入房间。\n\n喜来登俱乐部也很小，座位很少。游泳池很小，但我对市中心的酒店也没抱太大期望。\n\n酒店，主要就是位置好。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-6k4GhLI_AKi9yJY5J0FJRw",
+          "source": "yelp",
+          "shopId": 100074,
+          "shopName": "Kimpton Hotel Monaco Philadelphia",
+          "text": "我们于2012年11月入住摩纳哥酒店，据我所知，那时它刚开业不久。我们的费城之行是一次临时起意的4天之旅，完全没有计划，完全随性！我们玩得非常开心，以至于又加住了两晚，而且很高兴这家酒店能在这么短的时间内为我们安排住宿！\n\n我们之前只住过一次金普顿酒店，就是华盛顿的Madeira酒店。因为在那里的体验，我们很想再尝试另一家金普顿酒店——他们的酒店比典型的连锁酒店更让人放松，尽管由于“精品”性质，价格通常稍高一些。\n\n我们在费城的住宿非常棒——房间干净，员工友好，位置绝佳，就在自由钟旁边。每晚我们都步行去几家不同的餐厅和酒吧，对一切都如此便利印象深刻。附近有很多吃饭和放松的好地方——我们喜欢Amada、Chifa和Zento。森本先生的餐厅也在附近，但这次带着我们的小孩去可能不太方便……等她大一点我们一定会再去的——我妻子让我保证！\n\n艺术博物馆稍微远一点，但花10美元打车或坐地铁也不算太不方便，而且你就在历史区，可以欣赏自由钟（就在我们窗外……），独立公园的其他部分也近在咫尺。\n\n提示：注册他们的常客俱乐部——免费，还能在入住期间免费使用Wi-Fi！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-rimw8wLfGSgjTqXa3RYryg",
+          "source": "yelp",
+          "shopId": 100074,
+          "shopName": "Kimpton Hotel Monaco Philadelphia",
+          "text": "我们为家庭旅行预订了套房和一张大床房。房间不错。小酒馆的食物很好。服务不值我们付的钱。到达时，我不得不自己找行李车并开始装行李，才得到帮助。预订房间时，我们明确表示会在套房中使用沙发床给两岁的孩子，但房间里没有沙发床的床上用品。预订代理询问了孩子的年龄和性别，说会在入住时准备礼物——但没有。我妻子要了一个微波炉，在她第二次要求后很久才送来。回到房间发现没有床上用品，一点也不放松。更糟的是，晚上10点15分打电话要床上用品，直到11点15分才送到。位置很酷。建筑和房间不错。服务……嗯。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-cA6b5gatrU0tGvCP3iwi3g",
+          "source": "yelp",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "text": "好吧，从头开始。\n\n1）我第一次去办理入住时，前台那位年轻女士正在打电话，试图弄清楚她的午餐在哪里，为什么还没送到（不知道为什么我需要知道这个）。我去办理入住，因为我通过 hotel.com 支付了房费，所以没有带信用卡到酒店。那位年轻女士，一边忍受着饥饿的痛苦，一边尽可能带着态度对我说：“真的，你应该知道任何一家大牌酒店都需要信用卡。”我知道这一点，但因为我已经提前支付了，所以只带了身份证来酒店办理入住。\n所以第一击是这家“大牌”酒店粗鲁的员工！\n\n2）我和未婚妻去了220房间，一进门就很明显房间刚刚被退房（床没整理，各处有垃圾，毛巾在地上）。\n所以第二击是，在一家“大牌”酒店，你会认为分配到的房间应该是干净的！\n\n3）当我们终于被分配到一个打扫过的房间时，我检查了浴室，很明显204房间的浴室有某种水渍（马桶后面的墙上有白色痕迹），淋浴边缘角落的勾缝剂缺失。\n所以第三击是这家“大牌”酒店浴室糟糕的状态！\n\n4）我和未婚妻在外面参加新年夜派对后回到酒店，大约有50到60人直接站在车流中的车外，我忘了说现在是凌晨2点吗？我理解是新年，但一家“大牌”酒店的安全措施应该确保离开酒店酒吧的人真的离开，因为这里的停车位非常紧张。我不得不把车停在停车场另一端的喜来登酒店旁边的一排。\n所以第四击是这家“大牌”酒店糟糕的人群管理。我是说，这是新年夜，酒店应该预见到这一点并提供更多员工。\n\n5）我到了二楼，又有20到30人随意站在各个房间前，包括我的房间。有明显的 marijuana 和酒精气味，我知道是新年，所以大多忽略了，但后来意识到所有这些人都来自我隔壁的房间！不用说，我能听到那个房间里的每一声咒骂、笑声和争吵。我试图打电话给前台投诉，但房间电话只有忙音。我大约在凌晨2:30走出房间下楼去前台反映情况，被告知保安正在上楼。我回到房间，又过了15到20分钟，派对还在喧闹，我提到现在快凌晨3点了吗？我终于用手机打电话给前台，向那位年轻女士解释我刚下来投诉隔壁房间……她在我话没说完就打断我，说她已经叫了保安，他们正在上楼，然后“咔哒”一声挂断了电话！！！\n第五击是，对于一个明显非常繁忙的假日，酒店人手严重不足，同时还极其粗鲁！！！\n\n6）经过以上所有投诉，保安直到几乎正好凌晨3点才到房间让隔壁喧闹的人群安静下来。\n第六击是，保安花了将近45分钟才回应多位客人的投诉？我和酒店这一区的至少另外两位客人聊过，他们也都一直在打电话投诉人群。\n\n综上所述，我绝不会向任何人推荐这家酒店！这是我迄今为止在酒店度过的最糟糕的一晚！！！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-TywkfgGmkKmRDwicCRfd0w",
+          "source": "yelp",
+          "shopId": 100049,
+          "shopName": "The Inn at The Union League",
+          "text": "我在开会期间在这里住了一晚。装饰非常优雅细致，但酒店本身相当老旧。关于着装和电子设备使用的规定仍然存在，这让住宿体验不太理想。虽然我通常穿着得体，可以在三楼享用早餐或餐点，但想到必须穿运动外套（男性）或商务装才能吃早餐，还是有点沮丧。\n\n健身中心是我见过最好的之一，尤其是在有客房的酒店里。那里有衬衫、袜子、零食、水、头发用品（从发圈到卷发器）。设备再好不过了。我真希望住得更久，就为了健身设施。\n\n行李员毫无用处，前台在入住和退房时似乎有点心不在焉。对于这么小的旅馆来说，我觉得这很令人惊讶。没有人问停车的事，所以我走到街对面，结果又被送回酒店验证。旅馆不提供停车，所以你必须把车停在街对面。停车场提供进出权限，每晚32美元。\n\n我会再住这里吗？不会。但这不是个差地方。……“RC”就在下一个街区，对于所付的价格来说，那绝对是更好的选择。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-012",
+      "stratum": "seed_known_evidence",
+      "question": "下班后直接健身方便吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-012"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-SgNhuqWbbkin7ipO8WEYRQ",
+          "source": "yelp",
+          "shopId": 100014,
+          "shopName": "City Fitness - Northern Liberties",
+          "text": "哇——太失望了。 附加费用不透明——比如25美元的取消费。 谢谢Freddie！ 感谢你没告诉我这个。 而且在你想要联系他们的时间段——比如下班后下午5点以后或周末——没有经理可以谈话。 很不幸，这么多健身房都有这些隐藏费用——这让我再也不想加入健身房了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 2
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 2
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 1,
+            "label": "tangential",
+            "rationale": "提到下班后无法联系经理，但不说明锻炼设施是否方便使用。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-J30kTcKEgjhX-7qIoRHmUA",
+          "source": "yelp",
+          "shopId": 100097,
+          "shopName": "The Sporting Club at the Bellevue",
+          "text": "可能是城里最贵的健身房。但对我来说完全值得。我升级到了行政更衣室，这样我就没有借口在上班前或晚上出去玩之前不去健身房了。我总是在储物柜里放好化妆品、护发用品等。因为健康问题很久没去健身了，现在慢慢恢复。我看到有一两台机器有点问题，但整体设施很新潮且欢迎人。课程和器材选择很多……\n\n我唯一不满的两点是：希望周末能晚点关门，但这只是我休息日动作慢。希望课程表能更多样化。有些课我想上，但总是在中午，没有很早、下班后或周末的时段。所以没机会尝试。我猜是教练的问题，可能不会改变。总的来说，我很高兴加入了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 3
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 2,
+            "label": "relevant_with_missing_constraint",
+            "rationale": "说明健身房适合上班前或晚上使用，也指出缺少下班后课程，但未覆盖通勤。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-galen_dLtSt_l7yjPkWC0w",
+          "source": "yelp",
+          "shopId": 100089,
+          "shopName": "Pub & Kitchen",
+          "text": "啤酒不错，食物还行。适合和朋友喝一杯，但可能比附近其他选择贵。下班后可能会很挤，小心那些雅痞。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "候选是下班后拥挤的酒吧，不是健身房。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-S8Itn26Cs2rOBdO6gORiyA",
+          "source": "yelp",
+          "shopId": 100187,
+          "shopName": "Copabanana",
+          "text": "这是个下班后去的好地方，但饮料贵得要命。我点了一杯顶级长岛冰茶，那玩意儿要32美元。我还以为是搞错了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-3ey2zHNjmwag6-FzWcn3Qg",
+          "source": "yelp",
+          "shopId": 100282,
+          "shopName": "DK Sushi",
+          "text": "今天下班后去了那里。寿司很小，鱼也不新鲜。好吧，我知道这是大学城，但顾客就在你面前，你聊天时嘴都不遮一下？真的假的？？",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-LVha2oTvmzl3pOTXYNSF3A",
+          "source": "yelp",
+          "shopId": 100283,
+          "shopName": "The Post",
+          "text": "这是下班后吃午餐和欢乐时光的完美地点！我在大学城工作，没有比这更好的了。结束后我可以走一小段路到30街车站。继续加油，The Post！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-Y5pnbOi-HXU38WiMMeRnHQ",
+          "source": "yelp",
+          "shopId": 100105,
+          "shopName": "Little Caesars Pizza",
+          "text": "被披萨店包围，我总是在每个发薪日下班后去这里。决定周末下午去，这是我第二次点披萨配疯狂面包，它们又软又热，你进进出出眨眼间就完成了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-for2R-ubvqZF3V7aUlinPQ",
+          "source": "yelp",
+          "shopId": 100190,
+          "shopName": "Dagwood's Pub",
+          "text": "这是一家五星级的潜水酒吧。费城东北部的传奇酒吧。食物很棒，一定要试试25美元的自助螃蟹、贻贝和鸡翅……这个地方是下班后进来喝几杯的好去处。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp--N1m-vOjFLFlDh0AwGNFwA",
+          "source": "yelp",
+          "shopId": 100134,
+          "shopName": "Starbucks",
+          "text": "我下班后大约6:30去……即使我是唯一排队的人，也要等很久才能拿到我的饮料。员工们要么互相聊天，要么跟进来打招呼的朋友聊天，他们似乎没法一边说话一边做咖啡。非常令人沮丧。N",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-013",
+      "stratum": "seed_known_evidence",
+      "question": "周末三个人想找安静包间吃饭，预算只有 200 元，需要注意什么？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-026"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-NNkXp5idqT6r2u94jH1s9Q",
+          "source": "yelp",
+          "shopId": 100015,
+          "shopName": "Baltic Bakery",
+          "text": "很棒的烘焙店，我去过的最好的之一，但只给3星，以免被标记为可疑评论。我几乎每个周末都来这里买糕点，所以Yelp可以滚蛋了，因为这是真实评论，它值得5星。\n\n需要注意的是，这家烘焙店已经从Edgemont Ave搬到了Allegheny & Almond St.",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 2
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 3
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "面包店搬迁信息不涉及安静包间、三人用餐或预算。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-irpDKSZelQjvbqiRgsXPJg",
+          "source": "yelp",
+          "shopId": 100276,
+          "shopName": "Philadelphia Flyers",
+          "text": "飞人队尽力让比赛变得有趣。有大厅里的游戏、记分板上的游戏和很棒的场馆，比赛只是体验的一部分。球迷们除了嘘声外表现得相当不错，但这也在意料之中。但尽管有这么多荣耀和乐趣，有一个问题：票价。看一场NHL比赛比看一场NFL比赛还要贵。我花80多美元买了一张票，却只坐在离最顶层几排的位置。我知道一些下层座位几乎要200美元甚至更多。这么多人买季票真是让我无法理解。飞人队的比赛偶尔体验一次很棒，冰球迷应该考虑来，但要注意预算。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "冰球比赛票价不属于包间用餐场景。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-rDDvjf0_2O82N5bgcvaHdQ",
+          "source": "yelp",
+          "shopId": 100193,
+          "shopName": "Kato's Cajun",
+          "text": "这里便宜又快捷，如果订单没错，我没什么可抱怨的，但要注意怎么点单和找谁点，因为这家店容易出错。今天我在离开前发现他们给错了米饭，但我没注意到他们忘了给我的餐加蔬菜。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-2QMIwxBiLWoNrtqrucrDKQ",
+          "source": "yelp",
+          "shopId": 100215,
+          "shopName": "Philadelphia Marriott Old City",
+          "text": "也许我只是在这家酒店运气不好，但我是 SPG 金卡会员……即将成为白金卡，并在这家酒店预订了房间。我付了不少钱，当我要求更大的房间时，他们告诉我所有房间都一样。我问是否每个房间都有连通门，他们说是的。然后我告诉前台，我能听到隔壁的一切动静，包括打喷嚏，甚至空调上 CNN 360 的说话声都非常清楚。他让我下楼拿新钥匙，搬到一间没人的房间。他们没有主动给我送钥匙或帮我搬。当我到大厅时，队伍至少有10个人，而且只有一个人在那里。我只好放弃，忍受噪音，几个小时后他们终于关掉了电视，我才能睡觉。这家酒店没什么特别的，服务肯定需要改进！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "source": "yelp",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-CxqdDZV7qs0YwD0S9GMPvA",
+          "source": "yelp",
+          "shopId": 100119,
+          "shopName": "Wawa",
+          "text": "“方便”是我对Wawa的评价，24小时营业，而且总有保安在，你可以安心购物。我能买到饮料、三明治以及任何我需要的东西，然后继续前往下一个目的地。\n\n需要注意的是，当你点三明治时，你会先拿到收据并付款，然后他们才会为你制作。\n\n除此之外，强烈推荐Wawa。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-hozoa1DsTCjpz4UC8YGsNw",
+          "source": "yelp",
+          "shopId": 100073,
+          "shopName": "Han Dynasty",
+          "text": "新的Han Dynasty接管了原来中大西洋餐厅（菜单一成不变）的位置。我更喜欢这里的Han Dynasty，比老城区的那个好得多，尽管我都给了4星。也许我有偏见，因为我喜欢这里的服务。他们一直非常友好，当听说我对花生过敏时，还过来询问我，并聊了几句（尽管我点的菜里都没有花生；我想那是Han的妹妹？）。我一个月来这家Han Dynasty的次数比去另一家的总次数还多。\n\n不过要注意，不同分店有不同的特色菜。我听说老城区的担担面最好吃，但大学城这家不太好（我不知道，因为里面有花生）。总的来说，我觉得食物还行，但和另一家分店一样，还是不够辣。但我更喜欢这里的布局和氛围。\n\n另外，如果你午餐时间去，可以点午餐份量，比晚餐份量小，价格只有菜单上的一半！所以这里也是一个很棒的午餐地点，可以一个人来，也可以两三个人一起来。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-lR1yZPj0q-AR9sml9b1J9Q",
+          "source": "yelp",
+          "shopId": 100197,
+          "shopName": "Jasmine Rice - Rittenhouse",
+          "text": "上周三在这里吃了一顿安静美好的晚餐，绝对推荐。我们其实不需要预约，因为整个晚上只有零星几位客人进出，但这里空间不大，所以预约一下以防万一还是不错的（尤其是周末）。\n服务友好且不打扰，餐厅内部感觉温馨私密。一进门就有人迎接、安排座位，还为我们自带的白葡萄酒提供了冰桶。饭后我们多待了一会儿喝完酒，完全没有感到不受欢迎或被催促。晚餐本身也很棒；我的绿咖喱辣度刚好，分量小到能吃完，大到能吃饱。在里滕豪斯附近安静街区上的这家店，是度过休闲夜晚的好去处。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-014",
+      "stratum": "seed_known_evidence",
+      "question": "带老人和孩子晚上九点以后吃饭，想要清淡无烟的环境，河畔家常菜合适吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-027"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-MraV6-HmzFYh6tX_tE5YYg",
+          "source": "yelp",
+          "shopId": 100156,
+          "shopName": "McDonald's",
+          "text": "不要从这里订餐！！！！\n我说这些人懒可不是开玩笑。可能晚上8点，为了不供应奶昔或麦旋风，他们会告诉你机器坏了。他们在撒谎，因为白天他们供应，但晚上8点以后就“坏了”？不仅如此，他们还经常搞错订单，我进去过，里面完全恶心……",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "问题点名河畔家常菜，候选是另一家快餐店。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-Kd1ospGvy3M_xh3O_ZavEA",
+          "source": "yelp",
+          "shopId": 100202,
+          "shopName": "Mom Mom's Kitchen and Polish Food Cart",
+          "text": "一直很想尝试，终于在下班回家的路上买了外卖。我买了一些冷冻波兰饺子留着以后吃，还有一些热的，煎成棕色，配上酸奶油和焦糖洋葱。我还点了波兰香肠拼盘。我丈夫吃的时候不停地重复“天哪”。就是那么家常又美味，绝对喜欢，完全符合评论所说。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-SgNhuqWbbkin7ipO8WEYRQ",
+          "source": "yelp",
+          "shopId": 100014,
+          "shopName": "City Fitness - Northern Liberties",
+          "text": "哇——太失望了。 附加费用不透明——比如25美元的取消费。 谢谢Freddie！ 感谢你没告诉我这个。 而且在你想要联系他们的时间段——比如下班后下午5点以后或周末——没有经理可以谈话。 很不幸，这么多健身房都有这些隐藏费用——这让我再也不想加入健身房了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-5-YovLQWy6Srq0UnTdVhuw",
+          "source": "yelp",
+          "shopId": 100004,
+          "shopName": "Craft Hall",
+          "text": "适合有8岁以下孩子的家庭的好地方。和超过10个大人以及5个孩子一起去。空间充足，早午餐菜单不错。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-TXOOWKV3XNeRPrxL1AtLnA",
+          "source": "yelp",
+          "shopId": 100031,
+          "shopName": "The Royal Indian Cuisine",
+          "text": "鸡肉提卡玛萨拉令人失望，酱汁里是过熟的鸡胸肉块。就这个价格来说太贵了……萨莫萨三角饺更像炖菜。希望下次的菜能更像“家常”菜。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-E4PCNMCBn_-NwUomw5NfcA",
+          "source": "yelp",
+          "shopId": 100067,
+          "shopName": "Butter's Soul Food",
+          "text": "这是你有幸品尝到的最好的家常菜。简直不可思议。他们提供的每一样东西都物有所值：炸鸡、羽衣甘蓝、土豆泥，应有尽有！费城最好的秘密。说真的，现在就去那里。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-5VjzR8buWCUnU5IvBeq8eg",
+          "source": "yelp",
+          "shopId": 100055,
+          "shopName": "Wilson's Market",
+          "text": "这里的潜艇堡是我吃过最好的。自从几年前搬来这个地区，我就一直来。我通常会多买一些外带留着以后吃！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-015",
+      "stratum": "seed_known_evidence",
+      "question": "下雨天去深夜食堂烧烤，想坐露天位避开室内烟味并和朋友聊天，可以吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-021"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-sHAX9dpdXpUtcBEAyD8DKw",
+          "source": "yelp",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "text": "简直是我喝过最好的热巧克力！氛围轻松。是和朋友聊天、在寒冷的日子里分享热饮的绝佳地点。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-ttZo6DvUdCB1qU00SgFcMQ",
+          "source": "yelp",
+          "shopId": 100141,
+          "shopName": "Smiths Restaurant and Bar",
+          "text": "周三晚上我和朋友去了Smith's，只是深夜喝点东西（没吃东西）。我喜欢这里不用大喊就能聊天，而且不太拥挤。所以，不是周六晚上玩乐的好地方，但周中朋友聚会是个低调的好去处。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-M-38wpRyPVRT35MgRmLCjQ",
+          "source": "yelp",
+          "shopId": 100004,
+          "shopName": "Craft Hall",
+          "text": "最好的新添成员，尤其适合家庭。美味的食物，很棒的饮品，还有一个室内游乐场。这已经成为我们雨天想出门消耗精力时的首选去处。\n\n如果你没有孩子，别担心！这里基本上有两个独立的区域，你完全可以不跟太多小孩互动，也能度过愉快的时光。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-lmwXdYE6XVaZfcSEkRm0-g",
+          "source": "yelp",
+          "shopId": 100254,
+          "shopName": "So Korean Grill",
+          "text": "我和男朋友想吃韩国烧烤，想尝试一个新地方。我们在Yelp上搜索，觉得可以试试这家。服务员推荐了70美元的两人份韩国烧烤，说这是最划算的。套餐包括韩式小菜、味噌汤、蒸蛋、天妇罗、姜汁沙拉、拌饭和6种不同的肉类。份量非常足。服务员也很友好，每隔几分钟就来查看我们的情况。他们还免费提供了酒精饮料。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-ZbXQjA9GDIk9Ugmqr1MLew",
+          "source": "yelp",
+          "shopId": 100141,
+          "shopName": "Smiths Restaurant and Bar",
+          "text": "Smiths是个很酷的聚会场所，啤酒选择丰富，氛围适合和朋友聊天。服务员很可爱。然而，我们吃的食物最多算一般，这很令人失望，因为食物选择看起来非常诱人。\n\n我们点了两份不同口味的鸡翅。经典款和亚洲风味款，两者都没熟透，而且都不特别好吃。然后我们吃了芝士牛排春卷，还行。最后，我们吃了烧烤鸡肉扁面包。虽然不算难吃，但本可以更好。它比我们预想的大得多。\n\n我们最后整晚都在喝酒。正如我所说，这是一个非常酷且独特的酒吧场景，如果你只是想喝鸡尾酒，Smiths是个好地方。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-JG0q3ROaUSsA_3_g7KxRHA",
+          "source": "yelp",
+          "shopId": 100226,
+          "shopName": "Goldie",
+          "text": "别指望在工作日午餐时间能快速下单！我来过好几次，队伍至少有15-20人长，员工动作很快。我幸运地在一个下雨天溜进去，食堂几乎空无一人，几分钟内就拿到了我的tehina薄荷巧克力奶昔。虽然最初味道奇怪，但继续尝试后，我越来越喜欢它！口感很棒，里面的巧克力多到让我震惊。5美元一份有点小，但尝一次还是挺值的。不过份量很小，很快就吃完了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp--N1m-vOjFLFlDh0AwGNFwA",
+          "source": "yelp",
+          "shopId": 100134,
+          "shopName": "Starbucks",
+          "text": "我下班后大约6:30去……即使我是唯一排队的人，也要等很久才能拿到我的饮料。员工们要么互相聊天，要么跟进来打招呼的朋友聊天，他们似乎没法一边说话一边做咖啡。非常令人沮丧。N",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-7CtkWb2SkgI7r7dYIvea8Q",
+          "source": "yelp",
+          "shopId": 100282,
+          "shopName": "DK Sushi",
+          "text": "尝试了寿司米饭碗，感觉比点小卷更划算。食物非常快，因为下雨天出来吃午饭的人少。他们给你的酱油混合物浇在上面也很不错。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-016",
+      "stratum": "seed_known_evidence",
+      "question": "工作日下午想一个人安静写代码，街角共创咖啡合适吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-018"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-ZLxlEs371svztvnA2Gdp8g",
+          "source": "yelp",
+          "shopId": 100010,
+          "shopName": "ReAnimator Coffee",
+          "text": "友好的服务和简单的装饰。这正是我对咖啡店的所有需求。咖啡让我保持清醒，但味道足够温和，抑制了我加糖加奶的习惯。这里也是一个安静的好地方，可以工作或阅读。总的来说，是社区的一个极好补充。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-HZxmjzuN8zxhnJAa3iftKQ",
+          "source": "yelp",
+          "shopId": 100099,
+          "shopName": "Passero's Coffee Roasters",
+          "text": "我这么说不仅仅是因为我是隔壁的员工（咳咳——椒盐卷饼工厂咳咳……），但他们的咖啡和饼干只有他们的服务能与之媲美。他们动作快但不催促你，高效的同时还能让你心情愉快。\n      他们还提供Level Up，一种用手机支付的新方式！它（终于！）完全免费，使用起来绝对安全。你只需把卡绑定到手机上，通过加密条形码支付。\n        没人能获取你的卡信息，所以你不会遭遇身份盗窃。此外，Level Up还充当忠诚度俱乐部，当你在常去的商店消费时，还能获得返现。Passeros每消费40美元就返4美元！\n        如果你还没下载Level Up，用这个代码可以获得5美元的全球积分，在任何支持Level Up的商家使用！！！9WHRC2，别担心，这个代码永不过期！每个人都可以免费喝杯咖啡……或者两杯哈哈！！！^.^",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-MN-oGUhwZ6HTikmLsXe-4A",
+          "source": "yelp",
+          "shopId": 100179,
+          "shopName": "Moon Flower House",
+          "text": "人手严重不足，他们的电话一直响个不停。我被告知今天任何含水果的东西都卖完了（那是一个周日下午），真的很失望。点了一杯抹茶奶茶，但太甜了。不会再来了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-jslsvdUv2FK7x-jnx_8KqA",
+          "source": "yelp",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "text": "我去过Good Karma两次，两次体验都很好。咖啡很棒，座位充足……这是学习或工作的完美地点，因为通常很安静。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-Xtb2kH5Ptj6V9xY_tLXcJg",
+          "source": "yelp",
+          "shopId": 100068,
+          "shopName": "Alchemy Coffee",
+          "text": "偶然发现了Alchemy Coffee！！！推荐给需要安静学习/工作场所的人。\n\n多年来我一直在找一个学习的地方，但其他咖啡馆更适合见朋友，而Alchemy很完美。\n\n环境完美。他们的咖啡完美。拉花艺术完美。糕点完美。我真的很喜欢今天的到访！一定会再来的~~",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-BE3i5zfU-3JApv_Cb_Mbcg",
+          "source": "yelp",
+          "shopId": 100222,
+          "shopName": "Dunkin'",
+          "text": "有些星期我每个工作日早上都来这里开车经过买杯咖啡（通常是黑咖啡），有时还要一个百吉饼配奶油芝士（好吃！）。即使队伍很长，我通常也能在10分钟内拿着咖啡回到I76公路上。窗口的那位女士可能光看一眼就能让我的咖啡变甜，她人太好了。偶尔咖啡味道有点焦，但大部分时候都很好。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "source": "yelp",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-017",
+      "stratum": "seed_known_evidence",
+      "question": "四个人需要高速网络、充足插座并讨论项目，哪家咖啡店更合适？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-017"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+          "source": "yelp",
+          "shopId": 100277,
+          "shopName": "Valerio Coffee Roasters",
+          "text": "这是一家新咖啡店，和 Bald Birds Brewing Company 连在一起。它很快会成为我做工作的常去地点。这里有漂亮开阔的空间、很多座位和插座、充足自然光，以及很棒的 WiFi。咖啡很好喝，服务也很优秀。我肯定会经常回来！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 3,
+            "label": "directly_relevant",
+            "rationale": "直接提供充足座位、插座、Wi-Fi和适合工作的证据。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-GOfMeMJLlr2vaLRxNgkSnQ",
+          "source": "yelp",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "text": "这是学习或读报纸的好地方，但尤其在周末，如果你真的想占到位置，最晚也得早上 9 点或 10 点到。这里有大桌子可以摊开东西，有很多插座，也有不错的无线网络。他们还营业到 10 点，这对社区咖啡店来说非常非常晚，令人感激。这里不太适合随便聊天，因为大多数顾客似乎把它当成公共图书馆，而且会向你投来厌恶的眼神。咖啡和食物还可以——不算很棒——价格合理，员工友好。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-N0Dq5TPfMuf13PB6p9rtYw",
+          "source": "yelp",
+          "shopId": 100192,
+          "shopName": "Alena’s Cafe",
+          "text": "我在上班路上找咖啡时偶然发现了这家咖啡店。咖啡和早餐三明治都很棒，所以我又回来吃午餐，没有失望。强烈推荐给附近想找优质咖啡馆的人。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-mhS1SUPKRA3Q6nR3oresqA",
+          "source": "yelp",
+          "shopId": 100068,
+          "shopName": "Alchemy Coffee",
+          "text": "Rittenhouse 区域最漂亮（也可能最好看？）的咖啡店。咖啡师 Maya 不仅在我第一次来之后就记住了我的名字和点单，咖啡也真的很好喝，而且这里有 WiFi、插座和不错的氛围。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-AhTsqSS43V1-9yPq-NRX-w",
+          "source": "yelp",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "text": "这是个不错的地方，可以学习、工作，或者做其他类似的事。员工很棒，友好又爱笑。咖啡馆食品价格适中。桌子和插座都很充足。毫无疑问，这是我在费城最喜欢的咖啡馆之一。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-v2u6TqeimdKovePQl9F_eA",
+          "source": "yelp",
+          "shopId": 100068,
+          "shopName": "Alchemy Coffee",
+          "text": "这是一家非常简约的咖啡店，位于美丽的Northern Liberties区南端。他们主要卖咖啡。偶尔会有零食和糕点之类，但这主要是一家咖啡店。员工友好且高效，对他们卖的咖啡非常了解。\n\n有常见的浓缩咖啡饮品、滴滤和手冲咖啡。咖啡选择多样，但都是本地烘焙的。员工非常友好，服务出色。\n\n这是上下班途中或躲雨避寒的好去处。总体强烈推荐。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-018",
+      "stratum": "seed_known_evidence",
+      "question": "工作日上午只想安静看书、不需要电脑，纸间咖啡书屋有什么优缺点？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-014"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-33aURapX2sWlYPJe78lFRQ",
+          "source": "yelp",
+          "shopId": 100119,
+          "shopName": "Wawa",
+          "text": "这家WaWa是WaWa连锁店的耻辱。我去过好几个地方和州的WaWa，都一尘不染。这里的咖啡台脏得令人作呕，卡布奇诺咖啡机的滴盘看起来已经一周没清洗了。地上到处都是垃圾。这已经不是我第一次在这里遇到这种情况了。周六上午10点，不是拥挤的工作日。我知道这是个繁忙的地点，但清理柜台需要多长时间？我都不敢想象食物准备区是什么样子。有几个员工只是闲逛，什么也不做。\n\n这家WaWa位置很需要，但需要更好的管理。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "问题点名纸间咖啡书屋，候选是另一家Wawa的卫生评论。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        }
+      ]
+    },
+    {
+      "caseId": "rag-019",
+      "stratum": "seed_known_evidence",
+      "question": "预算每人 50 元以内但想看巨幕电影，欢乐巨幕影城合适吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-031"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-pu9ZbUpYlWuelf1jabDgdw",
+          "source": "yelp",
+          "shopId": 100168,
+          "shopName": "Fine Wine & Good Spirits - Premium Collection",
+          "text": "商品选择与其他“升级版”FW & GS商店相当，但排队最糟糕，客户服务几乎不存在。虽然我住在这个店10个街区以内，但需要时我宁愿开车去南费城，或者尽可能去新泽西。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 3
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "葡萄酒商店排队信息与巨幕影院及票价无关。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-hqknTz8ydXDZJoR-ciStKg",
+          "source": "yelp",
+          "shopId": 100295,
+          "shopName": "Allegro Pizza",
+          "text": "优点：\n- 当你需要在周日早上6点用紧张的预算喂饱一群过度劳累、睡眠不足的电影摄制组时，很方便\n\n缺点：\n- 食物太糟糕了，连过度劳累、睡眠不足的电影摄制组都宁愿饿着\n- 鸡蛋尝起来像纸，吐司尝起来像纸板，土豆感觉像腐烂的水果（虽然我不知道）\n\n我无法理解他们怎么能把最基本的小菜搞砸……但嘿，我想他们并不是以鸡蛋、吐司和土豆闻名的\n\n多花点钱买Dunkin' Donuts的三明治/牛角面包更值得。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-q41J0jfCzxb8qnbihHlAFQ",
+          "source": "yelp",
+          "shopId": 100060,
+          "shopName": "Philadelphia Phillies",
+          "text": "自从这个公园建成以来，价格每年都在飙升，停车费20美元，即使是好一点的座位每张也要30美元以上，更别提食物和饮料的价格了。一个四口之家很容易花掉200美元以上来享受一晚的娱乐。以现在的经济状况，如果你预算有限（如果你没有，那你很幸运），这可能会很糟糕。我们2013年8月18日去了，就在长期经理Charlie Manuel被解雇、Ryne Sandberg接任的两天后（如果我能退票我会退的）。今年球队一团糟，看台上的球迷也不怎么样，引座员不得不赶走几乎一整区的人，因为脏话连篇，你知道这给一个只想看一场大联盟现场比赛的孩子留下什么印象吗？很明显管理层在打瞌睡，因为当费城人队上场击球时，会响起“我们要Charlie”的呼声（包括我们自己）。所以到了2014年，我们不打算再去看比赛了，部分原因是抗议，部分原因是厌恶（在波士顿的芬威球场看过一场比赛，球迷和费城人队的球迷截然相反……很好）。所以如果你喜欢“路边旅馆”式的棒球体验，我强烈建议你尽可能多地去，我们的座位会在200层，210区，4-8座。解雇Ruben Amaro！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-y5hTesCiU2nxT6C_zJ9FiA",
+          "source": "yelp",
+          "shopId": 100033,
+          "shopName": "Pacifico Hyundai",
+          "text": "我提前打电话预约修轮胎。前台把我转给了合适的人，他碰巧不在座位上，所以录音提到了他们的在线预约网站。\n\n我上网预约了第二天早上。我准时到达，他们立刻接待了我，整个过程只花了大约45分钟。我很欣赏友好快捷的服务，他们还能修好我的轮胎！他们给了我附近洗车店的优惠券。\n\n等候区有大屏幕电视、自动售货机、软椒盐卷饼和Keurig咖啡机。我肯定会再去找他们服务。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-Yf0fi5Cxu7krKnuGEgFZeg",
+          "source": "yelp",
+          "shopId": 100058,
+          "shopName": "Retro Fitness",
+          "text": "呜呼，加入了健身房！新年决心：完成了！（不确定是哪一年……）\n\n这家店实际上在Franklin Mills Mall的范围内，但Knight's Road的地址让我困惑。它以前是CompUSA的位置。据老板/经理Frank说，他们开业大约5个月了，他带我参观并介绍了签约时的方案。\n\n过去两周我在这个分店的体验是，早上只有10%的设备在使用，而且设备非常多。有氧设备有个人电视，频道选择有限，但RetroRoom影院真的很酷。30多台机器像体育场一样排列，对着一个大电影屏幕。电影也是个人电视的频道之一，但奇怪的是没有声音。\n\n我见过的人中大约一半看起来是认真举铁/健美的，另一半是普通男女（像我一样）。有私人教练，但我完全没有被强迫使用。新会员有两次免费课程，这很好，因为有很多重量/阻力器械，我需要复习一下如何使用才不会伤到自己或旁边的人。\n\n淋浴间、储物柜和卫生间保持干净、明亮、气味清新。到目前为止热水充足，淋浴间有门！Retro之所以叫Retro，是因为据说是80年代主题。我觉得装饰有点Max Headroom风格，但嘿，很干净。\n\n其他我不会用但可能别人感兴趣的东西：儿童看护、每月再加5美元的晒黑、果汁吧、补剂等。\n\n我加入时交了20美元入会费，每月20美元，为期一年，这很完美，因为如果我一年去120次，我的保险会报销大部分费用。总的来说，如果你附近有分店，值得一看。这家离我工作的地方近，所以如果我睡过头了，可以午餐时间去。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-UcYDFoFz9njDDsQcybUaYA",
+          "source": "yelp",
+          "shopId": 100042,
+          "shopName": "Feet First Team Building",
+          "text": "我们和 Feet First Events 预订了我们的假日派对，就在几天前刚办完。这是一个有50名员工参加的虚拟派对，Feet First 团队（Nick、Will 和 Joe）太棒了！超级有趣又欢乐！派对结束后一整天，我都收到了员工们发来的热情邮件。谢谢你们！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-BOsBurCBDJli0TxW4xPcXA",
+          "source": "yelp",
+          "shopId": 100141,
+          "shopName": "Smiths Restaurant and Bar",
+          "text": "我给五星，因为这是我下班后去欢乐时光的首选酒吧，我爱这个地方。员工通常都很棒。如果你想看比赛，到处都有电视。鳄梨酱很棒。\n\n有些人给这家店扣了一两颗星，因为可能价格偏高或人多。我不能责怪酒吧吸引了顾客。那只是因为这是个好去处。酒水比街对面的酒吧贵一两美元，意味着这里吸引的是稍微成熟的人群，而不是大学生。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-020",
+      "stratum": "seed_known_evidence",
+      "question": "想开车去看文艺片，星河艺术影城停车方便吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-029"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-DTtcoSEJHTB-NiObdubnMg",
+          "source": "yelp",
+          "shopId": 100115,
+          "shopName": "Rittenhouse Market",
+          "text": "刚搬进这个社区，这家店位置非常方便，满足我所有的杂货需求。他们有单独的饮料区和新鲜果蔬区。布局非常美观，物品容易找到。\n\n额外的好处是，你还可以买到新鲜咖啡和精选肉类。这家店比其他杂货店贵一点，但如果你需要补给，又不想开车去更远的便宜店，那么这里就很完美。店员非常乐于助人。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 2
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 2
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "问题点名星河艺术影城，候选是杂货店且没有停车证据。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-zcgIx407lAQ1n9SrVLjhMg",
+          "source": "yelp",
+          "shopId": 100060,
+          "shopName": "Philadelphia Phillies",
+          "text": "很棒的棒球场，停车方便，周六也没有交通问题。视线良好。没有不好的座位。食物很贵，但每个体育场都这样。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 3
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "棒球场停车方便不能证明星河艺术影城停车情况。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-FfkbCIujH-kbn7bgwKePdQ",
+          "source": "yelp",
+          "shopId": 100251,
+          "shopName": "Bell Beverage",
+          "text": "有什么不喜欢的呢？\n\n如果你在找什么，他们都有！友好，服务快捷。仓库干净，价格合理。停车方便。很多次员工都主动帮我（找东西、装车等）。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-ZZz2zVeV_Ad3NA6S2Kmafg",
+          "source": "yelp",
+          "shopId": 100124,
+          "shopName": "Slices Pizza",
+          "text": "员工友好，食物美味，停车方便（前面免费两小时）。我觉得一份沙拉9美元有点贵，但我比较抠门。东方快车沙拉真的很好吃，里面有蜜饯核桃和橘子片。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-cde9T-0knSNa__eZWi3EFg",
+          "source": "yelp",
+          "shopId": 100106,
+          "shopName": "Vincera Institute",
+          "text": "优秀的物理治疗师团队，员工友好且知识渊博。有足够的锻炼空间和持续的监督。所有设备都很新、很干净。停车方便，营业时间足够长，便于安排时间。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-o5o3yb-nuWaryYoB8inn9w",
+          "source": "yelp",
+          "shopId": 100108,
+          "shopName": "Vineyards Cafe",
+          "text": "咖啡师不小心在我的拿铁里放了牛奶而不是豆奶，害我中毒了，但我已经原谅他们了。真的很喜欢我的山羊培根可丽饼和我丈夫的煎蛋卷。停车方便。会再来的（但不会再点拿铁了）。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-mNQ3jCHzSk1A56LZnF7Ohg",
+          "source": "yelp",
+          "shopId": 100019,
+          "shopName": "Federal Donuts",
+          "text": "喜欢来这家店，因为停车方便！！！还喜欢这条街上还有其他几家餐饮选择，所以如果你想从别家比如Goldie买点东西，也可以！而且整个杂货店显然也就在你手边！不过这家店关门比其他店早一点，所以要注意！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-k1la20QgzGZeE4tSJg83fg",
+          "source": "yelp",
+          "shopId": 100144,
+          "shopName": "Rite Aid",
+          "text": "我能说什么……库存充足且干净，这是好事。我不用他们的药房——我去 Ridge Ave 那家，以前是24小时营业，现在改成10小时药房，服务很好……但回到这家店，停车方便，客户服务在过去两年有所改善——他们只需要在排队人数达到5人时增加一个收银员，他们增加了一个保安，这很好。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-021",
+      "stratum": "seed_known_evidence",
+      "question": "情侣周末看热门电影，想坐电动躺椅，需要提前准备吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-032"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-lBuaNF4QriCiu5O1D8Eq7g",
+          "source": "yelp",
+          "shopId": 100060,
+          "shopName": "Philadelphia Phillies",
+          "text": "来城里度个长周末，看了费城人对阵勇士队的比赛。我们在StubHub上买了前排票，尽管有风，还是很享受这个体育场。\n\n吃了一个很棒的烧烤猪肉三明治，但没点蟹肉薯条……",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-oHQQ8H-1DF6jyjtdMceKBw",
+          "source": "yelp",
+          "shopId": 100169,
+          "shopName": "Good Karma Cafe",
+          "text": "很棒的社区咖啡店。他们在城里有几个分店。饮品和食物需要等一会儿，所以如果你很赶，要提前注意。不过我在这里吃喝过的所有东西都真的很好，而且环境小巧有趣。如果你想找桌子，要早点到。周末这里满是用笔记本电脑的人。我希望他们能划出一块给“工作人士”的区域，否则就计划外带，或者天气好时坐在外面。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-022",
+      "stratum": "seed_known_evidence",
+      "question": "出差要赶早班高铁，还需要在房间办公，城际商务酒店合适吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-034"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-be46b4Yc79H9GXQeyAu31A",
+          "source": "yelp",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "text": "绝对是机场酒店里你能找到的最好的。房间干净、宽敞、舒适。入住手续简单，但前台工作人员告诉我他们超订了——幸运的是我是喜达屋会员，所以他们保证了我的房间。这就是为什么只给4星，如果我预订了却发现超订，我会非常生气……总的来说，如果你有早班飞机，性价比不错。我们以前总是在航班前住喜来登，但从现在开始我会住aloft。它更便宜，房间更干净，员工更友好，整体性价比更高。我不会在任何一个机场酒店住超过一晚——附近有那么多更好的社区更好的地方——但如果你想赶早班飞机，这里非常方便。班车也很棒！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 2
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 2
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "问题点名城际商务酒店并要求高铁场景，候选是另一家机场酒店。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-Yo84eeFFim7rK78quQhLfQ",
+          "source": "yelp",
+          "shopId": 100049,
+          "shopName": "The Inn at The Union League",
+          "text": "在费城时住宿的好地方。非常舒适的住宿环境，可以享用餐饮，位于费城市中心，交通便利。有一个很棒的商务中心，适合在住宿期间办公，而且这栋建筑历史悠久。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 3
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "另一家酒店的商务中心不能证明城际商务酒店或赶高铁条件。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-ftikCPft0Esxs6I6amPH_w",
+          "source": "yelp",
+          "shopId": 100049,
+          "shopName": "The Inn at The Union League",
+          "text": "Union League酒店是旧世界、老钱的典型代表。我猜它的常客都是那些家族世代从埃克塞特或伊顿毕业的人。想想《死亡诗社》那种类型。整体着装要求相当正式。除了健身中心，所有区域至少需要穿夹克。\n\n我的房间是一间非常宽敞的套房。装饰非常传统。床很舒适；电视是现代平板屏幕。浴袍不错。我和前台工作人员互动不多，但他们相当礼貌。房间里没有Wi-Fi，只有有线连接，这对我来说是个问题，因为我想连接我的iPad。商务办公室有很多电脑可用。\n\n早餐很棒。种类繁多，从麦片到燕麦粥、香肠、培根、家常薯条、牛角包、松饼、糕点等等。还有现做的煎蛋卷台。值班厨师非常专业，出餐很快。\n\n最后，位于费城市中心的位置非常适合晚上外出。下次来出差时，我一定会尝试预订这家酒店。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-GEHezJuYUrESDFeZ-l5p2A",
+          "source": "yelp",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "text": "如果你真的想睡觉，就避开这个地方。酒店非常吵，因为它就在机场旁边。不是商务出差的理想基地。\n床硬得像石头，枕头上有黑头发（我是金发），地毯又脏又有污渍。浴室瓷砖上缺了大块的勾缝剂，感觉不干净。\n员工很棒，这是唯一的可取之处。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-9lZzGHtLbMaFDkC76Bhyxw",
+          "source": "yelp",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "text": "作为机场酒店非常不错！房间又大又宽敞，床非常舒适，电视质量也很好。酒吧和户外区域漂亮又现代。往返机场的班车准时，员工特别有礼貌。适合短暂或长期住宿！也强烈推荐商务旅行！\n\n唯一的不满是我多次打电话到前台反映马桶的问题，但没人回应。当时是深夜，所以我愿意相信他们是有原因的。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-Aaq4dJOkasOJWFIBbu2GfQ",
+          "source": "yelp",
+          "shopId": 100176,
+          "shopName": "Roosevelt Inn",
+          "text": "我：“打扰一下，我住在200房间。我刚买了这套西装去参加婚礼，但不想撕掉标签，能借一下剪刀吗？”\n\n前台的白人女士：“你偷的吗？”\n\n我：……\n\n有一位非常友好和乐于助人的客房清洁女士，是这家酒店唯一的亮点。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-9qoE2X6gkOqkEJd4mVr1gg",
+          "source": "yelp",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "text": "看到差评有点担心，但我在5楼住得很舒适。免费WiFi能用。床单有点粗糙，但枕头很舒服。房间有一瓶免费瓶装水，有迷你冰箱。衣柜不大，有房间保险箱和咖啡服务。只有淋浴，但有很好的大瓶装 Bliss 护发洗发水和沐浴露。房间感觉很干净。\n\n免费班车每20分钟到机场，在行李提取区外的4号区上车。班车每小时整点从酒店出发，比叫出租车快。早上6点从酒店到D航站楼大约花了20分钟。\n\n附近没有餐厅，所以我从前台给我的菜单上点了外卖。还行。\n\n我不会住在这里游览费城，但作为早班机前一晚的住宿，确实很舒适，我会再住。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-J-GACQ4GKqQ5QDkMToGJCg",
+          "source": "yelp",
+          "shopId": 100176,
+          "shopName": "Roosevelt Inn",
+          "text": "在对面的酒店住得很糟糕后，我入住罗斯福酒店并住了四晚。他们允许我很早办理入住。前台员工很棒，非常友好和合作。房间不豪华但干净舒适。住宿安静。我提前一天退房，他们全额退款。我把钱包落在房间，但直到回家才发现。经理把钱包寄回给我，没有钱、信用卡等丢失。我提出支付运费，但经理拒绝了。我肯定会再住这里。\n\n显示较少",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-YpwBi6ZTos9cdizfL0dKyw",
+          "source": "yelp",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "text": "我对最近在这里的住宿非常失望。我通常对SPG/Aloft酒店很满意，但这家Aloft太糟糕了。整个设施维护不善，普遍很脏。隔壁房间的住户一直待到凌晨（凌晨3点），在房间内外吸烟喝酒。工作人员表现出整体冷漠，几乎没有采取任何措施。如果你在这附近住宿，省省心，找个更好的选择吧。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-xdfCiJxCUSg4vieLR9OMoA",
+          "source": "yelp",
+          "shopId": 100215,
+          "shopName": "Philadelphia Marriott Old City",
+          "text": "这家酒店适合商务旅行或短期停留费城，但度假我不会住这里。酒店离地铁也很近。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-GXWQPOoYiq5wZ8uWJi3rqg",
+          "source": "yelp",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "text": "枕头太棒了！！！我喜欢床和 Bliss 产品。。\n我喜欢酒店的外观！！和男朋友一起享受体验，但酒店女服务员想催我们退房，我们要求下午1点退房。那些刻薄的女人告状说我们12:30还在房间里，尽管我们说我们得到了延迟退房的同意……而那个说同意的女孩又打电话问我们是否退房。唉\n#刻薄女服务员...",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-ap_IQ_K54qUrbuZM-eS_8w",
+          "source": "yelp",
+          "shopId": 100049,
+          "shopName": "The Inn at The Union League",
+          "text": "有什么好说的？不比普通的假日酒店好，但员工粗鲁，气氛做作，墙壁是斯库尔基尔河这边最薄的。不 impressed。\n早餐服务也很差。不要在这家店做女人、有色人种或年轻人，他们每天早上都会骚扰你。他们不遗余力地迎合每一个50岁以上的白人男性，只要他挥挥手，否则，祝你好运。\n我的房间“干净”，但浴室地板上有陌生的毛发，床单显然和富兰克林雕像一样旧。\n让我忍无可忍的是着装要求。如果这家店不是一家二星、敷衍、管理糟糕的酒店，我可以尊重这种商务着装的要求；但是，考虑到上述所有缺陷，强制执行着装要求显得非常愚蠢。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-023",
+      "stratum": "seed_known_evidence",
+      "question": "睡眠很浅但又想看城市景观，住城际商务酒店该怎么选房？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-035"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-eTeec7nyDY_vhCWCYo_CPQ",
+          "source": "yelp",
+          "shopId": 100137,
+          "shopName": "DoubleTree by Hilton Hotel Philadelphia Center City",
+          "text": "房间不错，城市景观很好。\n\n健身区有几台有氧器械和自由重量器材。\n\n健身房旁边有室内游泳池和桑拿。\n\n位置很好；费城这个区域酷到没朋友。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 2
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 2
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "另一家酒店的城市景观不能证明城际商务酒店的选房策略。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-n776BOF8hqrv54i6IDNVLw",
+          "source": "yelp",
+          "shopId": 100046,
+          "shopName": "Beck's Cajun Cafe",
+          "text": "我们爱这个地方！波旁街早餐非常适合当你还想吃早餐但又想同时吃午餐的时候。他们的埃托菲也很棒！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "餐厅早午餐评论与酒店选房无关。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-xdfCiJxCUSg4vieLR9OMoA",
+          "source": "yelp",
+          "shopId": 100215,
+          "shopName": "Philadelphia Marriott Old City",
+          "text": "这家酒店适合商务旅行或短期停留费城，但度假我不会住这里。酒店离地铁也很近。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 3
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "另一家酒店适合商务停留的信息不回答安静和景观选房。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-EfuTd17ZUVL3rOB0ZJ-iMA",
+          "source": "yelp",
+          "shopId": 100093,
+          "shopName": "Square 1682",
+          "text": "在我这里算不错。当你住在隔壁酒店，累得不想‘出去’，但又想社交时，就是这里了。有Chimay啤酒，很棒的创意酒吧食物，有趣的顾客，调酒师友好且掌控全局。\n\n我多次来这里吃过的东西。都很棒\n- 龙虾派。天哪。\n- 汉堡新鲜得离谱。无法形容它有多好吃。\n- 蒜味薯条。确保和你一起吃的人也吃了——这样你们就‘扯平’了。嘿嘿嘿\n- 培根包枣。我靠。配Chimay啤酒。完美/",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-6jikMgIByAy56vsj1vnikQ",
+          "source": "yelp",
+          "shopId": 100074,
+          "shopName": "Kimpton Hotel Monaco Philadelphia",
+          "text": "你在费城找一家好酒店吗？不用再找了。这就是你梦想中的酒店。你的梦想酒店，我告诉你！\n\n多年来我一直想住在这里，以前住在费城的时候，我经常路过并想：“我怎样才能证明住在这里是合理的，即使我步行就能到？” 那个时刻来了，我和丈夫进城参加朋友的婚礼，他们的酒店房间预留在了Hotel Monaco。当然，它仍然很贵（这么时髦的地方当然价格不菲！），但我告诉丈夫，我们基本上别无选择，只能尽情享受一晚，订个房间。及时行乐。\n\n我们一走进去，从第一秒起就充满了魅力。一切都美轮美奂，装饰无可挑剔。客户服务令人难以置信。我满脑子想的都是“别出丑，杰西卡，假装你很优雅！” 我们到了房间，天哪……是谁装饰的？！别误会——我热爱它的每一寸。我们发现了“喧闹”的壁纸、一个带有可爱引语的枕头、一本精心摆放的《爱丽丝梦游仙境》，以及我见过的最酷的亮红色电视柜/媒体中心。衣柜里有浴袍（包括一件豹纹的）和一张瑜伽垫（什么鬼）。床舒服得难以置信，我们享受了最奢华的睡眠。浴缸配有浴盐，让你可以真正浸泡放松（我没用，但很诱人）。唯一能让我们的房间更好的就是有一个酷炫的景观（我认识的一些人可以看到独立厅的绝佳景色）。我们只有一种半景观（好吧，有点牵强）能看到自由钟。但这应该能说明位置有多好——你就在老城区。你走出去，砰，就是独立厅。我们有45分钟的空闲时间，毫无问题地参加了国会厅的导览游。你可以去自由钟、贝琪·罗斯故居、宪法中心或美国犹太博物馆（以及其他无数酷地方），而无需打车或踏上地铁。\n\n两件烦人的事（好吧，其中一件其实有点酷）。第一：停车费每晚大约43美元。我的意思是，我理解——你在费城市中心，整个城市最旅游化的街区。但没门，何塞。幸运的是，我很了解费城，我们在研究生医院社区找到了免费街边停车位，然后打车去酒店（单程大约7美元）。第二：Lil Jon在酒店里。真的。屋顶酒吧有一个深夜活动，Lil Jon当DJ。婚礼结束后，我们深夜打车回来时，有一大群人试图阻止我们闯入Lil Jon的派对。甚至有一个看起来像特勤局的人阻止我们上其中一部电梯，因为那是，呃，Lil Jon派对专用电梯。冷静点，我没那么想和Lil Jon一起派对。（我其实有点想，但你懂的。）\n\n来这里，住这里，感觉优雅，逛逛费城的旅游陷阱，学点历史，穿豹纹浴袍，读《爱丽丝梦游仙境》，也许和Lil Jon一起派对。这地方太棒了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-kxFGRnl6iRs_7f7URIjekw",
+          "source": "yelp",
+          "shopId": 100236,
+          "shopName": "National Car Rental",
+          "text": "我经常出差，在租车公司从未有过好的体验。我加入了Emerald Club，我喜欢整个过程如此快速和友好。\n\n因为这是我第一次使用Emerald Club，我不知道该怎么做。柜台的那位女士非常友好，向我展示了该怎么做。从柜台到班车司机，每个人都非常友善。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-GEHezJuYUrESDFeZ-l5p2A",
+          "source": "yelp",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "text": "如果你真的想睡觉，就避开这个地方。酒店非常吵，因为它就在机场旁边。不是商务出差的理想基地。\n床硬得像石头，枕头上有黑头发（我是金发），地毯又脏又有污渍。浴室瓷砖上缺了大块的勾缝剂，感觉不干净。\n员工很棒，这是唯一的可取之处。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-hqknTz8ydXDZJoR-ciStKg",
+          "source": "yelp",
+          "shopId": 100295,
+          "shopName": "Allegro Pizza",
+          "text": "优点：\n- 当你需要在周日早上6点用紧张的预算喂饱一群过度劳累、睡眠不足的电影摄制组时，很方便\n\n缺点：\n- 食物太糟糕了，连过度劳累、睡眠不足的电影摄制组都宁愿饿着\n- 鸡蛋尝起来像纸，吐司尝起来像纸板，土豆感觉像腐烂的水果（虽然我不知道）\n\n我无法理解他们怎么能把最基本的小菜搞砸……但嘿，我想他们并不是以鸡蛋、吐司和土豆闻名的\n\n多花点钱买Dunkin' Donuts的三明治/牛角面包更值得。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-Yo84eeFFim7rK78quQhLfQ",
+          "source": "yelp",
+          "shopId": 100049,
+          "shopName": "The Inn at The Union League",
+          "text": "在费城时住宿的好地方。非常舒适的住宿环境，可以享用餐饮，位于费城市中心，交通便利。有一个很棒的商务中心，适合在住宿期间办公，而且这栋建筑历史悠久。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-9fe28udUTSQhcbe9wqo7VQ",
+          "source": "yelp",
+          "shopId": 100137,
+          "shopName": "DoubleTree by Hilton Hotel Philadelphia Center City",
+          "text": "这是一家很棒的酒店。我喜欢它（尽管是城市酒店）有游泳池和热水浴缸。不错的健身中心。房间漂亮、舒适、安静。你能想到的一切都有。另外，Doubletree 在入住时会给你免费饼干！太好吃了……",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-024",
+      "stratum": "seed_known_evidence",
+      "question": "预算每晚 100 元以内但不能接受公共卫浴，湖畔青年旅舍合适吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-037"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-pu9ZbUpYlWuelf1jabDgdw",
+          "source": "yelp",
+          "shopId": 100168,
+          "shopName": "Fine Wine & Good Spirits - Premium Collection",
+          "text": "商品选择与其他“升级版”FW & GS商店相当，但排队最糟糕，客户服务几乎不存在。虽然我住在这个店10个街区以内，但需要时我宁愿开车去南费城，或者尽可能去新泽西。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 2
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 2
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "葡萄酒商店评论与湖畔青年旅舍房价及卫浴无关。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-UbPgaOgJ3pg8DB53TP5A7Q",
+          "source": "yelp",
+          "shopId": 100288,
+          "shopName": "Edible Arrangements",
+          "text": "我妈妈大约一周前去世了，从那以后我收到了4个不同的花篮。其中2个送来的草莓发霉了。完全不能接受。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 0,
+            "label": "irrelevant",
+            "rationale": "水果礼篮质量与青年旅舍住宿条件无关。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-qr77kVINoKGqNUSmHN348Q",
+          "source": "yelp",
+          "shopId": 100159,
+          "shopName": "Ed's Pizza House",
+          "text": "这是我37年人生中经历过的最糟糕的电话客服。经理袖手旁观，任由收银员态度极其恶劣。食物没有按照要求准备，他们告诉我不能重做也不能退款，我只能接受……取消订单（.）！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-XMgLn0MR3GryuCRt310MYw",
+          "source": "yelp",
+          "shopId": 100280,
+          "shopName": "Village Burger",
+          "text": "每次。每次。我去Village Burger的快闪店，比如SSHP、Winterfest、Franklin Square等，都要等很久，而且员工很粗鲁。我现在在Winterfest，等我的汉堡已经等了30分钟。完全不能接受。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-K6p_dKPCKaodkq9XyUhIBA",
+          "source": "yelp",
+          "shopId": 100118,
+          "shopName": "Kurry Shack",
+          "text": "我点了很多食物，包括萨莫萨三角饺，当我咬第一口时，它闻起来有股馊味，像是变质的。真的又馊又黏糊糊的。我给餐厅打了电话，他们说会退款，但给顾客变质的食物是不能接受的。我永远不会再从这里点餐了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-KKmlAZhgkqAoRgxtqUOtQA",
+          "source": "yelp",
+          "shopId": 100215,
+          "shopName": "Philadelphia Marriott Old City",
+          "text": "总的来说，我们认为这是一家不错的酒店。房间宽敞干净，大堂很漂亮。位置很好，甚至还有停车位，2或3小时我记不清了，周日全天免费。不过酒店有些破旧。虽然最近翻新过，但我们房间外的走廊天花板似乎有漏水。吸音瓷砖严重污渍，还有一块不见了。对于一家每晚200美元以上的酒店来说，这真的不太好看。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-jeQijvSYFa5zA0dJuuDWXA",
+          "source": "yelp",
+          "shopId": 100018,
+          "shopName": "Aloft Philadelphia Airport",
+          "text": "上周末在费城。我通常住在市中心，但因为平等论坛，该地区的所有酒店都订满了。我在Expedia上订到了每晚120美元+税的不错价格。\n\n无论如何，我很喜欢这个地方的整体氛围。我大约下午2:30入住。一位英俊、精力充沛的前台员工迎接了我，并指引我到225房间。\n\n虽然225房间绝对是酒店里较大的房间之一，但这是有原因的。这是一间为轮椅使用者设计的双人房。我只住一晚，所以没有大惊小怪，但我确实喜欢更大的空间。一些无障碍的“额外设施”，比如所有东西都特别低以便于使用，需要一些时间来适应。浴室区域同样巨大，可以轻松使用水槽和衣柜区，还有一个隐藏在大推拉门后的马桶间和步入式淋浴间。淋浴间本身有一个可拆卸的淋浴头，还有一个健身房风格的沐浴露和洗发水分配器。\n\n至于床，除了低得离谱（同样是为了方便轮椅使用者），它相当舒适，我睡得很香。电视有不错的高清频道选择。房间里有免费的水和咖啡，浴室区域还有一个小冰箱，如果你想冷藏饮料或药品。\n\n停车费是9美元，可以自由进出。每次进入时你需要拿一张新票，离开停车场时前台会盖章。停车场很大，与另外两家喜来登酒店共用（它们还提供共享班车，如果你往返机场的话）。\n\n我快速看了一眼泳池区。那里几乎空无一人，但毕竟是五月初，我想这也是意料之中的。现场餐饮选择不多，只有一个快速服务区，价格有点贵（同样，意料之中）。如果需要，你可以开车向北大约5分钟到岛屿大道吃快餐。酒吧区看起来很有趣，但同样，周六晚上几乎空无一人。\n\n总的来说，如果我不得不住在费城市中心以外的地方，我可能会住在这里。依我看，他们真应该在市中心也开一家。那将非常完美。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-mYMZ_PaKx5ZtzAPh_7auyA",
+          "source": "yelp",
+          "shopId": 100036,
+          "shopName": "Edible Arrangements",
+          "text": "我今天11点左右打电话，问能不能在下午3:30到4点之间为朋友家的丧事准备一个花篮。电话里他们非常帮忙，描述了76/77美元会得到什么。她告诉我会有巧克力草莓和一些裹着榛子的水果。我记得当时想，哇，榛子是她最喜欢的，真巧。结果我到那里，看到牌子写着1.99美元一小份水果沙拉，我点了，如果你消费29美元以上。我花了远不止29美元，却被收了4.99美元。然后他们匆忙给我准备花篮，看起来非常小（我订的是中号），还缺东西。我没多想就走到车里。再仔细一看，根本没有巧克力裹的东西！他们给了我水果串，底部有像生菜的东西。他们显然是在我站在外面等的十分钟里随便拼凑的。我拿回去，准备好听这个……我引用原话：“我们忙疯了，巧克力裹的东西用完了，所以你只是少了大概10个裹着巧克力的草莓！”我说，所以你们收100美元就给我没裹任何东西的水果串？她说，我引用原话：“你没付100美元！”我说80美元也差不多了，她说：“那可不是100美元！”你是在逗我吗？？要不是我今天急需，我早就走了！我简直不敢相信。另一个员工就在旁边看着。所以他们想骗我，被我抓住了！如果我是让人送货，会怎么样？？我永远不会知道！我打算尽快打电话和老板谈！别来这里，他们那里有最无知的人在工作。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-025",
+      "stratum": "seed_known_evidence",
+      "question": "晚上十一点以后下班，还想练自由力量，有二十四小时营业且人少的健身房吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-043"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-SgNhuqWbbkin7ipO8WEYRQ",
+          "source": "yelp",
+          "shopId": 100014,
+          "shopName": "City Fitness - Northern Liberties",
+          "text": "哇——太失望了。 附加费用不透明——比如25美元的取消费。 谢谢Freddie！ 感谢你没告诉我这个。 而且在你想要联系他们的时间段——比如下班后下午5点以后或周末——没有经理可以谈话。 很不幸，这么多健身房都有这些隐藏费用——这让我再也不想加入健身房了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 3
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 3
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 1,
+            "label": "tangential",
+            "rationale": "只说明健身房下班后没有经理，不能证明24小时、自由力量或人少。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-CjcGeM_pwhQ_VCWcG6a0fw",
+          "source": "yelp",
+          "shopId": 100097,
+          "shopName": "The Sporting Club at the Bellevue",
+          "text": "不敢相信我找到了一个能和12街媲美的健身房……要不是价格问题，我肯定给五星。这正是你想要的健身房：干净、友好、种类繁多，而且你真的期待去那里。朋友给了我三天体验卡，我彻底爱上了。如果不是要搬离这座城市，我一定会考虑加入。壶铃课很棒，接着是力量/有氧课（带迷你蹦床！），然后是激烈的TRX课。第二天我试了动感单车，也不错。有大量的有氧器械（电视能看，频道多），还有大量哑铃、室内跑道和游泳池。我只希望未来的健身房也能这么好，否则我只能忍痛加入这家了。我很久没有这么兴奋地去健身房了。这适合任何喜欢多样化训练的人，从新兵训练营/CrossFit类课程，到动感单车、瑜伽和尊巴，并且厌倦了当前健身计划的人。我可以整天待在那里不离开。最棒的是？氛围，让你忘记自己在费城。PS. LA Fitness 现在简直丢人，真该只给一星。唉……",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-RIiRHSznn-o4oQSbAodKcA",
+          "source": "yelp",
+          "shopId": 100165,
+          "shopName": "SLT - Philadelphia",
+          "text": "我刚开始健身，之前试过的每个健身房，我都无法让自己再去。这是唯一一个让我想继续来的健身房。这个地方很棒，每个教练都非常贴心，真正推动你做到最好。这种锻炼真的让你很累，第二天你确实能感觉到。Megaformer 对我来说是实现目标的好方法，我的目标是拉长、塑形和增强力量。我知道这个课程很贵，但它确实有效，才两周，我已经能看到一点变化了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-fWd26wuWiwIdle6FJ0K_-g",
+          "source": "yelp",
+          "shopId": 100014,
+          "shopName": "City Fitness - Northern Liberties",
+          "text": "我讨厌锻炼。不，我恨恨恨锻炼。我讨厌喘粗气、流汗，做那些毫无意义的动作，比如把重物举起来再放下，或者原地跑步。太无聊了！不过算了，我是个成年人，我意识到我应该努力保持身材，尤其是如果我坚持像垃圾桶一样吃东西的话。\n\n所以我每周去City Fitness两三次。这是个便宜的健身房，没有合同要求，设备现代。是个锻炼的好地方，特别是如果你预算紧张，而且时间安排上可以在白天锻炼。\n\n高峰时段人太多了。想都别想5:30去。没有足够的空间拉伸，你得等器械和哑铃，课程也超员。晚上8点以后就好多了。唉。但说真的，这个价格真的无敌了，如果我要逼自己去做这么讨厌的事，我很高兴能花很少的钱做到。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-J30kTcKEgjhX-7qIoRHmUA",
+          "source": "yelp",
+          "shopId": 100097,
+          "shopName": "The Sporting Club at the Bellevue",
+          "text": "可能是城里最贵的健身房。但对我来说完全值得。我升级到了行政更衣室，这样我就没有借口在上班前或晚上出去玩之前不去健身房了。我总是在储物柜里放好化妆品、护发用品等。因为健康问题很久没去健身了，现在慢慢恢复。我看到有一两台机器有点问题，但整体设施很新潮且欢迎人。课程和器材选择很多……\n\n我唯一不满的两点是：希望周末能晚点关门，但这只是我休息日动作慢。希望课程表能更多样化。有些课我想上，但总是在中午，没有很早、下班后或周末的时段。所以没机会尝试。我猜是教练的问题，可能不会改变。总的来说，我很高兴加入了。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-fMQzoujxKSUkHPEv8PPZaQ",
+          "source": "yelp",
+          "shopId": 100058,
+          "shopName": "Retro Fitness",
+          "text": "很棒的健身房，没有普通Retro Fitness那么大，但健身房员工友好，每个人都很友善，器材也很棒！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-026",
+      "stratum": "seed_known_evidence",
+      "question": "健身新手想在安静小班里学动作，同时练自由力量，静力瑜伽馆都能满足吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-040"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-F2Bx7hzy11LLnhkJK7I-Eg",
+          "source": "yelp",
+          "shopId": 100134,
+          "shopName": "Starbucks",
+          "text": "这家星巴克在城里算大的！有很多桌子可以坐和学习，我偶尔会来这里学习！咖啡不错，就是星巴克该有的味道，他们出餐速度很快！我推荐来这里学习或者快速喝一杯带走！附近大多数商店和餐馆都很近，位置很方便！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-NQcK_TWS8rFKC_S0vfB1Uw",
+          "source": "yelp",
+          "shopId": 100097,
+          "shopName": "The Sporting Club at the Bellevue",
+          "text": "我会想念这个地方的。\n\n我在这里当会员大约一年了，有很多课程让我忙，设备也很多，所以我不需要等待就能做我想做的运动。我很难过要离开，因为我最近搬家了。这里真的很好，虽然贵，但会员费物有所值。\n\n他们最近彻底翻新了男淋浴间，很酷。不是说以前不好，但我能理解他们需要升级。\n\n我上过动感单车课、拳击课、循环训练课、普拉提课、游泳课和一般力量训练。我甚至试过几次瑜伽，很棒，因为是在一个私人瑜伽工作室里，而不是在灯光昏暗的房间里。瑜伽工作室很宁静，虽然我最后伤到了自己，但我还是很享受。我只是觉得自己不是练瑜伽的料。\n\n网站有时在我查看课程表时会出点小问题。对我来说这只是个小抱怨。我加入时享受了特别优惠，所以免掉了入会费，顺便说一句，入会费贵得离谱。不过，他们提供优惠，也会让你试练几天看看感觉如何。\n\n我真的很喜欢在这里锻炼，希望新家附近的健身房能有Bellevue的一半好。如果方便而且你愿意付钱，你会喜欢的。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-dW908lCbmAqnw47QlivNPw",
+          "source": "yelp",
+          "shopId": 100202,
+          "shopName": "Mom Mom's Kitchen and Polish Food Cart",
+          "text": "Mom Mom's不是你想象中的典型餐车。这是我吃过的最好的波兰饺子。自制的美味，入口即化。配上焦糖洋葱、酸奶油和苹果酱——你不会后悔的！你可以在North Bowl对面的Garden Variety找到他们。无论你是想找快餐、午餐还是晚餐，Mom Mom's都能满足你！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp--WxdpD6S7Xr4eTkhYHx3Nw",
+          "source": "yelp",
+          "shopId": 100097,
+          "shopName": "The Sporting Club at the Bellevue",
+          "text": "法语评论：这家健身房太棒了！各种项目应有尽有：有氧、力量、游泳池、桑拿、篮球……员工超级棒……总之，一家五星级健身房，当之无愧！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-JSYU5FSibkKZQEXBRioFlg",
+          "source": "yelp",
+          "shopId": 100085,
+          "shopName": "Chuck's Alibi",
+          "text": "看着厨师一边喝啤酒一边做你的芝士牛排。Chucks整晚都能满足你对油腻费城风味的渴望。厨房会给你塞满油腻的酒吧食物，让你背叛节食计划，但如果是周五晚上，就尽情放纵吧。菜单上有烤三文鱼、蟹腿、烤牛肉等选项，还算均衡。员工真诚而专注。音乐直截了当，不太吵也听不清。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-y9n7vLCtJCDpGet4KgFmXw",
+          "source": "yelp",
+          "shopId": 100188,
+          "shopName": "Rangoli: Vibrant Flavors of India",
+          "text": "来过大约4次了，食物一直很好吃，虽然即使在安静的日子服务也可能很慢。选择辣度时要小心……我觉得3或4度比较舒服。鹰嘴豆咖喱是心头好！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-XFrMwxuaoSsJxAPODM-xdA",
+          "source": "yelp",
+          "shopId": 100139,
+          "shopName": "Potito's Italian American Pastries",
+          "text": "这里的蛋糕和奶油甜馅煎饼卷是南费城最好的之一。店面小巧古朴，但在当地人中口碑很好，尤其是那些知道他们从黑白照片时代就开始经营的老人们。蛋糕非常美味，如果你不能开车去Sweet Eats，这里是个经济实惠的选择。奶油甜馅煎饼卷和蛋糕，尤其是意大利糕点，他们都能满足你。草莓脆饼，就是它！",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-CjcGeM_pwhQ_VCWcG6a0fw",
+          "source": "yelp",
+          "shopId": 100097,
+          "shopName": "The Sporting Club at the Bellevue",
+          "text": "不敢相信我找到了一个能和12街媲美的健身房……要不是价格问题，我肯定给五星。这正是你想要的健身房：干净、友好、种类繁多，而且你真的期待去那里。朋友给了我三天体验卡，我彻底爱上了。如果不是要搬离这座城市，我一定会考虑加入。壶铃课很棒，接着是力量/有氧课（带迷你蹦床！），然后是激烈的TRX课。第二天我试了动感单车，也不错。有大量的有氧器械（电视能看，频道多），还有大量哑铃、室内跑道和游泳池。我只希望未来的健身房也能这么好，否则我只能忍痛加入这家了。我很久没有这么兴奋地去健身房了。这适合任何喜欢多样化训练的人，从新兵训练营/CrossFit类课程，到动感单车、瑜伽和尊巴，并且厌倦了当前健身计划的人。我可以整天待在那里不离开。最棒的是？氛围，让你忘记自己在费城。PS. LA Fitness 现在简直丢人，真该只给一星。唉……",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-RIiRHSznn-o4oQSbAodKcA",
+          "source": "yelp",
+          "shopId": 100165,
+          "shopName": "SLT - Philadelphia",
+          "text": "我刚开始健身，之前试过的每个健身房，我都无法让自己再去。这是唯一一个让我想继续来的健身房。这个地方很棒，每个教练都非常贴心，真正推动你做到最好。这种锻炼真的让你很累，第二天你确实能感觉到。Megaformer 对我来说是实现目标的好方法，我的目标是拉长、塑形和增强力量。我知道这个课程很贵，但它确实有效，才两周，我已经能看到一点变化了。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "rag-027",
+      "stratum": "seed_known_evidence",
+      "question": "工作日晚上七点去综合健身房，想立即使用热门器械不用等待，现实吗？",
+      "expectedSourceFromExistingLabels": "seed",
+      "existingKnownReviewIds": [
+        "review-044"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "yelp-Z5nyYn8NXLYmqJb3sUTtbQ",
+          "source": "yelp",
+          "shopId": 100058,
+          "shopName": "Retro Fitness",
+          "text": "如果你只需要一个干净、开放、充满活力的健身房，有很多器械、跑步机和有氧设备，那么这个地方不错。不要因为我的低评分而气馁。\n\n我的低评分是基于对有限自由重量的个人失望。我不得不发布这条评论是为了帮助其他像我一样在我们地区努力寻找合适健身房的人。\n\n缺点：只有一个深蹲架。只有两个平凳。我看到的广告和我做的研究让我相信会有更多。诚然，我去的时候，我可以不用等待就使用平凳或深蹲架。但我怀疑在工作日晚上或周末是否还会这样。\n\n优点：尽管我有上述疑虑，自由重量区相当宽敞，并且与器械和有氧区充分隔离，这样中高级举重者可以不受阻碍地锻炼，而不会吓到或惹恼其他人。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 2
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 2
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 3,
+            "label": "directly_relevant",
+            "rationale": "直接讨论工作日晚间热门自由力量器械是否需要等待。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "yelp-EJ_cbz2Jnr8r51VdB6bJIQ",
+          "source": "yelp",
+          "shopId": 100163,
+          "shopName": "Planet Fitness",
+          "text": "我绝对很高兴加入这个健身房，虽然对我来说有点远。非常干净，总有员工保持整洁。晒黑也很棒。通常不用排队等晒黑机，而且同样保持得很干净。\n每月19.99美元，可以使用健身房和无限次晒黑……很难找到更划算的了，除非你想要的不仅仅是心肺器械和举重。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 5
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-cRDHBkwZEpPkynjHcRO8qg",
+          "source": "yelp",
+          "shopId": 100058,
+          "shopName": "Retro Fitness",
+          "text": "很棒的健身房，员工非常好，老板粗鲁！\n\n我取消会员后，他们多收了我6个月的信用卡费用，老板甚至拒绝和我协商退款。他的原话是：“系统里没有，所以我们不欠你任何东西。”很遗憾，因为我真的很喜欢这家健身房，而且从不需要等待干净现代的器材。但老板这种态度，我可能会劝阻任何人使用这家健身房（这就是为什么我给两星）。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 6
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-J30kTcKEgjhX-7qIoRHmUA",
+          "source": "yelp",
+          "shopId": 100097,
+          "shopName": "The Sporting Club at the Bellevue",
+          "text": "可能是城里最贵的健身房。但对我来说完全值得。我升级到了行政更衣室，这样我就没有借口在上班前或晚上出去玩之前不去健身房了。我总是在储物柜里放好化妆品、护发用品等。因为健康问题很久没去健身了，现在慢慢恢复。我看到有一两台机器有点问题，但整体设施很新潮且欢迎人。课程和器材选择很多……\n\n我唯一不满的两点是：希望周末能晚点关门，但这只是我休息日动作慢。希望课程表能更多样化。有些课我想上，但总是在中午，没有很早、下班后或周末的时段。所以没机会尝试。我猜是教练的问题，可能不会改变。总的来说，我很高兴加入了。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-eJJvI_fmSs4Qh0xfythYvw",
+          "source": "yelp",
+          "shopId": 100163,
+          "shopName": "Planet Fitness",
+          "text": "我作为客人（几个家庭成员有会员资格，每次访问允许带一位客人）来这家Planet Fitness已经几个月了，我仍然有复杂的感受。\n\n第一个问题——干净？胡——说——八——道。我的意思是，你不是走在垃圾堆里，但这不是一个整洁的地方。每台机器上都附着某种垃圾，无论是食物垃圾、汗巾等等。\n\n第二个问题——太拥挤了。如果你在正常时间（例如上午8点到晚上11点）去，你能用到机器，但拥挤得让人不舒服。我很高兴你们都在锻炼身体，但该死，我不想你的汗沾到我身上。\n\n第三个问题——机器种类不够多！有很多重量器械，但有氧器械不够。我被以前的健身房，Aramingo的Bally's宠坏了，因为他们有那么多可做的！\n\n好的方面——\n\n1）超级便宜，我的意思是，就这个价格而言，我能理解为什么这个地方挤得像有免费赠品一样。\n\n2）那个“笨蛋警报”很搞笑。\n\n3）每台机器都配有收音机/电视（9个不同的频道）。你只需要耳机！\n\n4）每个人都很友好，即使拥挤也各忙各的。\n\n顺便说一句：我为什么抱怨？我甚至不付钱来这里！\n\n:)",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-JnRcCrIXZa2zVvEHgyfs4A",
+          "source": "yelp",
+          "shopId": 100097,
+          "shopName": "The Sporting Club at the Bellevue",
+          "text": "我和一个会员朋友在会员感谢周去看了这家健身房。\n\n它位于 Bellevue 的顶层，是一个宽敞的开放式健身房。他们有很多市中心健身房没有的设施：游泳池、壁球场、篮球场、跑道、桑拿房和更衣室里的按摩浴缸。器械看起来状态良好，我看到的每台器械上都配有电视。\n\n更衣室很大，维护得很好，有充足的储物柜。淋浴间提供免费的洗发水、肥皂等——还有吹风机和其他整理仪容的工具。\n\n唯一让它不能得五星的是价格……作为健身房来说太贵了。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-jD1nxJdtRa45T5A3fY5IMA",
+          "source": "yelp",
+          "shopId": 100163,
+          "shopName": "Planet Fitness",
+          "text": "最近PF人满为患，想好好锻炼一下极其困难；更别提那些设备动不动就“停用”好几天！最近唯一适合去的时间是凌晨3点！他们是在提供免费会员吗？",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-FmjhaeGDpc4dKZEqFVceiQ",
+          "source": "yelp",
+          "shopId": 100240,
+          "shopName": "Smiley's Cafe",
+          "text": "吃了鸡肉沙威玛，太棒了！所有食材都很新鲜，而且价格非常便宜！工作日晚上外卖的好去处。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "yelp-v11fMQGMXOUjVm37OVEe1g",
+          "source": "yelp",
+          "shopId": 100058,
+          "shopName": "Retro Fitness",
+          "text": "我来这个地方已经有一段时间了。前台做得不错，但是……有几个容易改变的点很明显，但似乎没人在乎……\n淋浴间糟透了……到处都是头发……有些浴室门没有门把手。\n器械没人擦……所以有味道，很多都用胶带固定着……请告诉人们运动后清理，或者晚上找人打扫。\n\n整个地方的地板都是污渍，做俯卧撑时别太低，否则可能会碰到一些“惊喜”。能不能有人打扫一下，修好坏掉的器械，并在健身房里装上空调？我每周都看到这些女士从那间房里出来，好像刚蒸过桑拿……我问是不是搏击操课……回答是没有空调。\n\n至于私人教练……在那工作的公司没有一个人能待超过一个月……他们做不到。\n\n\n请保持清洁，你会得到更多客户……\n\nJulie",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "fuzzy-shop-val-001",
+      "stratum": "yelp_shop_discovery",
+      "question": "我想一个人安静地待一会儿，看看书放空，不希望周围太吵。",
+      "expectedSourceFromExistingLabels": "yelp",
+      "existingKnownReviewIds": [
+        "yelp-FoSx3bBtKJNtWAl6ZXTusQ",
+        "yelp-G1hVCb7CrOyL-HP1h6rByg",
+        "yelp-T52ED3B5-Lymo9EzCpuTwg",
+        "yelp-UO9TXvLjHoMHCZ1C5OXqLg",
+        "yelp-ZLxlEs371svztvnA2Gdp8g",
+        "yelp-lR1yZPj0q-AR9sml9b1J9Q",
+        "yelp-pEqgXzllsYcBAStBeP1QFw"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "review-131",
+          "source": "seed",
+          "shopId": 13,
+          "shopName": "湖畔青年旅舍",
+          "text": "候场区座位有限，人多时可能需要站一会儿。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 7
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "review-293",
+          "source": "seed",
+          "shopId": 10,
+          "shopName": "星河艺术影城",
+          "text": "候场区座位有限，人多时可能需要站一会儿。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 8
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "review-320",
+          "source": "seed",
+          "shopId": 11,
+          "shopName": "欢乐巨幕影城",
+          "text": "候场区座位有限，人多时可能需要站一会儿。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 9
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "review-018",
+          "source": "seed",
+          "shopId": 8,
+          "shopName": "街角共创咖啡",
+          "text": "工作日下午常有创业团队讨论，虽然适合协作和开会，但环境比普通咖啡店嘈杂，不适合需要安静专注的人。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "fuzzy-shop-val-002",
+      "stratum": "yelp_shop_discovery",
+      "question": "想带电脑找个地方待上几个小时，最好坐着舒服，也不会有人一直催我走。",
+      "expectedSourceFromExistingLabels": "yelp",
+      "existingKnownReviewIds": [
+        "yelp-2EsM0mPABnQempeoOPIlcA",
+        "yelp-ChYhI05dXfDPbATD9VdiDQ",
+        "yelp-RIdKOn-6dE8hdSFPh5RZug",
+        "yelp-YysS6Zla-HtqtR5SW60TbQ",
+        "yelp-ga3Ehtu88yTkvOEDbFFcUQ",
+        "yelp-kmEHaWvhg3O6IXfw7cDf7Q",
+        "yelp-zJUxQgDCQpZXVRfi0aCIRw"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "review-017",
+          "source": "seed",
+          "shopId": 8,
+          "shopName": "街角共创咖啡",
+          "text": "共享长桌配有很多插座和高速无线网络，工作日早上适合带电脑办公，也能预订四人讨论桌。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 4
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 4
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "fuzzy-shop-val-003",
+      "stratum": "yelp_shop_discovery",
+      "question": "想找个适合和朋友慢慢聊天的地方，氛围放松，说话不用提高嗓门。",
+      "expectedSourceFromExistingLabels": "yelp",
+      "existingKnownReviewIds": [
+        "yelp-0jBamrOBDkY6lLTpkY0xZw",
+        "yelp-GEX3lJS5yJObNX0VH0SdKg",
+        "yelp-QfJKvCMrzNPMlhakfQBD-A",
+        "yelp-RvQVDNwTEF7Gq-rfXHmYXQ",
+        "yelp-sHAX9dpdXpUtcBEAyD8DKw",
+        "yelp-ttZo6DvUdCB1qU00SgFcMQ"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "review-006",
+          "source": "seed",
+          "shopId": 3,
+          "shopName": "清晨手冲咖啡",
+          "text": "周末下午客人会多一些，但背景音乐不吵。拿铁价格适中，适合和朋友慢慢聊天。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 1
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 1
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 3,
+            "label": "directly_relevant",
+            "rationale": "直接说明背景音乐不吵且适合和朋友慢慢聊天。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "review-038",
+          "source": "seed",
+          "shopId": 13,
+          "shopName": "湖畔青年旅舍",
+          "text": "公共客厅适合认识旅伴，晚上十点前聊天活动较多，氛围热闹但不适合需要绝对安静的人。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 2
+            }
+          ],
+          "priority": "high",
+          "humanJudgment": {
+            "relevance": 1,
+            "label": "tangential",
+            "rationale": "适合聊天但氛围热闹，不能确认说话无需提高音量。",
+            "annotatorType": "codex_assistant_review",
+            "annotatedAt": "2026-07-15"
+          }
+        },
+        {
+          "reviewId": "review-292",
+          "source": "seed",
+          "shopId": 10,
+          "shopName": "星河艺术影城",
+          "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 5
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "review-130",
+          "source": "seed",
+          "shopId": 13,
+          "shopName": "湖畔青年旅舍",
+          "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 6
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "review-319",
+          "source": "seed",
+          "shopId": 11,
+          "shopName": "欢乐巨幕影城",
+          "text": "音量整体偏足，动作片氛围感强，怕吵的人可以考虑普通厅。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 7
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "review-002",
+          "source": "seed",
+          "shopId": 1,
+          "shopName": "巷子口火锅",
+          "text": "周五晚上七点以后常要排队，服务员会提醒等位时间。想安静聊天可以避开高峰。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 8
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "review-021",
+          "source": "seed",
+          "shopId": 2,
+          "shopName": "深夜食堂烧烤",
+          "text": "门口有露天座位，天气好时烟味比室内轻，适合朋友聊天；下雨天露天区不开放。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "fuzzy-shop-val-004",
+      "stratum": "yelp_shop_discovery",
+      "question": "第一次约会想找个有点情调但不会太正式、让人紧张的地方。",
+      "expectedSourceFromExistingLabels": "yelp",
+      "existingKnownReviewIds": [
+        "yelp-1FIFzSnwuyGw0V0a75-1Nw",
+        "yelp-1leFK2Q4id6cIJ8A_dH-vg",
+        "yelp-3d_m7U-jxRF9YTP6DbOhMw",
+        "yelp-3nKEF-D-FzbZcES_WD45qQ",
+        "yelp-RvQVDNwTEF7Gq-rfXHmYXQ",
+        "yelp-rWrVThcyPncp-wpqZkjYxA",
+        "yelp-u35-OtHG-npYBPXeGDAMMg"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "review-316",
+          "source": "seed",
+          "shopId": 11,
+          "shopName": "欢乐巨幕影城",
+          "text": "大厅指引牌清楚，第一次来也容易找到对应影厅和检票口。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 9
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        },
+        {
+          "reviewId": "review-289",
+          "source": "seed",
+          "shopId": 10,
+          "shopName": "星河艺术影城",
+          "text": "大厅指引牌清楚，第一次来也容易找到对应影厅和检票口。",
+          "observedIn": [
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    },
+    {
+      "caseId": "fuzzy-shop-val-005",
+      "stratum": "yelp_shop_discovery",
+      "question": "周末想带孩子一起吃饭，希望店员友善，环境对家庭比较轻松。",
+      "expectedSourceFromExistingLabels": "yelp",
+      "existingKnownReviewIds": [
+        "yelp-5-YovLQWy6Srq0UnTdVhuw",
+        "yelp-B0dVmjqgxiiTVXirBAhEYg",
+        "yelp-M-38wpRyPVRT35MgRmLCjQ",
+        "yelp-M_NslcVeH15cjxQh9Epl1w",
+        "yelp-R4UONMMp4CeDIG1_HHB44g",
+        "yelp-Zw4PyOQtIIgyevpB5lDmxw",
+        "yelp-_ZA32vrxoGMkPOZeKL_Lxw",
+        "yelp-sikPKS_co6hTNCbM2YxzAA",
+        "yelp-x4qR8AlRKckcXy8aCml-zQ"
+      ],
+      "crossSourceCandidates": [
+        {
+          "reviewId": "review-019",
+          "source": "seed",
+          "shopId": 8,
+          "shopName": "街角共创咖啡",
+          "text": "早上八点营业，有咖啡加三明治套餐，人均约 38 元；周末中午家庭客较多，空位和插座都比较紧张。",
+          "observedIn": [
+            {
+              "method": "bm25AllReviews",
+              "rank": 10
+            },
+            {
+              "method": "hybridAllBm25V02B08",
+              "rank": 10
+            }
+          ],
+          "priority": "normal",
+          "humanJudgment": null
+        }
+      ]
+    }
+  ]
+}

@@ -3,13 +3,22 @@ server:
   shutdown: graceful
 
 spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    publisher-confirm-type: simple
+    connection-timeout: 3s
   application:
     name: local-life-backend
   datasource:
     url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:local_life}?useUnicode=true&characterEncoding=utf8&connectionCollation=utf8mb4_unicode_ci&serverTimezone=Asia/Shanghai
     username: ${DB_USER:local_life}
-    password: ${DB_PASSWORD:local_life_password}
+    password: ${DB_PASSWORD:public-demo-secret-2-change-before-use}
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: ${DB_POOL_MAX_SIZE:10}
   flyway:
     enabled: true
     baseline-on-migrate: true
@@ -77,6 +86,11 @@ agent:
     max-attempts: ${REVIEW_SYNC_MAX_ATTEMPTS:3}
 
 local-life:
+  catalog-read:
+    enabled: ${CATALOG_READ_ADMISSION_ENABLED:true}
+    max-concurrent: ${CATALOG_READ_ADMISSION_MAX:0}
+    sql-timeout-seconds: ${CATALOG_READ_SQL_TIMEOUT_SECONDS:2}
+    max-wait-millis: ${CATALOG_READ_MAX_WAIT_MILLIS:1000}
   deployment:
     role: ${SERVICE_ROLE:monolith}
     migration-only: ${MIGRATION_ONLY:false}
@@ -106,6 +120,10 @@ local-life:
     stale-claim-after: ${MESSAGE_STALE_CLAIM_AFTER:PT5M}
   flash-sale:
     enabled: ${FLASH_SALE_ENABLED:true}
+    transport: rocketmq
+    rocketmq:
+      nameserver: ${ROCKETMQ_NAMESERVER:localhost:9876}
+      topic: ${ROCKETMQ_FLASH_SALE_TOPIC:flash-sale-orders-v1}
     stream: ${FLASH_SALE_STREAM:stream.flash-sale-orders}
     consumer-group: ${FLASH_SALE_CONSUMER_GROUP:flash-sale-order-group}
     claim-idle-after: ${FLASH_SALE_CLAIM_IDLE_AFTER:PT1M}

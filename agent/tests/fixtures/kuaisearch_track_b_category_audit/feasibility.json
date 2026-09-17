@@ -1,0 +1,38 @@
+[
+  {
+    "categoryKey": "1/39/0",
+    "categoryLevel1Name": "女装",
+    "categoryLevel2Name": "T恤",
+    "categoryLevel3Name": "UNKNOWN",
+    "evidenceProductCount": 2,
+    "itemCount": 2,
+    "productsWithNonemptyAttr": 2,
+    "distinctAttrSignatures": 2,
+    "topAttrValues": [
+      {"value": "短袖", "classification": "lexically_self_describing_candidate", "coverageAmongEvidenceProducts": 0.5},
+      {"value": "长袖", "classification": "lexically_self_describing_candidate", "coverageAmongEvidenceProducts": 0.5}
+    ]
+  },
+  {
+    "categoryKey": "1/13/103",
+    "categoryLevel1Name": "女装",
+    "categoryLevel2Name": "裤子",
+    "categoryLevel3Name": "牛仔裤装",
+    "evidenceProductCount": 1,
+    "itemCount": 1,
+    "productsWithNonemptyAttr": 1,
+    "distinctAttrSignatures": 1,
+    "topAttrValues": []
+  },
+  {
+    "categoryKey": "23/40/217",
+    "categoryLevel1Name": "女鞋",
+    "categoryLevel2Name": "休闲鞋",
+    "categoryLevel3Name": "休闲板鞋",
+    "evidenceProductCount": 2,
+    "itemCount": 2,
+    "productsWithNonemptyAttr": 2,
+    "distinctAttrSignatures": 2,
+    "topAttrValues": []
+  }
+]

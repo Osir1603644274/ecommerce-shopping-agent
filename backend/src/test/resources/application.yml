@@ -10,6 +10,11 @@ spring:
   flyway:
     enabled: false
 
+management:
+  health:
+    rabbit:
+      enabled: false
+
 agent:
   review-sync:
     mode: direct

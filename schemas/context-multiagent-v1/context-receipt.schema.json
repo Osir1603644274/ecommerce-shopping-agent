@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local-life.invalid/schemas/context-multiagent-v1/context-receipt.schema.json",
+  "title": "ContextReceipt V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "receiptId", "runId", "taskId", "taskRevision", "agentRole",
+    "phase", "modelCallOrdinal", "selectedItems", "rejectedItems", "semanticHash",
+    "bindingHash", "compilerVersion", "policyVersion", "tokenizerVersion",
+    "toolSchemaHash", "modelConfigHash", "modelViewBytes", "estimatedTokens",
+    "actualTokens", "tokenStatus", "compileDurationMs", "persistenceStatus"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "context-receipt-v1"},
+    "receiptId": {"type": "string", "minLength": 1},
+    "runId": {"type": "string", "minLength": 1},
+    "taskId": {"type": "string", "minLength": 1},
+    "taskRevision": {"type": "integer", "minimum": 1},
+    "agentRole": {"enum": ["SHOPPING_AGENT", "EVIDENCE_RESEARCH_AGENT"]},
+    "phase": {"type": "string", "minLength": 1},
+    "modelCallOrdinal": {"type": "integer", "minimum": 0},
+    "selectedItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["itemId", "semanticKey", "contentHash", "estimatedTokens"],
+        "properties": {
+          "itemId": {"type": "string"},
+          "semanticKey": {"type": "string"},
+          "sourceRevision": {"type": ["string", "integer", "null"]},
+          "contentHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "estimatedTokens": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "rejectedItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["itemId", "reason"],
+        "properties": {
+          "itemId": {"type": "string"},
+          "reason": {
+            "enum": [
+              "wrong_tenant", "wrong_owner", "wrong_session", "wrong_task",
+              "wrong_revision", "wrong_scope", "wrong_recipient", "wrong_phase",
+              "expired", "revoked", "superseded", "authority_lost", "duplicate",
+              "irrelevant", "budget_evicted", "server_only"
+            ]
+          }
+        }
+      }
+    },
+    "semanticHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "bindingHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "compilerVersion": {"type": "string", "minLength": 1},
+    "policyVersion": {"type": "string", "minLength": 1},
+    "tokenizerVersion": {"type": "string", "minLength": 1},
+    "toolSchemaHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "modelConfigHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "modelViewBytes": {"type": "integer", "minimum": 0},
+    "estimatedTokens": {"type": "integer", "minimum": 0},
+    "actualTokens": {"type": ["integer", "null"], "minimum": 0},
+    "tokenStatus": {"enum": ["OBSERVED", "ESTIMATED", "NOT_INSTRUMENTED"]},
+    "compileDurationMs": {"type": "number", "minimum": 0},
+    "persistenceStatus": {"enum": ["PRIMARY", "SPOOL", "FAILED"]}
+  }
+}

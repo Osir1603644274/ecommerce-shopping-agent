@@ -67,12 +67,17 @@ RUNTIME_TOOL_CONTRACTS: dict[str, RuntimeToolContract] = {
         ("products", "evidence", "evidenceRefs"),
     ),
     "compare_products": RuntimeToolContract(
-        frozenset({"requiresGuideDecision"}),
+        frozenset({"requiresGuideDecision", "requiresEvidenceComparison"}),
         frozenset({"productIds"}),
         (
             "category", "requirements", "products", "comparisonMatrix",
             "evidence", "evidenceRefs", "hasCompleteMatch", "rankingTrace",
+            "contractVersion", "comparisonMode", "scopeId", "userQuery", "productIds", "candidates", "knowledge", "answerConstraint",
         ),
+    ),
+    "search_product_evidence": RuntimeToolContract(
+        frozenset({"requiresProductEvidence"}), frozenset({"productIds"}),
+        ("productIds", "query", "knowledge"),
     ),
     "search_places": RuntimeToolContract(
         frozenset({"requiresPlaceCandidates"}),

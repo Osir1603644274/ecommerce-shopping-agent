@@ -26,11 +26,20 @@ class FlashSaleCampaignReconciler {
     }
 
     @Scheduled(fixedDelayString = "${local-life.flash-sale.reconcile-delay:PT30S}")
-    void reconcile() {
+    @org.springframework.transaction.annotation.Transactional(isolation=org.springframework.transaction.annotation.Isolation.READ_COMMITTED)
+    public void reconcile() {
         for (FlashSaleCampaign campaign : mapper.findActiveCampaigns()) {
             try {
                 if (!gateway.isReady(campaign.id())) {
-                    gateway.rebuild(campaign, mapper.findBuyerIds(campaign.id()));
+                    campaign = mapper.lockCampaign(campaign.id());
+                    var reservations = mapper.reservations(campaign.id()).stream().collect(
+                            java.util.stream.Collectors.toMap(FlashSaleMapper.Reservation::userId,FlashSaleMapper.Reservation::id));
+                    var restored = new FlashSaleCampaign(campaign.id(),campaign.itemType(),campaign.itemId(),
+                            campaign.title(),campaign.salePriceMinor(),campaign.totalStock(),
+                            Math.max(0,campaign.availableStock()-reservations.size()),
+                            campaign.startsAt(),campaign.endsAt(),campaign.status(),campaign.version(),
+                            campaign.createdAt(),campaign.updatedAt());
+                    gateway.rebuild(restored, mapper.findReservedBuyerIds(campaign.id()),reservations);
                 }
             } catch (RuntimeException exception) {
                 log.warn("秒杀活动 Redis 状态恢复失败: campaignId={}", campaign.id(), exception);

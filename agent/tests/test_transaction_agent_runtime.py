@@ -1,5 +1,6 @@
 import asyncio
 import json
+from dataclasses import replace
 
 import httpx
 
@@ -78,6 +79,67 @@ def _context(message: str) -> TransactionContext:
         candidate_scope_id="scope-1",
         user_message=message,
     )
+
+
+def test_browser_confirmation_id_replay_has_one_effect_and_readonly_receipt(monkeypatch):
+    monkeypatch.setattr(settings, "agent_transaction_enabled", True)
+    store = FakeRedis()
+    monkeypatch.setattr(transactions, "_redis_client", store)
+    effects = []
+    async def backend(context, method, path, **kwargs):
+        if path.endswith("preview"):
+            return {"itemType":"PRODUCT", "itemId":1001, "quantity":1, "payableMinor":100}
+        effects.append((method,path))
+        return {"id":"order-browser","status":"PENDING_PAYMENT"}
+    monkeypatch.setattr(transactions,"_request_backend",backend)
+    async def run():
+        with _bind_authenticated_transaction_context(_context("确认下单"), _issue_transaction_capability()):
+            preview = await preview_order_tool(1001,1)
+            cid=preview.detail["confirmationId"]
+            denied = await execute_confirmed_transaction("create_order","cfm-another-card")
+            assert not denied.ok and not effects
+            first = await execute_confirmed_transaction("create_order",cid)
+            again = await execute_confirmed_transaction("create_order",cid)
+            read = await transactions.confirmation_status_tool("create_order",cid)
+            assert first.ok and again.detail == first.detail and read.detail == first.detail
+            assert effects == [("POST","/api/orders")]
+    asyncio.run(run())
+
+
+def test_browser_confirmation_survives_token_rotation_but_not_owner_change(monkeypatch):
+    monkeypatch.setattr(settings, "agent_transaction_enabled", True)
+    monkeypatch.setattr(transactions, "_redis_client", FakeRedis())
+    effects = []
+    async def backend(context, method, path, **kwargs):
+        if path.endswith("preview"):
+            return {"itemType":"PRODUCT","itemId":1001,"quantity":1,"unitPriceMinor":100,"payableMinor":100}
+        assert kwargs["json_body"]["expectedUnitPriceMinor"] == 100
+        assert kwargs["json_body"]["expectedPayableMinor"] == 100
+        effects.append(context.access_token)
+        return {"id":"order-rotated","status":"PENDING_PAYMENT"}
+    monkeypatch.setattr(transactions, "_request_backend", backend)
+    async def run():
+        original = replace(_context("确认下单"), browser_confirmation=True)
+        with _bind_authenticated_transaction_context(original, _issue_transaction_capability()):
+            preview = await preview_order_tool(1001,1)
+        cid = preview.detail["confirmationId"]
+        other = replace(original, owner_user_id="user-2", access_token="other-owner")
+        with _bind_authenticated_transaction_context(other, _issue_transaction_capability()):
+            assert not (await execute_confirmed_transaction("create_order",cid)).ok
+        assert effects == []
+        rotated = replace(original, access_token="refreshed-access-token")
+        with _bind_authenticated_transaction_context(rotated, _issue_transaction_capability()):
+            first = await execute_confirmed_transaction("create_order",cid)
+            assert first.ok
+        relogin = replace(original, access_token="new-login-token")
+        with _bind_authenticated_transaction_context(relogin, _issue_transaction_capability()):
+            read = await transactions.confirmation_status_tool("create_order",cid)
+            replay = await execute_confirmed_transaction("create_order",cid)
+            assert read.detail == first.detail == replay.detail
+        assert effects == ["refreshed-access-token"]
+        # Non-browser Agent flows retain their original credential binding.
+        assert _context("确认下单").credential_fingerprint != replace(_context("确认下单"), access_token="new").credential_fingerprint
+    asyncio.run(run())
 
 
 def test_server_authenticated_dispatch_mints_private_capability_only_for_operation(monkeypatch):

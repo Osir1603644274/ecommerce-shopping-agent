@@ -18,6 +18,9 @@ public record MessagingProperties(
 ) {
     public MessagingProperties {
         transport = transport == null || transport.isBlank() ? "kafka" : transport;
+        if (enabled && !"kafka".equals(transport)) {
+            throw new IllegalArgumentException("Domain events now require kafka; drain/export the legacy Redis stream before switching");
+        }
         topic = topic == null || topic.isBlank() ? "local-life.domain-events.v1" : topic;
         redisStream = redisStream == null || redisStream.isBlank()
                 ? "stream.domain-events" : redisStream;

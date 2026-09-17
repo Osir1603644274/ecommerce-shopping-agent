@@ -1,6 +1,7 @@
 from pathlib import Path
+from typing import Literal
 
-from pydantic import ValidationInfo, field_validator
+from pydantic import Field, ValidationInfo, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -9,7 +10,13 @@ REPOSITORY_ROOT = AGENT_ROOT.parent
 
 
 class Settings(BaseSettings):
+    review_projection_receipts_path: str = str(AGENT_ROOT / "knowledge_data/runtime/review-projection.sqlite3")
     backend_base_url: str = "http://localhost:8080"
+    backend_observer_enabled: bool = False
+    backend_observer_key: str = ""
+    backend_observer_instances: dict[str,str] = Field(default_factory=dict)
+    catalog_internal_base_urls: list[str] = Field(default_factory=list)
+    catalog_internal_token_file: str = ""
     memory_projection_client_enabled: bool = False
     memory_projection_client_timeout_seconds: float = 2.0
     # Same-origin browser session for the explicit-memory canary. Java JWTs
@@ -22,12 +29,21 @@ class Settings(BaseSettings):
     # Same-origin browser session used only by the opt-in commerce demo.  Java
     # JWTs stay in Redis and are never exposed to browser JavaScript.
     commerce_demo_enabled: bool = False
+    commerce_workspace_cart_enabled: bool = False
+    commerce_workspace_local_offers_enabled: bool = False
+    commerce_workspace_external_catalog_enabled: bool = False
+    commerce_workspace_epoch: str = ""
     commerce_demo_session_ttl_seconds: int = 1800
     commerce_demo_cookie_secure: bool = False
     # This opens only the Java simulator bridge used by the local demo.  It is
     # independent from PAYMENT_SIMULATOR_ENABLED and remains false by default.
     commerce_demo_payment_simulation_enabled: bool = False
     memory_candidate_ttl_seconds: int = 900
+    # Independent opt-in rollout. Neither flag enables the global memory BFF.
+    memory_natural_candidates_enabled: bool = False
+    memory_durable_snapshot_enabled: bool = False
+    memory_candidate_reject_cooldown_seconds: int = 604800
+    memory_candidate_snooze_seconds: int = 86400
     # Server-owned receipt for the exact product-card order published to one
     # browser session.  It is deliberately short-lived and is validated again
     # against the current TaskState/CandidateScope on every reference turn.
@@ -43,6 +59,9 @@ class Settings(BaseSettings):
     )
     qdrant_url: str = "http://localhost:6333"
     ecommerce_guide_enabled: bool = True
+    product_knowledge_enabled: bool = False
+    product_knowledge_mcp_url: str = "http://127.0.0.1:18791/mcp"
+    product_knowledge_timeout_seconds: float = Field(default=5.0, gt=0, le=30)
     agent_transaction_enabled: bool = False
     transaction_confirmation_ttl_seconds: int = 300
     # Once an explicit confirmation has been durably recorded, retain the
@@ -61,9 +80,34 @@ class Settings(BaseSettings):
     product_title_reranker_enabled: bool = False
     product_title_reranker_candidate_limit: int = 20
     product_title_reranker_timeout_seconds: float = 6.0
+    # Public-corpus experiment uses an explicit Agent entry route and keeps
+    # evidence document IDs outside the commerce CandidateScope.
+    catalog_evidence_enabled: bool = False
+    catalog_evidence_data_root: str = ""
+    catalog_evidence_run_id: str = ""
+    catalog_evidence_manifest_sha256: str = ""
+    catalog_evidence_source: Literal["kuaisearch", "multicpr"] = "kuaisearch"
+    catalog_evidence_timeout_seconds: float = Field(default=60.0, gt=0, le=300)
+    catalog_evidence_answer_max_tokens: int = Field(default=512, ge=64, le=2048)
+    catalog_workspace_enabled: bool = False
+    catalog_workspace_fast_enabled: bool = False
+    catalog_workspace_reuse_model_client: bool = False
+    catalog_workspace_fast_index_version: int = 1
+    catalog_workspace_fast_index_dir: str = "D:/agent-datasets/catalog-latency-20260913-v1"
+    catalog_workspace_model_path: str = "D:/agent-datasets/search-closure-v1/training-preparation/runs/pairwise-lora-v1/checkpoints/epoch-2"
+    catalog_workspace_metadata_path: str = "D:/agent-datasets/integration-repair-20260913-v1/metadata"
+    catalog_workspace_timeout_seconds: float = Field(default=240, gt=0, le=300)
+    # Explicit distributed deployment only; empty URL retains the accepted local worker.
+    catalog_search_service_url: str = ""
+    catalog_search_token_file: str = ""
+    catalog_search_max_inflight: int = Field(default=4, ge=1, le=16)
+    product_cross_encoder_enabled: bool = False
+    product_cross_encoder_model_sha256: str = ""
+    product_cross_encoder_timeout_seconds: float = Field(default=6.0, gt=0, le=30)
     # Synthetic reference prices are a derived sidecar, never verified Java
     # snapshot prices.  Budget use requires the explicit audit-visible policy.
     used_phone_synthetic_price_policy: str = "disabled"
+    product_legacy_catalog_version: str = ""
     used_phone_synthetic_price_dir: str = (
         "data/derived/ecommerce/used_phone_synthetic_reference_price_v1"
     )
@@ -114,6 +158,8 @@ class Settings(BaseSettings):
     # ContextPack is the production default. Legacy remains an explicit rollback
     # alias and must never run inside the unified Harness.
     agent_context_mode: str = "context_pack"
+    # Development-only repair gate; does not switch the production strategy.
+    context_history_v1_enabled: bool = False
     # Unified Harness is the production path. Legacy is an explicit rollback
     # mode only; automatic per-request fallback is fail-closed by default.
     agent_orchestrator_mode: str = "unified"
@@ -136,6 +182,8 @@ class Settings(BaseSettings):
     # A live ReAct answer-model call must leave enough request budget for a
     # Validator-only server fallback when the provider stalls.
     agent_react_final_answer_timeout_seconds: float = 30.0
+    agent_final_answer_thinking: Literal['provider_default','disabled'] = 'provider_default'
+    agent_final_answer_max_tokens: int | None = Field(default=None, ge=256, le=8192)
     agent_executor_lease_seconds: int = 60
     # DeepSeek V4 thinking-mode extraction can legitimately consume ~20s
     # before the bounded Harness begins. Keep enough budget for one such
@@ -204,6 +252,10 @@ class Settings(BaseSettings):
     deepseek_api_key: str | None = None
     deepseek_base_url: str = "https://api.deepseek.com"
     deepseek_model: str = "deepseek-chat"
+    # Dedicated extraction budget; a truncated tool call must never be applied.
+    task_state_extraction_max_tokens: int = Field(default=4096, ge=128, le=16384)
+    # Opt-in only: requires the official /beta endpoint, never silently reroutes.
+    task_state_extraction_strict_enabled: bool = False
 
     @field_validator("rag_model_cache_dir", "rag_data_dir", "memory_catalog_values_path")
     @classmethod

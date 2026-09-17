@@ -2619,7 +2619,7 @@ class RunAgentTests(unittest.IsolatedAsyncioTestCase):
             )
 
         self.assertEqual(create_mock.await_count, 1)
-        self.assertNotIn("tool_choice", create_mock.await_args.kwargs)
+        self.assertEqual(create_mock.await_args.kwargs['tool_choice']['function']['name'], 'update_task_state')
         self.assertEqual(
             {item["key"] for item in updated.domain_state["shoppingGuide"]["requirements"]},
             {"os", "battery_health", "motherboard_repair"},
@@ -7065,7 +7065,7 @@ class RunAgentTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(ctx.exception.field_path, "arguments")
 
         # End-to-end: a missing update_task_state tool call is a safe stop with
-        # zero persistence, zero repair calls, and never auto-readies.
+        # zero persistence, one bounded format retry, and never auto-readies.
         task_state_store._client = FakeRedis()
         task_state_store._task_locks.clear()
         state = await create_task_state(
@@ -7076,7 +7076,7 @@ class RunAgentTests(unittest.IsolatedAsyncioTestCase):
             )
         )
         create_mock = AsyncMock(
-            side_effect=[_make_response(content="READY_TO_ANSWER", tool_calls=None)]
+            side_effect=[_make_response(content="READY_TO_ANSWER", tool_calls=None)] * 2
         )
         with patch("app.llm.get_client", return_value=_fake_client(create_mock)), patch(
             "app.llm._persist_task_patch", new=AsyncMock(),
@@ -7098,7 +7098,7 @@ class RunAgentTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(summary.failure_code, "task_state_update_missing")
         call_tool_mock.assert_not_awaited()
         persist_mock.assert_not_awaited()
-        self.assertEqual(create_mock.await_count, 1)
+        self.assertEqual(create_mock.await_count, 2)
         latest = await get_task_state(state.task_id)
         self.assertNotEqual(latest.status, "ready")
 

@@ -1,0 +1,7 @@
+.catalog-architecture { border: 1px solid #e6e9df; border-radius: 14px; padding: 18px; margin: 16px 0; background: #fcfdf9; }
+.catalog-architecture h4 { margin: 0 0 8px; color: #304738; }
+.catalog-architecture p { font-size: 14px; line-height: 1.65; }
+.catalog-architecture-diagram svg { display: block; width: 100%; max-width: 580px; height: auto; max-height: 560px; margin: 12px auto; }
+.catalog-architecture-legend { color: #647260; }
+.flow-detail .flow-technical { margin-top: 16px; overflow-wrap: anywhere; }
+.flow-detail .flow-technical pre { white-space: pre-wrap; }

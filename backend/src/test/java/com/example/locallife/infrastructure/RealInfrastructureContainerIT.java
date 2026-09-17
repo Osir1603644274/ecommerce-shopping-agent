@@ -75,7 +75,7 @@ class RealInfrastructureContainerIT {
     static final MySQLContainer<?> MYSQL = new MySQLContainer<>(MYSQL_IMAGE)
             .withDatabaseName("local_life_test")
             .withUsername("local_life")
-            .withPassword("local_life_password")
+            .withPassword("public-demo-secret-2-change-before-use")
             .withCommand("--log-bin-trust-function-creators=1")
             .withStartupTimeout(Duration.ofMinutes(2));
 

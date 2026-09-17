@@ -74,7 +74,7 @@ def main() -> None:
         "--mysql-url",
         default=os.getenv(
             "PRODUCT_MYSQL_URL",
-            "mysql://local_life:local_life_password@localhost:13306/local_life",
+            "mysql://local_life:public-demo-secret-2-change-before-use@localhost:13306/local_life",
         ),
     )
     parser.add_argument("--apply", action="store_true")

@@ -14,8 +14,11 @@ from ..domains.ecommerce.transactions import (
     TransactionContext,
     _bind_authenticated_transaction_context,
     execute_confirmed_transaction,
+    confirmation_status_tool,
     preview_order_tool,
     preview_payment_tool,
+    preview_cancel_order_tool,
+    preview_refund_tool,
     query_order_status_tool,
 )
 from ..schemas import ToolTrace
@@ -31,6 +34,7 @@ class TransactionRequestContext:
     task_revision: int | None
     candidate_scope_id: str | None
     user_message: str
+    browser_confirmation: bool = False
 
 
 @dataclass(frozen=True, slots=True)
@@ -61,6 +65,7 @@ def bind_transaction_request(
     task_revision: int | None,
     candidate_scope_id: str | None,
     user_message: str,
+    browser_confirmation: bool = False,
 ) -> Iterator[TransactionRequestContext | None]:
     """Carry untrusted request material without granting transaction authority."""
 
@@ -73,6 +78,7 @@ def bind_transaction_request(
             task_revision=task_revision,
             candidate_scope_id=candidate_scope_id,
             user_message=user_message,
+            browser_confirmation=browser_confirmation,
         )
     token = _REQUEST.set(request)
     try:
@@ -96,17 +102,22 @@ def _bearer(authorization: str | None) -> str:
 
 async def _authenticate(authorization: str | None) -> _AuthenticatedOwner:
     token = _bearer(authorization)
+    from ..backend_observer import observer_headers, observe_response, begin_call
+    timing = begin_call()
     try:
-        async with httpx.AsyncClient(timeout=2.0) as client:
+        from ..java_http import java_connection
+        async with java_connection(timeout=2.0) as client:
             response = await client.get(
                 f"{settings.backend_base_url}/api/identity/me",
-                headers={"Authorization": f"Bearer {token}"},
+                headers={"Authorization": f"Bearer {token}", **observer_headers()},
             )
     except httpx.HTTPError as exc:
+        observe_response(None, 'GET', '/api/identity/me', timing)
         raise _AuthenticationFailure(
             TRANSACTION_AUTH_PROVIDER_UNAVAILABLE,
             "交易身份服务暂时不可用。",
         ) from exc
+    observe_response(response, "GET", "/api/identity/me", timing)
     if response.status_code in {401, 403}:
         raise _AuthenticationFailure(
             "transaction_auth_rejected", "交易身份验证失败。"
@@ -180,6 +191,7 @@ async def _dispatch(tool: str, operation, *, require_transaction_enabled: bool =
         task_revision=request.task_revision,
         candidate_scope_id=request.candidate_scope_id,
         user_message=request.user_message,
+        browser_confirmation=request.browser_confirmation,
     )
     capability = _issue_transaction_capability()
     with _bind_authenticated_transaction_context(context, capability):
@@ -193,11 +205,15 @@ async def dispatch_order_preview(product_id: int, quantity: int, user_coupon_id:
     )
 
 
-async def dispatch_confirmed_handoff(action: TransactionAction) -> ToolTrace:
+async def dispatch_confirmed_handoff(action: TransactionAction, confirmation_id: str | None = None) -> ToolTrace:
     return await _dispatch(
         action,
-        lambda: execute_confirmed_transaction(action),
+        lambda: execute_confirmed_transaction(action, confirmation_id),
     )
+
+
+async def dispatch_confirmation_status(action: TransactionAction, confirmation_id: str) -> ToolTrace:
+    return await _dispatch("transaction_status", lambda: confirmation_status_tool(action, confirmation_id))
 
 
 async def dispatch_payment_preview(order_id: str) -> ToolTrace:
@@ -213,6 +229,14 @@ async def dispatch_order_status(order_reference: str) -> ToolTrace:
         lambda: query_order_status_tool(order_reference),
         require_transaction_enabled=False,
     )
+
+
+async def dispatch_cancel_preview(order_id: str) -> ToolTrace:
+    return await _dispatch("preview_cancel_order", lambda: preview_cancel_order_tool(order_id))
+
+
+async def dispatch_refund_preview(order_id: str, items: list[dict], reason: str) -> ToolTrace:
+    return await _dispatch("preview_refund", lambda: preview_refund_tool(order_id, items, reason))
 
 
 __all__ = [

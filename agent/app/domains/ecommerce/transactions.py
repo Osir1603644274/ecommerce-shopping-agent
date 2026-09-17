@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import hashlib
 import json
 import logging
@@ -33,18 +34,21 @@ logger = logging.getLogger(__name__)
 # provider is wired in a later batch.
 TRANSACTION_AUTH_PROVIDER_UNAVAILABLE = "transaction_auth_provider_unavailable"
 
-TransactionAction = Literal["create_order", "cancel_order", "create_payment"]
+TransactionAction = Literal["create_order", "cancel_order", "create_payment", "create_refund"]
 _CONFIRMATION_PHRASES: dict[TransactionAction, frozenset[str]] = {
+    "create_refund": frozenset({"确认申请退款"}),
     "create_order": frozenset({"确认下单", "我确认下单", "确认创建订单"}),
     "cancel_order": frozenset({"确认取消订单", "我确认取消订单"}),
     "create_payment": frozenset({"确认发起支付", "我确认发起支付", "确认支付"}),
 }
 _ACTION_TOOL: dict[TransactionAction, str] = {
+    "create_refund": "create_refund",
     "create_order": "create_order",
     "cancel_order": "cancel_order",
     "create_payment": "create_payment",
 }
 _ACTION_LABEL: dict[TransactionAction, str] = {
+    "create_refund": "申请退款",
     "create_order": "创建订单",
     "cancel_order": "取消订单",
     "create_payment": "发起支付",
@@ -69,9 +73,15 @@ class TransactionContext:
     task_revision: int | None
     candidate_scope_id: str | None
     user_message: str
+    browser_confirmation: bool = False
 
     @property
     def credential_fingerprint(self) -> str:
+        if self.browser_confirmation:
+            # Only the authenticated, server-only browser dispatcher sets this.
+            # JWT rotation must not orphan an owner's immutable recovery command.
+            binding = json.dumps(["browser-confirmation-v1", self.owner_user_id, self.session_id])
+            return hashlib.sha256(binding.encode("utf-8")).hexdigest()
         return hashlib.sha256(self.access_token.encode("utf-8")).hexdigest()
 
 
@@ -320,6 +330,7 @@ async def _save_proposal(
 async def _consume_proposal(
     context: TransactionContext,
     action: TransactionAction,
+    confirmation_id: str | None = None,
 ) -> TransactionProposal | None:
     """Durably confirm, but do not delete, the immutable command.
 
@@ -340,7 +351,8 @@ async def _consume_proposal(
         logger.error("Discarded malformed transaction proposal")
         return None
     if (
-        proposal.owner_user_id != context.owner_user_id
+        (confirmation_id is not None and proposal.confirmation_id != confirmation_id)
+        or proposal.owner_user_id != context.owner_user_id
         or proposal.session_id != context.session_id
         or proposal.task_id != context.task_id
         or proposal.task_revision != context.task_revision
@@ -454,15 +466,24 @@ async def _request_backend(
     idempotency_key: str | None = None,
 ) -> dict[str, Any]:
     headers = _backend_headers(context)
+    from ...backend_observer import observer_headers, observe_response, begin_call
+    headers.update(observer_headers())
     if idempotency_key is not None:
         headers["Idempotency-Key"] = idempotency_key
-    async with httpx.AsyncClient(timeout=5.0) as client:
-        response = await client.request(
-            method,
-            f"{settings.backend_base_url}{path}",
-            headers=headers,
-            json=json_body,
-        )
+    timing = begin_call(json_body)
+    try:
+        from ...java_http import java_connection
+        async with java_connection(timeout=5.0) as client:
+            response = await client.request(
+                method,
+                f"{settings.backend_base_url}{path}",
+                headers=headers,
+                json=json_body,
+            )
+    except httpx.HTTPError:
+        observe_response(None, method, path, timing)
+        raise
+    observe_response(response, method, path, timing)
     if response.is_error:
         raise BackendTransactionError(
             response.status_code,
@@ -573,22 +594,21 @@ async def preview_order_tool(
         "userCouponId": user_coupon_id,
     }
     try:
-        preview = await _request_backend(
-            context,
-            "POST",
-            "/api/orders/preview",
-            json_body=payload,
-        )
+        preview = await _read_order_preview(context, payload)
         if (
             preview.get("itemType") != "PRODUCT"
             or preview.get("itemId") != product_id
             or preview.get("quantity") != quantity
         ):
             raise BackendTransactionError(502, "订单预览与请求参数不一致。")
+        if (type(preview.get("unitPriceMinor")) is int
+                and type(preview.get("payableMinor")) is int):
+            payload = {**payload, "expectedUnitPriceMinor": preview["unitPriceMinor"],
+                       "expectedPayableMinor": preview["payableMinor"]}
         proposal = await _save_proposal(
             context,
             action="create_order",
-            payload=payload,
+            payload={**payload, "cartCheckout": True} if context.browser_confirmation and settings.commerce_workspace_cart_enabled else payload,
             preview=preview,
             idempotency_key=f"agent-{secrets.token_urlsafe(24)}",
         )
@@ -623,6 +643,27 @@ async def preview_order_tool(
         )
 
 
+async def _read_order_preview(context: TransactionContext, payload: dict[str, Any]) -> dict[str, Any]:
+    """Retry this explicitly read-only Java endpoint once, never a transaction write.
+
+    OrderService.preview only quotes current price/discount/stock. The Agent
+    saves ONE new confirmation proposal after a successful, validated result.
+    _request_backend still records each real attempt for backend diagnostics.
+    """
+    for attempt in range(2):
+        try:
+            return await _request_backend(context, "POST", "/api/orders/preview", json_body=payload)
+        except BackendTransactionError as exc:
+            if attempt or not exc.retryable:
+                raise
+        except (httpx.TimeoutException, httpx.NetworkError):
+            if attempt:
+                raise
+        logger.warning("Read-only order preview transient failure; retrying once")
+        await asyncio.sleep(0.15)
+    raise AssertionError("unreachable")
+
+
 async def preview_cancel_order_tool(order_id: str) -> ToolTrace:
     return await _preview_existing_order(
         tool="preview_cancel_order",
@@ -630,6 +671,29 @@ async def preview_cancel_order_tool(order_id: str) -> ToolTrace:
         action="cancel_order",
         phrase="确认取消订单",
     )
+
+
+async def preview_refund_tool(order_id: str, items: list[dict], reason: str) -> ToolTrace:
+    required = _require_context("preview_refund")
+    if isinstance(required, ToolTrace):
+        return required
+    if not required.browser_confirmation:
+        return _error("preview_refund", "browser_confirmation_required", "请在本人订单中选择退款明细并确认。")
+    try:
+        preview = await _request_backend(required, "POST", f"/api/payments/orders/{order_id}/partial-refunds/preview",
+                                         json_body={"items": items, "reason": reason})
+        if type(preview.get("amountMinor")) is not int or preview["amountMinor"] < 0:
+            raise BackendTransactionError(502, "退款预览金额无效")
+        order = await _request_backend(required, "GET", f"/api/orders/{order_id}")
+        names = {i['itemId']: i['titleSnapshot'] for i in order.get('items', [])}
+        refund_items = [{**i, 'title': names.get(i['itemId'], str(i['itemId']))} for i in preview['items']]
+        proposal = await _save_proposal(required, action="create_refund",
+            payload={"orderId": order_id, "items": items, "reason": reason, "expectedAmountMinor": preview["amountMinor"]},
+            preview={**preview, "refundItems": refund_items, "reason": reason, "payableMinor": preview["amountMinor"], "title": "按明细申请退款"},
+            idempotency_key=f"refund-{secrets.token_urlsafe(24)}")
+        return ToolTrace(tool="preview_refund", ok=True, detail=_confirmation_detail(proposal, phrase="确认申请退款"))
+    except BackendTransactionError as exc:
+        return _error("preview_refund", "refund_preview_rejected", exc.safe_message)
 
 
 async def preview_payment_tool(order_id: str) -> ToolTrace:
@@ -703,6 +767,7 @@ async def _preview_existing_order(
 
 async def execute_confirmed_transaction(
     expected_action: TransactionAction | None = None,
+    confirmation_id: str | None = None,
 ) -> ToolTrace:
     start = time.perf_counter()
     tool = _ACTION_TOOL.get(expected_action or "create_order", "create_order")
@@ -718,7 +783,11 @@ async def execute_confirmed_transaction(
             "确认短语与待执行交易不一致，未执行写入。",
         ))
     try:
-        proposal = await _consume_proposal(context, action)
+        if confirmation_id is not None:
+            cached = await _get_redis_client().get(_receipt_key(context, action, confirmation_id))
+            if cached:
+                return _finish(start, ToolTrace(tool=tool, ok=True, detail=json.loads(cached)))
+        proposal = await _consume_proposal(context, action, confirmation_id)
         if proposal is None:
             return _finish(start, _error(
                 tool,
@@ -740,6 +809,17 @@ async def execute_confirmed_transaction(
                 "transaction_rejected",
                 exc.safe_message,
             ))
+        receipt = {
+            "action": action,
+            "confirmationId": proposal.confirmation_id,
+            "result": result,
+        }
+        # Persist the browser replay receipt BEFORE removing the recovery command.
+        if confirmation_id is not None:
+            await _get_redis_client().set(
+                _receipt_key(context, action, proposal.confirmation_id),
+                json.dumps(receipt, ensure_ascii=False), ex=86400,
+            )
         await _delete_proposal_if_same(context, proposal)
         return _finish(start, ToolTrace(
             tool=tool,
@@ -755,7 +835,7 @@ async def execute_confirmed_transaction(
         return _finish(start, _error(
             tool,
             "confirmation_store_unavailable",
-            "交易确认存储暂时不可用，未执行写入。",
+            "交易确认存储暂时不可用，结果可能尚未记录，请回查原交易。",
         ))
     except (httpx.HTTPError, ValueError, TypeError) as exc:
         logger.warning("%s unavailable: %s", tool, type(exc).__name__)
@@ -766,11 +846,58 @@ async def execute_confirmed_transaction(
         ))
 
 
+def _receipt_key(context: TransactionContext, action: TransactionAction, confirmation_id: str) -> str:
+    return _proposal_key(context, action) + ":receipt:" + _session_digest(confirmation_id)
+
+
+async def confirmation_status_tool(action: TransactionAction, confirmation_id: str) -> ToolTrace:
+    """Read-only recovery; a browser timeout must never create a new command."""
+    required = _require_context("query_order_status")
+    if isinstance(required, ToolTrace):
+        return required
+    context = required
+    cached = await _get_redis_client().get(_receipt_key(context, action, confirmation_id))
+    if cached:
+        return ToolTrace(tool="transaction_status", ok=True, detail=json.loads(cached))
+    raw = await _get_redis_client().get(_proposal_key(context, action))
+    if not raw:
+        return _error("transaction_status", "confirmation_missing_or_expired", "确认已过期，请先查看我的订单。")
+    proposal = TransactionProposal.model_validate_json(raw)
+    if (proposal.confirmation_id != confirmation_id
+            or proposal.owner_user_id != context.owner_user_id
+            or proposal.session_id != context.session_id
+            or proposal.task_id != context.task_id
+            or proposal.task_revision != context.task_revision
+            or proposal.candidate_scope_id != context.candidate_scope_id
+            or proposal.action != action
+            or proposal.credential_fingerprint != context.credential_fingerprint
+            or proposal.command_digest != _proposal_command_digest(proposal)):
+        return _error("transaction_status", "confirmation_mismatch", "确认信息已更新。")
+    if proposal.confirmed_at is None:
+        return ToolTrace(tool="transaction_status", ok=True, detail={"status": "awaiting_confirmation"})
+    try:
+        result = await _query_proposal_effect(context, proposal)
+    except (BackendTransactionError, httpx.HTTPError, ValueError, TypeError):
+        result = None
+    if result is None:
+        return ToolTrace(tool="transaction_status", ok=True, detail={"status": "unknown"})
+    receipt = {"action": action, "confirmationId": confirmation_id, "result": result}
+    await _get_redis_client().set(_receipt_key(context, action, confirmation_id),
+                                 json.dumps(receipt, ensure_ascii=False), ex=86400)
+    return ToolTrace(tool="transaction_status", ok=True, detail=receipt)
+
+
 async def _execute_proposal(
     context: TransactionContext,
     proposal: TransactionProposal,
 ) -> dict[str, Any]:
     if proposal.action == "create_order":
+        if proposal.payload.get("cartCheckout"):
+            p = proposal.payload
+            return await _request_backend(context, "POST", "/api/orders/cart",
+                json_body={"items": [{k: p[k] for k in ("itemType", "itemId", "quantity", "expectedUnitPriceMinor")}],
+                           "userCouponId": p.get("userCouponId"), "expectedPayableMinor": p["expectedPayableMinor"]},
+                idempotency_key=proposal.idempotency_key)
         return await _request_backend(
             context,
             "POST",
@@ -779,6 +906,10 @@ async def _execute_proposal(
             idempotency_key=proposal.idempotency_key,
         )
     order_id = proposal.payload["orderId"]
+    if proposal.action == "create_refund":
+        return await _request_backend(context, "POST", f"/api/payments/orders/{order_id}/partial-refunds",
+            json_body={k: v for k, v in proposal.payload.items() if k != "orderId"},
+            idempotency_key=proposal.idempotency_key)
     if proposal.action == "cancel_order":
         return await _request_backend(
             context,
@@ -815,6 +946,9 @@ async def _query_proposal_effect(
                 + quote(proposal.idempotency_key, safe=""),
             )
         order_id = str(proposal.payload["orderId"])
+        if proposal.action == "create_refund":
+            return await _request_backend(context, "GET",
+                f"/api/payments/orders/{quote(order_id,safe='')}/partial-refunds/by-key/{quote(proposal.idempotency_key,safe='')}")
         if proposal.action == "create_payment":
             return await _request_backend(
                 context,
@@ -834,6 +968,7 @@ async def _query_proposal_effect(
         raise BackendTransactionError(409, "订单当前状态不允许取消。")
     except BackendTransactionError as exc:
         if exc.status_code == 404 and proposal.action in {
+            "create_refund",
             "create_order",
             "create_payment",
         }:
@@ -921,6 +1056,8 @@ def render_transaction_result(trace: ToolTrace) -> str:
             f"订单 {result.get('orderNo', result.get('id', ''))} 已取消，"
             "库存和未使用优惠券将按后端事务规则释放。"
         )
+    if action == "create_refund":
+        return f"退款申请已创建，金额 {result.get('amountMinor', 0) / 100:.2f} 元；以退款回执为准。"
     return (
         f"支付单已创建：支付号 {result.get('paymentNo', '未知')}，"
         f"状态 {result.get('status', '未知')}。"

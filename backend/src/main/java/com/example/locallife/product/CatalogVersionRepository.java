@@ -29,6 +29,13 @@ interface CatalogStateMapper {
         """)
     CatalogState findLatest();
 
+    @Select("""
+        SELECT product_id FROM catalog_version_member
+        WHERE catalog_version=#{version} AND product_id>#{afterId}
+        ORDER BY product_id LIMIT #{limit}
+        """)
+    List<Long> findMemberIds(@Param("version") String version,@Param("afterId") long afterId,@Param("limit") int limit);
+
     @Insert("""
         INSERT INTO catalog_state (catalog_version, product_count, content_hash)
         VALUES (#{catalogVersion}, #{productCount}, #{contentHash})
@@ -84,13 +91,12 @@ class CatalogVersionRepository {
             return new CatalogPageResponse(
                 catalogVersion, 0, "", List.of(), null, false);
         }
-        List<Product> products = productMapper.findByIdAfter(
+        List<Long> ids = stateMapper.findMemberIds(catalogVersion,
             afterId != null ? afterId : 0L, limit + 1);
-        boolean hasMore = products.size() > limit;
+        boolean hasMore = ids.size() > limit;
         if (hasMore) {
-            products = products.subList(0, limit);
+            ids = ids.subList(0, limit);
         }
-        List<Long> ids = products.stream().map(Product::id).toList();
         Long nextAfter = ids.isEmpty() ? null : ids.get(ids.size() - 1);
         return new CatalogPageResponse(
             catalogVersion, state.productCount(), state.contentHash(),

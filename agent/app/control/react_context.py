@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from collections.abc import Iterable
 from typing import Any, Literal
 
@@ -22,6 +23,7 @@ from ..domains.ecommerce.models import (
     compiled_shopping_requirements,
 )
 from ..task_state import TaskState
+from ..settings import settings
 from .react_actions import ActionKind, ActionOutcome
 
 
@@ -110,7 +112,7 @@ class DecisionObservationSummary(_FrozenView):
     evidence_gap_keys: list[str] = Field(default_factory=list, alias="evidenceGapKeys")
     stale_candidate_scope: bool = Field(default=False, alias="staleCandidateScope")
     adaptive_trigger: Literal[
-        "zero_result", "unsupported_evidence", "stale_reference"
+        "zero_result", "unsupported_evidence", "stale_reference", "bounded_action_choice"
     ] | None = Field(default=None, alias="adaptiveTrigger")
 
 
@@ -190,6 +192,8 @@ class DecisionContextView(_FrozenView):
     )
     answer_context_ref: str | None = Field(default=None, alias="answerContextRef")
     last_outcome: dict[str, Any] | None = Field(default=None, alias="lastOutcome")
+    long_term_memory: list[dict[str, str]] = Field(
+        default_factory=list, alias="longTermMemory", max_length=8)
     decision_view_hash: str = Field(alias="decisionViewHash", min_length=64, max_length=64)
 
 
@@ -320,12 +324,30 @@ def _validation_evidence_summary(state: TaskState) -> dict[str, Any]:
     return result
 
 
+def _explicit_current_search_refresh(user_message: str) -> bool:
+    """Narrow positive imperative, never historical/conditional/negated text.
+
+    This selects an existing read-only tool, not product IDs or new filters.
+    Uncovered language remains with the existing semantic decision path.
+    """
+    if not settings.context_history_v1_enabled:
+        return False
+    for clause in re.split(r"[，,。；;！!？?\n]", user_message):
+        text = re.sub(r"\s+", "", clause)
+        if re.search(r"不|别|无需|禁止|如果|若|假如|以后|之前|上次|曾经|记录|解释|[‘’“”\"']", text):
+            continue
+        if re.match(r"^(?:请|麻烦)?(?:现在|本轮)?(?:先)?(?:按[^，。；]{1,40}?)?(?:重新检索|重新搜索|重搜)", text):
+            return True
+    return False
+
+
 def build_decision_context_view(
     state: TaskState,
     *,
     user_message: str,
     allowed_tool_names: Iterable[str],
     last_outcome: ActionOutcome | None = None,
+    memory_run_binding: Any | None = None,
 ) -> DecisionContextView:
     """Project one revision-bound, hash-bound observation for the decider."""
 
@@ -391,6 +413,18 @@ def build_decision_context_view(
     bound_comparison = (
         extraction_reason == "bound_comparison" and comparison_bound
     )
+    compound = state.domain_state.get("compoundComparison")
+    if (
+        settings.context_history_v1_enabled and comparison_bound and current_scope is not None
+        and isinstance(compound, dict) and compound.get("status") == "ready"
+        and compound.get("kind") == "compare_first_two" and compound.get("taskId") == state.task_id
+        and compound.get("sourcePlanId") == current_scope.source_plan_id
+        and compound.get("productIds") == compared_ids
+    ):
+        bound_comparison = True
+        # Search success is only the first half of this server-bound request.
+        # Older comparison receipts cannot prematurely authorize its answer.
+        answer_ref = None
     presentation_only = bool(
         answer_ref is not None
         and any(cue in user_message for cue in _PRESENTATION_ONLY_CUES)
@@ -398,11 +432,22 @@ def build_decision_context_view(
     scope_answer_requested = bool(
         answer_ref is not None
         and (
-            extraction_reason == "complete_controlled_coverage"
+            extraction_reason in {"complete_controlled_coverage", "validated_scope_answer"}
             or capability_research_requested
             or any(cue in user_message for cue in _SCOPE_ANSWER_CUES)
         )
     )
+    # Retained validation proves old facts, not execution of a new request.
+    # Only the first action of this runtime turn is constrained; an actual
+    # outcome then takes the normal success/failure/clarification path.
+    fresh_search_required = bool(
+        last_outcome is None and state.status == "ready"
+        and not state.pending_questions and not state.unknowns
+        and not unsupported_capability_evidence and not unbound_negative_target
+        and _explicit_current_search_refresh(user_message)
+    )
+    if fresh_search_required:
+        bound_comparison = presentation_only = scope_answer_requested = False
     references_old_scope = any(
         cue in user_message for cue in _STALE_SCOPE_REFERENCE_CUES
     )
@@ -475,6 +520,8 @@ def build_decision_context_view(
     ):
         eligible_tools.add("rerank_products_in_scope")
     tool_names: list[str] = []
+    if fresh_search_required:
+        eligible_tools = {"search_products"}
     for raw_name in allowed_tool_names:
         name = str(raw_name)
         if (
@@ -511,6 +558,7 @@ def build_decision_context_view(
             ))
     if (
         (answer_ref is not None or boundary_answer_ref is not None)
+        and not fresh_search_required
         and adaptive_trigger != "stale_reference"
         and not terminal_nonretryable_outcome
     ):
@@ -589,6 +637,24 @@ def build_decision_context_view(
                 else "no_safe_action"
             ),
         ))
+    # A validated model extraction can leave several safe actions without a
+    # deterministic routing signal. Let the decider select a published option;
+    # never treat absence of a keyword rule as a reason to stop a ready task.
+    # This does not broaden tools/arguments, bypass pending questions, revive
+    # stale evidence, or retry a failed action.
+    if (
+        adaptive_trigger is None
+        and last_outcome is None
+        and state.status == "ready"
+        and not unknowns and not pending_questions
+        and current_scope is not None and answer_ref is not None
+        and validation_summary.get("validationOutcome") == "passed"
+        and isinstance(extraction, dict) and extraction.get("executionKind") == "model"
+        and not any((fresh_search_required, bound_comparison, presentation_only, scope_answer_requested,
+                     broad_catalog_discovery, "rerank_products_in_scope" in eligible_tools))
+        and len(options) > 1
+    ):
+        adaptive_trigger = "bounded_action_choice"
     observation_summary = DecisionObservationSummary.model_validate({
         **validation_summary,
         "evidenceGapKeys": (
@@ -631,6 +697,7 @@ def build_decision_context_view(
             "staleScopeReference": stale_scope_reference,
             "comparisonBound": comparison_bound,
             "boundComparison": bound_comparison,
+            "freshSearchRequired": fresh_search_required,
             "rerankRequested": "rerank_products_in_scope" in eligible_tools,
             "validatedEvidenceAvailable": answer_ref is not None,
             "unboundNegativeTarget": unbound_negative_target,
@@ -655,6 +722,20 @@ def build_decision_context_view(
             else None
         ),
     }
+    if memory_run_binding is not None:
+        from ..memory.v3_runtime import MemoryRunBinding
+        from ..domains.ecommerce.shopping_task_state_v2 import canonical_requirement_key
+        if type(memory_run_binding) is not MemoryRunBinding:
+            raise ValueError("unissued decision memory binding")
+        memory = memory_run_binding.payload_for_phase("planner")
+        if memory and guide is not None and guide.category == memory_run_binding.category_id:
+            overridden = {canonical_requirement_key(item["key"]) for item in requirements
+                          if type(item.get("key")) is str}
+            if guide.brand_avoidances:
+                overridden.add("brand")
+            channel = [item for item in memory["preferences"] if item["attributeKey"] not in overridden]
+            if channel:
+                payload["longTermMemory"] = channel
     canonical = json.dumps(
         payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")
     )

@@ -1,0 +1,8 @@
+{
+  "IdentityController.me": {
+    "sha256": "4309375CDE154C4156C97F6AE5BE693B2ACFDEA968B4A8DA8E69DBCBF6B54EF5",
+    "line": 15,
+    "file": "backend/src/main/java/com/example/locallife/identity/IdentityController.java",
+    "snippet": "15:     @GetMapping(\"/me\")\n16:     public ApiResponse<AuthenticatedIdentityResponse> me(Authentication authentication) {\n17:         List<String> roles = authentication.getAuthorities().stream()\n18:                 .map(authority -> authority.getAuthority())\n19:                 .filter(value -> value.startsWith(\"ROLE_\"))\n20:                 .map(value -> value.substring(\"ROLE_\".length()))\n21:                 .sorted()\n22:                 .toList();\n23:         return ApiResponse.ok(new AuthenticatedIdentityResponse(authentication.getName(), roles));\n24:     }"
+  }
+}

@@ -32,7 +32,10 @@ class FlashSaleServiceTests {
         Clock clock = Clock.fixed(Instant.parse("2026-07-30T04:00:00Z"), ZoneOffset.UTC);
         FlashSaleProperties properties = new FlashSaleProperties(
                 true, "stream.flash", "group", Duration.ofMinutes(1), 8);
-        service = new FlashSaleService(mapper, gateway, properties, clock);
+        FlashSaleRequestStore requests = mock(FlashSaleRequestStore.class);
+        when(requests.accept(anyString(),anyLong(),anyString(),anyLong()))
+                .thenAnswer(call -> call.getArgument(0));
+        service = new FlashSaleService(mapper, gateway, properties, requests, clock);
         campaign = new FlashSaleCampaign(
                 1L, "PRODUCT", 1001L, "手机秒杀", 199900L,
                 2, 2,

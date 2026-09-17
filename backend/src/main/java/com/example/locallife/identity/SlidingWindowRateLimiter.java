@@ -74,12 +74,15 @@ public class SlidingWindowRateLimiter {
             if (result == null) {
                 throw new IllegalStateException("Redis sliding-window script returned null");
             }
+            com.example.locallife.diagnostics.BackendTrace.mark("rate_limit", "Redis ZSET + Lua", result >= 0 ? "allowed" : "rejected");
             return result >= 0
                     ? new Decision(true, 0)
                     : new Decision(false, toRetrySeconds(-result));
         } catch (RuntimeException exception) {
             log.warn("Redis rate limit unavailable; using process-local sliding window");
-            return acquireLocally(key, effectiveLimit, windowMillis);
+            Decision local = acquireLocally(key, effectiveLimit, windowMillis);
+            com.example.locallife.diagnostics.BackendTrace.mark("rate_limit", "Redis 不可用，单进程降级", local.allowed() ? "allowed" : "rejected");
+            return local;
         }
     }
 

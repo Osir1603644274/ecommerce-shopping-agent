@@ -28,6 +28,12 @@ class ProductControllerTests {
     }
 
     @Test
+    void unknownPublishedScopeDoesNotFallBackToUnscopedProducts() throws Exception {
+        mockMvc.perform(get("/api/products").param("category","手机").param("catalogVersion","unknown-version"))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.data",hasSize(0)));
+    }
+
+    @Test
     void priceFilterUsesOnlyVerifiedSnapshots() throws Exception {
         mockMvc.perform(get("/api/products").param("maxPriceMinor", "1000000"))
                 .andExpect(status().isOk())

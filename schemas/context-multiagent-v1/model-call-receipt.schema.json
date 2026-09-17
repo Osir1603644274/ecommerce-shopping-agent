@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local-life.invalid/schemas/context-multiagent-v1/model-call-receipt.schema.json",
+  "title": "ModelCallReceipt V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "modelCallId", "runId", "parentRunId", "handoffId",
+    "contextReceiptId", "contextBindingHash", "callPurpose", "agentRole",
+    "provider", "model", "inputTokens", "outputTokens", "cachedInputTokens",
+    "tokenStatus", "durationMs", "retryOrdinal", "status", "errorCode"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "model-call-receipt-v1"},
+    "modelCallId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "runId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "parentRunId": {"type": ["string", "null"], "minLength": 1, "maxLength": 200},
+    "handoffId": {"type": ["string", "null"], "minLength": 1, "maxLength": 200},
+    "contextReceiptId": {"type": ["string", "null"], "minLength": 1, "maxLength": 200},
+    "contextBindingHash": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      ]
+    },
+    "callPurpose": {
+      "enum": [
+        "task_manager_relation", "task_state_extraction",
+        "shopping_policy_decision", "research_policy_decision",
+        "research_synthesis", "final_answer",
+        "memory_candidate_extraction", "contract_authoring"
+      ]
+    },
+    "agentRole": {
+      "enum": ["SYSTEM", "SHOPPING_AGENT", "EVIDENCE_RESEARCH_AGENT", null]
+    },
+    "provider": {"type": "string", "minLength": 1, "maxLength": 160},
+    "model": {"type": "string", "minLength": 1, "maxLength": 200},
+    "inputTokens": {"type": ["integer", "null"], "minimum": 0},
+    "outputTokens": {"type": ["integer", "null"], "minimum": 0},
+    "cachedInputTokens": {"type": ["integer", "null"], "minimum": 0},
+    "tokenStatus": {"enum": ["OBSERVED", "NOT_INSTRUMENTED"]},
+    "durationMs": {"type": "number", "minimum": 0},
+    "retryOrdinal": {"type": "integer", "minimum": 0},
+    "status": {"enum": ["STARTED", "SUCCEEDED", "FAILED", "CANCELLED"]},
+    "errorCode": {"type": ["string", "null"], "maxLength": 200}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"tokenStatus": {"const": "OBSERVED"}}},
+      "then": {
+        "properties": {
+          "inputTokens": {"type": "integer", "minimum": 0},
+          "outputTokens": {"type": "integer", "minimum": 0}
+        }
+      }
+    }
+  ]
+}

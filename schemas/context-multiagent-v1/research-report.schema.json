@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local-life.invalid/schemas/context-multiagent-v1/research-report.schema.json",
+  "title": "ResearchReport V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "reportId", "requestId", "handoffId", "parentRunId",
+    "childRunId", "taskId", "taskRevision", "candidateScopeId",
+    "candidateScopeSourceRevision", "candidateScopeHash",
+    "investigationSetId", "investigationSetBindingHash", "findings",
+    "rejectedFindings", "unresolved", "stopReason", "generatedAt",
+    "reportHash", "bindingHash"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "research-report-v1"},
+    "reportId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "requestId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "handoffId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "parentRunId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "childRunId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "taskId": {"type": "string", "minLength": 1, "maxLength": 160},
+    "taskRevision": {"type": "integer", "minimum": 1},
+    "candidateScopeId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "candidateScopeSourceRevision": {"type": "integer", "minimum": 1},
+    "candidateScopeHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "investigationSetId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "investigationSetBindingHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "findings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/finding"},
+      "uniqueItems": true
+    },
+    "rejectedFindings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/rejectedFinding"}
+    },
+    "unresolved": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/unresolvedGap"},
+      "uniqueItems": true
+    },
+    "stopReason": {
+      "enum": [
+        "COMPLETE", "BUDGET_EXHAUSTED", "DEADLINE", "CANCELLED",
+        "TOOL_FAILURE", "CONFLICT"
+      ]
+    },
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "reportHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "bindingHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidateId", "evidenceGapKey", "verdict", "evidenceRefs",
+        "summary", "sourceAuthority"
+      ],
+      "properties": {
+        "candidateId": {"type": "integer", "minimum": 1},
+        "evidenceGapKey": {"type": "string", "minLength": 1, "maxLength": 160},
+        "verdict": {"enum": ["SATISFIED", "VIOLATED", "UNKNOWN", "CONFLICT"]},
+        "evidenceRefs": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1, "maxLength": 500},
+          "uniqueItems": true
+        },
+        "summary": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "sourceAuthority": {
+          "enum": [
+            "TOOL_FACT", "VERIFIED_CATALOG", "INSUFFICIENT", "CONFLICTING"
+          ]
+        }
+      }
+    },
+    "rejectedFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidateId", "evidenceGapKey", "reason"],
+      "properties": {
+        "candidateId": {"type": "integer", "minimum": 1},
+        "evidenceGapKey": {"type": "string", "minLength": 1, "maxLength": 160},
+        "reason": {
+          "enum": [
+            "OUT_OF_SCOPE", "STALE_REVISION", "BINDING_MISMATCH",
+            "UNAUTHORIZED_TOOL", "INVALID_EVIDENCE", "DUPLICATE"
+          ]
+        }
+      }
+    },
+    "unresolvedGap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidateId", "evidenceGapKey", "reason"],
+      "properties": {
+        "candidateId": {"type": "integer", "minimum": 1},
+        "evidenceGapKey": {"type": "string", "minLength": 1, "maxLength": 160},
+        "reason": {"type": "string", "minLength": 1, "maxLength": 500}
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local-life.invalid/schemas/context-multiagent-v1/run-context.schema.json",
+  "title": "RunContext V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "runId", "tenantId", "ownerId", "sessionId",
+    "recipientType", "taskId", "taskRevision", "agentRole", "phase",
+    "modelCallOrdinal", "deadlineAt", "compilerVersion", "policyVersion",
+    "capabilityGrantId", "capabilityGrantHash", "sensitivity"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "context-multiagent-run-context-v1"},
+    "runId": {"type": "string", "minLength": 1, "maxLength": 160},
+    "parentRunId": {"type": ["string", "null"], "minLength": 1, "maxLength": 160},
+    "handoffId": {"type": ["string", "null"], "minLength": 1, "maxLength": 160},
+    "tenantId": {"type": "string", "minLength": 1, "maxLength": 160},
+    "ownerId": {"type": "string", "minLength": 1, "maxLength": 160},
+    "sessionId": {"type": "string", "minLength": 1, "maxLength": 160},
+    "recipientType": {"enum": ["SELF", "OTHER", "UNKNOWN"]},
+    "recipientId": {"type": ["string", "null"], "maxLength": 160},
+    "taskId": {"type": "string", "minLength": 1, "maxLength": 160},
+    "taskRevision": {"type": "integer", "minimum": 1},
+    "agentRole": {"enum": ["SHOPPING_AGENT", "EVIDENCE_RESEARCH_AGENT"]},
+    "phase": {
+      "enum": [
+        "SHOPPING_PLANNER", "SHOPPING_EXECUTOR", "SHOPPING_VALIDATOR",
+        "SHOPPING_REPLANNER", "SHOPPING_FINAL_ANSWER", "EVIDENCE_RESEARCH"
+      ]
+    },
+    "modelCallOrdinal": {"type": "integer", "minimum": 0},
+    "candidateScopeId": {"type": ["string", "null"], "maxLength": 200},
+    "candidateScopeSourceRevision": {"type": ["integer", "null"], "minimum": 1},
+    "candidateScopeHash": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "deadlineAt": {"type": "string", "format": "date-time"},
+    "compilerVersion": {"type": "string", "minLength": 1, "maxLength": 120},
+    "policyVersion": {"type": "string", "minLength": 1, "maxLength": 120},
+    "capabilityGrantId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "capabilityGrantHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "sensitivity": {"const": "SERVER_ONLY"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"agentRole": {"const": "EVIDENCE_RESEARCH_AGENT"}}},
+      "then": {
+        "required": [
+          "parentRunId", "handoffId", "candidateScopeId",
+          "candidateScopeSourceRevision", "candidateScopeHash"
+        ],
+        "properties": {"phase": {"const": "EVIDENCE_RESEARCH"}}
+      }
+    }
+  ]
+}
+

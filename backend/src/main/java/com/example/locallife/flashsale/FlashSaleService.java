@@ -18,26 +18,32 @@ public class FlashSaleService {
     private final FlashSaleRedisGateway redisGateway;
     private final FlashSaleProperties properties;
     private final Clock clock;
+    private final FlashSaleRequestStore requests;
+    @Autowired
+    private org.springframework.beans.factory.ObjectProvider<FlashSaleFaultProbe> probes;
 
     @Autowired
     public FlashSaleService(
             FlashSaleMapper mapper,
             FlashSaleRedisGateway redisGateway,
-            FlashSaleProperties properties
+            FlashSaleProperties properties,
+            FlashSaleRequestStore requests
     ) {
-        this(mapper, redisGateway, properties, Clock.systemUTC());
+        this(mapper, redisGateway, properties, requests, Clock.systemUTC());
     }
 
     FlashSaleService(
             FlashSaleMapper mapper,
             FlashSaleRedisGateway redisGateway,
             FlashSaleProperties properties,
+            FlashSaleRequestStore requests,
             Clock clock
     ) {
         this.mapper = mapper;
         this.redisGateway = redisGateway;
         this.properties = properties;
         this.clock = clock;
+        this.requests = requests;
     }
 
     @Transactional
@@ -71,6 +77,9 @@ public class FlashSaleService {
         if (!properties.enabled()) {
             throw new InvalidBusinessStateException("秒杀能力未启用");
         }
+        String existingRequest = requests.acceptedFor(campaignId, userId);
+        if (existingRequest != null)
+            return new FlashSalePurchaseResponse(existingRequest, "QUEUED", "此前请求已受理，请查询订单结果");
         FlashSaleCampaign campaign = requireCampaign(campaignId);
         LocalDateTime now = LocalDateTime.now(clock);
         if (!"ACTIVE".equals(campaign.status())) {
@@ -101,10 +110,12 @@ public class FlashSaleService {
         if (result != FlashSaleRedisGateway.ACCEPTED) {
             throw new IllegalStateException("未知秒杀脚本结果: " + result);
         }
+        String acceptedId = requests.accept(orderId, campaignId, userId, campaign.salePriceMinor());
+        if (probes != null) probes.orderedStream().forEach(p -> p.at("after-accept", acceptedId));
         return new FlashSalePurchaseResponse(
-                orderId,
+                acceptedId,
                 "QUEUED",
-                "抢购请求已进入可靠队列"
+                "抢购请求已持久受理，正在排队落单"
         );
     }
 

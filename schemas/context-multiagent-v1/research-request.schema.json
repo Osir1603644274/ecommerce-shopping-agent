@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local-life.invalid/schemas/context-multiagent-v1/research-request.schema.json",
+  "title": "ResearchRequest V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "requestId", "handoffId", "parentRunId", "childRunId",
+    "taskId", "taskRevision", "candidateScopeId",
+    "candidateScopeSourceRevision", "candidateScopeHash",
+    "investigationSetId", "investigationSetBindingHash",
+    "parentContextBindingHash", "childContextBindingHash",
+    "capabilityGrantHash", "researchGoal",
+    "candidateIds", "evidenceGapKeys", "allowedTools", "maxToolCalls",
+    "maxModelDecisions", "deadlineAt", "payloadHash", "bindingHash",
+    "sensitivity"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "research-request-v1"},
+    "requestId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "handoffId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "parentRunId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "childRunId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "taskId": {"type": "string", "minLength": 1, "maxLength": 160},
+    "taskRevision": {"type": "integer", "minimum": 1},
+    "candidateScopeId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "candidateScopeSourceRevision": {"type": "integer", "minimum": 1},
+    "candidateScopeHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "investigationSetId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "investigationSetBindingHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "parentContextBindingHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "childContextBindingHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "capabilityGrantHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "researchGoal": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "candidateIds": {
+      "type": "array",
+      "items": {"type": "integer", "minimum": 1},
+      "minItems": 1,
+      "maxItems": 8,
+      "uniqueItems": true
+    },
+    "evidenceGapKeys": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1, "maxLength": 160},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "allowedTools": {
+      "type": "array",
+      "items": {
+        "const": "get_product_details"
+      },
+      "minItems": 1,
+      "maxItems": 1,
+      "uniqueItems": true
+    },
+    "maxToolCalls": {"type": "integer", "minimum": 0, "maximum": 64},
+    "maxModelDecisions": {"type": "integer", "minimum": 0, "maximum": 32},
+    "deadlineAt": {"type": "string", "format": "date-time"},
+    "payloadHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "bindingHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "sensitivity": {"const": "SERVER_ONLY"}
+  }
+}

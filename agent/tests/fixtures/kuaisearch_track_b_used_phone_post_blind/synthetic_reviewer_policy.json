@@ -1,0 +1,10 @@
+{
+  "fixtureSchemaVersion": "track-b-used-phone-synthetic-reviewer-policy-v1",
+  "description": "Offline-only test policy. Populate decisions from the fixture's sealed/formal contracts, then force one candidate disagreement so both agreement and queue paths are exercised.",
+  "expectedReviewRows": 83,
+  "forcedCandidateOrdinal": 0,
+  "forcedRelevanceGrade": 0,
+  "forcedEligible": false,
+  "aiOnly": true,
+  "humanApproved": false
+}

@@ -32,6 +32,7 @@ public class OrderService {
     private final CouponService couponService;
     private final OutboxService outboxService;
     private final Clock clock;
+    private final com.example.locallife.fulfillment.FulfillmentLifecycle fulfillment;
 
     @Autowired
     public OrderService(
@@ -39,10 +40,11 @@ public class OrderService {
             CommerceCatalogPort catalog,
             InventoryService inventoryService,
             CouponService couponService,
-            OutboxService outboxService
+            OutboxService outboxService,
+            com.example.locallife.fulfillment.FulfillmentLifecycle fulfillment
     ) {
         this(mapper, catalog, inventoryService, couponService,
-                outboxService, Clock.systemUTC());
+                outboxService, fulfillment, Clock.systemUTC());
     }
 
     OrderService(
@@ -51,6 +53,7 @@ public class OrderService {
             InventoryService inventoryService,
             CouponService couponService,
             OutboxService outboxService,
+            com.example.locallife.fulfillment.FulfillmentLifecycle fulfillment,
             Clock clock
     ) {
         this.mapper = mapper;
@@ -59,6 +62,7 @@ public class OrderService {
         this.couponService = couponService;
         this.outboxService = outboxService;
         this.clock = clock;
+        this.fulfillment = fulfillment;
     }
 
     @Transactional
@@ -78,12 +82,20 @@ public class OrderService {
         }
 
         ResolvedItem resolved = resolveItem(request.itemType(), request.itemId());
+        if (request.expectedUnitPriceMinor() != null
+                && request.expectedUnitPriceMinor().longValue() != resolved.unitPriceMinor()) {
+            throw new BusinessConflictException("商品价格已变化，请重新预览并确认");
+        }
         long total = Math.multiplyExact(resolved.unitPriceMinor(), request.quantity().longValue());
         String orderId = UUID.randomUUID().toString();
         LocalDateTime now = LocalDateTime.now(clock);
         LocalDateTime expiresAt = now.plusMinutes(15);
         long discount = couponService.consume(
                 blankToNull(request.userCouponId()), userId, orderId, total);
+        if (request.expectedPayableMinor() != null
+                && request.expectedPayableMinor().longValue() != total - discount) {
+            throw new BusinessConflictException("应付金额已变化，请重新预览并确认");
+        }
         CustomerOrder order = new CustomerOrder(
                 orderId,
                 newOrderNo(now),
@@ -122,6 +134,7 @@ public class OrderService {
         ));
         inventoryService.reserve(
                 orderId, request.itemType(), request.itemId(), request.quantity(), expiresAt);
+        fulfillment.enroll(orderId, request.itemType(), request.itemId(), request.quantity());
         appendOrderEvent(orderId, DomainEventTypes.ORDER_CREATED_V1);
         return toResponse(requireOrder(orderId));
     }
@@ -169,8 +182,18 @@ public class OrderService {
         return toResponse(order);
     }
 
+    @Transactional(readOnly = true)
     public List<OrderResponse> listMine(String userId) {
-        return mapper.findByUserId(userId).stream().map(this::toResponse).toList();
+        List<CustomerOrder> orders = mapper.findByUserId(userId);
+        java.util.Map<String, List<OrderItem>> items = new java.util.HashMap<>();
+        for (int start = 0; start < orders.size(); start += 200) {
+            var ids = orders.subList(start, Math.min(start + 200, orders.size()))
+                    .stream().map(CustomerOrder::id).toList();
+            mapper.findItemsForOrders(ids).forEach(item ->
+                    items.computeIfAbsent(item.orderId(), ignored -> new java.util.ArrayList<>()).add(item));
+        }
+        return orders.stream().map(order -> toResponse(order,
+                items.getOrDefault(order.id(), List.of()))).toList();
     }
 
     @Transactional
@@ -194,6 +217,7 @@ public class OrderService {
     public OrderResponse complete(String orderId, String actorUserId) {
         CustomerOrder order = requireOrder(orderId);
         requireOwner(order, actorUserId, false);
+        fulfillment.received(orderId);
         transition(orderId, OrderStatus.PAID, OrderStatus.COMPLETED, "只有已支付订单可以完成");
         return toResponse(requireOrder(orderId));
     }
@@ -211,12 +235,14 @@ public class OrderService {
 
     @Transactional
     public void markRefunding(String orderId) {
+        fulfillment.beforeRefund(orderId);
         transition(orderId, OrderStatus.PAID, OrderStatus.REFUNDING, "只有已支付订单可以退款");
     }
 
     @Transactional
     public void markRefunded(String orderId) {
         transition(orderId, OrderStatus.REFUNDING, OrderStatus.REFUNDED, "订单不在退款中");
+        fulfillment.refunded(orderId);
         appendOrderEvent(orderId, DomainEventTypes.ORDER_REFUNDED_V1);
     }
 
@@ -259,11 +285,15 @@ public class OrderService {
     }
 
     private OrderResponse toResponse(CustomerOrder order) {
+        return toResponse(order, mapper.findItems(order.id()));
+    }
+
+    private OrderResponse toResponse(CustomerOrder order, List<OrderItem> items) {
         return new OrderResponse(
                 order.id(), order.orderNo(), order.status(), order.totalMinor(),
                 order.discountMinor(), order.payableMinor(), order.currency(),
                 order.userCouponId(), order.expiresAt(), order.paidAt(), order.createdAt(),
-                mapper.findItems(order.id())
+                items
         );
     }
 
@@ -328,6 +358,12 @@ public class OrderService {
                 request.itemId().toString(),
                 request.quantity().toString(),
                 safe(blankToNull(request.userCouponId())));
+        // Preserve legacy four-field hashes; a confirmed-price command has a
+        // separate immutable identity, including both expected amounts.
+        if (request.expectedUnitPriceMinor() != null || request.expectedPayableMinor() != null) {
+            canonical += "|confirmed-price|" + request.expectedUnitPriceMinor()
+                    + "|" + request.expectedPayableMinor();
+        }
         try {
             return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256")
                     .digest(canonical.getBytes(StandardCharsets.UTF_8)));

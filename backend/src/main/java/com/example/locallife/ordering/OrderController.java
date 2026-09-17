@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -19,9 +20,11 @@ import java.util.List;
 @RequestMapping("/api/orders")
 public class OrderController {
     private final OrderService service;
+    private final OrderPageService pages;
 
-    public OrderController(OrderService service) {
+    public OrderController(OrderService service, OrderPageService pages) {
         this.service = service;
+        this.pages = pages;
     }
 
     @PostMapping
@@ -46,6 +49,14 @@ public class OrderController {
     @GetMapping
     public ApiResponse<List<OrderResponse>> listMine(Authentication authentication) {
         return ApiResponse.ok(service.listMine(authentication.getName()));
+    }
+
+    @GetMapping("/page")
+    public ApiResponse<OrderPage> page(Authentication authentication,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(required = false) String status,
+            @RequestParam(required = false) String cursor) {
+        return ApiResponse.ok(pages.page(authentication.getName(), size, status, cursor));
     }
 
     @GetMapping("/by-idempotency-key/{idempotencyKey}")

@@ -8,9 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 class FlashSaleOrderPersistenceService {
     private final FlashSaleMapper mapper;
+    private final FlashSaleRequestStore requests;
 
-    FlashSaleOrderPersistenceService(FlashSaleMapper mapper) {
+    FlashSaleOrderPersistenceService(FlashSaleMapper mapper, FlashSaleRequestStore requests) {
         this.mapper = mapper;
+        this.requests = requests;
     }
 
     @Transactional
@@ -21,20 +23,24 @@ class FlashSaleOrderPersistenceService {
             Long amountMinor,
             String streamMessageId
     ) {
+        // The same lock is held by terminal-failure handling, so a late delivery
+        // cannot commit an order after its reservation was released.
+        FlashSaleCampaign campaign = mapper.lockCampaign(campaignId);
+        if (campaign == null) throw new ResourceNotFoundException("秒杀活动不存在");
+        if (!campaign.salePriceMinor().equals(amountMinor))
+            throw new BusinessConflictException("秒杀消息金额与活动价格不一致");
+        requests.assertNotDead(orderId);
         FlashSaleOrder existing = mapper.findOrder(orderId);
         if (existing != null) {
+            if (!existing.campaignId().equals(campaignId) || !existing.userId().equals(userId))
+                throw new BusinessConflictException("秒杀消息订单身份冲突");
+            requests.complete(orderId, existing.id());
             return existing;
         }
         existing = mapper.findOrderByCampaignAndUser(campaignId, userId);
         if (existing != null) {
+            requests.complete(orderId, existing.id());
             return existing;
-        }
-        FlashSaleCampaign campaign = mapper.findCampaign(campaignId);
-        if (campaign == null) {
-            throw new ResourceNotFoundException("秒杀活动不存在");
-        }
-        if (!campaign.salePriceMinor().equals(amountMinor)) {
-            throw new BusinessConflictException("秒杀消息金额与活动价格不一致");
         }
         if (mapper.decrementDatabaseStock(campaignId) != 1) {
             throw new BusinessConflictException("数据库秒杀库存不足或活动已关闭");
@@ -50,8 +56,26 @@ class FlashSaleOrderPersistenceService {
                 null
         );
         mapper.insertOrder(order);
+        requests.complete(orderId, orderId);
         return mapper.findOrder(orderId);
     }
+
+    @Transactional
+    public boolean deadLetterOrder(String messageId, String payload, int attempts, Throwable failure,
+                                   String orderId, Long campaignId, String userId) {
+        mapper.lockCampaign(campaignId);
+        var existing = mapper.findOrderByCampaignAndUser(campaignId, userId);
+        if (existing != null) {
+            requests.complete(orderId, existing.id());
+            return false;
+        }
+        deadLetter(messageId, payload, attempts, failure);
+        requests.dead(orderId, failure.getClass().getSimpleName());
+        return true;
+    }
+
+    @Transactional
+    public void compensationCompleted(String orderId) { requests.compensated(orderId); }
 
     @Transactional
     void deadLetter(

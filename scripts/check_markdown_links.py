@@ -5,16 +5,32 @@ import sys
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
+from document_paths import DocumentLocations
+
 ROOT = Path(__file__).resolve().parents[1]
+LOCATIONS = DocumentLocations(ROOT)
 LINK_PATTERN = re.compile(r"!?\[[^\]]*]\(([^)]+)\)")
 SKIPPED_PREFIXES = ("http://", "https://", "mailto:", "tel:", "data:")
 
 
 def markdown_files() -> list[Path]:
     files = [ROOT / "README.md"]
-    files.extend((ROOT / "docs").rglob("*.md"))
+    files.extend(
+        path
+        for path in (ROOT / "docs").rglob("*.md")
+        if "archive" not in path.relative_to(ROOT / "docs").parts
+        # Handoff evidence directories are immutable point-in-time copies. Their
+        # relative links resolve in the source tree, not inside the copied packet.
+        and not (
+            "handoffs" in path.relative_to(ROOT / "docs").parts
+            and "evidence" in path.relative_to(ROOT / "docs").parts
+        )
+    )
     files.extend((ROOT / "review").rglob("*.md"))
-    return sorted(files)
+    # Check newly archived originals as well, resolving their unchanged links
+    # from their former location. Do not silently exclude the moved documents.
+    files.extend(ROOT / e["current"] for e in LOCATIONS.entries if e["preserveBytes"] and e["current"].endswith(".md"))
+    return sorted(set(files))
 
 
 def links_outside_code_fences(path: Path) -> list[tuple[int, str]]:
@@ -45,7 +61,8 @@ def local_target(source: Path, raw_target: str) -> Path | None:
     decoded = unquote(parsed.path)
     if not decoded:
         return None
-    return (source.parent / decoded).resolve()
+    original_source = LOCATIONS.reference_source(source)
+    return LOCATIONS.resolve(original_source.parent / decoded)
 
 
 def main() -> int:
@@ -60,7 +77,7 @@ def main() -> int:
         print("Broken local Markdown links:")
         print("\n".join(failures))
         return 1
-    print(f"Markdown link check passed ({len(markdown_files())} active files).")
+    print(f"Markdown link check passed ({len(markdown_files())} files; archived references resolved through document-locations.json).")
     return 0
 
 

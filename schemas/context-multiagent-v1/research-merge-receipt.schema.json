@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local-life.invalid/schemas/context-multiagent-v1/research-merge-receipt.schema.json",
+  "title": "ResearchMergeReceipt V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "mergeReceiptId", "parentRunId", "handoffId",
+    "requestId", "reportId", "taskId", "taskRevision",
+    "candidateScopeId", "candidateScopeHash", "reportHash",
+    "reportBindingHash", "outcome", "acceptedFindingCount",
+    "unresolvedCount", "persistenceStatus", "createdAt", "receiptHash"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "research-merge-receipt-v1"},
+    "mergeReceiptId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "parentRunId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "handoffId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "requestId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "reportId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "taskId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "taskRevision": {"type": "integer", "minimum": 1},
+    "candidateScopeId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "candidateScopeHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "reportHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "reportBindingHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "outcome": {"enum": ["ACCEPTED", "REPLAY_NOOP"]},
+    "acceptedFindingCount": {"type": "integer", "minimum": 0},
+    "unresolvedCount": {"type": "integer", "minimum": 0},
+    "persistenceStatus": {"const": "PRIMARY"},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "receiptHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

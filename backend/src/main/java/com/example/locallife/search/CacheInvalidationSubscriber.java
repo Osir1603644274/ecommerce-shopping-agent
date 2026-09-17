@@ -3,15 +3,13 @@ package com.example.locallife.search;
 import com.example.locallife.product.ProductCache;
 import com.example.locallife.shop.ShopCache;
 import io.micrometer.core.instrument.MeterRegistry;
-import org.springframework.data.redis.connection.Message;
-import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 @Component
-class CacheInvalidationSubscriber implements MessageListener {
+class CacheInvalidationSubscriber {
     private final Optional<ShopCache> shopCache;
     private final Optional<ProductCache> productCache;
     private final MeterRegistry meters;
@@ -26,9 +24,18 @@ class CacheInvalidationSubscriber implements MessageListener {
         this.meters = meters;
     }
 
-    @Override
-    public void onMessage(Message message, byte[] pattern) {
-        String value = new String(message.getBody(), StandardCharsets.UTF_8);
+    void invalidateAll() {
+        shopCache.ifPresent(ShopCache::invalidateAllLocal);
+        productCache.ifPresent(ProductCache::invalidateAllLocal);
+    }
+
+    @org.springframework.context.event.EventListener
+    public void reconnected(org.springframework.amqp.rabbit.listener.ConsumeOkEvent event) { invalidateAll(); }
+
+    @org.springframework.context.event.EventListener
+    public void disconnected(org.springframework.amqp.rabbit.listener.ListenerContainerConsumerFailedEvent event) { invalidateAll(); }
+
+    public void accept(String value) {
         try {
             String entity;
             if (value.startsWith("shop:")) {

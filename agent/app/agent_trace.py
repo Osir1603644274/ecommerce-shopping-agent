@@ -13,6 +13,7 @@ import json
 import hashlib
 import logging
 import time
+import sys
 from datetime import datetime, timezone
 from typing import Any, Literal
 
@@ -34,6 +35,7 @@ class PhaseTrace(BaseModel):
     """Timing and outcome for one lifecycle phase."""
 
     phase: str  # planner, executor, validator, replanner, final_answer
+    code_location: str | None = None
     started_at: str | None = None
     finished_at: str | None = None
     duration_ms: float | None = None
@@ -275,7 +277,7 @@ class TraceBuilder:
             started_at=datetime.now(timezone.utc).isoformat(),
             mode=mode,
         )
-        self._phase_stack: list[tuple[str, float]] = []  # (phase_name, start_ts)
+        self._phase_stack: list[tuple] = []
         self._start_ns = time.perf_counter()
 
     @property
@@ -431,7 +433,12 @@ class TraceBuilder:
 
     def start_phase(self, phase: str) -> None:
         """Push a phase onto the stack — nested phases are independent."""
-        self._phase_stack.append((phase, time.perf_counter()))
+        caller = sys._getframe(1)
+        filename = caller.f_code.co_filename.replace('\\', '/')
+        location = filename[filename.rfind('/agent/app/') + 1:] if '/agent/app/' in filename else None
+        if location:
+            location += f':{caller.f_lineno} ({caller.f_code.co_name})'
+        self._phase_stack.append((phase, time.perf_counter(), datetime.now(timezone.utc).isoformat(), location))
 
     def end_phase(
         self,
@@ -445,13 +452,14 @@ class TraceBuilder:
         """Pop the most recently started phase and record it."""
         if not self._phase_stack:
             return
-        phase_name, start_ts = self._phase_stack.pop()
+        phase_name, start_ts, started_at, location = self._phase_stack.pop()
         duration = (time.perf_counter() - start_ts) * 1000
         now = datetime.now(timezone.utc).isoformat()
         self._trace.phases.append(
             PhaseTrace(
                 phase=phase_name,
-                started_at=None,
+                started_at=started_at,
+                code_location=location,
                 finished_at=now,
                 duration_ms=round(duration, 2),
                 outcome=outcome,
@@ -536,13 +544,14 @@ class TraceBuilder:
     def finish(self) -> AgentRunTrace:
         # Close any unclosed phases (shouldn't happen in normal flow)
         while self._phase_stack:
-            phase_name, start_ts = self._phase_stack.pop()
+            phase_name, start_ts, started_at, location = self._phase_stack.pop()
             duration = (time.perf_counter() - start_ts) * 1000
             now = datetime.now(timezone.utc).isoformat()
             self._trace.phases.append(
                 PhaseTrace(
                     phase=phase_name,
-                    started_at=None,
+                    started_at=started_at,
+                    code_location=location,
                     finished_at=now,
                     duration_ms=round(duration, 2),
                     outcome="unclosed",

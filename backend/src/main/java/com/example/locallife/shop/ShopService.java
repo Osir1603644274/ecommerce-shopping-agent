@@ -29,6 +29,7 @@ public class ShopService {
     private final Optional<ShopGeoCache> shopGeoCache;
     private final Optional<ShopSearchPort> shopSearch;
     private final Optional<OutboxService> outboxService;
+    private final com.example.locallife.integration.CacheInvalidationRequests invalidation;
 
     public ShopService(
             ShopRepository shopRepository,
@@ -38,7 +39,6 @@ public class ShopService {
         this(shopRepository, shopCache, shopGeoCache, Optional.empty(), Optional.empty());
     }
 
-    @Autowired
     public ShopService(
             ShopRepository shopRepository,
             Optional<ShopCache> shopCache,
@@ -46,11 +46,19 @@ public class ShopService {
             Optional<ShopSearchPort> shopSearch,
             Optional<OutboxService> outboxService
     ) {
+        this(shopRepository,shopCache,shopGeoCache,shopSearch,outboxService,null);
+    }
+
+    @Autowired
+    public ShopService(ShopRepository shopRepository,Optional<ShopCache> shopCache,
+            Optional<ShopGeoCache> shopGeoCache,Optional<ShopSearchPort> shopSearch,
+            Optional<OutboxService> outboxService,com.example.locallife.integration.CacheInvalidationRequests invalidation) {
         this.shopRepository = shopRepository;
         this.shopCache = shopCache;
         this.shopGeoCache = shopGeoCache;
         this.shopSearch = shopSearch;
         this.outboxService = outboxService;
+        this.invalidation = invalidation;
     }
 
     public List<ShopResponse> listShops(Long typeId, String name) {
@@ -161,6 +169,7 @@ public class ShopService {
     @Transactional
     public ShopDetailResponse updateShop(Long id, UpdateShopRequest request) {
         int updatedRows = shopRepository.updateDetails(id, request);
+        if (invalidation != null) invalidation.shopUpdated(id);
         if (updatedRows == 0) {
             throw new ResourceNotFoundException("商户不存在");
         }
@@ -171,7 +180,17 @@ public class ShopService {
                 DomainEventTypes.SHOP_UPDATED_V1,
                 Map.of("shopId", id)
         ));
-        shopCache.ifPresent(cache -> cache.deleteDetail(id));
+        shopCache.ifPresent(cache -> {
+            if (org.springframework.transaction.support.TransactionSynchronizationManager.isSynchronizationActive()) {
+                org.springframework.transaction.support.TransactionSynchronizationManager.registerSynchronization(
+                        new org.springframework.transaction.support.TransactionSynchronization() {
+                            @Override
+                            public void afterCommit() { cache.deleteDetail(id); }
+                        });
+            } else {
+                cache.deleteDetail(id);
+            }
+        });
         return shopRepository.findById(id)
                 .map(this::toDetailResponse)
                 .orElseThrow(() -> new IllegalStateException("更新商户后无法查询商户"));

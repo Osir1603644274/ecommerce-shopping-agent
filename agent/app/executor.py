@@ -1159,7 +1159,17 @@ def _validate_scope_rerank_resolved(
             "scope_rerank_category_mismatch",
             "范围重排 category 与当前 scope 不一致",
         )
-    if resolved.get("rankingIntent") not in {
+    if "userQuery" in resolved:
+        if resolved.get('contextQuery') is not None and resolved['contextQuery']!=scope.source_query:
+            raise ExecutorArgumentResolutionError('comparison_scope_query_changed','原检索问题必须来自当前候选范围')
+        from .domains.ecommerce.models import ShoppingGuideState, compiled_shopping_requirements
+        guide=ShoppingGuideState.model_validate(state.domain_state.get("shoppingGuide"))
+        expected=[r.model_dump(mode="json") for r in scope.requirements_snapshot]
+        if (resolved.get("requirements")!=expected
+            or list(compiled_shopping_requirements(guide))!=list(scope.requirements_snapshot)
+            or list(guide.brand_avoidances)!=list(scope.brand_avoidances_snapshot)):
+            raise ExecutorArgumentResolutionError("comparison_scope_conditions_changed", "候选范围已不符合当前硬条件，必须重新建立范围")
+    if "userQuery" not in resolved and resolved.get("rankingIntent") not in {
         "camera_title_claim", "gaming_title_claim",
     }:
         raise ExecutorArgumentResolutionError(
@@ -1414,6 +1424,13 @@ def extract_normalized_step_output(
             taskId=context.task_id, planId=context.plan_id,
             stepId=context.step.step_id, values={"productIds": product_ids},
         )
+    if context.step.expected_output.get("requiresProductEvidence") is True or context.step.expected_output.get("requiresEvidenceComparison") is True:
+        detail = result.tool_trace.detail
+        ids = detail.get("productIds") if isinstance(detail, dict) else None
+        if ids != result.resolved_arguments.get("productIds"):
+            raise ExecutorOutputExtractionError("product_evidence_scope_mismatch", "知识结果商品范围与输入不一致")
+        return _registered_normalized_output(context.step.tool_name,
+            taskId=context.task_id,planId=context.plan_id,stepId=context.step.step_id,values={"productIds":ids})
     if context.step.tool_name == "compare_products":
         if context.step.expected_output.get("requiresGuideDecision") is not True:
             raise ExecutorOutputExtractionError(
@@ -1884,7 +1901,9 @@ async def run_executor_step(
                 context,
                 system_policies=system_policies,
             )
-            if context.step.tool_name == "rerank_products_in_scope":
+            if context.step.tool_name == "rerank_products_in_scope" or (
+                context.step.tool_name == "compare_products" and resolved.resolved_arguments.get("scopeId") is not None
+            ):
                 try:
                     _validate_scope_rerank_resolved(
                         claimed_state, resolved.resolved_arguments

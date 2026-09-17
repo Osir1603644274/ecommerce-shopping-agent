@@ -26,6 +26,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Transactional
 class OrderServiceIntegrationTests {
     @Autowired
+    private CartOrderService cartOrderService;
+    @Autowired
     private OrderService orderService;
 
     @Autowired
@@ -53,6 +55,18 @@ class OrderServiceIntegrationTests {
     }
 
     @Test
+    void disabledFulfillmentRejectsNewCartBeforeAnyOrderOrStockChange() {
+        var request = new CreateCartOrderRequest(java.util.List.of(
+                new CreateCartOrderRequest.Line("PRODUCT", 1001L, 1)), null);
+        assertThatThrownBy(() -> cartOrderService.create(request, userId, "cart-disabled"))
+                .isInstanceOf(com.example.locallife.common.BusinessConflictException.class)
+                .hasMessageContaining("先启用可靠履约");
+        assertThat(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM customer_order WHERE user_id=?", Integer.class, userId)).isZero();
+        assertThat(inventoryService.getStock("PRODUCT", 1001L).availableQuantity()).isEqualTo(5);
+        assertThat(inventoryService.getStock("PRODUCT", 1001L).reservedQuantity()).isZero();
+    }
+
+    @Test
     void sameIdempotencyKeyReturnsOriginalOrderWithoutDoubleReservation() {
         CreateOrderRequest request = new CreateOrderRequest("PRODUCT", 1001L, 2, null);
 
@@ -70,6 +84,26 @@ class OrderServiceIntegrationTests {
         InventoryStock stock = inventoryService.getStock("PRODUCT", 1001L);
         assertThat(stock.availableQuantity()).isEqualTo(3);
         assertThat(stock.reservedQuantity()).isEqualTo(2);
+    }
+
+    @Test
+    void changedConfirmationPriceRejectsWithoutOrderOrInventoryEffect() {
+        var wrongPrice = new CreateOrderRequest("PRODUCT", 1001L, 1, null, 1L, 1L);
+        assertThatThrownBy(() -> orderService.create(wrongPrice, userId, "changed-price"))
+                .hasMessageContaining("价格已变化");
+        assertThat(inventoryService.getStock("PRODUCT", 1001L).availableQuantity()).isEqualTo(5);
+        assertThat(jdbcTemplate.queryForObject("SELECT COUNT(*) FROM customer_order WHERE user_id=?", Integer.class, userId)).isZero();
+    }
+
+    @Test
+    void confirmationAmountParticipatesInIdempotencyIdentity() {
+        var request = new CreateOrderRequest("PRODUCT", 1001L, 1, null, 249900L, 249900L);
+        var first = orderService.create(request, userId, "confirmed-price");
+        assertThat(orderService.create(request, userId, "confirmed-price").id()).isEqualTo(first.id());
+        assertThatThrownBy(() -> orderService.create(
+                new CreateOrderRequest("PRODUCT", 1001L, 1, null, 249900L, 249899L), userId, "confirmed-price"))
+                .hasMessageContaining("不能用于不同");
+        assertThat(inventoryService.getStock("PRODUCT", 1001L).availableQuantity()).isEqualTo(4);
     }
 
     @Test

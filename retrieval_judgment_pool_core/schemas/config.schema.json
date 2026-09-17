@@ -5,6 +5,7 @@
   "additionalProperties": false,
   "required": ["schema_version", "dataset", "field_mapping", "retrievers", "fusion", "reranker", "selection", "safety"],
   "properties": {
+    "execution_profile": {"enum": ["native_v1", "external_models_v1"]},
     "schema_version": {"const": "retrieval-judgment-pool-config-v1"},
     "dataset": {
       "type": "object", "additionalProperties": false,
@@ -36,6 +37,7 @@
         "properties": {
           "retriever_id":{"type":"string","pattern":"^[a-z0-9][a-z0-9._-]{0,63}$"},
           "kind":{"enum":["lexical_bm25f","char_ngram","semantic_hash","structured","external"]},
+          "family":{"enum":["lexical","character","dense"]},
           "depth":{"type":"integer","minimum":1,"maximum":1000},
           "model":{"type":"string","minLength":1}, "revision":{"type":"string","minLength":1},
           "field_weights":{"type":"object","minProperties":1,"additionalProperties":{"type":"number","exclusiveMinimum":0}},
@@ -51,7 +53,7 @@
       }
     },
     "fusion": {"type":"object","additionalProperties":false,"required":["method","k"],"properties":{"method":{"const":"rrf"},"k":{"type":"integer","minimum":1,"maximum":1000}}},
-    "reranker": {"type":"object","additionalProperties":false,"required":["kind","model","revision","pair_budget_per_query"],"properties":{"kind":{"const":"deterministic_pair_overlap"},"model":{"type":"string","minLength":1},"revision":{"type":"string","minLength":1},"pair_budget_per_query":{"type":"integer","minimum":1,"maximum":1000}}},
+    "reranker": {"type":"object","additionalProperties":false,"required":["kind","model","revision","pair_budget_per_query"],"properties":{"kind":{"enum":["deterministic_pair_overlap","external_scores"]},"model":{"type":"string","minLength":1},"revision":{"type":"string","minLength":1},"pair_budget_per_query":{"type":"integer","minimum":1,"maximum":1000}}},
     "selection": {
       "type":"object","additionalProperties":false,
       "required":["raw_depth_per_retriever","top_k_per_retriever","unique_quota","disagreement_quota","hard_negative_quota","reranker_quota","random_tail_quota","final_pool_budget_per_query"],

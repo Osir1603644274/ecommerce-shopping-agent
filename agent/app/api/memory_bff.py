@@ -67,7 +67,7 @@ class LoginBody(BaseModel):
 
 class CandidateDecisionBody(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    action: str = Field(pattern=r"^confirm$")
+    action: str = Field(pattern=r"^(confirm|reject|snooze)$")
 
 
 class MemoryEntryCorrectionBody(BaseModel):
@@ -423,6 +423,9 @@ async def candidates(
             "candidateId": candidate_id,
             "displayText": candidate["displayText"],
             "status": candidate["status"],
+            **({"evidenceQuote": candidate["evidence"]["evidenceQuote"],
+                "messageId": candidate["evidence"]["messageId"]}
+               if candidate.get("evidence") else {}),
         })
     return {"candidates": result}
 
@@ -438,7 +441,7 @@ async def decide_candidate(
     _require_same_origin(request)
     session = await _session(shopping_memory_session)
     _require_csrf(session, csrf)
-    if not candidate_id or len(candidate_id) > 128 or body.action != "confirm":
+    if not candidate_id or len(candidate_id) > 128:
         raise HTTPException(status_code=404, detail="candidate unavailable")
     raw = await _redis().get(_candidate_key(candidate_id))
     if raw is None:
@@ -446,15 +449,38 @@ async def decide_candidate(
     candidate = json.loads(raw)
     if candidate.get("sessionBinding") != session["sessionBinding"]:
         raise HTTPException(status_code=404, detail="candidate unavailable")
-    if candidate.get("status") == "confirmed":
+    if candidate.get("status") == "confirmed" and body.action == "confirm":
         return {"confirmed": True}
+    terminal = {"reject": "rejected", "snooze": "snoozed"}.get(body.action)
+    if terminal is not None and candidate.get("status") == terminal:
+        return {"confirmed": False, "status": terminal}
     if candidate.get("status") != "pending" or type(candidate.get("preference")) is not dict:
         raise HTTPException(status_code=409, detail="candidate unavailable")
     lock_key = f"{_candidate_key(candidate_id)}:lock"
     if not await _redis().set(lock_key, session["sessionBinding"], ex=15, nx=True):
         raise HTTPException(status_code=409, detail="candidate is being confirmed")
     try:
+        # Re-read after locking: a concurrent decision may have completed
+        # between our initial read and lock acquisition.
+        fresh = await _redis().get(_candidate_key(candidate_id))
+        if fresh != raw:
+            raise HTTPException(status_code=409, detail="candidate changed; reload")
         preference = candidate["preference"]
+        if terminal is not None:
+            governance = candidate.get("governance")
+            if type(governance) is dict:
+                if body.action == "reject":
+                    await _redis().set(governance["rejectKey"], "rejected",
+                        ex=settings.memory_candidate_reject_cooldown_seconds)
+                else:
+                    await _redis().set(governance["snoozeKey"], "snoozed",
+                        ex=settings.memory_candidate_snooze_seconds)
+            candidate["status"] = terminal
+            await _redis().set(_candidate_key(candidate_id),
+                json.dumps(candidate, ensure_ascii=True, separators=(",", ":")),
+                ex=settings.memory_candidate_ttl_seconds)
+            # No Java consent or command: rejection is not memory revocation.
+            return {"confirmed": False, "status": terminal}
         projection = await _java(
             "GET", "/api/memory/projection/v3",
             access_token=session["accessToken"],
@@ -741,9 +767,12 @@ async def store_validated_candidate_for_binding(
     preference: dict[str, str],
     display_text: str,
     candidate_id: str | None = None,
+    evidence: dict[str, str] | None = None,
+    explicit_request: bool = False,
 ) -> str | None:
     """Persist a card only after the Java catalog authority accepted it."""
-    if await session_for_binding(session_binding) is None:
+    session = await session_for_binding(session_binding)
+    if session is None:
         return None
     candidate_id = candidate_id or secrets.token_urlsafe(24)
     if not re.fullmatch(r"[A-Za-z0-9_-]{16,128}", candidate_id):
@@ -754,6 +783,30 @@ async def store_validated_candidate_for_binding(
         "displayText": display_text[:256],
         "status": "pending",
     }
+    if evidence is not None:
+        if (set(evidence) != {"messageId", "evidenceQuote", "strategy"}
+                or any(type(value) is not str or not value for value in evidence.values())
+                or evidence["strategy"] != "natural_v1"
+                or len(evidence["messageId"]) > 128
+                or len(evidence["evidenceQuote"]) > 2000):
+            raise ValueError("invalid memory candidate evidence")
+        owner = _digest(session["canaryEpoch"] + ":" + session["username"])
+        identity = _digest(json.dumps({key: preference[key] for key in (
+            "categoryId", "recipientScope", "attributeKey", "normalizedValue",
+            "preferenceKind", "catalogRevision",
+        )}, sort_keys=True, separators=(",", ":")))
+        prefix = f"memory:natural:v1:{owner}"
+        governance = {"rejectKey": f"{prefix}:reject:{identity}",
+                      "snoozeKey": f"{prefix}:snooze"}
+        if not explicit_request and (await _redis().get(governance["rejectKey"])
+                or await _redis().get(governance["snoozeKey"])):
+            return ""  # Intentional suppression, not a transient worker failure.
+        dedupe_key = f"{prefix}:pending:{identity}"
+        claimed = await _redis().set(dedupe_key, candidate_id,
+            ex=settings.memory_candidate_ttl_seconds, nx=True)
+        if not claimed and await _redis().get(dedupe_key) != candidate_id:
+            return ""
+        candidate.update(evidence=evidence, governance=governance)
     created = await _redis().set(
         _candidate_key(candidate_id),
         json.dumps(candidate, ensure_ascii=True, separators=(",", ":")),
@@ -766,21 +819,19 @@ async def store_validated_candidate_for_binding(
             existing = json.loads(raw) if raw is not None else None
         except (TypeError, ValueError, json.JSONDecodeError):
             existing = None
-        immutable = {key: candidate[key] for key in (
-            "sessionBinding", "preference", "displayText"
-        )}
+        immutable = {key: value for key, value in candidate.items() if key != "status"}
         existing_immutable = (
             {key: existing.get(key) for key in immutable}
             if type(existing) is dict else None
         )
         if (
             existing_immutable != immutable
-            or existing.get("status") not in {"pending", "confirmed"}
+            or existing.get("status") not in {"pending", "confirmed", "rejected", "snoozed"}
             or set(existing) != set(candidate)
         ):
             raise RuntimeError("memory candidate idempotency conflict")
     index = f"memory:bff:candidate-index:{session_binding}"
-    await _redis().zadd(index, {candidate_id: 0})
+    await _redis().zadd(index, {candidate_id: time.time()})
     await _redis().expire(index, settings.memory_candidate_ttl_seconds)
     return candidate_id
 
@@ -836,7 +887,24 @@ async def resolve_memory_run_for_browser_session(
             catalog_revision=catalog_revision,
         )
         outcome = projection.reason.value
+        durable_memory = settings.memory_durable_snapshot_enabled is True
+        if durable_memory and binding.preferences:
+            from ..memory.durable_snapshot import register_authority
+
+            async def refresh_authority() -> tuple[MemoryRunBinding, str]:
+                active = await session_for_binding(session["sessionBinding"])
+                if active is None:
+                    raise RuntimeError("memory session no longer active")
+                latest = await MemoryProjectionV3Client(enabled=True,
+                    backend_url=settings.backend_base_url,
+                    timeout_seconds=settings.memory_projection_client_timeout_seconds,
+                ).fetch(MemoryAccessCredential(active["accessToken"]))
+                return build_memory_run_binding(latest, category_id=category_id,
+                    catalog_revision=catalog_revision), latest.owner_binding or ""
+
+            register_authority(binding, projection, session["sessionBinding"], refresh_authority)
         mode_claim = (
+            await _claim_task_mode(task_id, "durable") if durable_memory and binding.preferences else
             await _mark_memory_bound_task_non_durable(task_id)
             if binding.preferences else "same"
         )

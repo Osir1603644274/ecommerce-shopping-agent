@@ -69,7 +69,7 @@ class GatewaySecurityConfiguration {
                                 "/api/products/**", "/api/shops/**", "/api/shop-types/**",
                                 "/api/reviews/**", "/api/recommendations/**")
                         .permitAll()
-                        .pathMatchers(HttpMethod.POST, "/api/products/resolve").permitAll()
+                        .pathMatchers(HttpMethod.POST, "/api/products/resolve", "/api/products/resolve-sources").permitAll()
                         .pathMatchers(HttpMethod.POST, "/api/admin/products").hasRole("ADMIN")
                         .pathMatchers(HttpMethod.PATCH, "/api/admin/products/**").hasRole("ADMIN")
                         .pathMatchers(HttpMethod.DELETE, "/api/admin/products/**").hasRole("ADMIN")

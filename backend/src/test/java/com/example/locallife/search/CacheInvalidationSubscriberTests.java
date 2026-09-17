@@ -23,7 +23,7 @@ class CacheInvalidationSubscriberTests {
                 new SimpleMeterRegistry()
         );
 
-        subscriber.onMessage(message("shop:17"), new byte[0]);
+        subscriber.accept("shop:17");
 
         verify(cache).invalidateLocal(17L);
     }
@@ -37,7 +37,7 @@ class CacheInvalidationSubscriberTests {
                 new SimpleMeterRegistry()
         );
 
-        subscriber.onMessage(message("product:17"), new byte[0]);
+        subscriber.accept("product:17");
 
         verifyNoInteractions(cache);
     }
@@ -51,7 +51,7 @@ class CacheInvalidationSubscriberTests {
                 new SimpleMeterRegistry()
         );
 
-        subscriber.onMessage(message("product:23"), new byte[0]);
+        subscriber.accept("product:23");
 
         verify(cache).invalidateLocal(23L);
     }

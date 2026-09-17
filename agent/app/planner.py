@@ -8,6 +8,7 @@ from openai import AsyncOpenAI
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator, model_validator
 
 from .context_pack import shopping_guide_argument_sources
+from .settings import settings
 from .model_compat import tool_choice_kwargs
 from .planning import (
     PLAN_ARGUMENT_SOURCE_CONTRACT,
@@ -267,8 +268,6 @@ def build_planner_context(
     authority_selection = None
     if state.task_type == "ecommerce_guide":
         from .domains.ecommerce.shopping_state_authority import select_shopping_state_authority
-        from .settings import settings
-
         authority_selection = select_shopping_state_authority(
             domain_state=state.domain_state,
             task_id=state.task_id,
@@ -303,7 +302,9 @@ def build_planner_context(
         candidateTools=tuple(
             _planner_tool_spec(schema) for schema in candidate_tool_schemas
         ),
-        systemPolicies=deepcopy(system_policies or {}),
+        systemPolicies=deepcopy({**(system_policies or {}), **(
+            {"productKnowledgeUserQuery": user_message} if settings.product_knowledge_enabled else {}
+        )}),
         # Only the ecommerce_guide task type exposes shopping-guide sources.
         # Any other task type must present None even if domainState carries a
         # format-valid shoppingGuide — the Plan may not fabricate these refs.
@@ -558,6 +559,9 @@ def accept_planner_model_output(
                 expected_output = {
                     name: True for name in tool.expected_output_contracts
                 }
+                if proposal.tool_name == "compare_products":
+                    expected_output = {"requiresEvidenceComparison" if settings.product_knowledge_enabled
+                        and "userQuery" in proposal.arguments else "requiresGuideDecision": True}
                 if not expected_output:
                     raise PlannerValidationError(
                         "unsupported_expected_output",
@@ -595,7 +599,11 @@ def accept_planner_model_output(
 
 
 def build_planner_messages(context: PlannerContext) -> list[dict[str, Any]]:
+    from .context_input import is_experimental_context_input, phase_context
     context_payload = context.model_dump(by_alias=True, mode="json")
+    if is_experimental_context_input():
+        return [{"role": "system", "content": PLANNER_SYSTEM_PROMPT},
+                {"role": "user", "content": json.dumps(phase_context("planner", context_payload), ensure_ascii=False)}]
     return [
         {"role": "system", "content": PLANNER_SYSTEM_PROMPT},
         {
@@ -814,18 +822,50 @@ def _deterministic_shopping_guide_plan(
             description = "按已验证的导购条件检索商品"
             expected_output = {"requiresProductCandidates": True}
 
+    if settings.product_knowledge_enabled and tool_name in {"compare_products", "rerank_products_in_scope"}:
+        tool_name = "compare_products"
+        arguments.pop("rankingIntent", None)
+        argument_sources.pop("rankingIntent", None)
+        if "productKnowledgeUserQuery" in context.system_policies:
+            arguments["userQuery"] = context.system_policies["productKnowledgeUserQuery"]
+            argument_sources["userQuery"] = {"kind": "system_policy", "reference": "productKnowledgeUserQuery"}
+        else:
+            arguments["userQuery"] = context.goal
+            argument_sources["userQuery"] = {"kind": "task_goal"}
+        expected_output = {"requiresEvidenceComparison": True}
+        if sources.get('scopeSourceQuery'):
+            arguments['contextQuery']=sources['scopeSourceQuery']
+            argument_sources['contextQuery']={'kind':'shopping_guide','reference':'scopeSourceQuery'}
+        description = "在可信商品范围核验硬条件并查询型号证据，交父Agent解释需求取舍"
+
     try:
-        output = PlannerModelOutput.model_validate({
-            "outcome": "planned",
-            "steps": [{
+        steps = [{
                 "stepId": "step-shopping-action",
                 "description": description,
                 "toolName": tool_name,
                 "arguments": arguments,
                 "argumentSources": argument_sources,
                 "expectedOutput": expected_output,
-            }],
-        })
+            }]
+        if (settings.product_knowledge_enabled and tool_name == "search_products"
+                and sources.get("categoryCode") == "phone"
+                and any(t.name == "compare_products" for t in context.candidate_tools)):
+            # One bounded plan: IDs are resolved from the first step's persisted,
+            # normalized ranking, not from a model-authored list or a second search.
+            steps.append({
+                "stepId": "step-shopping-evidence",
+                "description": "读取本次召回型号证据，交父Agent权衡原始需求",
+                "toolName": "compare_products",
+                "arguments": {"productIds": None, "category": sources["categoryCode"],
+                    "requirements": deepcopy(requirements), "userQuery": context.user_message},
+                "argumentSources": {
+                    "productIds": {"kind": "prior_step", "reference": "step-shopping-action.rankedItemIds"},
+                    "category": {"kind": "shopping_guide", "reference": "categoryCode"},
+                    "requirements": {"kind": "shopping_guide", "reference": "requirements"},
+                    "userQuery": {"kind": "system_policy", "reference": "productKnowledgeUserQuery"}},
+                "expectedOutput": {"requiresEvidenceComparison": True},
+            })
+        output = PlannerModelOutput.model_validate({"outcome": "planned", "steps": steps})
         return accept_planner_model_output(
             context,
             output,

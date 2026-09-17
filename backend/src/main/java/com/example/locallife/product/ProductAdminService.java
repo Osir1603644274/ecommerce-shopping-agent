@@ -16,15 +16,23 @@ public class ProductAdminService {
     private final ProductRepository products;
     private final ProductSearchEventService searchEvents;
     private final Optional<ProductCache> cache;
+    private final com.example.locallife.integration.CacheInvalidationRequests invalidation;
 
     public ProductAdminService(
             ProductRepository products,
             ProductSearchEventService searchEvents,
             Optional<ProductCache> cache
     ) {
+        this(products,searchEvents,cache,null);
+    }
+
+    @org.springframework.beans.factory.annotation.Autowired
+    public ProductAdminService(ProductRepository products, ProductSearchEventService searchEvents,
+            Optional<ProductCache> cache, com.example.locallife.integration.CacheInvalidationRequests invalidation) {
         this.products = products;
         this.searchEvents = searchEvents;
         this.cache = cache;
+        this.invalidation = invalidation;
     }
 
     @Transactional
@@ -110,6 +118,7 @@ public class ProductAdminService {
     }
 
     private void evictAfterCommit(long productId) {
+        if (invalidation != null) invalidation.productUpdated(productId);
         if (cache.isEmpty()) {
             return;
         }

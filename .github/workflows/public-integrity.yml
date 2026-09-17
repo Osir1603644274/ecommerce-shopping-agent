@@ -1,0 +1,27 @@
+name: public-integrity
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-public-snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify manifest and public safety
+        run: python -B scripts/check_public_snapshot.py .
+      - name: Verify repository hygiene
+        run: python -B scripts/check_repository_hygiene.py
+      - name: Verify active Markdown links
+        run: python -B scripts/check_markdown_links.py

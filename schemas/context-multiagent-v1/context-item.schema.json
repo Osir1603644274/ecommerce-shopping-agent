@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local-life.invalid/schemas/context-multiagent-v1/context-item.schema.json",
+  "title": "ContextItem V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "itemId", "itemType", "semanticKey", "authorityDomain",
+    "sourceKind", "sourceRefs", "scope", "recipientAllowlist", "phaseAllowlist",
+    "sensitivity", "validFrom", "payload", "contentHash", "estimatedTokens"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "context-item-v1"},
+    "itemId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "itemType": {
+      "enum": [
+        "TASK_FACT", "HARD_CONSTRAINT", "SOFT_PREFERENCE", "FRESH_EVIDENCE",
+        "WORKING_SET", "REFERENCE_CONTEXT", "MEMORY_PREFERENCE", "RAW_HISTORY",
+        "RESEARCH_REPORT", "BACKGROUND"
+      ]
+    },
+    "semanticKey": {"type": "string", "minLength": 1, "maxLength": 240},
+    "authorityDomain": {
+      "enum": [
+        "CURRENT_REQUEST", "TASK_STATE", "TOOL_FACT", "REFERENCE_CONTEXT",
+        "CANDIDATE_SCOPE", "GOVERNED_MEMORY", "SESSION_HISTORY", "BACKGROUND"
+      ]
+    },
+    "sourceKind": {
+      "enum": [
+        "USER_MESSAGE", "SHOPPING_TASK_STATE_V2", "TOOL_RECEIPT", "VALIDATOR",
+        "REFERENCE_RESOLVER", "MEMORY_SNAPSHOT", "SESSION_STORE", "RESEARCH_MERGE"
+      ]
+    },
+    "sourceRefs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1, "maxLength": 500},
+      "uniqueItems": true
+    },
+    "sourceRevision": {"type": ["string", "integer", "null"]},
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tenantId", "ownerId", "sessionId", "taskId", "taskRevision"],
+      "properties": {
+        "tenantId": {"type": "string", "minLength": 1},
+        "ownerId": {"type": "string", "minLength": 1},
+        "sessionId": {"type": "string", "minLength": 1},
+        "taskId": {"type": "string", "minLength": 1},
+        "taskRevision": {"type": "integer", "minimum": 1},
+        "candidateScopeId": {"type": ["string", "null"]},
+        "candidateScopeHash": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "recipientAllowlist": {
+      "type": "array",
+      "items": {"enum": ["SHOPPING_AGENT", "EVIDENCE_RESEARCH_AGENT"]},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "phaseAllowlist": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "SHOPPING_PLANNER", "SHOPPING_EXECUTOR", "SHOPPING_VALIDATOR",
+          "SHOPPING_REPLANNER", "SHOPPING_FINAL_ANSWER", "EVIDENCE_RESEARCH"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "sensitivity": {"enum": ["MODEL_VISIBLE", "SERVER_ONLY"]},
+    "untrustedData": {"type": "boolean", "default": false},
+    "validFrom": {"type": "string", "format": "date-time"},
+    "expiresAt": {"type": ["string", "null"], "format": "date-time"},
+    "supersedesItemIds": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true,
+      "default": []
+    },
+    "payload": {"type": "object"},
+    "contentHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "estimatedTokens": {"type": "integer", "minimum": 0}
+  }
+}
+

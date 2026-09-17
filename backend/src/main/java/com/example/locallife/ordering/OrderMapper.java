@@ -32,6 +32,31 @@ interface OrderMapper {
             + " FROM customer_order WHERE user_id = #{userId} ORDER BY created_at DESC")
     List<CustomerOrder> findByUserId(@Param("userId") String userId);
 
+    @Select("""
+            <script>
+            SELECT """ + " " + ORDER_COLUMNS + """
+            FROM customer_order WHERE user_id = #{userId}
+            <if test="status != null">AND status = #{status}</if>
+            <if test="createdAt != null">
+              AND (created_at &lt; #{createdAt} OR (created_at = #{createdAt} AND id &lt; #{id}))
+            </if>
+            ORDER BY created_at DESC, id DESC LIMIT #{limit}
+            </script>
+            """)
+    List<CustomerOrder> findPage(@Param("userId") String userId, @Param("status") String status,
+            @Param("createdAt") LocalDateTime createdAt, @Param("id") String id, @Param("limit") int limit);
+
+    @Select("""
+            <script>
+            SELECT id, order_id, item_type, item_id, title_snapshot, unit_price_minor,
+                   quantity, subtotal_minor, evidence_json
+            FROM order_item WHERE order_id IN
+            <foreach collection="ids" item="id" open="(" separator="," close=")">#{id}</foreach>
+            ORDER BY order_id, id
+            </script>
+            """)
+    List<OrderItem> findItemsForOrders(@Param("ids") List<String> ids);
+
     @Insert("""
             INSERT INTO customer_order(
                 id, order_no, user_id, idempotency_key, request_hash, status, total_minor,

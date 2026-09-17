@@ -1,9 +1,37 @@
 import asyncio
 import hashlib
 import json
+import pytest
 from types import SimpleNamespace
 
 from app import memory_candidate_worker as worker
+
+
+@pytest.mark.parametrize("initial_outage", [False, True])
+def test_worker_recovers_expired_group_and_startup_outage(monkeypatch, initial_outage):
+    async def scenario():
+        stop = asyncio.Event()
+        class Client:
+            creates=0
+            reads=0
+            async def xgroup_create(self,*args,**kwargs):
+                self.creates+=1
+                if initial_outage and self.creates==1:
+                    raise worker.redis.ConnectionError("startup unavailable")
+            async def xreadgroup(self,*args,**kwargs):
+                self.reads+=1
+                if self.reads==1:
+                    raise worker.redis.ResponseError("NOGROUP stream expired")
+                stop.set()
+                return []
+        client=Client()
+        async def pending(*args): return "0-0"
+        monkeypatch.setattr(worker.memory_bff,"_redis",lambda:client)
+        monkeypatch.setattr(worker,"_claim_pending",pending)
+        await asyncio.wait_for(worker.run_memory_candidate_worker(stop),timeout=5)
+        assert client.creates == (3 if initial_outage else 2)
+        assert client.reads == 2
+    asyncio.run(scenario())
 
 
 def test_catalog_is_hash_revision_and_identity_bound(tmp_path, monkeypatch):

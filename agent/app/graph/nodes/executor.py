@@ -35,6 +35,7 @@ from ...harness import (
     _extract_fact_keys_for_step,
     _extract_tool_schema_dict,
     _project_prior_step_outputs_for_step,
+    _project_step_arguments,
     _record_view,
     _validate_view_and_record,
     decide_after_execution,
@@ -591,7 +592,7 @@ async def executor_node(
                         step_description=step.description,
                         tool_name=step.tool_name,
                         tool_schema=tool_schema_dict,
-                        resolved_arguments=dict(step.arguments),
+                        resolved_arguments=_project_step_arguments(step, prior_outputs),
                         required_fact_keys=_extract_fact_keys_for_step(step),
                         required_constraint_keys=_extract_constraint_keys_for_step(step),
                         prior_step_outputs=prior_outputs,
@@ -646,7 +647,11 @@ async def executor_node(
         deps.trace_builder.end_phase(
             "step_executed"
             if executor_result.outcome == "step_executed"
-            else executor_result.outcome
+            else executor_result.outcome,
+            detail={"tool": executor_result.execution_result.tool_name,
+                    "toolOk": executor_result.execution_result.tool_trace.ok if executor_result.execution_result.tool_trace else None}
+                if executor_result.execution_result else None,
+            task_revision=current.revision,
         )
         trace_started = False
 

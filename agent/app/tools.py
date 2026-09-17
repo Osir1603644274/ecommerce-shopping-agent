@@ -15,6 +15,7 @@ from .knowledge import (
 from .place_data import PlaceCatalog
 from .rag import DEFAULT_TOP_K, search_reviews as query_reviews
 from .schemas import ToolTrace
+from .catalog_evidence import CATALOG_EVIDENCE_TOOL_SCHEMA, search_catalog_evidence_tool
 from .domains.ecommerce.tools import (
     compare_products_tool,
     get_product_details_tool,
@@ -48,12 +49,14 @@ USED_PHONE_REQUIREMENT_DESCRIPTION = "; ".join(
     for key, spec in sorted(USED_PHONE_ATTRIBUTE_REGISTRY.items())
 )
 _ECOMMERCE_TOOL_ARGUMENT_KEYS = {
+    "search_catalog_evidence": {"query", "source", "limit"},
     "search_products": {
         "query", "category", "brand", "minPriceMinor", "maxPriceMinor",
         "limit", "requirements",
     },
     "get_product_details": {"productIds"},
-    "compare_products": {"productIds", "category", "requirements"},
+    "compare_products": {"productIds", "category", "requirements", "userQuery", "scopeId", "contextQuery"},
+    "search_product_evidence": {"productIds", "query"},
     "rerank_products_in_scope": {
         "scopeId", "productIds", "rankingIntent", "category", "requirements",
     },
@@ -822,12 +825,15 @@ TOOL_SCHEMAS = [
         "type": "function",
         "function": {
             "name": "compare_products",
-            "description": "对最多 5 个已召回商品执行确定性硬约束判定与软偏好评分，生成最多 3 个决选及字段级证据。缺失规格视为 unknown。",
+            "description": "比较指定商品或当前候选范围：传入原始userQuery，程序核验硬条件并取回型号证据，父Agent权衡需求。scopeId仅来自服务端候选范围；未提供userQuery时兼容旧确定性比较。",
             "parameters": {
                 "type": "object",
                 "additionalProperties": False,
                 "properties": {
-                    "productIds": {"type": "array", "items": {"type": "integer"}, "maxItems": 5},
+                    "productIds": {"type": "array", "items": {"type": "integer"}, "minItems": 1, "maxItems": 20},
+                    "userQuery": {"type": "string", "minLength": 1, "maxLength": 2000},
+                    "contextQuery": {"type": "string", "minLength": 1, "maxLength": 2000, "description": "仅来自服务端候选范围的原检索问题，不由模型补写"},
+                    "scopeId": {"type": "string", "minLength": 1},
                     "category": {"type": "string", "enum": ["phone", "laptop", "headphones"]},
                     "requirements": {
                         "type": "array",
@@ -1161,6 +1167,17 @@ TOOL_SCHEMAS = [
     },
 ]
 
+# The explicit experiment route owns this menu. It is not appended to the
+# default shopping/legacy schema list, including when normal routing is unknown.
+EXPERIMENT_TOOL_SCHEMAS = {"search_catalog_evidence": CATALOG_EVIDENCE_TOOL_SCHEMA}
+TOOL_SCHEMAS.append({"type":"function","function":{
+    "name":"search_product_evidence",
+    "description":"通过只读MCP查询当前可信商品范围的型号参数与独立实测，返回来源、知识版本及缺口；不能查询订单或补造机况。",
+    "parameters":{"type":"object","additionalProperties":False,
+        "properties":{"productIds":{"type":"array","items":{"type":"integer"},"minItems":1,"maxItems":20},
+                      "query":{"type":"string","minLength":1,"maxLength":2000}},
+        "required":["productIds","query"]}}})
+
 # ② 派单台：模型“开单”说要调某个工具后，由这里真正去执行对应的 Python 函数。
 async def call_tool(
     name: str,
@@ -1227,6 +1244,10 @@ async def call_tool(
                     },
                 ),
             )
+    if name == "search_catalog_evidence":
+        return await search_catalog_evidence_tool(
+            arguments.get("query"), arguments.get("source"), arguments.get("limit", 10),
+        )
     if name == "search_products":
         query, category = arguments.get("query"), arguments.get("category")
         limit = arguments.get("limit", 20)
@@ -1248,10 +1269,21 @@ async def call_tool(
         ):
             return _finish_tool_trace(start, ToolTrace(tool=name, ok=False, detail="productIds 必须包含 1 到 10 个正整数"))
         return await get_product_details_tool(product_ids)
+    if name == "search_product_evidence":
+        product_ids=arguments.get("productIds")
+        query=arguments.get("query")
+        if (not isinstance(product_ids,list) or not 1<=len(product_ids)<=20
+            or not all(type(i) is int and i>0 for i in product_ids)
+            or len(set(product_ids))!=len(product_ids)
+            or not isinstance(query,str) or not 1<=len(query.strip())<=2000):
+            return _finish_tool_trace(start,ToolTrace(tool=name,ok=False,detail="非法商品范围或查询"))
+        from .product_knowledge.comparison import evidence_tool
+        return await evidence_tool(product_ids,query)
     if name == "compare_products":
         product_ids = arguments.get("productIds")
         requirements = arguments.get("requirements")
-        if not isinstance(product_ids, list) or not 1 <= len(product_ids) <= 5 or not all(
+        knowledge_mode = settings.product_knowledge_enabled and "userQuery" in arguments
+        if not isinstance(product_ids, list) or not 1 <= len(product_ids) <= (20 if knowledge_mode else 5) or not all(
             type(item) is int and item > 0 for item in product_ids
         ):
             return _finish_tool_trace(start, ToolTrace(tool=name, ok=False, detail="productIds 必须包含 1 到 5 个正整数"))
@@ -1259,6 +1291,19 @@ async def call_tool(
             return _finish_tool_trace(start, ToolTrace(tool=name, ok=False, detail="category 不受支持"))
         if not isinstance(requirements, list):
             return _finish_tool_trace(start, ToolTrace(tool=name, ok=False, detail="requirements 必须是数组"))
+        if knowledge_mode:
+            query=arguments.get("userQuery")
+            scope_id=arguments.get("scopeId")
+            context_query=arguments.get('contextQuery')
+            if (not isinstance(query,str) or not 1<=len(query.strip())<=2000
+                or (context_query is not None and (not isinstance(context_query,str) or not 1<=len(context_query.strip())<=2000))
+                or len(set(product_ids))!=len(product_ids)
+                or (scope_id is not None and (not isinstance(scope_id,str) or not scope_id.strip()))):
+                return _finish_tool_trace(start,ToolTrace(tool=name,ok=False,detail="非法原始需求或候选范围"))
+            from .product_knowledge.comparison import prepare_comparison
+            return await prepare_comparison(product_ids,arguments["category"],requirements,query,scope_id,context_query)
+        if "userQuery" in arguments or "scopeId" in arguments:
+            return _finish_tool_trace(start,ToolTrace(tool=name,ok=False,detail="知识比较功能未开启"))
         return await compare_products_tool(product_ids, arguments["category"], requirements)
     if name == "rerank_products_in_scope":
         scope_id = arguments.get("scopeId")

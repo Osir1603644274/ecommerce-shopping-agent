@@ -1,0 +1,36 @@
+spring:
+  cloud:
+    discovery:
+      client:
+        simple:
+          instances:
+            commerce-catalog:
+              - uri: ${CATALOG_INSTANCE_A}
+              - uri: ${CATALOG_INSTANCE_B}
+            commerce-trade:
+              - uri: ${TRADE_INSTANCE_A}
+              - uri: ${TRADE_INSTANCE_B}
+    loadbalancer:
+      configurations: health-check
+      cache:
+        enabled: false
+      health-check:
+        interval: 2s
+        initial-delay: 0s
+        refetch-instances: true
+        refetch-instances-interval: 2s
+        path:
+          default: /actuator/health
+    gateway:
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 8s
+      routes:
+        - id: catalog-owner
+          uri: lb://commerce-catalog
+          predicates:
+            - Path=/api/products/**,/api/admin/products/**,/api/shops/**,/api/shop-types/**,/api/reviews/**,/api/recommendations/**,/api/user-behaviors/**,/api/product-favorites/**
+        - id: trade-owner
+          uri: lb://commerce-trade
+          predicates:
+            - Path=/api/auth/**,/api/identity/**,/api/orders/**,/api/inventory/**,/api/payments/**,/api/flash-sales/**,/api/coupons/**,/api/memory/**,/api/admin/fulfillment/**,/api/health

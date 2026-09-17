@@ -24,6 +24,7 @@ GRANT SELECT ON ${MYSQL_DATABASE}.product_attribute TO 'catalog_service'@'%';
 GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.shop TO 'catalog_service'@'%';
 GRANT SELECT ON ${MYSQL_DATABASE}.shop_type TO 'catalog_service'@'%';
 GRANT SELECT, INSERT, UPDATE, DELETE ON ${MYSQL_DATABASE}.review TO 'catalog_service'@'%';
+GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.review_projection_head TO 'catalog_service'@'%';
 GRANT SELECT, INSERT ON ${MYSQL_DATABASE}.user_behavior TO 'catalog_service'@'%';
 GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.catalog_state TO 'catalog_service'@'%';
 GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.product_search_projection_cursor TO 'catalog_service'@'%';
@@ -33,6 +34,7 @@ GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.coupon_template TO 'trade_serv
 GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.customer_order TO 'trade_service'@'%';
 GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.flash_sale_campaign TO 'trade_service'@'%';
 GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.flash_sale_order TO 'trade_service'@'%';
+GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.flash_sale_request TO 'trade_service'@'%';
 GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.inventory_reservation TO 'trade_service'@'%';
 GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.inventory_stock TO 'trade_service'@'%';
 GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.order_item TO 'trade_service'@'%';
@@ -54,4 +56,6 @@ GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.outbox_event TO 'catalog_servi
 GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.inbox_event TO 'catalog_service'@'%', 'trade_service'@'%';
 GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.dead_letter_event TO 'catalog_service'@'%', 'trade_service'@'%';
 FLUSH PRIVILEGES;
+GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.cache_invalidation_outbox TO 'catalog_service'@'%', 'trade_service'@'%';
+GRANT SELECT, INSERT, UPDATE ON ${MYSQL_DATABASE}.flash_sale_request TO 'trade_service'@'%';
 SQL

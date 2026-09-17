@@ -1,0 +1,18 @@
+{
+  "fixtureSchemaVersion": "track-b-used-phone-ai-judged-freeze-input-contract-v1",
+  "offlineOnly": true,
+  "inputSha256": {
+    "blindReviewer": "9d009811821b5d52f9c5bebe3d5c97422021a37a9257fa8ebd1e4546ff4a331b",
+    "blindCaseActionReview": "d7c3beb33b2c5a584583ff343f7634652d87319c5692fe6a1dbb9195588fb4d5",
+    "independentAiAdjudication": "bb5f70cdb64220492b0e6561618f17a7d059ef11812cdf19a66bdcc782d3a150",
+    "independentAiAdjudicationSummary": "eb38b137e4a0b66345079d970e3daa6d1bd1d2e7d7cbd22910f214d61f253c49",
+    "comparisonManifest": "9c800d15f682bfa65b45c85c925e872357c17cb13aac096d8b8ee935829a5110",
+    "formalCases": "136c7a585c4b77d6c582abc7820daa2fb2a78d145a8636a06d1ee31593a75289",
+    "sealedMapping": "f0935e0ffd3b38b915755c945aa713936239deac96766292992f6beff418ba84",
+    "sealedSuggestions": "48c7830fdc91742b85201991ee15e38446200837e328e51be6159e14047425fa"
+  },
+  "expectedFinalGrade": {"3": 20, "2": 20, "1": 29, "null": 11},
+  "expectedFinalEligible": {"true": 40, "false": 29, "unknown": 11},
+  "actionSemanticMapVersion": "track-b-used-phone-case-action-semantic-map-v1",
+  "expectedRows": {"review": 83, "candidateQrel": 80, "caseAction": 8, "queryConstraints": 8, "adjudication": 10}
+}

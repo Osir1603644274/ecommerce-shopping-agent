@@ -160,13 +160,15 @@ CREATE TABLE IF NOT EXISTS inventory_stock (
 
 CREATE TABLE IF NOT EXISTS inventory_reservation (
     id VARCHAR(36) PRIMARY KEY,
-    order_id VARCHAR(36) NOT NULL UNIQUE,
+    order_id VARCHAR(36) NOT NULL,
     stock_id BIGINT NOT NULL,
     quantity INT NOT NULL,
     status VARCHAR(32) NOT NULL,
     expires_at TIMESTAMP NOT NULL,
+    refunded_quantity INT NOT NULL DEFAULT 0,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT uk_inventory_reservation_order_stock UNIQUE(order_id,stock_id)
 );
 
 CREATE TABLE IF NOT EXISTS coupon_template (
@@ -354,4 +356,150 @@ CREATE TABLE IF NOT EXISTS flash_sale_order (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT uk_flash_sale_campaign_user UNIQUE (campaign_id, user_id),
     CONSTRAINT uk_flash_sale_stream_message UNIQUE (stream_message_id)
+);
+
+CREATE TABLE IF NOT EXISTS fulfillment_task (
+    order_id VARCHAR(36) PRIMARY KEY,
+    request_key VARCHAR(96) NOT NULL UNIQUE,
+    command_json TEXT NOT NULL,
+    status VARCHAR(32) NOT NULL,
+    attempts INT NOT NULL DEFAULT 0,
+    fence BIGINT NOT NULL DEFAULT 0,
+    owner VARCHAR(64),
+    lease_until TIMESTAMP(6) NULL,
+    next_attempt_at TIMESTAMP(6) NULL,
+    tracking_no VARCHAR(128),
+    receipt_json TEXT,
+    last_error VARCHAR(1000),
+    created_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    INDEX idx_fulfillment_dispatch (status, next_attempt_at, lease_until),
+    CONSTRAINT fk_fulfillment_order FOREIGN KEY (order_id) REFERENCES customer_order(id)
+);
+
+CREATE TABLE IF NOT EXISTS fulfillment_attempt (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    order_id VARCHAR(36) NOT NULL,
+    fence BIGINT NOT NULL,
+    outcome VARCHAR(32) NOT NULL,
+    detail VARCHAR(1000),
+    created_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    INDEX idx_fulfillment_attempt_order (order_id, id),
+    CONSTRAINT fk_fulfillment_attempt_order FOREIGN KEY (order_id) REFERENCES customer_order(id)
+);
+CREATE TABLE IF NOT EXISTS order_line_allocation (
+    order_id VARCHAR(36) NOT NULL,
+    item_type VARCHAR(32) NOT NULL,
+    item_id BIGINT NOT NULL,
+    stock_id BIGINT NOT NULL,
+    quantity INT NOT NULL,
+    subtotal_minor BIGINT NOT NULL,
+    discount_minor BIGINT NOT NULL,
+    paid_minor BIGINT NOT NULL,
+    refunded_quantity INT NOT NULL DEFAULT 0,
+    refunded_minor BIGINT NOT NULL DEFAULT 0,
+    PRIMARY KEY(order_id,item_id),
+    CONSTRAINT fk_line_allocation_order FOREIGN KEY(order_id) REFERENCES customer_order(id),
+    CONSTRAINT fk_line_allocation_stock FOREIGN KEY(stock_id) REFERENCES inventory_stock(id),
+    CONSTRAINT ck_line_allocation CHECK(quantity>0 AND refunded_quantity>=0 AND refunded_quantity<=quantity
+        AND subtotal_minor>=0 AND discount_minor>=0 AND paid_minor>=0
+        AND subtotal_minor=discount_minor+paid_minor AND refunded_minor>=0 AND refunded_minor<=paid_minor)
+);
+
+CREATE TABLE IF NOT EXISTS fulfillment_command_version (
+    order_id VARCHAR(36) NOT NULL,
+    revision BIGINT NOT NULL,
+    request_key VARCHAR(96) NOT NULL UNIQUE,
+    command_json TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(order_id,revision),
+    CONSTRAINT fk_fulfillment_command_order FOREIGN KEY(order_id) REFERENCES customer_order(id)
+);
+
+CREATE TABLE IF NOT EXISTS partial_refund (
+    id VARCHAR(36) PRIMARY KEY,
+    order_id VARCHAR(36) NOT NULL,
+    payment_id VARCHAR(36) NOT NULL,
+    user_id VARCHAR(36) NOT NULL,
+    idempotency_key VARCHAR(128) NOT NULL,
+    request_hash VARCHAR(64) NOT NULL,
+    amount_minor BIGINT NOT NULL,
+    currency VARCHAR(16) NOT NULL,
+    reason VARCHAR(255) NOT NULL,
+    status VARCHAR(32) NOT NULL,
+    provider_refund_no VARCHAR(128),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    refunded_at TIMESTAMP NULL,
+    CONSTRAINT uk_partial_refund_key UNIQUE(order_id,idempotency_key),
+    CONSTRAINT fk_partial_refund_order FOREIGN KEY(order_id) REFERENCES customer_order(id),
+    CONSTRAINT fk_partial_refund_payment FOREIGN KEY(payment_id) REFERENCES payment_record(id),
+    CONSTRAINT ck_partial_refund_amount CHECK(amount_minor>=0)
+);
+CREATE INDEX IF NOT EXISTS idx_partial_refund_status ON partial_refund(order_id,status);
+
+CREATE TABLE IF NOT EXISTS partial_refund_item (
+    refund_id VARCHAR(36) NOT NULL,
+    item_id BIGINT NOT NULL,
+    quantity INT NOT NULL,
+    amount_minor BIGINT NOT NULL,
+    PRIMARY KEY(refund_id,item_id),
+    CONSTRAINT fk_partial_refund_item FOREIGN KEY(refund_id) REFERENCES partial_refund(id),
+    CONSTRAINT ck_partial_refund_item CHECK(quantity>0 AND amount_minor>=0)
+);
+
+CREATE TABLE IF NOT EXISTS local_refund_receipt (
+    refund_id VARCHAR(36) PRIMARY KEY,
+    provider_refund_no VARCHAR(128) NOT NULL UNIQUE,
+    payment_id VARCHAR(36) NOT NULL,
+    request_hash VARCHAR(64) NOT NULL,
+    amount_minor BIGINT NOT NULL,
+    currency VARCHAR(16) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_local_refund_receipt FOREIGN KEY(refund_id) REFERENCES partial_refund(id)
+);
+
+-- Accepted flash-sale requests outlive the Redis notification stream.
+CREATE TABLE IF NOT EXISTS flash_sale_request (
+    id VARCHAR(36) PRIMARY KEY,
+    campaign_id BIGINT NOT NULL,
+    user_id VARCHAR(36) NOT NULL,
+    amount_minor BIGINT NOT NULL,
+    status VARCHAR(16) NOT NULL DEFAULT 'PENDING',
+    completed_order_id VARCHAR(36),
+    attempts INT NOT NULL DEFAULT 0,
+    next_attempt_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_error VARCHAR(1000),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT uk_flash_request_buyer UNIQUE (campaign_id, user_id),
+    CHECK (attempts >= 0)
+);
+
+-- Serializes source-authoritative review projection snapshots, including deletions.
+CREATE TABLE IF NOT EXISTS review_projection_head (
+    review_id VARCHAR(64) PRIMARY KEY,
+    revision BIGINT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS product_favorite (
+    user_id VARCHAR(64) NOT NULL,
+    product_id BIGINT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(user_id, product_id),
+    FOREIGN KEY(product_id) REFERENCES product(id)
+);
+CREATE TABLE IF NOT EXISTS cache_invalidation_outbox (
+ id VARCHAR(36) PRIMARY KEY, entity_type VARCHAR(16) NOT NULL, entity_id BIGINT NOT NULL,
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, published_at TIMESTAMP NULL,
+ next_attempt_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, attempts INT DEFAULT 0,last_error VARCHAR(1000)
+);
+
+CREATE TABLE IF NOT EXISTS external_catalog_identity (
+ product_id BIGINT PRIMARY KEY, raw_sha BINARY(32) NOT NULL, source_line BIGINT NOT NULL,
+ source_revision CHAR(64) NOT NULL, import_version VARCHAR(128) NOT NULL,
+ preserved_existing BOOLEAN NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS catalog_version_member (
+ catalog_version VARCHAR(128) NOT NULL, product_id BIGINT NOT NULL,
+ PRIMARY KEY(catalog_version,product_id)
 );

@@ -50,15 +50,21 @@ class InboxClaimService {
                     || !event.eventType().equals(existing.eventType())) {
                 throw new BusinessConflictException("相同消息 ID 的事件类型或负载不一致");
             }
-            if ("PROCESSED".equals(existing.status())) {
+            if ("PROCESSED".equals(existing.status()) || "DEAD".equals(existing.status())) {
                 return false;
             }
-            return mapper.reclaim(
+            boolean acquired = mapper.reclaim(
                     consumer,
                     event.id(),
                     now,
                     now.minus(properties.staleClaimAfter())
             ) == 1;
+            if (!acquired) {
+                // A live claim is not a receipt. Returning success here would let the
+                // broker commit a message whose original executor may have crashed.
+                throw new InboxBusyException(consumer, event.id());
+            }
+            return true;
         }
     }
 

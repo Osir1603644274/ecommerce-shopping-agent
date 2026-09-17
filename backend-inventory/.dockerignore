@@ -1,0 +1,5 @@
+*
+!Dockerfile
+!target/
+target/*
+!target/inventory-service-0.1.0-SNAPSHOT.jar

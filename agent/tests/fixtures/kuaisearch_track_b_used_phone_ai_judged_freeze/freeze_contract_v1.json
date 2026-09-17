@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "track-b-used-phone-ai-judged-freeze-test-contract-v1",
+  "status": "FROZEN_AI_JUDGED_PILOT_NOT_HUMAN_GOLD",
+  "inputSha256": {
+    "blindReviewer": "9d009811821b5d52f9c5bebe3d5c97422021a37a9257fa8ebd1e4546ff4a331b",
+    "blindCaseActionReview": "d7c3beb33b2c5a584583ff343f7634652d87319c5692fe6a1dbb9195588fb4d5",
+    "independentAiAdjudication": "bb5f70cdb64220492b0e6561618f17a7d059ef11812cdf19a66bdcc782d3a150",
+    "independentAiAdjudicationSummary": "eb38b137e4a0b66345079d970e3daa6d1bd1d2e7d7cbd22910f214d61f253c49",
+    "comparisonManifest": "9c800d15f682bfa65b45c85c925e872357c17cb13aac096d8b8ee935829a5110",
+    "formalCases": "136c7a585c4b77d6c582abc7820daa2fb2a78d145a8636a06d1ee31593a75289",
+    "sealedMapping": "f0935e0ffd3b38b915755c945aa713936239deac96766292992f6beff418ba84",
+    "sealedSuggestions": "48c7830fdc91742b85201991ee15e38446200837e328e51be6159e14047425fa"
+  },
+  "expectedRows": {
+    "blindReviewer": 83,
+    "blindCaseActionReview": 8,
+    "candidateQrel": 80,
+    "caseAction": 8,
+    "queryConstraints": 8,
+    "adjudication": 10
+  },
+  "expectedGradeDistribution": {"3": 20, "2": 20, "1": 29, "null": 11},
+  "expectedEligibleDistribution": {"true": 40, "false": 29, "unknown": 11},
+  "expectedFinalBasisDistribution": {
+    "reviewer_sealed_exact_agreement": 70,
+    "independent_ai_adjudication": 10
+  },
+  "semanticPairMapVersion": "track-b-used-phone-case-action-semantic-map-v1",
+  "semanticPairs": {
+    "BLIND-CASE-001": ["retrieve_rank_with_tradeoff_explanation", "RETRIEVE_FILTER_AND_EXPLAIN_TRADEOFF"],
+    "BLIND-CASE-002": ["retrieve_rank_with_priority_tradeoff", "RETRIEVE_FILTER_AND_EXPLAIN_TRADEOFF"],
+    "BLIND-CASE-003": ["retrieve_filter_and_rank", "RETRIEVE_FILTER_AND_RANK"],
+    "BLIND-CASE-004": ["clarify_condition_threshold_before_retrieval", "CLARIFY"],
+    "BLIND-CASE-005": ["compare_visible_candidates", "COMPARE_WITH_FIELD_EVIDENCE"],
+    "BLIND-CASE-006": ["exclude_prior_and_retrieve_replacement", "RETRIEVE_SUBSTITUTES_RETAINING_CONSTRAINTS"],
+    "BLIND-CASE-007": ["abstain_from_unverifiable_guarantees_and_clarify_proxies", "ABSTAIN_OR_EXPLAIN"],
+    "BLIND-CASE-008": ["update_constraints_then_retrieve", "UPDATE_STATE_THEN_RETRIEVE"]
+  }
+}

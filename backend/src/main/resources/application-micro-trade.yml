@@ -1,0 +1,44 @@
+# Include cloud-trade alongside this profile to select the Feign catalog port.
+spring:
+  application:
+    name: commerce-trade
+  flyway:
+    enabled: false
+  cloud:
+    discovery:
+      client:
+        simple:
+          instances:
+            commerce-catalog:
+              - uri: ${CATALOG_INSTANCE_A}
+              - uri: ${CATALOG_INSTANCE_B}
+    loadbalancer:
+      retry:
+        enabled: false
+      configurations: health-check
+      cache:
+        enabled: false
+      health-check:
+        interval: 2s
+        refetch-instances: true
+        refetch-instances-interval: 2s
+        path:
+          default: /actuator/health
+local-life:
+  deployment:
+    role: trade
+    require-internal-token: true
+  trade:
+    catalog-base-url: ""
+  search:
+    enabled: false
+  cache:
+    product:
+      enabled: false
+    shop:
+      enabled: false
+  inventory:
+    remote-enabled: true
+    recovery-enabled: true
+  messaging:
+    consumer-group: ${MICRO_TRADE_CONSUMER_GROUP:commerce-trade-v1}

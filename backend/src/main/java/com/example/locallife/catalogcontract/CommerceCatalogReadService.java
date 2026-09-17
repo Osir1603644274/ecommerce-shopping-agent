@@ -18,15 +18,23 @@ public class CommerceCatalogReadService {
     private final ProductRepository products;
     private final ShopRepository shops;
     private final ObjectMapper json;
+    private final com.example.locallife.product.LocalOfferService offers;
 
     public CommerceCatalogReadService(
             ProductRepository products,
             ShopRepository shops,
             ObjectMapper json
     ) {
+        this(products, shops, json, null);
+    }
+
+    @org.springframework.beans.factory.annotation.Autowired
+    public CommerceCatalogReadService(ProductRepository products, ShopRepository shops, ObjectMapper json,
+            com.example.locallife.product.LocalOfferService offers) {
         this.products = products;
         this.shops = shops;
         this.json = json;
+        this.offers = offers;
     }
 
     public CommerceItemSnapshot requireItem(String rawItemType, Long itemId) {
@@ -43,6 +51,15 @@ public class CommerceCatalogReadService {
     private CommerceItemSnapshot product(Long itemId) {
         Product product = products.findById(itemId)
                 .orElseThrow(() -> new ResourceNotFoundException("商品不存在"));
+        if (!"ACTIVE".equals(product.lifecycleStatus())) {
+            throw new InvalidBusinessStateException("商品已退出在售目录，不能创建新订单");
+        }
+        var local = offers == null ? null : offers.find(itemId).orElse(null);
+        if (local != null) {
+            return new CommerceItemSnapshot("PRODUCT",product.id(),product.title(),local.priceMinor(),
+                    local.currency(),local.version(),evidence("product",product.source(),product.provenanceUrl(),
+                    "local_simulated",product.datasetRevision()));
+        }
         if (product.snapshotPriceMinor() == null
                 || !"verified".equalsIgnoreCase(product.priceStatus())) {
             throw new InvalidBusinessStateException("商品缺少已验证快照价格，不能创建订单");

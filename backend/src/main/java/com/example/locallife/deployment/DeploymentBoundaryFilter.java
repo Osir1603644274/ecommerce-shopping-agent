@@ -22,12 +22,12 @@ import java.util.List;
 class DeploymentBoundaryFilter extends OncePerRequestFilter {
     private static final List<String> CATALOG_PATHS = List.of(
             "/api/products", "/api/admin/products", "/api/shops", "/api/shop-types",
-            "/api/reviews", "/api/recommendations", "/api/user-behaviors",
+            "/api/reviews", "/api/recommendations", "/api/user-behaviors", "/api/product-favorites",
             "/internal/catalog", "/internal/trade-catalog"
     );
     private static final List<String> TRADE_PATHS = List.of(
             "/api/auth", "/api/identity", "/api/orders", "/api/inventory",
-            "/api/payments", "/api/flash-sales", "/api/coupons", "/api/memory"
+            "/api/payments", "/api/flash-sales", "/api/coupons", "/api/memory", "/api/admin/fulfillment"
     );
 
     private final DeploymentProperties properties;
@@ -45,6 +45,8 @@ class DeploymentBoundaryFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
         String path = request.getRequestURI();
+        response.setHeader("X-Service-Role",properties.role());
+        response.setHeader("X-Service-Instance",System.getenv().getOrDefault("SERVICE_INSTANCE_ID","local"));
         if (!roleAllows(path)) {
             write(response, HttpServletResponse.SC_NOT_FOUND, "该服务不拥有此接口");
             return;
@@ -71,7 +73,8 @@ class DeploymentBoundaryFilter extends OncePerRequestFilter {
 
     private static boolean commonPath(String path) {
         return path.startsWith("/actuator/") || "/actuator".equals(path)
-                || "/api/health".equals(path) || "/error".equals(path);
+                || "/api/health".equals(path) || "/error".equals(path)
+                || path.startsWith("/api/diagnostics/backend-traces/");
     }
 
     private static boolean hasPrefix(String path, List<String> prefixes) {

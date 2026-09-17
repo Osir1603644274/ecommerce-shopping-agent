@@ -18,11 +18,11 @@ SHOPPING_TOOL_NAMES = frozenset({
 # These names describe an internal future handoff only.  They are neither
 # public LLM schemas nor complete persisted Harness contracts.
 TRANSACTION_PREVIEW_TOOL_NAMES = frozenset({
-    "preview_order", "preview_cancel_order", "preview_payment",
+    "preview_order", "preview_cancel_order", "preview_payment", "preview_refund",
 })
 TRANSACTION_READ_TOOL_NAMES = frozenset({"query_order_status"})
 TRANSACTION_WRITE_TOOL_NAMES = frozenset({
-    "create_order", "cancel_order", "create_payment",
+    "create_order", "cancel_order", "create_payment", "create_refund",
 })
 
 _ISSUER = object()

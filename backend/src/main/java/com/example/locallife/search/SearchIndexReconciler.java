@@ -21,6 +21,10 @@ class SearchIndexReconciler {
     private final ShopRepository shopRepository;
     private final SearchProperties properties;
     private final MeterRegistry meters;
+    private String reconcileCatalogVersion="";
+
+    @org.springframework.beans.factory.annotation.Value("${local-life.search.reconcile-catalog-version:}")
+    void setReconcileCatalogVersion(String version) { this.reconcileCatalogVersion=version.strip(); }
 
     SearchIndexReconciler(
             ElasticsearchGateway gateway,
@@ -55,8 +59,9 @@ class SearchIndexReconciler {
         try {
             long afterId = 0L;
             while (true) {
-                List<Product> page = productRepository.findByIdAfter(
-                        afterId, properties.reconcileLimit());
+                List<Product> page = reconcileCatalogVersion.isEmpty()
+                        ? productRepository.findByIdAfter(afterId, properties.reconcileLimit())
+                        : productRepository.findPublishedByIdAfter(reconcileCatalogVersion,afterId,properties.reconcileLimit());
                 if (page.isEmpty()) {
                     break;
                 }
@@ -64,7 +69,7 @@ class SearchIndexReconciler {
                         .filter(product -> "ACTIVE".equalsIgnoreCase(product.lifecycleStatus()))
                         .toList());
                 page.stream()
-                        .filter(product -> "DELETED".equalsIgnoreCase(product.lifecycleStatus()))
+                        .filter(product -> !"ACTIVE".equalsIgnoreCase(product.lifecycleStatus()))
                         .forEach(product -> gateway.deleteProduct(product.id(), product.entityVersion()));
                 afterId = page.get(page.size() - 1).id();
                 if (page.size() < properties.reconcileLimit()) {

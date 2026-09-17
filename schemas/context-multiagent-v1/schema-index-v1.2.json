@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "context-multiagent-schema-index-v1.2",
+  "status": "FROZEN_IMPLEMENTATION_AMENDMENT_002",
+  "supersedesForActiveImplementation": "schema-index-v1.1.json",
+  "draft": "https://json-schema.org/draft/2020-12/schema",
+  "schemas": [
+    "run-context.schema.json",
+    "context-item.schema.json",
+    "context-receipt.schema.json",
+    "investigation-set.schema.json",
+    "research-request.schema.json",
+    "research-report.schema.json",
+    "research-merge-receipt.schema.json",
+    "route-decision.schema.json",
+    "model-call-receipt.schema.json"
+  ]
+}

@@ -47,6 +47,7 @@ from .llm import (
 from .rag_advanced import answer_with_advanced_rag_observed, requires_advanced_rag
 from .rag_answer import RagGenerationError, RagRetrievalError, answer_with_rag_observed
 from .review_index_events import listen_for_review_index_events
+from .review_projection_receipts import apply_review_projection
 from .review_index_sync import (
     delete_review_search_indexes,
     upsert_review_search_indexes,
@@ -315,6 +316,13 @@ async def lifespan(_app: FastAPI):
     memory_worker_stop = asyncio.Event()
     critic_queue = None
     try:
+        from .api.commerce_demo import start_java_client
+        await start_java_client()
+        if settings.catalog_workspace_enabled:
+            from .catalog_service import get_catalog_service
+            await get_catalog_service().start()
+            from .catalog_model_client import warm_startup
+            await warm_startup()
         if settings.evidence_critic_enabled:
             from .critic_queue import get_critic_queue
 
@@ -371,6 +379,13 @@ async def lifespan(_app: FastAPI):
                 )
         yield
     finally:
+        if settings.catalog_workspace_enabled:
+            from .catalog_service import get_catalog_service
+            get_catalog_service().close()
+        from .catalog_model_client import close_client as close_catalog_model_client
+        await close_catalog_model_client()
+        from .api.commerce_demo import close_java_client
+        await close_java_client()
         from .domains.ecommerce.tools import close_product_search_clients
 
         await close_product_search_clients()
@@ -417,6 +432,15 @@ app.include_router(task_router)
 app.include_router(memory_bff_router)
 app.include_router(transaction_agent_router)
 app.include_router(commerce_demo_router)
+from .api.commerce_workspace import router as commerce_workspace_router
+from .api import commerce_controls  # Register owner-bound controls before including the router.
+from .api import recommendation_workspace  # Public-history tool shares workspace identity and storage.
+app.include_router(commerce_workspace_router)
+from .backend_observer import BackendObserverMiddleware, router as backend_observer_router
+app.add_middleware(BackendObserverMiddleware)
+app.include_router(backend_observer_router)
+from .api.commerce_capabilities import router as commerce_capabilities_router
+app.include_router(commerce_capabilities_router)
 
 
 def _new_request_id() -> str:
@@ -1025,6 +1049,7 @@ async def _advance_debug_turn(turn: DebugTurn) -> DebugTurn:
         _extract_fact_keys_for_step,
         _extract_tool_schema_dict,
         _project_prior_step_outputs_for_step,
+        _project_step_arguments,
         decide_after_execution,
         decide_after_validation,
         run_harness_step,
@@ -1039,6 +1064,7 @@ async def _advance_debug_turn(turn: DebugTurn) -> DebugTurn:
     from .validator import run_validator_phase
 
     stage = turn.next_stage
+    debug_policies = ({'productKnowledgeUserQuery': turn.message} if settings.product_knowledge_enabled else {})
     if stage == "done":
         return turn
     label, code_file, code_function = _DEBUG_STAGE_CODE[stage]
@@ -1168,6 +1194,7 @@ async def _advance_debug_turn(turn: DebugTurn) -> DebugTurn:
                 user_message=turn.message,
                 candidate_tool_schemas=flat_tools,
                 phase_task_revision=state.revision,
+                system_policies=debug_policies,
             )
             result = await run_planning_step(
                 state,
@@ -1176,6 +1203,7 @@ async def _advance_debug_turn(turn: DebugTurn) -> DebugTurn:
                 client=get_client(),
                 model=settings.deepseek_model,
                 planner_view=planner_view,
+                system_policies=debug_policies,
             )
             state = result.task_state
             next_stage = {
@@ -1218,13 +1246,14 @@ async def _advance_debug_turn(turn: DebugTurn) -> DebugTurn:
             if not pending:
                 raise ValueError("Executor stage has no pending Plan step")
             step = pending[0]
+            prior_outputs = _project_prior_step_outputs_for_step(state, plan, step)
             executor_view = projector.executor_view(
                 plan_id=plan.plan_id,
                 step_id=step.step_id,
                 step_description=step.description,
                 tool_name=step.tool_name,
                 tool_schema=_extract_tool_schema_dict(step.tool_name, schemas),
-                resolved_arguments=dict(step.arguments),
+                resolved_arguments=_project_step_arguments(step, prior_outputs),
                 required_fact_keys=_extract_fact_keys_for_step(step),
                 required_constraint_keys=_extract_constraint_keys_for_step(step),
                 prior_step_outputs=_project_prior_step_outputs_for_step(
@@ -1233,12 +1262,14 @@ async def _advance_debug_turn(turn: DebugTurn) -> DebugTurn:
                     step,
                 ),
                 phase_task_revision=state.revision,
+                system_policies=debug_policies,
             )
             result = await run_executor_step(
                 state,
                 schemas,
                 tool_caller=tool_caller,
                 executor_view=executor_view,
+                system_policies=debug_policies,
             )
             state = result.task_state
             action = decide_after_execution(result)
@@ -1334,6 +1365,7 @@ async def _advance_debug_turn(turn: DebugTurn) -> DebugTurn:
                 model=settings.deepseek_model,
                 tool_caller=tool_caller,
                 projector=projector,
+                system_policies=debug_policies,
             )
             state = result.task_state
             next_stage = (
@@ -2335,6 +2367,7 @@ async def chat_llm(
         if category_id is not None:
             schedule_memory_extraction(
                 browser_session_id=shopping_memory_session,
+                message_id=request_id,
                 user_message=request.message.strip(),
                 category_id=category_id,
                 recipient_scope=request.recipient_scope,
@@ -2355,6 +2388,7 @@ async def chat_llm(
 async def chat_llm_durable(
     request: DurableEcommerceChatRequest,
     authorization: str | None = Header(default=None),
+    shopping_memory_session: str | None = Cookie(default=None, alias="shopping_memory_session"),
 ) -> ChatResponse:
     start = time.perf_counter()
     request_id = _new_request_id()
@@ -2578,6 +2612,14 @@ async def chat_llm_durable(
         if restart_task_id:
             task_kwargs["restart"] = True
             task_kwargs["pause_resume"] = pause_receipt
+        if settings.memory_durable_snapshot_enabled and not exact_resume_replay:
+            memory_resolution = await resolve_memory_run_for_browser_session(
+                shopping_memory_session, category_id=_memory_category_id(task_state),
+                recipient_scope=request.recipient_scope,
+                catalog_revision=settings.memory_active_catalog_revision,
+                task_id=task_state.task_id,
+            )
+            task_kwargs["memory_run_binding"] = memory_resolution.binding
         direct_answer = reference_failure_answer or (
             _task_relation_direct_answer(task_relation, task_state)
             if task_relation is not None and task_state is not None
@@ -3047,6 +3089,7 @@ async def chat_llm_stream(
                 if category_id is not None:
                     schedule_memory_extraction(
                         browser_session_id=shopping_memory_session,
+                        message_id=request_id,
                         user_message=request.message.strip(),
                         category_id=category_id,
                         recipient_scope=request.recipient_scope,
@@ -3241,11 +3284,11 @@ async def pause_session_run(session_id: str) -> dict[str, Any]:
     """Request cooperative pause without interrupting an in-flight tool."""
 
     if not (
-        settings.agent_control_runtime == "react_v1"
-        and settings.agent_react_live_enabled
+        settings.agent_control_runtime in {"fixed_v1", "react_v1"}
+        and (settings.agent_control_runtime == "fixed_v1" or settings.agent_react_live_enabled)
         and settings.agent_graph_v2_durable_enabled
     ):
-        raise HTTPException(status_code=409, detail="当前部署未启用 durable react_v1")
+        raise HTTPException(status_code=409, detail="当前部署未启用可暂停的 durable runtime")
     state = await get_session_task_state(session_id)
     if state is None:
         raise HTTPException(status_code=404, detail="该会话尚未绑定TaskState")
@@ -3263,11 +3306,12 @@ async def pause_session_run(session_id: str) -> dict[str, Any]:
     from .graph.runtime import CONTROL_POLICY_REVISIONS
 
     cursor = await read_task_cursor(state.task_id)
-    expected_policy_revision = CONTROL_POLICY_REVISIONS["react_v1"]
+    control_policy = settings.agent_control_runtime
+    expected_policy_revision = CONTROL_POLICY_REVISIONS[control_policy]
     if (
         not isinstance(cursor, dict)
         or cursor.get("sessionOwnerHash") != session_owner_hash(session_id)
-        or cursor.get("controlPolicy") != "react_v1"
+        or cursor.get("controlPolicy") != control_policy
         or cursor.get("policyRevision") != expected_policy_revision
         or not isinstance(cursor.get("runId"), str)
         or not isinstance(cursor.get("threadId"), str)
@@ -3281,7 +3325,7 @@ async def pause_session_run(session_id: str) -> dict[str, Any]:
         session_id=session_id,
         run_id=cursor["runId"],
         thread_id=cursor["threadId"],
-        control_policy="react_v1",
+        control_policy=control_policy,
     )
     return public_pause_receipt(receipt) or {}
 
@@ -3339,10 +3383,10 @@ async def get_agent_runtime_status() -> dict[str, Any]:
 def sync_review_vector(
     review_id: str,
     request: ReviewVectorSyncRequest,
+    projection_revision: int | None = Header(default=None, alias="X-Projection-Revision", ge=1),
 ) -> ReviewVectorSyncResponse:
     try:
-        upsert_review_search_indexes(
-            {
+        review = {
                 "reviewId": review_id,
                 "shopId": request.shop_id,
                 "shopName": request.shop_name,
@@ -3353,7 +3397,8 @@ def sync_review_vector(
                 "translationStatus": request.translation_status,
                 "tags": request.tags,
             }
-        )
+        apply_review_projection(review_id, projection_revision, {"operation":"upsert", "review":review},
+                                lambda: upsert_review_search_indexes(review))
     except Exception as exc:
         logger.exception("评论向量 upsert 失败: reviewId=%s", review_id)
         raise HTTPException(status_code=503, detail="评论向量同步失败") from exc
@@ -3371,9 +3416,11 @@ def sync_review_vector(
     tags=["系统接口"],
     summary="删除单条评论向量",
 )
-def remove_review_vector(review_id: str) -> ReviewVectorSyncResponse:
+def remove_review_vector(review_id: str,
+                         projection_revision: int | None = Header(default=None, alias="X-Projection-Revision", ge=1)) -> ReviewVectorSyncResponse:
     try:
-        delete_review_search_indexes(review_id)
+        apply_review_projection(review_id, projection_revision, {"operation":"delete", "reviewId":review_id},
+                                lambda: delete_review_search_indexes(review_id))
     except Exception as exc:
         logger.exception("评论向量 delete 失败: reviewId=%s", review_id)
         raise HTTPException(status_code=503, detail="评论向量同步失败") from exc

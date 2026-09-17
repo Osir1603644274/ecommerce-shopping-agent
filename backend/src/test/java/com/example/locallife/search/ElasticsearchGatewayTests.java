@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ElasticsearchGatewayTests {
     private HttpServer server;
@@ -69,6 +70,30 @@ class ElasticsearchGatewayTests {
         assertThat(result).isEmpty();
         assertThat(gateway.circuitOpen()).isTrue();
         assertThat(gateway.health().getStatus().getCode()).isEqualTo("DEGRADED");
+    }
+
+    @Test
+    void replayedDocumentDeletionSucceedsWithoutOpeningCircuit() throws Exception {
+        server = HttpServer.create(new InetSocketAddress(0), 0);
+        server.createContext("/catalog-products-v2/_doc/42", exchange ->
+                respond(exchange,404,"{\"_id\":\"42\",\"result\":\"not_found\"}"));
+        server.start();
+        var gateway=gateway("http://localhost:"+server.getAddress().getPort(),1);
+        gateway.deleteProduct(42,3);
+        gateway.deleteProduct(42,3);
+        assertThat(gateway.circuitOpen()).isFalse();
+    }
+
+    @org.junit.jupiter.params.ParameterizedTest
+    @org.junit.jupiter.params.provider.ValueSource(ints={404,409})
+    void missingIndexAndVersionConflictRemainFailures(int status) throws Exception {
+        server = HttpServer.create(new InetSocketAddress(0), 0);
+        server.createContext("/catalog-products-v2/_doc/42", exchange ->
+                respond(exchange,status,"{\"error\":{\"type\":\"unrecoverable_without_repair\"}}"));
+        server.start();
+        var gateway=gateway("http://localhost:"+server.getAddress().getPort(),1);
+        assertThatThrownBy(()->gateway.deleteProduct(42,3)).isInstanceOf(IllegalStateException.class);
+        assertThat(gateway.circuitOpen()).isTrue();
     }
 
     private static ElasticsearchGateway gateway(String baseUrl, int failureThreshold) {

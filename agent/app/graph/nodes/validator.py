@@ -239,7 +239,9 @@ async def validator_node(
             if action == "task_completed"
             else "insufficient_evidence"
             if action == "ready_for_replanning"
-            else "failed"
+            else "failed",
+            detail={"decision": action},
+            task_revision=current.revision,
         )
         trace_started = False
 

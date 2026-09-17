@@ -662,6 +662,7 @@ def accept_replanner_model_output(
 
 
 def build_replanner_messages(context: ReplannerContext) -> list[dict[str, Any]]:
+    from .context_input import is_experimental_context_input, phase_context
     context_payload = context.model_dump(by_alias=True, mode="json")
     available_sources = _available_argument_sources(context)
     policy_keys = available_sources["system_policy"]["keys"]
@@ -673,6 +674,10 @@ def build_replanner_messages(context: ReplannerContext) -> list[dict[str, Any]]:
         + "如果没有合法来源支持 limit，不得添加 limit；无法形成安全的新路线时返回 "
         "needs_user_input，不得伪造来源。"
     )
+    if is_experimental_context_input():
+        return [{"role": "system", "content": REPLANNER_SYSTEM_PROMPT + "\n\n" + dynamic_contract},
+                {"role": "user", "content": json.dumps(phase_context("replanner", {
+                    "context": context_payload, "availableArgumentSources": available_sources}), ensure_ascii=False)}]
     return [
         {
             "role": "system",

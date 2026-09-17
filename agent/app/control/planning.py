@@ -37,7 +37,7 @@ PlanArgumentSourceKind = Literal[
 # strong-typed boundary; the Planner copies them verbatim, never invents them.
 SHOPPING_GUIDE_SOURCE_REFERENCES = frozenset(
     {"category", "categoryCode", "requirements", "comparedIds",
-     "scopeId", "scopeRankedItemIds", "rankingIntent"}
+     "scopeId", "scopeRankedItemIds", "scopeSourceQuery", "rankingIntent"}
 )
 
 # The five legal argument-source shapes, as machine-readable contract data.

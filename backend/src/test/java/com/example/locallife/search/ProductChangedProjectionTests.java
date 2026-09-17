@@ -21,7 +21,7 @@ class ProductChangedProjectionTests {
     private final ElasticsearchGateway gateway = mock(ElasticsearchGateway.class);
     private final ObjectMapper json = new ObjectMapper();
     private final ProductChangedProjection projection = new ProductChangedProjection(
-            products, cursor, Optional.of(gateway), json, new SimpleMeterRegistry());
+            products, cursor, Optional.of(gateway), json, new SimpleMeterRegistry(), mock(CacheInvalidationPublisher.class));
 
     @Test
     void appliesNewerUpsertAndAdvancesCursorAfterIndexing() throws Exception {

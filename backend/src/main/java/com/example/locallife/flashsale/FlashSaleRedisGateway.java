@@ -26,7 +26,11 @@ public class FlashSaleRedisGateway {
                     """, Long.class);
     private static final DefaultRedisScript<Long> COMPENSATE_SCRIPT =
             new DefaultRedisScript<>("""
+                    if redis.call('HGET', KEYS[3], ARGV[1]) ~= ARGV[2] then
+                        return 0
+                    end
                     if redis.call('SREM', KEYS[2], ARGV[1]) == 1 then
+                        redis.call('HDEL', KEYS[3], ARGV[1])
                         redis.call('INCR', KEYS[1])
                         return 1
                     end
@@ -67,8 +71,8 @@ public class FlashSaleRedisGateway {
                     List.of(
                             stockKey(campaignId),
                             buyersKey(campaignId),
-                            properties.stream(),
-                            readyKey(campaignId)
+                            readyKey(campaignId),
+                            reservationKey(campaignId)
                     ),
                     orderId,
                     userId,
@@ -79,10 +83,17 @@ public class FlashSaleRedisGateway {
         if (result == null) {
             throw new IllegalStateException("Redis 秒杀脚本没有返回结果");
         }
+        com.example.locallife.diagnostics.BackendTrace.mark("redis_lua", "秒杀原子预扣", switch(result.intValue()) {
+            case 0 -> "accepted"; case 1 -> "sold_out"; case 2 -> "duplicate"; case 3 -> "not_ready"; default -> "unknown";
+        });
         return result;
     }
 
     public void rebuild(FlashSaleCampaign campaign, List<String> buyerIds) {
+        rebuild(campaign, buyerIds, java.util.Map.of());
+    }
+
+    void rebuild(FlashSaleCampaign campaign, List<String> buyerIds, java.util.Map<String,String> reservations) {
         String token = UUID.randomUUID().toString();
         String lockKey = rebuildLockKey(campaign.id());
         Boolean locked = redisTemplate.opsForValue()
@@ -94,6 +105,7 @@ public class FlashSaleRedisGateway {
             redisTemplate.delete(readyKey(campaign.id()));
             redisTemplate.delete(stockKey(campaign.id()));
             redisTemplate.delete(buyersKey(campaign.id()));
+            redisTemplate.delete(reservationKey(campaign.id()));
             redisTemplate.opsForValue().set(
                     stockKey(campaign.id()),
                     campaign.availableStock().toString()
@@ -103,6 +115,9 @@ public class FlashSaleRedisGateway {
                         buyersKey(campaign.id()),
                         buyerIds.toArray(String[]::new)
                 );
+            }
+            if (!reservations.isEmpty()) {
+                redisTemplate.opsForHash().putAll(reservationKey(campaign.id()), reservations);
             }
             redisTemplate.opsForValue().set(readyKey(campaign.id()), "1");
         } finally {
@@ -114,12 +129,16 @@ public class FlashSaleRedisGateway {
         return Boolean.TRUE.equals(redisTemplate.hasKey(readyKey(campaignId)));
     }
 
-    public void compensate(Long campaignId, String userId) {
+    public void compensate(Long campaignId, String userId, String orderId) {
         redisTemplate.execute(
                 COMPENSATE_SCRIPT,
-                List.of(stockKey(campaignId), buyersKey(campaignId)),
-                userId
+                List.of(stockKey(campaignId), buyersKey(campaignId), reservationKey(campaignId)),
+                userId, orderId
         );
+    }
+
+    private static String reservationKey(Long campaignId) {
+        return "flash:" + HASH_TAG + ":campaign:" + campaignId + ":reservations";
     }
 
     private static String stockKey(Long campaignId) {

@@ -6,3 +6,22 @@ __pycache__/
 .pytest_cache/
 build/
 *.egg-info/
+
+# Keep evaluation code and small runtime/test fixtures, not historical runs
+# (which contain recursively copied source snapshots and tens of GB of output).
+evaluation/*
+!evaluation/*.py
+!evaluation/*.json
+!evaluation/*.jsonl
+!evaluation/assets/
+!evaluation/assets/**
+!evaluation/fixtures/
+!evaluation/fixtures/**
+!evaluation/schemas/
+!evaluation/schemas/**
+
+# Re-apply cache exclusions after the fixture allow-list.
+**/__pycache__/
+**/*.py[cod]
+rag_benchmarks/
+translation_runs/

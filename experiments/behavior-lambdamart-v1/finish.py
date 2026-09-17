@@ -1,0 +1,47 @@
+"""Combine the two frozen development decisions and historical regression checks."""
+from run import *
+REC=Path('D:/agent-datasets/behavior-lambdamart-recent-v1')
+assert read(OUT/'FINAL_VALIDATION.json')['status']=='PASS' and read(REC/'FINAL_VALIDATION.json')['status']=='PASS'
+r=read(OUT/'RESULT.json');recent=read(REC/'RESULT.json');selection=read(REC/'FROZEN_SELECTION.json')
+summary={'stage1':r['selection'],'stage2':selection,'recent':recent,'production_switched':False}
+save('COMBINED_SUMMARY.json',summary)
+base=r['splits']['test']['models']['mlp16']['ndcg10_all'];pick=selection['selected']
+new=recent['test']['ndcg10_all'] if pick=='recent23' else r['splits']['test']['models']['binary16']['ndcg10_all']
+ci=recent['test']['vs_mlp16'] if pick=='recent23' else r['splits']['test']['comparisons']['binary16-minus-mlp16']
+lines=['# KuaiSearch 个性化行为排序：本轮结果','',
+'2026-09-17。完成 12 次训练：3 组同特征/目标对照 × 3 种子，再做 1 组近期关系特征增量 × 3 种子。全部配置仅由开发集选择，冻结后统一进行已暴露历史回归评测。','',
+'| 方案 | 开发 nDCG@10 | 历史回归 nDCG@10 | 历史回归有点击请求 nDCG@10 |','|---|---:|---:|---:|']
+names={'mlp16':'既有 MLP，16 特征','binary16':'GBDT/BCE，16 特征','rank16':'LambdaMART，16 特征','rank11':'LambdaMART，无历史 11 特征'}
+for a,label in names.items():
+    d=r['splits']['dev']['models'][a];t=r['splits']['test']['models'][a]
+    lines.append(f"| {label} | {d['ndcg10_all']:.6f} | {t['ndcg10_all']:.6f} | {t['ndcg10_positive']:.6f} |")
+lines.append(f"| GBDT/BCE，加近期关系共 23 特征 | {recent['dev']['ndcg10_all']:.6f} | {recent['test']['ndcg10_all']:.6f} | {recent['test']['ndcg10_positive']:.6f} |")
+lines+=['','## 结论与归因','',
+f"- 开发集选择 **{pick}**；对应历史回归相对既有 MLP：**{base:.6f} → {new:.6f}**（相对 {(new/base-1)*100:+.2f}%），配对差值 95% 区间 [{ci['ci95'][0]:+.6f}, {ci['ci95'][1]:+.6f}]。",
+'- 当前配置下 BCE 树在开发集优于 LambdaMART，因此第二阶段只扩充 BCE 树的近期关系特征；不能据此判断 LambdaMART 普遍不适用。',
+f"- 7 项近期关系增量相对原 16 特征 BCE 树：开发 Δ {recent['dev']['vs_binary16']['delta']:+.6f}；历史回归 Δ {recent['test']['vs_binary16']['delta']:+.6f}，95% 区间 [{recent['test']['vs_binary16']['ci95'][0]:+.6f}, {recent['test']['vs_binary16']['ci95'][1]:+.6f}]。",
+'- '+('近期关系历史回归差值区间略高于 0，但开发区间仍跨 0；这是有限增量证据，尚不能声称跨分区稳定提升。' if recent['test']['vs_binary16']['ci95'][0]>0 else '近期关系尚未显示稳定的独立增量，不把总体模型差值全部算作个性化收益。'),
+'- MLP 原按 dev LogLoss 选 checkpoint，树按 dev nDCG 选；二者对比是完整方案对比。binary16 与 rank16 使用同树参数，可比较训练目标；rank16 与 rank11 是历史特征组消融。','',
+'## 数据与计分','',
+'- 训练 20,192 请求 / 647,637 曝光；开发 13,481 / 448,658；历史回归 16,541 / 494,271。候选集合和二元点击标签未改。',
+'- 16,541 条回归请求中 8,456 条有点击，8,085 条没有点击。主表全部请求计分，零点击记 0；所以该表全部请求 nDCG 的理论最高值为 8,456 / 16,541 ≈ 0.5112。正点击子集仅是另一个分母，不能替换主结果。',
+'- 近期特征：近 20 请求（含边界同时间请求）内商品/品牌/类目点击份额，最近有点击的时间组中相同三项份额，以及近期点击数。不存在准确顺序时按同时间组聚合。',
+'- 严格过去历史；dev/回归历史截止训练时间。新品牌/类目关系特征不将未知 ID=0 视作匹配。没有使用当前点击标签构建输入。',
+'- 按原始分数排序、同分沿候选原顺序。三种子逐请求指标先平均，再做 2000 次用户簇 bootstrap；不确定性条件于固定三种子，不是全部训练随机性的总体保证。',
+'- 测试文件在训练前仅作结构/标签对齐核验。预测和指标在开发选择冻结后产生。历史回归不是独立新盲测；该指标不能与人工相关性 pooled nDCG=0.83 或其他仓库不同协议的 nDCG 横比。','',
+'## 下一步与接入边界','',
+'保留本轮开发选出的离线方案。进一步扩充应优先做候选与历史商品的文本/语义匹配，并为最终选择预留新的时间窗口；交叉编码分数要先审查其训练查询与行为评测是否重叠。',
+'现有匿名公共用户可以用于公开历史演示；真实购物用户需使用自己的历史。没有把模型切为默认排序，没有改前端、Java 服务或用户数据。',
+'## 可复核材料','',
+'- [第一阶段结果与协议](RESULT.md)',
+'- [正反真实开发案例](DEV_CASES.md)',
+'- 模型/预测/输入哈希：`D:/agent-datasets/behavior-lambdamart-v1/` 与 `D:/agent-datasets/behavior-lambdamart-recent-v1/`。',
+'- 新代码和预先写出的计划：`F:/agent/experiments/behavior-lambdamart-v1/`。',
+'- 第二阶段依次运行 recent.py build、fit；两个阶段冻结后，run.py evaluate、recent.py evaluate；分别 verify。不可覆盖已有目录。',
+'- 实验只借鉴开源项目的近期行为关系思想，自行实现此处的特征与训练；没有继承对方公开结果。']
+(DOC/'SUMMARY.md').write_text('\n'.join(lines)+'\n',encoding='utf8')
+code=DOC/'code-snapshot';code.mkdir(exist_ok=True)
+for p in HERE.iterdir():
+    if p.is_file() and p.suffix in {'.py','.md'}:(code/p.name).write_bytes(p.read_bytes())
+(DOC/'SHA256.json').write_text(json.dumps({str(p):sha(p) for p in DOC.rglob('*') if p.is_file() and p.name!='SHA256.json'},indent=2),encoding='utf8')
+print('SUMMARY',pick,base,new,ci,flush=True)

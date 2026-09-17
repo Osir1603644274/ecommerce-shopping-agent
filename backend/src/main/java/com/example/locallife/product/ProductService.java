@@ -5,6 +5,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
+import java.util.Set;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -15,12 +20,12 @@ public class ProductService {
     private final ProductRepository repository;
     private final Optional<ProductCache> cache;
     private final Optional<ProductSearchPort> search;
+    private LocalOfferService localOffers;
 
     public ProductService(ProductRepository repository, Optional<ProductCache> cache) {
         this(repository, cache, Optional.empty());
     }
 
-    @Autowired
     public ProductService(
             ProductRepository repository,
             Optional<ProductCache> cache,
@@ -29,6 +34,12 @@ public class ProductService {
         this.repository = repository;
         this.cache = cache;
         this.search = search;
+    }
+
+    @Autowired
+    public ProductService(ProductRepository repository,Optional<ProductCache> cache,
+            Optional<ProductSearchPort> search,LocalOfferService localOffers) {
+        this(repository,cache,search); this.localOffers=localOffers;
     }
 
     public List<ProductSummaryResponse> list(
@@ -52,10 +63,18 @@ public class ProductService {
             Long maxPriceMinor,
             Integer limit
     ) {
+        return searchWithTrace(query,category,brand,minPriceMinor,maxPriceMinor,limit,null);
+    }
+
+    public ProductSearchResult searchWithTrace(String query,String category,String brand,
+            Long minPriceMinor,Long maxPriceMinor,Integer limit,String catalogVersion) {
         String normalizedQuery = normalize(query);
         String normalizedCategory = normalize(category);
         String normalizedBrand = normalize(brand);
         int normalizedLimit = normalizeLimit(limit);
+        String version = normalize(catalogVersion);
+        Set<Long> members = version == null ? null : repository.findPublishedByIdAfter(version,0L,MAX_LIMIT)
+                .stream().map(Product::id).collect(Collectors.toSet());
         if (normalizedQuery != null && search.isPresent()) {
             Optional<List<Long>> searchIds = search.get().search(
                     normalizedQuery,
@@ -66,11 +85,13 @@ public class ProductService {
                     normalizedLimit
             );
             if (searchIds.isPresent()) {
-                List<Long> recalled = searchIds.get();
-                List<ProductSummaryResponse> products = recalled.stream()
-                        .map(repository::findById)
-                        .flatMap(Optional::stream)
-                        .filter(this::hasAuthoritativeCommerceFacts)
+                List<Long> recalled = searchIds.get().stream()
+                        .filter(id -> members == null || members.contains(id)).toList();
+                Map<Long, Product> byId = repository.findByIds(recalled).stream()
+                        .collect(Collectors.toMap(Product::id, Function.identity()));
+                // SQL IN does not preserve ES rank; restore it, including repeated IDs.
+                List<Product> ordered = recalled.stream().map(byId::get).filter(Objects::nonNull).toList();
+                List<ProductSummaryResponse> products = authoritativeProducts(ordered).stream()
                         .filter(product -> matchesHardConstraints(
                                 product,
                                 normalizedCategory,
@@ -87,15 +108,18 @@ public class ProductService {
             }
         }
         boolean controlledSearchFallback = normalizedQuery != null && search.isPresent();
-        List<ProductSummaryResponse> products = repository.findByFilters(
+        List<Product> candidates = version != null
+                ? repository.findByCatalogFilters(version,normalizedQuery,normalizedCategory,normalizedBrand,
+                        minPriceMinor,maxPriceMinor,normalizedLimit)
+                : repository.findByFilters(
                         normalizedQuery,
                         normalizedCategory,
                         normalizedBrand,
                         minPriceMinor,
                         maxPriceMinor,
-                        normalizedLimit)
-                .stream()
-                .filter(product -> !controlledSearchFallback || hasAuthoritativeCommerceFacts(product))
+                        normalizedLimit);
+        List<ProductSummaryResponse> products = (controlledSearchFallback
+                ? authoritativeProducts(candidates) : candidates).stream()
                 .map(this::toSummary)
                 .toList();
         List<String> degraded = normalizedQuery != null && search.isPresent()
@@ -146,7 +170,19 @@ public class ProductService {
     }
 
     public List<ProductDetailResponse> resolve(List<Long> ids) {
-        return ids.stream().distinct().map(this::get).flatMap(Optional::stream).toList();
+        List<Long> unique = ids.stream().distinct().toList();
+        if (unique.isEmpty()) return List.of();
+        Map<Long, Product> products = repository.findByIds(unique).stream()
+                .filter(p -> !"DELETED".equalsIgnoreCase(p.lifecycleStatus()))
+                .collect(Collectors.toMap(Product::id, Function.identity()));
+        List<Long> present = unique.stream().filter(products::containsKey).toList();
+        if (present.isEmpty()) return List.of();
+        // This endpoint verifies a recalled candidate batch. Read inventory once
+        // for the batch, not once per product over the remote service. Do not
+        // treat a dependency failure as empty/zero stock or use stale cache.
+        Map<Long, ProductCommerceFacts> facts = repository.findCommerceFactsByIds(present).stream()
+                .collect(Collectors.toMap(ProductCommerceFacts::productId, Function.identity()));
+        return present.stream().map(id -> toDetail(products.get(id), facts.get(id))).toList();
     }
 
     private Optional<ProductDetailResponse> waitForCacheRebuild(Long id, ProductCache productCache) {
@@ -167,7 +203,7 @@ public class ProductService {
 
     private Optional<ProductDetailResponse> queryProduct(Long id) {
         return repository.findById(id)
-                .filter(product -> "ACTIVE".equalsIgnoreCase(product.lifecycleStatus()))
+                .filter(product -> !"DELETED".equalsIgnoreCase(product.lifecycleStatus()))
                 .map(this::toDetail);
     }
 
@@ -193,6 +229,10 @@ public class ProductService {
 
     private ProductDetailResponse toDetail(Product product) {
         ProductCommerceFacts commerce = repository.findCommerceFacts(product.id()).orElse(null);
+        return toDetail(product, commerce);
+    }
+
+    private ProductDetailResponse toDetail(Product product, ProductCommerceFacts commerce) {
         List<ProductAttributeResponse> attributes = repository.findAttributes(product.id()).stream()
                 .map(attribute -> new ProductAttributeResponse(
                         attribute.key(), attribute.valueType(), attribute.rawValue(), attribute.normalizedText(),
@@ -247,14 +287,29 @@ public class ProductService {
                 && (maxPriceMinor == null || product.snapshotPriceMinor() <= maxPriceMinor);
     }
 
-    private boolean hasAuthoritativeCommerceFacts(Product product) {
-        return repository.findCommerceFacts(product.id())
+    private List<Product> authoritativeProducts(List<Product> products) {
+        if (products.isEmpty()) return List.of();
+        List<Long> activeIds = products.stream().filter(p -> "ACTIVE".equals(p.lifecycleStatus()))
+                .map(Product::id).distinct().toList();
+        Set<Long> offered = localOffers == null || activeIds.isEmpty()
+                ? Set.of() : localOffers.findProductIds(activeIds);
+        List<Long> remaining = products.stream()
+                .filter(p -> !("ACTIVE".equals(p.lifecycleStatus()) && offered.contains(p.id())))
+                .map(Product::id).distinct().toList();
+        Map<Long, ProductCommerceFacts> factsById = remaining.isEmpty() ? Map.of()
+                : repository.findCommerceFactsByIds(remaining).stream()
+                    .collect(Collectors.toMap(ProductCommerceFacts::productId, Function.identity()));
+        return products.stream().filter(product -> {
+            // Sold-out local offers stay searchable; checkout checks current stock.
+            if ("ACTIVE".equals(product.lifecycleStatus()) && offered.contains(product.id())) return true;
+            return Optional.ofNullable(factsById.get(product.id()))
                 .filter(facts -> facts.entityVersion().equals(product.entityVersion()))
                 .filter(facts -> "ACTIVE".equalsIgnoreCase(facts.lifecycleStatus()))
                 .filter(facts -> "verified".equalsIgnoreCase(facts.priceStatus()))
                 .filter(facts -> facts.snapshotPriceMinor() != null)
                 .filter(facts -> facts.availableQuantity() != null && facts.availableQuantity() > 0)
                 .isPresent();
+        }).toList();
     }
 
     private static boolean categoryMatches(Product product, String category) {

@@ -1,0 +1,31 @@
+server:
+  port: ${SERVER_PORT:8083}
+  tomcat:
+    threads:
+      max: 32
+    max-http-form-post-size: 64KB
+spring:
+  application:
+    name: inventory-service
+  datasource:
+    url: ${INVENTORY_DB_URL}
+    username: ${INVENTORY_DB_USER}
+    password: ${INVENTORY_DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 8
+      minimum-idle: 1
+      connection-timeout: 2000
+      connection-init-sql: SET SESSION innodb_lock_wait_timeout=3
+  flyway:
+    enabled: ${INVENTORY_MIGRATE:false}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+inventory:
+  write-token: ${INVENTORY_WRITE_TOKEN}
+  read-token: ${INVENTORY_READ_TOKEN}

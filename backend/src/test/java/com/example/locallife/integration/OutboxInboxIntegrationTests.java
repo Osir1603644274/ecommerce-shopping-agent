@@ -107,4 +107,16 @@ class OutboxInboxIntegrationTests {
                 .isInstanceOf(BusinessConflictException.class)
                 .hasMessageContaining("负载不一致");
     }
+
+    @Test
+    void crashedClaimMustNotAcknowledgeUntilItCanBeRecovered() {
+        var event = new EventEnvelope("crash-claim", "ORDER", "o-1", "order.created.v1", "{}", LocalDateTime.now());
+        assertThat(inboxClaims.claim("recovery-test", event)).isTrue();
+        assertThatThrownBy(() -> inboxClaims.claim("recovery-test", event)).isInstanceOf(InboxBusyException.class);
+        jdbcTemplate.update("UPDATE inbox_event SET claimed_at=? WHERE event_id=?",
+                LocalDateTime.now(java.time.ZoneOffset.UTC).minusMinutes(10),event.id());
+        assertThat(inboxClaims.claim("recovery-test", event)).isTrue();
+        inboxClaims.processed("recovery-test",event.id());
+        assertThat(inboxClaims.claim("recovery-test",event)).isFalse();
+    }
 }

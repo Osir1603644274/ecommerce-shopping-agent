@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @Profile("cloud-trade")
 @FeignClient(
-        name = "commerceCatalog",
+        name = "commerce-catalog",
+        contextId = "commerceCatalog",
         url = "${local-life.trade.catalog-base-url:http://catalog-search-service:8081}"
 )
 interface RemoteCommerceCatalogClient {

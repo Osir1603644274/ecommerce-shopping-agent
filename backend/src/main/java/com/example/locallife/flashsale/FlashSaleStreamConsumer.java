@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
         name = "enabled",
         havingValue = "true"
 )
+@org.springframework.boot.autoconfigure.condition.ConditionalOnExpression("'${local-life.flash-sale.transport:rocketmq}' == 'legacy-stream'")
 class FlashSaleStreamConsumer {
     private static final Logger log = LoggerFactory.getLogger(FlashSaleStreamConsumer.class);
     private final StringRedisTemplate redisTemplate;
@@ -39,6 +40,7 @@ class FlashSaleStreamConsumer {
     private final FlashSaleRedisGateway redisGateway;
     private final ObjectMapper objectMapper;
     private final String consumerName;
+    private String pendingCursor;
 
     FlashSaleStreamConsumer(
             StringRedisTemplate redisTemplate,
@@ -98,12 +100,14 @@ class FlashSaleStreamConsumer {
         PendingMessages pending = redisTemplate.opsForStream().pending(
                 properties.stream(),
                 properties.consumerGroup(),
-                Range.unbounded(),
+                pendingCursor == null ? Range.unbounded() : Range.rightUnbounded(Range.Bound.exclusive(pendingCursor)),
                 100
         );
         if (pending == null) {
             return;
         }
+        var page = pending.stream().toList();
+        pendingCursor = page.size() < 100 ? null : page.get(page.size()-1).getId().getValue();
         List<PendingMessage> stale = pending.stream()
                 .filter(message -> message.getElapsedTimeSinceLastDelivery()
                         .compareTo(properties.claimIdleAfter()) >= 0)
@@ -128,7 +132,7 @@ class FlashSaleStreamConsumer {
         ));
         if (claimed != null) {
             for (MapRecord<String, Object, Object> record : claimed) {
-                processRecord(
+                processSafely(
                         record,
                         deliveryCounts.getOrDefault(record.getId().getValue(), 1L)
                 );
@@ -144,36 +148,60 @@ class FlashSaleStreamConsumer {
             return;
         }
         for (MapRecord<String, Object, Object> record : records) {
-            processRecord(record, deliveryCount);
+            processSafely(record, deliveryCount);
         }
     }
 
-    private void processRecord(
+    private void processSafely(MapRecord<String, Object, Object> record, long deliveryCount) {
+        try {
+            processRecord(record, deliveryCount);
+        } catch (RuntimeException failure) {
+            log.warn("Flash-sale delivery remains pending: {}", record.getId(), failure);
+        }
+    }
+
+    void processRecord(
             MapRecord<String, Object, Object> record,
             long deliveryCount
     ) {
         Map<Object, Object> fields = record.getValue();
-        if (!fields.containsKey("orderId")) {
+        if ("true".equals(String.valueOf(fields.get("bootstrap")))) {
             acknowledge(record);
             return;
         }
-        Long campaignId = Long.valueOf(required(fields, "campaignId"));
-        String userId = required(fields, "userId");
+        Long campaignId;
+        String userId;
+        String orderId;
+        Long amount;
+        try {
+            campaignId = Long.valueOf(required(fields, "campaignId"));
+            userId = required(fields, "userId");
+            orderId = required(fields, "orderId");
+            amount = Long.valueOf(required(fields, "amountMinor"));
+        } catch (IllegalArgumentException malformed) {
+            // No trustworthy business identity: quarantine, never release somebody's stock.
+            persistenceService.deadLetter(record.getId().getValue(), payload(record, fields),
+                    Math.toIntExact(deliveryCount), malformed);
+            acknowledge(record);
+            return;
+        }
         try {
             persistenceService.persist(
-                    required(fields, "orderId"),
+                    orderId,
                     campaignId,
                     userId,
-                    Long.valueOf(required(fields, "amountMinor")),
+                    amount,
                     record.getId().getValue()
             );
-            acknowledge(record);
         } catch (RuntimeException exception) {
             if (deliveryCount < properties.maxAttempts()) {
                 throw exception;
             }
             deadLetter(record, fields, campaignId, userId, deliveryCount, exception);
+            return;
         }
+        // An ACK transport failure must never be interpreted as a failed business transaction.
+        acknowledge(record);
     }
 
     private void deadLetter(
@@ -185,18 +213,16 @@ class FlashSaleStreamConsumer {
             RuntimeException failure
     ) {
         try {
-            Map<String, String> traceablePayload = new LinkedHashMap<>();
-            traceablePayload.put("streamMessageId", record.getId().getValue());
-            fields.forEach((key, value) ->
-                    traceablePayload.put(String.valueOf(key), String.valueOf(value)));
-            String payload = objectMapper.writeValueAsString(traceablePayload);
-            persistenceService.deadLetter(
+            boolean compensate = persistenceService.deadLetterOrder(
                     record.getId().getValue(),
-                    payload,
+                    payload(record, fields),
                     Math.toIntExact(deliveryCount),
-                    failure
+                    failure, required(fields, "orderId"), campaignId, userId
             );
-            redisGateway.compensate(campaignId, userId);
+            if (compensate) {
+                redisGateway.compensate(campaignId, userId, required(fields, "orderId"));
+                persistenceService.compensationCompleted(required(fields, "orderId"));
+            }
             acknowledge(record);
         } catch (Exception deadLetterFailure) {
             failure.addSuppressed(deadLetterFailure);
@@ -210,6 +236,20 @@ class FlashSaleStreamConsumer {
                 properties.consumerGroup(),
                 record.getId()
         );
+        // This stream has one work group. Delete only this terminal, acknowledged
+        // entry; never trim by length across unread or pending requests.
+        redisTemplate.opsForStream().delete(properties.stream(), record.getId());
+    }
+
+    private String payload(MapRecord<String, Object, Object> record, Map<Object, Object> fields) {
+        try {
+            Map<String, String> value = new LinkedHashMap<>();
+            value.put("streamMessageId", record.getId().getValue());
+            fields.forEach((key, item) -> value.put(String.valueOf(key), String.valueOf(item)));
+            return objectMapper.writeValueAsString(value);
+        } catch (com.fasterxml.jackson.core.JsonProcessingException failure) {
+            throw new IllegalStateException("Cannot preserve flash-sale delivery", failure);
+        }
     }
 
     private static String required(Map<Object, Object> fields, String field) {
@@ -221,7 +261,9 @@ class FlashSaleStreamConsumer {
     }
 
     private static boolean isBusyGroup(RuntimeException exception) {
-        return exception.getMessage() != null
-                && exception.getMessage().contains("BUSYGROUP");
+        for (Throwable cause = exception; cause != null; cause = cause.getCause()) {
+            if (cause.getMessage() != null && cause.getMessage().contains("BUSYGROUP")) return true;
+        }
+        return false;
     }
 }

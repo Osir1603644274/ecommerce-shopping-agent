@@ -85,3 +85,16 @@ claude-code-philosophy-main/
 # malformed shell path. Keep them out of the project checkpoint.
 tmp/
 backend;D/
+
+# Machine-specific repair scripts, not application source.
+/scripts/local-maintenance/
+
+# Local dataset hub: preserve original data/publication boundaries after relocation.
+/datasets/current/
+/datasets/support/*/
+/datasets/benchmarks/phone-retrieval/
+/datasets/benchmarks/*.lnk
+/data/_archive/
+/数据集与Benchmark.lnk
+/docs/data/dataset-organization-2026-09-08/*.bin
+/docs/data/dataset-organization-2026-09-08/tracked-working-files-before.json

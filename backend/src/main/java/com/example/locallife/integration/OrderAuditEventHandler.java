@@ -14,7 +14,8 @@ class OrderAuditEventHandler implements InboundEventHandler {
             DomainEventTypes.ORDER_PAID_V1,
             DomainEventTypes.ORDER_CANCELLED_V1,
             DomainEventTypes.ORDER_EXPIRED_V1,
-            DomainEventTypes.ORDER_REFUNDED_V1
+            DomainEventTypes.ORDER_REFUNDED_V1,
+            DomainEventTypes.ORDER_PARTIAL_REFUNDED_V2
     );
 
     @Override

@@ -66,7 +66,8 @@ async def warm_local_product_vector_cache() -> int:
 
     response = await _product_http_client().get(
         f"{settings.backend_base_url}/api/products",
-        params={"category": "手机", "limit": 1500},
+        params={"category": "手机", "limit": 1500,
+                **({"catalogVersion": settings.product_legacy_catalog_version} if settings.product_legacy_catalog_version else {})},
     )
     response.raise_for_status()
     products = response.json().get("data", [])
@@ -202,6 +203,9 @@ async def search_products_tool(
             category_code == "phone" and synthetic_policy == "budget_and_ranking"
         )
         filter_params: dict[str, object] = {"category": category, "limit": 50}
+        catalog_scope = ({"catalogVersion": settings.product_legacy_catalog_version}
+                         if category_code == "phone" and settings.product_legacy_catalog_version else {})
+        filter_params.update(catalog_scope)
         if brand:
             filter_params["brand"] = brand
         if min_price_minor is not None and not synthetic_budget:
@@ -220,7 +224,7 @@ async def search_products_tool(
         async def fetch_catalog() -> list[dict[str, Any]]:
             response = await _product_http_client().get(
                 f"{settings.backend_base_url}/api/products",
-                params={"category": category, "limit": 1500},
+                params={"category": category, "limit": 1500, **catalog_scope},
             )
             response.raise_for_status()
             return response.json().get("data", [])
@@ -444,6 +448,7 @@ async def search_products_tool(
         ))
         authoritative_by_id: dict[int, dict[str, Any]] = {}
         failed_fact_batches = 0
+        fact_failures = []
         for trace in detail_traces:
             if trace.ok and isinstance(trace.detail, dict):
                 products = trace.detail.get("products", [])
@@ -461,6 +466,8 @@ async def search_products_tool(
                         authoritative_by_id[product_id] = product
             else:
                 failed_fact_batches += 1
+                failure = trace.detail if isinstance(trace.detail, dict) else {}
+                fact_failures.append({k: failure[k] for k in ('code', 'httpStatus', 'retryable', 'attemptCount') if k in failure})
         if failed_fact_batches:
             degraded.append({
                 "channel": "javaFacts",
@@ -505,6 +512,8 @@ async def search_products_tool(
                     "code": "authoritative_product_facts_unavailable",
                     "message": "Recall succeeded but Java/MySQL facts could not be resolved.",
                     "degraded": degraded,
+                    "failedBatchCount": failed_fact_batches,
+                    "failureReasons": fact_failures,
                     "retrievalTrace": {"channels": channel_trace},
                 },
             ))
@@ -584,6 +593,27 @@ async def search_products_tool(
                         "fallback": "bm25_vector_rule_ranking",
                     }
 
+        cross_encoder_trace: dict[str, Any] = {
+            "status": "disabled", "modelCalled": False, "candidateCount": 0,
+        }
+        if settings.product_cross_encoder_enabled:
+            from .cross_encoder import cross_encoder_rank
+
+            try:
+                semantic_scores, cross_encoder_trace = await cross_encoder_rank(
+                    query, authoritative_products,
+                )
+                score_map = semantic_scores
+            except Exception as exc:
+                # Keep the prior score map byte-for-byte in this failure path.
+                # Provider invocation does not prove an underlying model ran.
+                cross_encoder_trace = {
+                    "status": "failed", "modelCalled": None,
+                    "candidateCount": len(authoritative_products),
+                    "errorType": type(exc).__name__, "fallback": "previous_score_map",
+                }
+                degraded.append({"channel": "crossEncoder", "reason": type(exc).__name__})
+
         reranked = rule_rerank_candidates(
             category_code,
             authoritative_products,
@@ -632,6 +662,7 @@ async def search_products_tool(
                     "factOrConstraint": False,
                 },
                 "titleReranker": title_reranker_trace,
+                "crossEncoder": cross_encoder_trace,
             },
             "rankingTrace": ranking_trace,
             "citationTrace": {
@@ -681,13 +712,28 @@ async def search_products_tool(
 
 async def get_product_details_tool(product_ids: list[int]) -> ToolTrace:
     start = time.perf_counter()
+    attempts = 0
     try:
-        response = await _product_http_client().post(
-            f"{settings.backend_base_url}/api/products/resolve",
-            json={"productIds": product_ids[:10]},
-        )
-        response.raise_for_status()
-        products = response.json().get("data", [])
+        # /resolve is read-only despite POST. Retry transient transport/5xx
+        # once; never apply this policy to order, payment or inventory writes.
+        for attempt in range(2):
+            attempts += 1
+            try:
+                response = await _product_http_client().post(
+                    f"{settings.backend_base_url}/api/products/resolve",
+                    json={"productIds": product_ids[:10]},
+                )
+                response.raise_for_status()
+                break
+            except (httpx.TimeoutException, httpx.NetworkError, httpx.HTTPStatusError) as exc:
+                transient = not isinstance(exc, httpx.HTTPStatusError) or exc.response.status_code >= 500
+                if attempt or not transient:
+                    raise
+                await asyncio.sleep(0.15)
+        payload = response.json()
+        products = payload.get("data")
+        if payload.get("success") is False or not isinstance(products, list):
+            raise ValueError('invalid_product_facts_response')
         return _finish_tool_trace(
             start,
             ToolTrace(
@@ -697,6 +743,7 @@ async def get_product_details_tool(product_ids: list[int]) -> ToolTrace:
                     "products": products,
                     "productIds": [item["id"] for item in products],
                     "requestedProductIds": product_ids,
+                    "attemptCount": attempts,
                 },
             ),
         )
@@ -706,7 +753,16 @@ async def get_product_details_tool(product_ids: list[int]) -> ToolTrace:
             ToolTrace(
                 tool="get_product_details",
                 ok=False,
-                detail=str(exc),
+                detail={
+                    "code": "product_facts_timeout" if isinstance(exc, httpx.TimeoutException)
+                            else "product_facts_http_error" if isinstance(exc, httpx.HTTPStatusError)
+                            else "product_facts_invalid_response" if isinstance(exc, (ValueError, KeyError, TypeError))
+                            else "product_facts_unavailable",
+                    "httpStatus": exc.response.status_code if isinstance(exc, httpx.HTTPStatusError) else None,
+                    "retryable": isinstance(exc, (httpx.TimeoutException, httpx.NetworkError)) or
+                        (isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code >= 500),
+                    "attemptCount": attempts,
+                },
             ),
         )
 

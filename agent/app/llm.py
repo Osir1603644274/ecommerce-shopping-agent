@@ -13,6 +13,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Literal
 
+from .domains.ecommerce.models import SPEC_REGISTRY
+
 logger = logging.getLogger(__name__)
 
 # Per-request observation of TaskManager / TaskState model calls.  The endpoint
@@ -391,6 +393,8 @@ TASK_STATE_REPAIR_PROMPT = (
     "你的上一条 update_task_state 调用未通过服务端纯校验，且尚未写入任何状态（persist=0）。"
     "请只调用 update_task_state 一次提交修正后的合法 payload；不要调用其他工具，不要回答用户。"
     "工具返回的 JSON 中包含精确原因：code、field_path、message 与 persist=0。"
+    "function.arguments 直接包含业务字段，不得再套 arguments/name/function/tools 外壳。"
+    "若输出截断，只提交本轮必要的最小更新；不重复未变化事实，不添加解释文字。"
     "状态形状必须二选一且互斥："
     "可执行形状=status=ready 且 addUnknowns 为空、pendingQuestions=[]，非阻塞偏好只进 optionalShoppingQuestions；"
     "澄清形状=status=collecting_information 且同时存在真正的阻塞 addUnknowns 与一句 pendingQuestions。"
@@ -404,6 +408,25 @@ TASK_STATE_REPAIR_PROMPT = (
     "若已有 shoppingGuide.requirements，删除完整 requirements，改用 "
     "upsertRequirements/removeRequirementKeys；不要同时 upsert 和 remove 同一个 key。"
 )
+
+# The same registry used by business validation defines the category-specific
+# extraction vocabulary. The union enum alone cannot express this dependency.
+_SHOPPING_EXTRACTION_REGISTRY_PROMPT = (
+    "\n导购字段注册表（category -> key -> [类型, unit, 合法 operator]）："
+    + json.dumps(SPEC_REGISTRY, ensure_ascii=False, separators=(",", ":"))
+    + "。只使用当前品类支持的 key，不能跨品类借用字段。"
+    "只有用户给出具体数值时才可新增数值阈值；定性的续航体验不等于8小时、"
+    "5000mAh或任意数字。定性使用偏好由服务端从用户原话保留，不要写 useCases，"
+    "不要为表达这些偏好捏造 requirement。goal 未变时省略（strict 使用 JSON null）；"
+    '绝不能将 goal 写成字符串 "null"、"None" 或空白。'
+    "你是状态抽取器，不是回答器。直接提交 update_task_state；不要输出分析过程或普通正文。"
+    "只依据当前用户的明确变化更新状态；权衡、改变用途本身不代表撤回已有硬条件。"
+    "保留仍未解决的 unknowns 及其阻塞问题；pendingQuestions=[] 是显式清空，不是保持不变。"
+    "若历史 unknowns 未真正解决，请保持 collecting_information 和对应问题；"
+    "不要因新一轮要求建议就伪造指代已解析或清空未知项。"
+)
+TASK_STATE_PLANNING_PROMPT += _SHOPPING_EXTRACTION_REGISTRY_PROMPT
+TASK_STATE_REPAIR_PROMPT += _SHOPPING_EXTRACTION_REGISTRY_PROMPT
 
 _MODEL_TASK_STATE_WRITABLE_KEYS = frozenset({
     "status",
@@ -468,7 +491,10 @@ TASK_STATE_TOOL_SCHEMA = {
                         "cancelled",
                     ],
                 },
-                "goal": {"type": "string"},
+                "goal": {
+                    "type": "string",
+                    "description": '真实任务目标；未变化则省略，strict 用 JSON null，禁止字符串 "null"。',
+                },
                 "upsertFacts": {
                     "type": "array",
                     "items": {
@@ -1008,6 +1034,20 @@ AGENT_SYSTEM_PROMPT += (
 MAX_TOOL_ROUNDS = 5
 MAX_HARNESS_TRANSITIONS = 8
 
+
+def agent_system_prompt() -> str:
+    if not settings.product_knowledge_enabled:
+        return AGENT_SYSTEM_PROMPT
+    return AGENT_SYSTEM_PROMPT.replace(
+        "再用 get_product_details 读取权威快照，最后用 compare_products 做确定性比较；"
+        "需要对已建立候选范围做服务端重排时，只能使用 rerank_products_in_scope。",
+        "get_product_details 获取商品权威事实；search_product_evidence 经本地 MCP 获取型号证据。"
+        "compare_products 支持指定商品比较和原候选内推荐，核验范围与硬条件并汇集证据，"
+        "由父 Agent 在既有预算内权衡用户原始需求。不要根据标题宣传词评价实际游戏或相机能力。"
+        "保留否定需求、测试条件与证据缺口；知识服务不可用时只回答已核验商品事实。"
+        "引用证据来源，推断与事实分开；候选卡片顺序不是性能排名，不得自行改写商品编号。",
+    )
+
 MERCHANT_DOC_ANSWER_GUARD = (
     "商户资料只证明工具明确返回的客观字段。"
     "只能回答这些字段，不得把WiFi、座位、评分、停车或营业时间推断成适合办公、适合约会、"
@@ -1330,7 +1370,7 @@ def shopping_tool_schemas() -> list[dict]:
     # server-owned CandidateScope and state-bound arguments.
     return _tool_schemas_by_name(
         "search_products", "get_product_details", "compare_products",
-        "rerank_products_in_scope",
+        "search_product_evidence" if settings.product_knowledge_enabled else "rerank_products_in_scope",
     )
 
 
@@ -1397,6 +1437,7 @@ async def _generate_final_answer(
     fallback: str,
     final_answer_view: Any | None = None,
     multi_agent_projection: dict[str, Any] | None = None,
+    current_user_query: str | None = None,
 ) -> str:
     """Generate only the user-facing final answer; stream this call when requested.
 
@@ -1404,7 +1445,7 @@ async def _generate_final_answer(
     mode, the model input is built from only the view's validated results and
     allowed facts — NOT from full chat history or raw TaskState.
     """
-    async def create_non_stream_response(answer_messages: list[dict]):
+    async def create_non_stream_response(answer_messages: list[dict], *, max_tokens: int | None = None, json_mode: bool = False):
         """Retry one transient final-answer failure within the outer deadline.
 
         This call is read-only and has no state or business side effects.  We
@@ -1419,6 +1460,12 @@ async def _generate_final_answer(
                 response = await client.chat.completions.create(
                     model=settings.deepseek_model,
                     messages=answer_messages,
+                    **({'max_tokens':max_tokens or settings.agent_final_answer_max_tokens}
+                       if max_tokens is not None or settings.agent_final_answer_max_tokens is not None else {}),
+                    **({'response_format':{'type':'json_object'}} if json_mode else {}),
+                    **({'extra_body':{'thinking':{'type':'disabled'}}}
+                       if settings.deepseek_model.strip().lower().startswith('deepseek-v4-')
+                       and (json_mode or settings.agent_final_answer_thinking=='disabled') else {}),
                 )
                 answer_call_failed = False
                 return response
@@ -1439,6 +1486,30 @@ async def _generate_final_answer(
                     response=response,
                 )
         raise AssertionError("unreachable final-answer retry state")
+
+    # The same parent call, budget observer and outer deadline are retained.
+    # Buffer structured output until identity, hard-condition and citation checks pass.
+    if settings.product_knowledge_enabled and final_answer_view is not None:
+        from .product_knowledge.answer import payload_from_view, INSTRUCTION, render, model_input, fallback as knowledge_fallback
+        knowledge_payload=payload_from_view(final_answer_view)
+        if knowledge_payload is not None:
+            if knowledge_payload['knowledge'].get('status')=='UNAVAILABLE':
+                answer=knowledge_fallback(knowledge_payload)
+            else:
+                try:
+                    response=await asyncio.wait_for(create_non_stream_response([
+                        {'role':'system','content':INSTRUCTION},
+                        {'role':'user','content':json.dumps({'currentUserQuery':current_user_query or knowledge_payload['userQuery'],'currentGoal':final_answer_view.goal,
+                            'requirements':final_answer_view.answer_constraints,'comparison':model_input(knowledge_payload)},ensure_ascii=False)}],max_tokens=800,json_mode=True),
+                        timeout=settings.agent_react_final_answer_timeout_seconds)
+                    answer=render(response.choices[0].message.content or '{}',knowledge_payload,
+                        on_validation=lambda status:logger.info('knowledge_answer_validation %s',json.dumps({
+                            'runId':final_answer_view.run_id,'status':status,'finishReason':response.choices[0].finish_reason,
+                            'usage':response.usage.model_dump() if response.usage else None},ensure_ascii=False)))
+                except (asyncio.TimeoutError,APIConnectionError,APITimeoutError,RateLimitError,InternalServerError):
+                    answer='推荐生成暂不可用，本轮保留已核验事实，不生成性能排名。\n'+knowledge_fallback(knowledge_payload)
+            if on_answer_delta is not None: await on_answer_delta(answer)
+            return answer
 
     # ── context_pack mode: build input from FinalAnswerView only ──────
     if final_answer_view is not None:
@@ -1526,7 +1597,7 @@ async def _generate_final_answer(
             )
 
         view_messages: list[dict] = [
-            {"role": "system", "content": AGENT_SYSTEM_PROMPT},
+            {"role": "system", "content": agent_system_prompt()},
             {
                 "role": "system",
                 "content": (
@@ -1535,6 +1606,13 @@ async def _generate_final_answer(
                     f"## 用户目标\n{goal}\n\n"
                     f"## 已验证证据\n{evidence_block}\n\n"
                     f"## 允许引用的事实\n{facts_block}\n\n"
+                    + (
+                        "## 当前任务要求与偏好\n"
+                        + json.dumps({"requirements": view.answer_constraints,
+                                      "preferences": getattr(view, "answer_preferences", {})}, ensure_ascii=False)
+                        + "\n硬条件必须遵守；偏好只能用于取舍，不能升级为硬条件或已验证商品能力。\n\n"
+                        if getattr(view, "answer_preferences", {}) else ""
+                    )
                     + (f"## 尚不确定\n" + "\n".join(f"- {u}" for u in unknowns) + "\n\n" if unknowns else "")
                     + (f"## 证据引用\n{json.dumps(evidence_refs, ensure_ascii=False)}\n\n" if evidence_refs else "")
                     + ("## 低优先级长期购物偏好\n"
@@ -1549,6 +1627,16 @@ async def _generate_final_answer(
         ]
 
         streamed_text = ""
+        from .context_input import is_experimental_context_input, phase_context
+        if is_experimental_context_input():
+            view_messages = [
+                {"role": "system", "content": agent_system_prompt() + comparison_instruction + multi_agent_block
+                    + "\n依据已验证证据回答本轮 currentUserMessage；偏好不能变成硬条件，未知不能当作满足。价格为模拟参考价。"
+                    + "如果本轮只问任务状态、历史、备注或旧值，不要因为上下文有商品结果就改答商品列表或旧比较；"
+                    + "按原始用户来源与当前权威状态区分现行值和失效旧值，必要时只读回查，不能恢复已撤销条件。"},
+                {"role": "user", "content": json.dumps(phase_context("final_answer",
+                    view.model_dump(mode="json", by_alias=True)), ensure_ascii=False)},
+            ]
         if on_answer_delta is None:
             response = await create_non_stream_response(view_messages)
             raw_answer = response.choices[0].message.content or fallback
@@ -1713,12 +1801,57 @@ def _used_phone_presentation_lines(presentations: object) -> list[str]:
     return lines
 
 
+def _requires_contextual_final_answer(message: str | None) -> bool:
+    """A listing template cannot fulfill an explicit synthesis/question cue.
+
+    This only chooses final composition; it cannot authorize a tool or bypass
+    any state/evidence check. Plain validated listings remain deterministic.
+    """
+    if not settings.context_history_v1_enabled or not isinstance(message, str):
+        return False
+    if re.search(
+        r"复述|回忆|回看|总结|汇总|整理|梳理|解释|比较|对比|说明.*(?:原因|差异|取舍)|"
+        r"(?:多少|是什么|哪些|为何|为什么|如何)|备注|安排|日程|清单|记录|记下|配件|运输|交接|约定|验机|迁移|取货|只(?:回答|告诉我|说)|"
+        r"(?:当前|现在|以前|旧的).*(?:时间|预算|偏好).*[？?]",
+        message,
+    ):
+        return True
+    # A negative/conditional/history mention does not request a fresh list.
+    # Ambiguous requests use normal composition, never an old listing template.
+    if re.search(
+        r"(?:不|别|无需|不用)[^，。；！？\n]{0,12}(?:搜索|检索|筛选|展示|列出|推荐)|"
+        r"如果|假如|之前|以前|上次|曾经|原话",
+        message,
+    ):
+        return True
+    return not bool(re.search(
+        r"搜索|检索|推荐|找.*(?:手机|商品|候选)|"
+        r"(?:筛选|展示|列出).*(?:手机|商品|候选|[一二三四五六七八九十\d]+款)",
+        message,
+    ))
+
+
 def _render_validated_used_phone_answer(
     state: TaskState,
     final_answer_view: Any | None,
+    *,
+    user_message: str | None = None,
+    current_tool_traces: list[ToolTrace] | None = None,
 ) -> str | None:
     """Render only Validator-whitelisted used-phone facts, with no model call."""
 
+    if _requires_contextual_final_answer(user_message):
+        return None
+    if settings.context_history_v1_enabled and (
+        not user_message
+        or not any(
+            trace.tool == "search_products" and trace.ok
+            for trace in (current_tool_traces or [])
+        )
+    ):
+        # Validated historical products do not prove a search in this run.
+        # These traces are owned by the current executor, not model input.
+        return None
     if state.task_type != "ecommerce_guide" or final_answer_view is None:
         return None
     if (
@@ -2551,11 +2684,31 @@ def _validated_model_task_patch(arguments: object) -> dict[str, Any]:
 
     if not isinstance(arguments, dict):
         raise ValueError("update_task_state arguments must be an object")
+    if "arguments" in arguments:
+        raise TaskStatePayloadValidationError(
+            "model cannot write task state keys: arguments; function.arguments must "
+            "contain the patch itself, not another arguments wrapper",
+            code="unexpected_task_state_arguments_wrapper",
+            field_path="arguments.arguments",
+        )
     rejected_keys = sorted(set(arguments) - _MODEL_TASK_STATE_WRITABLE_KEYS)
     if rejected_keys:
         raise ValueError(
             "model cannot write task state keys: " + ", ".join(rejected_keys)
         )
+    if "goal" in arguments:
+        goal = arguments["goal"]
+        if not isinstance(goal, str) or goal.strip().casefold() in {"", "null", "none", "undefined"}:
+            raise TaskStatePayloadValidationError(
+                'goal must be a real task goal; omit unchanged goal, or use JSON null '
+                'in strict wire format, never the string "null"',
+                code="invalid_goal_placeholder", field_path="goal",
+            )
+        if settings.context_history_v1_enabled and len(goal) > 500:
+            raise TaskStatePayloadValidationError(
+                "goal must be a concise task title of at most 500 characters; keep details in their proper fields",
+                code="task_goal_exceeds_contract", field_path="goal",
+            )
     return dict(arguments)
 
 
@@ -2720,15 +2873,88 @@ def _materialize_model_domain_patch(
         existing_requirements,
         guide_patch,
     )
+    category = merged_guide.get("category")
+    registry = SPEC_REGISTRY.get(category, {}) if isinstance(category, str) else {}
+    if registry:
+        for index, item in enumerate(merged_guide["requirements"]):
+            if isinstance(item, dict) and item.get("key") not in registry:
+                raise TaskStatePayloadValidationError(
+                    f"invalid shoppingGuide patch: category={category} does not support key={item.get('key')}; "
+                    f"allowed key/unit/operators: {json.dumps(registry, ensure_ascii=False)}; "
+                    "remove unsupported inferred thresholds; qualitative preferences are preserved by the server",
+                    code="unsupported_category_requirement",
+                    field_path=f"domainStatePatch.shoppingGuide.requirements[{index}].key",
+                )
     try:
         guide_state = ShoppingGuideState.model_validate(merged_guide)
     except ValueError as exc:
-        raise ValueError(
-            "invalid shoppingGuide patch: unsupported or malformed requirement"
+        raise TaskStatePayloadValidationError(
+            "invalid shoppingGuide patch: unsupported or malformed requirement; "
+            f"category={category}; allowed key/type/unit/operators={json.dumps(registry, ensure_ascii=False)}",
+            code="invalid_shopping_requirement", field_path="domainStatePatch.shoppingGuide",
         ) from exc
     return {
         "shoppingGuide": guide_state.model_dump(by_alias=True, mode="json")
     }, guide_state
+
+
+def _validate_battery_threshold_evidence(
+    state: TaskState, guide: ShoppingGuideState | None, message: str,
+) -> None:
+    """A qualitative preference cannot manufacture a new battery threshold.
+
+    Existing numeric requirements survive unrelated turns. Ambiguous new
+    thresholds fail closed instead of becoming a synthetic product filter.
+    """
+    if guide is None:
+        return
+    old = state.domain_state.get("shoppingGuide", {})
+    previous = old.get("requirements", []) if isinstance(old, dict) else []
+    explicit_numbers = {float(v) for v in re.findall(r"(?<![\d.])\d+(?:\.\d+)?(?![\d.])", message)}
+    for item in guide.requirements:
+        if item.key not in {"battery_hours", "battery_mah"}:
+            continue
+        if any(isinstance(r, dict) and all(r.get(k) == getattr(item, k)
+               for k in ("key", "operator", "value", "unit")) for r in previous):
+            continue
+        if not isinstance(item.value, (int, float)) or item.value not in explicit_numbers:
+            raise TaskStatePayloadValidationError(
+                "new battery threshold has no explicit numeric evidence in the user message; "
+                "remove the invented threshold, keep qualitative intent; ask if an exact threshold is required",
+                code="unsupported_inferred_battery_threshold",
+                field_path="domainStatePatch.shoppingGuide.requirements." + item.key,
+            )
+
+
+def _preserve_qualitative_phone_preferences(
+    guide: ShoppingGuideState | None, message: str,
+) -> ShoppingGuideState | None:
+    """Retain literal user preferences, not numeric facts or model-owned ledgers.
+
+    Each aspect stores the user's clause with a provenance prefix. Retractions
+    remove that aspect; repeated turns replace rather than grow its history.
+    This bounded list is retrieval/answer context, never a hard specification.
+    """
+    if guide is None or guide.category != "phone":
+        return guide
+    aspects = {
+        "endurance": ("续航",), "stability": ("日常稳定", "稳定性"),
+        "elderly": ("长辈", "老人"), "wechat_video": ("微信", "视频使用"),
+        "long_term": ("长期使用", "用得久"), "fluency": ("日常流畅", "流畅性"),
+    }
+    use_cases = list(guide.use_cases)
+    for clause in re.split(r"[，,。；;！!？?\n]", message):
+        clause = clause.strip()
+        if not clause or len(clause) > 300:
+            continue
+        for aspect, cues in aspects.items():
+            if not any(cue in clause for cue in cues):
+                continue
+            prefix = f"user_preference:{aspect}:"
+            use_cases = [u for u in use_cases if not u.startswith(prefix)]
+            if not re.search(r"(?:不(?:用|必|再)?(?:考虑|在意|看重)|取消.{0,8}(?:偏好|要求))", clause):
+                use_cases.append(prefix + clause)
+    return guide.model_copy(update={"use_cases": use_cases})
 
 
 def _synchronize_ecommerce_constraint_projection(
@@ -2839,6 +3065,11 @@ def _scope_excluded_values(key: str, text: str) -> list[str] | None:
         if any(token in text for token in ("未修", "没修")):
             return ["not_repaired"]
     if key == "scratch_level":
+        if settings.context_history_v1_enabled:
+            grades = [value for phrase, value in (("无划痕", "none"), ("轻微", "light"), ("明显", "obvious"))
+                      if phrase in text]
+            if grades:
+                return grades
         if "划痕" in text or "磕碰" in text:
             return ["light", "obvious"]
     if key == "shell_condition":
@@ -2952,6 +3183,8 @@ def _canonicalize_explicit_used_phone_negation(
     ``not_in`` even when the extractor submitted an extensionally equivalent
     positive form such as ``eq original``.  Unrecognized text is untouched.
     """
+    if _requires_context_semantic_change(message):
+        return guide_state
     brand_negations = parse_brand_negations(message)
     if guide_state is not None:
         conflicting_operations = (
@@ -3073,6 +3306,59 @@ def _used_phone_clauses(message: str) -> list[str]:
     ]
 
 
+def _requires_context_budget_interpretation(message: str) -> bool:
+    """Route budget edits to validated semantics; do not calculate an amount.
+
+    A previous comparison mode must not undo the extractor's budget update.
+    This is only a routing signal, not permission to persist any new value.
+    """
+    if not settings.context_history_v1_enabled:
+        return False
+    text = re.sub(r"\s+", "", message).casefold()
+    if not re.search(r"预算|(?:手机)?硬?上限|价位", text):
+        return False
+    return bool(re.search(
+        r"改成|改为|调整|降到|降至|提高|恢复|替换|增加|减少|预留|留出|"
+        r"合计|总计|分之|[×÷]|\d[+*/-]\d", text))
+
+
+def _requires_context_note_interpretation(message: str) -> bool:
+    """Execution notes and recall are outside exact product-field coverage.
+
+    Generic words such as '分别' plus a retained comparison pair cannot prove
+    a product action is requested. Use the existing validated model extractor
+    for these turns, including mixed note/action requests; never infer facts
+    or authorize tools here. Original messages remain in the source archive.
+    """
+    return settings.context_history_v1_enabled and bool(re.search(
+        r"记录|记下|备注|回顾|回忆|回查|安排|预案|迁移|见面|验机|配件|运输|交接|清单",
+        message,
+    ))
+
+
+def _requires_context_semantic_change(message: str) -> bool:
+    """Withdrawal and permissive alternatives need semantic interpretation.
+
+    In the experimental lane, literal field matchers must not undo a validated
+    model removal by turning 'non-original is also OK' into 'only non-original'.
+    Schema, authority, revision and evidence checks remain fully enabled.
+    """
+    if not settings.context_history_v1_enabled:
+        return False
+    if _requires_context_budget_interpretation(message) or _requires_context_note_interpretation(message):
+        return True
+    text = re.sub(r"\s+", "", message).casefold()
+    text = re.sub(r"(?:不要|别|不能|不准)(?:再)?(?:取消|撤销|去掉|删除|放宽)", "", text)
+    # These expressions carry strength, alternative-set or narrative semantics;
+    # literal matches cannot safely choose an eq/hard filter from one substring.
+    if re.search(r"软偏好|软优先|排序偏好|不是硬条件|只(?:作|做).*偏好|"
+                 r"划痕.{0,24}(?:或|或者)|电池健康.{0,28}(?:或|或者)", text):
+        return True
+    return bool(re.search(
+        r"撤销|取消|去掉|删除|不再(?:要求|设|限制|只看|只要)|不设硬条件|不限|放宽|"
+        r"(?:非原装(?:电池|屏)?|(?:电池|屏幕)不是原装|android|ios|安卓|苹果).{0,8}(?:也可以|都可以|都行|可接受|可以接受)", text))
+
+
 def _nonbinding_used_phone_platform_acceptance_mentions(
     message: str,
 ) -> set[str]:
@@ -3154,10 +3440,13 @@ def _explicit_used_phone_requirement_removals(message: str) -> set[str]:
         "scratch_level": ("划痕条件", "划痕偏好", "无划痕偏好", "外观划痕偏好"),
         "shell_condition": ("外壳条件", "外壳偏好"),
         "price_minor": ("预算", "预算条件", "预算要求", "价格条件", "价位条件"),
+        "storage_gb": ("存储容量要求", "存储要求", "存储空间要求", "储存容量要求", "存储限制"),
     }
     removal_cues = ("取消", "去掉", "删掉", "不再要求", "不用保留", "不需要保留")
     result: set[str] = set()
     for clause in _used_phone_clauses(message):
+        if re.search(r"(?:不要|别|不能|不准)(?:再)?(?:取消|去掉|删掉)", clause):
+            continue
         if not any(cue in clause for cue in removal_cues):
             continue
         for key, phrases in key_phrases.items():
@@ -3223,6 +3512,7 @@ def _explicit_used_phone_retained_requirements(message: str) -> set[str]:
         "scratch_level": ("划痕",),
         "shell_condition": ("外壳", "机壳"),
         "price_minor": ("预算", "价格", "价位"),
+        "storage_gb": ("存储", "储存", "机身容量"),
     }
     retain_cues = ("保留", "不变", "照旧", "继续", "维持")
     result: set[str] = set()
@@ -3267,12 +3557,22 @@ def _explicit_phone_price_ceiling(message: str) -> int | None:
 
     normalized = re.sub(r"\s+", "", message).casefold()
     amount_pattern = r"(?P<amount>\d+(?:\.\d+)?|[零〇一二两三四五六七八九十百千万]+)"
+    if settings.context_history_v1_enabled and any(cue in normalized for cue in ("预算", "上限", "价位")):
+        if re.search(r"(?:元|块)(?:加|减)|合计|总计|分之|[×÷]|\d[+*/-]\d", normalized):
+            # A partial literal (e.g. 7000 in '7000 + 300, total 7300')
+            # must not claim complete deterministic coverage. Let the normal
+            # model extraction + business validator handle the full statement.
+            return None
     patterns = (
         amount_pattern + r"(?P<scale>[k千]?)(?:元|块)?(?:以内|以下|之内|封顶)",
-        r"(?:预算|价格|价位)(?:不超过|最多|上限(?:是|为)?|控制在|"
+        r"(?:预算|价格|价位)(?:暂时|临时|现在|目前)?(?:不超过|最多|上限(?:是|为)?|控制在|"
         r"改成|改为|调整为|降到|降至|提高到|提高至)"
         + amount_pattern
         + r"(?P<scale>[k千]?)(?:元|块)?",
+        # A budget can precede the product noun without the word 预算.
+        # Explicit ceilings above take precedence over approximate wording.
+        # Require currency to avoid interpreting model/storage digits as prices.
+        amount_pattern + r"(?P<scale>[k千]?)(?:元|块)(?:左右|上下)",
         r"(?:预算|价位)(?:是|为|大概|大约|约)?"
         + amount_pattern
         + r"(?P<scale>[k千]?)(?:元|块)?(?:左右|上下|吧)?",
@@ -3529,7 +3829,7 @@ def _explicit_used_phone_requirements(message: str) -> dict[str, ShoppingRequire
     )
     if (
         "battery_health" not in result
-        and (battery_quality_direction or endurance_direction)
+        and (battery_quality_direction or (endurance_direction and not settings.product_knowledge_enabled))
     ):
         # This wording expresses direction, not an exact threshold. Preserve it
         # as a soft preference over the two healthy catalog bands; never turn
@@ -3611,6 +3911,11 @@ def _explicit_used_phone_requirements(message: str) -> dict[str, ShoppingRequire
             )
             for alias in aliases
         )
+        if settings.context_history_v1_enabled:
+            brand_is_soft = brand_is_soft or any(
+                re.search(r"(?:倾向|偏向|希望|首选)(?:选择|选|用|买)?" + re.escape(alias), text)
+                for alias in aliases
+            )
         result["brand"] = ShoppingRequirement(
             key="brand",
             operator="eq",
@@ -3638,6 +3943,10 @@ def _used_phone_controlled_mentions(message: str) -> set[str]:
     normalized = re.sub(r"\s+", "", message).casefold()
     cues: dict[str, tuple[str, ...]] = {
         "price_minor": ("预算", "价格", "价位"),
+        # Storage is outside the seven-field deterministic value extractor,
+        # but must participate in coverage: missing value support is a model
+        # fallback, never a falsely complete partial parse.
+        "storage_gb": ("存储", "储存", "机身容量", "内存", "rom"),
         "os": (
             "ios", "iphone", "安卓", "android", "苹果手机", "苹果系统",
         ),
@@ -3670,10 +3979,21 @@ _INVALIDATED_SCOPE_REFERENCE_CUES = (
 )
 
 
+def _product_reference_surface(message: str) -> str:
+    normalized = re.sub(r"\s+", "", message).casefold()
+    if settings.context_history_v1_enabled:
+        # Typed references to brands/requirements are not product-card ordinals.
+        # Only the resolver's working text is masked; originals stay unchanged.
+        normalized = re.sub(
+            r"(?:这|那|前|第)?[一二三四五六七八九十两\d]+(?:个|种|条|款|项)?"
+            r"(?:品牌|牌子|系统|条件|要求|预算|备注|问题|方面|用途|方案|档位|档)", "", normalized)
+    return normalized
+
+
 def _references_invalidated_candidate_scope(state: TaskState, message: str) -> bool:
     """Recognize an old-pair reference before TaskState falls back to a model."""
 
-    normalized = re.sub(r"\s+", "", message).casefold()
+    normalized = _product_reference_surface(message)
     if not any(cue in normalized for cue in _INVALIDATED_SCOPE_REFERENCE_CUES):
         return False
     invalidation = state.domain_state.get("candidateScopeInvalidation")
@@ -3715,7 +4035,8 @@ def _unsupported_used_phone_capability(
         "帧率", "发热", "跑分", "画质", "实际性能", "真实体验",
     )
     if (
-        any(cue in normalized for cue in capability_mentions)
+        not settings.product_knowledge_enabled
+        and any(cue in normalized for cue in capability_mentions)
         and any(cue in normalized for cue in capability_evaluation_cues)
     ):
         return (
@@ -3773,6 +4094,10 @@ def _broad_used_phone_retrieval_goal(message: str) -> str:
 def _used_phone_text_claim_discovery(message: str) -> str | None:
     """Identify title/text recall without treating marketing text as a fact."""
 
+    if settings.context_history_v1_enabled:
+        # Negative use cases are not positive title-retrieval instructions.
+        # Double negation is outside this narrow deterministic removal rule.
+        message = re.sub(r"(?<!不是)(?<!并非)不(?:玩|打)(?:大型|手机|网络|重度)?游戏", "", message)
     normalized = re.sub(
         r"\s+",
         "",
@@ -3880,6 +4205,14 @@ def _used_phone_presentation_only_request(message: str) -> bool:
     """Recognize display-only controls that cannot change shopping meaning."""
 
     normalized = re.sub(r"\s+", "", message).casefold()
+    if settings.context_history_v1_enabled:
+        # Mixed refresh/requirement/synthesis requests must reach the normal
+        # extractor and planner. A substring cannot prove a display-only turn.
+        return bool(re.fullmatch(
+            r"(?:请|麻烦)?(?:只)?展示前三(?:个|款)(?:商品|手机)?[。！!]?|"
+            r"不用把(?:20|二十)个都详细(?:展示|列出)?[。！!]?",
+            normalized,
+        ))
     return any(cue in normalized for cue in (
         "只展示前三个",
         "只展示前三款",
@@ -3897,7 +4230,7 @@ def _ordinal_comparison_binding(
 ) -> tuple[str, list[int] | None]:
     """Resolve explicit display ordinals, or request clarification fail-closed."""
 
-    normalized = re.sub(r"\s+", "", message).casefold()
+    normalized = _product_reference_surface(message)
     deictic_visible_choice = any(cue in normalized for cue in (
         "这里面那个", "这里面哪个", "这里面哪一个", "这里面哪款",
         "这些里面那个", "这些里面哪个", "这其中那个", "这其中哪个",
@@ -4026,11 +4359,36 @@ def _ordinal_comparison_binding(
 
 def _requests_compound_first_two_comparison(message: str) -> bool:
     normalized = re.sub(r"\s+", "", message).casefold()
+    if settings.context_history_v1_enabled:
+        from .control.react_context import _explicit_current_search_refresh
+        if _explicit_current_search_refresh(message) and re.search(
+            r"(?:再|然后|随后|接着)(?:仅|只)?(?:比较|对比)"
+            r"[^。；;]{0,30}(?:前两(?:个|款|台)|第一(?:个|款|台)[^。；;]{0,8}第二(?:个|款|台))",
+            normalized,
+        ):
+            return True
     return bool(re.search(
         r"(?:再|然后|随后|接着|并且?|同时)(?:比较|对比)"
         r"(?:检索|搜索|结果|出来的)?(?:前两个|前两款)",
         normalized,
     ))
+
+
+def _context_compound_refresh_patch(state: TaskState, message: str) -> dict[str, Any]:
+    """One-turn intent only; Validator binds IDs after the new search passes."""
+    if not settings.context_history_v1_enabled:
+        return {}
+    from .control.react_context import _explicit_current_search_refresh
+    guide = state.domain_state.get("shoppingGuide")
+    requested = bool(
+        state.task_type == "ecommerce_guide" and isinstance(guide, dict)
+        and guide.get("category") == "phone"
+        and _explicit_current_search_refresh(message)
+        and _requests_compound_first_two_comparison(message)
+    )
+    return {"compoundComparison": {
+        "status": "awaiting_search_validation", "kind": "compare_first_two", "taskId": state.task_id,
+    } if requested else None}
 
 
 def _bound_comparison_guide_patch(
@@ -4159,6 +4517,8 @@ def _canonicalize_explicit_used_phone_semantics(
 
     if guide_state is None or guide_state.category != "phone":
         return guide_state
+    if _requires_context_semantic_change(message):
+        return guide_state
     explicit = _explicit_used_phone_requirements(message)
     existing_raw = state.domain_state.get("shoppingGuide")
     try:
@@ -4211,6 +4571,33 @@ def _canonicalize_explicit_used_phone_semantics(
         )
     }
     requirements.update(explicit)
+    # A newly stated platform replaces an incompatible *inherited* brand,
+    # not a brand the user explicitly asks for in this very utterance.
+    # Keep the compatibility validator below: Apple + Android explicitly
+    # requested together must still be rejected, never silently rewritten.
+    old_brand = next((r for r in (existing.requirements if existing else [])
+                      if r.key == "brand" and r.priority == "hard"), None)
+    new_os = explicit.get("os")
+    current_brand = requirements.get("brand")
+    if (new_os is not None and new_os.priority == "hard" and old_brand is not None
+            and current_brand == old_brand
+            and "brand" not in explicit):
+        values = old_brand.value if isinstance(old_brand.value, list) else [old_brand.value]
+        compatible = [v for v in values if
+            (new_os.value == "ios" and canonicalize_brand(str(v)) == "apple") or
+            (new_os.value == "android" and canonicalize_brand(str(v)) != "apple")]
+        if not compatible:
+            requirements.pop("brand", None)
+    old_os = next((r for r in (existing.requirements if existing else [])
+                   if r.key == "os" and r.priority == "hard"), None)
+    if ("brand" in explicit and explicit["brand"].priority == "hard"
+            and "os" not in explicit and old_os is not None
+            and requirements.get("os") == old_os):
+        try:
+            _validate_used_phone_requirement_compatibility(
+                guide_state.model_copy(update={"requirements": list(requirements.values())}))
+        except TaskStatePayloadValidationError:
+            requirements.pop("os", None)
     for key in _explicit_used_phone_requirement_removals(message):
         requirements.pop(key, None)
     return guide_state.model_copy(update={"requirements": list(requirements.values())})
@@ -4262,6 +4649,8 @@ _EVIDENCE_RESEARCH_GAP_CUES_V2: tuple[tuple[str, tuple[str, ...]], ...] = (
 def _scope_rerank_reference_present(message: str) -> bool:
     """Detect a deictic reference to the previous candidate batch."""
     normalized = re.sub(r"\s+", "", message).casefold()
+    if settings.product_knowledge_enabled and re.search(r'没有实测.*(?:缺少什么|缺什么)|这几个.*(?:实测|参数|证据)',normalized):
+        return True
     return any(cue in normalized for cue in _SCOPE_RERANK_REFERENCE_CUES)
 
 
@@ -4330,11 +4719,17 @@ def _scope_rerank_title_order_intent(message: str) -> str | None:
     measured capability is excluded and falls back to the capability boundary.
     """
     normalized = re.sub(r"\s+", "", message).casefold()
+    if settings.product_knowledge_enabled and re.search(
+        r"续航|电池|充电|芯片|屏幕|参数|相机|拍照|游戏|性能|实测|证据|缺少什么", normalized
+    ):
+        # This marker only requests evidence, never converts a negated use case
+        # into a positive ranking preference. The parent sees the raw query.
+        return "evidence_comparison"
     if not any(cue in normalized for cue in _SCOPE_RERANK_ORDER_CUES):
         return None
     if not any(cue in normalized for cue in _SCOPE_RERANK_SUPERLATIVE_CUES):
         return None
-    if any(cue in normalized for cue in _SCOPE_RERANK_EXCLUDED_MEASURED_CUES):
+    if not settings.product_knowledge_enabled and any(cue in normalized for cue in _SCOPE_RERANK_EXCLUDED_MEASURED_CUES):
         return None
     if any(cue in normalized for cue in _SCOPE_RERANK_GAMING_CUES):
         return "gaming_title_claim"
@@ -4442,6 +4837,7 @@ def _explicit_unsupported_product_category(message: str) -> str | None:
                     "相机能力",
                     "相机质量",
                     "相机素质",
+                    "相机参数",
                     "拍照表现",
                     "影像表现",
                 )
@@ -4455,6 +4851,25 @@ def _explicit_unsupported_product_category(message: str) -> str | None:
         if matched_aliases:
             return label
     return None
+
+
+def _has_unbound_brand_rejection(message: str) -> bool:
+    """Only a bare rejection or explicit unresolved demonstrative can justify
+    deterministic brand clarification. Other negated verbs need model reading.
+    """
+    return bool(re.search(
+        r"(?:不要|不想要|不考虑|排除|不喜欢|不感兴趣|不接受|不能接受)"
+        r"(?:它们?|这(?:个|款|些)(?:品牌|牌子|商品|手机)?|那(?:个|款|些)(?:品牌|牌子|商品|手机)?)?"
+        r"(?:[，,。.!！?？；;]|$)", re.sub(r"\s+", "", message)))
+
+
+def _append_task_goal(existing: str, message: str, relation_label: str) -> str:
+    combined = f"{existing}；{relation_label}：{message}"
+    if settings.context_history_v1_enabled:
+        # Full messages remain in the raw archive. Goal is a bounded business
+        # label, not another ever-growing conversational transcript.
+        return combined if len(combined) <= 500 else existing
+    return combined if len(combined) <= 2000 else message
 
 
 def _deterministic_used_phone_task_state_decision(
@@ -4473,6 +4888,22 @@ def _deterministic_used_phone_task_state_decision(
 
     if state.task_type != "ecommerce_guide":
         return None, None
+    if _requires_context_semantic_change(message):
+        return None, _task_state_extraction_observation(
+            route="model_fallback", reason=("semantic_budget_interpretation"
+                if _requires_context_budget_interpretation(message)
+                else "long_message_requires_bounded_goal"
+                if _requires_context_note_interpretation(message) and len(message) > 500
+                else "context_note_or_recall_requires_semantics"
+                if _requires_context_note_interpretation(message)
+                else "semantic_withdrawal_or_acceptance"),
+            mentioned_keys=set(), covered_keys=set(),
+        )
+    if settings.context_history_v1_enabled and len(message) > 500:
+        return None, _task_state_extraction_observation(
+            route="model_fallback", reason="long_message_requires_bounded_goal",
+            mentioned_keys=set(), covered_keys=set(),
+        )
     raw_guide = state.domain_state.get("shoppingGuide")
     try:
         parsed_guide = (
@@ -4512,7 +4943,10 @@ def _deterministic_used_phone_task_state_decision(
         # pair is nevertheless phone-specific enough to bootstrap the same
         # deterministic contract; this avoids a slow model call that used to
         # invent an unsupported memory requirement for “偶尔打游戏”.
-        if not _nonbinding_used_phone_platform_acceptance_mentions(message):
+        if not _nonbinding_used_phone_platform_acceptance_mentions(message) and not (
+            settings.product_knowledge_enabled and re.search(r'芯片|相机参数|续航实测|\d+帧',message)
+            and re.search(r'手机|iphone|oppo|vivo|华为|荣耀',message,re.I)
+        ):
             return None, None
         existing = ShoppingGuideState(mode="recommend", category="phone")
     else:
@@ -4520,6 +4954,21 @@ def _deterministic_used_phone_task_state_decision(
         assert existing is not None
     if existing.category != "phone":
         return None, None
+
+    if (settings.product_knowledge_enabled and not state.domain_state.get('candidateScope')
+            and re.search(r'芯片|相机参数|续航实测|\d+帧',message)
+            and re.search(r'手机|iphone|oppo|vivo|华为|荣耀',message,re.I)
+            and not re.search(r'比较|对比|第[一二三123]|这两个|这三个',message)
+            and not parse_brand_negations(message).unresolved_cues):
+        # A specification question does not require the user to invent a
+        # second phone or specify cosmetic condition before a read-only lookup.
+        requirements={r.key:r for r in existing.requirements}
+        requirements.update(_explicit_used_phone_requirements(message))
+        return {'status':'ready','goal':message,'pendingQuestions':[],
+            'resolveUnknowns':list(state.unknowns),'domainStatePatch':{'shoppingGuide':{
+                'mode':'recommend','category':'phone','upsertRequirements':[r.model_dump(mode='json') for r in requirements.values()],
+                'removeRequirementKeys':[]}}}, _task_state_extraction_observation(
+                    route='deterministic_knowledge_question',reason='read_only_specs_or_test_gap')
 
     normalized = re.sub(r"\s+", "", message).casefold()
     if _references_invalidated_candidate_scope(state, message):
@@ -4576,6 +5025,11 @@ def _deterministic_used_phone_task_state_decision(
         message,
         reference_context,
     )
+    if settings.context_history_v1_enabled and compound_comparison:
+        from .control.react_context import _explicit_current_search_refresh
+        if _explicit_current_search_refresh(message):
+            # The request refers to a future display, not the retained pair.
+            ordinal_status, ordinal_ids = "none", None
     if compound_comparison and not (
         list(reference_context.presentation_ids)
         if reference_context is not None
@@ -4585,7 +5039,8 @@ def _deterministic_used_phone_task_state_decision(
     comparison = (
         ordinal_status == "bound"
         or (
-            any(cue in normalized for cue in _COMPARISON_INTENT_CUES)
+            any(cue in (_product_reference_surface(message) if settings.context_history_v1_enabled else normalized)
+                for cue in _COMPARISON_INTENT_CUES)
             and len(existing.compared_ids) in {2, 3}
             and len(set(existing.compared_ids)) == len(existing.compared_ids)
         )
@@ -4609,7 +5064,7 @@ def _deterministic_used_phone_task_state_decision(
         | retained
         | _nonbinding_used_phone_acceptance_mentions(message)
         | _nonbinding_used_phone_ambiguous_mentions(message)
-    ) & (set(USED_PHONE_ATTRIBUTE_REGISTRY) | {"price_minor"})
+    ) & (set(USED_PHONE_ATTRIBUTE_REGISTRY) | {"price_minor", "storage_gb"})
     mentioned_keys = _used_phone_controlled_mentions(message)
     if (
         "brand" in explicit
@@ -4630,10 +5085,22 @@ def _deterministic_used_phone_task_state_decision(
     )
     if (
         brand_negations.unresolved_cues
+        and (not settings.product_knowledge_enabled or parse_brand_negations(re.sub(
+            r'不(?:怎么)?(?:打|玩|考虑)游戏|不(?:要求|重视|考虑)拍照|不要猜|别猜|不要凭常识',
+            '',message)).unresolved_cues)
+        and (
+            not settings.context_history_v1_enabled
+            or _has_unbound_brand_rejection(message)
+        )
         and not brand_negations.targets
         and not brand_negations.released_brands
         and not explicit
         and not exclusions
+        and not (
+            settings.context_history_v1_enabled
+            and "price_minor" in mentioned_keys
+            and "price_minor" not in covered_keys
+        )
     ):
         blocker = "否决表达没有绑定到明确品牌或商品"
         return {
@@ -5035,6 +5502,8 @@ def _require_clarification_for_empty_phone_recommendation(
 
     if (
         _used_phone_text_claim_discovery(message) is not None
+        or (settings.product_knowledge_enabled and re.search(r'芯片|相机参数|续航实测|\d+帧',message)
+            and re.search(r'手机|iphone|oppo|vivo|华为|荣耀',message,re.I))
         or _broad_used_phone_discovery(message)
         or parse_brand_negations(message).released_brands
         or
@@ -5502,6 +5971,7 @@ def _build_validated_task_state_payload(
             state,
             model_domain_patch,
         )
+        _validate_battery_threshold_evidence(state, guide_state, message)
         constraints_changed = False
         if state.task_type == "ecommerce_guide":
             effective_guide_state = guide_state
@@ -5520,6 +5990,7 @@ def _build_validated_task_state_payload(
             guide_state = _canonicalize_explicit_used_phone_negation(
                 message, guide_state
             )
+            guide_state = _preserve_qualitative_phone_preferences(guide_state, message)
             _validate_used_phone_requirement_compatibility(guide_state)
             if guide_state is not None:
                 guide_state, constraints_changed = clear_stale_guide_references(
@@ -5569,15 +6040,16 @@ def _build_validated_task_state_payload(
             require_status=require_status,
         )
         recommend_mode_explicit = False
-        if state.task_type == "ecommerce_guide" and "shoppingGuide" in model_domain_patch:
-            raw_guide = model_domain_patch["shoppingGuide"]
-            recommend_mode_explicit = (
-                isinstance(raw_guide, dict) and raw_guide.get("mode") == "recommend"
-            )
-        elif state.task_type == "ecommerce_guide" and optional_shopping_value is not None:
+        if state.task_type == "ecommerce_guide" and optional_shopping_value is not None:
             existing_guide = state.domain_state.get("shoppingGuide")
+            raw_guide = model_domain_patch.get("shoppingGuide", {})
+            # Inherit an explicitly established mode, not the Pydantic
+            # default of a newly constructed guide with no mode provenance.
+            effective_mode = raw_guide.get("mode", (
+                existing_guide.get("mode") if isinstance(existing_guide, dict) else None
+            ))
             if guide_state is not None:
-                recommend_mode_explicit = guide_state.mode == "recommend"
+                recommend_mode_explicit = effective_mode == guide_state.mode == "recommend"
             elif isinstance(existing_guide, dict):
                 recommend_mode_explicit = existing_guide.get("mode") == "recommend"
                 try:
@@ -5621,6 +6093,14 @@ def _build_validated_task_state_payload(
             # user-turn patch has passed all extraction and domain validation.
             payload["activePlan"] = None
             payload["planningFailure"] = None
+        if settings.context_history_v1_enabled:
+            # Validate the COMPLETE persistence shape while still inside the
+            # pure, zero-write repair boundary. Conflicting upsert/remove
+            # operations must receive the existing single structured repair,
+            # not fail later outside it. Do not normalize away the conflict.
+            TaskStatePatchRequest.model_validate({
+                **payload, "expectedRevision": state.revision, "actor": "agent",
+            })
         return payload, model_domain_patch
     except TaskStatePayloadValidationError:
         raise
@@ -5644,7 +6124,8 @@ async def _apply_task_state_update(
     Pure validation runs in ``_build_validated_task_state_payload`` and may raise
     ``TaskStatePayloadValidationError`` before any persistence, giving the
     bounded repair in ``_update_task_state_for_unified_harness`` a clean chance
-    to resubmit. Persist-stage failures keep the turn-ledger fallback behavior.
+    to resubmit. Unified persist-stage failures never become partial writes;
+    only the legacy caller keeps the turn-ledger fallback behavior.
 
     ``require_status`` forces an explicit model status; ``allow_auto_ready`` is
     False by default so nothing silently auto-readies a model payload. The
@@ -5659,15 +6140,45 @@ async def _apply_task_state_update(
         require_status=require_status,
         allow_auto_ready=allow_auto_ready,
     )
-    initial_server_patch = (
-        server_domain_patch_builder(state)
-        if server_domain_patch_builder is not None else server_domain_patch
-    )
-    if initial_server_patch:
-        payload["domainStatePatch"] = {
-            **payload["domainStatePatch"],
-            **initial_server_patch,
-        }
+    def apply_server_patch(current: TaskState, proposed: dict[str, Any]) -> None:
+        # Builders must see this turn's validated guide, not the previous
+        # revision's guide (which would restore old requirements/candidate IDs).
+        future_domain = dict(current.domain_state)
+        for key, value in proposed["domainStatePatch"].items():
+            if value is None:
+                future_domain.pop(key, None)
+            else:
+                future_domain[key] = value
+        future = current.model_copy(update={"domain_state": future_domain})
+        patch = (
+            server_domain_patch_builder(future)
+            if server_domain_patch_builder is not None else server_domain_patch
+        )
+        if not patch:
+            return
+        proposed["domainStatePatch"].update(patch)
+        if current.task_type == "ecommerce_guide" and "shoppingGuide" in patch:
+            # Finalize the lifecycle and scope from the final server-owned
+            # guide, atomically with the same write, including OCC rebuilds.
+            guide = ShoppingGuideState.model_validate(patch["shoppingGuide"])
+            guide, changed = clear_stale_guide_references(current, guide)
+            proposed["domainStatePatch"]["shoppingGuide"] = guide.model_dump(
+                by_alias=True, mode="json",
+            )
+            proposed["domainStatePatch"].update(build_shopping_state_transition_patch(
+                current, guide, proposed, constraints_changed=changed,
+            ))
+            # The first validation already materialized a constraint table.
+            # Rebuild that derived table, but still reject conflicts with any
+            # constraints explicitly supplied by the model.
+            projection = {
+                "upsertConstraints": list(arguments.get("upsertConstraints", [])),
+                "removeConstraintKeys": list(arguments.get("removeConstraintKeys", [])),
+            }
+            _synchronize_ecommerce_constraint_projection(current, projection, guide)
+            proposed.update(projection)
+
+    apply_server_patch(state, payload)
 
     def rebuild_domain_patch(latest: TaskState) -> dict[str, Any]:
         latest_model_patch, _ = _materialize_model_domain_patch(
@@ -5692,16 +6203,7 @@ async def _apply_task_state_update(
             require_status=require_status,
             allow_auto_ready=allow_auto_ready,
         )
-        retry_server_patch = (
-            server_domain_patch_builder(latest)
-            if server_domain_patch_builder is not None
-            else server_domain_patch
-        )
-        if retry_server_patch:
-            rebuilt["domainStatePatch"] = {
-                **rebuilt["domainStatePatch"],
-                **retry_server_patch,
-            }
+        apply_server_patch(latest, rebuilt)
         return rebuilt
 
     try:
@@ -5714,6 +6216,10 @@ async def _apply_task_state_update(
             retry_payload_builder=rebuild_payload,
         )
     except (ValueError, TaskStateTransitionError):
+        if require_status:
+            # Unified extraction must not turn a rejected full write into a
+            # partial domain-only write. Only pre-persist validation may repair.
+            raise
         # State maintenance must not make the user-facing Agent unavailable when
         # the model proposes a malformed field. Preserve at least the turn ledger.
         fallback_domain_patch = dict(payload["domainStatePatch"])
@@ -5786,13 +6292,14 @@ def _explicit_harness_tool_schemas(
     # activePlan early-return below: a rerank turn retires the completed
     # search Plan at task-state update time, so `state.active_plan` is already
     # None when the deterministic rerank plan is being built.
+    pending_scope_tool = "compare_products" if settings.product_knowledge_enabled else "rerank_products_in_scope"
     if state.domain_state.get("scopeRerankRequest") and (
-        "rerank_products_in_scope" not in selected_names
+        pending_scope_tool not in selected_names
     ):
         for schema in TOOL_SCHEMAS:
-            if _tool_schema_name(schema) == "rerank_products_in_scope":
+            if _tool_schema_name(schema) == pending_scope_tool:
                 selected.append(schema)
-                selected_names.add("rerank_products_in_scope")
+                selected_names.add(pending_scope_tool)
                 break
     if state.active_plan is None:
         return selected
@@ -6104,6 +6611,9 @@ def _react_boundary_answer(answer_context_ref: object) -> str | None:
 def _should_use_comparison_judge(state: TaskState) -> bool:
     """Keep durable and non-durable final-answer routing semantically identical."""
 
+    if settings.product_knowledge_enabled:
+        if state.active_plan is not None and any(s.expected_output.get("requiresEvidenceComparison") for s in state.active_plan.steps):
+            return True
     guide_raw = state.domain_state.get("shoppingGuide")
     extraction_raw = state.domain_state.get("taskStateExtraction")
     deterministic_scope_answer = bool(
@@ -6236,6 +6746,9 @@ async def _maybe_run_multi_agent_research_v2(
     child tool observations never enter the parent answer context.
     """
 
+    from .product_knowledge.answer import payload_from_view
+    if settings.product_knowledge_enabled and payload_from_view(final_answer_view) is not None:
+        return None
     if not settings.multi_agent_v2_enabled:
         return None
     raw_scope = state.domain_state.get("candidateScope")
@@ -6685,6 +7198,8 @@ async def _run_react_v0_live_agent(
             validated_results=validated_results,
             evidence_refs=evidence_refs,
             phase_task_revision=current.revision,
+            current_turn_tool_names=([trace.tool for trace in tool_traces if trace.ok]
+                if settings.context_history_v1_enabled else None),
         )
         from .harness import _validate_view_and_record
 
@@ -6734,6 +7249,8 @@ async def _run_react_v0_live_agent(
                     else _render_validated_used_phone_answer(
                         current,
                         final_answer_view,
+                        user_message=message,
+                        current_tool_traces=tool_traces,
                     )
                 )
             prebuilt_answer = answer is not None
@@ -6778,7 +7295,10 @@ async def _run_react_v0_live_agent(
                 if (
                     use_comparison_judge
                     and (
-                        _has_unsupported_used_phone_capability_claim(answer)
+                        (_has_unsupported_used_phone_capability_claim(answer)
+                         and not (settings.product_knowledge_enabled and any(
+                             r.get('evidence', {}).get('contractVersion') == 'product-evidence-comparison-v1'
+                             for r in final_answer_view.validated_results)))
                         or _comparison_reference_claim_is_invalid(
                             answer, final_answer_view
                         )
@@ -6924,7 +7444,11 @@ def _durable_enabled_for_run(
         memory_run_binding is not None
         and memory_run_binding.payload_for_phase("planner") is not None
     )
-    return bool(settings.agent_graph_v2_durable_enabled and not memory_bound)
+    from .memory.durable_snapshot import has_durable_authority
+    return bool(settings.agent_graph_v2_durable_enabled and (
+        not memory_bound or (settings.memory_durable_snapshot_enabled
+                             and has_durable_authority(memory_run_binding))
+    ))
 
 
 async def _run_explicit_harness_agent(
@@ -7437,6 +7961,23 @@ async def _run_explicit_harness_agent(
         )
 
     try:
+        memory_guard = None
+        if durable and (settings.memory_durable_snapshot_enabled or resume is not None or restart):
+            from .memory.durable_snapshot import prepare_memory_guard
+            from .task_state import _get_client as _memory_receipt_redis
+            prepared_memory_guard = None
+
+            async def memory_guard(*identity: Any) -> None:
+                nonlocal prepared_memory_guard
+                # Lazy: exact committed-answer replays have no new effect and
+                # must keep their zero-model, no-new-memory-lookup semantics.
+                if prepared_memory_guard is None:
+                    prepared_memory_guard = await prepare_memory_guard(
+                        redis=_memory_receipt_redis(), binding=memory_run_binding,
+                        task_id=state.task_id, run_id=run_id, session_id=session_id,
+                        resuming=resume is not None or restart,
+                    )
+                await prepared_memory_guard(*identity)
         # LangGraph owns the bounded loop. The surrounding block handles only
         # the single terminal user-facing boundary returned by the graph.
         for graph_round in range(2):
@@ -7485,6 +8026,8 @@ async def _run_explicit_harness_agent(
                         tool_caller_v2=durable_tool_transport_v2,
                         trace_builder=trace_builder,
                         projector=projector,
+                        memory_run_binding=memory_run_binding,
+                        memory_guard=memory_guard,
                         projector_factory=_durable_projector_factory(
                             message, history, run_id, memory_run_binding,
                             evaluation_context_arm,
@@ -7787,7 +8330,7 @@ async def _run_explicit_harness_agent(
                         [context_pack_system_message(pack), {"role": "user", "content": message}]
                         if pack is not None
                         else [
-                            {"role": "system", "content": AGENT_SYSTEM_PROMPT},
+                            {"role": "system", "content": agent_system_prompt()},
                             {"role": "user", "content": message},
                             _task_state_context(state),
                         ]
@@ -7906,6 +8449,8 @@ async def _run_explicit_harness_agent(
                     continue
 
                 # ── Project FinalAnswerView in context_pack mode ─────────
+                if memory_guard is not None:
+                    await memory_guard()
                 final_answer_view = None
                 final_answer_phase_started = False
                 multi_agent_projection: dict[str, Any] | None = None
@@ -7967,6 +8512,8 @@ async def _run_explicit_harness_agent(
                         validated_results=validated_results,
                         evidence_refs=validated_evidence_refs,
                         phase_task_revision=state.revision,
+                        current_turn_tool_names=([trace.tool for trace in tool_traces if trace.ok]
+                            if settings.context_history_v1_enabled else None),
                     )
                     # Pre-validate: the view's phaseTaskRevision must match
                     # the current state.revision before generating final answer.
@@ -8062,6 +8609,8 @@ async def _run_explicit_harness_agent(
                         else _render_validated_used_phone_answer(
                             state,
                             final_answer_view,
+                            user_message=message,
+                            current_tool_traces=tool_traces,
                         )
                     )
                 )
@@ -8071,7 +8620,7 @@ async def _run_explicit_harness_agent(
                         _generate_final_answer(
                         client,
                         messages=[
-                            {"role": "system", "content": AGENT_SYSTEM_PROMPT},
+                            {"role": "system", "content": agent_system_prompt()},
                             *(history or []),
                             {"role": "user", "content": message},
                             _task_state_context(state),
@@ -8421,7 +8970,7 @@ async def _run_legacy_agent(
 
     client = get_client()
     messages = [
-        {"role": "system", "content": AGENT_SYSTEM_PROMPT},
+        {"role": "system", "content": agent_system_prompt()},
         *([_task_state_context(task_state)] if task_state is not None else []),
         *(history or []),
         {"role": "user", "content": message},
@@ -8945,7 +9494,9 @@ async def _run_deterministic_preflight(
     return None
 
 
-def _parse_task_state_arguments(task_call: Any) -> dict[str, Any]:
+def _parse_task_state_arguments(
+    task_call: Any, *, response: Any = None, strict: bool = False,
+) -> dict[str, Any]:
     """Parse an ``update_task_state`` tool call, fail-closed on any malformed input.
 
     Returns the parsed arguments dict. A ``None`` call, invalid JSON, or a JSON
@@ -8959,9 +9510,39 @@ def _parse_task_state_arguments(task_call: Any) -> dict[str, Any]:
             code="missing_task_state_tool_call",
             field_path="arguments",
         )
+    if response is not None and getattr(response.choices[0], "finish_reason", None) == "length":
+        raise TaskStatePayloadValidationError(
+            "update_task_state arguments were truncated; submit only the minimal changed fields",
+            code="truncated_task_state_arguments",
+            field_path="arguments",
+        )
+
+    def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        result: dict[str, Any] = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError("duplicate JSON key")
+            result[key] = value
+        return result
+
+    def reject_constant(value: str) -> None:
+        raise ValueError("non-finite JSON number")
+
+    def finite_float(value: str) -> float:
+        import math
+
+        number = float(value)
+        if not math.isfinite(number):
+            raise ValueError("non-finite JSON number")
+        return number
+
     try:
-        parsed = json.loads(task_call.function.arguments or "{}")
-    except json.JSONDecodeError as exc:
+        parsed = json.loads(
+            task_call.function.arguments or "{}",
+            object_pairs_hook=unique_object, parse_constant=reject_constant,
+            parse_float=finite_float,
+        )
+    except (ValueError, TypeError) as exc:
         raise TaskStatePayloadValidationError(
             "update_task_state arguments are not valid JSON",
             code="invalid_task_state_arguments_json",
@@ -8973,6 +9554,16 @@ def _parse_task_state_arguments(task_call: Any) -> dict[str, Any]:
             code="task_state_arguments_not_an_object",
             field_path="arguments",
         )
+    if strict:
+        from .task_state_output_contract import decode_strict_task_patch
+
+        try:
+            return decode_strict_task_patch(parsed, TASK_STATE_TOOL_SCHEMA)
+        except ValueError as exc:
+            raise TaskStatePayloadValidationError(
+                "strict tool arguments do not match the declared wire schema",
+                code="strict_task_state_wire_schema_mismatch", field_path="arguments",
+            ) from exc
     return parsed
 
 
@@ -8995,15 +9586,49 @@ def _assistant_tool_call_message(task_call: Any) -> dict[str, str]:
 
 def _task_state_validation_error_message(
     error: TaskStatePayloadValidationError,
+    *,
+    state: TaskState | None = None,
+    proposed_arguments: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Structured, non-leaking summary of a pure-validation rejection."""
-    return {
+    result = {
         "valid": False,
         "code": error.code,
         "field_path": error.field_path,
         "message": str(error),
         "persist": 0,
     }
+    if state is None:
+        return result
+    # A first field failure must not hide independent status/unknown failures
+    # from the only repair request. These diagnostics neither amend the patch
+    # nor persist anything; full authoritative validation still runs afterward.
+    result["currentBlockingState"] = {
+        "status": state.status,
+        "unknowns": list(state.unknowns),
+        "pendingQuestions": list(state.pending_questions),
+        "rule": "Preserve unresolved blockers and their questions. Do not invent resolution to pass validation.",
+    }
+    if not isinstance(proposed_arguments, dict):
+        return result
+    patch = dict(proposed_arguments)
+    if any(key in patch and (
+        not isinstance(patch[key], list)
+        or any(not isinstance(value, str) for value in patch[key])
+    ) for key in ("addUnknowns", "resolveUnknowns", "pendingQuestions")):
+        return result
+    violations = []
+    try:
+        _enforce_task_executability_invariants(
+            state, patch, requested_status=patch.get("status"),
+        )
+    except TaskStatePayloadValidationError as additional:
+        if (additional.code, additional.field_path) != (error.code, error.field_path):
+            violations.append(_task_state_validation_error_message(additional))
+    if violations:
+        result["additionalViolations"] = violations
+        result["repairInstruction"] = "Fix the original error AND every additional violation in this single repair."
+    return result
 
 
 async def _submit_task_state_extraction(
@@ -9016,16 +9641,32 @@ async def _submit_task_state_extraction(
     V4 thinking models must omit ``tool_choice``; the single-tool menu plus the
     strict name check below preserves the same fail-closed runtime boundary.
     """
+    tool_schema = TASK_STATE_TOOL_SCHEMA
+    if settings.task_state_extraction_strict_enabled:
+        from .task_state_output_contract import require_strict_endpoint, strict_task_state_tool
+
+        require_strict_endpoint(settings.deepseek_base_url, settings.deepseek_model)
+        tool_schema = strict_task_state_tool(TASK_STATE_TOOL_SCHEMA)
+        messages = [*messages, {"role": "system", "content": (
+            "本次使用 strict 工具 schema：所有属性必须提供；原可选字段用 null 表示不修改，"
+            "空数组 [] 表示显式清空。不得用空字符串代替 null，不得遗漏 status。"
+            '注意 JSON null 不加引号；字符串 "null" 是非法占位符，尤其禁止 goal="null"。'
+            "只提交本轮变化；未变字段填 null。value 仅支持标量、null 或字符串列表。"
+        )}]
     response = await client.chat.completions.create(
         model=settings.deepseek_model,
         messages=messages,
-        tools=[TASK_STATE_TOOL_SCHEMA],
+        tools=[tool_schema],
+        max_tokens=settings.task_state_extraction_max_tokens,
+        **({"extra_body": {"thinking": {"type": "disabled"}}}
+           if settings.deepseek_model.strip().lower().startswith("deepseek-v4-") else {}),
         **tool_choice_kwargs(
             settings.deepseek_model,
             {
                 "type": "function",
                 "function": {"name": TASK_STATE_TOOL_NAME},
             },
+            thinking_enabled=False,
         ),
     )
     reply = response.choices[0].message
@@ -9045,6 +9686,8 @@ async def _repair_task_state_payload(
     planning_messages: list[dict],
     original_call: Any,
     validation_error: TaskStatePayloadValidationError,
+    state: TaskState | None = None,
+    proposed_arguments: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], Any]:
     """One bounded structured repair call after a pure-validation rejection.
 
@@ -9060,7 +9703,9 @@ async def _repair_task_state_payload(
             "role": "tool",
             "tool_call_id": original_call.id,
             "content": json.dumps(
-                _task_state_validation_error_message(validation_error),
+                _task_state_validation_error_message(
+                    validation_error, state=state, proposed_arguments=proposed_arguments,
+                ),
                 ensure_ascii=False,
             ),
         },
@@ -9072,7 +9717,10 @@ async def _repair_task_state_payload(
     if repair_call is None:
         raise validation_error
     try:
-        return _parse_task_state_arguments(repair_call), repair_response
+        return _parse_task_state_arguments(
+            repair_call, response=repair_response,
+            strict=settings.task_state_extraction_strict_enabled,
+        ), repair_response
     except TaskStatePayloadValidationError:
         # The repair itself was malformed (invalid JSON / non-object): fail
         # closed by re-raising the original rejection so nothing persists.
@@ -9139,9 +9787,7 @@ async def _update_task_state_for_unified_harness(
             and deterministic_arguments["goal"] == message
         ):
             relation_label = "基于上述候选回答" if isinstance(bound_ids, list) else "追加条件"
-            combined_goal = f"{task_state.goal}；{relation_label}：{message}"
-            if len(combined_goal) <= 2000:
-                deterministic_arguments["goal"] = combined_goal
+            deterministic_arguments["goal"] = _append_task_goal(task_state.goal, message, relation_label)
         extraction_observation = _with_extraction_metrics(
             extraction_observation,
             execution_kind="deterministic",
@@ -9167,6 +9813,10 @@ async def _update_task_state_for_unified_harness(
                     "kind": "compare_first_two",
                     "taskId": latest.task_id,
                 }
+            if settings.context_history_v1_enabled:
+                refresh_patch = _context_compound_refresh_patch(latest, message)
+                if refresh_patch.get("compoundComparison") is not None or not compound_comparison:
+                    patch.update(refresh_patch)
             # The one-turn rerank request is server-owned and cleared on every
             # write; it is re-published only when the decision layer produced
             # one and the OCC-safe re-check against ``latest`` still holds.
@@ -9212,42 +9862,53 @@ async def _update_task_state_for_unified_harness(
     )
 
     planning_messages = [
-        {"role": "system", "content": AGENT_SYSTEM_PROMPT},
+        {"role": "system", "content": agent_system_prompt()},
         context_pack_system_message(pre_update_pack),
         {"role": "user", "content": message},
         {"role": "system", "content": TASK_STATE_PLANNING_PROMPT},
     ]
     loop = asyncio.get_running_loop()
     llm_started = loop.time()
-    task_call_failed = True
-    task_response = None
-    try:
-        task_call, task_response = await _submit_task_state_extraction(
-            client, planning_messages
-        )
-        task_call_failed = False
-    finally:
-        llm_duration_ms = (loop.time() - llm_started) * 1000.0
-        _observe_llm_call(
-            "task_state",
-            llm_duration_ms,
-            failed=task_call_failed,
-            response=task_response,
-        )
+    llm_duration_ms = 0.0
+    extraction_calls = 0
+    task_call = None
+    for attempt in range(2):
+        request_messages = planning_messages
+        if attempt:
+            # Retry the original input with a format instruction, not a forged
+            # assistant/tool exchange and not the untrusted prose as facts.
+            request_messages = [*planning_messages, {"role": "system", "content": (
+                "上次响应没有提交 update_task_state，未写入任何业务状态。"
+                "这是唯一一次格式重试：只提交工具调用，不要输出正文，保持所有状态不变量。"
+            )}]
+        call_started = loop.time()
+        task_call_failed = True
+        task_response = None
+        extraction_calls += 1
+        try:
+            task_call, task_response = await _submit_task_state_extraction(client, request_messages)
+            task_call_failed = task_call is None
+        finally:
+            duration = (loop.time() - call_started) * 1000.0
+            llm_duration_ms += duration
+            _observe_llm_call("task_state", duration, failed=task_call_failed, response=task_response)
+        if task_call is not None:
+            break
     if task_call is None:
-        # Missing update_task_state tool call: there is no original call to echo
-        # back for a bounded repair. Return the untouched state so the caller
-        # detects the no-op (revision unchanged) and safe-stops with zero
-        # business persistence, no forged tool call and no auto-ready.
+        # Both responses omitted the required call. No writes or auto-ready.
         return task_state
+    arguments = None
     try:
-        arguments = _parse_task_state_arguments(task_call)
+        arguments = _parse_task_state_arguments(
+            task_call, response=task_response,
+            strict=settings.task_state_extraction_strict_enabled,
+        )
         extraction_observation = _with_extraction_metrics(
             extraction_observation,
             execution_kind="model",
-            model_call_count=1,
+            model_call_count=extraction_calls,
             llm_duration_ms=llm_duration_ms,
-            repair_used=False,
+            repair_used=extraction_calls > 1,
         )
         return await _apply_task_state_update(
             task_state,
@@ -9262,9 +9923,13 @@ async def _update_task_state_for_unified_harness(
                 # leftover one-turn request is cleared so it cannot leak into a
                 # later deterministic turn.
                 "scopeRerankRequest": None,
+                **_context_compound_refresh_patch(task_state, message),
             } if extraction_observation is not None else None,
         )
     except TaskStatePayloadValidationError as exc:
+        if extraction_calls >= 2:
+            # Missing-call retry and payload repair share one two-call budget.
+            raise
         # Pure-validation rejection: nothing was persisted, so a single bounded
         # repair is safe. Post-write failures (OCC/persist/backend/timeout) are
         # not TaskStatePayloadValidationError and never reach this branch.
@@ -9277,6 +9942,8 @@ async def _update_task_state_for_unified_harness(
                 planning_messages=planning_messages,
                 original_call=task_call,
                 validation_error=exc,
+                state=task_state,
+                proposed_arguments=arguments,
             )
             repair_call_failed = False
         finally:
@@ -9308,6 +9975,7 @@ async def _update_task_state_for_unified_harness(
                 # leftover one-turn request is cleared so it cannot leak into a
                 # later deterministic turn.
                 "scopeRerankRequest": None,
+                **_context_compound_refresh_patch(task_state, message),
             } if extraction_observation is not None else None,
         )
 
@@ -9319,10 +9987,20 @@ async def _unified_pre_harness_safe_stop(
     answer: str,
     failure_code: str,
     on_answer_delta: AnswerDeltaCallback | None,
+    evaluation_context_arm: Any | None = None,
 ) -> tuple[str, list[ToolTrace], list[dict], str, TraceSummary]:
     """Return a structured Agent failure before Planner/tool execution begins."""
 
-    run_id = f"run-{uuid.uuid4().hex[:12]}"
+    if evaluation_context_arm is not None:
+        from .evaluation_context_arm import validate_evaluation_capability
+
+        validate_evaluation_capability(
+            evaluation_context_arm, task_id=state.task_id, session_id=state.session_id,
+        )
+    run_id = (
+        evaluation_context_arm.identity.run_id
+        if evaluation_context_arm is not None else f"run-{uuid.uuid4().hex[:12]}"
+    )
     trace_builder = TraceBuilder(run_id, mode="context_pack")
     if failure_code == "react_v0_not_accepted":
         trace_builder.set_entered_runtime("react_v0")
@@ -9366,11 +10044,16 @@ async def _run_unified_harness_agent(
 ) -> tuple[str, list[ToolTrace], list[dict], str | None, TraceSummary | None]:
     """Run one TaskState -> ContextPack -> persisted Harness path."""
 
+    async def safe_stop(message: str, **kwargs: Any):
+        return await _unified_pre_harness_safe_stop(
+            message, evaluation_context_arm=evaluation_context_arm, **kwargs,
+        )
+
     if (
         settings.agent_control_runtime == "react_v0"
         and not settings.agent_react_live_enabled
     ):
-        return await _unified_pre_harness_safe_stop(
+        return await safe_stop(
             message,
             state=task_state,
             answer=(
@@ -9385,7 +10068,7 @@ async def _run_unified_harness_agent(
         settings.agent_react_live_enabled
         and settings.agent_graph_v2_durable_enabled
     ):
-        return await _unified_pre_harness_safe_stop(
+        return await safe_stop(
             message,
             state=task_state,
             answer=(
@@ -9397,7 +10080,7 @@ async def _run_unified_harness_agent(
         )
 
     if settings.agent_control_runtime == "adaptive_hybrid_v1":
-        return await _unified_pre_harness_safe_stop(
+        return await safe_stop(
             message,
             state=task_state,
             answer="当前混合回退策略尚未进入验收，本轮已安全停止。",
@@ -9443,7 +10126,7 @@ async def _run_unified_harness_agent(
             )
         except asyncio.TimeoutError:
             answer = "抱歉，本轮请求超过了总执行时间限制，已安全停止；你可以稍后继续当前任务。"
-            return await _unified_pre_harness_safe_stop(
+            return await safe_stop(
                 message, state=task_state, answer=answer,
                 failure_code="task_state_update_timeout",
                 on_answer_delta=on_answer_delta,
@@ -9451,7 +10134,7 @@ async def _run_unified_harness_agent(
         except Exception:
             logger.exception("Bounded TaskState extraction failed")
             answer = "抱歉，本轮任务状态构建失败，系统已安全停止；请稍后重试。"
-            return await _unified_pre_harness_safe_stop(
+            return await safe_stop(
                 message, state=task_state, answer=answer,
                 failure_code="task_state_update_failed",
                 on_answer_delta=on_answer_delta,
@@ -9462,14 +10145,14 @@ async def _run_unified_harness_agent(
             # bounded repair. Safe-stop with zero business persistence, no forged
             # tool call and no auto-ready (the P1 boundary from review 001).
             answer = "抱歉，本轮任务状态构建失败，系统已安全停止；请稍后重试。"
-            return await _unified_pre_harness_safe_stop(
+            return await safe_stop(
                 message, state=state, answer=answer,
                 failure_code="task_state_update_missing",
                 on_answer_delta=on_answer_delta,
             )
     if settings.agent_control_runtime == "react_v0":
         if resume is not None or restart:
-            return await _unified_pre_harness_safe_stop(
+            return await safe_stop(
                 message,
                 state=state,
                 answer=(
@@ -9569,7 +10252,7 @@ async def _run_unified_harness_agent(
         except Exception:
             logger.exception("ContextPack build failed while asking for clarification")
             answer = "抱歉，本轮上下文构建失败，系统已安全停止，请稍后重试。"
-            return await _unified_pre_harness_safe_stop(
+            return await safe_stop(
                 message, state=state, answer=answer,
                 failure_code="clarification_context_build_failed",
                 on_answer_delta=on_answer_delta,
@@ -9586,7 +10269,7 @@ async def _run_unified_harness_agent(
             )
         except asyncio.TimeoutError:
             answer = "抱歉，本轮请求超过了总执行时间限制，已安全停止；请稍后继续。"
-            return await _unified_pre_harness_safe_stop(
+            return await safe_stop(
                 message, state=state, answer=answer,
                 failure_code="clarification_generation_timeout",
                 on_answer_delta=on_answer_delta,
@@ -9621,7 +10304,7 @@ async def _run_unified_harness_agent(
         # This should normally be prevented by the pre-route contract check.
         # Fail closed instead of silently entering the legacy loop mid-turn.
         answer = "当前任务尚未具备可执行条件，请补充最关键的缺失信息后再试。"
-        return await _unified_pre_harness_safe_stop(
+        return await safe_stop(
             message, state=state, answer=answer,
             failure_code="harness_contract_not_executable",
             on_answer_delta=on_answer_delta,
@@ -9662,6 +10345,27 @@ async def run_agent(
     evaluation_context_arm: Any | None = None,
 ) -> tuple[str, list[ToolTrace], list[dict], str | None, TraceSummary | None]:
     """Public Agent entry point with one observable routing decision."""
+
+    # Opt-in experimental route. It deliberately has no access to persisted
+    # shopping state, resume capabilities, candidate IDs or transactions.
+    if domain_hint == "catalog_evidence":
+        from .catalog_evidence_agent import run_catalog_evidence_agent
+
+        if (task_state is not None or resume is not None or restart or pause_resume is not None
+                or memory_run_binding is not None or reference_context is not None
+                or evaluation_context_arm is not None or history):
+            raise ValueError("catalog_evidence_requires_isolated_stateless_turn")
+        if not settings.catalog_evidence_enabled:
+            answer = "公开语料搜索实验尚未启用。"
+            return answer, [ToolTrace(tool="search_catalog_evidence", ok=False,
+                                     detail={"code": "catalog_evidence_disabled"})], [
+                {"role": "user", "content": message}, {"role": "assistant", "content": answer},
+            ], None, None
+        async with get_client() as catalog_client:
+            return await asyncio.wait_for(run_catalog_evidence_agent(
+                message, client=catalog_client, tool_caller=call_tool,
+                on_answer_delta=on_answer_delta, on_model_call=_observe_llm_call,
+            ), timeout=max(float(settings.agent_request_deadline_seconds), 0.1))
 
     if evaluation_context_arm is not None:
         if task_state is None:

@@ -70,6 +70,7 @@ _DURABLE_READ_ONLY_TOOL_NAMES = frozenset({
     "search_products",
     "get_product_details",
     "compare_products",
+    "search_product_evidence",
     "rerank_products_in_scope",
 })
 

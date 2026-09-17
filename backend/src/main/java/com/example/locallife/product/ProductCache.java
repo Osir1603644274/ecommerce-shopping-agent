@@ -139,7 +139,6 @@ public class ProductCache {
         localCache.invalidate(id);
         try {
             redisTemplate.delete(key(id));
-            redisTemplate.convertAndSend(INVALIDATION_CHANNEL, "product:" + id);
         } catch (RuntimeException ex) {
             log.warn("Failed to delete product cache for id={}", id, ex);
         }
@@ -148,6 +147,8 @@ public class ProductCache {
     public void invalidateLocal(Long id) {
         localCache.invalidate(id);
     }
+
+    public void invalidateAllLocal() { localCache.invalidateAll(); }
 
     public Optional<String> tryLockDetail(Long id) {
         String ownerToken = UUID.randomUUID().toString();
@@ -182,7 +183,7 @@ public class ProductCache {
         return Duration.ofSeconds(baseSeconds + ThreadLocalRandom.current().nextLong(-range, range + 1));
     }
 
-    private static String key(Long id) {
+    public static String key(Long id) {
         return KEY_PREFIX + id;
     }
 
@@ -191,6 +192,7 @@ public class ProductCache {
     }
 
     private void record(String tier, String outcome) {
+        com.example.locallife.diagnostics.BackendTrace.mark("cache", "商品详情 " + tier, outcome);
         meters.counter(
                 "local_life.cache.lookup",
                 "entity", "product",

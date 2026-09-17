@@ -115,7 +115,10 @@ async def planner_node(
         deps.trace_builder.end_phase(
             planning_step.planner_result.outcome
             if planning_step.planner_result is not None
-            else "skipped"
+            else "skipped",
+            detail={"plannedTools": [step.tool_name for step in planning_step.task_state.active_plan.steps]}
+                if planning_step.task_state.active_plan else None,
+            task_revision=current.revision,
         )
         trace_started = False
 

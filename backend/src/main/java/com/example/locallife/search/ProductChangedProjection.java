@@ -22,19 +22,22 @@ class ProductChangedProjection implements InboundEventHandler {
     private final Optional<ElasticsearchGateway> search;
     private final ObjectMapper json;
     private final MeterRegistry meters;
+    private final CacheInvalidationPublisher invalidation;
 
     ProductChangedProjection(
             ProductRepository products,
             ProductSearchProjectionCursorMapper cursor,
             Optional<ElasticsearchGateway> search,
             ObjectMapper json,
-            MeterRegistry meters
+            MeterRegistry meters,
+            CacheInvalidationPublisher invalidation
     ) {
         this.products = products;
         this.cursor = cursor;
         this.search = search;
         this.json = json;
         this.meters = meters;
+        this.invalidation = invalidation;
     }
 
     @Override
@@ -48,6 +51,7 @@ class ProductChangedProjection implements InboundEventHandler {
     public void handle(EventEnvelope event) {
         ProductSearchEventPayload payload = read(event);
         validateIdentity(event, payload);
+        invalidation.productUpdated(payload.productId());
         Long applied = cursor.findVersionForUpdate(payload.productId());
         if (applied != null && payload.entityVersion() <= applied) {
             meters.counter("local_life.search.product_event", "outcome", "stale_or_duplicate").increment();

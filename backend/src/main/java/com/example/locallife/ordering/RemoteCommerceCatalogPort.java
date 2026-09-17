@@ -33,6 +33,9 @@ class RemoteCommerceCatalogPort implements CommerceCatalogPort {
             if (response == null || !response.success() || response.data() == null) {
                 throw new CatalogUnavailableException("商品服务返回了无效合同");
             }
+            if(!itemId.equals(response.data().itemId()) || !itemType.equals(response.data().itemType())
+                || response.data().unitPriceMinor()<0 || response.data().currency()==null)
+                throw new CatalogUnavailableException("商品服务合同身份不匹配");
             return response.data();
         } catch (FeignException.NotFound exception) {
             throw new ResourceNotFoundException("交易商品不存在");

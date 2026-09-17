@@ -1,0 +1,14 @@
+.execution-inspector { min-width: 0; margin-top: 14px; padding: 16px; border: 1px solid #dce2df; border-radius: 12px; background: #fbfcfb; color: #263b33; }
+.execution-inspector small { color: #62736b; overflow-wrap: anywhere; }
+.execution-clock,.execution-data { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.execution-clock dt { font-size: 12px; color: #62736b; }
+.execution-clock dd { margin: 5px 0; font-variant-numeric: tabular-nums; }
+.execution-json,.execution-source,.execution-reference { min-width: 0; overflow-wrap: anywhere; }
+.execution-json h4 { font-size: 13px; margin: 16px 0 8px; }
+.execution-inspector pre { padding: 12px; margin: 0; max-height: 360px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; background: #edf1ef; border-radius: 8px; font: 12px/1.65 Consolas,monospace; }
+.execution-source { margin-top: 16px; border-top: 1px solid #dce2df; padding-top: 12px; }
+.execution-source summary { cursor: pointer; font-weight: 600; }
+.execution-reference { font-size: 12px; }
+.backend-event > summary { cursor: pointer; display: flex; flex-wrap: wrap; gap: 10px; }
+.backend-event { width: 100%; min-width: 0; }
+@media(max-width:650px) { .execution-clock,.execution-data { grid-template-columns: minmax(0,1fr); } .execution-inspector { padding: 10px; } }

@@ -306,6 +306,12 @@ class ElasticsearchGateway implements HealthIndicator {
     ) {
         try {
             HttpResponse<String> response = send(method, path, contentType, body);
+            if (response.statusCode() == 404 && "DELETE".equals(method) && path.contains("/_doc/")) {
+                JsonNode deleted = objectMapper.readTree(response.body());
+                if ("not_found".equals(deleted.path("result").asText()) && !deleted.has("error")) {
+                    return deleted; // Replaying an already-applied deletion is successful.
+                }
+            }
             if (response.statusCode() < 200 || response.statusCode() >= 300) {
                 throw statusFailure(response);
             }

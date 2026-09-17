@@ -267,6 +267,7 @@ class CandidateScope(BaseModel):
     source_revision: int = Field(alias="sourceRevision")
     source_plan_id: str = Field(alias="sourcePlanId")
     source_step_id: str = Field(alias="sourceStepId")
+    source_query: str | None = Field(default=None, alias="sourceQuery", max_length=2000)
     category: ProductCategory
     candidate_pool_ids: list[int] = Field(alias="candidatePoolIds")
     ranked_item_ids: list[int] = Field(alias="rankedItemIds")
@@ -326,7 +327,7 @@ class ScopeRerankRequest(BaseModel):
     model_config = ConfigDict(populate_by_name=True, extra="forbid")
 
     scope_id: str = Field(alias="scopeId")
-    ranking_intent: Literal["camera_title_claim", "gaming_title_claim"] = Field(
+    ranking_intent: Literal["camera_title_claim", "gaming_title_claim", "evidence_comparison"] = Field(
         alias="rankingIntent",
     )
     created_at: str = Field(alias="createdAt")

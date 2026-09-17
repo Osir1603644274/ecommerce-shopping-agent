@@ -1,0 +1,16 @@
+{
+  "date": "2026-09-17",
+  "scope": "current source and selected reports; external artifacts excluded",
+  "redacted_files": [
+    ".env.example",
+    "docker-compose.yml",
+    "agent/scripts/audit_product_qrel_readiness.py",
+    "agent/scripts/import_kuaisearch_products.py",
+    "agent/scripts/seed_product_evaluation_prices.py",
+    "backend/src/main/resources/application.yml",
+    "backend/src/test/java/com/example/locallife/infrastructure/BackendReliabilityContainerIT.java",
+    "backend/src/test/java/com/example/locallife/infrastructure/RealInfrastructureContainerIT.java"
+  ],
+  "omitted_snapshot_file_count": 14342,
+  "business_worktree_committed": false
+}

@@ -825,6 +825,7 @@ async def react_policy_node(
             user_message=deps.user_message,
             allowed_tool_names=allowed_names,
             last_outcome=last_outcome,
+            memory_run_binding=deps.memory_run_binding,
         )
         action = deterministic_next_action(view)
         source = "deterministic_policy"
@@ -935,6 +936,7 @@ async def react_policy_node(
                 user_message=deps.user_message,
                 allowed_tool_names=allowed_names,
                 last_outcome=last_outcome,
+                memory_run_binding=deps.memory_run_binding,
             )
             source = "model"
             if model_slot is None:

@@ -1,0 +1,23 @@
+# Independent catalog owner: no order expiry, flash-sale or fulfillment jobs.
+spring:
+  application:
+    name: commerce-catalog
+  flyway:
+    enabled: false
+local-life:
+  deployment:
+    role: catalog
+    require-internal-token: true
+  order:
+    expiry-enabled: false
+  flash-sale:
+    enabled: false
+  fulfillment:
+    worker-enabled: false
+  memory:
+    enabled: false
+  inventory:
+    remote-enabled: true
+    recovery-enabled: false
+  messaging:
+    consumer-group: ${MICRO_CATALOG_CONSUMER_GROUP:commerce-catalog-v1}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local-life.invalid/schemas/context-multiagent-v1/route-decision.schema.json",
+  "title": "RouteDecision V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "decisionId", "runId", "taskId", "taskRevision",
+    "candidateScopeId", "candidateScopeSourceRevision", "routeClass",
+    "reasons", "routePolicyVersion", "decisionSource", "researchAllowed",
+    "transactionAllowed", "bindingHash"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "route-decision-v1"},
+    "decisionId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "runId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "taskId": {"type": "string", "minLength": 1, "maxLength": 160},
+    "taskRevision": {"type": "integer", "minimum": 1},
+    "candidateScopeId": {"type": ["string", "null"], "minLength": 1, "maxLength": 200},
+    "candidateScopeSourceRevision": {"type": ["integer", "null"], "minimum": 1},
+    "routeClass": {
+      "enum": [
+        "MUST_CLARIFY", "MUST_TRANSACTION", "MUST_DIRECT",
+        "RESEARCH_ELIGIBLE", "RESEARCH_REQUIRED"
+      ]
+    },
+    "reasons": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1, "maxLength": 500},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "routePolicyVersion": {"const": "context-multiagent-route-v1"},
+    "decisionSource": {
+      "enum": [
+        "DETERMINISTIC_GATE", "FROZEN_ORACLE",
+        "SHOPPING_AGENT_REQUEST_VALIDATED"
+      ]
+    },
+    "researchAllowed": {"type": "boolean"},
+    "transactionAllowed": {"type": "boolean"},
+    "bindingHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"routeClass": {"const": "MUST_TRANSACTION"}}},
+      "then": {
+        "properties": {
+          "researchAllowed": {"const": false},
+          "transactionAllowed": {"const": true}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "routeClass": {
+            "enum": ["RESEARCH_ELIGIBLE", "RESEARCH_REQUIRED"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "researchAllowed": {"const": true},
+          "transactionAllowed": {"const": false}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "routeClass": {"enum": ["MUST_CLARIFY", "MUST_DIRECT"]}
+        }
+      },
+      "then": {
+        "properties": {
+          "researchAllowed": {"const": false},
+          "transactionAllowed": {"const": false}
+        }
+      }
+    }
+  ]
+}

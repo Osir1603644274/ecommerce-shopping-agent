@@ -72,6 +72,10 @@ def _pause_guard(
         )
         if request is not None:
             raise GraphPauseRequested(request)
+        guard = runtime.context.memory_guard
+        if guard is not None:
+            await guard(runtime.context.task_id, runtime.context.run_id,
+                        runtime.context.session_owner_hash)
         return await node(state, runtime)
 
     guarded.__name__ = f"pause_guarded_{node_name}"

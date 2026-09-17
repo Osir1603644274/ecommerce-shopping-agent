@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 
 @Mapper
 interface PaymentMapper {
+    @Select("SELECT COUNT(*) FROM order_line_allocation WHERE order_id=#{orderId}")
+    int cartLines(@Param("orderId") String orderId);
+
     String PAYMENT_COLUMNS = """
             id, payment_no, order_id, user_id, provider, status, amount_minor,
             currency, provider_trade_no, paid_at, version, created_at, updated_at

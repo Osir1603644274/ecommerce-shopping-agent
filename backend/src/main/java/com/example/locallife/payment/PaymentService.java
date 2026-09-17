@@ -145,6 +145,7 @@ public class PaymentService {
         return requirePayment(payment.id());
     }
 
+    @Transactional
     public PaymentRecord simulateSuccess(String paymentId, String userId) {
         if (!properties.simulatorEnabled()) {
             throw new ForbiddenOperationException("本地支付模拟器未启用");
@@ -168,6 +169,9 @@ public class PaymentService {
     @Transactional
     public RefundRecord requestRefund(String orderId, String userId, String reason) {
         CustomerOrder order = orderService.requireOwnedOrder(orderId, userId);
+        if (mapper.cartLines(order.id()) != 0) {
+            throw new BusinessConflictException("购物车订单请使用按数量退款接口，不能混用整单退款");
+        }
         PaymentRecord payment = mapper.findByOrderId(orderId);
         if (payment == null || !"SUCCESS".equals(payment.status())) {
             throw new InvalidBusinessStateException("订单没有可退款的成功支付");

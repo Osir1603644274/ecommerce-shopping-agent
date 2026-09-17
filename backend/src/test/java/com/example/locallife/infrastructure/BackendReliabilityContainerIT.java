@@ -68,7 +68,7 @@ class BackendReliabilityContainerIT {
     static final MySQLContainer<?> MYSQL = new MySQLContainer<>("mysql:8.4")
             .withDatabaseName("backend_reliability")
             .withUsername("local_life")
-            .withPassword("local_life_password")
+            .withPassword("public-demo-secret-2-change-before-use")
             .withStartupTimeout(Duration.ofMinutes(2));
 
     @Container

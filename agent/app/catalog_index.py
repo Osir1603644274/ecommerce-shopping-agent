@@ -108,6 +108,7 @@ class CatalogIndexManager:
     ) -> None:
         self._interval = poll_interval_seconds
         self._backend_url = (backend_url or settings.backend_base_url).rstrip("/")
+        self._catalog_urls = [backend_url.rstrip('/')] if backend_url else [url.rstrip('/') for url in settings.catalog_internal_base_urls] or [self._backend_url]
         self._client: httpx.AsyncClient | None = None
         self._known_version: str | None = None
         self._task: asyncio.Task[None] | None = None
@@ -115,13 +116,13 @@ class CatalogIndexManager:
 
     async def _get_client(self) -> httpx.AsyncClient:
         if self._client is None or getattr(self._client, "is_closed", False):
-            self._client = httpx.AsyncClient(timeout=30.0)
+            self._client = httpx.AsyncClient(timeout=30.0, trust_env=False, follow_redirects=False)
         return self._client
 
     async def _fetch_manifest(self) -> dict[str, Any] | None:
         try:
             client = await self._get_client()
-            response = await client.get(f"{self._backend_url}/internal/catalog/manifest")
+            response = await self._internal_get(client,"/internal/catalog/manifest")
             response.raise_for_status()
             data = response.json()
             return data.get("data")
@@ -140,16 +141,28 @@ class CatalogIndexManager:
             params["afterId"] = after_id
         try:
             client = await self._get_client()
-            response = await client.get(
-                f"{self._backend_url}/internal/catalog/products",
-                params=params,
-            )
+            response = await self._internal_get(client,"/internal/catalog/products",params=params)
             response.raise_for_status()
             data = response.json()
             return data.get("data")
         except Exception as exc:
             logger.warning("Failed to fetch catalog page: %s", exc)
             return None
+
+    async def _internal_get(self,client,path,**kwargs):
+        headers={}
+        if settings.catalog_internal_token_file:
+            from pathlib import Path
+            token=Path(settings.catalog_internal_token_file).read_text(encoding='utf8').strip()
+            if len(token)<32:raise RuntimeError('catalog_internal_identity_required')
+            headers['X-Internal-Service-Token']=token
+        last=None
+        for url in self._catalog_urls:
+            try:
+                response=await client.get(url+path,headers=headers,**kwargs)
+                response.raise_for_status();return response
+            except httpx.HTTPError as error:last=error
+        raise last or RuntimeError('no_catalog_service_available')
 
     async def _build_and_swap(self, manifest: dict[str, Any]) -> bool:
         """Page through all products, build BM25, and atomically swap the index."""

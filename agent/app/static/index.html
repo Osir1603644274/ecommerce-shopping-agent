@@ -102,7 +102,7 @@
     }
     .memory-candidates:empty { display: none; }
     .memory-candidate {
-      display: flex; align-items: center; gap: 10px; padding: 10px 11px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 11px;
       border: 1px solid #ffd3c4; border-radius: 14px; background: #fff8f5;
       box-shadow: 0 5px 16px rgba(255,87,34,.08);
     }
@@ -1132,6 +1132,11 @@
           const text = document.createElement("div");
           text.className = "memory-candidate-text";
           text.textContent = candidate.displayText;
+          if (candidate.evidenceQuote) {
+            const source = document.createElement("div");
+            source.textContent = "来源原话：“" + candidate.evidenceQuote + "”";
+            text.appendChild(source);
+          }
           const confirm = document.createElement("button");
           confirm.type = "button";
           confirm.textContent = "确认记住";
@@ -1154,6 +1159,24 @@
             }
           });
           card.append(text, confirm);
+          for (const [action, label] of [["reject", "不保存"], ["snooze", "暂不提示"]]) {
+            const dismiss = document.createElement("button");
+            dismiss.type = "button";
+            dismiss.textContent = label;
+            dismiss.addEventListener("click", async () => {
+              dismiss.disabled = true;
+              try {
+                const result = await fetch(
+                  "/api/web-memory/candidates/" + encodeURIComponent(candidate.candidateId) + "/decision",
+                  { method: "POST", credentials: "same-origin",
+                    headers: { "Content-Type": "application/json", "X-CSRF-Token": memoryCsrfToken || "" },
+                    body: JSON.stringify({ action }) });
+                if (result.ok) card.remove();
+                else { dismiss.disabled = false; dismiss.textContent = "请重试"; }
+              } catch (_) { dismiss.disabled = false; dismiss.textContent = "请重试"; }
+            });
+            card.appendChild(dismiss);
+          }
           memoryCandidates.appendChild(card);
         }
       } catch (_) {

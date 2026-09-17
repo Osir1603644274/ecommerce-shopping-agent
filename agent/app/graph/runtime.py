@@ -96,3 +96,16 @@ class GraphV2Runtime:
     react_decision_timeout_seconds: float = 15.0
     on_model_call: ModelCallCallback | None = None
     on_model_call_receipt: ModelCallReceiptCallback | None = None
+    # Request-only issued memory capability and before-effect revocation check.
+    memory_run_binding: Any | None = None
+    memory_guard: Callable[..., Awaitable[None]] | None = None
+
+    def __post_init__(self) -> None:
+        from ..settings import settings
+        if settings.product_knowledge_enabled:
+            # One request-owned value shared by Planner and Executor views.
+            # Do not add it only in Planner: execution must resolve the same source.
+            object.__setattr__(self, 'system_policies', {
+                **(self.system_policies or {}),
+                'productKnowledgeUserQuery': self.user_message,
+            })

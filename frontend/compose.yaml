@@ -1,0 +1,9 @@
+# Use as an override from repository root, not a standalone Compose project:
+# docker compose -f docker-compose.yml -f frontend/compose.yaml up -d --build --no-deps frontend
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "127.0.0.1:${FRONTEND_PORT:-5173}:80"
+    restart: unless-stopped

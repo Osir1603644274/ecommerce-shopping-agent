@@ -67,6 +67,7 @@ ECOMMERCE_GUIDE_TOOL_NAMES = (
     "search_products",
     "get_product_details",
     "compare_products",
+    "search_product_evidence",
     "rerank_products_in_scope",
 )
 ECOMMERCE_TOOL_NAMES = (

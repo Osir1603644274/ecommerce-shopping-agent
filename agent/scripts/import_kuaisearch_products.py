@@ -218,7 +218,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--revision", default=DEFAULT_REVISION)
     parser.add_argument("--mysql-url", default=os.getenv(
-        "PRODUCT_MYSQL_URL", "mysql://local_life:local_life_password@localhost:13306/local_life"
+        "PRODUCT_MYSQL_URL", "mysql://local_life:public-demo-secret-2-change-before-use@localhost:13306/local_life"
     ))
     parser.add_argument("--target-per-category", type=int, default=500)
     parser.add_argument("--minimum-per-category", type=int, default=200)

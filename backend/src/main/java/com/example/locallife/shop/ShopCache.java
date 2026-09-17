@@ -154,6 +154,8 @@ public class ShopCache {
         localCache.invalidate(shopId);
     }
 
+    public void invalidateAllLocal() { localCache.invalidateAll(); }
+
     public Optional<String> tryLockDetail(Long shopId) {
         String key = lockKey(shopId);
         String ownerToken = UUID.randomUUID().toString();
@@ -188,7 +190,7 @@ public class ShopCache {
         return Duration.ofSeconds(baseSeconds + ThreadLocalRandom.current().nextLong(-range, range + 1));
     }
 
-    static String detailKey(Long shopId) {
+    public static String detailKey(Long shopId) {
         return SHOP_DETAIL_KEY_PREFIX + shopId;
     }
 

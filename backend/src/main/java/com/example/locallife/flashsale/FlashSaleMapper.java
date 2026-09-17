@@ -34,6 +34,9 @@ interface FlashSaleMapper {
     @Select("SELECT " + CAMPAIGN_COLUMNS + " FROM flash_sale_campaign WHERE id = #{id}")
     FlashSaleCampaign findCampaign(@Param("id") Long id);
 
+    @Select("SELECT " + CAMPAIGN_COLUMNS + " FROM flash_sale_campaign WHERE id = #{id} FOR UPDATE")
+    FlashSaleCampaign lockCampaign(@Param("id") Long id);
+
     @Select("SELECT " + CAMPAIGN_COLUMNS
             + " FROM flash_sale_campaign ORDER BY starts_at DESC")
     List<FlashSaleCampaign> findCampaigns();
@@ -87,6 +90,26 @@ interface FlashSaleMapper {
             SELECT user_id FROM flash_sale_order WHERE campaign_id = #{campaignId}
             """)
     List<String> findBuyerIds(@Param("campaignId") Long campaignId);
+
+    @Select("""
+            SELECT user_id FROM flash_sale_order WHERE campaign_id = #{campaignId}
+            UNION SELECT user_id FROM flash_sale_request WHERE campaign_id = #{campaignId} AND status='PENDING'
+            """)
+    List<String> findReservedBuyerIds(@Param("campaignId") Long campaignId);
+
+    @Select("""
+            SELECT COUNT(*) FROM flash_sale_request r WHERE campaign_id=#{campaignId} AND status='PENDING'
+            AND NOT EXISTS (SELECT 1 FROM flash_sale_order o WHERE o.campaign_id=r.campaign_id AND o.user_id=r.user_id)
+            """)
+    int pendingReservations(@Param("campaignId") Long campaignId);
+
+    @Select("""
+            SELECT id,user_id FROM flash_sale_request r WHERE campaign_id=#{campaignId} AND status='PENDING'
+            AND NOT EXISTS (SELECT 1 FROM flash_sale_order o WHERE o.campaign_id=r.campaign_id AND o.user_id=r.user_id)
+            """)
+    List<Reservation> reservations(@Param("campaignId") Long campaignId);
+
+    record Reservation(String id, String userId) { }
 
     @Insert("""
             INSERT INTO flash_sale_order(

@@ -418,11 +418,12 @@ def _build_validator_context_from_view(
         )
         normalized_output = None
         if evidence.normalized_output:
+            from .product_knowledge.projection import unpack_proof
             normalized_output = NormalizedStepOutput(
                 taskId=view.task_id,
                 planId=plan.plan_id,
                 stepId=step_id,
-                values=evidence.normalized_output,
+                values=unpack_proof(evidence.normalized_output),
             )
             try:
                 validate_normalized_output_values(
@@ -1360,7 +1361,36 @@ def _validate_shop_recommendations(step_context: ValidatorStepContext):
     return "satisfied", None, None, {"count": len(ids), "shopIds": ids}
 
 
+def _validate_product_evidence(step_context: ValidatorStepContext):
+    from .product_knowledge.comparison import CONTRACT, check_candidates, validate_knowledge
+    from .product_knowledge.projection import unpack_proof, answer_projection
+    args=step_context.execution_result.resolved_arguments
+    detail=step_context.execution_result.tool_trace.detail
+    try:
+        if isinstance(detail,dict): detail=unpack_proof(detail)
+        if not isinstance(detail,dict) or detail.get('productIds')!=args.get('productIds'):
+            raise ValueError('product_scope_mismatch')
+        validate_knowledge(detail.get('knowledge'),args['productIds'])
+        if step_context.step.tool_name=='compare_products':
+            if detail.get('contractVersion')!=CONTRACT: raise ValueError('comparison_contract_mismatch')
+            if any(detail.get(k)!=args.get(k) for k in ('category','requirements','userQuery','scopeId','contextQuery')):
+                raise ValueError('comparison_arguments_mismatch')
+            if [p.get('id') for p in detail.get('products',[])]!=args['productIds']:
+                raise ValueError('comparison_product_mismatch')
+            if detail.get('candidates')!=check_candidates(detail['products'],args['category'],args['requirements']):
+                raise ValueError('hard_condition_check_mismatch')
+        elif step_context.step.tool_name=='search_product_evidence':
+            if detail.get('query')!=args.get('query'): raise ValueError('query_mismatch')
+        else: raise ValueError('tool_mismatch')
+    except (ValueError,TypeError,KeyError) as exc:
+        return 'invalid_evidence','invalid_product_knowledge',str(exc),{}
+    # An explicit unavailable/no-evidence result is itself a valid answerable gap.
+    return 'satisfied',None,None,(answer_projection(detail) if step_context.step.tool_name=='compare_products' else deepcopy(detail))
+
+
 _EXPECTED_OUTPUT_VALIDATORS = {
+    "requiresProductEvidence": _validate_product_evidence,
+    "requiresEvidenceComparison": _validate_product_evidence,
     "requiresShopId": _validate_shop_id,
     "requiresShopDetail": _validate_shop_detail,
     "requiresReviewEvidence": _validate_review_evidence,
@@ -1412,7 +1442,7 @@ def validate_step_result(
     first_code = None
     first_reason = None
     for contract_name, required in step_context.step.expected_output.items():
-        if contract_name == "requiresGuideDecision":
+        if contract_name in {"requiresGuideDecision", "requiresProductEvidence", "requiresEvidenceComparison"}:
             execution = step_context.execution_result
             requested = set(execution.resolved_arguments.get("productIds", []))
             candidate_ids: set[int] = set()
@@ -1420,6 +1450,7 @@ def validate_step_result(
                 if prior.step.tool_name != "search_products" or prior.normalized_output is None:
                     continue
                 candidate_ids.update(prior.normalized_output.values.get("productIds", []))
+                candidate_ids.update(prior.normalized_output.values.get("rankedItemIds", []))
             # A direct comparison has no search step by design.  In that shape
             # the only other trusted identity source is the server-published
             # shoppingGuide.comparedIds reference that Executor already
@@ -1433,11 +1464,18 @@ def validate_step_result(
                 and direct_compare_source.reference == "comparedIds"
                 and len(requested) in {2, 3}
             )
+            has_trusted_scope = (
+                contract_name in {"requiresProductEvidence", "requiresEvidenceComparison"}
+                and direct_compare_source is not None
+                and direct_compare_source.kind == "shopping_guide"
+                and direct_compare_source.reference == "scopeRankedItemIds"
+                and 1 <= len(requested) <= 20
+            )
             if (
                 not requested
                 or (
                     not requested.issubset(candidate_ids)
-                    and not has_trusted_direct_selection
+                    and not has_trusted_direct_selection and not has_trusted_scope
                 )
             ):
                 return _invalid_step(
@@ -1570,6 +1608,7 @@ def _materialize_candidate_scope(
         source_revision=state.revision,
         source_plan_id=plan.plan_id,
         source_step_id=step.step_id,
+        source_query=str(step.arguments.get('query') or state.goal)[:2000] if settings.product_knowledge_enabled else None,
         category=guide.category,
         candidate_pool_ids=list(ranking_output.candidate_pool_ids),
         ranked_item_ids=list(ranking_output.ranked_item_ids),
@@ -1762,6 +1801,15 @@ async def persist_validator_result(
         result.outcome == "passed"
         and state.task_type == "ecommerce_guide"
         and len(plan.steps) == 1
+        and plan.steps[0].expected_output.get("requiresEvidenceComparison") is True
+    ):
+        # Consume the one-turn request. Do not rewrite authoritative candidate
+        # order from unvalidated model prose; references stay on the existing scope.
+        domain_patch["scopeRerankRequest"] = None
+    elif (
+        result.outcome == "passed"
+        and state.task_type == "ecommerce_guide"
+        and len(plan.steps) == 1
         and plan.steps[0].tool_name == "rerank_products_in_scope"
     ):
         # A passed in-scope rerank updates ranked/visible order inside the SAME
@@ -1849,8 +1897,14 @@ async def persist_validator_result(
     elif (
         result.outcome == "passed"
         and state.task_type == "ecommerce_guide"
-        and len(plan.steps) == 1
         and plan.steps[0].tool_name == "search_products"
+        and (len(plan.steps) == 1 or (
+            settings.product_knowledge_enabled and len(plan.steps) == 2
+            and plan.steps[1].tool_name == "compare_products"
+            and plan.steps[1].expected_output.get("requiresEvidenceComparison") is True
+            and plan.steps[1].argument_sources["productIds"].kind == "prior_step"
+            and plan.steps[1].argument_sources["productIds"].reference == plan.steps[0].step_id + ".rankedItemIds"
+        ))
     ):
         # A passed full search freezes the new trusted range and invalidates any
         # prior scope it replaces, recording the reason for the audit trail.
@@ -1939,10 +1993,15 @@ async def persist_validator_result(
         domain_patch["candidateScope"] = new_scope.model_dump(
             by_alias=True, mode="json"
         )
-        domain_patch["shoppingGuide"] = guide.model_copy(update={
+        new_guide_values = {
             "candidate_ids": list(new_scope.visible_product_ids),
             "evidence_status": "complete",
-        }).model_dump(by_alias=True, mode="json")
+        }
+        if settings.context_history_v1_enabled:
+            # A new search publishes a new authority scope, not a continuation
+            # of the previous comparison. Preserve old IDs in history only.
+            new_guide_values.update({"compared_ids": [], "mode": "recommend"})
+        domain_patch["shoppingGuide"] = guide.model_copy(update=new_guide_values).model_dump(by_alias=True, mode="json")
         domain_patch["scopeRerankRequest"] = None
     keep_ready_for_followup = state.task_type == "ecommerce_guide"
     if keep_ready_for_followup:

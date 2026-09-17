@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.example/schemas/used-phone-model-evidence-v1/model-fact.schema.json",
+  "title": "Used-phone Model Fact V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "factId", "canonicalModelClaim", "factKey", "value", "unit",
+    "factAuthority", "publisher", "sourceLocator", "sourceSection", "licenseProfile",
+    "protocolFamily", "browser", "testBrightnessCdM2", "comparisonScope",
+    "listingIdentityVerified", "productionRankingAuthorized", "observedAt"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "used-phone-model-fact-v1"},
+    "factId": {"type": "string", "minLength": 1},
+    "canonicalModelClaim": {"type": "string", "minLength": 3},
+    "factKey": {"const": "wifi_websurfing_runtime_minutes"},
+    "value": {"type": "integer", "minimum": 1},
+    "unit": {"const": "minute"},
+    "factAuthority": {"const": "INDEPENDENT_MODEL_TEST"},
+    "publisher": {"const": "Notebookcheck"},
+    "sourceLocator": {"type": "string", "pattern": "^https://www\\.notebookcheck\\.(net|org)/"},
+    "sourceSection": {"const": "Battery Runtime / WiFi Websurfing"},
+    "licenseProfile": {"const": "SHORT_QUOTATION_REFERENCE_ONLY"},
+    "protocolFamily": {"const": "NOTEBOOKCHECK_WIFI_V1_3"},
+    "browser": {"type": ["string", "null"]},
+    "testBrightnessCdM2": {"type": ["integer", "null"], "minimum": 1},
+    "comparisonScope": {"const": "DIAGNOSTIC_SAME_PUBLISHER_PROTOCOL_FAMILY"},
+    "listingIdentityVerified": {"const": false},
+    "productionRankingAuthorized": {"const": false},
+    "observedAt": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"}
+  }
+}

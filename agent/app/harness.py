@@ -216,6 +216,10 @@ def _build_executed_steps(state: TaskState) -> list[dict[str, Any]]:
         )
         validator_evidence = _project_validator_tool_evidence(s.tool_name, detail)
         normalized = outputs.get(s.step_id)
+        normalized_values=dict(normalized.values) if normalized is not None else {}
+        if s.tool_name=='search_products' and any(step.expected_output.get('requiresEvidenceComparison') for step in plan.steps):
+            from .product_knowledge.projection import pack_proof
+            normalized_values=pack_proof(normalized_values)
         steps.append({
             "stepId": s.step_id,
             "toolName": s.tool_name,
@@ -225,7 +229,7 @@ def _build_executed_steps(state: TaskState) -> list[dict[str, Any]]:
             "detailKeys": list(validator_evidence.keys()),
             "evidenceValues": validator_evidence,
             "normalizedOutput": (
-                dict(normalized.values) if normalized is not None else {}
+                normalized_values
             ),
         })
     return steps
@@ -387,6 +391,20 @@ def _build_validated_results(
             compact_support = dict(evidence["candidateSupport"])
             compact_support.pop("productPresentations", None)
             evidence["candidateSupport"] = compact_support
+        elif plan_step.expected_output.get("requiresEvidenceComparison") is True:
+            evidence = summary.get("requiresEvidenceComparison")
+            if not isinstance(evidence, dict):
+                raise ValueError("Validated evidence comparison summary is missing")
+            # The checked body appears once in the parent view. Full Validator
+            # receipt remains persisted; this is only its presentation header.
+            summary = {"requiresEvidenceComparison": {
+                "contractVersion": evidence["contractVersion"],
+                "productIds": evidence["productIds"],
+            }}
+        elif plan_step.expected_output.get("requiresProductEvidence") is True:
+            evidence = summary.get("requiresProductEvidence")
+            if not isinstance(evidence, dict):
+                raise ValueError("Validated product evidence summary is missing")
         elif plan_step.tool_name == "compare_products":
             guide_summary = summary.get("requiresGuideDecision")
             if not isinstance(guide_summary, dict):
@@ -923,6 +941,15 @@ def build_validated_guide_result(
                 )
     except (ValueError, TypeError):
         return None
+    if (any(r.get('evidence',{}).get('contractVersion')=='product-evidence-comparison-v1' for r in results)
+            and not any(r.get('tool')=='search_products' for r in results)
+            and isinstance(scope_id,str)):
+        try:
+            # Recommendations do not silently renumber the existing cards.
+            # Recover their exact search receipt through the existing guard.
+            results = [*_build_validated_scope_results(state,f'validated-scope:{scope_id}'),*results]
+        except (ValueError,TypeError):
+            return None
     for result in reversed(results):
         if result.get("tool") == "rerank_products_in_scope":
             summary = result.get("validationSummary")
@@ -1117,7 +1144,7 @@ def _project_validated_tool_evidence(
         for key in allowed_keys
         if key in detail
     }
-    if tool_name == "compare_products":
+    if tool_name == "compare_products" and detail.get("contractVersion") != "product-evidence-comparison-v1":
         projected["products"] = _compact_compare_products(
             projected.get("products")
         )
@@ -1146,6 +1173,9 @@ def _project_validator_tool_evidence(
     post-validation final-answer projection.
     """
 
+    if detail.get('contractVersion') == 'product-evidence-comparison-v1':
+        from .product_knowledge.projection import pack_proof
+        return pack_proof(detail)
     if tool_name == "search_products":
         return {}
     if tool_name == "rerank_products_in_scope":
@@ -1337,6 +1367,17 @@ def _extract_constraint_keys_for_step(step: Any) -> list[str]:
             if ref and ref.startswith("constraints."):
                 keys.append(ref.split(".", 1)[1])
     return keys
+
+
+def _project_step_arguments(step: Any, prior_outputs: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    """Resolve projected prior fields; Executor independently rechecks provenance."""
+    from copy import deepcopy
+    arguments = deepcopy(step.arguments)
+    for name, source in step.argument_sources.items():
+        if source.kind == 'prior_step':
+            source_step, field = source.reference.split('.', 1)
+            arguments[name] = deepcopy(prior_outputs[source_step][field])
+    return arguments
 
 
 def _project_prior_step_outputs_for_step(
@@ -1871,6 +1912,8 @@ async def run_harness_step(
     the phase, tool call, and business Validator are all blocked.
     """
 
+    if settings.product_knowledge_enabled:
+        system_policies = {**(system_policies or {}), "productKnowledgeUserQuery": user_message}
     # Recover a step abandoned by a crashed worker before making routing
     # decisions. A live, unexpired lease remains fail-closed.
     state = await recover_expired_executor_claim(state)
@@ -2028,7 +2071,7 @@ async def run_harness_step(
                     step_description=step.description,
                     tool_name=step.tool_name,
                     tool_schema=tool_schema_dict,
-                    resolved_arguments=dict(step.arguments),
+                    resolved_arguments=_project_step_arguments(step, prior_outputs),
                     required_fact_keys=_extract_fact_keys_for_step(step),
                     required_constraint_keys=_extract_constraint_keys_for_step(step),
                     prior_step_outputs=prior_outputs,
@@ -2072,7 +2115,10 @@ async def run_harness_step(
 
     if trace_builder is not None:
         trace_builder.end_phase(
-            "step_executed" if executor_result.outcome == "step_executed" else executor_result.outcome
+            "step_executed" if executor_result.outcome == "step_executed" else executor_result.outcome,
+            detail={"tool": executor_result.execution_result.tool_name,
+                    "toolOk": executor_result.execution_result.tool_trace.ok if executor_result.execution_result.tool_trace else None}
+                if executor_result.execution_result else None,
         )
 
     # ── Validator after executor ───────────────────────────────────────────

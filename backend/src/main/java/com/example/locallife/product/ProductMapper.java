@@ -32,6 +32,16 @@ interface ProductMapper {
     @Select("SELECT " + COLUMNS + " FROM product WHERE id = #{id}")
     Product findById(@Param("id") Long id);
 
+    @SelectProvider(type = ProductSqlProvider.class, method = "findByFilters")
+    List<Product> findByCatalogFilters(@Param("catalogVersion") String catalogVersion,
+            @Param("query") String query, @Param("category") String category,
+            @Param("brand") String brand, @Param("minPriceMinor") Long minPriceMinor,
+            @Param("maxPriceMinor") Long maxPriceMinor, @Param("limit") int limit);
+
+    @Select("<script>SELECT " + COLUMNS + " FROM product WHERE id IN "
+            + "<foreach collection='ids' item='id' open='(' separator=',' close=')'>#{id}</foreach></script>")
+    List<Product> findByIds(@Param("ids") List<Long> ids);
+
     @Insert("""
             INSERT INTO product(
                 id, source, source_item_id, title, brand, seller,
@@ -59,6 +69,12 @@ interface ProductMapper {
         """)
     List<Product> findByIdAfter(@Param("afterId") Long afterId, @Param("limit") int limit);
 
+    @Select("SELECT " + COLUMNS + " FROM product WHERE id IN (SELECT product_id FROM catalog_version_member WHERE catalog_version=#{version}) AND id>#{afterId} ORDER BY id LIMIT #{limit}")
+    List<Product> findPublishedByIdAfter(@Param("version") String version,@Param("afterId") Long afterId,@Param("limit") int limit);
+
+    @Select("SELECT " + COLUMNS + " FROM product WHERE lifecycle_status='ACTIVE' AND id>#{afterId} ORDER BY id LIMIT #{limit}")
+    List<Product> findActiveByIdAfter(@Param("afterId") Long afterId, @Param("limit") int limit);
+
     @Select("SELECT " + COLUMNS + " FROM product WHERE lifecycle_status = #{status} ORDER BY id LIMIT #{limit}")
     List<Product> findByLifecycleStatus(
             @Param("status") String status,
@@ -84,6 +100,20 @@ interface ProductMapper {
             WHERE p.id = #{productId}
             """)
     ProductCommerceFacts findCommerceFacts(@Param("productId") Long productId);
+
+    @Select("""
+            <script>
+            SELECT p.id AS product_id, p.snapshot_price_minor, p.price_status,
+                   p.lifecycle_status, p.entity_version,
+                   stock.available_quantity, stock.version AS inventory_version
+            FROM product p
+            LEFT JOIN inventory_stock stock
+              ON stock.item_type = 'PRODUCT' AND stock.item_id = p.id
+            WHERE p.id IN
+            <foreach collection="ids" item="id" open="(" separator="," close=")">#{id}</foreach>
+            </script>
+            """)
+    List<ProductCommerceFacts> findCommerceFactsByIds(@Param("ids") List<Long> ids);
 
     @Update("""
             <script>

@@ -84,11 +84,21 @@ public class OutboxService {
                     || !event.aggregateType().equals(existing.aggregateType())
                     || !event.aggregateId().equals(existing.aggregateId())
                     || !event.eventType().equals(existing.eventType())
-                    || !event.payloadJson().equals(existing.payloadJson())) {
+                    || !samePayload(event.payloadJson(), existing.payloadJson())) {
                 throw new IllegalStateException("Outbox idempotency key conflict: " + key, duplicate);
             }
         }
         return id;
+    }
+
+    private boolean samePayload(String expected,String persisted) {
+        // MySQL JSON rewrites whitespace and object-key order. Compare values,
+        // not driver formatting, while still rejecting changed event contents.
+        try {
+            return objectMapper.readTree(expected).equals(objectMapper.readTree(persisted));
+        } catch (JsonProcessingException invalid) {
+            return false;
+        }
     }
 
     private String serialize(Object payload) {

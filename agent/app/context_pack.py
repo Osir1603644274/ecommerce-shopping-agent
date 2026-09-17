@@ -213,6 +213,10 @@ class ContextPack(BaseModel):
 
     schema_version: Literal["1.0"] = "1.0"
 
+    history_repair_version: Literal["history-v1"] | None = Field(
+        default=None, alias="historyRepairVersion", exclude_if=lambda value: value is None,
+    )
+
     # Identity
     run_id: str = Field(alias="runId")
     task_id: str = Field(alias="taskId")
@@ -614,6 +618,9 @@ def shopping_guide_argument_sources(
         return None
     serialized = validated.model_dump(by_alias=True, mode="json")
     sources: dict[str, Any] = {"category": CATEGORY_LABELS[validated.category]}
+    if settings.product_knowledge_enabled:
+        # The server, never the model, maps the search label to the comparison code.
+        sources["categoryCode"] = validated.category
     sources["requirements"] = [
         item.model_dump(mode="json")
         for item in compiled_shopping_requirements(validated)
@@ -645,6 +652,8 @@ def shopping_guide_argument_sources(
             return sources
         sources["scopeId"] = scope_model.scope_id
         sources["scopeRankedItemIds"] = list(scope_model.ranked_item_ids)
+        if scope_model.source_query:
+            sources["scopeSourceQuery"] = scope_model.source_query
         sources["rankingIntent"] = rerank_model.ranking_intent
         # The in-scope rerank tool consumes the internal category code, exactly
         # like ``compare_products``.
@@ -657,7 +666,7 @@ async def build_context_pack(
     *,
     allowed_tools: list[str] | None = None,
     history: list[dict[str, Any]] | None = None,
-    budget_tokens: int = DEFAULT_TOKEN_BUDGET,
+    budget_tokens: int | None = None,
     run_id: str | None = None,
 ) -> ContextPack:
     """Construct a deterministic ContextPack from the current TaskState and history.
@@ -698,7 +707,19 @@ async def build_context_pack(
         published_context = {}
 
     # --- History summaries ---
-    history_summaries, history_metrics = _prepare_history_summaries(history)
+    from .context_input import is_experimental_context_input, experimental_pack_budget
+    if budget_tokens is None:
+        # Ordinary callers keep the legacy default. A declared isolated study
+        # budget also governs this shared control Pack; explicit smaller
+        # caller budgets still win. The complete model wire is checked later.
+        budget_tokens = experimental_pack_budget() or DEFAULT_TOKEN_BUDGET
+    if is_experimental_context_input():
+        # New lanes read source-linked archive history at the explicit model
+        # boundary. Do not mechanically clip it into legacy summaries first.
+        history_summaries = []
+        history_metrics = {"deduplicated": 0, "compressedGroups": 0}
+    else:
+        history_summaries, history_metrics = _prepare_history_summaries(history)
 
     # --- Soft preferences ---
     raw_soft_prefs = _extract_soft_preferences(
@@ -767,6 +788,7 @@ async def build_context_pack(
             authority_selection.semantic_hash if authority_selection is not None else None
         ),
         history_summaries=history_summaries,
+        history_repair_version="history-v1" if settings.context_history_v1_enabled else None,
         allowed_tools=tools,
         evidence_refs=evidence_refs,
     )
@@ -863,10 +885,11 @@ def context_pack_token_count(pack: ContextPack) -> int:
 
 def context_pack_system_message(pack: ContextPack) -> dict[str, str]:
     """Render a ContextPack as a single role=system message for the model."""
+    from .context_input import phase_context
     return {
         "role": "system",
         "content": json.dumps(
-            pack.model_dump(by_alias=True, mode="json", exclude={"run_id"}),
+            phase_context("extraction", pack.model_dump(by_alias=True, mode="json", exclude={"run_id"})),
             ensure_ascii=False,
             default=str,
         ),

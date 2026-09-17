@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local-life.invalid/schemas/context-multiagent-v1/investigation-set.schema.json",
+  "title": "InvestigationSet V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "investigationSetId", "taskId", "taskRevision",
+    "candidateScopeId", "candidateScopeSourceRevision", "candidateScopeHash",
+    "candidateIds", "evidenceGapKeys", "selectionPolicyVersion", "expiresAt",
+    "bindingHash"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "investigation-set-v1"},
+    "investigationSetId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "taskId": {"type": "string", "minLength": 1, "maxLength": 160},
+    "taskRevision": {"type": "integer", "minimum": 1},
+    "candidateScopeId": {"type": "string", "minLength": 1, "maxLength": 200},
+    "candidateScopeSourceRevision": {"type": "integer", "minimum": 1},
+    "candidateScopeHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "candidateIds": {
+      "type": "array",
+      "items": {"type": "integer", "minimum": 1},
+      "minItems": 1,
+      "maxItems": 8,
+      "uniqueItems": true
+    },
+    "evidenceGapKeys": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1, "maxLength": 160},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "selectionPolicyVersion": {"const": "investigation-selection-policy-v1"},
+    "expiresAt": {"type": "string", "format": "date-time"},
+    "bindingHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}
+

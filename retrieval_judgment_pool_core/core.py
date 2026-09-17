@@ -227,7 +227,13 @@ def _validate_config(config: dict[str, Any], schema_path: Path) -> None:
     if len(ids) != len(set(ids)):
         raise PoolError("DUPLICATE_RETRIEVER_ID", "retriever_id values must be unique")
     kinds = {item["kind"] for item in config["retrievers"]}
-    if not {"lexical_bm25f", "char_ngram", "semantic_hash"}.issubset(kinds):
+    if config.get("execution_profile") == "external_models_v1":
+        families = {item.get("family") for item in config["retrievers"]}
+        if kinds != {"external"} or families != {"lexical", "character", "dense"}:
+            raise PoolError("RETRIEVER_FAMILY_INCOMPLETE", "external profile requires actual lexical, character, and dense runs")
+        if config["reranker"]["kind"] != "external_scores":
+            raise PoolError("REAL_RERANKER_REQUIRED", "external profile requires imported model pair scores")
+    elif not {"lexical_bm25f", "char_ngram", "semantic_hash"}.issubset(kinds):
         raise PoolError("RETRIEVER_FAMILY_INCOMPLETE", "lexical, character/fuzzy, and semantic-hash retrievers are required")
 
 
@@ -495,7 +501,7 @@ class PoolService:
             "config": sha256_file(config_path),
         }
         identity_payload = {
-            "core_version": CORE_VERSION,
+            "core_version": "1.1.0-external" if config.get("execution_profile") == "external_models_v1" else CORE_VERSION,
             "dataset_ref": dataset_ref.replace("\\", "/"),
             "dataset": config["dataset"],
             "source_hashes": source_hashes,
@@ -523,7 +529,7 @@ class PoolService:
             paths = RunPaths(run_dir)
             manifest = {
                 "schema_version": RUN_SCHEMA_VERSION,
-                "core_version": CORE_VERSION,
+                "core_version": "1.1.0-external" if config.get("execution_profile") == "external_models_v1" else CORE_VERSION,
                 "run_id": run_id,
                 "identity_hash": hashes["identity"],
                 "dataset_ref": dataset_ref.replace("\\", "/"),
@@ -568,8 +574,6 @@ class PoolService:
             retriever = next((item for item in config["retrievers"] if item["retriever_id"] == retriever_id), None)
             if retriever is None or retriever["kind"] != "external":
                 raise PoolError("EXTERNAL_RETRIEVER_NOT_DECLARED", "retriever_id is not a declared external retriever")
-            if state["phase"] not in {"NORMALIZE", "RETRIEVE"}:
-                raise PoolError("RUN_ALREADY_BUILT", "external runs cannot be submitted after retrieval closes")
             dataset_dir, *_ = self._dataset_paths(manifest["dataset_ref"])
             submission_path = _safe_relative(dataset_dir, submission_ref, kind="submission")
             rows = read_jsonl(submission_path)
@@ -580,6 +584,8 @@ class PoolService:
                 if previous["sha256"] != submission_hash:
                     raise PoolError("EXTERNAL_RUN_DRIFT", "an immutable external submission already exists with different bytes")
                 return {"run_id": run_id, "retriever_id": retriever_id, "status": "ACCEPTED", "idempotent_reuse": True}
+            if state["phase"] not in {"NORMALIZE", "RETRIEVE"}:
+                raise PoolError("RUN_ALREADY_BUILT", "external runs cannot be submitted after retrieval closes")
             output = paths.root / "external_runs" / f"{retriever_id}.jsonl"
             write_jsonl(output, rows)
             state["external_submissions"][retriever_id] = {
@@ -590,6 +596,61 @@ class PoolService:
             }
             write_json(paths.state, state)
             return {"run_id": run_id, "retriever_id": retriever_id, "status": "ACCEPTED", "idempotent_reuse": False}
+
+    def prepare_retrieval(self, run_id: str) -> dict[str, Any]:
+        """Freeze the recall union before a real external cross-encoder runs."""
+        paths = self._run_paths(run_id)
+        with _ExclusiveLock(paths.root / ".mutate.lock"):
+            state, _manifest, config, queries, documents = self._load_run(paths)
+            self._ensure_external_ready(paths, state, config)
+            runs = self._stage_retrieve(paths, state, config, queries, documents)
+            analysis = self._stage_analyze(paths, state, config, queries, documents, runs)
+            return {"run_id": run_id, "phase": "ANALYZE", "query_count": len(analysis["queries"]),
+                    "pair_budget_per_query": config["reranker"]["pair_budget_per_query"]}
+
+    def submit_reranker_scores(self, run_id: str, submission_ref: str) -> dict[str, Any]:
+        """Accept scores for exactly the declared RRF prefix, never new recall."""
+        paths = self._run_paths(run_id)
+        with _ExclusiveLock(paths.root / ".mutate.lock"):
+            state, manifest, config, _queries, _documents = self._load_run(paths)
+            if config["reranker"]["kind"] != "external_scores":
+                raise PoolError("EXTERNAL_RERANKER_NOT_DECLARED", "external pair scores are not declared")
+            if "ANALYZE" not in state["stages"]:
+                raise PoolError("RECALL_NOT_FROZEN", "prepare retrieval before submitting pair scores")
+            dataset_dir, *_ = self._dataset_paths(manifest["dataset_ref"])
+            source = _safe_relative(dataset_dir, submission_ref, kind="submission")
+            rows = read_jsonl(source)
+            _assert_label_free(rows)
+            analysis = read_json(paths.root / "analysis.json")
+            budget = config["reranker"]["pair_budget_per_query"]
+            expected = {(q["query_id"], d["document_id"]) for q in analysis["queries"] for d in q["rrf_ranking"][:budget]}
+            seen: set[tuple[str, str]] = set()
+            for row in rows:
+                if set(row) != {"query_id", "document_id", "score"}:
+                    raise PoolError("EXTERNAL_PAIR_SCHEMA_INVALID", "pair scores require exactly query_id, document_id, score")
+                identity = (row["query_id"], row["document_id"])
+                if identity not in expected or identity in seen:
+                    raise PoolError("EXTERNAL_PAIR_IDENTITY_INVALID", "duplicate or non-budgeted pair")
+                if type(row["score"]) not in (float, int) or not math.isfinite(row["score"]):
+                    raise PoolError("EXTERNAL_PAIR_VALUE_INVALID", "pair score must be finite")
+                seen.add(identity)
+            if seen != expected:
+                raise PoolError("EXTERNAL_PAIR_INCOMPLETE", "every budgeted pair must receive a real model score")
+            rows.sort(key=lambda row: (row["query_id"], row["document_id"]))
+            payload = b"".join(canonical_bytes(row) + b"\n" for row in rows)
+            previous = state.get("external_reranker")
+            if previous:
+                if previous["sha256"] != sha256_bytes(payload):
+                    raise PoolError("EXTERNAL_PAIR_DRIFT", "submitted pair scores are immutable")
+                return {"run_id": run_id, "row_count": len(rows), "idempotent_reuse": True}
+            if "CE_SCORE" in state["stages"]:
+                raise PoolError("RUN_ALREADY_BUILT", "pair scoring stage already closed")
+            output = paths.root / "external_reranker" / "scores.jsonl"
+            _atomic_write(output, payload)
+            state["external_reranker"] = {"sha256": sha256_file(output), "row_count": len(rows),
+                                          "model": config["reranker"]["model"], "revision": config["reranker"]["revision"]}
+            write_json(paths.state, state)
+            return {"run_id": run_id, "row_count": len(rows), "idempotent_reuse": False}
 
     def build_pool(self, run_id: str, *, inject_failure_after: str | None = None) -> dict[str, Any]:
         paths = self._run_paths(run_id)
@@ -676,6 +737,17 @@ class PoolService:
                 artifact = paths.root / relative
                 if not artifact.is_file() or sha256_file(artifact) != expected:
                     raise PoolError("ARTIFACT_TAMPERED", "a completed stage artifact is missing or has changed")
+        external_pairs = state.get("external_reranker")
+        for retriever_id, submission in state.get("external_submissions", {}).items():
+            artifact = paths.root / "external_runs" / f"{retriever_id}.jsonl"
+            if not artifact.is_file() or sha256_file(artifact) != submission["sha256"]:
+                raise PoolError("EXTERNAL_RUN_DRIFT", "imported retrieval bytes changed after submission")
+            retriever = next(item for item in config["retrievers"] if item["retriever_id"] == retriever_id)
+            self._validate_external_rows(read_jsonl(artifact), queries, documents, int(retriever["depth"]))
+        if external_pairs:
+            artifact = paths.root / "external_reranker" / "scores.jsonl"
+            if not artifact.is_file() or sha256_file(artifact) != external_pairs["sha256"]:
+                raise PoolError("EXTERNAL_PAIR_DRIFT", "imported model pair scores changed")
         return state, manifest, config, queries, documents
 
     @staticmethod
@@ -828,6 +900,13 @@ class PoolService:
         documents_by_id = {row["document_id"]: row for row in documents}
         queries_by_id = {row["query_id"]: row for row in queries}
         budget = int(config["reranker"]["pair_budget_per_query"])
+        external = config["reranker"]["kind"] == "external_scores"
+        imported_scores = {}
+        imported_path = paths.root / "external_reranker" / "scores.jsonl"
+        if external:
+            if not state.get("external_reranker"):
+                raise PoolError("EXTERNAL_RERANKER_SCORES_REQUIRED", "submit real model pair scores after prepare_retrieval")
+            imported_scores = {(row["query_id"], row["document_id"]): row["score"] for row in read_jsonl(imported_path)}
         rows = []
         for item in analysis["queries"]:
             ranking = [row["document_id"] for row in item["rrf_ranking"]]
@@ -837,12 +916,13 @@ class PoolService:
                     "query_id": item["query_id"],
                     "document_id": document_id,
                     "status": "SCORED" if scored else "NOT_SCORED",
-                    "score": round(_pair_overlap_score(queries_by_id[item["query_id"]], documents_by_id[document_id]), 10) if scored else None,
+                    "score": (imported_scores[(item["query_id"], document_id)] if external else round(_pair_overlap_score(queries_by_id[item["query_id"]], documents_by_id[document_id]), 10)) if scored else None,
                     "model": config["reranker"]["model"],
                     "revision": config["reranker"]["revision"],
                 })
         write_jsonl(output, rows)
-        self._record_stage(paths, state, "CE_SCORE", state["stages"]["ANALYZE"]["outputs"], (output,))
+        outputs = (output, imported_path) if external else (output,)
+        self._record_stage(paths, state, "CE_SCORE", state["stages"]["ANALYZE"]["outputs"], outputs)
         return rows
 
     def _stage_select(self, paths: RunPaths, state: dict[str, Any], config: dict[str, Any], queries: list[dict[str, Any]], documents: list[dict[str, Any]], runs: dict[str, list[dict[str, Any]]], analysis: dict[str, Any], reranker_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:

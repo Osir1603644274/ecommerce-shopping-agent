@@ -30,9 +30,10 @@ public class ProductController {
             @RequestParam(required = false) String brand,
             @RequestParam(required = false) Long minPriceMinor,
             @RequestParam(required = false) Long maxPriceMinor,
-            @RequestParam(required = false) Integer limit
+            @RequestParam(required = false) Integer limit,
+            @RequestParam(required = false) String catalogVersion
     ) {
-        return ApiResponse.ok(service.list(query, category, brand, minPriceMinor, maxPriceMinor, limit));
+        return ApiResponse.ok(service.searchWithTrace(query, category, brand, minPriceMinor, maxPriceMinor, limit,catalogVersion).products());
     }
 
     @GetMapping("/retrieval")
@@ -42,10 +43,11 @@ public class ProductController {
             @RequestParam(required = false) String brand,
             @RequestParam(required = false) Long minPriceMinor,
             @RequestParam(required = false) Long maxPriceMinor,
-            @RequestParam(required = false) Integer limit
+            @RequestParam(required = false) Integer limit,
+            @RequestParam(required = false) String catalogVersion
     ) {
         return ApiResponse.ok(service.searchWithTrace(
-                query, category, brand, minPriceMinor, maxPriceMinor, limit));
+                query, category, brand, minPriceMinor, maxPriceMinor, limit,catalogVersion));
     }
 
     @GetMapping("/{id}")

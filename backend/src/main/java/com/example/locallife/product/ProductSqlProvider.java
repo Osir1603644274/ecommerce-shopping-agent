@@ -13,6 +13,9 @@ public final class ProductSqlProvider {
         StringBuilder sql = new StringBuilder("SELECT ")
                 .append(ProductMapper.COLUMNS)
                 .append(" FROM product WHERE lifecycle_status = 'ACTIVE'");
+        if (parameters.containsKey("catalogVersion") && parameters.get("catalogVersion") != null) {
+            sql.append(" AND id IN (SELECT product_id FROM catalog_version_member WHERE catalog_version=#{catalogVersion})");
+        }
         if (parameters.get("query") != null) {
             sql.append("""
                      AND (

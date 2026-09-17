@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from copy import deepcopy
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -50,7 +51,13 @@ class ContextViewBudgetExceeded(ValueError):
 
 
 def _enforce_view_budget(view: BaseModel, phase: str) -> None:
-    budget = PHASE_TOKEN_BUDGETS[phase]
+    from .context_input import experimental_pack_budget
+    # All arms traverse these shared control views before the experiment's
+    # complete model-input boundary. Keep legacy defaults outside the explicit
+    # runner scope; inside it use the same declared hard capacity as the Pack.
+    # This never clips protected content or bypasses downstream wire checks.
+    legacy_budget = PHASE_TOKEN_BUDGETS[phase]
+    budget = experimental_pack_budget() or legacy_budget
     actual = _estimate_dict_tokens(
         view.model_dump(by_alias=True, mode="json", exclude={"context_hash", "contextHash"})
     )
@@ -431,6 +438,9 @@ class FinalAnswerContextView(BaseModel):
     answer_constraints: list[dict[str, Any]] = Field(
         default_factory=list,
         alias="answerConstraints",
+    )
+    answer_preferences: dict[str, Any] = Field(
+        default_factory=dict, alias="answerPreferences", exclude_if=lambda value: not value,
     )
     answer_format: dict[str, Any] = Field(default_factory=dict, alias="answerFormat")
     long_term_memory: list[dict[str, str]] = Field(
@@ -911,18 +921,47 @@ class ContextProjector:
         validated_results: list[dict[str, Any]],
         evidence_refs: list[str] | None = None,
         phase_task_revision: int | None = None,
+        current_turn_tool_names: list[str] | None = None,
     ) -> FinalAnswerContextView:
         """Project FinalAnswerContextView — only validated results and evidence.
 
         phase_task_revision is the current TaskState.revision at projection time.
         """
         final_context = self._phase_context("final_answer")
+        if any(r.get('evidence',{}).get('contractVersion')=='product-evidence-comparison-v1' for r in validated_results):
+            # The passed comparison contains every candidate and hard check.
+            # Keep search identity/order, not its duplicate UI proof payload.
+            validated_results=deepcopy(validated_results)
+            evidence_refs=list(dict.fromkeys(ref for r in validated_results
+                if r.get('evidence',{}).get('contractVersion')=='product-evidence-comparison-v1'
+                for ref in r['evidence'].get('evidenceRefs',[])))
+            for result in validated_results:
+                if result.get('tool')=='search_products':
+                    result['evidence']={k:result['evidence'][k] for k in ('rankedItemIds','productIds') if k in result['evidence']}
+                    result['validationSummary']={'requiresProductCandidates':{'validated':True}}
+                    result['evidenceRefs']=[]
         final_guide = final_context.get("shoppingGuide")
+        if isinstance(final_guide,dict):
+            for result in validated_results:
+                if result.get('evidence',{}).get('contractVersion')=='product-evidence-comparison-v1':
+                    result['evidence']['sourceDisplayIds']=list(final_guide.get('candidateIds',[]))
         answer_format: dict[str, Any] = {
             "maxProducts": 3,
             "requireEvidenceRefs": True,
             "requireUnknownsDisclosure": bool(self._pack.unknowns),
         }
+        if current_turn_tool_names is not None:
+            if len(current_turn_tool_names) > 16 or any(
+                not isinstance(name, str) or not name or len(name) > 128
+                for name in current_turn_tool_names
+            ):
+                raise ValueError("invalid_current_turn_tool_execution_summary")
+            answer_format["currentTurnExecution"] = {
+                "runId": self._pack.run_id,
+                "taskId": self._pack.task_id,
+                "successfulToolCalls": list(current_turn_tool_names),
+                "productFactsRequireValidatedResults": True,
+            }
         if isinstance(final_guide, dict) and final_guide.get("mode") == "compare":
             candidate_ids = final_guide.get("candidateIds")
             compared_ids = final_guide.get("comparedIds")
@@ -969,6 +1008,15 @@ class ContextProjector:
                 else []
             ),
             answerFormat=answer_format,
+            answerPreferences=(
+                {
+                    "softPreferences": deepcopy(self._pack.soft_preferences),
+                    "useCases": deepcopy((final_guide or {}).get("useCases", [])),
+                    "brandAvoidances": deepcopy((final_guide or {}).get("brandAvoidances", [])),
+                }
+                if self._pack.history_repair_version == "history-v1" and isinstance(final_guide, dict)
+                else {}
+            ),
             longTermMemory=self._long_term_memory_channel("final_answer"),
         )
         view = view.model_copy(update={"context_hash": _derive_view_hash(self.pack_hash, "final_answer", _view_hash(view))})

@@ -36,7 +36,7 @@ class ProductCacheInvalidationTests {
     }
 
     @Test
-    void localDeleteRemovesRedisAndBroadcastsInvalidation() {
+    void localDeleteRemovesRedisWhileTransactionalOutboxOwnsBroadcasting() {
         StringRedisTemplate redis = mock(StringRedisTemplate.class);
         ProductCache cache = new ProductCache(redis, new ObjectMapper(), 60, 2, 10,
                 new SimpleMeterRegistry());
@@ -44,7 +44,7 @@ class ProductCacheInvalidationTests {
         cache.deleteDetail(1001L);
 
         verify(redis).delete("local-life:product:detail:v1:1001");
-        verify(redis).convertAndSend(ProductCache.INVALIDATION_CHANNEL, "product:1001");
+        org.mockito.Mockito.verify(redis,org.mockito.Mockito.never()).convertAndSend(org.mockito.ArgumentMatchers.anyString(),org.mockito.ArgumentMatchers.any());
     }
 
     private static ProductDetailResponse detail(String title, Long entityVersion) {

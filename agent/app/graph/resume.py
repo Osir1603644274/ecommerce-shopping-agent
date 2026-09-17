@@ -680,6 +680,8 @@ def _build_runtime(
     on_model_call: Callable[..., None] | None,
     on_model_call_receipt: Callable[..., None] | None,
     recovery_mode: bool,
+    memory_run_binding: Any | None = None,
+    memory_guard: Callable[..., Awaitable[None]] | None = None,
 ) -> GraphV2Runtime:
     return GraphV2Runtime(
         user_message=user_message,
@@ -708,6 +710,8 @@ def _build_runtime(
         react_decision_timeout_seconds=react_decision_timeout_seconds,
         on_model_call=on_model_call,
         on_model_call_receipt=on_model_call_receipt,
+        memory_run_binding=memory_run_binding,
+        memory_guard=memory_guard,
     )
 
 
@@ -1246,7 +1250,19 @@ async def _run_resume(
     )
     # The terminal response is rendered by the request layer, but any receipt
     # must stay bound to the exact answer/proposal that drove this graph run.
-    completed.proposal_hash = payload.proposal_hash
+    if (
+        settings.context_history_v1_enabled
+        and completed.boundary == "clarification"
+        and completed.interrupted
+    ):
+        # Answering one question can park at a DIFFERENT question/revision.
+        # The public next-resume receipt must echo that new interrupt, not
+        # the old question just answered. Terminal replay keeps the old hash.
+        fresh_hash = (completed.interrupt_payload or {}).get("proposalHash")
+        if not fresh_hash or completed.proposal_hash != fresh_hash:
+            raise RuntimeError("new_clarification_proposal_binding_missing")
+    else:
+        completed.proposal_hash = payload.proposal_hash
     return completed
 
 
@@ -1324,6 +1340,8 @@ async def run_graph_v2_durable(
     react_decision_timeout_seconds: float = 15.0,
     on_model_call: Callable[..., None] | None = None,
     on_model_call_receipt: Callable[..., None] | None = None,
+    memory_run_binding: Any | None = None,
+    memory_guard: Callable[..., Awaitable[None]] | None = None,
 ) -> DurableRunResult:
     """Run the durable V2 graph to one user-facing boundary.
 
@@ -1481,6 +1499,8 @@ async def run_graph_v2_durable(
             on_model_call=on_model_call,
             on_model_call_receipt=on_model_call_receipt,
             recovery_mode=restart,
+            memory_run_binding=memory_run_binding,
+            memory_guard=memory_guard,
         )
 
     if resume is not None:

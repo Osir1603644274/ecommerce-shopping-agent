@@ -1,0 +1,4 @@
+{"query":"源查询不得用于Track B标签","item_title":"基础款女装T恤一号","brand":"甲牌","seller_name":"甲店","attr_value":"短袖,棉,圆领","score":3,"split":"train"}
+{"query":"源查询不得用于Track B标签","item_title":"基础款女装T恤二号","brand":"乙牌","seller_name":"乙店","attr_value":"长袖,涤纶(聚酯纤维),圆领","score":0,"split":"train"}
+{"query":"源查询不得用于Track B标签","item_title":"基础款女装T恤三号","brand":"丙牌","seller_name":"丙店","attr_value":"无品牌,其他","score":2,"split":"train"}
+{"query":"源查询不得用于Track B标签","item_title":"重复连接商品","brand":"丁牌","seller_name":"丁店","attr_value":"短袖","score":3,"split":"train"}

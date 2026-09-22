@@ -318,6 +318,9 @@ async def lifespan(_app: FastAPI):
     try:
         from .api.commerce_demo import start_java_client
         await start_java_client()
+        if settings.customer_support_agent_enabled:
+            from .customer_support.model_client import initialize_client
+            await initialize_client()
         if settings.catalog_workspace_enabled:
             from .catalog_service import get_catalog_service
             await get_catalog_service().start()
@@ -379,6 +382,8 @@ async def lifespan(_app: FastAPI):
                 )
         yield
     finally:
+        from .customer_support.model_client import close_client as close_support_model_client
+        await close_support_model_client()
         if settings.catalog_workspace_enabled:
             from .catalog_service import get_catalog_service
             get_catalog_service().close()
@@ -436,6 +441,8 @@ from .api.commerce_workspace import router as commerce_workspace_router
 from .api import commerce_controls  # Register owner-bound controls before including the router.
 from .api import recommendation_workspace  # Public-history tool shares workspace identity and storage.
 app.include_router(commerce_workspace_router)
+from .api.commerce_support import router as commerce_support_router
+app.include_router(commerce_support_router)
 from .backend_observer import BackendObserverMiddleware, router as backend_observer_router
 app.add_middleware(BackendObserverMiddleware)
 app.include_router(backend_observer_router)

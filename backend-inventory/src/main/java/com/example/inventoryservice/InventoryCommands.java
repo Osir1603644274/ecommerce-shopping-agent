@@ -79,7 +79,7 @@ public class InventoryCommands {
             if(!"PROCESSING".equals(row.get("status")))return decode(String.valueOf(row.get("response_json")));
             // Backfill compatibility for pre-migration reservations, without reading trade tables.
             var prior=reservations(command.orderId());
-            String initial=prior.stream().anyMatch(r->Set.of("CONFIRMED","REFUNDED").contains(r.status()))?"CONFIRMED":
+            String initial=prior.stream().anyMatch(r->Set.of("CONFIRMED","REFUNDED","RETURNED").contains(r.status()))?"CONFIRMED":
                 prior.stream().anyMatch(r->Set.of("RELEASED","EXPIRED").contains(r.status()))?"RELEASED":"OPEN";
             jdbc.update("INSERT INTO inventory_order_guard(order_id,state) VALUES(?,?) ON DUPLICATE KEY UPDATE order_id=order_id",command.orderId(),initial);
             String guard=jdbc.queryForObject("SELECT state FROM inventory_order_guard WHERE order_id=? FOR UPDATE",String.class,command.orderId());
@@ -101,6 +101,7 @@ public class InventoryCommands {
             case "CONFIRM" -> transition(command,guard,true);
             case "RELEASE" -> transition(command,guard,false);
             case "REFUND","RESTORE_ALL" -> refund(command,guard);
+            case "RETURN_SELLABLE","RETURN_QUARANTINE" -> receiveReturn(command,guard);
             default -> throw new IllegalArgumentException("unsupported_inventory_command");
         }
     }
@@ -148,18 +149,39 @@ public class InventoryCommands {
         var rows=reservations(command.orderId());
         var quantities=new TreeMap<Long,Integer>();
         if("RESTORE_ALL".equals(command.kind())){
+            if(jdbc.queryForObject("SELECT COALESCE(SUM(returned_quantity),0) FROM inventory_reservation WHERE order_id=?",Integer.class,command.orderId())>0)
+                throw new Rejected("physical_return_already_received");
             for(var row:rows)if(row.quantity()>row.refundedQuantity())quantities.put(row.stockId(),row.quantity()-row.refundedQuantity());
         }else for(var item:command.items())
             quantities.put(stock(item.itemType(),item.itemId()).orElseThrow(()->new Rejected("stock_not_configured")).id(),item.quantity());
         for(var entry:quantities.entrySet()){
             var row=rows.stream().filter(r->r.stockId().equals(entry.getKey())).findFirst().orElseThrow(()->new Rejected("reservation_not_found"));
             int quantity=entry.getValue();
-            if(!"CONFIRMED".equals(row.status()) || row.refundedQuantity()+quantity>row.quantity())throw new Rejected("refund_quantity_exceeded");
+            int returned=jdbc.queryForObject("SELECT returned_quantity FROM inventory_reservation WHERE id=?",Integer.class,row.id());
+            if(!"CONFIRMED".equals(row.status()) || (long)row.refundedQuantity()+returned+quantity>row.quantity())throw new Rejected("refund_quantity_exceeded");
             if(jdbc.update("UPDATE inventory_stock SET sold_quantity=sold_quantity-?,available_quantity=available_quantity+?,version=version+1 WHERE id=? AND sold_quantity>=?",
                 quantity,quantity,row.stockId(),quantity)!=1)throw new Rejected("inventory_balance_conflict");
             jdbc.update("UPDATE inventory_reservation SET refunded_quantity=refunded_quantity+?,status=? WHERE id=?",
-                quantity,row.refundedQuantity()+quantity==row.quantity()?"REFUNDED":"CONFIRMED",row.id());
+                quantity,row.refundedQuantity()+returned+quantity==row.quantity()?"REFUNDED":"CONFIRMED",row.id());
         }
+    }
+    private void receiveReturn(Command command,String guard){
+        if(!"CONFIRMED".equals(guard))throw new Rejected("inventory_not_confirmed");
+        Item item=command.items().get(0);
+        Stock stock=stock(item.itemType(),item.itemId()).orElseThrow(()->new Rejected("stock_not_configured"));
+        int quantity=item.quantity();boolean sellable="RETURN_SELLABLE".equals(command.kind());
+        if(jdbc.update("""
+            UPDATE inventory_reservation SET status=CASE WHEN returned_quantity+refunded_quantity+?=quantity THEN 'RETURNED' ELSE status END,
+              returned_quantity=returned_quantity+?
+            WHERE order_id=? AND stock_id=? AND status='CONFIRMED' AND returned_quantity+refunded_quantity+?<=quantity
+            """,quantity,quantity,command.orderId(),stock.id(),quantity)!=1)throw new Rejected("return_quantity_exceeded");
+        String sql=sellable?
+            "UPDATE inventory_stock SET sold_quantity=sold_quantity-?,available_quantity=available_quantity+?,version=version+1 WHERE id=? AND sold_quantity>=?":
+            "UPDATE inventory_stock SET sold_quantity=sold_quantity-?,total_quantity=total_quantity-?,version=version+1 WHERE id=? AND sold_quantity>=? AND total_quantity>=?";
+        int count=sellable?jdbc.update(sql,quantity,quantity,stock.id(),quantity):jdbc.update(sql,quantity,quantity,stock.id(),quantity,quantity);
+        if(count!=1)throw new Rejected("inventory_balance_conflict");
+        jdbc.update("INSERT INTO inventory_return_receipt(command_id,order_id,item_id,stock_id,quantity,disposition) VALUES(?,?,?,?,?,?)",
+            command.commandId(),command.orderId(),item.itemId(),stock.id(),quantity,command.kind());
     }
     private static class Rejected extends RuntimeException{Rejected(String reason){super(reason);}}
 }

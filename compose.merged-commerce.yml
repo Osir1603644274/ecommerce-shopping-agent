@@ -1,0 +1,29 @@
+services:
+  backend:
+    image: agent-backend:messaging-main-20260914
+    environment:
+      LOCAL_LIFE_CATALOG_READ_ENABLED: 'true'
+      LOCAL_LIFE_CATALOG_READ_MAX_CONCURRENT: '0'
+      LOCAL_LIFE_CATALOG_READ_SQL_TIMEOUT_SECONDS: '2'
+      LOCAL_LIFE_OBSERVER_ENABLED: 'true'
+      LOCAL_LIFE_OBSERVER_KEY: ${MERGED_OBSERVER_KEY:?Set from the local observer token file through the launcher}
+      PAYMENT_SIMULATOR_ENABLED: 'true'
+      LOCAL_LIFE_DEMO_COMMERCE_ENABLED: 'true'
+      LOCAL_LIFE_FULFILLMENT_ENABLED: 'true'
+      LOCAL_LIFE_FULFILLMENT_WORKER_ENABLED: 'true'
+      LOCAL_LIFE_FULFILLMENT_KAFKA_ENABLED: 'true'
+      LOCAL_LIFE_FULFILLMENT_DISPATCH_DELAY_SECONDS: '120'
+      LOCAL_LIFE_FULFILLMENT_WAREHOUSE_URL: http://warehouse-simulator:19091
+      LOCAL_LIFE_FULFILLMENT_WAREHOUSE_TOKEN: ${MERGED_WAREHOUSE_TOKEN:?Set from the local token file through the launcher}
+      AGENT_BASE_URL: http://host.docker.internal:8000
+      TZ: UTC
+  warehouse-simulator:
+    image: python:3.12-slim
+    container_name: local-life-warehouse-simulator
+    command: ['python', '/fixture/warehouse_simulator.py', '--database', '/state/warehouse.sqlite3', '--token-file', '/token/warehouse.token', '--host', '0.0.0.0']
+    volumes:
+      - ./scripts/backend-strengthening/warehouse_simulator.py:/fixture/warehouse_simulator.py:ro
+      - ./.runtime/merged-commerce/warehouse:/state
+      - ./.runtime/merged-commerce/secrets:/token:ro
+    ports:
+      - '127.0.0.1:19091:19091'

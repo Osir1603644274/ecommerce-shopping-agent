@@ -10,6 +10,7 @@ REPOSITORY_ROOT = AGENT_ROOT.parent
 
 
 class Settings(BaseSettings):
+    customer_support_agent_enabled: bool = False
     review_projection_receipts_path: str = str(AGENT_ROOT / "knowledge_data/runtime/review-projection.sqlite3")
     backend_base_url: str = "http://localhost:8080"
     backend_observer_enabled: bool = False

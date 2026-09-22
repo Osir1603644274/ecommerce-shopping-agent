@@ -268,9 +268,12 @@ export default function Shop() {
   const [showHistory, setShowHistory] = useState(false)
   const [workspaceRetry, setWorkspaceRetry] = useState(0)
   const [streamNotice, setStreamNotice] = useState('')
+  const [newConversationPending, setNewConversationPending] = useState(false)
   const activeRun = isActive(workspace?.run)
   const receivingRun = !!workspace?.run && ['running', 'pausing'].includes(workspace.run.status)
-  const canChat = !receivingRun && (!activeRun || workspace?.run?.mode === 'continuous' || workspace?.run?.status === 'clarification')
+  // A paused, interrupted, failed, or step-mode task can be ended before a
+  // new request starts. Only an output that is still running must block send.
+  const canChat = !receivingRun && !newConversationPending
   const partial=workspace?.answerStream
   const draft=partial?.runId===workspace?.run?.id && !workspace?.messages.some(m=>m.role==='assistant'&&m.requestId===partial?.requestId) ? partial?.text || '' : ''
   const streaming=receivingRun || !!draft
@@ -291,6 +294,7 @@ export default function Shop() {
     setWorkspace(null)
     setFavorites([])
     setGuestCsrf('')
+    setNewConversationPending(false)
     setError('会话已更新，请重新登录。')
     setLogin(true)
   }, [])
@@ -383,6 +387,20 @@ export default function Shop() {
     return () => { controller.abort(); if (stream.current === controller) stream.current = null }
   }, [workspace?.run?.id, receivingRun, csrf, expired])
 
+  useEffect(() => {
+    if (!newConversationPending) return
+    if (!workspace || workspace.checkout?.pending) {
+      setNewConversationPending(false)
+      return
+    }
+    // A click on “新对话” while output is active first requests the existing
+    // safe pause. Once the server confirms a non-running state, retire that
+    // run and create the fresh conversation automatically.
+    if (receivingRun || busyRef.current || submitting.current) return
+    setNewConversationPending(false)
+    void newConversation()
+  }, [newConversationPending, workspace?.conversationId, workspace?.run?.id, workspace?.run?.status, workspace?.checkout?.pending, receivingRun])
+
   async function action(path: string, body?: unknown, method = 'POST'): Promise<Workspace | null> {
     if (busyRef.current) return null
     busyRef.current = true
@@ -451,6 +469,18 @@ export default function Shop() {
         navigate('guide'); composer.current?.focus()
       }
     } finally { submitting.current = false }
+  }
+  async function requestNewConversation() {
+    if (newConversationPending || busyRef.current || !workspace?.conversationId || workspace.checkout?.pending) return
+    if (!receivingRun) {
+      await newConversation()
+      return
+    }
+    const current = workspace.run
+    if (!current) return
+    setNewConversationPending(true)
+    const paused = await action('/control/pause', { runId: current.id, revision: current.revision })
+    if (!paused) setNewConversationPending(false)
   }
   async function openConversation(chat: ArchivedChat) {
     setTab('guide'); setSidebarOpen(false)
@@ -613,8 +643,8 @@ export default function Shop() {
             拾物<span className="brand-subtitle">FIND YOUR EVERYDAY</span>
           </span>
         </a>
-        <button className="nav-item new-chat" disabled={busy || !workspace?.conversationId || receivingRun || !!checkout?.pending}
-          onClick={()=>{void newConversation()}}><SquarePen size={19}/>新对话</button>
+        <button className="nav-item new-chat" disabled={busy || !workspace?.conversationId || !!checkout?.pending || newConversationPending}
+          onClick={()=>{void requestNewConversation()}}><SquarePen size={19}/>{newConversationPending ? '正在新建…' : '新对话'}</button>
         <nav aria-label="主导航">
           {(['guide', 'favorites', 'orders', 'benefits'] as Tab[]).map((item) => (
             <button
@@ -693,8 +723,8 @@ export default function Shop() {
                     <MessageCircle size={18} />
                     <strong>拾物 AI</strong>
                     <span>为你认真挑选</span>
-                    <button className="conversation-button" disabled={busy || !workspace?.conversationId || receivingRun || !!checkout?.pending}
-                      onClick={() => void newConversation()}>新建对话</button>
+                    <button className="conversation-button" disabled={busy || !workspace?.conversationId || !!checkout?.pending || newConversationPending}
+                      onClick={() => void requestNewConversation()}>{newConversationPending ? '正在新建…' : '新建对话'}</button>
                     <button className="conversation-button" disabled={!workspace || busy} onClick={() => setShowHistory(true)}>历史对话</button>
                   </header>
                   <RecommendationMode value={recommendationCase} onChange={value=>{setRecommendationCase(value);setStepMode(false)}} csrf={csrf||''} disabled={busy||activeRun||!!checkout?.pending}/>
@@ -714,7 +744,7 @@ export default function Shop() {
                           {['推荐一部 2000 元左右的二手手机', '想找一部适合拍照的二手手机'].map(
                             (text) => (
                               <button
-                                disabled={busy || !workspace || activeRun}
+                                disabled={busy || !workspace || receivingRun || newConversationPending}
                                 key={text}
                                 onClick={() => void ask(text)}
                               >

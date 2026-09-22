@@ -74,6 +74,7 @@ class GatewaySecurityConfiguration {
                         .pathMatchers(HttpMethod.PATCH, "/api/admin/products/**").hasRole("ADMIN")
                         .pathMatchers(HttpMethod.DELETE, "/api/admin/products/**").hasRole("ADMIN")
                         .pathMatchers(HttpMethod.PUT, "/api/shops/**").hasRole("ADMIN")
+                        .pathMatchers("/api/admin/support-simulator/**").hasRole("ADMIN")
                         .pathMatchers("/api/**").authenticated()
                         .anyExchange().denyAll())
                 .oauth2ResourceServer(resource -> resource

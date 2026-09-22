@@ -1,6 +1,6 @@
-# 电商搜索推荐与购物 Agent
+# 电商导购 Agent 与 Java 交易后端
 
-> **2026-09-17 源码与实验更新**：包含 React 前端、Agent、Java 商品/交易/库存服务及搜索推荐实验代码。先读 [项目审阅纲要](docs/project-review-20260917/PROJECT_OVERVIEW.md) 与 [最新行为排序实验](docs/experiments/behavior-lambdamart-20260917/SUMMARY.md)。外部数据、模型权重和本机发布清单需按文档另行准备。
+> **2026-09-22 客服与售后更新**：公开源码已同步售前问答、订单履约查询、退款 / 退货 / 同款同规格换货、工单、独立模拟器及对应测试。运行时凭据、原始评测 evidence 和本机数据库不随仓库发布。
 
 **数据与评测入口：[我的数据集与 Benchmark](datasets/README.md)** — [完整资产总账](datasets/ASSETS.md)含商品、单轮、多轮 Agent、跨会话记忆和外部历史材料；[全部位置](datasets/ALL_LOCATIONS.md)可查跨盘来源与候选。
 
@@ -13,6 +13,18 @@
 
 当前界面以聊天为中心，支持正文 SSE 增量、停止与继续、历史回看；商品交易与后端学习详情按需展开。[流式输出与页面验收](docs/architecture/chat-streaming-20260915/ACCEPTANCE.md)。
 此前版本的[全链路演示录像](docs/assets/demo/commerce-demo-walkthrough.gif)保留作历史材料，界面以当前截图为准。
+
+
+## 客服与售后模块
+
+当前源码包含客服多轮对话、订单和物流事实查询、退款、退货、同款同规格换货、工单升级与独立业务模拟器。模型负责理解和规划；Java/MySQL 保存订单、库存、履约和售后权威状态，动作执行必须返回可核验回执。
+
+- 接口合同：[API_CONTRACT.md](docs/implementation/customer-support-20260919/API_CONTRACT.md)
+- 交付边界：[DELIVERY.md](docs/implementation/customer-support-20260919/DELIVERY.md)
+- 评测说明：[EVALUATION.md](docs/implementation/customer-support-20260919/EVALUATION.md)
+- 运维入口：[OPERATIONS.md](docs/implementation/customer-support-20260919/OPERATIONS.md)
+
+人工复核状态以文档记录为准；自动判分结果不表述为人工金标。
 
 ## 可运行主链
 

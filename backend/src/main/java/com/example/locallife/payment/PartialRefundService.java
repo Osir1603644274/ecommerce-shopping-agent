@@ -48,6 +48,8 @@ public class PartialRefundService {
             return get(existing.get(0).get(0),user);
         }
         CustomerOrder order=orders.requireOwnedOrder(orderId,user);
+        if(jdbc.queryForObject("SELECT COUNT(*) FROM support_order_claim WHERE order_id=?",Integer.class,orderId)>0)
+            throw new BusinessConflictException("此订单已有售后处理中，请查询原售后单");
         if(!"PAID".equals(order.status())) throw new BusinessConflictException("只有已支付订单支持按数量退款");
         if(jdbc.queryForObject("SELECT COUNT(*) FROM partial_refund WHERE order_id=? AND status='PROCESSING'",Integer.class,orderId)>0)
             throw new BusinessConflictException("此订单已有退款处理中，请先对账");

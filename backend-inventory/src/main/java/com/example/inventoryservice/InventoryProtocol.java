@@ -13,14 +13,15 @@ public final class InventoryProtocol {
                        @NotNull @Positive Long itemId, @Min(1) @Max(100000) int quantity) { }
     public record Command(@NotBlank @Size(max=128) String commandId,
                           @NotBlank @Size(max=36) String orderId,
-                          @NotNull @Pattern(regexp="RESERVE|CONFIRM|RELEASE|REFUND|RESTORE_ALL") String kind,
+                          @NotNull @Pattern(regexp="RESERVE|CONFIRM|RELEASE|REFUND|RESTORE_ALL|RETURN_SELLABLE|RETURN_QUARANTINE") String kind,
                           @NotNull @Size(max=50) List<@Valid Item> items,
                           LocalDateTime expiresAt) {
         public Command normalized() {
             var sorted=new ArrayList<>(items);
             sorted.sort(Comparator.comparing(Item::itemType).thenComparing(Item::itemId));
-            if (Set.of("RESERVE","REFUND").contains(kind) == sorted.isEmpty())
+            if (Set.of("RESERVE","REFUND","RETURN_SELLABLE","RETURN_QUARANTINE").contains(kind) == sorted.isEmpty())
                 throw new IllegalArgumentException("invalid_command_items");
+            if(kind.startsWith("RETURN_") && sorted.size()!=1) throw new IllegalArgumentException("return_requires_one_item");
             if ("RESERVE".equals(kind) && expiresAt==null) throw new IllegalArgumentException("expires_at_required");
             if (!"RESERVE".equals(kind) && expiresAt!=null) throw new IllegalArgumentException("unexpected_expires_at");
             for(int i=1;i<sorted.size();i++)

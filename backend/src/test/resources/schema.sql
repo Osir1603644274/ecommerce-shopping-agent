@@ -166,9 +166,23 @@ CREATE TABLE IF NOT EXISTS inventory_reservation (
     status VARCHAR(32) NOT NULL,
     expires_at TIMESTAMP NOT NULL,
     refunded_quantity INT NOT NULL DEFAULT 0,
+    returned_quantity INT NOT NULL DEFAULT 0,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT uk_inventory_reservation_order_stock UNIQUE(order_id,stock_id)
+    CONSTRAINT uk_inventory_reservation_order_stock UNIQUE(order_id,stock_id),
+    CONSTRAINT ck_inventory_return_quantity CHECK(returned_quantity>=0 AND returned_quantity+refunded_quantity<=quantity)
+);
+
+CREATE TABLE IF NOT EXISTS inventory_return_receipt (
+    command_id VARCHAR(128) PRIMARY KEY,
+    order_id VARCHAR(36) NOT NULL,
+    item_id BIGINT NOT NULL,
+    stock_id BIGINT NOT NULL,
+    quantity INT NOT NULL,
+    disposition VARCHAR(32) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CHECK(quantity>0),
+    FOREIGN KEY(stock_id) REFERENCES inventory_stock(id)
 );
 
 CREATE TABLE IF NOT EXISTS coupon_template (
@@ -503,3 +517,229 @@ CREATE TABLE IF NOT EXISTS catalog_version_member (
  catalog_version VARCHAR(128) NOT NULL, product_id BIGINT NOT NULL,
  PRIMARY KEY(catalog_version,product_id)
 );
+
+-- New support writes stay feature-gated until their adapters and recovery are verified.
+CREATE TABLE IF NOT EXISTS support_case (
+ id VARCHAR(36) PRIMARY KEY,
+ order_id VARCHAR(36) NOT NULL,
+ user_id VARCHAR(36) NOT NULL,
+ item_id BIGINT NOT NULL,
+ quantity INT NOT NULL,
+ original_type VARCHAR(32) NOT NULL,
+ current_type VARCHAR(32) NOT NULL,
+ phase VARCHAR(40) NOT NULL,
+ amount_minor BIGINT NOT NULL,
+ currency VARCHAR(16) NOT NULL,
+ reason VARCHAR(1000) NOT NULL,
+ specification_json TEXT NULL,
+ policy_version VARCHAR(64) NOT NULL,
+ idempotency_key VARCHAR(128) NOT NULL,
+ request_hash CHAR(64) NOT NULL,
+ version BIGINT NOT NULL DEFAULT 0,
+ created_at TIMESTAMP(6) NOT NULL,
+ updated_at TIMESTAMP(6) NOT NULL,
+ CONSTRAINT uk_support_case_key UNIQUE(order_id,idempotency_key),
+ CONSTRAINT fk_support_case_order FOREIGN KEY(order_id) REFERENCES customer_order(id),
+ CONSTRAINT ck_support_case_values CHECK(quantity>0 AND amount_minor>=0 AND version>=0)
+);
+CREATE INDEX IF NOT EXISTS idx_support_case_owner ON support_case(user_id,created_at,id);
+CREATE TABLE IF NOT EXISTS support_order_claim (
+ order_id VARCHAR(36) PRIMARY KEY,
+ case_id VARCHAR(36) NOT NULL UNIQUE,
+ quantity INT NOT NULL,
+ amount_minor BIGINT NOT NULL,
+ CONSTRAINT fk_support_claim_case FOREIGN KEY(case_id) REFERENCES support_case(id),
+ CONSTRAINT ck_support_claim_values CHECK(quantity>0 AND amount_minor>=0)
+);
+CREATE TABLE IF NOT EXISTS support_preview (
+ id VARCHAR(36) PRIMARY KEY,
+ order_id VARCHAR(36) NOT NULL,
+ user_id VARCHAR(36) NOT NULL,
+ request_json TEXT NOT NULL,
+ facts_hash CHAR(64) NOT NULL,
+ amount_minor BIGINT NOT NULL,
+ expires_at TIMESTAMP(6) NOT NULL,
+ case_id VARCHAR(36) NULL,
+ CONSTRAINT fk_support_preview_order FOREIGN KEY(order_id) REFERENCES customer_order(id),
+ CONSTRAINT fk_support_preview_case FOREIGN KEY(case_id) REFERENCES support_case(id)
+);
+CREATE TABLE IF NOT EXISTS support_event (
+ id VARCHAR(36) PRIMARY KEY,
+ case_id VARCHAR(36) NOT NULL,
+ event_key VARCHAR(128) NOT NULL,
+ request_hash CHAR(64) NOT NULL,
+ actor VARCHAR(128) NOT NULL,
+ event_type VARCHAR(48) NOT NULL,
+ from_phase VARCHAR(40) NULL,
+ to_phase VARCHAR(40) NOT NULL,
+ evidence_json TEXT NOT NULL,
+ created_at TIMESTAMP(6) NOT NULL,
+ CONSTRAINT uk_support_event_key UNIQUE(case_id,event_key),
+ CONSTRAINT fk_support_event_case FOREIGN KEY(case_id) REFERENCES support_case(id)
+);
+CREATE INDEX IF NOT EXISTS idx_support_event_case ON support_event(case_id,created_at,id);
+CREATE TABLE IF NOT EXISTS support_sale_specification (
+ product_id BIGINT PRIMARY KEY,
+ code VARCHAR(128) NOT NULL,
+ label VARCHAR(512) NOT NULL,
+ version BIGINT NOT NULL,
+ enabled BOOLEAN NOT NULL DEFAULT TRUE,
+ CHECK(version>0)
+);
+
+CREATE TABLE IF NOT EXISTS support_receipt (
+ id VARCHAR(36) PRIMARY KEY,
+ case_id VARCHAR(36) NOT NULL,
+ receipt_key VARCHAR(128) NOT NULL,
+ request_hash CHAR(64) NOT NULL,
+ event_type VARCHAR(48) NOT NULL,
+ expected_version BIGINT NOT NULL,
+ actor VARCHAR(128) NOT NULL,
+ payload_json TEXT NOT NULL,
+ status VARCHAR(24) NOT NULL DEFAULT 'PENDING',
+ attempts INT NOT NULL DEFAULT 0,
+ next_attempt_at TIMESTAMP(6) NULL,
+ last_error VARCHAR(512) NULL,
+ created_at TIMESTAMP(6) NOT NULL,
+ applied_at TIMESTAMP(6) NULL,
+ CONSTRAINT uk_support_receipt_key UNIQUE(case_id,receipt_key),
+ CONSTRAINT fk_support_receipt_case FOREIGN KEY(case_id) REFERENCES support_case(id)
+);
+CREATE INDEX IF NOT EXISTS idx_support_receipt_pending ON support_receipt(status,created_at);
+CREATE TABLE IF NOT EXISTS support_return (
+ case_id VARCHAR(36) PRIMARY KEY,
+ tracking_no VARCHAR(128) NOT NULL,
+ item_id BIGINT NOT NULL,
+ requested_quantity INT NOT NULL,
+ received_quantity INT NULL,
+ sellable BOOLEAN NULL,
+ receipt_id VARCHAR(36) NULL,
+ inspection_receipt_id VARCHAR(36) NULL,
+ CONSTRAINT fk_support_return_case FOREIGN KEY(case_id) REFERENCES support_case(id)
+);
+CREATE TABLE IF NOT EXISTS support_refund_command (
+ case_id VARCHAR(36) PRIMARY KEY,
+ payment_id VARCHAR(36) NOT NULL,
+ request_hash CHAR(64) NOT NULL,
+ amount_minor BIGINT NOT NULL,
+ currency VARCHAR(16) NOT NULL,
+ status VARCHAR(24) NOT NULL DEFAULT 'PENDING',
+ provider_receipt_id VARCHAR(36) NULL,
+ created_at TIMESTAMP(6) NOT NULL,
+ completed_at TIMESTAMP(6) NULL,
+ CONSTRAINT fk_support_refund_case FOREIGN KEY(case_id) REFERENCES support_case(id),
+ CONSTRAINT fk_support_refund_payment FOREIGN KEY(payment_id) REFERENCES payment_record(id),
+ CHECK(amount_minor>=0)
+);
+CREATE TABLE IF NOT EXISTS support_stock_effect (
+ effect_id VARCHAR(64) PRIMARY KEY,
+ case_id VARCHAR(36) NOT NULL,
+ order_id VARCHAR(36) NOT NULL,
+ item_id BIGINT NOT NULL,
+ quantity INT NOT NULL,
+ kind VARCHAR(32) NOT NULL,
+ status VARCHAR(24) NOT NULL DEFAULT 'PENDING',
+ receipt_id VARCHAR(128) NULL,
+ attempts INT NOT NULL DEFAULT 0,
+ last_error VARCHAR(512) NULL,
+ created_at TIMESTAMP(6) NOT NULL,
+ CONSTRAINT fk_support_stock_case FOREIGN KEY(case_id) REFERENCES support_case(id),
+ CHECK(quantity>0 AND attempts>=0)
+);
+CREATE TABLE IF NOT EXISTS support_conversion_preview (
+ id VARCHAR(36) PRIMARY KEY,
+ case_id VARCHAR(36) NOT NULL,
+ user_id VARCHAR(36) NOT NULL,
+ expected_version BIGINT NOT NULL,
+ amount_minor BIGINT NOT NULL,
+ expires_at TIMESTAMP(6) NOT NULL,
+ confirmed_key VARCHAR(128) NULL,
+ CONSTRAINT fk_conversion_case FOREIGN KEY(case_id) REFERENCES support_case(id)
+);
+CREATE TABLE IF NOT EXISTS support_replacement (
+ id VARCHAR(36) PRIMARY KEY,
+ case_id VARCHAR(36) NOT NULL,
+ case_version BIGINT NOT NULL,
+ item_id BIGINT NOT NULL,
+ quantity INT NOT NULL,
+ specification TEXT NOT NULL,
+ status VARCHAR(24) NOT NULL DEFAULT 'PENDING',
+ reserve_until TIMESTAMP(6) NOT NULL,
+ created_at TIMESTAMP(6) NOT NULL,
+ CONSTRAINT uk_replacement_attempt UNIQUE(case_id,case_version),
+ CONSTRAINT fk_replacement_case FOREIGN KEY(case_id) REFERENCES support_case(id),
+ CHECK(quantity>0)
+);
+ALTER TABLE support_replacement ADD COLUMN IF NOT EXISTS tracking_no VARCHAR(128) NULL;
+ALTER TABLE support_replacement ADD COLUMN IF NOT EXISTS dispatch_receipt_id VARCHAR(36) NULL;
+ALTER TABLE support_replacement ADD COLUMN IF NOT EXISTS received_receipt_id VARCHAR(36) NULL;
+ALTER TABLE support_case ADD COLUMN IF NOT EXISTS recovery_attempts INT NOT NULL DEFAULT 0;
+ALTER TABLE support_case ADD COLUMN IF NOT EXISTS recovery_next_at TIMESTAMP(6) NULL;
+ALTER TABLE support_case ADD COLUMN IF NOT EXISTS recovery_error VARCHAR(512) NULL;
+ALTER TABLE support_stock_effect ADD COLUMN IF NOT EXISTS next_attempt_at TIMESTAMP(6) NULL;
+CREATE TABLE IF NOT EXISTS support_ticket (
+ id VARCHAR(36) PRIMARY KEY,
+ order_id VARCHAR(36) NOT NULL,
+ user_id VARCHAR(36) NOT NULL,
+ case_id VARCHAR(36) NULL,
+ category VARCHAR(40) NOT NULL,
+ status VARCHAR(24) NOT NULL DEFAULT 'OPEN',
+ summary VARCHAR(1000) NOT NULL,
+ create_key VARCHAR(128) NOT NULL,
+ request_hash CHAR(64) NOT NULL,
+ version BIGINT NOT NULL DEFAULT 0,
+ created_at TIMESTAMP(6) NOT NULL,
+ updated_at TIMESTAMP(6) NOT NULL,
+ CONSTRAINT uk_ticket_create UNIQUE(order_id,create_key),
+ CONSTRAINT fk_ticket_order FOREIGN KEY(order_id) REFERENCES customer_order(id),
+ CONSTRAINT fk_ticket_case FOREIGN KEY(case_id) REFERENCES support_case(id)
+);
+CREATE INDEX IF NOT EXISTS idx_ticket_owner ON support_ticket(user_id,created_at,id);
+CREATE TABLE IF NOT EXISTS support_scenario_clock (
+ order_id VARCHAR(36) PRIMARY KEY,
+ virtual_now TIMESTAMP(6) NOT NULL,
+ version BIGINT NOT NULL DEFAULT 0,
+ actor VARCHAR(128) NOT NULL,
+ CONSTRAINT fk_scenario_clock_order FOREIGN KEY(order_id) REFERENCES customer_order(id)
+);
+CREATE TABLE IF NOT EXISTS support_clock_event (
+ order_id VARCHAR(36) NOT NULL,
+ event_key VARCHAR(128) NOT NULL,
+ request_hash CHAR(64) NOT NULL,
+ actor VARCHAR(128) NOT NULL,
+ from_time TIMESTAMP(6) NOT NULL,
+ to_time TIMESTAMP(6) NOT NULL,
+ PRIMARY KEY(order_id,event_key),
+ CONSTRAINT fk_clock_event_order FOREIGN KEY(order_id) REFERENCES customer_order(id)
+);
+CREATE TABLE IF NOT EXISTS support_order_receipt (
+ id VARCHAR(36) PRIMARY KEY,
+ order_id VARCHAR(36) NOT NULL,
+ event_type VARCHAR(24) NOT NULL,
+ receipt_key VARCHAR(128) NOT NULL,
+ actor VARCHAR(128) NOT NULL,
+ request_hash CHAR(64) NOT NULL,
+ claim_json TEXT NOT NULL,
+ payload_json TEXT NOT NULL,
+ status VARCHAR(24) NOT NULL DEFAULT 'PENDING',
+ created_at TIMESTAMP(6) NOT NULL,
+ applied_at TIMESTAMP(6) NULL,
+ CONSTRAINT uk_order_receipt_event UNIQUE(order_id,event_type),
+ CONSTRAINT uk_order_receipt_key UNIQUE(order_id,receipt_key),
+ CONSTRAINT fk_order_receipt_order FOREIGN KEY(order_id) REFERENCES customer_order(id)
+);
+CREATE TABLE IF NOT EXISTS support_ticket_event (
+ id VARCHAR(36) PRIMARY KEY,
+ ticket_id VARCHAR(36) NOT NULL,
+ event_key VARCHAR(128) NOT NULL,
+ request_hash CHAR(64) NOT NULL,
+ actor VARCHAR(128) NOT NULL,
+ action VARCHAR(40) NOT NULL,
+ message VARCHAR(2000) NOT NULL,
+ created_at TIMESTAMP(6) NOT NULL,
+ CONSTRAINT uk_ticket_event UNIQUE(ticket_id,event_key),
+ CONSTRAINT fk_ticket_event FOREIGN KEY(ticket_id) REFERENCES support_ticket(id)
+);
+ALTER TABLE support_order_receipt ADD COLUMN IF NOT EXISTS attempts INT NOT NULL DEFAULT 0;
+ALTER TABLE support_order_receipt ADD COLUMN IF NOT EXISTS next_attempt_at TIMESTAMP(6) NULL;
+ALTER TABLE support_order_receipt ADD COLUMN IF NOT EXISTS last_error VARCHAR(512) NULL;

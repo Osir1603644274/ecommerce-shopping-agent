@@ -58,6 +58,8 @@ class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/api/orders/**", "/api/coupons/mine")
                         .authenticated()
                         .requestMatchers("/api/memory/**", "/api/product-favorites/**").authenticated()
+                        .requestMatchers("/api/after-sales/**", "/api/support/**").authenticated()
+                        .requestMatchers("/api/admin/support-simulator/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/flash-sales/orders")
                         .authenticated()
                         .requestMatchers(HttpMethod.GET, "/api/identity/**").authenticated()

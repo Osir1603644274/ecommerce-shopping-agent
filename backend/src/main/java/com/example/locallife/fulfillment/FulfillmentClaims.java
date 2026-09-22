@@ -24,8 +24,8 @@ public class FulfillmentClaims {
     public List<String> candidates(int limit) {
         return store.jdbc().query("""
             SELECT order_id FROM fulfillment_task
-            WHERE ((status IN ('READY','UNKNOWN') AND next_attempt_at &lt;= CURRENT_TIMESTAMP)
-               OR (status='DISPATCHING' AND lease_until &lt;= CURRENT_TIMESTAMP))
+            WHERE ((status IN ('READY','UNKNOWN') AND next_attempt_at &lt;= CURRENT_TIMESTAMP(6))
+               OR (status='DISPATCHING' AND lease_until &lt;= CURRENT_TIMESTAMP(6)))
             ORDER BY next_attempt_at,order_id LIMIT ?
             """.replace("&lt;", "<"), (rs, n) -> rs.getString(1), Math.max(1, Math.min(limit, 100)));
     }
@@ -34,7 +34,8 @@ public class FulfillmentClaims {
     public Optional<FulfillmentTask> claim(String orderId, String owner) {
         String orderStatus = store.lockOrder(orderId);
         FulfillmentTask task = store.lockTask(orderId);
-        LocalDateTime now = store.jdbc().queryForObject("SELECT CURRENT_TIMESTAMP", LocalDateTime.class);
+        // next_attempt_at and lease_until are TIMESTAMP(6); compare at the same precision on MySQL.
+        LocalDateTime now = store.jdbc().queryForObject("SELECT CURRENT_TIMESTAMP(6)", LocalDateTime.class);
         if (task == null) return Optional.empty();
         // Money/order state alone does not prove that remote inventory has caught up.
         // Do not dispatch while confirm/refund effects are unresolved or need review.
@@ -84,7 +85,7 @@ public class FulfillmentClaims {
             UPDATE fulfillment_task SET status=?,last_error=?,next_attempt_at=?,owner=NULL,lease_until=NULL,
             updated_at=CURRENT_TIMESTAMP WHERE order_id=? AND status='DISPATCHING' AND owner=? AND fence=?
             """, exhausted ? "NEEDS_REVIEW" : "UNKNOWN", error,
-                exhausted ? null : store.jdbc().queryForObject("SELECT CURRENT_TIMESTAMP", LocalDateTime.class)
+                exhausted ? null : store.jdbc().queryForObject("SELECT CURRENT_TIMESTAMP(6)", LocalDateTime.class)
                         .plusSeconds(Math.min(300, 1L << Math.min(8, claim.attempts()))),
                 claim.orderId(), claim.owner(), claim.fence());
         if (rows == 1) store.audit(claim.orderId(), claim.fence(), exhausted ? "NEEDS_REVIEW" : "UNKNOWN", error);

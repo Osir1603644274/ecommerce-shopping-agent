@@ -77,12 +77,15 @@ async def _java(
     access_token: str | None = None,
     body: dict[str, Any] | None = None,
     params: dict[str, str] | None = None,
+    idempotency_key: str | None = None,
 ) -> dict[str, Any]:
     headers = {"Accept": "application/json"}
     from ..backend_observer import observer_headers, observe_response, begin_call
     headers.update(observer_headers())
     if access_token is not None:
         headers["Authorization"] = f"Bearer {access_token}"
+    if idempotency_key is not None:
+        headers["Idempotency-Key"] = idempotency_key
     timing = begin_call(body, params)
     try:
         async with java_connection(timeout=5.0) as client:

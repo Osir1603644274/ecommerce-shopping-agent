@@ -19,6 +19,12 @@ public class CommerceCatalogReadService {
     private final ShopRepository shops;
     private final ObjectMapper json;
     private final com.example.locallife.product.LocalOfferService offers;
+    private com.example.locallife.support.SaleSpecificationRegistry supportSpecifications;
+
+    @org.springframework.beans.factory.annotation.Autowired
+    public void setSupportSpecifications(com.example.locallife.support.SaleSpecificationRegistry registry) {
+        this.supportSpecifications=registry;
+    }
 
     public CommerceCatalogReadService(
             ProductRepository products,
@@ -57,8 +63,7 @@ public class CommerceCatalogReadService {
         var local = offers == null ? null : offers.find(itemId).orElse(null);
         if (local != null) {
             return new CommerceItemSnapshot("PRODUCT",product.id(),product.title(),local.priceMinor(),
-                    local.currency(),local.version(),evidence("product",product.source(),product.provenanceUrl(),
-                    "local_simulated",product.datasetRevision()));
+                    local.currency(),local.version(),productEvidence(product,"local_simulated"));
         }
         if (product.snapshotPriceMinor() == null
                 || !"verified".equalsIgnoreCase(product.priceStatus())) {
@@ -68,8 +73,7 @@ public class CommerceCatalogReadService {
         return new CommerceItemSnapshot(
                 "PRODUCT", product.id(), product.title(), product.snapshotPriceMinor(),
                 product.currency(), version,
-                evidence("product", product.source(), product.provenanceUrl(),
-                        product.priceStatus(), product.datasetRevision())
+                productEvidence(product, product.priceStatus())
         );
     }
 
@@ -85,6 +89,11 @@ public class CommerceCatalogReadService {
                 evidence("local_deal", shop.source(), shop.sourceEntityId(),
                         "shop_avg_price", shop.localizationVersion())
         );
+    }
+
+    private String productEvidence(Product product,String priceStatus) {
+        String result=evidence("product",product.source(),product.provenanceUrl(),priceStatus,product.datasetRevision());
+        return supportSpecifications==null?result:supportSpecifications.enrich(product.id(),result);
     }
 
     private String evidence(

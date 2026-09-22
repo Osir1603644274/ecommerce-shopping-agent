@@ -103,11 +103,11 @@ interface InventoryMapper {
     int transitionOne(@Param("id") String id, @Param("expected") String expected, @Param("target") String target);
 
     @Update("""
-            UPDATE inventory_reservation SET status=CASE WHEN refunded_quantity+#{quantity}=quantity THEN 'REFUNDED' ELSE 'CONFIRMED' END,
+            UPDATE inventory_reservation SET status=CASE WHEN returned_quantity+refunded_quantity+#{quantity}=quantity THEN 'REFUNDED' ELSE 'CONFIRMED' END,
               refunded_quantity=refunded_quantity+#{quantity},
               updated_at=CURRENT_TIMESTAMP
             WHERE order_id=#{orderId} AND stock_id=#{stockId} AND status='CONFIRMED'
-              AND refunded_quantity+#{quantity}<=quantity
+              AND returned_quantity+refunded_quantity+#{quantity}<=quantity
             """)
     int refundQuantity(@Param("orderId") String orderId,@Param("stockId") Long stockId,@Param("quantity") int quantity);
 

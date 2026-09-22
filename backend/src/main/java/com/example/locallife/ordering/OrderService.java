@@ -279,7 +279,8 @@ public class OrderService {
             OrderStatus target,
             String message
     ) {
-        if (mapper.transition(orderId, expected.name(), target.name(), LocalDateTime.now(clock)) != 1) {
+        if (mapper.transition(orderId, expected.name(), target.name(),
+                LocalDateTime.now(clock).truncatedTo(java.time.temporal.ChronoUnit.MICROS)) != 1) {
             throw new InvalidBusinessStateException(message);
         }
     }

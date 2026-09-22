@@ -36,6 +36,75 @@ for (const status of ['failed','interrupted','paused','clarification']) {
   })
 }
 
+for (const status of ['waiting', 'interrupted']) {
+  test(`${status} step task: typed request retires the old task before sending`, async ({ page }) => {
+    let state: Workspace = { conversationId: oldId, messages: [], cards: [], selection: null, checkout: null,
+      run: { id: 'step-run', requestId: 'old-step', revision: 1, status, mode: 'step', nodes: [] } }
+    const writes: string[] = []
+    await page.route('**/api/**', async route => {
+      const path = new URL(route.request().url()).pathname
+      let body: unknown = state
+      if (path.endsWith('/me')) body = { authenticated: true, username: 'fixture', csrfToken: 'csrf' }
+      else if (path.endsWith('/favorites')) body = { products: [] }
+      else if (path.endsWith('/capability')) body = { enabled: true }
+      else if (path.endsWith('/conversations')) body = { conversations: [], nextOffset: null }
+      else if (path.endsWith('/control/end')) {
+        writes.push('end')
+        state = { ...state, run: { ...state.run!, status: 'ended', revision: 2 } }
+        body = state
+      } else if (path.endsWith('/run')) {
+        writes.push('run')
+        expect(route.request().postDataJSON().message).toBe('换一个需求')
+        state = { ...state, run: null, messages: [{ role: 'user', requestId: 'new', content: '换一个需求' }] }
+        body = state
+      } else if (route.request().method() !== 'GET') throw new Error('Unexpected mutation ' + path)
+      await route.fulfill({ contentType: 'application/json', body: JSON.stringify(body) })
+    })
+    await page.goto('/')
+    const input = page.getByLabel('告诉我你想找什么')
+    await input.fill('换一个需求')
+    await expect(page.getByRole('button', { name: '发送消息' })).toBeEnabled()
+    await input.press('Enter')
+    await expect.poll(() => writes).toEqual(['end', 'run'])
+  })
+}
+
+test('new conversation safely pauses active output, then retires its run', async ({ page }) => {
+  let state: Workspace = { conversationId: oldId, messages: [], cards: [], selection: null, checkout: null,
+    run: { id: 'live-run', requestId: 'live', revision: 1, status: 'running', mode: 'continuous', nodes: [] } }
+  const writes: string[] = []
+  await page.route('**/api/**', async route => {
+    const path = new URL(route.request().url()).pathname
+    let body: unknown = state
+    if (path.endsWith('/me')) body = { authenticated: true, username: 'fixture', csrfToken: 'csrf' }
+    else if (path.endsWith('/favorites')) body = { products: [] }
+    else if (path.endsWith('/capability')) body = { enabled: true }
+    else if (path.endsWith('/conversations')) {
+      if (route.request().method() === 'POST') {
+        writes.push('new')
+        state = { ...state, conversationId: freshId, messages: [], run: null }
+        body = state
+      } else body = { conversations: [], nextOffset: null }
+    } else if (path.endsWith('/control/pause')) {
+      writes.push('pause')
+      state = { ...state, run: { ...state.run!, status: 'paused', revision: 2 } }
+      body = state
+    } else if (path.endsWith('/control/end')) {
+      writes.push('end')
+      state = { ...state, run: { ...state.run!, status: 'ended', revision: 3 } }
+      body = state
+    } else if (path.endsWith('/control/events')) {
+      return route.fulfill({ contentType: 'text/event-stream', body: 'event: settled\ndata: {"type":"settled"}\n\n' })
+    } else if (route.request().method() !== 'GET') throw new Error('Unexpected mutation ' + path)
+    await route.fulfill({ contentType: 'application/json', body: JSON.stringify(body) })
+  })
+  await page.goto('/')
+  await expect(page.getByRole('button', { name: '新对话', exact: true })).toBeEnabled()
+  await page.getByRole('button', { name: '新对话', exact: true }).click()
+  await expect.poll(() => writes).toEqual(['pause', 'end', 'new'])
+  await expect(page.getByLabel('告诉我你想找什么')).toBeEnabled()
+})
+
 test('server-confirmed checkpoint offers continuation',async({page})=>{
   const state:Workspace={conversationId:oldId,messages:[],cards:[],selection:null,checkout:null,
     run:{id:'r',requestId:'q',revision:1,status:'paused',mode:'continuous',nodes:[],canResume:true}}

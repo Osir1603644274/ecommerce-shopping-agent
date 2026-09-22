@@ -32,12 +32,12 @@ const errors: Record<string, string> = {
   'csrf validation failed': '会话已更新，请重新登录后再操作',
   'same-origin request required': '请求来源校验未通过，请通过同源页面访问',
 }
-export async function api(path: string, options: RequestInit & { observation?: ObservationCause } = {}): Promise<unknown> {
-  const { observation, ...fetchOptions } = options
+export async function api(path: string, options: RequestInit & { observation?: ObservationCause; timeoutMs?: number } = {}): Promise<unknown> {
+  const { observation, timeoutMs = 12000, ...fetchOptions } = options
   const observed = startObservation(path, options.method ?? 'GET', observation)
   let observedStatus = 0, ticket: string | null = null
   const timeout = new AbortController()
-  const timer = setTimeout(() => timeout.abort(), 12_000)
+  const timer = setTimeout(() => timeout.abort(), Math.max(1000, Math.min(90000, timeoutMs)))
   const signal = options.signal ? AbortSignal.any([options.signal, timeout.signal]) : timeout.signal
   try {
     const response = await fetch(`/api/commerce-demo${path}`, {

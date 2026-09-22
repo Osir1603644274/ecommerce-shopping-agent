@@ -33,4 +33,4 @@ spring:
         - id: trade-owner
           uri: lb://commerce-trade
           predicates:
-            - Path=/api/auth/**,/api/identity/**,/api/orders/**,/api/inventory/**,/api/payments/**,/api/flash-sales/**,/api/coupons/**,/api/memory/**,/api/admin/fulfillment/**,/api/health
+            - Path=/api/auth/**,/api/identity/**,/api/orders/**,/api/inventory/**,/api/payments/**,/api/after-sales/**,/api/support/**,/api/admin/support-simulator/**,/api/flash-sales/**,/api/coupons/**,/api/memory/**,/api/admin/fulfillment/**,/api/health

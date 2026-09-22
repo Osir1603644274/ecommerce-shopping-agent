@@ -1,0 +1,40 @@
+{
+  "source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "retrievedDate": "2026-09-19",
+  "currency": "USD",
+  "perTokens": 1000000,
+  "model": "DeepSeek-V4.1-Flash",
+  "acceptedAlias": "deepseek-v4-flash",
+  "rates": {
+    "offPeak": {
+      "cacheHit": 0.003,
+      "cacheMiss": 0.15,
+      "output": 0.6
+    },
+    "peak": {
+      "cacheHit": 0.006,
+      "cacheMiss": 0.3,
+      "output": 1.2
+    }
+  },
+  "peakWindowUTC": {
+    "weekdays": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "hours": [
+      [
+        1,
+        4
+      ],
+      [
+        6,
+        10
+      ]
+    ]
+  },
+  "scope": "Official direct API list-price estimate only, not a settled invoice. Missing cache usage or price-window ambiguity must remain explicit."
+}

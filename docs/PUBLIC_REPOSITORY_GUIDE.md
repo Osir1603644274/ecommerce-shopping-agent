@@ -1,6 +1,6 @@
 # 公开仓库与运行指南
 
-2026-09-17 公开源码更新；以下运行验收来自 2026-09-15：独立搜索、商品 / 交易服务及库存服务已完成本机验收，见[发布记录](architecture/microservices-release-20260915/RELEASE.md)。本次同步源码与精选报告，不附带私有部署清单、原始数据、数据库或权重。
+2026-09-15 本地部署更新：独立搜索、商品 / 交易服务及库存服务已完成本机验收，见[发布记录](architecture/microservices-release-20260915/RELEASE.md)。远端公开快照是否同步应以 GitHub 实际版本为准；本次本地修复没有执行 push。
 
 状态：`CURRENT_PUBLIC_GUIDE`  
 适用范围：公开仓库 <https://github.com/Osir1603644274/ecommerce-shopping-agent>。
@@ -15,8 +15,8 @@
 ## 代码边界
 
 - `agent/app`：生产 Agent 运行时。模型只能选择服务端发布的受限动作；高风险写操作移交 TransactionAgent。
-- `backend/src`：商品与交易共享构建产物，可按职责配置分别运行。MySQL 保存交易权威事实，Redis 保存缓存/会话/幂等状态，Kafka 传递 Outbox 事件，Elasticsearch 保存可重建检索投影。
-- `backend-gateway/src`：当前本机服务部署的网关；`backend-inventory/src` 为独立库存工程。
+- `backend/src`：默认 Java 模块化单体。MySQL 保存交易权威事实，Redis 保存缓存/会话/幂等状态，Kafka 传递 Outbox 事件，Elasticsearch 保存可重建检索投影。
+- `backend-gateway/src`：Spring Cloud Gateway 有界实验，不是默认部署。
 - `agent/evaluation` 与根目录 `evaluation`：离线 runner 和证据产物；生产 `agent/app` 不得反向导入。
 - `retrieval_judgment_pool_core`、`retrieval_judgment_pool_mcp`：候选池工具链，与在线 Agent 解耦。
 - `docs/legacy` 与历史兼容接口：仅复现旧本地生活/RAG 路线，不进入当前自动路由。

@@ -4,6 +4,7 @@ import { parseOrder, money } from './lib/orders'
 import type { Order } from './lib/orders'
 import { isProductId } from './lib/identity'
 import type { ProductId } from './lib/identity'
+import { CustomerAfterSales } from './CustomerAfterSales'
 
 type Balance = { itemId: ProductId; quantity: number; refundedQuantity: number; refundedMinor: number }
 type Data = { order: Order; balance: Balance[]; remainingSeconds?: number | null; fulfillment: null | { status: string; trackingNo: string | null } }
@@ -70,5 +71,6 @@ export function OrderAfterSales({ id, csrf, onPreview }: {
       {data.order.status === 'PAID' && !refundable && <p className="muted">按数量退款仅限新订单尚未派发的商品；已派发或结果未明时不能自动退款。</p>}
     </>}
     <button className="text-button" onClick={() => setRevision(v => v + 1)}>刷新履约与退款状态</button>
+    {data && <CustomerAfterSales key={id} order={data.order} balance={data.balance} csrf={csrf} received={data.fulfillment?.status === 'RECEIVED'} />}
   </section>
 }

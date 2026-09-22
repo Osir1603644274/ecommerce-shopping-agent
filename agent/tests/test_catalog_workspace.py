@@ -9,12 +9,18 @@ import pytest
 from .test_commerce_workspace import setup, client, async_test, state_key
 from app.api import commerce_controls as controls, commerce_workspace as ws
 from app.api import catalog_workspace as workflow
-from app.catalog_conversation import transition, compact_evidence
+from app.catalog_conversation import CatalogPlan, transition, compact_evidence
 from app.catalog_service import document_scope, fingerprint
 
 
 def plan(action='search', query='收纳盒', numbers=None):
     return dict(route='catalog', action=action, query=query, numbers=numbers or [], question='')
+
+
+def test_phone_is_not_a_route_and_business_is_explicit():
+    with pytest.raises(ValueError):
+        CatalogPlan(route='phone',action='search',query='手机',numbers=[],question='')
+    assert CatalogPlan(route='business',action='inspect',query='查订单',numbers=[],question='').route=='business'
 
 
 def scope(query='收纳盒'):
@@ -138,18 +144,58 @@ async def test_version_change_does_not_resume_with_different_code(setup,monkeypa
         assert 'catalogSearch' not in (await ws._load(key))
 
 
-async def prepare_client(c, store, monkeypatch, *, mode='step'):
+async def prepare_client(c, store, monkeypatch, *, mode='step', message='收纳盒', catalog_plan=None):
     from app import catalog_conversation, task_state, graph
     monkeypatch.setattr(ws.auth.settings,'catalog_workspace_enabled',True)
     monkeypatch.setattr(task_state,'get_session_task_state',AsyncMock(return_value=None))
     monkeypatch.setattr(graph,'read_task_cursor',AsyncMock(return_value=None))
-    monkeypatch.setattr(catalog_conversation,'plan_turn',AsyncMock(return_value=(plan(),{'fixture':True})))
+    monkeypatch.setattr(catalog_conversation,'plan_turn',AsyncMock(return_value=(catalog_plan or plan(),{'fixture':True})))
     result=await c.get('/api/commerce-demo/workspace')
     c.headers['X-CSRF-Token']=result.json()['csrfToken']
     key=state_key(store,':guest')
-    result=await c.post('/api/commerce-demo/workspace/run',json=dict(message='收纳盒',requestId='fixture-catalog-0001',mode=mode))
+    result=await c.post('/api/commerce-demo/workspace/run',json=dict(message=message,requestId='fixture-catalog-0001',mode=mode))
     assert result.status_code==200,result.text
     return key,result.json()['run']
+
+
+@async_test
+async def test_phone_query_enters_unified_catalog_workspace(setup, monkeypatch):
+    app,store,_=setup
+    phone_plan=plan(query='苹果手机3000元以内')
+    async with client(app) as c:
+        key,_=await prepare_client(c,store,monkeypatch,message='找一台3000元以内的苹果手机',catalog_plan=phone_plan)
+        saved=await ws._load(key+':run')
+    assert saved['workflow']=='catalog_workspace_v1'
+    assert saved['catalogPlan']['route']=='catalog' and saved['catalogPlan']['query']==phone_plan['query']
+
+
+@async_test
+async def test_business_route_leaves_catalog_and_enters_durable_agent(setup, monkeypatch):
+    from app import catalog_conversation, task_state, graph, main
+    app,store,_=setup
+    monkeypatch.setattr(ws.auth.settings,'catalog_workspace_enabled',True)
+    monkeypatch.setattr(task_state,'get_session_task_state',AsyncMock(return_value=None))
+    monkeypatch.setattr(graph,'read_task_cursor',AsyncMock(return_value=None))
+    business=dict(route='business',action='inspect',query='查询订单物流',numbers=[],question='')
+    monkeypatch.setattr(catalog_conversation,'plan_turn',AsyncMock(return_value=(business,{'fixture':True})))
+    create=AsyncMock(return_value=SimpleNamespace(debug_turn_id='debug-business',revision=1,next_stage='规划'))
+    monkeypatch.setattr(main,'create_debug_turn',create)
+    async with client(app) as c:
+        result=await c.get('/api/commerce-demo/workspace')
+        c.headers['X-CSRF-Token']=result.json()['csrfToken']
+        key=state_key(store,':guest')
+        state=await ws._load(key)
+        state['catalogSearch']={'query':'旧商品','revision':1}
+        async with ws._lock(key):
+            await ws._save(key,state)
+        result=await c.post('/api/commerce-demo/workspace/run',json=dict(
+            message='帮我查订单物流',requestId='fixture-business-0001',mode='step'))
+        assert result.status_code==200,result.text
+        saved=await ws._load(key+':run')
+        after=await ws._load(key)
+    assert 'workflow' not in saved and saved['debugId']=='debug-business'
+    assert 'catalogSearch' not in after
+    create.assert_awaited_once()
 
 
 async def finish_job(key):

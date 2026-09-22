@@ -15,12 +15,12 @@ export function CatalogExecutionGraph({ nodes }: { nodes: FlowNode[] }) {
     renderExecutionDiagram(`catalog-execution-${++serial}`, definition).then(({ svg }) => {
       if (!cancelled && host.current) {
         host.current.innerHTML = svg
-        host.current.querySelector('svg')?.setAttribute('aria-label', '普通商品实际执行架构图')
+        host.current.querySelector('svg')?.setAttribute('aria-label', '商品检索实际执行架构图')
       }
     }).catch(() => { if (!cancelled) setError(true) })
     return () => { cancelled = true }
   }, [definition])
-  return <section className="catalog-architecture" aria-label="普通商品执行架构">
+  return <section className="catalog-architecture" aria-label="商品检索执行架构">
     <h4>这轮怎样从需求到答案？</h4>
     <p>当前是固定编排：模型选择操作，程序依次执行。尚无工具返回后再由模型自由规划的 ReAct 循环。</p>
     <div ref={host} className="catalog-architecture-diagram" />

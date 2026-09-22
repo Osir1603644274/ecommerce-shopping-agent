@@ -741,7 +741,7 @@ export default function Shop() {
                           告诉我你最在意的那一点。
                         </p>
                         <div className="prompt-chips">
-                          {['推荐一部 2000 元左右的二手手机', '想找一部适合拍照的二手手机'].map(
+                          {['找一台 3000 元以内的苹果手机', '想买一个适合宿舍的小型收纳盒'].map(
                             (text) => (
                               <button
                                 disabled={busy || !workspace || receivingRun || newConversationPending}

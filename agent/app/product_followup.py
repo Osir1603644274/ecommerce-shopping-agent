@@ -66,7 +66,7 @@ async def bind_plan(plan, state, task, message):
             return {**value,'route':'product','action':'clarify',
                     'question':f'第{number}项标题尚不能明确你要适配的具体型号，请补充型号后再找{accessory}。'}
         # Rebuild the cross-category requirements. Only literal requirements in
-        # THIS utterance may survive, never the phone's earlier 2000 CNY ceiling.
+        # THIS utterance may survive, never the earlier product budget ceiling.
         requirements=[{'facet':'商品','mode':'require','value':accessory,'terms':[accessory]},
                       {'facet':'适配型号','mode':'require','value':model,'terms':[model]}]
         for r in plan.get('requirements',[]):

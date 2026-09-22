@@ -1,0 +1,57 @@
+{
+  "status": "PASSED",
+  "sameProductWorkflow": true,
+  "cases": [
+    {
+      "case": "phone_search",
+      "message": "找一台3000元以内的苹果手机",
+      "route": "catalog",
+      "workflow": "catalog_workspace_v1",
+      "action": "search",
+      "status": "completed",
+      "seconds": 18.007,
+      "nodeWorkflows": [
+        "catalog_workspace_v1",
+        null,
+        "catalog_workspace_v1",
+        null,
+        "catalog_workspace_v1",
+        "catalog_workspace_v1"
+      ],
+      "answerPublished": true
+    },
+    {
+      "case": "storage_search",
+      "message": "找适合宿舍的小型透明收纳盒",
+      "route": "catalog",
+      "workflow": "catalog_workspace_v1",
+      "action": "search",
+      "status": "completed",
+      "seconds": 13.88,
+      "nodeWorkflows": [
+        "catalog_workspace_v1",
+        null,
+        "catalog_workspace_v1",
+        null,
+        "catalog_workspace_v1",
+        "catalog_workspace_v1"
+      ],
+      "answerPublished": true
+    },
+    {
+      "case": "order_business",
+      "message": "查询我的订单",
+      "route": "business",
+      "workflow": null,
+      "action": "inspect",
+      "status": "waiting",
+      "seconds": 1.602,
+      "nodeWorkflows": [],
+      "answerPublished": false
+    }
+  ],
+  "limitations": [
+    "does not judge relevance quality",
+    "does not exercise commerce writes"
+  ]
+}

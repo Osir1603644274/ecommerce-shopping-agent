@@ -72,9 +72,9 @@ async def checkpoint(key, run, *, phase=None, seconds=0):
         run['nextStage'] = ('根据执行结果决定下一步' if run.get('catalogReact') and index in {1,2}
             else labels[PHASES[index]] if index<len(PHASES) else 'done')
         if index==len(PHASES):
-            run.update(status='completed', notice='本轮商品问答已完成' if run['catalogPlan']['route']=='product' else '本轮普通商品搜索已完成')
+            run.update(status='completed', notice='本轮商品问答已完成' if run['catalogPlan']['route']=='product' else '本轮商品搜索已完成')
         elif run.get('pauseRequested'):
-            run.update(status='paused', notice='已保存普通搜索检查点，可以继续或结束。')
+            run.update(status='paused', notice='已保存商品搜索检查点，可以继续或结束。')
         elif run['mode']=='step':
             run.update(status='waiting', notice='当前步骤已保存，可以执行下一步。')
         run['revision'] = saved['revision']+1
@@ -99,8 +99,8 @@ async def work(key, run, operation, answer):
                 catalogReact=ws.auth.settings.agent_control_runtime=='react_v1' and ws.auth.settings.agent_react_live_enabled, catalogModelDecisions=0, catalogQueries=[])
             for field in ('catalogClarification','clarification','catalogPendingDecision','catalogNext','catalogBefore','catalogNotice','presentationData','productFacts','catalogEvidenceSha256'):
                 run.pop(field,None)
-            if plan['route']=='phone':
-                # A new, server-bound phone task, never a fabricated durable resume.
+            if plan['route']=='business':
+                # Start a server-bound business task; never fabricate a durable resume.
                 run.pop('workflow',None)
                 run['message']=original_message+'\n用户补充：'+answer
                 async with worker_lock(key):
@@ -109,8 +109,8 @@ async def work(key, run, operation, answer):
                     state.pop('catalogPendingRequest',None)
                     await ws._save(key,state)
                     await save_run(key,run)
-                from .commerce_controls import work as phone_work
-                return await phone_work(key,run,'start',None)
+                from .commerce_controls import work as business_work
+                return await business_work(key,run,'start',None)
             async with worker_lock(key):
                 await save_run(key,run)
         if run['catalogPlan']['route']=='product':
@@ -214,7 +214,7 @@ async def work(key, run, operation, answer):
             if not saved or saved['id']!=run['id'] or saved['status']=='ended':
                 return
             run.update(status='paused' if isinstance(exc, AnswerPaused) else 'interrupted', revision=saved['revision']+1,
-                notice='本轮普通搜索尚未完成。可以从已保存步骤继续，或结束本轮。',
+                notice='本轮商品搜索尚未完成。可以从已保存步骤继续，或结束本轮。',
                 catalogError={'type': type(exc).__name__, 'phase': run.get('catalogPhase', 0),
                     'code': str(exc) if re.fullmatch(r'[a-z0-9_]+', str(exc)) else None,
                     'modelCall': getattr(exc, 'receipt', None),
@@ -278,7 +278,7 @@ the original decision view; no stale scope or unlisted action may be executed.
 
 
 async def product_work(key, run):
-    """Reuse checkpoints while preserving the phone presentation and TaskState."""
+    """Reuse checkpoints while preserving the bound product presentation and TaskState."""
     from ..product_followup import verify_anchor, read_facts, answer_question, bind_plan
     from ..task_state import get_session_task_state
     plan=run['catalogPlan']

@@ -502,15 +502,15 @@ async def start(body: Start, request: Request, response: Response):
                     nextStage='整理当前需求', pauseRequested=False)
                 run.pop('reference', None)
                 if body.mode == 'step':
-                    run.update(status='waiting', notice='普通搜索已准备，可以逐步执行。')
+                    run.update(status='waiting', notice='商品搜索已准备，可以逐步执行。')
             elif state.get('catalogSearch'):
-                # Public document references never cross into phone CandidateScope.
+                # Search-document references never cross into transaction state.
                 state.pop('catalogSearch', None)
                 state.pop('catalogPendingRequest', None)
                 state.update(cards=[], selection=None, reference=None, engine='web-' + secrets.token_urlsafe(24))
                 run.update(engine=state['engine'], initialCursor=None, initialStepKeys=[])
                 run.pop('reference', None)
-            if plan['route']=='phone':
+            if plan['route']=='business':
                 state.pop('productFollowup', None)
                 if state.pop('restoredConversation', False):
                     # The router has the saved user turns and must restate the

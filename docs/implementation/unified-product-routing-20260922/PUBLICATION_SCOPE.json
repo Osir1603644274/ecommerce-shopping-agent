@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "github-publication-scope-v1",
+  "date": "2026-09-22",
+  "baseCommit": "461e4d8544fb7c5139e1fe575b99d84e39b777ed",
+  "localProtectedWorktreeCommitted": false,
+  "exclusions": [
+    "runtime state",
+    "credentials",
+    "raw datasets",
+    "model weights",
+    "sealed evaluation artifacts"
+  ]
+}

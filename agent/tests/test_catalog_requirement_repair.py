@@ -82,12 +82,12 @@ def test_literal_product_query_preserves_packaging_even_if_model_drops_it(monkey
     assert receipt['literalQueryPreserved']
 
 
-def test_literal_guard_does_not_override_phone_routing_or_clarification(monkeypatch):
+def test_literal_guard_does_not_override_business_routing_or_clarification(monkeypatch):
     import asyncio,json
     from types import SimpleNamespace
     from unittest.mock import AsyncMock
     from app import catalog_conversation as c
-    for route,action in [('phone','search'),('catalog','clarify')]:
+    for route,action in [('business','inspect'),('catalog','clarify')]:
         fake=dict(route=route,action=action,query='',numbers=[],question='请补充商品')
         reply=SimpleNamespace(tool_calls=[SimpleNamespace(function=SimpleNamespace(name='select_search_action',arguments=json.dumps(fake)))])
         monkeypatch.setattr(c,'model_call',AsyncMock(return_value=(reply,{})))

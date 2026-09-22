@@ -1,6 +1,7 @@
 {
   "schemaVersion": "public-snapshot-manifest-v1",
-  "fileCount": 3432,
+  "generatedAt": "2026-09-22",
+  "fileCount": 3438,
   "files": [
     {
       "path": ".env.example",
@@ -54,8 +55,8 @@
     },
     {
       "path": "agent/app/api/catalog_workspace.py",
-      "bytes": 20155,
-      "sha256": "4b86017ae1205e27250a2e94dac195ab793ed579bb6e8716705367591a545928"
+      "bytes": 20169,
+      "sha256": "d742cfc734d34041bce523003b989735f097167b4837aad2024e1adb79b2ea11"
     },
     {
       "path": "agent/app/api/commerce_capabilities.py",
@@ -65,7 +66,7 @@
     {
       "path": "agent/app/api/commerce_controls.py",
       "bytes": 35946,
-      "sha256": "4558f6814d3168a2ff080e91f20b8a4e1ff5aaa0d07c8d8589b07a965b01a78d"
+      "sha256": "2ce31fdc5d3edb978984bf4bd98e2a2e58e5729c157f876e4ca872ae6f6df445"
     },
     {
       "path": "agent/app/api/commerce_demo.py",
@@ -134,8 +135,8 @@
     },
     {
       "path": "agent/app/catalog_conversation.py",
-      "bytes": 29296,
-      "sha256": "2d3b272ab6289e4ca20bc41e8fc948d7cd851c1b323ce93e5607d95a548023e1"
+      "bytes": 29079,
+      "sha256": "b686f15a88a3fbbb34a04073b49792f2f0d4a7248f5321fc0d2667d5db4331f4"
     },
     {
       "path": "agent/app/catalog_data.py",
@@ -679,8 +680,8 @@
     },
     {
       "path": "agent/app/main.py",
-      "bytes": 135804,
-      "sha256": "36d466b449cf8901a5de1a10dd1f0f01c0c6344256458e4e8a07c42b20aefe18"
+      "bytes": 136026,
+      "sha256": "6f0c9b7e33e100411e979108676f9cd81c97e13d56fbb0ca9e3da70edf680178"
     },
     {
       "path": "agent/app/mcp_client.py",
@@ -824,8 +825,8 @@
     },
     {
       "path": "agent/app/product_followup.py",
-      "bytes": 9130,
-      "sha256": "0ceec646d6e38a9ef5a881950cdf81cac0a62627fcc5532249be36f066fd609a"
+      "bytes": 9128,
+      "sha256": "97a0bd533551b5e0b992255309e5c575ceceb8f00b9680ed9223473dff86e1ff"
     },
     {
       "path": "agent/app/product_knowledge/__init__.py",
@@ -9544,8 +9545,8 @@
     },
     {
       "path": "agent/tests/test_catalog_requirement_repair.py",
-      "bytes": 7078,
-      "sha256": "fcd5b4196ba6b9be384edee6f9ba4ad01f376b637edab23c35e724bed3f6f61f"
+      "bytes": 7085,
+      "sha256": "98392fdffd0e01841cf9dd1dd4fb53cc7f75fa3a644e77737ad49e1ef9efc887"
     },
     {
       "path": "agent/tests/test_catalog_search_integration.py",
@@ -9559,8 +9560,8 @@
     },
     {
       "path": "agent/tests/test_catalog_workspace.py",
-      "bytes": 12272,
-      "sha256": "859433e210c4c0402d78b7a399438a6164e12364734ed0a6e04c488135760141"
+      "bytes": 14796,
+      "sha256": "a051b34e84ac54e2b5aaa8aafaee8504e4fcc907a7b1a4a07ae85133aab5f6b5"
     },
     {
       "path": "agent/tests/test_chat_endpoint.py",
@@ -10249,8 +10250,8 @@
     },
     {
       "path": "agent/tests/test_product_published_scope.py",
-      "bytes": 2394,
-      "sha256": "272af2665dfb701955b828017bd3330d2cc315b4cfd228d05dda84254503234c"
+      "bytes": 2991,
+      "sha256": "d637dd63a20a1d8c72f362556aa0195141f267cdc296d4408a54dda93a72233f"
     },
     {
       "path": "agent/tests/test_product_qrel_review_workflow.py",
@@ -13983,6 +13984,31 @@
       "sha256": "10abe5f1fd7983938cfc3d3a009e7e594c5a1748e99d9b810104259293c5fa30"
     },
     {
+      "path": "docs/implementation/unified-product-routing-20260922/evidence/attempt002/CONTRACT.json",
+      "bytes": 1393,
+      "sha256": "5349a93c049b1ff62b3055f8d7bfe98db5d91544c0f27f77e241706893a2c2bd"
+    },
+    {
+      "path": "docs/implementation/unified-product-routing-20260922/evidence/attempt002/RESULTS.json",
+      "bytes": 1386,
+      "sha256": "f1400b3a717ed29363faf018698ad198a45471cb0a8e7d5975e7a0ce9965d6dc"
+    },
+    {
+      "path": "docs/implementation/unified-product-routing-20260922/evidence/attempt002/SHA256SUMS.txt",
+      "bytes": 159,
+      "sha256": "1ac4f5a29cd4ad2e01a51b80a2d92ad18b29e0c899f716fdf5d875d54bb67842"
+    },
+    {
+      "path": "docs/implementation/unified-product-routing-20260922/PUBLICATION_SCOPE.json",
+      "bytes": 332,
+      "sha256": "a139f80161fdb6fb379ffcd378acc6b33022139cfe1430427d9bcab2ba0b402f"
+    },
+    {
+      "path": "docs/implementation/unified-product-routing-20260922/REPORT.md",
+      "bytes": 2012,
+      "sha256": "9cc78f01a1fe7412713d1441aeddc3dd94d22d8060780d7004e2c7f64e989728"
+    },
+    {
       "path": "docs/learning-notes/2026-09-07-PRODUCT-KNOWLEDGE-MCP.md",
       "bytes": 15580,
       "sha256": "48fc0cb3c630083f96b4a8c64bb6b54695dbb752de6a2a3d9841969d83e7071f"
@@ -15200,7 +15226,7 @@
     {
       "path": "frontend/src/CatalogExecutionGraph.tsx",
       "bytes": 1593,
-      "sha256": "0cc9a3f3b39e08f5c4ad58fd5ab8facdaa2b26c2b19ac6533a79d29a995fb848"
+      "sha256": "8d0e3003e1c2b4eb92b48c17948a73b9c82c6d53b8c4a5b57e4755a18ee78f02"
     },
     {
       "path": "frontend/src/ChatHistoryRail.tsx",
@@ -15435,7 +15461,7 @@
     {
       "path": "frontend/src/Shop.tsx",
       "bytes": 49951,
-      "sha256": "9b741e1291e1514e755b789639906335f51e76f43c1c5f836d828a5ef2906ebb"
+      "sha256": "ea6526b2f493c841c26825fb0bd4b877c9e03b9c7240e544d49a5ba6d4373a76"
     },
     {
       "path": "frontend/src/ShopDrawer.tsx",
@@ -15614,8 +15640,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 8903,
-      "sha256": "61abec5b3653cc7314ba973dc1e10f9be87dd23c82cf3bbc0af379c9c14f230e"
+      "bytes": 7844,
+      "sha256": "b2597cfc6947840d1ee652ec59188c3527f5388b664a37d91f56cc936a706d0e"
     },
     {
       "path": "retrieval_judgment_pool_core/__init__.py",
@@ -16654,8 +16680,8 @@
     },
     {
       "path": "scripts/merged-commerce.ps1",
-      "bytes": 16253,
-      "sha256": "e462e26724367bb5d36fd3248f26ee9ac10c6d24e8dfdec1b4c217aac445bc37"
+      "bytes": 16326,
+      "sha256": "d0a3fade93a6b5176cf197a696e7bf6c137bf01fc3aa15af560c39ab75739995"
     },
     {
       "path": "scripts/messaging-integration-20260914/final_audit.py",
@@ -17136,6 +17162,11 @@
       "path": "scripts/verify_session_refresh_20260914.py",
       "bytes": 4365,
       "sha256": "2fa7cca3efc40587b038fe9ced40da71164bacfa1db7eb91e2374b31e9015c76"
+    },
+    {
+      "path": "scripts/verify_unified_product_routing_20260922.py",
+      "bytes": 7109,
+      "sha256": "bc22234678e92a4d3db48e7588768e26b1ebe085da1734a97a19e032013a1428"
     },
     {
       "path": "scripts/verify_workspace_controls.py",

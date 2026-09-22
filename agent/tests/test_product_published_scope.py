@@ -32,13 +32,24 @@ def test_phone_vector_warmup_uses_same_published_scope():
     assert client.get.call_args.kwargs['params']['catalogVersion']=='frozen-phone'
 
 
-@pytest.mark.parametrize('enabled',[False,True])
-def test_full_catalog_phone_search_is_explicit_and_opt_in(enabled):
+def test_unified_catalog_does_not_warm_legacy_phone_vectors():
+    from app import main
+    with (patch.object(main.settings,'catalog_workspace_enabled',True),
+          patch.object(main.settings,'product_retrieval_mode','hybrid'),
+          patch.object(main.settings,'product_vector_backend','local')):
+        assert not main._needs_legacy_product_vector_warmup()
+    with (patch.object(main.settings,'catalog_workspace_enabled',False),
+          patch.object(main.settings,'product_retrieval_mode','hybrid'),
+          patch.object(main.settings,'product_vector_backend','local')):
+        assert main._needs_legacy_product_vector_warmup()
+
+
+def test_all_product_searches_share_catalog_route_contract():
     from app import catalog_conversation as conversation
     call=AsyncMock(side_effect=RuntimeError('captured'))
-    with (patch.object(conversation.settings,'commerce_workspace_external_catalog_enabled',enabled),
-          patch.object(conversation,'model_call',call),pytest.raises(RuntimeError,match='captured')):
-        asyncio.run(conversation.plan_turn('在全量目录中搜索手机',{}))
+    with patch.object(conversation,'model_call',call),pytest.raises(RuntimeError,match='captured'):
+        asyncio.run(conversation.plan_turn('找一台3000元左右的苹果手机',{}))
     prompt=call.call_args.args[0][0]['content']
-    assert ('用户明确要求在全量目录' in prompt)==enabled
-    assert ('手机本体不可误送catalog' in prompt)==(not enabled)
+    routes=call.call_args.kwargs['tools'][0]['function']['parameters']['properties']['route']['enum']
+    assert routes==['business','catalog','product']
+    assert 'catalog用于所有商品检索' in prompt and 'phone用于' not in prompt

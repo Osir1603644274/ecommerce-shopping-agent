@@ -165,8 +165,9 @@ if($Action -eq 'start') {
     if($LASTEXITCODE -ne 0 -or $dockerRedis -ne $agentRedis){throw 'Agent Redis differs from Java Docker Redis'}
     $env:AGENT_TRANSACTION_ENABLED='true'
     $env:COMMERCE_DEMO_ENABLED='true'
-    # Public documents have their own read-only workflow; phone commerce stays intact.
-    # Rollback: restart-agent -DisableCatalogSearch.
+    # Every product category uses the same catalog workspace. Transaction and
+    # after-sales requests continue through the durable business Agent.
+    # Emergency rollback: restart-agent -DisableCatalogSearch.
     $env:CATALOG_WORKSPACE_ENABLED=if($DisableCatalogSearch){'false'}else{'true'}
     $env:CATALOG_WORKSPACE_FAST_ENABLED=if($ExactCatalogSearch){'false'}else{'true'}
     $env:CATALOG_WORKSPACE_FAST_INDEX_VERSION=[string]$CatalogIndexVersion

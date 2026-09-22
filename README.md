@@ -1,7 +1,5 @@
 # 电商导购 Agent 与 Java 交易后端
 
-> **2026-09-22 客服与售后更新**：公开源码已同步售前问答、订单履约查询、退款 / 退货 / 同款同规格换货、工单、独立模拟器及对应测试。运行时凭据、原始评测 evidence 和本机数据库不随仓库发布。
-
 **数据与评测入口：[我的数据集与 Benchmark](datasets/README.md)** — [完整资产总账](datasets/ASSETS.md)含商品、单轮、多轮 Agent、跨会话记忆和外部历史材料；[全部位置](datasets/ALL_LOCATIONS.md)可查跨盘来源与候选。
 
 这是一个可运行的全栈电商 Agent 工程：Python/FastAPI 负责多轮导购、上下文与受约束 ReAct，Java/Spring Boot 负责身份、商品、库存、订单、支付和事件一致性。高风险写操作不交给模型自由决定，而是经过服务端候选范围校验、JWT 身份校验、精确二次确认与幂等交易接口。
@@ -13,18 +11,6 @@
 
 当前界面以聊天为中心，支持正文 SSE 增量、停止与继续、历史回看；商品交易与后端学习详情按需展开。[流式输出与页面验收](docs/architecture/chat-streaming-20260915/ACCEPTANCE.md)。
 此前版本的[全链路演示录像](docs/assets/demo/commerce-demo-walkthrough.gif)保留作历史材料，界面以当前截图为准。
-
-
-## 客服与售后模块
-
-当前源码包含客服多轮对话、订单和物流事实查询、退款、退货、同款同规格换货、工单升级与独立业务模拟器。模型负责理解和规划；Java/MySQL 保存订单、库存、履约和售后权威状态，动作执行必须返回可核验回执。
-
-- 接口合同：[API_CONTRACT.md](docs/implementation/customer-support-20260919/API_CONTRACT.md)
-- 交付边界：[DELIVERY.md](docs/implementation/customer-support-20260919/DELIVERY.md)
-- 评测说明：[EVALUATION.md](docs/implementation/customer-support-20260919/EVALUATION.md)
-- 运维入口：[OPERATIONS.md](docs/implementation/customer-support-20260919/OPERATIONS.md)
-
-人工复核状态以文档记录为准；自动判分结果不表述为人工金标。
 
 ## 可运行主链
 

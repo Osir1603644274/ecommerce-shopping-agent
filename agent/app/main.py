@@ -307,6 +307,15 @@ def _durable_ownership_rejected_response(
         ),
     )
 
+def _needs_legacy_product_vector_warmup() -> bool:
+    """The unified catalog owns product retrieval; warm only the legacy path."""
+    return (
+        not settings.catalog_workspace_enabled
+        and settings.product_retrieval_mode == "hybrid"
+        and settings.product_vector_backend == "local"
+    )
+
+
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     """Build optional in-memory indexes before a flagged canary accepts traffic."""
@@ -358,10 +367,7 @@ async def lifespan(_app: FastAPI):
             memory_worker_task = asyncio.create_task(
                 run_memory_candidate_worker(memory_worker_stop)
             )
-        if (
-            settings.product_retrieval_mode == "hybrid"
-            and settings.product_vector_backend == "local"
-        ):
+        if _needs_legacy_product_vector_warmup():
             try:
                 from .domains.ecommerce.tools import warm_local_product_vector_cache
 

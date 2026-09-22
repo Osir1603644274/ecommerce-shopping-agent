@@ -1,0 +1,35 @@
+{
+  "status": "FROZEN_BEFORE_CALLS",
+  "baseUrl": "http://127.0.0.1:5173",
+  "cases": [
+    {
+      "id": "phone_search",
+      "message": "找一台3000元以内的苹果手机",
+      "expectedRoute": "catalog",
+      "execute": true
+    },
+    {
+      "id": "storage_search",
+      "message": "找适合宿舍的小型透明收纳盒",
+      "expectedRoute": "catalog",
+      "execute": true
+    },
+    {
+      "id": "order_business",
+      "message": "查询我的订单",
+      "expectedRoute": "business",
+      "execute": false
+    }
+  ],
+  "sourceSha256": {
+    "agent/app/catalog_conversation.py": "b686f15a88a3fbbb34a04073b49792f2f0d4a7248f5321fc0d2667d5db4331f4",
+    "agent/app/api/commerce_controls.py": "2ce31fdc5d3edb978984bf4bd98e2a2e58e5729c157f876e4ca872ae6f6df445",
+    "agent/app/api/catalog_workspace.py": "d742cfc734d34041bce523003b989735f097167b4837aad2024e1adb79b2ea11",
+    "agent/app/product_followup.py": "97a0bd533551b5e0b992255309e5c575ceceb8f00b9680ed9223473dff86e1ff",
+    "agent/app/main.py": "6f0c9b7e33e100411e979108676f9cd81c97e13d56fbb0ca9e3da70edf680178",
+    "frontend/src/Shop.tsx": "865c5e60ceb4f6905a6a81ffa214eaaafbe00f30c63229b7d531c2c1075d752d",
+    "frontend/src/CatalogExecutionGraph.tsx": "8d0e3003e1c2b4eb92b48c17948a73b9c82c6d53b8c4a5b57e4755a18ee78f02"
+  },
+  "commerceWrites": false,
+  "qualityClaim": "routing_and_workflow_acceptance_only"
+}

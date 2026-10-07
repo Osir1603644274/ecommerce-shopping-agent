@@ -45,6 +45,8 @@ def assess(title,members,requirements):
                 reason='设备名也是所需配件的适配对象，不能仅凭子串判为整机'
             elif yes and not no:status='conflict';reason='标题明确包含排除项：'+yes[0]
             elif no and not yes:status='supported';reason='标题否定描述：'+no[0]
+        elif r['facet']=='商品' and r['mode']=='require' and yes and not no:
+            reason='标题词面出现：'+yes[0]+'；商品主体待核验'
         elif yes and not no:
             status='supported';reason='标题出现：'+yes[0]
         elif no and not yes:
@@ -58,18 +60,22 @@ def assess(title,members,requirements):
             found={k for k,aliases in MATERIALS.items() if any(occurrences(title,a)[0] for a in aliases)}
             if expected and found and not expected&found:
                 status='conflict';reason='标题明确写有其他材质'
-        evidence.append({'facet':r['facet'],'mode':r['mode'],'value':r['value'],'status':status,'reason':reason})
+        item={'facet':r['facet'],'mode':r['mode'],'value':r['value'],'status':status,'reason':reason}
+        if r['facet']=='商品' and r['mode']=='require' and yes and not no:
+            item['lexicalHint']=True
+        evidence.append(item)
     return evidence
 
 def selection_key(g):
     evidence=g['constraintEvidence']
     # Subject / brand evidence takes precedence over incidental attributes.
     subject=sum(e['status']=='supported' for e in evidence if e['mode']=='require' and e['facet']=='商品')
+    subject_hint=sum(bool(e.get('lexicalHint')) for e in evidence if e['mode']=='require' and e['facet']=='商品')
     core=sum(e['status']=='supported' for e in evidence if e['mode']=='require' and e['facet'] in {'品牌','型号'})
     hard=sum(e['status']=='supported' for e in evidence if e['mode'] in {'require','exclude'})
     soft=sum(e['status']=='supported' for e in evidence if e['mode']=='prefer')
     soft-=sum(e['status']=='conflict' for e in evidence if e['mode']=='avoid')
-    return (-subject,-core,-hard,-soft)
+    return (-subject,-subject_hint,-core,-hard,-soft)
 
 
 def select_groups(groups,requirements):

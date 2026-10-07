@@ -9,7 +9,7 @@ import pytest
 from .test_commerce_workspace import setup, client, async_test, state_key
 from app.api import commerce_controls as controls, commerce_workspace as ws
 from app.api import catalog_workspace as workflow
-from app.catalog_conversation import CatalogPlan, transition, compact_evidence
+from app.catalog_conversation import CatalogPlan, expand_intent, transition, compact_evidence
 from app.catalog_service import document_scope, fingerprint
 
 
@@ -20,7 +20,10 @@ def plan(action='search', query='收纳盒', numbers=None):
 def test_phone_is_not_a_route_and_business_is_explicit():
     with pytest.raises(ValueError):
         CatalogPlan(route='phone',action='search',query='手机',numbers=[],question='')
-    assert CatalogPlan(route='business',action='inspect',query='查订单',numbers=[],question='').route=='business'
+    plan = CatalogPlan(intent='business_request',query='查订单',numbers=[],question='')
+    assert expand_intent(plan.model_dump())['route']=='business'
+    schema = CatalogPlan.model_json_schema()['properties']
+    assert 'intent' in schema and 'route' not in schema and 'action' not in schema
 
 
 def scope(query='收纳盒'):
@@ -145,11 +148,13 @@ async def test_version_change_does_not_resume_with_different_code(setup,monkeypa
 
 
 async def prepare_client(c, store, monkeypatch, *, mode='step', message='收纳盒', catalog_plan=None):
-    from app import catalog_conversation, task_state, graph
+    from app import guide_interpreter, task_state, graph
+    from tests.fake_redis import FakeRedis
     monkeypatch.setattr(ws.auth.settings,'catalog_workspace_enabled',True)
-    monkeypatch.setattr(task_state,'get_session_task_state',AsyncMock(return_value=None))
+    monkeypatch.setattr(task_state,'_client',FakeRedis())
+    task_state._task_locks.clear();task_state._session_locks.clear()
     monkeypatch.setattr(graph,'read_task_cursor',AsyncMock(return_value=None))
-    monkeypatch.setattr(catalog_conversation,'plan_turn',AsyncMock(return_value=(catalog_plan or plan(),{'fixture':True})))
+    monkeypatch.setattr(guide_interpreter,'plan_turn',AsyncMock(return_value=(catalog_plan or plan(),{'fixture':True})))
     result=await c.get('/api/commerce-demo/workspace')
     c.headers['X-CSRF-Token']=result.json()['csrfToken']
     key=state_key(store,':guest')
@@ -171,13 +176,15 @@ async def test_phone_query_enters_unified_catalog_workspace(setup, monkeypatch):
 
 @async_test
 async def test_business_route_leaves_catalog_and_enters_durable_agent(setup, monkeypatch):
-    from app import catalog_conversation, task_state, graph, main
+    from app import guide_interpreter, task_state, graph, main
+    from tests.fake_redis import FakeRedis
     app,store,_=setup
     monkeypatch.setattr(ws.auth.settings,'catalog_workspace_enabled',True)
-    monkeypatch.setattr(task_state,'get_session_task_state',AsyncMock(return_value=None))
+    monkeypatch.setattr(task_state,'_client',FakeRedis())
+    task_state._task_locks.clear();task_state._session_locks.clear()
     monkeypatch.setattr(graph,'read_task_cursor',AsyncMock(return_value=None))
     business=dict(route='business',action='inspect',query='查询订单物流',numbers=[],question='')
-    monkeypatch.setattr(catalog_conversation,'plan_turn',AsyncMock(return_value=(business,{'fixture':True})))
+    monkeypatch.setattr(guide_interpreter,'plan_turn',AsyncMock(return_value=(business,{'fixture':True})))
     create=AsyncMock(return_value=SimpleNamespace(debug_turn_id='debug-business',revision=1,next_stage='规划'))
     monkeypatch.setattr(main,'create_debug_turn',create)
     async with client(app) as c:
@@ -213,8 +220,9 @@ async def test_real_workspace_steps_checkpoint_reuse_and_no_commerce_cards(setup
         return await original_get(key)
     monkeypatch.setattr(store,'get',yielding_get)
     search=AsyncMock(return_value=scope())
-    monkeypatch.setattr(workflow,'get_catalog_service',lambda:SimpleNamespace(search=search))
-    monkeypatch.setattr(workflow,'answer_turn',AsyncMock(return_value=('候选1是收纳盒，价格未知。',{'fixture':True})))
+    from app import guide_execution
+    monkeypatch.setattr(guide_execution,'get_catalog_service',lambda:SimpleNamespace(search=search))
+    monkeypatch.setattr(guide_execution,'answer_turn',AsyncMock(return_value=('候选1是收纳盒，价格未知。',{'fixture':True})))
     async with client(app) as c:
         key,run=await prepare_client(c,store,monkeypatch)
         for _ in range(4):
@@ -223,9 +231,13 @@ async def test_real_workspace_steps_checkpoint_reuse_and_no_commerce_cards(setup
             await finish_job(key)
             run=(await c.get('/api/commerce-demo/workspace')).json()['run']
         assert run['status']=='completed' and search.await_count==1
+        assert (await ws._load(key+':run'))['catalogProviderQuery']=='收纳盒'
+        assert search.call_args.kwargs['retrieval_query']=='收纳盒'
+        assert run['nodes'][0]['detail']['parseAttempts']==1
         state=await ws._load(key)
         assert state['cards']==[] and state['selection'] is None and state['reference'] is None
-        assert state['catalogSearch']['scope']['scopeId']==scope()['scopeId']
+        assert state['catalogScope']['scopeId']==scope()['scopeId']
+        assert 'catalogSearch' not in state
         assert len([m for m in state['messages'] if m['role']=='assistant'])==1
         # Re-enter publication after a crash: the same answer is not appended twice.
         saved=await ws._load(key+':run');saved['catalogPhase']=3;saved['status']='running'
@@ -233,6 +245,106 @@ async def test_real_workspace_steps_checkpoint_reuse_and_no_commerce_cards(setup
         assert len([m for m in (await ws._load(key))['messages'] if m['role']=='assistant'])==1
         bad=await c.post('/api/commerce-demo/workspace/selection',json={'productId':'kuaisearch:1'})
         assert bad.status_code in {409,422}
+
+
+@async_test
+async def test_undo_new_scope_uses_the_shared_candidate_answer_path(setup, monkeypatch):
+    from app import guide_interpreter, guide_execution
+    from app.catalog_conversation import apply_subject_review, render_documents
+    app,store,_=setup
+    required=[dict(facet='商品',mode='require',value='收纳盒',terms=[])]
+    def search_scope(query, **kwargs):
+        base=scope(query)
+        base['sources'][0]['metadata'][1]['fields']['title']['value']='收纳盒贴纸'
+        return document_scope(query,base['sources'],'b'*64,required)
+    search=AsyncMock(side_effect=search_scope)
+    monkeypatch.setattr(guide_execution,'get_catalog_service',lambda:SimpleNamespace(search=search))
+    seen=[]
+    async def reviewed_answer(message, plan, current):
+        seen.append(plan['action'])
+        reviews=[dict(number=g['number'],relation='other' if '贴纸' in g['title'] else 'target',
+                      quote='贴纸' if '贴纸' in g['title'] else '收纳盒',
+                      reason='商品主体',conflicts=[]) for g in current['scope']['groups']]
+        reviewed=apply_subject_review(current['scope'],reviews)
+        answer=('已撤销上次需求修改。\n\n' if plan['action']=='undo' else '')+render_documents(reviewed)
+        return answer, {'scopeReview':{'baseScopeId':current['scope']['scopeId'],'reviews':reviews}}, reviewed
+    monkeypatch.setattr(workflow,'answer_catalog',reviewed_answer)
+
+    async with client(app) as c:
+        key,run=await prepare_client(c,store,monkeypatch,catalog_plan={
+            **plan(), 'requirements':required})
+        async def finish(run):
+            for _ in range(4):
+                response=await c.post('/api/commerce-demo/workspace/control/step',
+                    json=dict(runId=run['id'],revision=run['revision']))
+                assert response.status_code==200,response.text
+                await finish_job(key)
+                run=(await c.get('/api/commerce-demo/workspace')).json()['run']
+            assert run['status']=='completed'
+            return run
+        await finish(run)
+        for action,query,request_id in (
+            ('refine','透明收纳盒','fixture-catalog-refine-0002'),
+            ('undo','','fixture-catalog-undo-0003'),
+        ):
+            monkeypatch.setattr(guide_interpreter,'plan_turn',AsyncMock(
+                return_value=({**plan(action,query),'requirements':required},{'fixture':True})))
+            response=await c.post('/api/commerce-demo/workspace/run',
+                json=dict(message='修改需求' if action=='refine' else '撤销上次修改',
+                          requestId=request_id,mode='step'))
+            assert response.status_code==200,response.text
+            await finish(response.json()['run'])
+        saved=await ws._load(key+':run')
+        assert seen==['search','refine','undo']
+        assert saved['catalogAnswerCall']['scopeReview']['baseScopeId']
+        assert saved['catalogProviderQuery']=='收纳盒'
+        assert (await ws._load(key))['catalogScope']['scopeId']==saved['catalogNext']['scope']['scopeId']
+        assert saved['catalogNext']['scope']['subjectReviewBaseScopeId']
+        assert all('贴纸' not in g['title'] for g in saved['catalogNext']['scope']['groups'])
+        assert '贴纸' not in saved['catalogAnswer']
+        assert saved['catalogAnswer'].count('同标题收纳盒')==2
+
+
+@async_test
+async def test_noop_undo_keeps_existing_scope_cards_and_reference(setup,monkeypatch):
+    from app import guide_interpreter, guide_execution
+    app,store,_=setup
+    search=AsyncMock(return_value=scope())
+    monkeypatch.setattr(guide_execution,'get_catalog_service',lambda:SimpleNamespace(search=search))
+    monkeypatch.setattr(guide_execution,'answer_turn',AsyncMock(return_value=('候选。',None)))
+    async with client(app) as c:
+        key,run=await prepare_client(c,store,monkeypatch)
+        for _ in range(4):
+            response=await c.post('/api/commerce-demo/workspace/control/step',
+                json=dict(runId=run['id'],revision=run['revision']))
+            assert response.status_code==200,response.text
+            await finish_job(key)
+            run=(await c.get('/api/commerce-demo/workspace')).json()['run']
+        before=await ws._load(key)
+        before.update(cards=[{'title':'旧卡片'}],selection={'number':1},reference={'number':1})
+        async with ws._lock(key):
+            await ws._save(key,before)
+        answer=AsyncMock()
+        monkeypatch.setattr(workflow,'answer_catalog',answer)
+        monkeypatch.setattr(guide_interpreter,'plan_turn',AsyncMock(
+            return_value=(plan('undo',''),{'fixture':True})))
+        response=await c.post('/api/commerce-demo/workspace/run',json=dict(
+            message='撤销上次修改',requestId='fixture-catalog-noop-undo-0002',mode='step'))
+        assert response.status_code==200,response.text
+        run=response.json()['run']
+        for _ in range(4):
+            response=await c.post('/api/commerce-demo/workspace/control/step',
+                json=dict(runId=run['id'],revision=run['revision']))
+            assert response.status_code==200,response.text
+            await finish_job(key)
+            run=(await c.get('/api/commerce-demo/workspace')).json()['run']
+        after=await ws._load(key)
+        assert after['catalogScope']['scopeId']==before['catalogScope']['scopeId']
+        assert after['cards']==before['cards']
+        assert after['selection']==before['selection']
+        assert after['reference']==before['reference']
+        assert search.await_count==1
+        answer.assert_not_awaited()
 
 
 @async_test
@@ -245,12 +357,13 @@ async def test_prepare_crash_recovery_is_idempotent(setup,monkeypatch):
         monkeypatch.setattr(workflow,'checkpoint',AsyncMock(side_effect=RuntimeError('crash_after_state_write')))
         await workflow.work(key,run,'step',None)
         after=await ws._load(key)
-        assert after['catalogSearch']['revision']==1
+        assert after['catalogPendingRequest']=='fixture-catalog-0001'
+        assert 'catalogSearch' not in after
         monkeypatch.setattr(workflow,'checkpoint',original)
         run=await ws._load(key+':run');run['status']='running'
         await workflow.work(key,run,'continue',None)
         after=await ws._load(key)
-        assert after['catalogSearch']['revision']==1 and len(after['catalogSearch']['history'])==1
+        assert after['catalogPendingRequest']=='fixture-catalog-0001' and 'catalogSearch' not in after
         assert (await ws._load(key+':run'))['catalogPhase']==1
 
 
@@ -258,10 +371,11 @@ async def test_prepare_crash_recovery_is_idempotent(setup,monkeypatch):
 async def test_pause_checkpoint_and_cross_owner_control(setup,monkeypatch):
     app,store,_=setup
     entered=asyncio.Event();release=asyncio.Event()
-    async def search(query):
+    async def search(query, **kwargs):
         entered.set();await release.wait();return scope(query)
-    monkeypatch.setattr(workflow,'get_catalog_service',lambda:SimpleNamespace(search=search))
-    monkeypatch.setattr(workflow,'answer_turn',AsyncMock(return_value=('候选，价格未知。',None)))
+    from app import guide_execution
+    monkeypatch.setattr(guide_execution,'get_catalog_service',lambda:SimpleNamespace(search=search))
+    monkeypatch.setattr(guide_execution,'answer_turn',AsyncMock(return_value=('候选，价格未知。',None)))
     async with client(app) as a,client(app) as b:
         key,run=await prepare_client(a,store,monkeypatch,mode='continuous')
         await asyncio.wait_for(entered.wait(),3)

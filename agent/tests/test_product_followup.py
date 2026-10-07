@@ -131,13 +131,15 @@ async def test_price_question_keeps_local_simulated_provenance(resolved,monkeypa
 
 @async_test
 async def test_product_questions_checkpoint_without_replacing_phone_cards(setup,resolved,monkeypatch):
-    from app import task_state, graph
+    from app import guide_interpreter, task_state, graph
     from app.api import commerce_workspace as ws
+    from tests.fake_redis import FakeRedis
     app,store,_=setup
     monkeypatch.setattr(ws.auth.settings,'catalog_workspace_enabled',True)
-    monkeypatch.setattr(task_state,'get_session_task_state',AsyncMock(return_value=SimpleNamespace(task_id='task',domain_state={})))
+    monkeypatch.setattr(task_state,'_client',FakeRedis())
+    task_state._task_locks.clear();task_state._session_locks.clear()
     monkeypatch.setattr(graph,'read_task_cursor',AsyncMock(return_value=None))
-    monkeypatch.setattr(catalog_conversation,'plan_turn',AsyncMock(return_value=(plan(),{})))
+    monkeypatch.setattr(guide_interpreter,'plan_turn',AsyncMock(return_value=(plan(),{})))
     async with client(app) as c:
         response=await c.get('/api/commerce-demo/workspace')
         c.headers['X-CSRF-Token']=response.json()['csrfToken']

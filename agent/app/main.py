@@ -501,16 +501,16 @@ def _initial_chat_domain_state(
     task_type: str,
     origin: str,
 ) -> dict[str, Any]:
-    """Create server-owned domain state before any model extraction.
+    """Create minimal server-owned state before the unified guide interpretation.
 
-    Exact product identity belongs to routing, not to the LLM.  Publishing an
-    empty validated guide for a detected category lets the same deterministic
-    seven-field compiler used by the benchmark run through the real API path.
-    Messages without a concrete category keep the minimal generic state.
+    The old category-specific shoppingGuide seed is retained only for the
+    disabled legacy path; guideV1 is populated by the shared interpreter.
     """
 
     state: dict[str, Any] = {"origin": origin, "turnCount": 0}
-    category = detect_product_category(message) if task_type == "ecommerce_guide" else None
+    category = (detect_product_category(message)
+                if task_type == "ecommerce_guide" and not settings.catalog_workspace_enabled
+                else None)
     if category is not None:
         state["shoppingGuide"] = {
             "mode": "recommend",
@@ -581,6 +581,18 @@ async def _prepare_session_task(
         if on_relation is not None:
             await on_relation(decision)
         return active, decision, True
+
+    if settings.catalog_workspace_enabled and active.task_type == "ecommerce_guide":
+        # The guide interpreter owns both intent and semantic state.  A second
+        # TaskManager model call would route the same utterance twice.
+        decision = TaskRelationDecision(
+            relation="continue_current", targetTaskId=active.task_id,
+            reason="unified guide interpretation owns the active session",
+            confidence=1.0,
+        )
+        if on_relation is not None:
+            await on_relation(decision)
+        return active, decision, False
 
     if active.task_type != requested_task_type and (
         effective_domain_hint != "auto"
@@ -1129,29 +1141,40 @@ async def _advance_debug_turn(turn: DebugTurn) -> DebugTurn:
 
         elif stage == "task_state":
             state = await _debug_load_task(turn)
-            history = await get_history(
-                turn.session_id,
-                state.task_id,
-                migrate_legacy=True,
-            )
-            updated = await _update_task_state_for_unified_harness(
-                turn.message,
-                history=history,
-                client=get_client(),
-                task_state=state,
-                on_task_state=None,
-            )
+            guided_result = None
+            if settings.catalog_workspace_enabled and state.task_type == "ecommerce_guide":
+                from .guide_runtime import execute_guide_turn
+
+                updated, guided_result = await execute_guide_turn(
+                    turn.message, state, session_id=turn.session_id,
+                    turn_id=turn.request_id,
+                )
+            else:
+                history = await get_history(
+                    turn.session_id,
+                    state.task_id,
+                    migrate_legacy=True,
+                )
+                updated = await _update_task_state_for_unified_harness(
+                    turn.message,
+                    history=history,
+                    client=get_client(),
+                    task_state=state,
+                    on_task_state=None,
+                )
             if updated.revision == state.revision:
                 raise ValueError("TaskState extractor produced no persisted update")
             state = updated
             next_stage = (
                 "final_answer"
-                if state.pending_questions or state.status != "ready"
+                if guided_result is not None or state.pending_questions or state.status != "ready"
                 else "context_pack"
             )
             updates.update({
                 "task_revision": state.revision,
             })
+            if guided_result is not None:
+                updates["final_answer"] = guided_result[0]
             key_state = _debug_task_projection(state)
 
         elif stage == "context_pack":
@@ -2179,7 +2202,7 @@ async def chat_llm(
 
         fast = (
             analyze_used_phone_fast(request.message.strip(), task_state)
-            if settings.used_phone_fast_preview_enabled
+            if settings.used_phone_fast_preview_enabled and not settings.catalog_workspace_enabled
             and task_state is not None
             else None
         )
@@ -2620,6 +2643,8 @@ async def chat_llm_durable(
             "reference_context": reference_context,
         }
         task_kwargs["domain_hint"] = PRIMARY_AGENT_DOMAIN_HINT
+        from .llm import trusted_guide_turn_id
+        task_kwargs["guide_turn_id"] = trusted_guide_turn_id()
         if resume_payload is not None:
             task_kwargs["resume"] = resume_payload
         if restart_task_id:
@@ -2888,7 +2913,7 @@ async def chat_llm_stream(
 
                     fast = (
                         analyze_used_phone_fast(request.message.strip(), task_state)
-                        if settings.used_phone_fast_preview_enabled
+                        if settings.used_phone_fast_preview_enabled and not settings.catalog_workspace_enabled
                         and task_state is not None
                         else None
                     )
@@ -2915,12 +2940,13 @@ async def chat_llm_stream(
                         # holding the preview hostage to a multi-megabyte Redis
                         # read would push the warm preview past the 1s bar and
                         # defeat 先快后完整.
-                        preview_event = await _maybe_build_preview_event(
-                            request_id,
-                            request.message.strip(),
-                            task_state,
-                            fast=fast,
-                        )
+                        preview_event = (None if settings.catalog_workspace_enabled else
+                            await _maybe_build_preview_event(
+                                request_id,
+                                request.message.strip(),
+                                task_state,
+                                fast=fast,
+                            ))
                         if preview_event is not None:
                             await queue.put(preview_event)
                         history = (

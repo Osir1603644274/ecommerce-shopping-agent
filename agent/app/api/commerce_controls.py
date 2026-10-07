@@ -231,6 +231,8 @@ async def work(key, run, operation, answer):
                 run['notice'] = '单步执行已结束'
         else:
             kwargs = dict(message=run.get('contextualMessage') or run['message'], sessionId=run['engine'], domainHint='ecommerce')
+            if run.get('guideTaskId') and operation == 'start':
+                kwargs['message'] = run['message']
             if operation == 'continue' and not run.get('presentationData'):
                 if run.get('clarification'):
                     if not answer:
@@ -250,8 +252,16 @@ async def work(key, run, operation, answer):
                         kwargs['pauseReceipt'] = {**receipt, 'state': 'paused'}
             elif run.get('reference'):
                 kwargs['referenceContext'] = run['reference']
-            data = run.get('presentationData') or (await main.chat_llm_durable(main.DurableEcommerceChatRequest(**kwargs),
-                        authorization=None, shopping_memory_session=None)).model_dump(by_alias=True, mode='json')
+            if run.get('presentationData'):
+                data = run['presentationData']
+            else:
+                from contextlib import nullcontext
+                from ..llm import bind_preinterpreted_guide_turn
+                binding = (bind_preinterpreted_guide_turn(run['requestId'])
+                           if run.get('guideTaskId') and operation == 'start' else nullcontext())
+                with binding:
+                    data = (await main.chat_llm_durable(main.DurableEcommerceChatRequest(**kwargs),
+                            authorization=None, shopping_memory_session=None)).model_dump(by_alias=True, mode='json')
             if (data.get('trace') or {}).get('status') != 'ok':
                 raise RuntimeError('durable_request_failed')
             summary = data.get('traceSummary') or {}
@@ -470,7 +480,7 @@ async def start(body: Start, request: Request, response: Response):
         if state.get('checkout') and state['checkout'].get('pending'):
             raise HTTPException(409, '请先回查未决交易')
         from .. import main
-        from ..task_state import get_session_task_state
+        from ..task_state import get_or_create_session_task_state, get_session_task_state
         from ..graph import read_task_cursor
         old = await get_session_task_state(state['engine'])
         initial = await read_task_cursor(old.task_id) if old else None
@@ -488,37 +498,44 @@ async def start(body: Start, request: Request, response: Response):
         if ref and ref.get('handle'):
             run['reference'] = dict(handle=ref['handle'], presentationMode='compact')
         if ws.auth.settings.catalog_workspace_enabled:
-            from ..catalog_conversation import plan_turn
-            plan, plan_call = await plan_turn(body.message, state)
-            from ..product_followup import bind_plan
-            plan = await bind_plan(plan, state, old, body.message)
+            from ..guide_interpreter import GuideInterpretationError, GuideRevisionConflictError, interpret_and_commit
+            if old is None or getattr(old, 'status', None) in {'completed', 'cancelled'}:
+                old, _ = await get_or_create_session_task_state(
+                    state['engine'], body.message, 'ecommerce_guide',
+                )
+            try:
+                old, plan, plan_call = await interpret_and_commit(
+                    body.message, old, workspace=state, turn_id=body.request_id,
+                )
+            except GuideRevisionConflictError as exc:
+                raise HTTPException(409, '导购状态刚被另一轮更新，请刷新后重试') from exc
+            except GuideInterpretationError as exc:
+                raise HTTPException(422, '本轮需求未能通过结构化校验，状态未更新；请换种说法再试') from exc
+            run.pop('contextualMessage', None)
             run['catalogRouteCall'] = plan_call
-            if plan['route'] in {'catalog', 'product'}:
+            run['guideTaskId'] = old.task_id
+            run['guideTaskRevision'] = old.revision
+            run['intent'] = plan['intent']
+            if plan['intent'] != 'business_request':
                 from ..catalog_service import workflow_code_binding
                 run.update(workflow='catalog_workspace_v1', catalogPlan=plan, catalogPhase=0,
-                    catalogReact=ws.auth.settings.agent_control_runtime=='react_v1' and ws.auth.settings.agent_react_live_enabled,
                     catalogCodeBinding=workflow_code_binding(),
-                    catalogBaseRevision=(state.get('catalogSearch') or {}).get('revision', 0),
                     nextStage='整理当前需求', pauseRequested=False)
                 run.pop('reference', None)
                 if body.mode == 'step':
                     run.update(status='waiting', notice='商品搜索已准备，可以逐步执行。')
-            elif state.get('catalogSearch'):
-                # Search-document references never cross into transaction state.
+            elif state.get('catalogSearch') or state.get('catalogScope'):
+                # Search-document references never grant transaction authority.
+                # Keep the session/task identity: this turn was already parsed
+                # and committed into its canonical guide state.
                 state.pop('catalogSearch', None)
+                state.pop('catalogScope', None)
                 state.pop('catalogPendingRequest', None)
-                state.update(cards=[], selection=None, reference=None, engine='web-' + secrets.token_urlsafe(24))
-                run.update(engine=state['engine'], initialCursor=None, initialStepKeys=[])
+                state.update(cards=[], selection=None, reference=None)
                 run.pop('reference', None)
-            if plan['route']=='business':
+            if plan['intent']=='business_request':
                 state.pop('productFollowup', None)
-                if state.pop('restoredConversation', False):
-                    # The router has the saved user turns and must restate the
-                    # current request. Do not revive an old CandidateScope,
-                    # checkout confirmation, cursor, or failed executor plan.
-                    query = plan.get('query', '').strip()
-                    if query:
-                        run['contextualMessage'] = query
+                state.pop('restoredConversation', False)
         if body.mode == 'step' and run.get('workflow') != 'catalog_workspace_v1':
             if len(body.message) > 500:
                 raise HTTPException(422, '单步调试每轮最多 500 字')

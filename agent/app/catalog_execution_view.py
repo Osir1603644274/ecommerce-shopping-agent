@@ -44,7 +44,8 @@ def code_reference(phase):
 
 def phase_fields(run,phase,seconds):
     plan=run['catalogPlan'];state=run.get('catalogNext') or {};scope=state.get('scope') or {}
-    action=plan['action'];searching=action in {'search','refine','new'}
+    action=plan['action'];searching=(action in {'search','refine','new','undo'}
+        and not run.get('catalogNotice') and bool(state.get('query')))
     detail={'workflow':'catalog_workspace_v1','phase':phase,'action':action,
             'scopeId':scope.get('scopeId'),'executionMode':'bounded_catalog_react' if run.get('catalogReact') else 'fixed_catalog_workflow'}
     if phase=='prepare':
@@ -52,21 +53,25 @@ def phase_fields(run,phase,seconds):
         before=previous.get('requirements') or [];after=state.get('requirements') or []
         inputs={'用户原话':run['message'],'更新前需求':previous.get('query',''), '更新前条件':requirements(before)}
         outputs={'本轮操作':ACTIONS.get(action,action),'完整需求':state.get('query',''),
-           '实际检索词':state.get('retrievalQuery',''),'当前条件':requirements(after),
+           '预计检索词':state.get('retrievalQuery',''),
+           '查询选择原因':(run.get('catalogRouteCall') or {}).get('queryDecision',{}).get('reason'),
+           '当前条件':requirements(after),
            '新增或修改条件':requirements([r for r in after if r not in before]),
            '移除或修改前条件':requirements([r for r in before if r not in after]),
            '旧候选已失效':searching,'比较编号':plan.get('numbers',[]),
-           '下一步':'检索两个来源' if searching else '复用当前候选，无新检索' if action in {'undo','compare'} else '直接处理本轮操作'}
+           '下一步':'检索两个来源' if searching else '复用当前候选，无新检索' if action=='compare' else '直接处理本轮操作'}
         route=run.get('catalogRouteCall') or {}
         detail.update(purpose=('解释需求并保存版本；后续由受限 ReAct 决策选择只读工具或回答。' if run.get('catalogReact') else '大模型解释本轮操作，程序保存需求与候选版本；此处不是模型自由循环。'),
              model=route.get('model'),modelDurationMs=route.get('durationMs'),decision=ACTIONS.get(action,action))
     elif phase=='retrieve':
         inputs={'实际调用':'CatalogService.search' if searching else '无新检索',
-             '需求':state.get('query',''),'检索词':state.get('retrievalQuery',''),
+             '需求':state.get('query',''),
+             '检索词':(run.get('catalogProviderQuery') or state.get('retrievalQuery','')) if searching else None,
+             '实际查询来源':run.get('catalogProviderQueryReason') if searching else None,
              '条件':requirements(state.get('requirements',[]))}
         outputs={'本步执行':'调用两个来源检索' if searching else '复用已保存候选' if scope else '无需候选',
            '来源返回':[{'来源':s['source'],'返回记录数':len(s.get('hits',[])),
-              '耗时秒':s.get('seconds'),'工具参数':{'query':state.get('retrievalQuery') or state.get('query'),
+              '耗时秒':s.get('seconds'),'工具参数':{'query':run.get('catalogProviderQuery') or state.get('retrievalQuery') or state.get('query'),
               'source':s['source'],'limit':10}} for s in scope.get('sources',[])] if searching else [],
            '明确条件冲突排除数':len(scope.get('excludedGroups',[])), '待主体审核候选':candidates(scope),
            '下一步':'依据原文审核并回答'}
@@ -81,6 +86,7 @@ def phase_fields(run,phase,seconds):
                 '明确硬条件冲突':[{'属性':c['facet'],'要求':c['value'],'标题原文':c['quote'],'说明':c['reason']} for c in r.get('conflicts',[])]}
                 for r in review.get('reviews',call.get('subjectReviews',[]))],
              '保留候选':candidates(scope),'排除数量':len(scope.get('semanticExcludedGroups',[])),
+             '商品主体待核验数量':len(scope.get('subjectPendingGroups',[])),
              '生成的回答':run.get('catalogAnswer'),'下一步':'保存并展示本轮结果'}
         detail.update(modelCalled=bool(call),purpose='模型依据商品原文回答，程序校验并同步候选；不是隐藏思维链。'
             if call else '返回已确定的操作结果；本步没有调用回答模型。')
@@ -96,8 +102,6 @@ def phase_fields(run,phase,seconds):
     finished=datetime.now(timezone.utc)
     if run.get('catalogReact') and phase in {'prepare','retrieve'}:
         outputs['下一步']='回到受限 ReAct 决策；不预先假定会回答或再次检索'
-    if run.get('catalogReact') and phase=='retrieve':
-        inputs['检索词']=(run.get('catalogPendingDecision') or {}).get('query') or inputs.get('检索词')
     return dict(input=clean(inputs),output=clean(outputs),detail=clean(detail),
         source=code_reference('publish' if phase=='retrieve' and not searching else phase),
         startedAt=(finished-timedelta(seconds=seconds)).isoformat(),finishedAt=finished.isoformat())

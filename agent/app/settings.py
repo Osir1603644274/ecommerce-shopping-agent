@@ -90,7 +90,7 @@ class Settings(BaseSettings):
     catalog_evidence_source: Literal["kuaisearch", "multicpr"] = "kuaisearch"
     catalog_evidence_timeout_seconds: float = Field(default=60.0, gt=0, le=300)
     catalog_evidence_answer_max_tokens: int = Field(default=512, ge=64, le=2048)
-    catalog_workspace_enabled: bool = False
+    catalog_workspace_enabled: bool = True
     catalog_workspace_fast_enabled: bool = False
     catalog_workspace_reuse_model_client: bool = False
     catalog_workspace_fast_index_version: int = 1

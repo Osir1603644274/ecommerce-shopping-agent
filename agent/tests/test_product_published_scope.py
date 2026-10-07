@@ -50,6 +50,17 @@ def test_all_product_searches_share_catalog_route_contract():
     with patch.object(conversation,'model_call',call),pytest.raises(RuntimeError,match='captured'):
         asyncio.run(conversation.plan_turn('找一台3000元左右的苹果手机',{}))
     prompt=call.call_args.args[0][0]['content']
-    routes=call.call_args.kwargs['tools'][0]['function']['parameters']['properties']['route']['enum']
-    assert routes==['business','catalog','product']
-    assert 'catalog用于所有商品检索' in prompt and 'phone用于' not in prompt
+    schema=call.call_args.kwargs['tools'][0]['function']
+    assert schema['name']=='interpret_shopping_intent'
+    properties=schema['parameters']['properties']
+    assert 'route' not in properties and 'action' not in properties
+    assert schema['parameters']['additionalProperties'] is False
+    assert set(properties['intent']['enum'])=={
+        'search','modify','new_search','undo','compare','cancel',
+        'product_question','clarify','business_request',
+    }
+    for intent in ('search','modify','new_search','undo','compare','cancel'):
+        assert conversation.expand_intent({'intent':intent})['route']=='catalog'
+    assert conversation.expand_intent({'intent':'product_question'})['route']=='product'
+    assert conversation.expand_intent({'intent':'business_request'})['route']=='business'
+    assert '商品检索和需求修改对所有品类使用同一规则' in prompt and 'phone用于' not in prompt

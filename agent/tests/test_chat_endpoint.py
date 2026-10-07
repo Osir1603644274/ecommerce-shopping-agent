@@ -200,6 +200,12 @@ def _seed_validator_bound_phone_task(session_id: str) -> str:
 class ChatEndpointTests(unittest.TestCase):
 
     def setUp(self):
+        # This suite records the pre-cutover endpoint contract.  The unified
+        # guide path has dedicated tests and is the new production default.
+        from app.settings import settings
+        legacy_guide = patch.object(settings, "catalog_workspace_enabled", False)
+        legacy_guide.start()
+        self.addCleanup(legacy_guide.stop)
         fake_redis = FakeRedis()
         session_memory._client = fake_redis
         task_state._client = fake_redis

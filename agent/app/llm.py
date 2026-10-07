@@ -7,6 +7,7 @@ import re
 import threading
 import time
 import uuid
+from contextlib import contextmanager
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, replace
 from datetime import datetime, timedelta, timezone
@@ -23,6 +24,23 @@ logger = logging.getLogger(__name__)
 _llm_call_span_var: contextvars.ContextVar[dict[str, Any] | None] = (
     contextvars.ContextVar("agent_llm_call_span", default=None)
 )
+_trusted_guide_turn_var: contextvars.ContextVar[str | None] = contextvars.ContextVar(
+    "trusted_guide_turn", default=None,
+)
+
+
+@contextmanager
+def bind_preinterpreted_guide_turn(turn_id: str):
+    """Only the in-process workspace may reuse its already committed decision."""
+    token = _trusted_guide_turn_var.set(turn_id)
+    try:
+        yield
+    finally:
+        _trusted_guide_turn_var.reset(token)
+
+
+def trusted_guide_turn_id() -> str | None:
+    return _trusted_guide_turn_var.get()
 
 
 def begin_agent_llm_call_span(
@@ -187,6 +205,8 @@ from .model_call_observability import (
 )
 
 _MODEL_CALL_PURPOSE_BY_STAGE: dict[str, CallPurpose] = {
+    "guide_interpretation": "task_state_extraction",
+    "guide_answer": "final_answer",
     "task_manager": "task_manager_relation",
     "task_state": "task_state_extraction",
     "react_decision": "shopping_policy_decision",
@@ -198,6 +218,8 @@ _MODEL_CALL_PURPOSE_BY_STAGE: dict[str, CallPurpose] = {
     "contract_authoring": "contract_authoring",
 }
 _MODEL_CALL_ROLE_BY_STAGE = {
+    "guide_interpretation": "SYSTEM",
+    "guide_answer": "SHOPPING_AGENT",
     "task_manager": "SYSTEM",
     "task_state": "SYSTEM",
     "react_decision": "SHOPPING_AGENT",
@@ -10041,6 +10063,7 @@ async def _run_unified_harness_agent(
     memory_run_binding: MemoryRunBinding | None = None,
     reference_context: ResolvedReferenceContext | None = None,
     evaluation_context_arm: Any | None = None,
+    guide_preinterpreted: bool = False,
 ) -> tuple[str, list[ToolTrace], list[dict], str | None, TraceSummary | None]:
     """Run one TaskState -> ContextPack -> persisted Harness path."""
 
@@ -10104,7 +10127,7 @@ async def _run_unified_harness_agent(
             raise asyncio.TimeoutError
         return remaining
 
-    if resume is not None or restart:
+    if resume is not None or restart or guide_preinterpreted:
         # Day-2 durable resume/restart: the live TaskState (server-loaded by
         # taskId) is already authoritative.  Re-running the extractor here
         # would advance the revision, replace the server-owned run marker and
@@ -10343,6 +10366,7 @@ async def run_agent(
     memory_run_binding: MemoryRunBinding | None = None,
     reference_context: ResolvedReferenceContext | None = None,
     evaluation_context_arm: Any | None = None,
+    guide_turn_id: str | None = None,
 ) -> tuple[str, list[ToolTrace], list[dict], str | None, TraceSummary | None]:
     """Public Agent entry point with one observable routing decision."""
 
@@ -10381,6 +10405,47 @@ async def run_agent(
             session_id=session_id,
         )
         history = apply_history_policy(history, evaluation_context_arm)
+
+    guide_preinterpreted = False
+    if (settings.catalog_workspace_enabled and domain_hint == "ecommerce"
+            and task_state is not None and resume is None and not restart
+            and evaluation_context_arm is None):
+        from .guide_interpreter import GuideInterpretationError, GuideRevisionConflictError
+        from .guide_runtime import execute_guide_turn
+        if is_unsafe_shopping_use(message):
+            answer = "我不能帮助选择用于窃听、破解、偷拍或绕过监护的设备。"
+            if on_answer_delta is not None:
+                await on_answer_delta(answer)
+            return answer, [], [{"role": "user", "content": message},
+                                {"role": "assistant", "content": answer}], None, None
+
+        previous = task_state.domain_state.get("guideTurnDecision") or {}
+        trusted_replay = bool(guide_turn_id and previous.get("turnId") == guide_turn_id
+                              and previous.get("messageSha256") == hashlib.sha256(message.encode()).hexdigest())
+        if trusted_replay:
+            guide_preinterpreted = True
+        else:
+            try:
+                task_state, direct_result = await execute_guide_turn(
+                    message, task_state, session_id=session_id,
+                    turn_id=guide_turn_id or uuid.uuid4().hex,
+                    on_answer_delta=on_answer_delta, on_task_state=on_task_state,
+                )
+            except GuideRevisionConflictError:
+                answer = "导购需求刚被另一轮更新，请刷新会话后重试。"
+                if on_answer_delta is not None:
+                    await on_answer_delta(answer)
+                return answer, [], [{"role": "user", "content": message},
+                                    {"role": "assistant", "content": answer}], None, None
+            except GuideInterpretationError:
+                answer = "本轮需求未能通过结构化校验，状态未更新；请换种说法再试。"
+                if on_answer_delta is not None:
+                    await on_answer_delta(answer)
+                return answer, [], [{"role": "user", "content": message},
+                                    {"role": "assistant", "content": answer}], None, None
+            if direct_result is not None:
+                return direct_result
+            guide_preinterpreted = True
 
     loop = asyncio.get_running_loop()
     deadline_at = loop.time() + max(
@@ -10449,6 +10514,7 @@ async def run_agent(
             memory_run_binding=memory_run_binding,
             reference_context=reference_context,
             evaluation_context_arm=evaluation_context_arm,
+            guide_preinterpreted=guide_preinterpreted,
         )
     if decision.route in {"legacy_rollback", "compatibility_fallback"}:
         if evaluation_context_arm is not None:

@@ -19,12 +19,14 @@ class CatalogRequirement(BaseModel):
     mode: Literal['require', 'exclude', 'prefer', 'avoid']
     value: str = Field(min_length=1, max_length=80)
     terms: list[str] = Field(default_factory=list, max_length=8)
+    operator: Literal['eq', 'lte', 'gte', 'in', 'not_in'] | None = None
+    unit: str = Field(default='', max_length=40)
 
 
 class CatalogPlan(BaseModel):
     model_config = ConfigDict(extra='forbid')
-    route: Literal['business', 'catalog', 'product']
-    action: Literal['search', 'refine', 'new', 'undo', 'compare', 'cancel', 'clarify', 'inspect']
+    intent: Literal['search', 'modify', 'new_search', 'undo', 'compare', 'cancel',
+                    'product_question', 'clarify', 'business_request']
     query: str = Field(max_length=1000)
     numbers: list[StrictInt] = Field(max_length=6)
     question: str = Field(max_length=300)
@@ -33,6 +35,33 @@ class CatalogPlan(BaseModel):
     followup: Literal['none', 'detail', 'included', 'accessory', 'ambiguous'] = 'none'
     accessory: str = Field(default='', max_length=80)
     referenceModel: str = Field(default='', max_length=80)
+
+
+_INTENT_EXECUTION = {
+    'search': ('catalog', 'search'), 'modify': ('catalog', 'refine'),
+    'new_search': ('catalog', 'new'), 'undo': ('catalog', 'undo'),
+    'compare': ('catalog', 'compare'), 'cancel': ('catalog', 'cancel'),
+    'product_question': ('product', 'inspect'), 'clarify': ('catalog', 'clarify'),
+    'business_request': ('business', 'inspect'),
+}
+_LEGACY_INTENT = {value: key for key, value in _INTENT_EXECUTION.items()}
+_LEGACY_INTENT[('product', 'clarify')] = 'clarify'
+
+
+def expand_intent(plan: dict) -> dict:
+    """Derive executor compatibility fields on the server, never from the model."""
+    intent = plan.get('intent')
+    if intent is None:
+        # Read-only compatibility for already-persisted run records and tests.
+        intent = _LEGACY_INTENT[(plan['route'], plan['action'])]
+    route, action = _INTENT_EXECUTION[intent]
+    if intent == 'clarify' and plan.get('followup') in {'ambiguous', 'accessory'}:
+        route = 'product'
+    return {**plan, 'intent': intent, 'route': route, 'action': action}
+
+
+def intent_from_execution(plan: dict) -> str:
+    return _LEGACY_INTENT[(plan['route'], plan['action'])]
 
 
 class CatalogModelError(ValueError):
@@ -64,7 +93,7 @@ class CatalogAnswer(BaseModel):
     subjectReviews: list[CatalogSubjectReview] = Field(max_length=20)
 
 
-async def model_call(messages, *, tools=None, max_tokens=1200):
+async def model_call(messages, *, tools=None, max_tokens=1200, stage='guide_answer'):
     from .catalog_model_client import borrow_client
     began = time.perf_counter()
     kwargs = dict(model=settings.deepseek_model, messages=messages, temperature=0, max_tokens=max_tokens)
@@ -74,8 +103,15 @@ async def model_call(messages, *, tools=None, max_tokens=1200):
         kwargs['extra_body'] = {'thinking': {'type': 'disabled'}}
     if tools:
         kwargs.update(tools=tools, tool_choice='auto')
-    async with borrow_client() as client:
-        result = await client.chat.completions.create(**kwargs)
+    try:
+        async with borrow_client() as client:
+            result = await client.chat.completions.create(**kwargs)
+    except Exception:
+        from .llm import _observe_llm_call
+        _observe_llm_call(stage, (time.perf_counter()-began)*1000, failed=True)
+        raise
+    from .llm import _observe_llm_call
+    _observe_llm_call(stage, (time.perf_counter()-began)*1000, response=result)
     choice = result.choices[0]
     receipt = {'model': settings.deepseek_model, 'responseId': result.id, 'finishReason': choice.finish_reason,
         'inputSha256': fingerprint(messages), 'durationMs': (time.perf_counter()-began)*1000,
@@ -87,35 +123,38 @@ async def model_call(messages, *, tools=None, max_tokens=1200):
     return choice.message, receipt
 
 
-async def plan_turn(message, workspace):
+async def plan_turn(message, workspace, *, repair_reason=None):
     current = workspace.get('catalogSearch') or {}
-    schema = {'type': 'function', 'function': {'name': 'select_search_action',
-        'description': '选择统一商品搜索、当前商品问答或交易售后业务，并解释本轮需求操作。',
+    schema = {'type': 'function', 'function': {'name': 'interpret_shopping_intent',
+        'description': '一次输出本轮唯一意图和完整购物需求。',
         'parameters': CatalogPlan.model_json_schema()}}
-    reply, receipt = await model_call([
+    messages = [
         {'role': 'system', 'content': (
-            '你是同一个购物Agent的路由与需求解释器。必须调用select_search_action一次。'
-            'catalog用于所有商品检索与需求修改，包括手机本体、二手手机、手机壳、电脑支架及其他品类；'
-            'business用于订单、付款、退款、物流、售后等非商品检索业务，action=inspect，query抄录当前完整业务请求；'
-            'product用于对当前已展示商品卡片的具体问答，action=inspect，不重新搜索。'
+            '你是同一个购物Agent的需求解释器。必须调用interpret_shopping_intent一次，只输出单一intent，不输出route或action。'
+            'intent可选search首次搜索、modify修改/追加、new_search换需求、undo撤销、compare比较、cancel取消、clarify澄清、product_question当前商品问答、business_request订单售后。'
+            '商品检索和需求修改对所有品类使用同一规则，包括手机本体、二手手机、手机壳、电脑支架；'
+            'business_request用于订单、付款、退款、物流、售后等非商品检索业务，query抄录当前完整业务请求；'
+            'product_question用于对当前已展示商品卡片的具体问答，不重新搜索。'
             '追问卡片商品的价格、库存、规格或“第一个/它/这台”时根据productDisplay或pendingProductQuestion定位，numbers填真实展示编号。'
             '查询已展示商品的颜色/规格等用followup=detail；是否随附/赠送配件用included；'
-            '另找/另买适配它的配件用accessory、route=catalog、action=new；'
-            '“第一个苹果手机有它的充电器吗”无法区分随附还是另购，必须product+ambiguous，先澄清。'
+            '另找/另买适配它的配件用accessory、intent=new_search；'
+            '“第一个苹果手机有它的充电器吗”无法区分随附还是另购，必须clarify+ambiguous，先澄清。'
             '配件名填accessory；referenceModel只能抄录所指商品标题中的型号，不能凭常识补型号或兼容性。'
             '用户回答“另买一个/找适配的”时继承pendingProductQuestion指向的商品和配件，不把它当原商品预算修改。'
             '从当前商品转为配件时不得继承原商品的预算、成色、品牌筛选；只保留适配对象及本轮明确提出的配件条件。'
-            '没有明确指向或标题有多个型号时先澄清。重新搜索任何商品或调整商品预算用catalog+none。'
-            '根据本轮原话和当前需求选择search首次搜索、refine修改/追加、new显式换一个商品需求、'
-            'undo撤销最近一次需求修改、compare比较当前列表编号、cancel取消当前商品搜索、clarify需要澄清。'
-            'undo只能撤销完整的一轮修改；同一轮新增多个属性而用户只取消其中一个，必须refine，不能undo。'
-            'query是搜索时完整需求，refine合并保留用户没有撤销的条件，new不继承旧需求；不得虚构属性。'
+            '没有明确指向或标题有多个型号时先澄清。重新搜索任何商品或调整商品预算用search/modify及followup=none。'
+            '根据本轮原话选择唯一intent：search首次搜索、modify修改/追加、new_search显式换商品需求、'
+            'undo撤销最近一次需求修改、compare比较当前列表编号、cancel取消搜索、clarify需要澄清。'
+            'undo只能撤销完整的一轮修改；同一轮新增多个属性而用户只取消其中一个，必须modify，不能undo。'
+            'query是搜索时完整需求，modify合并保留用户没有撤销的条件，new_search不继承旧需求；不得虚构属性。'
             'requirements为本轮操作后的完整需求列表，不是增量；每项facet用稳定属性名，如商品、品牌、材质、型号、数量、预算。'
+            '明确的数值上限或下限分别用operator=lte或gte，value只写数字，unit单列；普通等值用eq。'
+            '不要把“3000元以内”写成预算等值。来源必须能在用户原话或已保留需求中找到。'
             'mode=require必须、exclude明确排除、prefer倾向具备、avoid倾向避开（软偏好）；value始终用正向属性名（例如避开鸡肉写value鸡肉），'
             'terms为标题能直接出现的该属性同义短词，不能放否定词、不能扩大商品范围，不知道同义词就用value。'
             '保留用户未取消的商品主体与品牌；用户放宽或取消它们时必须释放，不能因历史需求仍有该词就保留。'
             '区分放宽和排除：“不限定X/不限X/其他类型也行”是删除原来必须X的限制，不能增加排除X；'
-            '“不要X/排除X”才是exclude。放宽商品品类仍是refine，保留用途与偏好，改为合适上位品类，重写query及retrievalQuery。'
+            '“不要X/排除X”才是exclude。放宽商品品类仍是modify，保留用途与偏好，改为合适上位品类，重写query及retrievalQuery。'
             '例如面包改为不限定面包，应搜食品，不能继续搜面包；椅子改为不限椅子，应扩大到对应家具，而非排除椅子。'
             '“算了/换成”结合整句识别替换的口味/用途，去掉被替换条件；用户对某属性表达顾虑或不好吃属于偏好，'
             '未明确不要/禁止时不得擅自转成硬排除，应使用avoid。例如“全麦太难吃了”记avoid全麦，不能exclude全麦。'
@@ -123,7 +162,7 @@ async def plan_turn(message, workspace):
             '“好吃又不变胖”是口感及饮食管理目标，不是已证实效果或保证。'
             '用户同时提出的用途和口感目标必须分别保留：好吃记prefer口感，不能只写进query而漏掉requirements。'
             '把主板/手机壳等配件作为商品主体，不要把手机/充电宝本体当同义词。'
-            'refine保留未删除的requirements与mode；软偏好永远不能自动变成必须。new清空旧需求后重新提取。'
+            'modify保留未删除的requirements与mode；软偏好永远不能自动变成必须。new_search清空旧需求后重新提取。'
             'retrievalQuery只含正向商品、品牌、型号等词，保留具体商品短语；不要把exclude/avoid属性、否定词或预算数字送入召回词。'
             '简单短商品query尽量原文保留，不删数量、包装或产品系列词。query应同时体现所有排除条件和软偏好限定。'
             '明确容量、尺寸或数量必须单列requirements并保留原数值与单位，如888ml不能丢失或改成常见规格。'
@@ -141,52 +180,84 @@ async def plan_turn(message, workspace):
             'productDisplay': [{'number':i+1,'title':c['title']} for i,c in enumerate(workspace.get('cards',[]))],
             'pendingProductQuestion': {k:v for k,v in (workspace.get('productFollowup') or {}).items()
                 if k in {'number','title','model','accessory','kind'}}}, ensure_ascii=False)},
-    ], tools=[schema])
+    ]
+    if repair_reason:
+        messages.append({'role': 'system', 'content':
+            '上次结构化结果未通过服务端校验，且没有写入状态。'
+            '仅允许再提交一次 interpret_shopping_intent；请修复：' + str(repair_reason)[:300]})
+    reply, receipt = await model_call(messages, tools=[schema], stage='guide_interpretation')
     calls = reply.tool_calls or []
-    if len(calls)!=1 or calls[0].function.name!='select_search_action':
+    if len(calls)!=1 or calls[0].function.name!='interpret_shopping_intent':
         raise ValueError('catalog_route_selection_invalid')
-    plan = CatalogPlan.model_validate_json(calls[0].function.arguments)
-    if plan.route=='catalog':
-        if plan.action in {'search', 'refine', 'new'} and not plan.query.strip():
+    plan = expand_intent(CatalogPlan.model_validate_json(calls[0].function.arguments).model_dump())
+    if plan['route']=='catalog':
+        if plan['action'] in {'search', 'refine', 'new'} and not plan['query'].strip():
             raise ValueError('empty_search_query')
-        if plan.action=='compare' and (len(set(plan.numbers))!=len(plan.numbers) or len(plan.numbers)<2 or
-                not set(plan.numbers)<={g['number'] for g in (current.get('scope') or {}).get('groups', [])}):
+        if plan['action']=='compare' and (len(set(plan['numbers']))!=len(plan['numbers']) or len(plan['numbers'])<2 or
+                not set(plan['numbers'])<={g['number'] for g in (current.get('scope') or {}).get('groups', [])}):
             raise ValueError('invalid_document_scope_reference')
-    value=plan.model_dump()
+    value=plan
     receipt['modelPlan']=deepcopy(value)
-    if plan.route=='catalog' and plan.followup=='none' and plan.action in {'search','new','refine'}:
-        if plan.action in {'search','new'}:
+    model_retrieval_query=plan['retrievalQuery']
+    if plan['route']=='catalog' and plan['followup']=='none' and plan['action'] in {'search','new','refine'}:
+        query_reason = 'model_suggestion'
+        def conversational(query):
+            return bool(re.match(r'^(?:我(?:喜欢|偏好|想要|想买|需要|在找|要)|来(?:一|个)|给我|帮我|想找|求推荐|请(?:帮我)?推荐|推荐|一个|一款|一台)',query.strip()))
+        if plan['action'] in {'search','new'}:
             literal=re.sub(r'^(?:换个需求[，, ]*|新任务[，, ]*)?(?:请)?(?:帮我找|我想买|我想找|搜索|找|买)\s*','',message.strip())
-            if len(literal)<=80 and not re.search(r'[，,。；;！？?]|不要|不含|只要|预算|以内|最好|优先|保留|取消|撤销',literal):
+            if (len(literal)<=80 and not conversational(literal)
+                    and not re.search(r'[，,。；;！？?]|不要|不含|只要|预算|以内|最好|优先|保留|取消|撤销',literal)):
                 value['query']=value['retrievalQuery']=literal
                 receipt['literalQueryPreserved']=True
+                query_reason = 'literal_product_phrase'
         value['retrievalQuery']=value['retrievalQuery'].strip() or value['query']
         def positive_signature(requirements):
-            return sorted((r['mode'],re.sub(r'\s+','',r['value']).casefold()) for r in requirements
-                          if r['mode'] not in {'exclude','avoid'} and r['facet']!='预算')
-        if plan.action=='refine' and current.get('requirements') and value['requirements'] and (
-                positive_signature(current['requirements'])==positive_signature(value['requirements'])):
-            value['retrievalQuery']=current.get('retrievalQuery') or current['query']
-            receipt['positiveQueryReused']=True
+            return {(r['facet'],r['mode'],r.get('operator'),r.get('unit',''),
+                     re.sub(r'\s+','',r['value']).casefold()) for r in requirements
+                    if r['mode'] not in {'exclude','avoid'} and r['facet']!='预算'}
+        if plan['action']=='refine' and current.get('requirements') and value['requirements']:
+            before=positive_signature(current['requirements'])
+            after=positive_signature(value['requirements'])
+            prior_query=(current.get('retrievalQuery') or current['query']).strip()
+            if before==after and prior_query and not conversational(prior_query):
+                value['retrievalQuery']=prior_query
+                receipt['positiveQueryReused']=True
+                query_reason = 'unchanged_positive_requirements'
+            elif before-after and not after-before:
+                terms=[r['value']+(r.get('unit','') if r.get('unit') and not r['value'].endswith(r['unit']) else '')
+                       for r in value['requirements'] if r['mode'] not in {'exclude','avoid'} and r['facet']!='预算']
+                if terms:
+                    value['retrievalQuery']=' '.join(dict.fromkeys(terms))
+                    query_reason = 'positive_requirement_removed'
+            elif before==after and conversational(prior_query):
+                query_reason = 'stale_conversational_query_replaced'
         for r in value['requirements']:
             if r['mode']=='prefer' and not re.search(r'(偏好|优先|最好|非必须|不是必须)',value['query']):
                 value['query']+='；优先'+r['value']+'（非必须）'
             if r['mode']=='avoid' and '尽量避开'+r['value'] not in value['query']:
                 value['query']+='；尽量避开'+r['value']+'（非必须）'
-        if plan.action=='refine' and value['requirements']:
+        if plan['action']=='refine' and value['requirements']:
             # The full state, not a second free-text paraphrase, owns the
             # strength of each condition. Keep the raw model plan in receipt.
             value['query']=requirement_summary(value['requirements'])
             receipt['queryRenderedFromRequirements']=True
-    receipt['selectedTool'] = 'select_search_action'
+        receipt['queryDecision']={'reason':query_reason,'modelSuggestion':model_retrieval_query,
+                                  'plannedRetrievalQuery':value['retrievalQuery']}
+    receipt['selectedTool'] = 'interpret_shopping_intent'
     receipt['outputSha256'] = fingerprint(value)
     return value, receipt
 
 
 def requirement_summary(requirements):
+    def shown(r):
+        value = r['value']
+        operator = r.get('operator')
+        suffix = ('以内' if operator == 'lte' else '以上' if operator == 'gte' else '')
+        return value + (r.get('unit') or '') + suffix
     forms={'require':lambda r:r['value'], 'exclude':lambda r:'不要'+r['value'],
            'prefer':lambda r:'优先'+r['value']+'（非必须）',
            'avoid':lambda r:'尽量避开'+r['value']+'（非必须）'}
+    forms['require'] = shown
     return '；'.join(dict.fromkeys(forms[r['mode']](r) for r in requirements))
 
 
@@ -235,7 +306,7 @@ def render_documents(scope):
     if not scope or not scope['groups']:
         return ''
     lines = []
-    for group in scope['groups']:
+    for group in scope['groups'][:scope.get('presentationLimit', 6)]:
         title = re.sub(r'[\r\n]', ' ', group['title'])
         title = re.sub(r'([\\`*_{}\[\]()<>#!|])', r'\\\1', title)
         lines.append(f"{group['number']}. {title}")
@@ -257,7 +328,7 @@ def apply_subject_review(scope, reviews):
     has_subject = any(r['facet']=='商品' and r['mode']=='require' for r in scope.get('requirements', []))
     hard_conditions = {(r['facet'],r['value']) for r in scope.get('requirements',[]) if r['mode'] in {'require','exclude'}}
     soft_conditions = {(r['facet'],r['value']) for r in scope.get('requirements',[]) if r['mode'] in {'prefer','avoid'}}
-    kept, rejected = [], []
+    kept, rejected, subject_pending = [], [], []
     for group in scope['groups']:
         r = deepcopy(by_number[group['number']])
         if r['relation'] != 'unknown' and (not r['quote'].strip() or r['quote'] not in group['title']):
@@ -287,6 +358,12 @@ def apply_subject_review(scope, reviews):
                     evidence.update(status='supported',reason='标题主体判断：'+r['quote'],origin='model_subject_review')
         if r['relation']=='other' or r.get('conflicts'):
             rejected.append(checked)
+        elif has_subject and r['relation']=='unknown':
+            for evidence in checked.get('constraintEvidence',[]):
+                if evidence['facet']=='商品' and evidence['mode']=='require':
+                    evidence.update(status='unknown',reason='商品主体未获可信核验',
+                                    origin='subject_review_pending')
+            subject_pending.append(checked)
         else:
             kept.append(checked)
     from .catalog_requirements import selection_key
@@ -295,8 +372,9 @@ def apply_subject_review(scope, reviews):
     kept=[dict(g,number=i) for i,g in enumerate(kept[:scope.get('presentationLimit',6)],1)]
     value = {k:deepcopy(v) for k,v in scope.items() if k!='scopeId'}
     value.update(groups=kept, subjectReviewBaseScopeId=scope['scopeId'],
-        subjectReviewPolicy='quoted_subject_and_hard_conflicts_missing_properties_retained_v2',
+        subjectReviewPolicy='quoted_subject_required_pending_subjects_v3',
         semanticExcludedGroups=deepcopy(scope.get('semanticExcludedGroups',[]))+rejected,
+        subjectPendingGroups=deepcopy(scope.get('subjectPendingGroups',[]))+subject_pending,
         reviewedCandidateCount=len(reviews),reviewedEligibleCount=eligible_count)
     return dict(value, scopeId=fingerprint(value))
 
@@ -379,22 +457,31 @@ async def answer_turn(message, plan, current):
             text = re.sub(r'第\s*(\d+)\s*项',lambda m:'第'+str(number_map[int(m[1])])+'项',text)
         scope = reviewed_scope
         removed = len(reviewed_scope['semanticExcludedGroups'])-len(current['scope'].get('semanticExcludedGroups',[]))
-        if removed or len(reviews)>len(scope['groups']):
+        pending = len(reviewed_scope['subjectPendingGroups'])-len(current['scope'].get('subjectPendingGroups',[]))
+        if removed or pending or len(reviews)>len(scope['groups']):
             # Free prose can still describe the input list after structured
             # filtering. Publish counts and actual remaining evidence instead.
             receipt['preFilterSummary'] = parsed.answer
             unknown = list(dict.fromkeys(e['facet'] for g in scope['groups'] for e in g.get('constraintEvidence',[])
                 if e['mode'] in {'require','exclude'} and e['status']=='unknown'))
             text = f'已审核{len(reviews)}条召回记录，'+(f'排除{removed}条商品主体或硬条件明确不符项，' if removed else '')+f'展示{len(scope["groups"])}条候选。'
+            if pending:
+                text += f'{pending}条商品主体待核验，未列入展示候选。'
             if unknown:
                 text += '部分候选的'+ '、'.join(unknown[:4])+'仍缺少明确证据，需进一步核验。'
         receipt['scopeReview'] = {'baseScopeId':current['scope']['scopeId'], 'reviews':reviews}
         if not scope['groups']:
-            text = '本轮候选均存在商品主体或硬条件的明确冲突，已排除；请调整搜索条件后再试。'
+            if pending and removed:
+                text = f'本轮排除{removed}条明确不符候选，另有{pending}条商品主体待核验；暂无可展示候选。'
+            elif pending:
+                text = '本轮候选的商品主体尚未获得可信核验，暂不展示；请调整搜索条件后再试。'
+            else:
+                text = '本轮候选均存在商品主体或硬条件的明确冲突，已排除；请调整搜索条件后再试。'
     else:
         receipt['subjectReviews'] = reviews
     receipt['outputSha256'] = hashlib.sha256(text.encode()).hexdigest()
-    prefix = ('当前需求：'+current['query']+'。\n\n') if action in {'undo','refine','new'} else ''
+    prefix = ('已撤销上次需求修改，当前需求：'+current['query']+'。\n\n' if action=='undo'
+              else '当前需求：'+current['query']+'。\n\n' if action in {'refine','new'} else '')
     listing = '' if action=='compare' else '\n\n'+render_documents(scope)
     claim_notice = ('\n\n低脂、减脂等为标题宣称，缺少营养成分与配料依据，不能据此保证减脂效果或不长胖。'
         if any(re.search(r'减脂|减肥|低脂|低卡',r['value']) for r in current.get('requirements',[])) else '')

@@ -8,7 +8,7 @@ from app.api import commerce_controls as controls, commerce_workspace as ws, cat
 from app import catalog_react
 from app.control.react_decision import ReactActionProposal, materialize_next_action
 from .test_commerce_workspace import setup, client, async_test, state_key
-from .test_catalog_workspace import scope, prepare_client, finish_job
+from .test_catalog_workspace import scope, prepare_client, finish_job, plan
 
 
 def test_stopped_followup_new_budget_precedes_old_history():
@@ -106,6 +106,9 @@ async def test_catalog_decision_checkpoint_survives_pause_without_second_model_c
         assert await workflow.select_catalog_action(key,saved)
         choose.assert_awaited_once()
         assert saved['catalogModelDecisions']==1
+        tampered=deepcopy(saved);tampered['catalogPendingDecision']['query']='未绑定的检索词'
+        with pytest.raises(ValueError,match='query_binding_changed'):
+            await workflow.select_catalog_action(key,tampered)
         bad=deepcopy(saved);bad['catalogNext']['query']='被替换需求'
         with pytest.raises(ValueError,match='scope_changed'):
             await workflow.select_catalog_action(key,bad)
@@ -113,6 +116,7 @@ async def test_catalog_decision_checkpoint_survives_pause_without_second_model_c
 
 @async_test
 async def test_catalog_react_changes_next_action_from_observation_then_respects_budget(setup,monkeypatch):
+    from app import guide_execution
     app,store,_=setup
     chosen=[]
     async def choose(run):
@@ -129,12 +133,13 @@ async def test_catalog_react_changes_next_action_from_observation_then_respects_
     async def search(query,**kwargs):
         searches.append((query,kwargs));return scope(query)
     monkeypatch.setattr(catalog_react,'decide',choose)
-    monkeypatch.setattr(workflow,'get_catalog_service',lambda:SimpleNamespace(search=search))
-    monkeypatch.setattr(workflow,'answer_turn',AsyncMock(return_value=('依据已核验记录回答',None)))
+    monkeypatch.setattr(guide_execution,'get_catalog_service',lambda:SimpleNamespace(search=search))
+    monkeypatch.setattr(guide_execution,'answer_turn',AsyncMock(return_value=('依据已核验记录回答',None)))
     async with client(app) as c:
-        key,_=await prepare_client(c,store,monkeypatch)
+        key,_=await prepare_client(c,store,monkeypatch,catalog_plan={
+            **plan(query='透明收纳盒'), 'retrievalQuery':'透明收纳盒',
+            'requirements':[dict(facet='商品',mode='require',value='收纳盒',terms=['收纳盒'])]})
         run=await ws._load(key+':run')
-        run['catalogPlan'].update(query='透明收纳盒',retrievalQuery='透明收纳盒',requirements=[dict(facet='商品',mode='require',value='收纳盒',terms=['收纳盒'])])
         run.update(catalogReact=True,mode='continuous',status='running')
         async with ws._lock(key): await controls.save_run(key,run)
         await workflow.work(key,run,'start',None)
@@ -177,7 +182,7 @@ async def test_old_worker_cannot_publish_into_new_run(setup):
 
 @async_test
 async def test_catalog_clarification_reply_replans_under_same_owner_and_keeps_transcript(setup,monkeypatch):
-    from app import catalog_conversation, catalog_commerce
+    from app import catalog_conversation, catalog_commerce, guide_execution
     app,store,_=setup
     async def choose(run):
         view,queries=catalog_react.decision_view(run)
@@ -189,8 +194,8 @@ async def test_catalog_clarification_reply_replans_under_same_owner_and_keeps_tr
             optionId=view.allowed_action_options[index].option_id,source='model',receipt={},
             query=queries.get((action.argument_refs or {}).get('query')),durationMs=1)
     monkeypatch.setattr(catalog_react,'decide',choose)
-    monkeypatch.setattr(workflow,'get_catalog_service',lambda:SimpleNamespace(search=AsyncMock(return_value=scope())))
-    monkeypatch.setattr(workflow,'answer_turn',AsyncMock(return_value=('这里是重新核验的收纳盒候选',None)))
+    monkeypatch.setattr(guide_execution,'get_catalog_service',lambda:SimpleNamespace(search=AsyncMock(return_value=scope())))
+    monkeypatch.setattr(guide_execution,'answer_turn',AsyncMock(return_value=('这里是重新核验的收纳盒候选',None)))
     monkeypatch.setattr(catalog_commerce,'resolve_cards',AsyncMock(return_value=[]))
     async with client(app) as c:
         key,_=await prepare_client(c,store,monkeypatch)

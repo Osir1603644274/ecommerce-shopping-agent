@@ -8,7 +8,7 @@ from .catalog_service import fingerprint
 
 def display_binding(state):
     return fingerprint({'engine':state['engine'], 'reference':state.get('reference'),
-        'catalogScopeId':((state.get('catalogSearch') or {}).get('scope') or {}).get('scopeId'),
+        'catalogScopeId':(state.get('catalogScope') or (state.get('catalogSearch') or {}).get('scope') or {}).get('scopeId'),
         'cards':[{k:c.get(k) for k in ('id','title','sourceDocid','sourceRecordSha256')} for c in state.get('cards',[])]})
 
 
@@ -40,6 +40,12 @@ async def bind_plan(plan, state, task, message):
     try:
         if card.get('sourceDocid'):
             from .catalog_commerce import verify_card_reference
+            scope = state.get('catalogScope') or (state.get('catalogSearch') or {}).get('scope') or {}
+            ref = (task.domain_state.get('guideEvidenceRef') if task else None) or {}
+            if (not task or ref.get('taskId') != task.task_id
+                    or ref.get('scopeId') != scope.get('scopeId')
+                    or ref.get('scopeSha256') != fingerprint(scope)):
+                raise ReferenceContextError('catalog_task_evidence_expired')
             if not await verify_card_reference(state,card):raise ReferenceContextError('catalog_card_reference_missing')
         else:
             if not task or not (state.get('reference') or {}).get('handle'):

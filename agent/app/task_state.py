@@ -555,11 +555,21 @@ async def _append_event(
     )
 
 
+def _assert_guide_write_allowed(domain_patch: dict[str, Any]) -> None:
+    if not domain_patch:
+        return
+    from .guide_state import PROTECTED_GUIDE_KEYS, guide_write_authorized
+
+    if PROTECTED_GUIDE_KEYS.intersection(domain_patch) and not guide_write_authorized():
+        raise ValueError("guide_state_requires_server_owned_transition")
+
+
 async def create_task_state(
     request: TaskStateCreateRequest,
     *,
     trace: TaskStateTraceCallback | None = None,
 ) -> TaskState:
+    _assert_guide_write_allowed(request.domain_state)
     await _emit_trace(
         trace,
         "request_validated",
@@ -964,6 +974,7 @@ async def update_task_state(
     trace: TaskStateTraceCallback | None = None,
     immutable_side_record: tuple[str, str] | None = None,
 ) -> TaskState:
+    _assert_guide_write_allowed(patch.domain_state_patch)
     # The local lock avoids duplicate work inside one event loop. Redis Lua CAS
     # remains the cross-process source of truth when Agent instances scale out.
     await _emit_trace(

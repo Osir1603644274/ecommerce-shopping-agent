@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "public-release-scope-v1",
+  "repository": "Osir1603644274/ecommerce-shopping-agent",
+  "syncTrees": [
+    "agent/app",
+    "agent/tests",
+    "backend/src",
+    "backend-gateway/src",
+    "backend-inventory/src",
+    "frontend/src",
+    "frontend/public",
+    "frontend/tests",
+    "retrieval_judgment_pool_core",
+    "retrieval_judgment_pool_mcp",
+    "schemas"
+  ],
+  "codeOverlays": ["agent/scripts", "scripts"],
+  "topLevelOverlays": ["agent", "backend", "backend-gateway", "backend-inventory", "frontend"],
+  "requiredFiles": [
+    "README.md",
+    ".env.example",
+    ".gitattributes",
+    ".gitignore",
+    "docker-compose.yml",
+    ".github/workflows/public-integrity.yml",
+    "docs/PUBLIC_REPOSITORY_GUIDE.md",
+    "docs/FEATURE_EVIDENCE_INDEX.md",
+    "docs/PUBLIC_RELEASE_RUNBOOK.md",
+    "scripts/public-release-scope.json"
+  ],
+  "optionalFiles": ["compose.merged-commerce.yml"],
+  "tests": [
+    "agent/tests/test_product_published_scope.py",
+    "agent/tests/test_catalog_workspace.py",
+    "agent/tests/test_catalog_requirement_repair.py",
+    "agent/tests/test_product_followup.py",
+    "agent/tests/test_ui_four_repairs.py",
+    "scripts/tests/test_public_release.py"
+  ]
+}

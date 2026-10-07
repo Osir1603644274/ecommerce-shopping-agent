@@ -29,7 +29,8 @@ def workflow_code_binding():
     directory = Path(__file__).parent
     paths = ['catalog_service.py', 'catalog_requirements.py', 'catalog_worker.py', 'catalog_conversation.py', 'catalog_model_client.py', 'api/catalog_workspace.py', 'api/workspace_answer_stream.py', 'catalog_fast_retrieval.py', 'catalog_fast_retrieval_v2.py', 'catalog_fast_retrieval_v3.py', 'catalog_fast_selection.py']
     configuration = selection_file(settings.catalog_workspace_fast_index_dir,settings.catalog_workspace_fast_index_version)
-    paths += ['product_followup.py', 'api/commerce_controls.py', 'catalog_execution_view.py']
+    paths += ['product_followup.py', 'api/commerce_controls.py', 'catalog_execution_view.py',
+              'guide_execution.py']
     paths += ['catalog_commerce.py', 'catalog_remote.py', 'catalog_search_server.py']
     paths += ['catalog_react.py', 'control/react_context.py', 'control/react_decision.py']
     return fingerprint({'code': {p: hashlib.sha256((directory/p).read_bytes()).hexdigest() for p in paths},

@@ -39,7 +39,7 @@ services:
     image: mysql:8.4
     container_name: local-life-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-public-demo-secret-1-change-before-use}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-public-demo-secret-3-change-before-use}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-local_life}
       MYSQL_USER: ${MYSQL_USER:-local_life}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-public-demo-secret-2-change-before-use}
@@ -249,7 +249,7 @@ services:
     profiles: ["cloud-split"]
     image: mysql:8.4
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-public-demo-secret-1-change-before-use}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-public-demo-secret-3-change-before-use}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-local_life}
       CATALOG_DB_PASSWORD: ${CATALOG_DB_PASSWORD:-catalog-local-only-password}
       TRADE_DB_PASSWORD: ${TRADE_DB_PASSWORD:-trade-local-only-password}

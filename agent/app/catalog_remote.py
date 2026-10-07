@@ -44,9 +44,9 @@ class RemoteCatalogService:
 
     async def search(self,query,*,requirements=None,retrieval_query=None):
         if time.monotonic()<self.open_until:raise RuntimeError('search_circuit_open')
-        from .catalog_search_server import SearchCommand
-        body=SearchCommand(requestId=uuid.uuid4().hex,query=query,
-            retrievalQuery=retrieval_query,requirements=requirements or []).model_dump()
+        from .catalog_search_server import SearchCommand, legacy_search_body
+        body=legacy_search_body(SearchCommand(requestId=uuid.uuid4().hex,query=query,
+            retrievalQuery=retrieval_query,requirements=requirements or []))
         try:
             async with asyncio.timeout(settings.catalog_workspace_timeout_seconds+2):
                 async with self.client(httpx.Timeout(settings.catalog_workspace_timeout_seconds,connect=2)) as client:

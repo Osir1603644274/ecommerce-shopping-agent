@@ -57,6 +57,8 @@ pwsh -NoProfile -File .\scripts\commerce-demo.ps1 smoke
 
 ## 发布流程
 
+常规更新请使用[公开发布手册](PUBLIC_RELEASE_RUNBOOK.md)中的 `scripts/public_release.py`。它从上次已验证的公开快照生成增量计划，并在发布前后核对远端提交和文件哈希。下面保留原始快照构建流程，供首次建仓或独立审计使用。
+
 1. 在新的 `.runtime/public-snapshot-v*` 目录生成允许列表快照，禁止覆盖旧版本。
 2. 独立复算文件集合、大小、常见密钥模式与 SHA-256 manifest。
 3. 在快照内部执行仓库卫生、Markdown 链接与定向测试。

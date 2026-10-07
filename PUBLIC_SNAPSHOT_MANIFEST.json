@@ -1,12 +1,11 @@
 {
   "schemaVersion": "public-snapshot-manifest-v1",
-  "generatedAt": "2026-09-22",
-  "fileCount": 3438,
+  "fileCount": 3456,
   "files": [
     {
       "path": ".env.example",
       "bytes": 5051,
-      "sha256": "134c7a98f714687df34cc8d4c689b368275afa2ead48a8623b2274e3d60594c4"
+      "sha256": "3435cb3a9b220f9529b32eb3626c18f359c4fca6ad2191970c1c7609d7c2e142"
     },
     {
       "path": ".gitattributes",
@@ -29,9 +28,19 @@
       "sha256": "a69c0e9e1fcd9333bb31ace4741d220932e68a8eaa224328f50ddfd4cf15bc8f"
     },
     {
+      "path": "README.md",
+      "bytes": 7718,
+      "sha256": "d7a431f4b3ff108535d4c1d5107aa32c65f27e7aad97186f26b44eb2a0c842de"
+    },
+    {
       "path": "agent/.dockerignore",
       "bytes": 588,
       "sha256": "cc6d2b7a7992316b543c1addffe1a35ac27c0b1d5b1a94de505ae46a92bf8541"
+    },
+    {
+      "path": "agent/Dockerfile",
+      "bytes": 2235,
+      "sha256": "311da8dc7023f5cbc6040962a301f39c3e0cb54dedcfaab062fc3cb15f3224aa"
     },
     {
       "path": "agent/app/__init__.py",
@@ -55,8 +64,8 @@
     },
     {
       "path": "agent/app/api/catalog_workspace.py",
-      "bytes": 20169,
-      "sha256": "d742cfc734d34041bce523003b989735f097167b4837aad2024e1adb79b2ea11"
+      "bytes": 24112,
+      "sha256": "87ce4ecc2476b65565a83a345cd333fe9eeee974a07693e7e64b76163a15636a"
     },
     {
       "path": "agent/app/api/commerce_capabilities.py",
@@ -65,8 +74,8 @@
     },
     {
       "path": "agent/app/api/commerce_controls.py",
-      "bytes": 35946,
-      "sha256": "2ce31fdc5d3edb978984bf4bd98e2a2e58e5729c157f876e4ca872ae6f6df445"
+      "bytes": 36825,
+      "sha256": "b377853ea727abef35e75ef9a402111a6e015e9a3a264b46c311aff6b491c37f"
     },
     {
       "path": "agent/app/api/commerce_demo.py",
@@ -130,13 +139,13 @@
     },
     {
       "path": "agent/app/catalog_commerce.py",
-      "bytes": 4209,
-      "sha256": "14c724c59720057726f4edf6e6d9d77969c9841b0e45acc3085f9851f36c4405"
+      "bytes": 4238,
+      "sha256": "921c6385c39332273227301779a6aaa81e33e14897ad03084d311b8e7a68f487"
     },
     {
       "path": "agent/app/catalog_conversation.py",
-      "bytes": 29079,
-      "sha256": "b686f15a88a3fbbb34a04073b49792f2f0d4a7248f5321fc0d2667d5db4331f4"
+      "bytes": 34524,
+      "sha256": "81f35204d12d4e57dc4f44c94b008c11acf0dc921e62ef6b7209482d7d84ef47"
     },
     {
       "path": "agent/app/catalog_data.py",
@@ -155,8 +164,8 @@
     },
     {
       "path": "agent/app/catalog_execution_view.py",
-      "bytes": 7542,
-      "sha256": "038254d0cbc56a12f5093bfc409d3b963ea8b12c5c1ca561b3a618ab87bcdce4"
+      "bytes": 7856,
+      "sha256": "fd11cf9ebedebdb65cc062e5a0703377008976edae5a4794868ced53396ae44a"
     },
     {
       "path": "agent/app/catalog_fast_retrieval.py",
@@ -195,23 +204,23 @@
     },
     {
       "path": "agent/app/catalog_remote.py",
-      "bytes": 3496,
-      "sha256": "3bf8c72243f0faa9bd4800be6db9ef6666a4e00efab23743401bbab90ce3a329"
+      "bytes": 3523,
+      "sha256": "6d06201de5fd2f60e50a2250b89a48263d2ab1596a17707d76ccd0769b977e12"
     },
     {
       "path": "agent/app/catalog_requirements.py",
-      "bytes": 5176,
-      "sha256": "e6a51e50bb8da1ecb6a3c03a469d2c80a5e48c7d735cb0615feb6dbf0c1d924b"
+      "bytes": 5594,
+      "sha256": "e16d351cf950f1cb269be79742dffcdf57c65a59b42aeb0dd3a0a37c5db10385"
     },
     {
       "path": "agent/app/catalog_search_server.py",
-      "bytes": 4534,
-      "sha256": "63559b09b6f07eff533650b5e3383666f097dcba5b6f8965d592777480e30741"
+      "bytes": 5011,
+      "sha256": "22e1effe67858c11b019a057600c8f26520f6060c94f030de9d3cdaf4d059c94"
     },
     {
       "path": "agent/app/catalog_service.py",
-      "bytes": 7997,
-      "sha256": "e66bf8d57b7fb20830e36d50f24bc896bcd0f6aed0470117f665598e5fd5e9d8"
+      "bytes": 8033,
+      "sha256": "f2602b8047f1504720021b4f0c00633cb203bc10ba86dcac1e03295ca1724ace"
     },
     {
       "path": "agent/app/catalog_worker.py",
@@ -574,6 +583,31 @@
       "sha256": "9f6f685e10242dae89bc640688dbfecf4f063fdd9c5a6faadc569d219173d9f7"
     },
     {
+      "path": "agent/app/guide_evidence.py",
+      "bytes": 2531,
+      "sha256": "ce82e0afcc8246e782f84c9a9fafa1568593f46c135a43426a55b27ed2a81a02"
+    },
+    {
+      "path": "agent/app/guide_execution.py",
+      "bytes": 1956,
+      "sha256": "fe5f8b46ef6481e68f66f1f5de8965fc645cb33beddfe185da45a33c30020b6b"
+    },
+    {
+      "path": "agent/app/guide_interpreter.py",
+      "bytes": 8814,
+      "sha256": "bf02cea8c73b99ee4b651663551c23e70d8175ea5c723b014fd2f52eff8184eb"
+    },
+    {
+      "path": "agent/app/guide_runtime.py",
+      "bytes": 5240,
+      "sha256": "fe122da37abb05504016fe480292ac6dcf27c62842143ae612cc429994fe4b9b"
+    },
+    {
+      "path": "agent/app/guide_state.py",
+      "bytes": 19613,
+      "sha256": "3c57848256818ede7eec4518cd9cad008fdd30fe3527d803a6f8fb4c551f9437"
+    },
+    {
       "path": "agent/app/harness.py",
       "bytes": 88596,
       "sha256": "2dafc5eded3899df2929e2f1190e69fbeb2cb333933c8e2ded6b9d22ab5dd471"
@@ -675,13 +709,13 @@
     },
     {
       "path": "agent/app/llm.py",
-      "bytes": 456218,
-      "sha256": "c5b7c8259bfebe469fd9bfd44e50149c79fdbd3c26e27195c82e17c9da6de0b1"
+      "bytes": 459450,
+      "sha256": "211b1ee45fb99527dd607a541f941de2df87caa12790d3d135b0a94f5ac3c767"
     },
     {
       "path": "agent/app/main.py",
-      "bytes": 136026,
-      "sha256": "6f0c9b7e33e100411e979108676f9cd81c97e13d56fbb0ca9e3da70edf680178"
+      "bytes": 137409,
+      "sha256": "6d08d7d96e93dcce9f8400642d71c2ff92cafc57a9d2e8a55d19df6661a2b9b4"
     },
     {
       "path": "agent/app/mcp_client.py",
@@ -825,8 +859,8 @@
     },
     {
       "path": "agent/app/product_followup.py",
-      "bytes": 9128,
-      "sha256": "97a0bd533551b5e0b992255309e5c575ceceb8f00b9680ed9223473dff86e1ff"
+      "bytes": 9621,
+      "sha256": "cb5d15a568a6e44d5b08516693062f450f8e8d1a11f639298da59c9800ae5209"
     },
     {
       "path": "agent/app/product_knowledge/__init__.py",
@@ -1010,8 +1044,8 @@
     },
     {
       "path": "agent/app/settings.py",
-      "bytes": 22029,
-      "sha256": "abdcc1fd32068dab68278bb842fb8221e12d79ceff8007a44200b0dde3ff8372"
+      "bytes": 22028,
+      "sha256": "0525060ae202d21dfbb5c6e18b8846ffcfc330e54710606bc80368c15581797a"
     },
     {
       "path": "agent/app/shop_entity.py",
@@ -1080,8 +1114,8 @@
     },
     {
       "path": "agent/app/task_state.py",
-      "bytes": 41595,
-      "sha256": "eff110f01934c8dd1e0df1cef77e07466b824bd0836b8997216a6fc3e706365e"
+      "bytes": 42057,
+      "sha256": "69d20f3238e4b296abb1b5ec6fe655e60a1edb7f45ac3c8c88d6289828b9006c"
     },
     {
       "path": "agent/app/task_state_output_contract.py",
@@ -1147,11 +1181,6 @@
       "path": "agent/app/workspace_archive.py",
       "bytes": 6198,
       "sha256": "506ed98155ca770ec636e0e2d00f31b3315e68d6f62c5ce211e5032d2e8216ce"
-    },
-    {
-      "path": "agent/Dockerfile",
-      "bytes": 2235,
-      "sha256": "311da8dc7023f5cbc6040962a301f39c3e0cb54dedcfaab062fc3cb15f3224aa"
     },
     {
       "path": "agent/evaluation/__init__.py",
@@ -1499,6 +1528,11 @@
       "sha256": "8ed86a79fff82304c42acdf4d7c35c877baa5ade5d64eb4411066a9c3c05307e"
     },
     {
+      "path": "agent/evaluation/context_compiler_provider_paired_v1_20260901_v3/FINAL_EVIDENCE_AND_DECISION_2026-09-01.md",
+      "bytes": 3043,
+      "sha256": "eb8bfde293870ed4a063a6df55433720ffddd7a8379f1d8eeca91f86a4289984"
+    },
+    {
       "path": "agent/evaluation/context_compiler_provider_paired_v1_20260901_v3/__init__.py",
       "bytes": 70,
       "sha256": "9a4637f1af5e35444929e09535fc42e8b9149eed0c88edc124fe693887cba8ba"
@@ -1509,14 +1543,14 @@
       "sha256": "6888b1824d73a77e9a75790501d71a648e888c1cfa7dcfed05291bdc12989617"
     },
     {
-      "path": "agent/evaluation/context_compiler_provider_paired_v1_20260901_v3/FINAL_EVIDENCE_AND_DECISION_2026-09-01.md",
-      "bytes": 3043,
-      "sha256": "eb8bfde293870ed4a063a6df55433720ffddd7a8379f1d8eeca91f86a4289984"
-    },
-    {
       "path": "agent/evaluation/context_compiler_provider_paired_v1_20260901_v3/runner.py",
       "bytes": 6490,
       "sha256": "76b6e9040de070e27c9c0571f5d65b21efb9e10778d834e410b8bd4d016cdc3d"
+    },
+    {
+      "path": "agent/evaluation/context_compiler_provider_paired_v1_20260901_v4/FINAL_EVIDENCE_AND_DECISION_2026-09-01.md",
+      "bytes": 4902,
+      "sha256": "fef7a2954159698f379a4252adda07ca3a538d4244d6e8c03fa915f94bbbedc5"
     },
     {
       "path": "agent/evaluation/context_compiler_provider_paired_v1_20260901_v4/__init__.py",
@@ -1527,11 +1561,6 @@
       "path": "agent/evaluation/context_compiler_provider_paired_v1_20260901_v4/build_package.py",
       "bytes": 14827,
       "sha256": "8fd556c2ee0c0cdf137a64b05a5b098df5ee6f5328cc5654fdd809cfb0d81ae3"
-    },
-    {
-      "path": "agent/evaluation/context_compiler_provider_paired_v1_20260901_v4/FINAL_EVIDENCE_AND_DECISION_2026-09-01.md",
-      "bytes": 4902,
-      "sha256": "fef7a2954159698f379a4252adda07ca3a538d4244d6e8c03fa915f94bbbedc5"
     },
     {
       "path": "agent/evaluation/context_compiler_provider_paired_v1_20260901_v4/finalize_hashes.py",
@@ -1967,6 +1996,36 @@
       "path": "agent/evaluation/context_history_review_v2_20260905/test_loader.py",
       "bytes": 987,
       "sha256": "c99d336c80a2277765158790bda9056877bb13244d5f719d914b20eecda2a3fa"
+    },
+    {
+      "path": "agent/evaluation/context_history_strategies_v1_20260905/FIRST_EDITION_EXECUTION.md",
+      "bytes": 3591,
+      "sha256": "799dfc5406a16f6da184f86010b054ff08e5b22af51fd2d895e8ea5068446005"
+    },
+    {
+      "path": "agent/evaluation/context_history_strategies_v1_20260905/FIRST_EDITION_REPORT.md",
+      "bytes": 17817,
+      "sha256": "6c41b44b051324cb141b41d49b68aac63286f2d4c2bffb8741d69546d05d2ceb"
+    },
+    {
+      "path": "agent/evaluation/context_history_strategies_v1_20260905/V7_GENERAL72_QUALITY_AUDIT.md",
+      "bytes": 7832,
+      "sha256": "c983929151860e60b6312a4fc70fdc506fbd537f3b0162ebbe68493b221ea11d"
+    },
+    {
+      "path": "agent/evaluation/context_history_strategies_v1_20260905/V7_IPHONE24_COMPLETE_COST.md",
+      "bytes": 5195,
+      "sha256": "f19421cf3a20b86de0fc0ad44aaf9718d186e4b7283c719d253e7aa0a672448d"
+    },
+    {
+      "path": "agent/evaluation/context_history_strategies_v1_20260905/V7_IPHONE24_QUALITY_AUDIT.md",
+      "bytes": 6318,
+      "sha256": "7f9725dd991a28a3401e81cdef11cd14ac9b3ecdc466ca0b9a7e4f6b278f2483"
+    },
+    {
+      "path": "agent/evaluation/context_history_strategies_v1_20260905/V7_VIVO48_C_COLLECTION_CLOSEOUT.md",
+      "bytes": 3281,
+      "sha256": "c9e1dcbf7fe367a85e1b5fe86c6f503901068e91d3cd50c2443ce333f79e5d0c"
     },
     {
       "path": "agent/evaluation/context_history_strategies_v1_20260905/__init__.py",
@@ -2829,16 +2888,6 @@
       "sha256": "aadd284c67121af97f1427aa82e2d50217e6f82c1772b483bde0274ffd6df90d"
     },
     {
-      "path": "agent/evaluation/context_history_strategies_v1_20260905/FIRST_EDITION_EXECUTION.md",
-      "bytes": 3591,
-      "sha256": "799dfc5406a16f6da184f86010b054ff08e5b22af51fd2d895e8ea5068446005"
-    },
-    {
-      "path": "agent/evaluation/context_history_strategies_v1_20260905/FIRST_EDITION_REPORT.md",
-      "bytes": 17817,
-      "sha256": "6c41b44b051324cb141b41d49b68aac63286f2d4c2bffb8741d69546d05d2ceb"
-    },
-    {
       "path": "agent/evaluation/context_history_strategies_v1_20260905/history_lookup.py",
       "bytes": 3726,
       "sha256": "c6a9c581906882b0467a477136d87a13e39230d395dd73357017b4b08e9b6c11"
@@ -2972,26 +3021,6 @@
       "path": "agent/evaluation/context_history_strategies_v1_20260905/test_subscription.py",
       "bytes": 3703,
       "sha256": "0494d44bfbc094cf17ca91f1f8833d49e0dc42887ee40418c12eb1ff433162f4"
-    },
-    {
-      "path": "agent/evaluation/context_history_strategies_v1_20260905/V7_GENERAL72_QUALITY_AUDIT.md",
-      "bytes": 7832,
-      "sha256": "c983929151860e60b6312a4fc70fdc506fbd537f3b0162ebbe68493b221ea11d"
-    },
-    {
-      "path": "agent/evaluation/context_history_strategies_v1_20260905/V7_IPHONE24_COMPLETE_COST.md",
-      "bytes": 5195,
-      "sha256": "f19421cf3a20b86de0fc0ad44aaf9718d186e4b7283c719d253e7aa0a672448d"
-    },
-    {
-      "path": "agent/evaluation/context_history_strategies_v1_20260905/V7_IPHONE24_QUALITY_AUDIT.md",
-      "bytes": 6318,
-      "sha256": "7f9725dd991a28a3401e81cdef11cd14ac9b3ecdc466ca0b9a7e4f6b278f2483"
-    },
-    {
-      "path": "agent/evaluation/context_history_strategies_v1_20260905/V7_VIVO48_C_COLLECTION_CLOSEOUT.md",
-      "bytes": 3281,
-      "sha256": "c9e1dcbf7fe367a85e1b5fe86c6f503901068e91d3cd50c2443ce333f79e5d0c"
     },
     {
       "path": "agent/evaluation/context_history_strategies_v1_20260905/verify.py",
@@ -7054,6 +7083,11 @@
       "sha256": "2fef8994f8bcfcd9fad9a7f2a7f0f508d766a8e5b9c7b00fadcc6abef12e251d"
     },
     {
+      "path": "agent/evaluation/context_raw_full_vs_compiled_v1_20260902_v1/FINAL_EVIDENCE_AND_DECISION_2026-09-02.md",
+      "bytes": 1364,
+      "sha256": "3f6507d7532f8e85c33025077990117f38ac6e949e05aa2aa8e747cb3ab9f582"
+    },
+    {
       "path": "agent/evaluation/context_raw_full_vs_compiled_v1_20260902_v1/__init__.py",
       "bytes": 66,
       "sha256": "e5e0d6532b84d68f125aeb03c339d0230e86634d216c8ff7bf672710e4e9ca8d"
@@ -7062,11 +7096,6 @@
       "path": "agent/evaluation/context_raw_full_vs_compiled_v1_20260902_v1/build_package.py",
       "bytes": 5050,
       "sha256": "46b9d04a31ec8355818ca265d99f1ee549ea993bae979704609aa29681e24cae"
-    },
-    {
-      "path": "agent/evaluation/context_raw_full_vs_compiled_v1_20260902_v1/FINAL_EVIDENCE_AND_DECISION_2026-09-02.md",
-      "bytes": 1364,
-      "sha256": "3f6507d7532f8e85c33025077990117f38ac6e949e05aa2aa8e747cb3ab9f582"
     },
     {
       "path": "agent/evaluation/context_raw_full_vs_compiled_v1_20260902_v1/finalize.py",
@@ -7484,14 +7513,14 @@
       "sha256": "a13fb14cc7fbd7d1b419629bae562766235e271d3963dc54091ffff6c78338af"
     },
     {
-      "path": "agent/evaluation/react_v1_durable_checkpoint_v2_20260901_v1/__init__.py",
-      "bytes": 75,
-      "sha256": "123ba6f46ea1b6e502ac8a64c04de71ef0c39585760003a4f1a3c5acae7135f5"
-    },
-    {
       "path": "agent/evaluation/react_v1_durable_checkpoint_v2_20260901_v1/FINAL_EVIDENCE_AND_DECISION_2026-09-01.md",
       "bytes": 4040,
       "sha256": "64845e45f4e334b2000e7ffe498b87466b6355c07156cefd066711a7ef89b5b7"
+    },
+    {
+      "path": "agent/evaluation/react_v1_durable_checkpoint_v2_20260901_v1/__init__.py",
+      "bytes": 75,
+      "sha256": "123ba6f46ea1b6e502ac8a64c04de71ef0c39585760003a4f1a3c5acae7135f5"
     },
     {
       "path": "agent/evaluation/react_v1_durable_checkpoint_v2_20260901_v1/runner.py",
@@ -7659,6 +7688,11 @@
       "sha256": "4998413fb850af38d5dee0f6ca096be785aee565a9694b7796221967a84a28c0"
     },
     {
+      "path": "agent/evaluation/real_user_multiturn_replay_20260903_v7/FINAL_EVIDENCE_AND_DECISION_2026-09-03.md",
+      "bytes": 2445,
+      "sha256": "d0cbded69b0f4618574bf1a536c70615d85e4e82c08d9dc11ca8afde91c5b523"
+    },
+    {
       "path": "agent/evaluation/real_user_multiturn_replay_20260903_v7/blind_packet_builder.py",
       "bytes": 27167,
       "sha256": "534832bb419f8b1c713fe131694f5b2b1a1f7dad609b3db9914a26d96fd83d0c"
@@ -7667,11 +7701,6 @@
       "path": "agent/evaluation/real_user_multiturn_replay_20260903_v7/build_replay_schedule.py",
       "bytes": 2992,
       "sha256": "95d9125d9dcfd7dd337d73fd0a8a1f96c735bc948fc4a471054314f709411f01"
-    },
-    {
-      "path": "agent/evaluation/real_user_multiturn_replay_20260903_v7/FINAL_EVIDENCE_AND_DECISION_2026-09-03.md",
-      "bytes": 2445,
-      "sha256": "d0cbded69b0f4618574bf1a536c70615d85e4e82c08d9dc11ca8afde91c5b523"
     },
     {
       "path": "agent/evaluation/real_user_multiturn_replay_20260903_v7/verify_package.py",
@@ -8484,6 +8513,11 @@
       "sha256": "70e44eb3e7089b484da34ea836bccb0ce2a8fe006133cf03d17c0a41b6a5b267"
     },
     {
+      "path": "agent/place_data/README.md",
+      "bytes": 1424,
+      "sha256": "9db6d8c137f51d434bfdc107ffa1bf3ecfa7e5b52321d66ded97a61e9929098a"
+    },
+    {
       "path": "agent/place_data/demo/place_agent_demo_report.json",
       "bytes": 44597,
       "sha256": "5647b4d897d9ae521eb84f0771324401b2283b7ed4d2bf4f21ad27dedaabefe1"
@@ -8517,11 +8551,6 @@
       "path": "agent/place_data/eval/place_agent_validation_targeted_report.json",
       "bytes": 15560,
       "sha256": "40fc80d14fddb9724c047e2e313892904d1a118dfb7465718557efae2e6b2f9c"
-    },
-    {
-      "path": "agent/place_data/README.md",
-      "bytes": 1424,
-      "sha256": "9db6d8c137f51d434bfdc107ffa1bf3ecfa7e5b52321d66ded97a61e9929098a"
     },
     {
       "path": "agent/pyproject.toml",
@@ -9530,8 +9559,8 @@
     },
     {
       "path": "agent/tests/test_catalog_multiturn_subject.py",
-      "bytes": 9177,
-      "sha256": "262184a09838ec3ab84d823905406bbc72deb3064673379c0d6b3173cc1560bf"
+      "bytes": 11365,
+      "sha256": "8302ec55661a05a0026388aa39d67e670e57783b4a5ceba1f53d33777593db07"
     },
     {
       "path": "agent/tests/test_catalog_parallel_read.py",
@@ -9545,8 +9574,8 @@
     },
     {
       "path": "agent/tests/test_catalog_requirement_repair.py",
-      "bytes": 7085,
-      "sha256": "98392fdffd0e01841cf9dd1dd4fb53cc7f75fa3a644e77737ad49e1ef9efc887"
+      "bytes": 12532,
+      "sha256": "a4b223c200e7c8151d1de95de7722dab299f4f7e6d5b16fe1983939bdcf9bed3"
     },
     {
       "path": "agent/tests/test_catalog_search_integration.py",
@@ -9560,13 +9589,13 @@
     },
     {
       "path": "agent/tests/test_catalog_workspace.py",
-      "bytes": 14796,
-      "sha256": "a051b34e84ac54e2b5aaa8aafaee8504e4fcc907a7b1a4a07ae85133aab5f6b5"
+      "bytes": 21188,
+      "sha256": "4e3b2ce73c26424c5291e5aae346979f5c75e3d89c352b3bb39987cb7c08feb1"
     },
     {
       "path": "agent/tests/test_chat_endpoint.py",
-      "bytes": 107485,
-      "sha256": "d815b0595311c5483d871f9263994adf1c59abb60f00d5516596062c6aa6a319"
+      "bytes": 107834,
+      "sha256": "2b5abd7323ef417c7e33d4e63617dfd6a6be90abf5dbdff820ee74c82582effe"
     },
     {
       "path": "agent/tests/test_chat_recovery_repairs.py",
@@ -9882,6 +9911,16 @@
       "path": "agent/tests/test_graph_v2_terminal_atomic_redis_integration.py",
       "bytes": 5412,
       "sha256": "5825908a118f4d1a868f75689da55cc79b5a7a4bd4cdf80e3270995d0855eaf6"
+    },
+    {
+      "path": "agent/tests/test_guide_runtime.py",
+      "bytes": 11653,
+      "sha256": "4c7afcf41328aed081b3da00ed105786f8e299f80511754b75fd16b1d5e7291c"
+    },
+    {
+      "path": "agent/tests/test_guide_state.py",
+      "bytes": 17707,
+      "sha256": "28b92f917c6e8e14dbd784475b1b2f46acb73db8aa99031da4634a7aea0cceef"
     },
     {
       "path": "agent/tests/test_harness.py",
@@ -10240,8 +10279,8 @@
     },
     {
       "path": "agent/tests/test_product_followup.py",
-      "bytes": 8652,
-      "sha256": "8df3562aafa7adcf88310165eaa5c9dfa01bd87017899c93987224c2bc6721aa"
+      "bytes": 8705,
+      "sha256": "f0b0a2e0c085827974872f333a5b3cdb5d95bac7bcae09aef39c187919a6f64d"
     },
     {
       "path": "agent/tests/test_product_knowledge_v1.py",
@@ -10250,8 +10289,8 @@
     },
     {
       "path": "agent/tests/test_product_published_scope.py",
-      "bytes": 2991,
-      "sha256": "d637dd63a20a1d8c72f362556aa0195141f267cdc296d4408a54dda93a72233f"
+      "bytes": 3676,
+      "sha256": "fbb13c707a29390a8b6005e377cce7b492ad68075b8486e73ecfd89485d0d563"
     },
     {
       "path": "agent/tests/test_product_qrel_review_workflow.py",
@@ -10855,8 +10894,13 @@
     },
     {
       "path": "agent/tests/test_ui_four_repairs.py",
-      "bytes": 12161,
-      "sha256": "3d68490c75aed7e8bff3bba00802389c63c33e3f89cd6f00598a114cc0a0b94b"
+      "bytes": 12501,
+      "sha256": "f2ca4395cde63a9f81428f5baf06808d7e62ba60e99159894fb3ca259439a48f"
+    },
+    {
+      "path": "agent/tests/test_unified_guide_endpoints.py",
+      "bytes": 5096,
+      "sha256": "bb50b15d4e963d00986e0c9aa526b25781a842b15c75f2b5096552e41d7a8c5b"
     },
     {
       "path": "agent/tests/test_unsupported_category_boundary.py",
@@ -11139,6 +11183,141 @@
       "sha256": "799737beb9acb4422dfb05a2eac51959b3aa6896a0ef3379ec8670831d457d28"
     },
     {
+      "path": "backend-gateway/Dockerfile",
+      "bytes": 436,
+      "sha256": "3e2288b48a2502224b4d56e4fbc803a21326770cd1d89cc7f5ec4ce25963b8f4"
+    },
+    {
+      "path": "backend-gateway/pom.xml",
+      "bytes": 3265,
+      "sha256": "f0c79af50dcc4e4899b0bb46199cc4ab9a99b077b908b1c93580e77caa36ea09"
+    },
+    {
+      "path": "backend-gateway/settings.xml",
+      "bytes": 550,
+      "sha256": "15cc4b7386d7d7fb2667c36af7c924a96dccf4fbde00f918b7802ebca38e4079"
+    },
+    {
+      "path": "backend-gateway/src/main/java/com/example/locallife/gateway/GatewayApplication.java",
+      "bytes": 334,
+      "sha256": "aeb387d7a3be1819b8d1fd5c134f914fea68246d74a0bc33384bc656034d7ad1"
+    },
+    {
+      "path": "backend-gateway/src/main/java/com/example/locallife/gateway/GatewayAuthProperties.java",
+      "bytes": 674,
+      "sha256": "22256b7d104804e16dd2b6ec40655409992614c0222ffe578889eacbdf478a26"
+    },
+    {
+      "path": "backend-gateway/src/main/java/com/example/locallife/gateway/GatewayRateLimitFilter.java",
+      "bytes": 4454,
+      "sha256": "a3e2c8c59503b117a89a8ccbaac7d4f8d9111f86140935ed2e646c144c883499"
+    },
+    {
+      "path": "backend-gateway/src/main/java/com/example/locallife/gateway/GatewayRateLimitProperties.java",
+      "bytes": 698,
+      "sha256": "d6bca636533fc8ba4871fd4c8c93baf4c87783ac77d82f8bbb696fd7c55203b3"
+    },
+    {
+      "path": "backend-gateway/src/main/java/com/example/locallife/gateway/GatewaySecurityConfiguration.java",
+      "bytes": 6625,
+      "sha256": "d11cf6ca90fa7ef9cc1ca95ce2f955e190787d80db8743e82fb18f070771231b"
+    },
+    {
+      "path": "backend-gateway/src/main/java/com/example/locallife/gateway/ReactiveSlidingWindowRateLimiter.java",
+      "bytes": 4464,
+      "sha256": "0c20df91cc92934bcd5e7c51064e95b705d4fcf6646c1c9e43da029b6c154e39"
+    },
+    {
+      "path": "backend-gateway/src/main/resources/application-microservices.yml",
+      "bytes": 1297,
+      "sha256": "841b6b201ac1cd431c15219006731bfad932e2ed2d47834f697a4f769b0c10d5"
+    },
+    {
+      "path": "backend-gateway/src/main/resources/application.yml",
+      "bytes": 1392,
+      "sha256": "a996253ff0716014a58c29d06df527eae6fb9bedc7357b08cc50d780a187ae8b"
+    },
+    {
+      "path": "backend-gateway/src/test/java/com/example/locallife/gateway/GatewayRateLimitEnabledContextTests.java",
+      "bytes": 789,
+      "sha256": "3cdc0a6a6f8a62acc68974e27362cc098a2e5f7248ccfe38bcebce375a37861d"
+    },
+    {
+      "path": "backend-gateway/src/test/java/com/example/locallife/gateway/GatewayRateLimitFilterTests.java",
+      "bytes": 1925,
+      "sha256": "44848d38ec0ef5955550d6cbeb3cc89b20211fd3b38862f893e334a2522e2b25"
+    },
+    {
+      "path": "backend-gateway/src/test/java/com/example/locallife/gateway/GatewayRouteAndSecurityTests.java",
+      "bytes": 3869,
+      "sha256": "612ae89311c897dd3ff5d199ad1491a008fc2c83b0ac44f5782fbe407e6bd3f3"
+    },
+    {
+      "path": "backend-inventory/.dockerignore",
+      "bytes": 77,
+      "sha256": "ee0c4b9ec374e7814e978e5a1974f330081c029634703441eb6e3102b645d87a"
+    },
+    {
+      "path": "backend-inventory/Dockerfile",
+      "bytes": 152,
+      "sha256": "540a1653b8c0d20e9a82fcad640d8f50d546a5dc0c0e4ead0a3100f9f72e617a"
+    },
+    {
+      "path": "backend-inventory/pom.xml",
+      "bytes": 1859,
+      "sha256": "59c38d7b46c77403348276c7bcb214e0953249fbf38f48d4d0db82ba7706d299"
+    },
+    {
+      "path": "backend-inventory/src/main/java/com/example/inventoryservice/InternalIdentityFilter.java",
+      "bytes": 2128,
+      "sha256": "b5ce27c8b02859a639cfbc7269f5e91126b27cc05029bb3a9cd830683a58924c"
+    },
+    {
+      "path": "backend-inventory/src/main/java/com/example/inventoryservice/InventoryApplication.java",
+      "bytes": 324,
+      "sha256": "0edc3886c3d55da243490201ee82ed3faa6917768430c53042dfbc5f7c907526"
+    },
+    {
+      "path": "backend-inventory/src/main/java/com/example/inventoryservice/InventoryCommands.java",
+      "bytes": 13379,
+      "sha256": "41339417362640975e4c77944b389ee4e92b27222ecea10658e44ac8ce89accf"
+    },
+    {
+      "path": "backend-inventory/src/main/java/com/example/inventoryservice/InventoryController.java",
+      "bytes": 1472,
+      "sha256": "483be73946be7e755e3a5cda869e99a5706c46c4e7bbdbe2ebf5194307737da7"
+    },
+    {
+      "path": "backend-inventory/src/main/java/com/example/inventoryservice/InventoryProtocol.java",
+      "bytes": 3221,
+      "sha256": "91d30974318b1cfcaba5ac60042e659539712fd874f4d15ca98f4c8b87e8cb97"
+    },
+    {
+      "path": "backend-inventory/src/main/resources/application.yml",
+      "bytes": 701,
+      "sha256": "666f473b7147dd90cd169b7e809d89992657a6bc078cb01a9ce8024be9aae047"
+    },
+    {
+      "path": "backend-inventory/src/main/resources/db/migration/V1__owned_inventory.sql",
+      "bytes": 2160,
+      "sha256": "204dfcdaa54c9a2866341218ec6dde2f293a5af1b2b12dda60e2114303e54b72"
+    },
+    {
+      "path": "backend-inventory/src/main/resources/db/migration/V2__returned_inventory.sql",
+      "bytes": 602,
+      "sha256": "29b171296aea38abff36a0572adaa2f0b439a832c6bf5e1d44ccb12a731606ee"
+    },
+    {
+      "path": "backend-inventory/src/test/java/com/example/inventoryservice/InventoryProtocolTest.java",
+      "bytes": 1796,
+      "sha256": "962b01bd913aa1f0b151296c917baf08d0d79294b167122c541a11c9250dcf8d"
+    },
+    {
+      "path": "backend-inventory/src/test/java/com/example/inventoryservice/ReturnedInventoryIntegrationTest.java",
+      "bytes": 5615,
+      "sha256": "9e21ead1ead664c209878334e896cbc2648a6b5ec4082dd0019f8e83858e9161"
+    },
+    {
       "path": "backend/.dockerignore",
       "bytes": 31,
       "sha256": "7f240460af5280f15b9007cce0f71424a773860982d18e9652a21cac4969636a"
@@ -11172,6 +11351,11 @@
       "path": "backend/src/main/java/com/example/cloudclient/CatalogLoadBalancerConfiguration.java",
       "bytes": 994,
       "sha256": "4f8454f674d302ba941e823c38033de473ba3b144945d8c44e81f92723e896d4"
+    },
+    {
+      "path": "backend/src/main/java/com/example/locallife/LocalLifeApplication.java",
+      "bytes": 499,
+      "sha256": "372c45ace5125b9201f09f68501470b3432a9984cf261ac3b79cae96b44f9243"
     },
     {
       "path": "backend/src/main/java/com/example/locallife/behavior/CreateUserBehaviorRequest.java",
@@ -11504,11 +11688,6 @@
       "sha256": "1078b9b228a45f393e9b587ae607d5ae2bca6362736638add5bd11ae0cb92a20"
     },
     {
-      "path": "backend/src/main/java/com/example/locallife/identity/AuthenticatedIdentityResponse.java",
-      "bytes": 166,
-      "sha256": "640d01a3b8f0f88bd7ab74a9c5504eab21b507493fa02f23f586d906e8fe5725"
-    },
-    {
       "path": "backend/src/main/java/com/example/locallife/identity/AuthExceptionHandler.java",
       "bytes": 612,
       "sha256": "053e46a288710f222584b96c1c172812597408705650f86c71ca1c4df430d0a3"
@@ -11537,6 +11716,11 @@
       "path": "backend/src/main/java/com/example/locallife/identity/AuthUserResponse.java",
       "bytes": 148,
       "sha256": "4cf615f236c84df8a47a52f961d2cb018417320fab56bcc90b36375c4ed24f59"
+    },
+    {
+      "path": "backend/src/main/java/com/example/locallife/identity/AuthenticatedIdentityResponse.java",
+      "bytes": 166,
+      "sha256": "640d01a3b8f0f88bd7ab74a9c5504eab21b507493fa02f23f586d906e8fe5725"
     },
     {
       "path": "backend/src/main/java/com/example/locallife/identity/IdentityController.java",
@@ -11784,6 +11968,16 @@
       "sha256": "fd085da8c4e6fc18222085c1e2fe95784f413a79170446efe8ca268d52ae5476"
     },
     {
+      "path": "backend/src/main/java/com/example/locallife/inventory/ReplacementInventory.java",
+      "bytes": 6037,
+      "sha256": "22adbb1b94b1042c9581f68889304060891f4db26bd74b54ade679358c33a8cf"
+    },
+    {
+      "path": "backend/src/main/java/com/example/locallife/inventory/ReturnedInventory.java",
+      "bytes": 3774,
+      "sha256": "e42c5a3340fd7628149f58404de30252da7bfdf72ff85b8735041216ae846ea5"
+    },
+    {
       "path": "backend/src/main/java/com/example/locallife/inventory/remote/DistributedInventory.java",
       "bytes": 2539,
       "sha256": "56879c68fcad8c50b46e65c013ff2911c8cdfd9629304fc48a426f73187cd0d9"
@@ -11817,21 +12011,6 @@
       "path": "backend/src/main/java/com/example/locallife/inventory/remote/StockCommand.java",
       "bytes": 944,
       "sha256": "667f13db183abaf4a8008da7a74c175369bca4dffd8a2ea5f0d88a3d2bb9d426"
-    },
-    {
-      "path": "backend/src/main/java/com/example/locallife/inventory/ReplacementInventory.java",
-      "bytes": 6037,
-      "sha256": "22adbb1b94b1042c9581f68889304060891f4db26bd74b54ade679358c33a8cf"
-    },
-    {
-      "path": "backend/src/main/java/com/example/locallife/inventory/ReturnedInventory.java",
-      "bytes": 3774,
-      "sha256": "e42c5a3340fd7628149f58404de30252da7bfdf72ff85b8735041216ae846ea5"
-    },
-    {
-      "path": "backend/src/main/java/com/example/locallife/LocalLifeApplication.java",
-      "bytes": 499,
-      "sha256": "372c45ace5125b9201f09f68501470b3432a9984cf261ac3b79cae96b44f9243"
     },
     {
       "path": "backend/src/main/java/com/example/locallife/marketing/CouponController.java",
@@ -12044,11 +12223,6 @@
       "sha256": "4600c18801ad00fa4a84203d8ad86722abe2628e5b8076cd5b60a2bad99fd677"
     },
     {
-      "path": "backend/src/main/java/com/example/locallife/ordering/OrderingExceptionHandler.java",
-      "bytes": 2610,
-      "sha256": "49f767dfed621293d2c9d1b2385eb7bbf73b406c7b65f471db0c1abbaaaf1fba"
-    },
-    {
       "path": "backend/src/main/java/com/example/locallife/ordering/OrderItem.java",
       "bytes": 300,
       "sha256": "e350a5674b7ded337fc39f9df8f37bb1fe3d944476fd8bf665b7aeb538a878ec"
@@ -12087,6 +12261,11 @@
       "path": "backend/src/main/java/com/example/locallife/ordering/OrderStatus.java",
       "bytes": 171,
       "sha256": "8c501f6ebb76cab4177af2b81cec3c92c78a9afc3723353c2a39780600e3ced6"
+    },
+    {
+      "path": "backend/src/main/java/com/example/locallife/ordering/OrderingExceptionHandler.java",
+      "bytes": 2610,
+      "sha256": "49f767dfed621293d2c9d1b2385eb7bbf73b406c7b65f471db0c1abbaaaf1fba"
     },
     {
       "path": "backend/src/main/java/com/example/locallife/ordering/RemoteCommerceCatalogClient.java",
@@ -12854,6 +13033,26 @@
       "sha256": "b8712b50c9421e2b010b10d8ab43c121ddac09aab33c23ac05a4e6a4f228f7d2"
     },
     {
+      "path": "backend/src/test/java/com/example/locallife/LocalLifeApplicationTests.java",
+      "bytes": 225,
+      "sha256": "2dea887dda792ec3e75807a1c58b6a66ab0372f2e0bf299c7d1d60d8f5aea3a7"
+    },
+    {
+      "path": "backend/src/test/java/com/example/locallife/ModularityTests.java",
+      "bytes": 308,
+      "sha256": "aff1162469bddd763041a63126cff475abd6da97f1006c4407710fb6600ef16a"
+    },
+    {
+      "path": "backend/src/test/java/com/example/locallife/ProductionFeatureContextTests.java",
+      "bytes": 615,
+      "sha256": "4b93ba1597600f98ed54b0c3fea53943880b29f0446db4558b66f8daa0cca418"
+    },
+    {
+      "path": "backend/src/test/java/com/example/locallife/SearchFeatureContextTests.java",
+      "bytes": 1820,
+      "sha256": "079ad3c6a3105626d4cf32b95f686986ad780524a172926b1eb908702972a680"
+    },
+    {
       "path": "backend/src/test/java/com/example/locallife/behavior/UserBehaviorControllerTests.java",
       "bytes": 5875,
       "sha256": "64944aac7496f6e26785e19e4043908e31b8098a43c508a1a2f74694f5a7d61b"
@@ -13014,11 +13213,6 @@
       "sha256": "bd0911daadea70033ef43165296ada35681a2fd15bfbaec83f3702e30b3c8751"
     },
     {
-      "path": "backend/src/test/java/com/example/locallife/LocalLifeApplicationTests.java",
-      "bytes": 225,
-      "sha256": "2dea887dda792ec3e75807a1c58b6a66ab0372f2e0bf299c7d1d60d8f5aea3a7"
-    },
-    {
       "path": "backend/src/test/java/com/example/locallife/memory/ShoppingMemoryControllerTests.java",
       "bytes": 9730,
       "sha256": "4c8a0810417e39d5aabd023764f285e9a8d7b9169ec8bcb9dbef0627c84ca96d"
@@ -13079,11 +13273,6 @@
       "sha256": "7ba68440bdff05bb04229ee49dd4c3e4d3618a6a4f00d4a6caa9d36f414717e6"
     },
     {
-      "path": "backend/src/test/java/com/example/locallife/ModularityTests.java",
-      "bytes": 308,
-      "sha256": "aff1162469bddd763041a63126cff475abd6da97f1006c4407710fb6600ef16a"
-    },
-    {
       "path": "backend/src/test/java/com/example/locallife/observability/CorrelationIdFilterTests.java",
       "bytes": 1557,
       "sha256": "e3b18d311d213aaec740352befd996046ecdc24d192d4689d66f625353ade82c"
@@ -13109,11 +13298,6 @@
       "sha256": "0e343941a1e0c3ebf771858941ee15658aab051800d1add2917ba10972b24305"
     },
     {
-      "path": "backend/src/test/java/com/example/locallife/ordering/OrderingExceptionHandlerTests.java",
-      "bytes": 2804,
-      "sha256": "99de65d9207c59d4dbfec94e775eecfacccccbd7081f8d0e684caee50c7a7367"
-    },
-    {
       "path": "backend/src/test/java/com/example/locallife/ordering/OrderPageIntegrationTests.java",
       "bytes": 6165,
       "sha256": "06796ee69ecf7e4e2815344d10d47dc4c72190531387897e63e7acd6fe72bb9c"
@@ -13122,6 +13306,11 @@
       "path": "backend/src/test/java/com/example/locallife/ordering/OrderServiceIntegrationTests.java",
       "bytes": 11278,
       "sha256": "a53bd98bef31625013be73689d6171d06b137fb549e892aaeeee84c7d5b9edfa"
+    },
+    {
+      "path": "backend/src/test/java/com/example/locallife/ordering/OrderingExceptionHandlerTests.java",
+      "bytes": 2804,
+      "sha256": "99de65d9207c59d4dbfec94e775eecfacccccbd7081f8d0e684caee50c7a7367"
     },
     {
       "path": "backend/src/test/java/com/example/locallife/ordering/RemoteCommerceCatalogPortTests.java",
@@ -13219,11 +13408,6 @@
       "sha256": "3cec23f071120dc33fb98bf2ac76400f5f512d6261f9f07452e0f0ce8598a203"
     },
     {
-      "path": "backend/src/test/java/com/example/locallife/ProductionFeatureContextTests.java",
-      "bytes": 615,
-      "sha256": "4b93ba1597600f98ed54b0c3fea53943880b29f0446db4558b66f8daa0cca418"
-    },
-    {
       "path": "backend/src/test/java/com/example/locallife/recommendation/ShopRecommendationControllerTests.java",
       "bytes": 7325,
       "sha256": "a1d7b791f62ede985aee8db2182c1c4d08955196c2fcd1d59acdca5c76349a26"
@@ -13272,11 +13456,6 @@
       "path": "backend/src/test/java/com/example/locallife/search/SearchReconcileScopeTests.java",
       "bytes": 1049,
       "sha256": "45975968bcbbea867fe780598e152e8403a5758225b0eb408901be5ea3eafa31"
-    },
-    {
-      "path": "backend/src/test/java/com/example/locallife/SearchFeatureContextTests.java",
-      "bytes": 1820,
-      "sha256": "079ad3c6a3105626d4cf32b95f686986ad780524a172926b1eb908702972a680"
     },
     {
       "path": "backend/src/test/java/com/example/locallife/shop/ShopCacheTests.java",
@@ -13354,141 +13533,6 @@
       "sha256": "2ea816a5803f1c9833baf94e1e1019be24c239f8fdc83ab5204ce16676c17fa7"
     },
     {
-      "path": "backend-gateway/Dockerfile",
-      "bytes": 436,
-      "sha256": "3e2288b48a2502224b4d56e4fbc803a21326770cd1d89cc7f5ec4ce25963b8f4"
-    },
-    {
-      "path": "backend-gateway/pom.xml",
-      "bytes": 3265,
-      "sha256": "f0c79af50dcc4e4899b0bb46199cc4ab9a99b077b908b1c93580e77caa36ea09"
-    },
-    {
-      "path": "backend-gateway/settings.xml",
-      "bytes": 550,
-      "sha256": "15cc4b7386d7d7fb2667c36af7c924a96dccf4fbde00f918b7802ebca38e4079"
-    },
-    {
-      "path": "backend-gateway/src/main/java/com/example/locallife/gateway/GatewayApplication.java",
-      "bytes": 334,
-      "sha256": "aeb387d7a3be1819b8d1fd5c134f914fea68246d74a0bc33384bc656034d7ad1"
-    },
-    {
-      "path": "backend-gateway/src/main/java/com/example/locallife/gateway/GatewayAuthProperties.java",
-      "bytes": 674,
-      "sha256": "22256b7d104804e16dd2b6ec40655409992614c0222ffe578889eacbdf478a26"
-    },
-    {
-      "path": "backend-gateway/src/main/java/com/example/locallife/gateway/GatewayRateLimitFilter.java",
-      "bytes": 4454,
-      "sha256": "a3e2c8c59503b117a89a8ccbaac7d4f8d9111f86140935ed2e646c144c883499"
-    },
-    {
-      "path": "backend-gateway/src/main/java/com/example/locallife/gateway/GatewayRateLimitProperties.java",
-      "bytes": 698,
-      "sha256": "d6bca636533fc8ba4871fd4c8c93baf4c87783ac77d82f8bbb696fd7c55203b3"
-    },
-    {
-      "path": "backend-gateway/src/main/java/com/example/locallife/gateway/GatewaySecurityConfiguration.java",
-      "bytes": 6625,
-      "sha256": "d11cf6ca90fa7ef9cc1ca95ce2f955e190787d80db8743e82fb18f070771231b"
-    },
-    {
-      "path": "backend-gateway/src/main/java/com/example/locallife/gateway/ReactiveSlidingWindowRateLimiter.java",
-      "bytes": 4464,
-      "sha256": "0c20df91cc92934bcd5e7c51064e95b705d4fcf6646c1c9e43da029b6c154e39"
-    },
-    {
-      "path": "backend-gateway/src/main/resources/application-microservices.yml",
-      "bytes": 1297,
-      "sha256": "841b6b201ac1cd431c15219006731bfad932e2ed2d47834f697a4f769b0c10d5"
-    },
-    {
-      "path": "backend-gateway/src/main/resources/application.yml",
-      "bytes": 1392,
-      "sha256": "a996253ff0716014a58c29d06df527eae6fb9bedc7357b08cc50d780a187ae8b"
-    },
-    {
-      "path": "backend-gateway/src/test/java/com/example/locallife/gateway/GatewayRateLimitEnabledContextTests.java",
-      "bytes": 789,
-      "sha256": "3cdc0a6a6f8a62acc68974e27362cc098a2e5f7248ccfe38bcebce375a37861d"
-    },
-    {
-      "path": "backend-gateway/src/test/java/com/example/locallife/gateway/GatewayRateLimitFilterTests.java",
-      "bytes": 1925,
-      "sha256": "44848d38ec0ef5955550d6cbeb3cc89b20211fd3b38862f893e334a2522e2b25"
-    },
-    {
-      "path": "backend-gateway/src/test/java/com/example/locallife/gateway/GatewayRouteAndSecurityTests.java",
-      "bytes": 3869,
-      "sha256": "612ae89311c897dd3ff5d199ad1491a008fc2c83b0ac44f5782fbe407e6bd3f3"
-    },
-    {
-      "path": "backend-inventory/.dockerignore",
-      "bytes": 77,
-      "sha256": "ee0c4b9ec374e7814e978e5a1974f330081c029634703441eb6e3102b645d87a"
-    },
-    {
-      "path": "backend-inventory/Dockerfile",
-      "bytes": 152,
-      "sha256": "540a1653b8c0d20e9a82fcad640d8f50d546a5dc0c0e4ead0a3100f9f72e617a"
-    },
-    {
-      "path": "backend-inventory/pom.xml",
-      "bytes": 1859,
-      "sha256": "59c38d7b46c77403348276c7bcb214e0953249fbf38f48d4d0db82ba7706d299"
-    },
-    {
-      "path": "backend-inventory/src/main/java/com/example/inventoryservice/InternalIdentityFilter.java",
-      "bytes": 2128,
-      "sha256": "b5ce27c8b02859a639cfbc7269f5e91126b27cc05029bb3a9cd830683a58924c"
-    },
-    {
-      "path": "backend-inventory/src/main/java/com/example/inventoryservice/InventoryApplication.java",
-      "bytes": 324,
-      "sha256": "0edc3886c3d55da243490201ee82ed3faa6917768430c53042dfbc5f7c907526"
-    },
-    {
-      "path": "backend-inventory/src/main/java/com/example/inventoryservice/InventoryCommands.java",
-      "bytes": 13379,
-      "sha256": "41339417362640975e4c77944b389ee4e92b27222ecea10658e44ac8ce89accf"
-    },
-    {
-      "path": "backend-inventory/src/main/java/com/example/inventoryservice/InventoryController.java",
-      "bytes": 1472,
-      "sha256": "483be73946be7e755e3a5cda869e99a5706c46c4e7bbdbe2ebf5194307737da7"
-    },
-    {
-      "path": "backend-inventory/src/main/java/com/example/inventoryservice/InventoryProtocol.java",
-      "bytes": 3221,
-      "sha256": "91d30974318b1cfcaba5ac60042e659539712fd874f4d15ca98f4c8b87e8cb97"
-    },
-    {
-      "path": "backend-inventory/src/main/resources/application.yml",
-      "bytes": 701,
-      "sha256": "666f473b7147dd90cd169b7e809d89992657a6bc078cb01a9ce8024be9aae047"
-    },
-    {
-      "path": "backend-inventory/src/main/resources/db/migration/V1__owned_inventory.sql",
-      "bytes": 2160,
-      "sha256": "204dfcdaa54c9a2866341218ec6dde2f293a5af1b2b12dda60e2114303e54b72"
-    },
-    {
-      "path": "backend-inventory/src/main/resources/db/migration/V2__returned_inventory.sql",
-      "bytes": 602,
-      "sha256": "29b171296aea38abff36a0572adaa2f0b439a832c6bf5e1d44ccb12a731606ee"
-    },
-    {
-      "path": "backend-inventory/src/test/java/com/example/inventoryservice/InventoryProtocolTest.java",
-      "bytes": 1796,
-      "sha256": "962b01bd913aa1f0b151296c917baf08d0d79294b167122c541a11c9250dcf8d"
-    },
-    {
-      "path": "backend-inventory/src/test/java/com/example/inventoryservice/ReturnedInventoryIntegrationTest.java",
-      "bytes": 5615,
-      "sha256": "9e21ead1ead664c209878334e896cbc2648a6b5ec4082dd0019f8e83858e9161"
-    },
-    {
       "path": "compose.merged-commerce.yml",
       "bytes": 1484,
       "sha256": "7315241015699c4e18e838c945154342513d60fbc10b4b5b19c1b64d1537ea94"
@@ -13539,6 +13583,11 @@
       "sha256": "c5c57e1173cf48fb2f009a48d389b7e6f4e7254c3f2cc486656c90632ca8557c"
     },
     {
+      "path": "datasets/README.md",
+      "bytes": 7843,
+      "sha256": "8b5937d9d2dda67a4ff96cc1e3b6f4f4db4e519760dca36890dbc61b94c9cf78"
+    },
+    {
       "path": "datasets/knowledge/phone-v1/COVERAGE.md",
       "bytes": 19673,
       "sha256": "518984bbcffe09acac1e7c7e5e956f4909b4c903db2e4d6e08e2bf78390d44dd"
@@ -13547,11 +13596,6 @@
       "path": "datasets/knowledge/phone-v2/COVERAGE.md",
       "bytes": 72413,
       "sha256": "1a48c9bf839e5ded9b4d9cda06a5d1bb99c755db52f203419c8c0dfc04ca710c"
-    },
-    {
-      "path": "datasets/README.md",
-      "bytes": 7843,
-      "sha256": "8b5937d9d2dda67a4ff96cc1e3b6f4f4db4e519760dca36890dbc61b94c9cf78"
     },
     {
       "path": "datasets/support/README.md",
@@ -13606,12 +13650,47 @@
     {
       "path": "docker-compose.yml",
       "bytes": 20213,
-      "sha256": "6c3222918a79d032c4958e1795d5f4c5c2384a51e927a149c7cd43c6bbe0f1f9"
+      "sha256": "239ba97e9d6fd62515074ec9e4874d9b0e97714b5920031117ebebc3f82547cf"
     },
     {
       "path": "docs/2026年09月唯一待办清单.md",
       "bytes": 25919,
       "sha256": "f86616be91eb45883427c5f09ac44cc3ff88e8b936e46ed21bb2b2d9edbad7e5"
+    },
+    {
+      "path": "docs/CURRENT_PROJECT_AUTHORITY.md",
+      "bytes": 33008,
+      "sha256": "fdca129625a395a9293dd1075f0e74b0e2de4b77179f90a9d10e6d1eeb9c4102"
+    },
+    {
+      "path": "docs/DEVELOPMENT.md",
+      "bytes": 2209,
+      "sha256": "1c5af1b00baf49ce2f47cf32aca3159ab8000e6b587ca13c261fbd0277ffe813"
+    },
+    {
+      "path": "docs/FEATURE_EVIDENCE_INDEX.md",
+      "bytes": 5361,
+      "sha256": "8d48c7424d41f546183cc69a5d646ca9ae72f10317d353a1ea17695d56bb0360"
+    },
+    {
+      "path": "docs/FEATURE_MAP.md",
+      "bytes": 2270,
+      "sha256": "fda8b37b4d1fb8966d1b1e18a1e877099fd8e7781a55609c92481bd37f34cf59"
+    },
+    {
+      "path": "docs/PUBLIC_RELEASE_RUNBOOK.md",
+      "bytes": 2789,
+      "sha256": "ee984d316fd7e22e02bddcf52d4fd73b7e519e9ee349492d6692c41a2026879d"
+    },
+    {
+      "path": "docs/PUBLIC_REPOSITORY_GUIDE.md",
+      "bytes": 4245,
+      "sha256": "72800f8438765d7ad311aa72396dae80b992026ba2f3ce1a4de612c2650fc4e7"
+    },
+    {
+      "path": "docs/TESTING.md",
+      "bytes": 2389,
+      "sha256": "cb9705b7c84f38437d70ddbffde0eeb99b0f25d65d7900204b8b9ff625ba191d"
     },
     {
       "path": "docs/acceptance/agent-runtime-path-convergence-2026-09-01.md",
@@ -13629,6 +13708,11 @@
       "sha256": "9c8f1b9548b0b12eb6cdaec3065d4f48037f835e9018bb2b1fd0a42e7de73210"
     },
     {
+      "path": "docs/acceptance/frontend-orders-2026-09-08.md",
+      "bytes": 5311,
+      "sha256": "0a7f23033dc5e1efeb0c3dfd0d4bf76affda2b9d4f45bcefda6734c2a850d088"
+    },
+    {
       "path": "docs/acceptance/frontend-orders-2026-09-08/desktop-orders.png",
       "bytes": 102187,
       "sha256": "1fcffa0c333759af9febbfe9b2de83ce58f78e9190789efb873d6e0eb124dd6a"
@@ -13642,11 +13726,6 @@
       "path": "docs/acceptance/frontend-orders-2026-09-08/registration-dialog.png",
       "bytes": 85057,
       "sha256": "cb2439ea7725af4de7134c11ba0996dfd0ada6cf14e2e89722e750e343c3131e"
-    },
-    {
-      "path": "docs/acceptance/frontend-orders-2026-09-08.md",
-      "bytes": 5311,
-      "sha256": "0a7f23033dc5e1efeb0c3dfd0d4bf76affda2b9d4f45bcefda6734c2a850d088"
     },
     {
       "path": "docs/acceptance/github-publication-and-demo-2026-09-03.md",
@@ -13689,6 +13768,11 @@
       "sha256": "54e246782de8b479151815d7d2bec3b8f614cbe7cf54fcae0aa0a4c7b8670c96"
     },
     {
+      "path": "docs/analysis-briefs/product-knowledge-mcp-2026-09-07/README.md",
+      "bytes": 17177,
+      "sha256": "4fdc6d5eaa3acd9cf8bae9191c4c929d024d3e281eed0e3ee2c62c4596f2a911"
+    },
+    {
       "path": "docs/analysis-briefs/product-knowledge-mcp-2026-09-07/audit_phone_sources.py",
       "bytes": 16206,
       "sha256": "938929726c3e749746beaa437ce072079efaaed18d5396a01170883bc03afb00"
@@ -13697,11 +13781,6 @@
       "path": "docs/analysis-briefs/product-knowledge-mcp-2026-09-07/phone-sources-20260908/README.md",
       "bytes": 13368,
       "sha256": "240be7678586018970dfd10a774b214cc0fbb325e2bb935e48f4fd987aad9f27"
-    },
-    {
-      "path": "docs/analysis-briefs/product-knowledge-mcp-2026-09-07/README.md",
-      "bytes": 17177,
-      "sha256": "4fdc6d5eaa3acd9cf8bae9191c4c929d024d3e281eed0e3ee2c62c4596f2a911"
     },
     {
       "path": "docs/architecture/chat-streaming-20260915/ACCEPTANCE.md",
@@ -13769,11 +13848,6 @@
       "sha256": "9f88c95e99ee1cf3b2cafc2b06b25345031a842ba61c0b64cf7e0bafbbc0e6fe"
     },
     {
-      "path": "docs/CURRENT_PROJECT_AUTHORITY.md",
-      "bytes": 33008,
-      "sha256": "fdca129625a395a9293dd1075f0e74b0e2de4b77179f90a9d10e6d1eeb9c4102"
-    },
-    {
       "path": "docs/data/dataset-ledger-2026-09-08/README.md",
       "bytes": 4380,
       "sha256": "630902eac964af686207bc3a1cba3855a55aa395a91fcb995836079d2ae5e532"
@@ -13799,19 +13873,14 @@
       "sha256": "2849f04c413c604278f44ef80835dca39a023f8416472143825b7db371743970"
     },
     {
-      "path": "docs/DEVELOPMENT.md",
-      "bytes": 2209,
-      "sha256": "1c5af1b00baf49ce2f47cf32aca3159ab8000e6b587ca13c261fbd0277ffe813"
+      "path": "docs/diagrams/current-architecture/README.md",
+      "bytes": 1794,
+      "sha256": "fb4693b0b6da4c08359e18f4b68fa894f6617cec7bc65fcb35d3af73ef897951"
     },
     {
       "path": "docs/diagrams/current-architecture/current-system.mmd",
       "bytes": 1123,
       "sha256": "1c61fd3e044ce5cf3201871348408124c559ba090db47df0d48bf521e3400b97"
-    },
-    {
-      "path": "docs/diagrams/current-architecture/README.md",
-      "bytes": 1794,
-      "sha256": "fb4693b0b6da4c08359e18f4b68fa894f6617cec7bc65fcb35d3af73ef897951"
     },
     {
       "path": "docs/experiments/backend-strengthening-v1-2026-09-04/FINAL_RESULT.md",
@@ -13934,16 +14003,6 @@
       "sha256": "d8a0767ebc130710749159a32765ad14475f7aed32a5517ae6fe141a895637fd"
     },
     {
-      "path": "docs/FEATURE_EVIDENCE_INDEX.md",
-      "bytes": 5390,
-      "sha256": "de72b3a075d3486394c0e6817c2995056d4b97eeed2be7761af96a8e0ca36659"
-    },
-    {
-      "path": "docs/FEATURE_MAP.md",
-      "bytes": 2270,
-      "sha256": "fda8b37b4d1fb8966d1b1e18a1e877099fd8e7781a55609c92481bd37f34cf59"
-    },
-    {
       "path": "docs/implementation/customer-support-20260919/API_CONTRACT.md",
       "bytes": 14693,
       "sha256": "4952a8e7cadec685daf7f61fc4547f19e0b65a43171bbbae9cb60d876f88d0b9"
@@ -13984,6 +14043,16 @@
       "sha256": "10abe5f1fd7983938cfc3d3a009e7e594c5a1748e99d9b810104259293c5fa30"
     },
     {
+      "path": "docs/implementation/unified-product-routing-20260922/PUBLICATION_SCOPE.json",
+      "bytes": 332,
+      "sha256": "a139f80161fdb6fb379ffcd378acc6b33022139cfe1430427d9bcab2ba0b402f"
+    },
+    {
+      "path": "docs/implementation/unified-product-routing-20260922/REPORT.md",
+      "bytes": 2012,
+      "sha256": "9cc78f01a1fe7412713d1441aeddc3dd94d22d8060780d7004e2c7f64e989728"
+    },
+    {
       "path": "docs/implementation/unified-product-routing-20260922/evidence/attempt002/CONTRACT.json",
       "bytes": 1393,
       "sha256": "5349a93c049b1ff62b3055f8d7bfe98db5d91544c0f27f77e241706893a2c2bd"
@@ -13997,16 +14066,6 @@
       "path": "docs/implementation/unified-product-routing-20260922/evidence/attempt002/SHA256SUMS.txt",
       "bytes": 159,
       "sha256": "1ac4f5a29cd4ad2e01a51b80a2d92ad18b29e0c899f716fdf5d875d54bb67842"
-    },
-    {
-      "path": "docs/implementation/unified-product-routing-20260922/PUBLICATION_SCOPE.json",
-      "bytes": 332,
-      "sha256": "a139f80161fdb6fb379ffcd378acc6b33022139cfe1430427d9bcab2ba0b402f"
-    },
-    {
-      "path": "docs/implementation/unified-product-routing-20260922/REPORT.md",
-      "bytes": 2012,
-      "sha256": "9cc78f01a1fe7412713d1441aeddc3dd94d22d8060780d7004e2c7f64e989728"
     },
     {
       "path": "docs/learning-notes/2026-09-07-PRODUCT-KNOWLEDGE-MCP.md",
@@ -14032,16 +14091,6 @@
       "path": "docs/project-review-20260917/PUBLICATION_SCOPE.json",
       "bytes": 683,
       "sha256": "7acd5ed07e06732c314ce9634a5d6c0219120840cf92a826a3f34710943d1e58"
-    },
-    {
-      "path": "docs/PUBLIC_REPOSITORY_GUIDE.md",
-      "bytes": 4016,
-      "sha256": "c07be17a1ec1ee63fc31721e4b9935fc80bf5b860aa5034727324f5bb91b26fa"
-    },
-    {
-      "path": "docs/TESTING.md",
-      "bytes": 2389,
-      "sha256": "cb9705b7c84f38437d70ddbffde0eeb99b0f25d65d7900204b8b9ff625ba191d"
     },
     {
       "path": "evaluation/context-multiagent-v2-feasibility-v2/phase1b-execution-report-v2.md",
@@ -15129,14 +15178,19 @@
       "sha256": "33fb896cc5be44b79c1fb61dbb05d5a8fb18ba4b1ea90dfb052c463fc00d8327"
     },
     {
-      "path": "frontend/compose.yaml",
-      "bytes": 318,
-      "sha256": "92a15252c2e085714f115c656c0ff6b970bd09ecf1ab84e51712564054a5fa7f"
-    },
-    {
       "path": "frontend/Dockerfile",
       "bytes": 245,
       "sha256": "053932d1771203006e61b459a1706234af81898baaaba39719521d8f24983f6f"
+    },
+    {
+      "path": "frontend/README.md",
+      "bytes": 10026,
+      "sha256": "06c34d99c7b3ee25f40e6a4d75c885621d5183b00ec00242d229c66260e2277d"
+    },
+    {
+      "path": "frontend/compose.yaml",
+      "bytes": 318,
+      "sha256": "92a15252c2e085714f115c656c0ff6b970bd09ecf1ab84e51712564054a5fa7f"
     },
     {
       "path": "frontend/index.html",
@@ -15174,11 +15228,6 @@
       "sha256": "b45fa506195cfcdef406ba9f0c77b36ddc1a7c224040926ec70abc2fdea7b93a"
     },
     {
-      "path": "frontend/README.md",
-      "bytes": 10147,
-      "sha256": "147b8aceb03dd6b5e552eb1f21233330b98f78fa03c6d11f4ca61152e61babef"
-    },
-    {
       "path": "frontend/src/App.css",
       "bytes": 37912,
       "sha256": "78add8b922c19cc4a04bae6170450f71de5e87dfac3cc3df94676528ad7ac4ba"
@@ -15187,21 +15236,6 @@
       "path": "frontend/src/App.tsx",
       "bytes": 33108,
       "sha256": "bd0f4b16d17ff1b297b8b729a2982cde3861c1a1c69daa0b3c83b2540f6ae65e"
-    },
-    {
-      "path": "frontend/src/assets/hero.png",
-      "bytes": 13057,
-      "sha256": "881ffbcaafc212e49addad08846a5b82761355fa20624253af3477ba33262c5c"
-    },
-    {
-      "path": "frontend/src/assets/react.svg",
-      "bytes": 4126,
-      "sha256": "35ef61ed53b323ae94a16a8ec659b3d0af3880698791133f23b084085ab1c2e5"
-    },
-    {
-      "path": "frontend/src/assets/vite.svg",
-      "bytes": 8709,
-      "sha256": "5be21acd42eb7b896e517f4e0f0f11eb5c5d9e54fbbcebe9453f033008fcca6f"
     },
     {
       "path": "frontend/src/BackendObserver.css",
@@ -15277,6 +15311,56 @@
       "path": "frontend/src/ExecutionGraph.tsx",
       "bytes": 5871,
       "sha256": "a94042a54009514e3db67c2a80d975bd59b103d609e77b963d720577ef718cfc"
+    },
+    {
+      "path": "frontend/src/MessageBody.tsx",
+      "bytes": 569,
+      "sha256": "dfb590b85e0211d5ecb58aab675097a9a8d129c0f0c72a024b83b2c1093ce0a3"
+    },
+    {
+      "path": "frontend/src/OrderAfterSales.tsx",
+      "bytes": 5349,
+      "sha256": "bcf9060ccab43645700afeb1e3f7b38c4cc31ae5e1dcaff89f76edacf161f39f"
+    },
+    {
+      "path": "frontend/src/RecommendationMode.tsx",
+      "bytes": 2350,
+      "sha256": "d85e1d251e2c83ca31c8681f837c858599622fcd38d5e936afcf9e79d0458c1f"
+    },
+    {
+      "path": "frontend/src/RunPanel.tsx",
+      "bytes": 8684,
+      "sha256": "1e6e70baf7b407b3d08be4809c2df7aaa191fb66eb4cf3e91410741b32c19d27"
+    },
+    {
+      "path": "frontend/src/Shop.css",
+      "bytes": 20481,
+      "sha256": "874e2642350459005b7316b69397ad02538c408ec32b53b0ecff99552ebd031e"
+    },
+    {
+      "path": "frontend/src/Shop.tsx",
+      "bytes": 49951,
+      "sha256": "ea6526b2f493c841c26825fb0bd4b877c9e03b9c7240e544d49a5ba6d4373a76"
+    },
+    {
+      "path": "frontend/src/ShopDrawer.tsx",
+      "bytes": 693,
+      "sha256": "f3b67a1e84715cc741cc4bd2bd2376e86b039b44678c7bcbacf6a93076d86fc4"
+    },
+    {
+      "path": "frontend/src/assets/hero.png",
+      "bytes": 13057,
+      "sha256": "881ffbcaafc212e49addad08846a5b82761355fa20624253af3477ba33262c5c"
+    },
+    {
+      "path": "frontend/src/assets/react.svg",
+      "bytes": 4126,
+      "sha256": "35ef61ed53b323ae94a16a8ec659b3d0af3880698791133f23b084085ab1c2e5"
+    },
+    {
+      "path": "frontend/src/assets/vite.svg",
+      "bytes": 8709,
+      "sha256": "5be21acd42eb7b896e517f4e0f0f11eb5c5d9e54fbbcebe9453f033008fcca6f"
     },
     {
       "path": "frontend/src/hooks/useOrders.ts",
@@ -15432,41 +15516,6 @@
       "path": "frontend/src/main.tsx",
       "bytes": 406,
       "sha256": "7054a6d1d5765c696f2c4869daef45d0d3a66fb8003c070ec34e7d6678439fcb"
-    },
-    {
-      "path": "frontend/src/MessageBody.tsx",
-      "bytes": 569,
-      "sha256": "dfb590b85e0211d5ecb58aab675097a9a8d129c0f0c72a024b83b2c1093ce0a3"
-    },
-    {
-      "path": "frontend/src/OrderAfterSales.tsx",
-      "bytes": 5349,
-      "sha256": "bcf9060ccab43645700afeb1e3f7b38c4cc31ae5e1dcaff89f76edacf161f39f"
-    },
-    {
-      "path": "frontend/src/RecommendationMode.tsx",
-      "bytes": 2350,
-      "sha256": "d85e1d251e2c83ca31c8681f837c858599622fcd38d5e936afcf9e79d0458c1f"
-    },
-    {
-      "path": "frontend/src/RunPanel.tsx",
-      "bytes": 8684,
-      "sha256": "1e6e70baf7b407b3d08be4809c2df7aaa191fb66eb4cf3e91410741b32c19d27"
-    },
-    {
-      "path": "frontend/src/Shop.css",
-      "bytes": 20481,
-      "sha256": "874e2642350459005b7316b69397ad02538c408ec32b53b0ecff99552ebd031e"
-    },
-    {
-      "path": "frontend/src/Shop.tsx",
-      "bytes": 49951,
-      "sha256": "ea6526b2f493c841c26825fb0bd4b877c9e03b9c7240e544d49a5ba6d4373a76"
-    },
-    {
-      "path": "frontend/src/ShopDrawer.tsx",
-      "bytes": 693,
-      "sha256": "f3b67a1e84715cc741cc4bd2bd2376e86b039b44678c7bcbacf6a93076d86fc4"
     },
     {
       "path": "frontend/tests/backend-explainer.spec.ts",
@@ -15639,11 +15688,6 @@
       "sha256": "58856b22f49a5911dc791cb3e8594f5ffe1a6af8af74b05db9a89ee26343146a"
     },
     {
-      "path": "README.md",
-      "bytes": 7844,
-      "sha256": "b2597cfc6947840d1ee652ec59188c3527f5388b664a37d91f56cc936a706d0e"
-    },
-    {
       "path": "retrieval_judgment_pool_core/__init__.py",
       "bytes": 172,
       "sha256": "b3c1b13ca6dbc892958b56ce0a093bb9b788626346661740cea599b8d316f1f2"
@@ -15674,6 +15718,11 @@
       "sha256": "08ebdaa7600cf2691b3277162749f185d88ada52733ec08953fad91ded2622f8"
     },
     {
+      "path": "retrieval_judgment_pool_mcp/SERVER_CONTRACT.md",
+      "bytes": 1985,
+      "sha256": "1c487af4c64f482bc63ffc68d02bb07b5246f116f778ad4968e5b73598167034"
+    },
+    {
       "path": "retrieval_judgment_pool_mcp/__init__.py",
       "bytes": 76,
       "sha256": "0950063896b5ee3635c450ac0b6be4b25ab6c96921e0347816bd46d821142a25"
@@ -15684,11 +15733,6 @@
       "sha256": "a1dc0dafeb53dac31c08f53b91ad95b4f46999d4a25eb2cd50017a08853e16b2"
     },
     {
-      "path": "retrieval_judgment_pool_mcp/SERVER_CONTRACT.md",
-      "bytes": 2017,
-      "sha256": "7a2e3749f05100b16670106b15f848f5605e0a0cb327fe2f3911243ee06a5824"
-    },
-    {
       "path": "retrieval_judgment_pool_mcp/tests/test_server.py",
       "bytes": 7906,
       "sha256": "5b560819eaef697d952157d7f986e83041615712a4b1989f2819d0dc9b94fe80"
@@ -15697,6 +15741,11 @@
       "path": "review/progress.md",
       "bytes": 160842,
       "sha256": "ad372c62415bdc8b311f8b94c4980429516a7958fa954036210f97e0a87af39b"
+    },
+    {
+      "path": "schemas/context-multiagent-v1/README.md",
+      "bytes": 885,
+      "sha256": "2f87b182a21e543c3391ebe0f02f4158aa313e28b309c735c857d59122aa110d"
     },
     {
       "path": "schemas/context-multiagent-v1/context-item.schema.json",
@@ -15717,11 +15766,6 @@
       "path": "schemas/context-multiagent-v1/model-call-receipt.schema.json",
       "bytes": 2482,
       "sha256": "8bb56815d425b3a1c0943fdd3e41e519662a263e3079f40c36cb44c6eccb47d0"
-    },
-    {
-      "path": "schemas/context-multiagent-v1/README.md",
-      "bytes": 901,
-      "sha256": "0282a43d82a5c540f60c8ae786bf9c9a0028f299e72e7aa7a462a4b64d8bc52a"
     },
     {
       "path": "schemas/context-multiagent-v1/research-merge-receipt.schema.json",
@@ -15764,6 +15808,11 @@
       "sha256": "1d58c89387a064420b28cdf8cc4d9f071c681fbb7ed7c005382a666330dd883e"
     },
     {
+      "path": "schemas/used-phone-model-evidence-v1/README.md",
+      "bytes": 313,
+      "sha256": "b766236f80b3922de9ce0fcb91e8bc11030b6bf60b0bb664a021f2f079c915bf"
+    },
+    {
       "path": "schemas/used-phone-model-evidence-v1/model-evidence-result.schema.json",
       "bytes": 4901,
       "sha256": "4e24776adbbb08e208687c1afbef9f192747f7a3259d08ec4dcb5ca367620c17"
@@ -15772,11 +15821,6 @@
       "path": "schemas/used-phone-model-evidence-v1/model-fact.schema.json",
       "bytes": 1693,
       "sha256": "f8fcc2b8cefddddebe2e85b5906b6844c2e7b514edfb557ee7ee0fbfcd8881e9"
-    },
-    {
-      "path": "schemas/used-phone-model-evidence-v1/README.md",
-      "bytes": 320,
-      "sha256": "097d1b679a90d26d8d52985656bdfc09b0694d4e7b01613395724c9e4bf4bd1f"
     },
     {
       "path": "scripts/analyze_kuaisearch_lite_phone_behavior_v1.py",
@@ -15812,6 +15856,16 @@
       "path": "scripts/audit_product_knowledge_replays.py",
       "bytes": 6801,
       "sha256": "a54cc240107541fb5f1f299ed2c3c8dbc9621ca8807b0d02ee23cb6257bb024a"
+    },
+    {
+      "path": "scripts/audit_shopping_legacy_runs.py",
+      "bytes": 4306,
+      "sha256": "b9f96c6042fd7d07e865bf72c9e1881e1bbf77bdd4a7a9da597385815fa8c1f4"
+    },
+    {
+      "path": "scripts/backend-strengthening/README.md",
+      "bytes": 17416,
+      "sha256": "0db317212b49eebae882cbb71ae1ea8863084cd5b6734f1fdb73013b09e8c39a"
     },
     {
       "path": "scripts/backend-strengthening/analyze_mixed_workload.py",
@@ -15852,11 +15906,6 @@
       "path": "scripts/backend-strengthening/prepare_runtime.py",
       "bytes": 1094,
       "sha256": "6b0b3bacc56d98dd248006f87543d7a3c25e310934c096cc666d74bbf0e18aca"
-    },
-    {
-      "path": "scripts/backend-strengthening/README.md",
-      "bytes": 17416,
-      "sha256": "0db317212b49eebae882cbb71ae1ea8863084cd5b6734f1fdb73013b09e8c39a"
     },
     {
       "path": "scripts/backend-strengthening/renew_read_fixture.py",
@@ -16002,6 +16051,11 @@
       "path": "scripts/build_resume_v9.py",
       "bytes": 15544,
       "sha256": "4572f49930ac744a75dccc856c66d635f864b8def4b735600c54b95b7591c0ec"
+    },
+    {
+      "path": "scripts/build_shopping_flow_review.py",
+      "bytes": 10309,
+      "sha256": "b6a84434d852142a475fd6037c3cdb3cf1913daf040171525ca49f8d8d77e6d2"
     },
     {
       "path": "scripts/cache-resilience-20260911/finalize.py",
@@ -16939,6 +16993,16 @@
       "sha256": "a81e8a447957ff14107921f5a8f597861add2fb0825ef1df742cf4c6aa5c748b"
     },
     {
+      "path": "scripts/public-release-scope.json",
+      "bytes": 1215,
+      "sha256": "8bfe804e54d914c70fbd49fc8e52824d95b71e26e0e14479bc1d79a0b2d51e08"
+    },
+    {
+      "path": "scripts/public_release.py",
+      "bytes": 22794,
+      "sha256": "d9a60025d7c5279bbb193e565dd6b49bbd185ff04212eeef0e040fd98a37ebfa"
+    },
+    {
       "path": "scripts/reliability-lab-20260910/broker.py",
       "bytes": 6008,
       "sha256": "161bc29055e47cf4bd5db9ce1e39e94d468706a3114a74aeb6fa2805883fc672"
@@ -17064,9 +17128,19 @@
       "sha256": "9542658286d41f59d19ed3d2de806d7a76d3aa8acb483573fe0961a3a5a03789"
     },
     {
+      "path": "scripts/setup-colbert-bge-m3.ps1",
+      "bytes": 916,
+      "sha256": "c802566de0b1ef0b21741eb870442eddede43b9205b94c6a1a9f2c04229c49fe"
+    },
+    {
       "path": "scripts/start-local-project.ps1",
       "bytes": 4013,
       "sha256": "e8ab65cb0d9a90b442afbe072c6ed84a5e64de1ff50c61f5914b5ee3e2444932"
+    },
+    {
+      "path": "scripts/summarize_shopping_slimming.py",
+      "bytes": 2020,
+      "sha256": "616a2c22adefba530e2c6d10008c4cfd09878b5c102a1ff47e2e3b8e625851b4"
     },
     {
       "path": "scripts/taskstate-context-ab-v3-live.ps1",
@@ -17082,6 +17156,16 @@
       "path": "scripts/tests/test_document_paths.py",
       "bytes": 3208,
       "sha256": "e0a4ca0bac30c147a3f9d0a17d99c8fcd3b3b54716f19bce86279f5ae19007c3"
+    },
+    {
+      "path": "scripts/tests/test_public_release.py",
+      "bytes": 7151,
+      "sha256": "08ca9e410d548a954b045302584c22c42088bbcf19da4920e6015a4183745fe6"
+    },
+    {
+      "path": "scripts/trace_shopping_flow.py",
+      "bytes": 8133,
+      "sha256": "f7a4759133ebc04a8893a2827a75db45b1b6f1624880c092ab849749a307a776"
     },
     {
       "path": "scripts/unified-commerce.ps1",
@@ -17162,6 +17246,11 @@
       "path": "scripts/verify_session_refresh_20260914.py",
       "bytes": 4365,
       "sha256": "2fa7cca3efc40587b038fe9ced40da71164bacfa1db7eb91e2374b31e9015c76"
+    },
+    {
+      "path": "scripts/verify_unified_guide_live.py",
+      "bytes": 5005,
+      "sha256": "46c2da3a34f672b0432370218350b0acddab4dfcde45cb6ce103ea2d9d8040c6"
     },
     {
       "path": "scripts/verify_unified_product_routing_20260922.py",

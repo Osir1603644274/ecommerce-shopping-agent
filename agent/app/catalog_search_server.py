@@ -26,6 +26,15 @@ class SearchCommand(BaseModel):
     requirements: list[CatalogRequirement] = Field(default_factory=list, max_length=32)
 
 
+def legacy_search_body(command: SearchCommand) -> dict:
+    """Keep the independent search wire/hash stable while guide semantics grow."""
+    return {"requestId": command.requestId, "query": command.query,
+            "retrievalQuery": command.retrievalQuery,
+            "requirements": [{"facet": row.facet, "mode": row.mode,
+                              "value": row.value, "terms": list(row.terms)}
+                             for row in command.requirements]}
+
+
 def load_token():
     path=settings.catalog_search_token_file
     if not path:raise RuntimeError('search_service_token_file_required')
@@ -65,7 +74,7 @@ def create_app(engine_factory=CatalogService, *, token=None, capacity=None):
         jobs=app.state.jobs
         if command.requestId in jobs:raise HTTPException(409,'request_already_running')
         if len(jobs)>=app.state.capacity:raise HTTPException(429,'search_capacity_exceeded',headers={'Retry-After':'2'})
-        body=command.model_dump()
+        body=legacy_search_body(command)
         async def run():
             async with asyncio.timeout(settings.catalog_workspace_timeout_seconds):
                 return await app.state.engine.search(command.query,requirements=body['requirements'],retrieval_query=command.retrievalQuery)

@@ -71,7 +71,7 @@ async def verify_card_reference(state,card):
     from .api import commerce_workspace as ws
     from .catalog_service import verify_scope
     if not ws.auth.settings.commerce_workspace_external_catalog_enabled:return False
-    scope=(state.get('catalogSearch') or {}).get('scope')
+    scope=state.get('catalogScope') or (state.get('catalogSearch') or {}).get('scope')
     if not scope:return False
     verify_scope(scope)
     docid=card.get('sourceDocid');raw=card.get('sourceRecordSha256')

@@ -12,8 +12,8 @@ import re
 from fastapi import HTTPException
 
 from . import commerce_workspace as ws
-from ..catalog_conversation import transition, answer_turn, apply_subject_review
-from ..catalog_service import get_catalog_service, fingerprint, workflow_code_binding, verify_scope
+from ..catalog_service import fingerprint, workflow_code_binding, verify_scope
+from ..guide_execution import answer as answer_catalog, retrieve as retrieve_catalog, select_provider_query
 
 PHASES = ['prepare', 'retrieve', 'answer', 'publish']
 LABELS = {'prepare': '整理当前需求', 'retrieve': '检索两个商品来源', 'answer': '依据证据回答', 'publish': '保存本轮结果'}
@@ -52,11 +52,23 @@ async def checkpoint(key, run, *, phase=None, seconds=0):
         if phase:
             from ..catalog_execution_view import phase_fields
             public_fields = phase_fields(run,phase,seconds) if run['catalogPlan']['route']=='catalog' else {}
+            metrics = {}
+            if phase == 'prepare':
+                receipt = run.get('catalogRouteCall') or {}
+                metrics = {'parseAttempts': receipt.get('parseAttempts', 1),
+                           'parseDurationMs': receipt.get('durationMs'),
+                           'parseUsage': receipt.get('usage')}
+            elif phase == 'answer':
+                receipt = run.get('catalogAnswerCall') or {}
+                metrics = {'answerDurationMs': receipt.get('durationMs'),
+                           'answerUsage': receipt.get('usage')}
+            if public_fields.get('detail'):
+                public_fields['detail'] = {**public_fields['detail'], **metrics}
             run['nodes'].append({'id': run['id']+':catalog:'+phase+(f":{len(run['nodes'])}" if run.get('catalogReact') else ''), 'label': labels[phase],
                 'outcome': 'completed', 'durationMs': seconds*1000,
                 'code': 'agent/app/api/catalog_workspace.py:work',
                 'detail': {'workflow': 'product_question_v1' if run['catalogPlan']['route']=='product' else 'catalog_workspace_v1', 'phase': phase,
-                    'scopeId': (run.get('catalogNext', {}).get('scope') or {}).get('scopeId')}, **public_fields})
+                    'scopeId': (run.get('catalogNext', {}).get('scope') or {}).get('scopeId'), **metrics}, **public_fields})
             run['catalogPhase'] += 1
             if run.get('catalogReact') and phase in {'retrieve', 'answer'}:
                 run.pop('catalogPendingDecision', None)
@@ -87,25 +99,34 @@ async def work(key, run, operation, answer):
         if run.get('catalogCodeBinding') != workflow_code_binding():
             raise ValueError('catalog_workflow_version_changed')
         if operation == 'continue' and run.get('catalogClarification'):
-            from ..catalog_conversation import plan_turn
-            from ..product_followup import bind_plan
+            from ..guide_interpreter import GuideInterpretationError, GuideRevisionConflictError, interpret_and_commit
             from ..task_state import get_session_task_state
             state = await ws._load(key)
-            plan, receipt = await plan_turn(answer, state)
-            plan = await bind_plan(plan, state, await get_session_task_state(state['engine']), answer)
-            original_message = run['message']
+            task = await get_session_task_state(state['engine'])
+            if task is None:
+                raise ValueError('guide_clarification_task_expired')
+            try:
+                task, plan, receipt = await interpret_and_commit(
+                    answer, task, workspace=state, turn_id=run['replyRequestId'],
+                )
+            except GuideRevisionConflictError as exc:
+                raise HTTPException(409, '导购状态刚被另一轮更新，请刷新后重试') from exc
+            except GuideInterpretationError as exc:
+                raise HTTPException(422, '本轮补充信息未能通过结构化校验，请换种说法再试') from exc
             run.update(message=answer, requestId=run['replyRequestId'], catalogPlan=plan,
-                catalogRouteCall=receipt, catalogPhase=0, catalogBaseRevision=(state.get('catalogSearch') or {}).get('revision',0),
-                catalogReact=ws.auth.settings.agent_control_runtime=='react_v1' and ws.auth.settings.agent_react_live_enabled, catalogModelDecisions=0, catalogQueries=[])
-            for field in ('catalogClarification','clarification','catalogPendingDecision','catalogNext','catalogBefore','catalogNotice','presentationData','productFacts','catalogEvidenceSha256'):
+                intent=plan['intent'], catalogRouteCall=receipt, catalogPhase=0,
+                guideTaskId=task.task_id, guideTaskRevision=task.revision,
+                catalogModelDecisions=0, catalogQueries=[])
+            for field in ('catalogClarification','clarification','catalogPendingDecision','catalogNext','catalogBefore','catalogNotice',
+                          'presentationData','productFacts','catalogEvidenceSha256','catalogProviderQuery','catalogProviderQueryReason'):
                 run.pop(field,None)
             if plan['route']=='business':
                 # Start a server-bound business task; never fabricate a durable resume.
                 run.pop('workflow',None)
-                run['message']=original_message+'\n用户补充：'+answer
                 async with worker_lock(key):
                     state.update(cards=[],selection=None,reference=None)
                     state.pop('catalogSearch',None)
+                    state.pop('catalogScope',None)
                     state.pop('catalogPendingRequest',None)
                     await ws._save(key,state)
                     await save_run(key,run)
@@ -127,31 +148,55 @@ async def work(key, run, operation, answer):
                     state = await ws._load(key)
                     if state['engine']!=run['engine']:
                         raise HTTPException(409, '对话已切换')
-                    current = state.get('catalogSearch') or {}
-                    if 'catalogBefore' not in run:
-                        run['catalogBefore'] = {k:deepcopy(current.get(k)) for k in ['query','requirements']}
+                    old_scope = state.get('catalogScope') or (state.get('catalogSearch') or {}).get('scope')
                     replay_prepare = state.get('catalogPendingRequest')==run['requestId']
-                    if not replay_prepare and current.get('revision', 0)!=run['catalogBaseRevision']:
-                        raise HTTPException(409, '需求版本已变化，请重新提交')
-                    next_state, notice = ((deepcopy(current), state.get('catalogPendingNotice'))
-                        if replay_prepare else transition(current, plan))
+                    from ..task_state import get_task_state
+                    from ..guide_state import ShoppingState, catalog_projection
+                    task = await get_task_state(run['guideTaskId'])
+                    if not task or task.revision != run['guideTaskRevision'] or task.session_id != run['engine']:
+                        raise HTTPException(409, '导购状态版本已变化，请恢复页面核对')
+                    decision = task.domain_state.get('guideTurnDecision') or {}
+                    if decision.get('turnId') != run['requestId']:
+                        raise HTTPException(409, '本轮导购决策已失效')
+                    guide = ShoppingState.model_validate(task.domain_state['shopping'])
+                    if 'catalogBefore' not in run:
+                        run['catalogBefore'] = {'query': guide.query,
+                            'requirements': catalog_projection(guide)['requirements']}
+                    old_scope = old_scope if (plan['action'] in {'compare', 'clarify', 'inspect'}
+                        or plan['action']=='undo' and not decision.get('semanticChanged')) else None
+                    if old_scope:
+                        ref = task.domain_state.get('guideEvidenceRef') or {}
+                        verify_scope(old_scope)
+                        if (ref.get('taskId') != task.task_id or ref.get('scopeId') != old_scope.get('scopeId')
+                                or ref.get('scopeSha256') != fingerprint(old_scope)):
+                            old_scope = None
+                    next_state = catalog_projection(guide, scope=old_scope, revision=task.revision)
+                    notice = (state.get('catalogPendingNotice') if replay_prepare else
+                        '没有可以撤销的需求修改。' if plan['action']=='undo'
+                        and not decision.get('semanticChanged') else None)
                     run['catalogNext'] = next_state
                     if notice:
                         run['catalogNotice'] = notice
                     # Invalidate references immediately for a changed query.
                     # The pending state is identified by this request on retry.
-                    state.update(catalogSearch=next_state, cards=[], selection=None, reference=None)
-                    state.pop('productFollowup', None)
+                    if decision.get('semanticChanged'):
+                        state.update(cards=[], selection=None, reference=None)
+                        state.pop('catalogScope', None)
+                        state.pop('productFollowup', None)
+                    # A legacy demand may be read for migration once, never written again.
+                    state.pop('catalogSearch', None)
                     state['catalogPendingRequest'] = run['requestId']
                     state['catalogPendingNotice'] = notice
                     await ws._save(key, state)
             elif phase=='retrieve':
-                if plan['action'] in {'search', 'refine', 'new'}:
+                if (plan['action'] in {'search', 'refine', 'new', 'undo'} and not run.get('catalogNotice')
+                        and run['catalogNext'].get('query')):
                     current=run['catalogNext']
-                    retrieval_query=(run.get('catalogPendingDecision') or {}).get('query') or current.get('retrievalQuery') or current['query']
-                    kwargs=({'requirements':current['requirements'],'retrieval_query':retrieval_query}
-                            if current.get('requirements') else {})
-                    run['catalogNext']['scope'] = await get_catalog_service().search(current['query'],**kwargs)
+                    retrieval_query, query_reason=select_provider_query(current, run.get('catalogPendingDecision'))
+                    run['catalogProviderQuery'] = retrieval_query
+                    run['catalogProviderQueryReason'] = query_reason
+                    run['catalogNext']['scope'] = await retrieve_catalog(
+                        current['query'], retrieval_query, current['requirements'])
                     if run.get('catalogReact'):
                         run.setdefault('catalogQueries',[]).append(retrieval_query)
                 scope = run['catalogNext'].get('scope')
@@ -160,34 +205,48 @@ async def work(key, run, operation, answer):
             elif phase=='answer':
                 if run.get('catalogNotice'):
                     run['catalogAnswer'] = run['catalogNotice']
+                elif plan['action']=='undo' and not run['catalogNext']['query']:
+                    run['catalogAnswer'] = '已撤销上次需求修改，当前没有正在检索的商品需求。'
+                    run['catalogAnswerCall'] = None
                 else:
-                    text, receipt = await answer_turn(run['message'], plan, run['catalogNext'])
-                    review = (receipt or {}).get('scopeReview')
-                    if review:
-                        scope = run['catalogNext']['scope']
-                        if review['baseScopeId']!=scope['scopeId'] or fingerprint(scope)!=run['catalogEvidenceSha256']:
+                    text, receipt, scope = await answer_catalog(run['message'], plan, run['catalogNext'])
+                    if (receipt or {}).get('scopeReview'):
+                        if fingerprint(run['catalogNext']['scope'])!=run['catalogEvidenceSha256']:
                             raise ValueError('catalog_review_evidence_changed')
                         run['catalogRetrievedEvidenceSha256'] = run['catalogEvidenceSha256']
-                        run['catalogNext']['scope'] = apply_subject_review(scope, review['reviews'])
-                        run['catalogEvidenceSha256'] = fingerprint(run['catalogNext']['scope'])
+                    run['catalogNext']['scope'] = scope
+                    run['catalogEvidenceSha256'] = fingerprint(scope)
                     run['catalogAnswer'] = text
                     run['catalogAnswerCall'] = receipt
             else:
                 from ..catalog_commerce import resolve_optional_cards, source_only_answer
-                from .workspace_answer_stream import compose
-                from ..catalog_conversation import compact_evidence
                 scope = run['catalogNext'].get('scope')
+                noop_undo = plan['action']=='undo' and bool(run.get('catalogNotice'))
+                if scope and not noop_undo:
+                    from ..task_state import get_task_state
+                    from ..guide_evidence import publish_scope
+                    task = await get_task_state(run['guideTaskId'])
+                    if not task or task.session_id != run['engine']:
+                        raise ValueError('guide_evidence_task_changed')
+                    ref = task.domain_state.get('guideEvidenceRef') or {}
+                    if ref.get('runId') == run['id'] and ref.get('scopeSha256') == fingerprint(scope):
+                        run['guideTaskRevision'] = task.revision
+                    elif task.revision == run['guideTaskRevision']:
+                        task = await publish_scope(task, scope, run_id=run['id'])
+                        run['guideTaskRevision'] = task.revision
+                    else:
+                        raise ValueError('guide_evidence_task_revision_changed')
                 # Perform read-only authority resolution before entering the publication lock.
                 # Retry may refresh prices, but never grants order-creation authority itself.
-                trading_cards, authority_notice = await resolve_optional_cards(scope)
+                trading_cards, authority_notice = ([], None) if noop_undo else await resolve_optional_cards(scope)
                 if authority_notice:
                     visible_answer = source_only_answer(scope, authority_notice)
                 else:
-                    visible_answer = await compose(key, run, {'answer': run['catalogAnswer'],
-                        'candidates': compact_evidence(scope) if scope else []})
-                run['catalogTradingSummary']={'resolved':len(trading_cards),'previewEligible':sum(bool(c.get('purchasable')) for c in trading_cards)}
-                if authority_notice:
-                    run['catalogTradingSummary']['availability'] = 'unavailable_read_only'
+                    visible_answer = run['catalogAnswer']
+                if not noop_undo:
+                    run['catalogTradingSummary']={'resolved':len(trading_cards),'previewEligible':sum(bool(c.get('purchasable')) for c in trading_cards)}
+                    if authority_notice:
+                        run['catalogTradingSummary']['availability'] = 'unavailable_read_only'
                 async with worker_lock(key):
                     state = await ws._load(key)
                     if state['engine']!=run['engine'] or state.get('catalogPendingRequest')!=run['requestId']:
@@ -198,7 +257,8 @@ async def work(key, run, operation, answer):
                         state['messages'].append({'role': 'assistant', 'requestId': run['requestId'],
                             'content': visible_answer, 'cards': trading_cards, 'flow': deepcopy(run['nodes']),
                             'source': run.get('source', 'web_unreviewed')})
-                    state.update(catalogSearch=run['catalogNext'], cards=trading_cards, selection=None, reference=None)
+                    if not noop_undo:
+                        state.update(catalogScope=scope, cards=trading_cards, selection=None, reference=None)
                     state['messages'] = state['messages'][-60:]
                     # Keep pendingRequest as the idempotent publication key;
                     # a new request replaces it during its prepare phase.
@@ -241,10 +301,13 @@ the original decision view; no stale scope or unlisted action may be executed.
     validation_run = deepcopy(run)
     if run.get('catalogPendingDecision') and selected['source']=='model':
         validation_run['catalogModelDecisions'] -= 1
-    view,_ = decision_view(validation_run)
+    view, query_bindings = decision_view(validation_run)
     if selected['viewHash'] != view.decision_view_hash:
         raise ValueError('catalog_decision_scope_changed')
     action = validate_next_action(NextAction.model_validate(selected['action']),view)
+    expected_query = query_bindings.get((action.argument_refs or {}).get('query'))
+    if selected.get('query') != expected_query:
+        raise ValueError('catalog_decision_query_binding_changed')
     async with worker_lock(key):
         saved=await ws._load(key+':run')
         state=await ws._load(key)
@@ -290,8 +353,7 @@ async def product_work(key, run):
         phase=PHASES[run.get('catalogPhase',0)]
         began=time.perf_counter()
         if phase == 'publish':
-            from .workspace_answer_stream import compose
-            visible_answer = await compose(key, run, {'answer': run['catalogAnswer'], 'facts': run.get('productFacts', {})})
+            visible_answer = run['catalogAnswer']
         if phase in {'prepare','publish'}:
             async with worker_lock(key):
                 state=await ws._load(key)

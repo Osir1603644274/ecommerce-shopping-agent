@@ -50,10 +50,15 @@ def test_subject_rejection_keeps_original_evidence_and_rebinds_display():
     assert '花生酱' not in c.render_documents(reviewed)
 
 
-def test_unknown_properties_do_not_remove_candidates():
-    scope=fixture_scope();r=reviews(scope)
-    for item in r:item.update(relation='unknown',quote='',reason='未提供配料')
-    assert len(c.apply_subject_review(scope,r)['groups'])==3
+def test_unknown_price_does_not_remove_verified_subject_candidates():
+    base=fixture_scope()
+    scope=document_scope('低脂面包',base['sources'],'b'*64,[
+        dict(facet='商品',mode='require',value='面包',terms=[]),
+        dict(facet='预算',mode='require',value='3000',terms=[],operator='lte',unit='元')])
+    result=c.apply_subject_review(scope,reviews(scope))
+    assert len(result['groups'])==2
+    assert all(next(e for e in g['constraintEvidence'] if e['facet']=='预算')['status']=='unknown'
+               for g in result['groups'])
 
 
 def test_negative_soft_preference_can_demote_but_never_filter():
@@ -119,14 +124,45 @@ def test_subject_review_cannot_invent_identity_or_source_quote(fault):
     with pytest.raises(ValueError):c.apply_subject_review(scope,r)
 
 
-def test_unquoted_subject_is_retained_as_unknown_without_adopting_model_claim():
+def test_unquoted_subject_is_pending_without_adopting_model_claim():
     scope=fixture_scope();r=reviews(scope)
     r[0].update(relation='other',quote='未经提供的配料表')
     result=c.apply_subject_review(scope,r)
-    kept=next(g for g in result['groups'] if g['subjectReview']['number']==r[0]['number'])
-    assert kept['subjectReview']['relation']=='unknown'
-    assert kept['subjectReview']['ignoredSubjectReview']['quote']=='未经提供的配料表'
+    pending=next(g for g in result['subjectPendingGroups'] if g['subjectReview']['number']==r[0]['number'])
+    assert pending['subjectReview']['relation']=='unknown'
+    assert pending['subjectReview']['ignoredSubjectReview']['quote']=='未经提供的配料表'
+    assert next(e for e in pending['constraintEvidence'] if e['facet']=='商品')['status']=='unknown'
+    assert all(g['members'][0]['docid']!=pending['members'][0]['docid'] for g in result['groups'])
     assert r[0]['relation']=='other'
+
+
+def test_invalid_phone_case_quote_is_pending_but_phone_with_gift_is_displayed():
+    titles=[
+        '我爱老婆适用iPhone苹果16华为荣耀vivo红米oppo小米彩银手机壳',
+        '苹果手机，赠手机壳',
+    ]
+    sources=[]
+    for source,title in zip(('kuaisearch','multicpr'),titles):
+        docid=source+':1'
+        sources.append(dict(source=source,
+            hits=[dict(source=source,docid=docid,rank=1,score=1.0)],
+            metadata=[dict(docid=docid,titleGroupKey=title,fields={
+                'title':{'value':title},'seller':{'value':'fixture'},'brand':{'value':None}},
+                provenance={'recordSha256':'a'*64})]))
+    scope=document_scope('苹果手机',sources,'b'*64,[
+        dict(facet='商品',mode='require',value='手机',terms=[]),
+        dict(facet='品牌',mode='require',value='苹果',terms=[])])
+    assert all(next(e for e in g['constraintEvidence'] if e['facet']=='商品')['status']=='unknown'
+               for g in scope['groups'])
+    r=[dict(number=g['number'],relation='other' if '适用iPhone' in g['title'] else 'target',
+            quote='适用iPhone苹果16手机壳' if '适用iPhone' in g['title'] else '苹果手机',
+            reason='标题商品主体') for g in scope['groups']]
+    result=c.apply_subject_review(scope,r)
+    verify_scope(result)
+    assert [g['title'] for g in result['groups']]==['苹果手机，赠手机壳']
+    assert [g['title'] for g in result['subjectPendingGroups']]==[titles[0]]
+    assert not result['semanticExcludedGroups']
+    assert next(e for e in result['groups'][0]['constraintEvidence'] if e['facet']=='商品')['status']=='supported'
 
 
 def test_answer_filters_exact_scope_used_for_listing_and_next_turn(monkeypatch):
